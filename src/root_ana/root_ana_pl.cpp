@@ -54,8 +54,12 @@ void Initialization() {
   //eff_file_tmp = "list.settings.fpi2";
   //off_file_tmp = "fit_piplus/cointime_pl.dat";
 
-  eff_file = "list.settings.omega";
-  off_file = "offset.dat";  
+  TString eff_file_tmp;
+
+  TString off_file_tmp;
+  
+  eff_file_tmp = "list.settings.omega";
+  off_file_tmp = "offset.dat";  
   
 	rf = new ReadFile(eff_file_tmp, off_file_tmp);
 	fo = new File_Output();
