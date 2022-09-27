@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:06:15 trottar"
+# Time-stamp: "2022-09-27 14:08:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -85,4 +85,32 @@ def Init():
     print(cen_ana)
     list_file = inp_f.Get_List_File()
     print(list_file)
+    data_file_dir = "data/"
+    Para_Init()
+
+def Para_Init():
     
+    Q_2		= kin_ana.Q2set[0];
+    kset	= kin_ana.kset[0];
+    t_min	= kin_ana.tmnset[0];
+    t_max	= kin_ana.tmxset[0];
+
+    t_bin_set = kin_ana.NBtset[0];
+    t_width   = ( t_max - t_min ) / t_bin_set;
+    
+
+    phi_bin_num = 16;
+
+    pstp = 360./phi_bin_num;
+    pmn  = pstp/2.;
+    pmx  = 360. - pstp/2.;
+
+    acccc_temp = 0.0;
+    errrr_temp = 0.0;
+    charge_tot = 0.0;
+
+
+    yield_vec.resize(t_bin_set*phi_bin_num);
+    yield_err_vec.resize(t_bin_set*phi_bin_num);
+    phi_vec.resize(t_bin_set*phi_bin_num);
+    tb_vec.resize(t_bin_set*phi_bin_num);
