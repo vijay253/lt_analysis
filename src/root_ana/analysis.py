@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:08:16 trottar"
+# Time-stamp: "2022-09-27 14:10:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -86,9 +86,9 @@ def Init():
     list_file = inp_f.Get_List_File()
     print(list_file)
     data_file_dir = "data/"
-    Para_Init()
+    Para_Init(kin_ana)
 
-def Para_Init():
+def Para_Init(kin_ana):
     
     Q_2		= kin_ana.Q2set[0];
     kset	= kin_ana.kset[0];
