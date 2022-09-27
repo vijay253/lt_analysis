@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 13:41:02 trottar"
+# Time-stamp: "2022-09-27 13:43:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -27,7 +27,7 @@ off_file = "fit_piplus/cointime_pl.dat"
 ################################################################################################################################################
 '''
 ltsep package import and pathing definitions
-'''
+
 
 # Import package for cuts
 from ltsep import Root
@@ -61,6 +61,7 @@ c = proc_root[0] # Cut object
 tree = proc_root[1] # Dictionary of branches
 strDict = proc_root[2] # Dictionary of cuts as strings
 
+'''
 ################################################################################################################################################
 from cppfiles import read_setting
 
