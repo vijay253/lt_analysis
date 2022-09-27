@@ -13,7 +13,7 @@
 #include "TString.h"
 
 #include "read_setting.h"
-#include "analysis.h"
+//#include "analysis.h"
 //#include "analysis_heep.h"
 #include "print_data.h"
 
