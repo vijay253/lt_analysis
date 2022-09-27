@@ -3,13 +3,14 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:14:20 trottar"
+# Time-stamp: "2022-09-27 14:17:12 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
 #
 # Copyright (c) trottar
 #
+from cppyy import include
 import cppyy
 import sys,os
 
@@ -65,7 +66,7 @@ strDict = proc_root[2] # Dictionary of cuts as strings
 ################################################################################################################################################
 from cppfiles import read_setting, general_utility
 
-cppyy.include('analysis.h')
+include('analysis.h')
 
 def Analysis(eff_struc):
 
