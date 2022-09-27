@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:00:39 trottar"
+# Time-stamp: "2022-09-27 14:02:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -78,3 +78,4 @@ def Init():
     cppyy.cppdef(general_utility())
     cppyy.cppdef(read_setting())
     inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
+    print(inp_f)
