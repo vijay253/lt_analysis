@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 13:55:44 trottar"
+# Time-stamp: "2022-09-27 14:00:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -21,8 +21,8 @@ User Inputs
 #eff_file = sys.argv[1]
 #off_file = sys.argv[2]
 
-eff_file = "list.settings.fpi2"
-off_file = "fit_piplus/cointime_pl.dat"
+eff_file = "list.settings.omega"
+off_file = "offset.dat"
 
 ################################################################################################################################################
 '''
