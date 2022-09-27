@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 13:54:01 trottar"
+# Time-stamp: "2022-09-27 13:54:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -76,5 +76,5 @@ def Analysis(eff_struc):
 def Init():
 
     cppyy.cppdef(general_utility())
-     cppyy.cppdef(read_setting())
-     inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
+    cppyy.cppdef(read_setting())
+    inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
