@@ -81,7 +81,7 @@ Analysis **ana_dummy;
 
 ReadFile* rf;
 
-File_Output *fo; 
+//File_Output *fo; 
 
 
 TString target_name;
