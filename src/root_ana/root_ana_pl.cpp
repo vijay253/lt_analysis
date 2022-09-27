@@ -48,16 +48,12 @@ int main() {
 // Initialization 
 //
 
-void Initialization() {
+void Initialization(TString eff_file_tmp, TString off_file_tmp) {
 
-	
-	TString eff_file_tmp;
-	TString off_file_tmp;
+  //eff_file_tmp = "list.settings.fpi2";
+  //off_file_tmp = "fit_piplus/cointime_pl.dat";
 
-	eff_file_tmp = "list.settings.fpi2";
-	off_file_tmp = "fit_piplus/cointime_pl.dat";
-
-	rf = new ReadFile("list.settings.fpi2", "fit_piplus/cointime_pl.dat");
+	rf = new ReadFile(eff_file_tmp, off_file_tmp);
 	fo = new File_Output();
 
 	kin_setting = rf->kin_pro;

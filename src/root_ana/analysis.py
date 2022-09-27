@@ -3,13 +3,14 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:40:08 trottar"
+# Time-stamp: "2022-09-27 14:51:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
 #
 # Copyright (c) trottar
 #
+from ROOT import TTree
 import cppyy
 import sys,os
 
@@ -63,9 +64,7 @@ strDict = proc_root[2] # Dictionary of cuts as strings
 
 '''
 ################################################################################################################################################
-from cppfiles import read_setting, general_utility
-
-#cppyy.include('analysis.h')
+from cppfiles import read_setting, general_utility, analysis, root_ana_pl
 
 def Analysis(eff_struc):
 
@@ -76,7 +75,9 @@ def Analysis(eff_struc):
 def Init():
 
     cppyy.cppdef(general_utility())
+    cppyy.cppdef(analysis())
     cppyy.cppdef(read_setting())
+    cppyy.cppdef(root_ana_pl())    
     inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
     print(inp_f)
     kin_ana = inp_f.kin_pro
@@ -85,8 +86,14 @@ def Init():
     print(cen_ana)
     list_file = inp_f.Get_List_File()
     print(list_file)
+    
     data_file_dir = "data/"
     Para_Init(kin_ana)
+    
+    tree_out = Create_File();
+
+    test = cppyy.gbl.Initialization(eff_file, off_file)
+    print(test)
 
 def Para_Init(kin_ana):
     
