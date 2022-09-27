@@ -1,7 +1,7 @@
 #ifndef __CUT_H_INCLUDED__
 #define __CUT_H_INCLUDED__
 
-#include "TString.h"
+//#include "TString.h"
 
 /*--------------------------------------------------*/
 /// Cut definition
