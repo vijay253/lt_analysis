@@ -65,7 +65,7 @@ void Analysis::Init() {
 
 	Para_Init(); 
 
-	tree_out = Ceate_File();
+	tree_out = Create_File();
 
 	c1 = new TCanvas();
 	c2 = new TCanvas();
@@ -137,11 +137,12 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	// cout << "Is the run dummy? " << is_run_dummy << endl;
 	
-	run_tree = Ceate_File();
+	run_tree = Create_File();
 
 	Para_Run_Def(run_itt);
 
 	Set_Coin_Min(-6);
+
 	Set_Coin_Max(10);
 	Set_Coin_Bin(80);
 
@@ -949,7 +950,7 @@ void Analysis::Missing_Mass_Plot() {
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
 
-TTree* Analysis::Ceate_File() {
+TTree* Analysis::Create_File() {
 
  	TTree* exam = new TTree();
 
