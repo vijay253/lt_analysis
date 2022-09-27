@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:04:52 trottar"
+# Time-stamp: "2022-09-27 14:06:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -80,3 +80,9 @@ def Init():
     inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
     print(inp_f)
     kin_ana = inp_f.kin_pro
+    print(kin_ana)
+    cen_ana = inp_f.cen_pro
+    print(cen_ana)
+    list_file = inp_f.Get_List_File()
+    print(list_file)
+    
