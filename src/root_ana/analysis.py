@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 13:50:24 trottar"
+# Time-stamp: "2022-09-27 13:54:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,7 +65,7 @@ strDict = proc_root[2] # Dictionary of cuts as strings
 ################################################################################################################################################
 from cppfiles import read_setting
 
-cppyy.include('general_utility.h')
+#cppyy.include('general_utility.h')
 
 def Analysis(eff_struc):
 
@@ -75,5 +75,6 @@ def Analysis(eff_struc):
 
 def Init():
 
+    cppyy.cppdef(general_utility())
      cppyy.cppdef(read_setting())
      inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
