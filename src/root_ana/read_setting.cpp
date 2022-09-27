@@ -50,7 +50,7 @@ ReadFile::ReadFile() {
 // 
 ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
-	cout << "12312312 " << off_file_name_tmp << endl;
+	cout << "Offset File...\n" << off_file_name_tmp << endl;
 
 	static int tsttst = 0;
 
@@ -63,7 +63,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	}
 
 
-	cout << eff_file_name_tmp << endl;
+	cout << "Efficiency File...\n" << eff_file_name_tmp << endl;
 
 	eff_file_name = eff_file_name_tmp;
 	off_file_name = off_file_name_tmp;
