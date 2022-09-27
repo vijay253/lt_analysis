@@ -82,7 +82,7 @@ class Analysis {
 
 		TTree* run_tree;	
 		TTree* tree_out;
-		TTree* Ceate_File();
+		TTree* Create_File();
 
 		int phi_bin_num;
 
