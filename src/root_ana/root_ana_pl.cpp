@@ -4,6 +4,7 @@
 // Email: wenliang.billlee@gmail.com
 
 #include <iostream>
+#include <cstdlib>
 #include "root_ana_pl.h"
 
 //#include "cut.h"
