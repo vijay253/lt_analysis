@@ -3,14 +3,13 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:17:12 trottar"
+# Time-stamp: "2022-09-27 14:40:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
 #
 # Copyright (c) trottar
 #
-from cppyy import include
 import cppyy
 import sys,os
 
@@ -66,7 +65,7 @@ strDict = proc_root[2] # Dictionary of cuts as strings
 ################################################################################################################################################
 from cppfiles import read_setting, general_utility
 
-include('analysis.h')
+#cppyy.include('analysis.h')
 
 def Analysis(eff_struc):
 
@@ -115,7 +114,7 @@ def Para_Init(kin_ana):
     charge_tot = 0.0
 
 
-    yield_vec.resize(t_bin_set*phi_bin_num)
-    yield_err_vec.resize(t_bin_set*phi_bin_num)
-    phi_vec.resize(t_bin_set*phi_bin_num)
-    tb_vec.resize(t_bin_set*phi_bin_num)
+    #yield_vec.resize(t_bin_set*phi_bin_num)
+    #yield_err_vec.resize(t_bin_set*phi_bin_num)
+    #phi_vec.resize(t_bin_set*phi_bin_num)
+    #tb_vec.resize(t_bin_set*phi_bin_num)
