@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:51:47 trottar"
+# Time-stamp: "2022-09-27 14:52:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -90,8 +90,8 @@ def Init():
     data_file_dir = "data/"
     Para_Init(kin_ana)
 
-    test = cppyy.gbl.Initialization(eff_file, off_file)
-    print(test)
+    #test = cppyy.gbl.Initialization(eff_file, off_file)
+    #print(test)
 
 def Para_Init(kin_ana):
     
