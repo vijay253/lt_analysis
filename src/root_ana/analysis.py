@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 13:55:11 trottar"
+# Time-stamp: "2022-09-27 13:55:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -63,7 +63,7 @@ strDict = proc_root[2] # Dictionary of cuts as strings
 
 '''
 ################################################################################################################################################
-from cppfiles import read_setting, general_utility()
+from cppfiles import read_setting, general_utility
 
 #cppyy.include('general_utility.h')
 
