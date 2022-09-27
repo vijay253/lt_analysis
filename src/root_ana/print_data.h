@@ -2,7 +2,7 @@
 #define PRINT_DATA_H
 
 #include "TFile.h"
-
+#include "TString.h"
 
 
 class File_Output {
@@ -16,7 +16,7 @@ class File_Output {
 
 		TFile* Create_Out_File(TString fname);
 
-		//TString Get_Dir() {return out_dir;};
+		TString Get_Dir() {return out_dir;};
 		// TFile* file_out;
 
 
