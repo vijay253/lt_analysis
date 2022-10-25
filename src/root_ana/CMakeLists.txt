@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
+project(DEMPgen)
+set (DEMPgen_VERSION_MAJOR 0)
+set (DEMPgen_VERSION_MINOR 1)
 
 add_definitions (-DROOT_MATH_LOG)
 
