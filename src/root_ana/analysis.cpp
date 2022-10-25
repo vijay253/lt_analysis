@@ -26,7 +26,7 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
   off_file = "offset.dat";  
   eff_ana = eff_struc;
 
-  //Init();
+  Init();
 
 }
 
