@@ -7,10 +7,13 @@ eval cmake --version
 
 # source /site/12gev_phys/softenv.csh 2.4
 
-echo "Building cpp enviroment..."
 if ( ! -d "build" ) then
+    echo "Build directory does not exist..."
     mkdir build
+    echo "Created build directory."
 endif
+
+echo "Building cpp enviroment..."
 cd build/
 cmake ../
 make
