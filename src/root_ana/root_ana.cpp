@@ -14,7 +14,7 @@ using namespace std;
 int main() {
 
   //Initialization(eff_file_tmp, off_file_tmp);
-  Initialization();
+  //Initialization();
 
 	Dummy_Load();
 	Target_Load();
