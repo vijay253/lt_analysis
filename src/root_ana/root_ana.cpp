@@ -18,6 +18,8 @@ int main(TString eff_file_tmp, TString off_file_tmp) {
   //off_file_tmp = "offset.dat";  
 
   //Initialization(eff_file_tmp, off_file_tmp);
+  TString eff_file;
+  TString off_file;
   eff_file = eff_file_tmp;
   off_file = off_file_tmp;
   	Initialization();
