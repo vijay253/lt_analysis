@@ -51,9 +51,6 @@ int main() {
 //void Initialization(TString eff_file_tmp, TString off_file_tmp) {
 void Initialization() {
 
-  //eff_file_tmp = "list.settings.fpi2";
-  //off_file_tmp = "fit_piplus/cointime_pl.dat";
-
   TString eff_file_tmp;
 
   TString off_file_tmp;
@@ -387,7 +384,7 @@ void Dummy_Load() {
 
 			output_file_dummy[ii] = fo->Create_Out_File(Dummy_Name(i));
 
-			list_name = list_dir + "list.dummy_" + List_Name(i) + "_plus";
+			list_name = list_dir + "list.dummy_" + List_Name(i);
 			lists_vec_itt = find (lists_vec.begin(), lists_vec.end(), list_name);
 
 			if (!rf->File_exist(list_name) && rf->File_empty(list_name)) {
@@ -450,7 +447,7 @@ void Target_Load() {
 
 			output_file_target[iiii] = fo->Create_Out_File(Target_Name(i));
 
-			list_name = list_dir + "list." + List_Name(i) + "_plus";
+			list_name = list_dir + "list." + List_Name(i);
 
 			// cout << list_name << endl;
 

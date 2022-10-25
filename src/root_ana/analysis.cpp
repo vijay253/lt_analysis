@@ -11,12 +11,6 @@ using namespace std;
 
 Analysis::Analysis() {
 
-// 	eff_file = "list.settings.fpi2";
-// 	off_file = "fit_piplus/cointime_pl.dat";
-// 
-// // 	eff_file = "list.settings.heep";
-// // 	off_file = "offset.dat";
-// // 
 // 	Init();
 
 }
@@ -26,13 +20,6 @@ Analysis::Analysis() {
 /*--------------------------------------------------*/
 
 Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
-
-  //eff_file = "list.settings.fpi2";
-  //	off_file = "fit_piplus/cointime_pl.dat";
-
-// 	eff_file = "list.settings.heep";
-// 	off_file = "offset.dat";
-//
 
   eff_file = "list.settings.omega";
   off_file = "offset.dat";  
@@ -48,8 +35,6 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
 void Analysis::Init() {
 
-
-//	ReadFile* rff = new ReadFile("list.settings.fpi2", "fit_piplus/cointime_pl.dat");
 	ReadFile* rff = new ReadFile(eff_file, off_file);
 
 	kin_ana = rff->kin_pro;

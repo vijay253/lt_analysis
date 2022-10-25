@@ -155,13 +155,11 @@ void ReadFile::Setting_file_loading() {
 
 	/*--------------------------------------------------*/	
 	/// Knematics setting loading 
-	// setting_ntp->ReadFile("list.settings.fpi2");
 	setting_ntp->ReadFile("list.settings.heep");
 
 	///*--------------------------------------------------*/
 	// Read center file
 	/*--------------------------------------------------*/
-	// center_ntp->ReadFile("fit_piplus/cointime_pl.dat");
 	center_ntp->ReadFile("offset.dat");
 
 
@@ -172,13 +170,11 @@ void ReadFile::Setting_file_loading_name() {
 
 	/*--------------------------------------------------*/	
 	/// Knematics setting loading 
-	// setting_ntp->ReadFile("list.settings.fpi2");
 	setting_ntp->ReadFile(eff_file_name);
 
 	///*--------------------------------------------------*/
 	// Read center file
 	/*--------------------------------------------------*/
-	// center_ntp->ReadFile("fit_piplus/cointime_pl.dat");
 	center_ntp->ReadFile(off_file_name);
 
 
@@ -204,7 +200,6 @@ void ReadFile:: Eff_file_loading(TString list_file_in) {
 
 	/*--------------------------------------------------*/
 	/// Input file name
-	// list_file = "list.dummy_245_27_plus";
 
 
 // 	string list_file11;
