@@ -21,7 +21,8 @@ Analysis::Analysis() {
 
 Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
-  eff_file = "list.settings.omega";
+  //eff_file = "list.settings.omega";
+  eff_file = "list.settings";
   off_file = "offset.dat";  
   eff_ana = eff_struc;
 
