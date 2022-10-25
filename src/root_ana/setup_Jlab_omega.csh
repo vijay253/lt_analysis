@@ -17,4 +17,4 @@ echo "Building cpp enviroment..."
 cd build/
 cmake ../
 make
-
+mv root_ana ../
