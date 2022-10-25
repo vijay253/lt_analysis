@@ -18,8 +18,7 @@
 //#include "analysis_heep.h"
 
 
-//void Initialization();
-void Initialization(TString , TString );
+void Initialization();
 
 ReadFile::kinematics_profile kin_setting;
 //ReadFile::efficiency_profile eff_setting;
