@@ -6,3 +6,12 @@ module load cmake/3.19.4
 eval cmake --version
 
 # source /site/12gev_phys/softenv.csh 2.4
+
+echo "Building cpp enviroment..."
+if ( ! -d "build" ) then
+    mkdir build
+endif
+cd build/
+cmake ../
+make
+
