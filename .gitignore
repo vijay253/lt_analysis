@@ -15,5 +15,13 @@
 *_0_-1
 Tmp*
 
+# Data files
+list.settings.*
+*.dat
+
+# Directories
+__pycache__
+build
+
 
 $HOME
