@@ -15,10 +15,10 @@
 #include "print_data.h"
 #include "read_setting.h"
 #include "analysis.h"
-//#include "analysis_heep.h"
 
 
 void Initialization();
+//void Initialization(TString , TString );
 
 ReadFile::kinematics_profile kin_setting;
 //ReadFile::efficiency_profile eff_setting;
