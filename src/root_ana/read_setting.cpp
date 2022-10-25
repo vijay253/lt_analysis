@@ -144,6 +144,28 @@ void ReadFile::Read_init() {
 }
 
  
+
+
+
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+
+void ReadFile::Setting_file_loading() {
+
+  /*--------------------------------------------------*/	
+  /// Knematics setting loading 
+  setting_ntp->ReadFile(eff_file_name);
+  
+  ///*--------------------------------------------------*/
+  // Read center file
+  /*--------------------------------------------------*/
+  center_ntp->ReadFile(off_file_name);
+
+
+}
+
+
 void ReadFile::Setting_file_loading_name() {
 
 	/*--------------------------------------------------*/	
