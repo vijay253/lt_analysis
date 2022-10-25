@@ -24,6 +24,7 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
   eff_file = "list.settings.omega";
   off_file = "offset.dat";  
   eff_ana = eff_struc;
+  cout << eff_struc << endl;
 
   Init();
 
