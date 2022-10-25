@@ -96,28 +96,12 @@ ReadFile::ReadFile(TString sim_file_name_tmp) {
 	/*--------------------------------------------------*/
 
 	sim_file_name = sim_file_name_tmp;
-
-	if( sim_file_name.Contains("omega") || sim_file_name.Contains("Omega") 
-		|| sim_file_name.Contains("xphsp") || sim_file_name.Contains("rho") 
-		|| sim_file_name.Contains("eta") ) {
-
-		Sim_Pro_Array_Omega_Load();
-
-	} else {
-
-		Sim_Pro_Array_Load();
-
-	}
+	Sim_Pro_Array_Load();
 
 //	cout << "Angle Check "<< sim_pro.hms_theta[2] << endl;
 //	exit(0);
 
 }
-
-
-
-
- 
 
 void ReadFile::Read_init() {
 
@@ -142,11 +126,6 @@ void ReadFile::Read_init() {
 	
 
 }
-
- 
-
-
-
 
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
@@ -357,38 +336,6 @@ void ReadFile::Sim_Pro_Array_Load() {
 //	cout << "center size: " << SizeOfArray(center_run_num_d) << endl; 
 
 }
-
-/*--------------------------------------------------*/
-/*--------------------------------------------------*/
-
-void ReadFile::Sim_Pro_Array_Omega_Load() {
-
-	sim_ntp = new TNtuple("sim","sim", "q2:epsilon:hms_theta:normfac:event_num");
-	sim_ntp->ReadFile(sim_file_name);
-
-
-	sim_pro.q2_setting 		 = Return_array_D("q2",        sim_ntp);
-	sim_pro.epsilon 		 = Return_array_D("epsilon",   sim_ntp);
-	sim_pro.hms_theta 		 = Return_array_D("hms_theta", sim_ntp);
- 	sim_pro.normfac    		 = Return_array_D("normfac",   sim_ntp);
-	Double_t* event_num_temp = Return_array_D("event_num", sim_ntp);
-
-
-// 	cout << sim_pro.q2_setting[0] << endl;
-// 	cout << sim_pro.q2_setting[1] << endl;
-// 	cout << sim_pro.q2_setting[2] << endl;
-// 	cout << sim_pro.q2_setting[3] << endl;
-
-
-	Int_t num_tem = SizeOfArray(event_num_temp);
-                                           
-	sim_pro.event_num = Array_D_to_I(event_num_temp, num_tem);
-//	cout << "center size: " << SizeOfArray(center_run_num_d) << endl; 
-
-}
-
-
-
 
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
