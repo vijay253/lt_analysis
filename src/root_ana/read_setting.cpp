@@ -144,28 +144,6 @@ void ReadFile::Read_init() {
 }
 
  
-
-
-
-
-/*--------------------------------------------------*/
-/*--------------------------------------------------*/
-
-void ReadFile::Setting_file_loading() {
-
-	/*--------------------------------------------------*/	
-	/// Knematics setting loading 
-	setting_ntp->ReadFile("list.settings.heep");
-
-	///*--------------------------------------------------*/
-	// Read center file
-	/*--------------------------------------------------*/
-	center_ntp->ReadFile("offset.dat");
-
-
-}
-
-
 void ReadFile::Setting_file_loading_name() {
 
 	/*--------------------------------------------------*/	
