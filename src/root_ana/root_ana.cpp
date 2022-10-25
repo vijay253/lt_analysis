@@ -1,5 +1,5 @@
 /*--------------------------------------------------*/
-// Program for analysing the omega data 
+// Program for analysing data 
 // Author: wl
 // Email: wenliang.billlee@gmail.com
 
@@ -48,15 +48,13 @@ int main() {
 // Initialization 
 //
 
-//void Initialization(TString eff_file_tmp, TString off_file_tmp) {
-void Initialization() {
+void Initialization(TString eff_file_tmp, TString off_file_tmp) {
+//void Initialization() {
 
-  TString eff_file_tmp;
-
-  TString off_file_tmp;
-  
-  eff_file_tmp = "list.settings.omega";
-  off_file_tmp = "offset.dat";  
+  //TString eff_file_tmp;
+  //TString off_file_tmp;
+  //eff_file_tmp = "list.settings.omega";
+  //off_file_tmp = "offset.dat";  
   
 	rf = new ReadFile(eff_file_tmp, off_file_tmp);
 	fo = new File_Output();

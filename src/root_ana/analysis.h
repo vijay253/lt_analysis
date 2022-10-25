@@ -213,7 +213,7 @@ class Analysis {
 
 
 		TMultiGraph* diamond_setting;    
-    	TMultiGraph* diamond_setting_cut;
+		TMultiGraph* diamond_setting_cut;
 
 		/// Cut specifically for Fp2 test code
 		TString without_diamond_cut;
