@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:53:17 trottar"
+# Time-stamp: "2022-10-25 11:18:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -64,7 +64,7 @@ strDict = proc_root[2] # Dictionary of cuts as strings
 
 '''
 ################################################################################################################################################
-from cppfiles import read_setting, general_utility, analysis, root_ana_pl
+from cppfiles import read_setting, general_utility, analysis, root_ana
 
 def Analysis(eff_struc):
 
@@ -77,7 +77,7 @@ def Init():
     cppyy.cppdef(general_utility())
     cppyy.cppdef(analysis())
     cppyy.cppdef(read_setting())
-    cppyy.cppdef(root_ana_pl())    
+    cppyy.cppdef(root_ana())    
     inp_f = cppyy.gbl.ReadFile(eff_file, off_file)
     print(inp_f)
     kin_ana = inp_f.kin_pro

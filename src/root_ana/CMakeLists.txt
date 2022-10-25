@@ -22,11 +22,11 @@ include_directories(SYSTEM ${ROOT_INCLUDE_DIRS})
 # file(GLOB SOURCES "src/*.cpp")
 # file(GLOB SOURCES "src/*.cpp")
 
-file(GLOB PIONPLUS_SOURCES "root_ana_pl.cpp",  "analysis.cpp", "read_setting.cpp", "general_utility.cpp", "cut.cpp", "print_data.cpp" )
+file(GLOB PIONPLUS_SOURCES "root_ana.cpp",  "analysis.cpp", "read_setting.cpp", "general_utility.cpp", "cut.cpp", "print_data.cpp" )
 
 message("Root Include Dirs: " ${ROOT_INCLUDE_DIRS})
 message("Root Libraries: " ${ROOT_LIBRARIES})
 message("Mathmore: " ${ROOT_mathmore_FOUND})
 
-add_executable (root_ana_pl ${PIONPLUS_SOURCES})
-target_link_libraries(root_ana_pl ${ROOT_LIBRARIES})
+add_executable (root_ana ${PIONPLUS_SOURCES})
+target_link_libraries(root_ana ${ROOT_LIBRARIES})

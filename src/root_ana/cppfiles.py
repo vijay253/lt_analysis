@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-27 14:45:03 trottar"
+# Time-stamp: "2022-10-25 11:19:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -26,8 +26,8 @@ def print_data():
 def read_setting():
     return savefile("read_setting.cpp")
 
-def root_ana_pl():
-    return savefile("root_ana_pl.cpp")
+def root_ana():
+    return savefile("root_ana.cpp")
 
 def analysis():
     return savefile("analysis.cpp")

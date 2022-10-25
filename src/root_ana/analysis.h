@@ -36,7 +36,6 @@
 #include "TChain.h"
 #include "TCutG.h"
 
-//#include "root_ana_pl.h"
 #include "read_setting.h"
 #include "print_data.h"
 
