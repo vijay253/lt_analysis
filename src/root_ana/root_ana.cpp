@@ -10,9 +10,14 @@
 
 using namespace std;
 
-int main() {
+int main(TString eff_file_tmp, TString off_file_tmp) {
 
-	Initialization();
+  //TString eff_file_tmp;
+  //TString off_file_tmp;
+  //eff_file_tmp = "list.settings.omega";
+  //off_file_tmp = "offset.dat";  
+
+	Initialization(TString eff_file_tmp, TString off_file_tmp);
 
 	Dummy_Load();
 	Target_Load();
@@ -49,7 +54,13 @@ int main() {
 //
 
 void Initialization(TString eff_file_tmp, TString off_file_tmp) {
+//void Initialization() {
 
+  //TString eff_file_tmp;
+  //TString off_file_tmp;
+  //eff_file_tmp = "list.settings.omega";
+  //off_file_tmp = "offset.dat";  
+  
 	rf = new ReadFile(eff_file_tmp, off_file_tmp);
 	fo = new File_Output();
 
