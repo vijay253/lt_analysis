@@ -21,7 +21,7 @@ File_Output::File_Output() {
 		tsttst++;
 	}
 
-	out_dir = "file_out/";
+	out_dir = "../file_out/";
 
 }
 

@@ -82,7 +82,7 @@ void Initialization() {
 
 	cout << "Set Runs !!!  : " << set_runs << endl;
 
-	list_dir 			= "lists/";
+	list_dir 			= "../lists/";
 	
 }
 

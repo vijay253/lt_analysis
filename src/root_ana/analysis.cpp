@@ -47,7 +47,7 @@ void Analysis::Init() {
 	list_file = rff->Get_List_File();
 
 
-	data_file_dir = "data/";
+	data_file_dir = "../data/";
 
 	Para_Init(); 
 
