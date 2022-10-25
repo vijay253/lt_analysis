@@ -58,7 +58,7 @@ void Initialization() {
   //eff_file_tmp = "list.settings.omega";
   //off_file_tmp = "offset.dat";  
   
-	rf = new ReadFile(eff_file_tmp, off_file_tmp);
+	rf = new ReadFile(eff_file, off_file);
 	fo = new File_Output();
 
 	kin_setting = rf->kin_pro;
