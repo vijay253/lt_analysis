@@ -120,6 +120,8 @@ class Analysis {
 		TString real_coin_cut;
 		TString rand_coin_cut;
 
+		TString t_cut;
+
 		float charge_tot, acccc_temp, errrr_temp; 
 
 		void SetYield(float yield_setting) { yield = yield_setting; }
@@ -180,7 +182,7 @@ class Analysis {
 		TString root_out_dir_name;
 		TString list_file;
 
-		float yield, yield_err, phi, tb;
+		float yield, yield_err, phi, MandelT;
 
 		float  tmnset, tmxset;
 
@@ -228,7 +230,7 @@ class Analysis {
 
 		Int_t t_bin_set;
 		float t_max, t_min, t_width;
-		std::vector<float> yield_vec, yield_err_vec, phi_vec, tb_vec;
+		std::vector<float> yield_vec, yield_err_vec, phi_vec, MandelT_vec;
 
 		float pstp, pmn, pmx;  
 

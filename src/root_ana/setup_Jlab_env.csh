@@ -18,3 +18,6 @@ cd build/
 cmake ../
 make
 mv root_ana ../
+
+cd ../
+eval root_ana

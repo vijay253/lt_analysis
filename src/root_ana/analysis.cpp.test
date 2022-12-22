@@ -686,11 +686,7 @@ void Analysis::Load_Data_Tree() {
   //cout << " ::::  "  << run_num << endl;
 
 	//data_file.Form( data_file_dir + "coin%i.root", run_num);
-  if (is_run_dummy) {
-    data_file.Form( data_file_dir + "%i_-1_Raw_Dummy.root", run_num); // Uncut data
-  }else{
-    data_file.Form( data_file_dir + "%i_-1_Raw_Target.root", run_num); // Uncut data
-  }
+  data_file.Form( data_file_dir + "Kaon_coin_replay_production_%i_-1.root", run_num); // Uncut data
 
 
 	// cout << data_file_dir << endl;
