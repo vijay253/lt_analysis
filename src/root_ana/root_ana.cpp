@@ -26,7 +26,7 @@ int main() {
 	cout         << "                   Analysis Starts                     " << endl << endl;
 //	cout         << "/*--------------------------------------------------*/ " << endl << endl;
 	
-	Dummy_Analysis();
+//	Dummy_Analysis(); // HERE!
 	Target_Analysis();
 
 //	cout << endl << "/*--------------------------------------------------*/ "  << endl;
