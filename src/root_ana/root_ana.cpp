@@ -148,7 +148,7 @@ TString List_Name(int num_itt) {
 
 	// cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
 
-	dir_str.Form("%i_%i", int(round(kin_setting.Q2set[num_itt]*100)), int(kin_setting.epsset[num_itt]*100));	
+	dir_str.Form("%i_%i", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*10));	
 
 	// cout << "gyyyy !" << dir_str << endl;
 
