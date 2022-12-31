@@ -104,7 +104,7 @@ void Analysis::Init() {
 
 /*-------------------------------------------------------------------
   REMOVED FOR KAONLT TESTING
-  -------------------------------------------------------------------*/
+  -------------------------------------------------------------------
 
 void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
@@ -375,10 +375,9 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	Para_Run_Clean();
 
 }
-/* -------------------------------------------------------------------*/
+  -------------------------------------------------------------------*/
 
-/* -------------------------------------------------------------------
-void Analysis::Run_by_Run_Analysis2(Int_t run_itt){
+void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	is_run_dummy = false;
 
@@ -429,7 +428,8 @@ void Analysis::Run_by_Run_Analysis2(Int_t run_itt){
 		TH1F* event_phi_real_clone = (TH1F*) event_phi_real->Clone();
 		TH1F* event_phi_rand_clone = (TH1F*) event_phi_rand->Clone();
 
-
+		/*--------------------------------------------------*/
+		/*--------------------------------------------------*/
 		/// Note that the scale factor of 0.463 is documented in the report by Dave Meekins,  
 		/// the scale factor corrects the difference in the target thickness difference between 
 		///	dummy target and real target 
@@ -686,12 +686,8 @@ void Analysis::Load_Data_Tree() {
   //cout << " ::::  "  << run_num << endl;
 
 	//data_file.Form( data_file_dir + "coin%i.root", run_num);
-  //  data_file.Form( data_file_dir + "Kaon_coin_replay_production_%i_-1.root", run_num); // Uncut data
-  if (is_run_dummy) {
-    data_file.Form( data_file_dir + "%i_-1_Raw_Dummy.root", run_num); // Uncut data
-  }else{
-    data_file.Form( data_file_dir + "%i_-1_Raw_Target.root", run_num); // Uncut data
-  }
+  data_file.Form( data_file_dir + "Kaon_coin_replay_production_%i_-1.root", run_num); // Uncut data
+
 
 	// cout << data_file_dir << endl;
 
@@ -734,14 +730,14 @@ void Analysis::Load_Data_Tree() {
 void Analysis::Define_Cuts() {
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
-	  -------------------------------------------------------------------*/
+	  -------------------------------------------------------------------
 	all_coin_cut = HMS_cut() + " && "+ SOS_cut() + " && " + PID_cut() + " && " + Cointime_all(coin_center) + " && " + Diamond_cut() + " && " + Missingmass_cut(miss_mass_offset[kset]) + " && " + Set_t_limit(t_min, t_max);
 
 	real_coin_cut = HMS_cut() + " && "+ SOS_cut() + " && " + PID_cut() + " && " + Cointime_primary_cut(coin_center) + " && " + Diamond_cut() + " && " + Missingmass_cut(miss_mass_offset[kset]) + " && " + Set_t_limit(t_min, t_max);
 
 	rand_coin_cut = HMS_cut() + " && "+ SOS_cut() + " && " + PID_cut() + " && " + Cointime_random_cut(coin_center) + " && " + Diamond_cut() + " && " + Missingmass_cut(miss_mass_offset[kset]) + " && " + Set_t_limit(t_min, t_max);
-	/*-------------------------------------------------------------------*/
-	//t_cut = Set_t_limit(t_min, t_max);
+	-------------------------------------------------------------------*/
+	t_cut = Set_t_limit(t_min, t_max);
 
 }
 
@@ -1129,18 +1125,17 @@ void Analysis::Missing_Mass_Plot() {
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
-	  -------------------------------------------------------------------*/
+	  -------------------------------------------------------------------
 	data_tree_in->Draw("cointime>>all",  all_coin_cut, "goff");
 	data_tree_in->Draw("cointime>>real", real_coin_cut, "goff");
 	data_tree_in->Draw("cointime>>rand", rand_coin_cut, "goff");
-
-	/*-------------------------------------------------------------------
+	-------------------------------------------------------------------*/
 
 	data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff");
 	data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff");
 	data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff");
 
-	-------------------------------------------------------------------*/
+
 // 	cout << kset << "   " << miss_mass_offset[kset] << "   " << miss_mass_offset[1] << endl;
 // 	cout << all_coin_cut << endl;
  
@@ -1195,14 +1190,12 @@ void Analysis::Missing_Mass_Plot() {
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
-	  -------------------------------------------------------------------*/
+	  -------------------------------------------------------------------
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
-
-	/*-------------------------------------------------------------------
+	-------------------------------------------------------------------*/
 	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
-	-------------------------------------------------------------------*/
 
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
@@ -1241,12 +1234,10 @@ void Analysis::Missing_Mass_Plot() {
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
-	  -------------------------------------------------------------------*/
+	  -------------------------------------------------------------------
 	miss_mass_offset_str.Form("missmass-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
-
-	/*-------------------------------------------------------------------
-	miss_mass_offset_str.Form("MMp-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
 	-------------------------------------------------------------------*/
+	miss_mass_offset_str.Form("MMp-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
 
 	TH1F* mm_off = new TH1F("mm_off", "mm_off", 50, -0.1, 0.12);
 	TH1F* mm_1_off = new TH1F("mm_1_off", "mm1_off", 50, -0.1, 0.12);
@@ -1320,15 +1311,12 @@ void Analysis::Missing_Mass_Plot() {
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
-	  -------------------------------------------------------------------*/
-	//without_diamond_cut = HMS_cut() + " && "+ SOS_cut() + " && " + PID_cut() + " && " + Missingmass_cut(miss_mass_offset[kset]) + " && " + Set_t_limit(t_min, t_max);
-	without_diamond_cut = "";
+	  -------------------------------------------------------------------
+	without_diamond_cut = HMS_cut() + " && "+ SOS_cut() + " && " + PID_cut() + " && " + Missingmass_cut(miss_mass_offset[kset]) + " && " + Set_t_limit(t_min, t_max);
 	data_tree_in->Draw("W:Q2", without_diamond_cut);
-
-	/*-------------------------------------------------------------------
+	-------------------------------------------------------------------*/
 
 	data_tree_in->Draw("W:Q2");
-	-------------------------------------------------------------------*/
 
 	TGraph *gr1 = (TGraph*)gPad->GetPrimitive("Graph")->Clone();
 	gr1->SetMarkerStyle(7);	
