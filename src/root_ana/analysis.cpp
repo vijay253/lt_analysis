@@ -603,10 +603,8 @@ void Analysis::Para_Run_Def(Int_t num) {
 	} else {
 		target = "Real";
 	}
-
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
- 	coin_center = cen_ana.center_mean[pos];	// ERROR!
+ 	//coin_center = cen_ana.center_mean[pos];	// ERROR!
 
 	cout << " Before "<< acccc_temp << endl; 
 
@@ -622,8 +620,7 @@ void Analysis::Para_Run_Def(Int_t num) {
 
 //	errrr_temp = errrr_temp + pow(charge,2) * (pow(charge_err, 2) + pow(tot_eff_err,2)); 
 
-	cout << "Now analyzing " << target << " Target Run #" << run_num << ": coin center=" 
-		 << coin_center << endl;
+	//cout << "Now analyzing " << target << " Target Run #" << run_num << ": coin center=" << coin_center << endl;
 
 
 	cout << "acccc: " << acccc_temp << "   charge: " << charge << "   tot_eff: " 
@@ -635,7 +632,7 @@ void Analysis::Para_Run_Def(Int_t num) {
 	
 	out_dir = file_out_ana->mkdir(root_out_dir_name);
 
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 
 
 	/*--------------------------------------------------*/
