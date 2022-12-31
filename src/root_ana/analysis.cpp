@@ -604,9 +604,9 @@ void Analysis::Para_Run_Def(Int_t num) {
 		target = "Real";
 	}
 
- 	coin_center = cen_ana.center_mean[pos];
-
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;	
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	
+ 	coin_center = cen_ana.center_mean[pos];	// ERROR!
 
 	cout << " Before "<< acccc_temp << endl; 
 
