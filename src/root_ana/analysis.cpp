@@ -588,7 +588,6 @@ void Analysis::Para_Run_Def(Int_t num) {
 
 	ebeam_run   = Float_t(eff_ana.ebeam[num]);
 
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	int pos = -100000000;
 
  	for(int ii = 0; ii < cen_runs; ii++) {
@@ -597,7 +596,7 @@ void Analysis::Para_Run_Def(Int_t num) {
  		}
  	}
 
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	//cout << is_run_dummy << endl;
 
 	if (is_run_dummy) {
