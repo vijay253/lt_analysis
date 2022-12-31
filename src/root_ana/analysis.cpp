@@ -604,7 +604,9 @@ void Analysis::Para_Run_Def(Int_t num) {
 		target = "Real";
 	}
 
- 	coin_center = cen_ana.center_mean[pos];    
+ 	coin_center = cen_ana.center_mean[pos];
+
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;	
 
 	cout << " Before "<< acccc_temp << endl; 
 
@@ -645,7 +647,7 @@ void Analysis::Para_Run_Def(Int_t num) {
 		yield_err_sum[i].resize(phi_bin_num);
 	}
 
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << end;
+
 
 }
 
