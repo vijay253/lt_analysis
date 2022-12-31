@@ -383,7 +383,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	cout << " sadadout_dirout_dir " << run_itt << endl;
 
-	// cout << "Is the run dummy? " << is_run_dummy << endl;
+	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
 	run_tree = Create_File();
 
