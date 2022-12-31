@@ -682,7 +682,7 @@ void Analysis::Load_Data_Tree() {
 
 	//data_file.Form( data_file_dir + "coin%i.root", run_num);
   //data_file.Form( data_file_dir + "Kaon_coin_replay_production_%i_-1.root", run_num); // Uncut data
-  data_file.Form( data_file_dir + "%i_-1_Raw_Data.root", run_num); // Uncut data
+  data_file.Form( data_file_dir + "%i_-1_Raw_Proc.root", run_num); // Uncut data
 
 
 	// cout << data_file_dir << endl;
