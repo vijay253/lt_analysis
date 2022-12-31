@@ -386,15 +386,16 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
 	run_tree = Create_File();
+	cout << "Is the run dummy? " << is_run_dummy << endl;
 
 	Para_Run_Def(run_itt);
 	
-	//Set_Coin_Min(-6);
+	Set_Coin_Min(-6);
 
-	//Set_Coin_Max(10);
-	//Set_Coin_Bin(80);
+	Set_Coin_Max(10);
+	Set_Coin_Bin(80);
 
-	//Set_Expected_MM(0.939565);
+	Set_Expected_MM(0.939565);
 
 	Double_t array_temp[6] = {0.0, 0.00574, 0.00554, 0.00254, 0.00253, 0.00260};
 
