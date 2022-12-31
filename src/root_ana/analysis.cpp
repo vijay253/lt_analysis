@@ -387,7 +387,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	
 	run_tree = Create_File();
 
-	Para_Run_Def(run_itt);
+	Para_Run_Def(run_itt); // ERROR!
 
 	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
@@ -574,7 +574,7 @@ void Analysis::Para_Init() {
 
 void Analysis::Para_Run_Def(Int_t num) {
 
-//	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+  cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 
 	run_num     = eff_ana.run_num[num];
 
