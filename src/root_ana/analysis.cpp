@@ -386,9 +386,10 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
 	run_tree = Create_File();
-	cout << "Is the run dummy? " << is_run_dummy << endl;
 
 	Para_Run_Def(run_itt);
+
+	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
 	Set_Coin_Min(-6);
 
