@@ -575,7 +575,7 @@ void Target_Setup() {
 
 			setting_run_list_target[setting_num_tmp].push_back(ii);
 
-			cout << "setting_run_list_target    " << setting_run_list_target[setting_num_tmp].push_back(ii) << endl;
+			cout << "setting_run_list_target    " << setting_run_list_target[setting_num_tmp] << endl;
 
    	 	}	
 
