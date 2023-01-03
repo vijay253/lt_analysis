@@ -1193,9 +1193,6 @@ void Analysis::Missing_Mass_Plot() {
  	mm->SetMarkerStyle(3);
 
 	TH1F* mm_fit = (TH1F*) mm->Clone();
-
-
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
 	c2->cd(1);
 
@@ -1237,7 +1234,7 @@ void Analysis::Missing_Mass_Plot() {
 
 	data_tree_in->Draw(miss_mass_offset_str + " >> mm_off", real_coin_cut, "goff");
 	data_tree_in->Draw(miss_mass_offset_str + " >> mm_1_off", rand_coin_cut, "goff");
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	mm_off->Add(mm_1_off, -0.3333333);
  	mm_off->SetMarkerStyle(3);
 
