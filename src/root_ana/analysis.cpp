@@ -422,10 +422,10 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 		yield_t_bin_cut.Form("MandelT > %f && MandelT < %f",yield_cut_t_l, yield_cut_t_h);
 		
 		TH1F* event_phi_real = new TH1F("phi_real", "phi_real", phi_bin_num, 0, 360);
-		data_tree_in->Draw("ph_q*180/3.1415926 >> phi_real", yield_t_bin_cut + "&&" + real_coin_cut, "goff");
+		data_tree_in->Draw("ph_q*180/3.1415926 >> phi_real", yield_t_bin_cut, "goff");
 
 		TH1F* event_phi_rand = new TH1F("phi_rand", "phi_rand", phi_bin_num, 0, 360);
-		data_tree_in->Draw("ph_q*180/3.1415926 >> phi_rand", yield_t_bin_cut + "&&" + rand_coin_cut, "goff");
+		data_tree_in->Draw("ph_q*180/3.1415926 >> phi_rand", yield_t_bin_cut, "goff");
 
 		TH1F* event_phi_real_clone = (TH1F*) event_phi_real->Clone();
 		TH1F* event_phi_rand_clone = (TH1F*) event_phi_rand->Clone();
