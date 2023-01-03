@@ -1326,7 +1326,7 @@ void Analysis::Missing_Mass_Plot() {
 	
  	TText* number_points = new TText();
  	number_points->SetTextSize(0.035);
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
  	TString points_str; 
  	points_str.Form("Black Events: %i", gr1->GetN());
  	number_points->DrawTextNDC(0.7, 0.65, points_str);
@@ -1336,7 +1336,7 @@ void Analysis::Missing_Mass_Plot() {
 
  	points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN());
  	number_points->DrawTextNDC(0.7, 0.85, points_str);
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+
 	diamond_setting->Add(gr1);
 	diamond_setting_cut->Add(gr2);
  
