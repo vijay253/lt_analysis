@@ -408,6 +408,8 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	Missing_Mass_Plot();
 
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	
 	TH1F* phi_real_check[t_bin_set];
 	TH1F* phi_rand_check[t_bin_set];
 
@@ -641,8 +643,6 @@ void Analysis::Para_Run_Def(Int_t num) {
 	for (unsigned int i = 0; i < t_bin_set; ++i) {
 		yield_err_sum[i].resize(phi_bin_num);
 	}
-
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 
 }
 
