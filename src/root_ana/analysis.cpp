@@ -243,7 +243,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	}
 
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	//cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
 	out_dir->cd();
  	phi_no_sub->Write("phi_check_no_sub");
@@ -527,7 +527,8 @@ void Analysis::Print_out_data() {
 			phi_vec[itt_tmp]       = phi; 
 			MandelT_vec[itt_tmp]        = MandelT;
 
-			cout << "*  "; 
+			cout << "*  ";
+			cout << "yield" << "     " << "yield_err" << "     " << "phi" << "     " << "MandelT" << endl;
 	 		cout << yield << "     " << yield_err << "     " << phi << "     " << MandelT << endl;
 
 		}
@@ -866,6 +867,7 @@ void Analysis::Yield_Out() {
  		yield_err = yield_err/1000.;
 
 	 	cout << "********  ";
+		cout << "yield" << "     " << "yield_err" << "     " << "phi" << "     " << "MandelT" << endl;
 	 	cout << yield << "     " << yield_err << "     " << phi << "     " << MandelT << endl;
 
 		tree_out->Fill();		
