@@ -388,8 +388,6 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	run_tree = Create_File();
 
 	Para_Run_Def(run_itt);
-
-	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
 	Set_Coin_Min(-6);
 
@@ -398,7 +396,8 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	Set_Expected_MM(0.939565);
 
-	Double_t array_temp[6] = {0.0, 0.00574, 0.00554, 0.00254, 0.00253, 0.00260};
+	//Double_t array_temp[6] = {0.0, 0.00574, 0.00554, 0.00254, 0.00253, 0.00260};
+	Double_t array_temp[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 	Set_MM_Offset(array_temp);
 
@@ -437,15 +436,15 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 		///	dummy target and real target 
 
 		if (is_run_dummy) {
-			event_phi_real->Scale(1.000);		
-			event_phi_rand->Scale(1.000);		
+			event_phi_real->Scale(0.48579);		
+			event_phi_rand->Scale(0.48579);		
 		}
 
 		phi_real_check[t_bin_set_tmp-1] = (TH1F*) event_phi_real->Clone(); 
 
-		event_phi_real->Add(event_phi_rand, -1.000);
+		event_phi_real->Add(event_phi_rand, -0.333333);
 
-		event_phi_rand->Scale(1.000);
+		event_phi_rand->Scale(0.3333333);
 
 		phi_sub_check[t_bin_set_tmp-1] = (TH1F*) event_phi_real->Clone(); 
 		phi_rand_check[t_bin_set_tmp-1] =  (TH1F*) event_phi_rand->Clone(); 
@@ -459,18 +458,18 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 //			int real_event_err_itt = real_err_itt ;
 
 			if (is_run_dummy) {
-				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 1.000 * 1.000;
+				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579 * 0.3333333;
 			} else { 
-//				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 1.000;
-				rand_err = event_phi_rand_clone->GetBinError(iiii+1) *1.000;
+//				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579;
+				rand_err = event_phi_rand_clone->GetBinError(iiii+1) *0.3333333;
 			}
 
 
  			if (is_run_dummy) {
-//				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 1.000 * 1.000;
-				real_err = event_phi_real_clone->GetBinError(iiii+1) * 1.000;
+//				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579 * 0.3333333;
+				real_err = event_phi_real_clone->GetBinError(iiii+1) * 0.48579;
 			} else { 
-//				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 1.000;
+//				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579;
 				real_err = event_phi_real_clone->GetBinError(iiii+1);
 			}
 
