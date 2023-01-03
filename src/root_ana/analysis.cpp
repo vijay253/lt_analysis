@@ -24,7 +24,7 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
   //eff_file = "list.settings.omega";
   eff_file = "list.settings";
   //off_file = "offset.dat.omega";  
-  //off_file = "offset.dat";  
+  off_file = "offset.dat";  
   eff_ana = eff_struc;
 
   Init();
@@ -37,14 +37,13 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
 void Analysis::Init() {
 
-  //ReadFile* rff = new ReadFile(eff_file, off_file);
-  ReadFile* rff = new ReadFile(eff_file);
+	ReadFile* rff = new ReadFile(eff_file, off_file);
 
 	kin_ana = rff->kin_pro;
 //	eff_ana = rff->eff_pro1;
-	//cen_ana = rff->cen_pro;
+	cen_ana = rff->cen_pro;
 
-	//cen_runs = rff->Get_Cen_Runs();
+	cen_runs = rff->Get_Cen_Runs();
 
 	list_file = rff->Get_List_File();
 
@@ -318,14 +317,12 @@ void Analysis::Para_Run_Def(Int_t num) {
 
 	int pos = -100000000;
 
-	/*
  	for(int ii = 0; ii < cen_runs; ii++) {
  		if (cen_ana.center_run_num[ii] == run_num) {
  			pos = ii;
  		}
  	}
-	*/
-	
+
 	//cout << is_run_dummy << endl;
 
 	if (is_run_dummy) {

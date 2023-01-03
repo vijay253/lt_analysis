@@ -49,15 +49,14 @@ void Initialization() {
   TString off_file_tmp;
   //eff_file_tmp = "list.settings.omega";
   eff_file_tmp = "list.settings";
-  //off_file_tmp = "offset.dat";  
+  off_file_tmp = "offset.dat";  
   
-  //rf = new ReadFile(eff_file_tmp, off_file_tmp);
-  rf = new ReadFile(eff_file_tmp);
+	rf = new ReadFile(eff_file_tmp, off_file_tmp);
 	fo = new File_Output();
 
 	kin_setting = rf->kin_pro;
 //	eff_setting = rf->eff_pro;
-	//cen_setting = rf->cen_pro;
+	cen_setting = rf->cen_pro;
 
 //	num_runs = rf->Get_Num_Runs();
 

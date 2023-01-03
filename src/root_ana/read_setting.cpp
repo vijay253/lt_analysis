@@ -50,7 +50,7 @@ ReadFile::ReadFile() {
 // 
 ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
-	cout << "\n\nOffset File...\n" << off_file_name_tmp << endl;
+  //cout << "\n\nOffset File...\n" << off_file_name_tmp << endl;
 
 	static int tsttst = 0;
 
@@ -66,7 +66,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	cout << "Efficiency File...\n" << eff_file_name_tmp << endl;
 
 	eff_file_name = eff_file_name_tmp;
-	off_file_name = off_file_name_tmp;
+	//off_file_name = off_file_name_tmp;
 
 	Read_init();
 	Setting_file_loading_name();
@@ -75,7 +75,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 	// eff_pro_array_load();
 
-	Cen_Pro_Array_Load();
+	//Cen_Pro_Array_Load();
 
 	// Sim_Pro_Array_Load();
 
