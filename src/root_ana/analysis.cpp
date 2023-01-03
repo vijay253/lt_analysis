@@ -21,10 +21,9 @@ Analysis::Analysis() {
 
 Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
-  //eff_file = "list.settings.omega";
   eff_file = "list.settings";
-  //off_file = "offset.dat.omega";  
-  off_file = "offset.dat";  
+
+  off_file = "offset.dat";  // Not used
   eff_ana = eff_struc;
 
   Init();
@@ -47,7 +46,6 @@ void Analysis::Init() {
 
 	list_file = rff->Get_List_File();
 
-
 	data_file_dir = "../data/";
 
 	Para_Init(); 
@@ -58,8 +56,6 @@ void Analysis::Init() {
 	c2 = new TCanvas();
 	c3 = new TCanvas();
 	c4 = new TCanvas();
-
-
 
 	c2->Divide(1,2);
 
@@ -528,7 +524,6 @@ void Analysis::Print_out_data() {
 			MandelT_vec[itt_tmp]        = MandelT;
 
 			cout << "*  ";
-			cout << "yield" << "     " << "yield_err" << "     " << "phi" << "     " << "MandelT" << endl;
 	 		cout << yield << "     " << yield_err << "     " << phi << "     " << MandelT << endl;
 
 		}

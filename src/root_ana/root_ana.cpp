@@ -47,9 +47,9 @@ void Initialization() {
 
   TString eff_file_tmp;
   TString off_file_tmp;
-  //eff_file_tmp = "list.settings.omega";
+
   eff_file_tmp = "list.settings";
-  off_file_tmp = "offset.dat";  
+  off_file_tmp = "offset.dat"; // Not used
   
 	rf = new ReadFile(eff_file_tmp, off_file_tmp);
 	fo = new File_Output();
@@ -145,8 +145,8 @@ TString List_Name(int num_itt) {
 
 	TString dir_str;
 
-
-	// cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
+	cout << "kin_setting.Q2set[num_itt]*100" << "      " << "kin_setting.Q2set[num_itt]"<< endl;
+	cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
 
 	if (int(round(kin_setting.Q2set[num_itt]*10)) >= 10)
 	  {
@@ -165,7 +165,7 @@ TString List_Name(int num_itt) {
 	    }
 	}
 
-	// cout << "gyyyy !" << dir_str << endl;
+	cout << "gyyyy !" << dir_str << endl;
 
 	return dir_str;
 
