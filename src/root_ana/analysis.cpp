@@ -1313,9 +1313,10 @@ void Analysis::Missing_Mass_Plot() {
 	gr1->SetMarkerColor(1);	
 
 	//data_tree_in->Draw("W:Q2", real_coin_cut); // ERROR!
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
 	TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone();
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+
 	gr2->SetMarkerStyle(7);	
 	gr2->SetMarkerSize(1);	
 	gr2->SetMarkerColor(2);	
