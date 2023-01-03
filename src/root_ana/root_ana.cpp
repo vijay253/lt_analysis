@@ -248,7 +248,7 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 	cout << "**** "<< setting_vec_target[set_itt] << "     " << run_setting_name << endl;
 	
 	if (setting_vec_target[set_itt] == run_setting_name) {
-	// 	cout << "AAAA" << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
+	  cout << "AAAA" << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
 		cout << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
 		setting_num = set_itt;
 	}
