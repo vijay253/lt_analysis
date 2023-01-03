@@ -3,17 +3,17 @@ TGraphErrors* q2_ratio_lo;
 TGraphErrors* q2_ratio_hi;
 
 
-TGraphErrors* q2_u_set;
+TGraphErrors* q2_t_set;
 
 TMultiGraph *mg;
 
-// const Int_t u_bin_num = 2;
-// Float_t u_lower_limit[u_bin_num];
-// Float_t u_upper_limit[u_bin_num];
+// const Int_t t_bin_num = 2;
+// Float_t t_lower_limit[t_bin_num];
+// Float_t t_upper_limit[t_bin_num];
 
-Int_t u_bin_num;
-Double_t* u_lower_limit;
-Double_t* u_upper_limit;
+Int_t t_bin_num;
+Double_t* t_lower_limit;
+Double_t* t_upper_limit;
 
 TString outplot_dir;
 outplot_dir = "ratio_check/";
@@ -25,14 +25,14 @@ Int_t iii = 0;
 
 void plot_R() {
 
-	gROOT->ProcessLine(".L get_u_phi_bin.C");
+	gROOT->ProcessLine(".L get_t_phi_bin.C");
 
-	u_bin_num = Get_u_bin();
+	t_bin_num = Get_t_bin();
 
-	const Int_t u_bin_num_const = u_bin_num;
+	const Int_t t_bin_num_const = t_bin_num;
 
-	u_lower_limit = new Double_t[u_bin_num_const];
-	u_upper_limit = new Double_t[u_bin_num_const];
+	t_lower_limit = new Double_t[t_bin_num_const];
+	t_upper_limit = new Double_t[t_bin_num_const];
 
 
 //	Double file_name_arr[4] = {"160_32", "160_59", "245_27", "245_55"};
@@ -59,7 +59,7 @@ void plot_R() {
 
 	mg = new TMultiGraph();
 	
- 	q2_u_set  = new TGraphErrors();
+ 	q2_t_set  = new TGraphErrors();
 
 // 
 // 	for (Int_t i; i < 4; i++) {
@@ -72,11 +72,18 @@ void plot_R() {
 // 
 // 	}
 
-	Single_Setting(160, 32);
-	Single_Setting(160, 59);
-	Single_Setting(245, 27);
-	Single_Setting(245, 55);
-
+	Single_Setting(55,18);
+	Single_Setting(55,52);
+	Single_Setting(44,48);
+	Single_Setting(44,71);
+	Single_Setting(33,39);
+	Single_Setting(33,66);
+	Single_Setting(33,57);
+	Single_Setting(33,87);
+	Single_Setting(21,24);
+	Single_Setting(21,78);
+	Single_Setting(05,45);
+	Single_Setting(05,69);
 
 
 	TCanvas* c2 = new TCanvas();
@@ -105,16 +112,16 @@ void plot_R() {
 	c2->cd();
 
 
- 	q2_u_set->SetTitle("Q^{2} vs -u");
+ 	q2_t_set->SetTitle("Q^{2} vs -u");
  	
-    q2_u_set->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
-    q2_u_set->GetXaxis()->CenterTitle();		
+    q2_t_set->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
+    q2_t_set->GetXaxis()->CenterTitle();		
 
-    q2_u_set->GetYaxis()->SetTitle("Q^{2}");		
-    q2_u_set->GetYaxis()->SetTitleOffset(1.2);		
-    q2_u_set->GetYaxis()->CenterTitle();		
+    q2_t_set->GetYaxis()->SetTitle("Q^{2}");		
+    q2_t_set->GetYaxis()->SetTitleOffset(1.2);		
+    q2_t_set->GetYaxis()->CenterTitle();		
 
-	q2_u_set->Draw("A*");
+	q2_t_set->Draw("A*");
 
 	c2->Print(outplot_dir+"q2_vs_u.png");
 
@@ -154,7 +161,7 @@ void plot_R() {
 
 
 
-	TF1* u_fit_total = new TF1("u_total", "pol1", 0.04, 0.6); 
+	TF1* t_fit_total = new TF1("t_total", "pol1", 0.04, 0.6); 
 
 
 
@@ -169,7 +176,7 @@ void plot_R() {
     mg->GetYaxis()->SetTitleOffset(1.2);		
     mg->GetYaxis()->CenterTitle();		
 
-	mg->Fit("u_total", "R");
+	mg->Fit("t_total", "R");
 
 
 	TLatex* tt = new TLatex();
@@ -203,11 +210,11 @@ void plot_R() {
 
 void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
-	const Int_t u_bin_num_const = u_bin_num;
+	const Int_t t_bin_num_const = t_bin_num;
 
-	ifstream u_bin_file("../u_bin_interval", std::fstream::in); 
+	ifstream t_bin_file("../t_bin_interval", std::fstream::in); 
 
-	if (!u_bin_file.is_open()) {
+	if (!t_bin_file.is_open()) {
 
 		cout << "u file doesn't exits! " << endl; 
 		exit(0)
@@ -215,75 +222,75 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	string dummy_str;
 
-	getline(u_bin_file, dummy_str);
+	getline(t_bin_file, dummy_str);
 
  	if( q2_set == 160) {
  
  	/// t from 0.01 to 0.45
  
- 	///	u_lower_limit[0] = 0.01;
+ 	///	t_lower_limit[0] = 0.01;
 
-	//	u_bin_file >> >> >> ; 
+	//	t_bin_file >> >> >> ; 
 
-		Float_t temp_num[u_bin_num_const];
+		Float_t temp_num[t_bin_num_const];
 
-		for(Int_t i = 0; i <= u_bin_num; i++) {
-			u_bin_file >> temp_num[i];
+		for(Int_t i = 0; i <= t_bin_num; i++) {
+			t_bin_file >> temp_num[i];
 			cout << temp_num[i] << endl;
 		}
 
 
-		for(Int_t i = 0; i < u_bin_num; i++) {
+		for(Int_t i = 0; i < t_bin_num; i++) {
 
-			u_lower_limit[i] = temp_num[i];
-			u_upper_limit[i] = temp_num[i+1];
+			t_lower_limit[i] = temp_num[i];
+			t_upper_limit[i] = temp_num[i+1];
 
-			cout << 	u_lower_limit[i] << "   " << u_upper_limit[i] << endl;
+			cout << 	t_lower_limit[i] << "   " << t_upper_limit[i] << endl;
 
 		}
 
 
 //		exit(0);
 
-//  		u_lower_limit[0] = 0.0;
-//  		u_upper_limit[0] = 0.12;
+//  		t_lower_limit[0] = 0.0;
+//  		t_upper_limit[0] = 0.12;
 //  
-//  		u_lower_limit[1] = 0.12;
-//  		u_upper_limit[1] = 0.2;
+//  		t_lower_limit[1] = 0.12;
+//  		t_upper_limit[1] = 0.2;
 //  
-//  		u_lower_limit[2] = 0.2;
-//  		u_upper_limit[2] = 0.4;
+//  		t_lower_limit[2] = 0.2;
+//  		t_upper_limit[2] = 0.4;
  
  	} else if ( q2_set == 245) {
  
-		getline(u_bin_file, dummy_str);
-		getline(u_bin_file, dummy_str);
+		getline(t_bin_file, dummy_str);
+		getline(t_bin_file, dummy_str);
 
-		Float_t temp_num[u_bin_num_const];
+		Float_t temp_num[t_bin_num_const];
 
-		for(Int_t i = 0; i <= u_bin_num; i++) {
-			u_bin_file >> temp_num[i];
+		for(Int_t i = 0; i <= t_bin_num; i++) {
+			t_bin_file >> temp_num[i];
 			cout << temp_num[i] << endl;
 		}
 
 
-		for(Int_t i = 0; i < u_bin_num; i++) {
+		for(Int_t i = 0; i < t_bin_num; i++) {
 
-			u_lower_limit[i] = temp_num[i];
-			u_upper_limit[i] = temp_num[i+1];
+			t_lower_limit[i] = temp_num[i];
+			t_upper_limit[i] = temp_num[i+1];
 
-			cout << 	u_lower_limit[i] << "   " << u_upper_limit[i] << endl;
+			cout << 	t_lower_limit[i] << "   " << t_upper_limit[i] << endl;
 
 		}
 
-//  		u_lower_limit[0] = 0.0; 
-//  		u_upper_limit[0] = 0.212;
+//  		t_lower_limit[0] = 0.0; 
+//  		t_upper_limit[0] = 0.212;
 //  
-//  		u_lower_limit[1] = 0.212;
-//  		u_upper_limit[1] = 0.33;
+//  		t_lower_limit[1] = 0.212;
+//  		t_upper_limit[1] = 0.33;
 //  
-//  		u_lower_limit[2] = 0.33;
-//  		u_upper_limit[2] = 0.60;
+//  		t_lower_limit[2] = 0.33;
+//  		t_upper_limit[2] = 0.60;
 
 //			exit(0);
  
@@ -294,7 +301,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	Double_t t_set;
 
-//	cout << u_lower_limit[2] << endl;
+//	cout << t_lower_limit[2] << endl;
 	
 //	exit(0);
 
@@ -309,7 +316,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
  
  	n1->ReadFile(file_name);
  
-    TGraphErrors* u_g = new TGraphErrors();
+    TGraphErrors* t_g = new TGraphErrors();
 
 	TF1* t_fit = new TF1("t1", "pol1", 0, 4); 
 
@@ -322,7 +329,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 
 
-	for (Int_t i = 0; i < u_bin_num; i++) {
+	for (Int_t i = 0; i < t_bin_num; i++) {
 
 		Int_t in = i + 1;	
 
@@ -390,14 +397,14 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
  		g->Draw("AP");
 
 
-		Int_t graph_it = u_g->GetN(); 
+		Int_t graph_it = t_g->GetN(); 
 
-		t_set = (u_lower_limit[i] + u_upper_limit[i])/2;
+		t_set = (t_lower_limit[i] + t_upper_limit[i])/2;
 
-//		u_g->SetPoint(graph_it, i+1, sum_r/4);
+//		t_g->SetPoint(graph_it, i+1, sum_r/4);
 
-//		u_g->SetPoint(graph_it, t_set, sum_r/graph_it);
-//		u_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/graph_it);
+//		t_g->SetPoint(graph_it, t_set, sum_r/graph_it);
+//		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/graph_it);
 
 
 		cout << "ppppppppppppppppp   "<< g->GetN() << endl;
@@ -405,21 +412,21 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 //		exit(0);
 			
 
-//		u_g->SetPoint(graph_it, t_set, sum_r/g->GetN());
-//		u_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/g->GetN());
+//		t_g->SetPoint(graph_it, t_set, sum_r/g->GetN());
+//		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/g->GetN());
 
-		u_g->SetPoint(graph_it, t_set, weighted_ave_top/weighted_ave_bot);
-		u_g->SetPointError(graph_it, 0, 1/sqrt(sum_w));
+		t_g->SetPoint(graph_it, t_set, weighted_ave_top/weighted_ave_bot);
+		t_g->SetPointError(graph_it, 0, 1/sqrt(sum_w));
 
 
 		Float_t q2_set_tmp;
 
-//		q2_set_tmp = Get_u_bin_q2(q2_set, i);
+//		q2_set_tmp = Get_t_bin_q2(q2_set, i);
 
-		q2_set_tmp = Get_u_bin_q2(q2_set, i);
+		q2_set_tmp = Get_t_bin_q2(q2_set, i);
 
 
-		q2_u_set->SetPoint(q2_u_set->GetN(), t_set, q2_set_tmp);
+		q2_t_set->SetPoint(q2_t_set->GetN(), t_set, q2_set_tmp);
 
 		
 		cout << t_set << "   " << q2_set_tmp << endl;
@@ -492,8 +499,8 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 
 
-	c1->Print(outplot_dir + "ratio_check_u_phi_bin" + file_name_str + ".png");
-	c1->Print(outplot_dir + "ratio_check_u_phi_bin" + file_name_str + ".root");
+	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".png");
+	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".root");
 
 	c1->Clear();
 
@@ -502,32 +509,32 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	c1->cd();
 	
 
-    u_g->SetTitle("u Dependence Plot");
+    t_g->SetTitle("u Dependence Plot");
      
-    u_g->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
-    u_g->GetXaxis()->CenterTitle();		
+    t_g->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
+    t_g->GetXaxis()->CenterTitle();		
      
-    u_g->GetYaxis()->SetTitle("Yield Ratio");		
-    u_g->GetYaxis()->SetTitleOffset(1.8);		
-    u_g->GetYaxis()->CenterTitle();		
+    t_g->GetYaxis()->SetTitle("Yield Ratio");		
+    t_g->GetYaxis()->SetTitleOffset(1.8);		
+    t_g->GetYaxis()->CenterTitle();		
 
-	u_g->Draw("a*");
+	t_g->Draw("a*");
 
-	TGraphErrors* u_g_1 = (TGraphErrors*) u_g->Clone();
+	TGraphErrors* t_g_1 = (TGraphErrors*) t_g->Clone();
 	
 	iii = iii+1;
 
-	u_g_1->SetMarkerColor(iii);
-	u_g_1->SetLineColor(iii);
+	t_g_1->SetMarkerColor(iii);
+	t_g_1->SetLineColor(iii);
 
-    mg->Add(u_g_1, "*");
+    mg->Add(t_g_1, "*");
 
 
 
 	
 	gStyle->SetOptFit(); 
 
-	u_g->Fit("t1");
+	t_g->Fit("t1");
 
 
 
@@ -571,7 +578,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
 
-Double_t Get_u_bin_q2(Int_t q2_set, Int_t t_bin_num) {
+Double_t Get_t_bin_q2(Int_t q2_set, Int_t t_bin_num) {
 	
 	TString file_str;
 	TString dir_str;

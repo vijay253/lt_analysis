@@ -8,6 +8,7 @@ c     settings, then different polarities.
 c
 c     Input:  kindata/kindata.*.dat
 c     Output: averages/averages.*.dat
+      
 !     call average_k(Q2,epslow,epshigh)
       call average_k(5.5,0.1838,0.5291)
       print*,  "-------------------------------------------------"
@@ -203,7 +204,7 @@ c     Get low, high eps. and neg., pos. polarity data.
          do lh=1,2
 
             nset=0
-            open(55,file='list.settings')
+            open(55,file='root_ana/list.settings')
             do while(.true.)
 
 c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt

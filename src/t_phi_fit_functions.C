@@ -31,16 +31,16 @@ Double_t fit_lo_global = fitting_limit;
 
 
 
-void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
+void t_phi_fit_sim(TCanvas* cc3, TString file_name) {
 
-	const Int_t u_bin_num_const   = u_bin_num;  
+	const Int_t t_bin_num_const   = t_bin_num;  
 	const Int_t phi_bin_num_const = phi_bin_num;  
-	const Int_t bin_num_const     = u_bin_num_const * phi_bin_num_const;
+	const Int_t bin_num_const     = t_bin_num_const * phi_bin_num_const;
 
 	ofstream fit_out_file;
-	fit_out_file.open("u_bin_fit/fit_output.pl_" + file_name + ".dat", std::fstream::out); 
+	fit_out_file.open("t_bin_fit/fit_output.pl_" + file_name + ".dat", std::fstream::out); 
 
-	TFile* file_out_root = new TFile(out_dir_str + "u_fit_phi_" + file_name+".root", "RECREATE");
+	TFile* file_out_root = new TFile(out_dir_str + "t_fit_phi_" + file_name+".root", "RECREATE");
 
 	cout << "asddddddddddddddddd " << endl;
 
@@ -49,16 +49,16 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 //	TPad* cur_pad;
 
 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-	cc4->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc4->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TCanvas* cc2 = new TCanvas("cc2", "cc2", 1600, 800);
-	cc2->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc2->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TCanvas* cc6 = new TCanvas("cc6", "cc6", 1600, 800);
-	cc6->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc6->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TCanvas* cc7 = new TCanvas("cc7", "cc7", 1600, 800);
-	cc7->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc7->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 
  	TH1F* h_tgt[bin_num_const];
@@ -100,7 +100,7 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 	
 	Int_t refit_itt = 0;
 
-	for (Int_t i = 1; i <= u_bin_num*phi_bin_num; i++) {
+	for (Int_t i = 1; i <= t_bin_num*phi_bin_num; i++) {
 
 		// fit_out_file << fixed << setprecision(4) << Int_t((i-1)/phi_bin_num) + 1 << "  " << (i-1)%phi_bin_num + 1 << endl;
 
@@ -128,7 +128,7 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 
 		TString f_str_temp;
 		f_str_temp.Form("_%i_%i", Int_t((i-1)/phi_bin_num) + 1, (i-1)%phi_bin_num + 1);
-		f_str_temp = "u_fit_phi_" + file_name + f_str_temp;
+		f_str_temp = "t_fit_phi_" + file_name + f_str_temp;
 
 		TPad*cur_pad = (TPad*)cc4->GetPad(i);
 
@@ -143,28 +143,28 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 //		cout << in << endl;
 
 		cout << endl << "/*--------------------------------------------------*/" << endl;
-		cout << "u_bin: " << Int_t((i-1)/phi_bin_num) + 1 << "   Phi_bin: " << (i-1)%phi_bin_num + 1 
+		cout << "t_bin: " << Int_t((i-1)/phi_bin_num) + 1 << "   Phi_bin: " << (i-1)%phi_bin_num + 1 
 			 << "    Overall counter: " << in<< endl;
 	
 //		TH1F* h_tgt[in] = (TH1F*) cc3->GetPad(i)->GetPrimitive("h_miss");
 //		TH1F* h_sim[in] = (TH1F*) cc3->GetPad(i)->GetPrimitive("h_miss_sim");
 
- 		TH1F* h_tgt_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_target");
+ 		TH1F* h_tgt_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_target");
  		TH1F* h_tgt[in] = (TH1F*) h_tgt_tmp->Clone("h_tgt_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_omega");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_omega");
  		TH1F* h_sim[in] = (TH1F*) h_sim_tmp->Clone("h_sim_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_rho");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_rho");
  		TH1F* h_sim_rho[in] = (TH1F*) h_sim_tmp->Clone("h_sim_rho_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_xphsp");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_xphsp");
  		TH1F* h_sim_xphsp[in] = (TH1F*) h_sim_tmp->Clone("h_sim_xphsp_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_eta");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_eta");
  		TH1F* h_sim_eta[in] = (TH1F*) h_sim_tmp->Clone("h_sim_eta_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_etap");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_etap");
  		TH1F* h_sim_etap[in] = (TH1F*) h_sim_tmp->Clone("h_sim_etap_clone");
 
 
@@ -373,15 +373,15 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 			}
 
 	
-			TF1 *fit_u_fun = new TF1("fit_u_fun", fun_sim_total, fit_local_lo, fit_local_hi, 5);
+			TF1 *fit_t_fun = new TF1("fit_t_fun", fun_sim_total, fit_local_lo, fit_local_hi, 5);
 	
-	 		fit_u_fun->SetParameters(1, 40, 5000, 0.1, 10);
+	 		fit_t_fun->SetParameters(1, 40, 5000, 0.1, 10);
 	
-			fit_u_fun->SetParLimits(0, 0, 100);
-			fit_u_fun->SetParLimits(1, 0, 100000);
-			fit_u_fun->SetParLimits(2, 0, 100000);
-			fit_u_fun->SetParLimits(3, 0, 100000);
-			fit_u_fun->SetParLimits(4, 0, 100000);
+			fit_t_fun->SetParLimits(0, 0, 100);
+			fit_t_fun->SetParLimits(1, 0, 100000);
+			fit_t_fun->SetParLimits(2, 0, 100000);
+			fit_t_fun->SetParLimits(3, 0, 100000);
+			fit_t_fun->SetParLimits(4, 0, 100000);
 			
 
 
@@ -397,16 +397,16 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 
 
 		
-// 			fit_u_fun->FixParameter(1, 0);
-// 			fit_u_fun->FixParameter(2, 0);
-// 			fit_u_fun->FixParameter(3, 0);
-// 			fit_u_fun->FixParameter(4, 0);
+// 			fit_t_fun->FixParameter(1, 0);
+// 			fit_t_fun->FixParameter(2, 0);
+// 			fit_t_fun->FixParameter(3, 0);
+// 			fit_t_fun->FixParameter(4, 0);
 
 			if (include_etap(tar_pad)) {
-				fit_u_fun->FixParameter(3, 0);
+				fit_t_fun->FixParameter(3, 0);
  				fit_fun_used_str = fit_fun_used_str + "+etap";
 			} else {
-				fit_u_fun->FixParameter(4, 0);
+				fit_t_fun->FixParameter(4, 0);
  				fit_fun_used_str = fit_fun_used_str + "+#eta";
 			}
 
@@ -415,12 +415,12 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 
 // 			if (h_tgt[in]->GetBinCenter(h_tgt[in]->FindFirstBinAbove(0)) < 0.50 ) {
 // 
-// 				fit_u_fun->ReleaseParameter(3);
+// 				fit_t_fun->ReleaseParameter(3);
 // 				fit_fun_used_str = fit_fun_used_str + "+#eta";
 // 
 // 			} else if (h_tgt[in]->GetMean(1) > 0.85 ) {
 // 				
-// 				fit_u_fun->ReleaseParameter(4);
+// 				fit_t_fun->ReleaseParameter(4);
 // 				fit_fun_used_str = fit_fun_used_str + "+#etap";
 // 					
 //     		}
@@ -434,15 +434,15 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
  
 
 	 
-			h_tgt[in]->Fit("fit_u_fun", "MNR");
+			h_tgt[in]->Fit("fit_t_fun", "MNR");
 
-			fit_u_fun->SetParameters(fit_u_fun->GetParameter(0), 
-									 fit_u_fun->GetParameter(1), 
-									 fit_u_fun->GetParameter(2), 
-									 fit_u_fun->GetParameter(3), 
-									 fit_u_fun->GetParameter(4));
+			fit_t_fun->SetParameters(fit_t_fun->GetParameter(0), 
+									 fit_t_fun->GetParameter(1), 
+									 fit_t_fun->GetParameter(2), 
+									 fit_t_fun->GetParameter(3), 
+									 fit_t_fun->GetParameter(4));
 			
-			h_tgt[in]->Fit("fit_u_fun", "MNR");
+			h_tgt[in]->Fit("fit_t_fun", "MNR");
 	
 		 	TH1F *h_sim_omega_clone = (TH1F*) h_sim[in]->Clone();
 		 	TH1F *h_sim_rho_clone   = (TH1F*) h_sim_rho[in]->Clone();
@@ -450,17 +450,17 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 		 	TH1F *h_sim_eta_clone   = (TH1F*) h_sim_eta[in]->Clone();
 		 	TH1F *h_sim_etap_clone  = (TH1F*) h_sim_etap[in]->Clone();
 			
-			omega_scale_fac = fit_u_fun->GetParameter(0);
-			rho_scale_fac   = fit_u_fun->GetParameter(1);
-			xphsp_scale_fac = fit_u_fun->GetParameter(2);
-			eta_scale_fac   = fit_u_fun->GetParameter(3);
-			etap_scale_fac  = fit_u_fun->GetParameter(4);
+			omega_scale_fac = fit_t_fun->GetParameter(0);
+			rho_scale_fac   = fit_t_fun->GetParameter(1);
+			xphsp_scale_fac = fit_t_fun->GetParameter(2);
+			eta_scale_fac   = fit_t_fun->GetParameter(3);
+			etap_scale_fac  = fit_t_fun->GetParameter(4);
 	
-			omega_scale_fac_err = fit_u_fun->GetParError(0);
-            rho_scale_fac_err   = fit_u_fun->GetParError(1);
-            xphsp_scale_fac_err = fit_u_fun->GetParError(2);
-            eta_scale_fac_err   = fit_u_fun->GetParError(3);
-            etap_scale_fac_err  = fit_u_fun->GetParError(4);
+			omega_scale_fac_err = fit_t_fun->GetParError(0);
+            rho_scale_fac_err   = fit_t_fun->GetParError(1);
+            xphsp_scale_fac_err = fit_t_fun->GetParError(2);
+            eta_scale_fac_err   = fit_t_fun->GetParError(3);
+            etap_scale_fac_err  = fit_t_fun->GetParError(4);
 
 			h_sim_omega_clone->Scale(omega_scale_fac);		
 			h_sim_rho_clone  ->Scale(rho_scale_fac);		
@@ -495,9 +495,9 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 // 
 // 
 // 
-// 				fit_u_fun->SetRange(fit_local_lo, fit_local_hi);
+// 				fit_t_fun->SetRange(fit_local_lo, fit_local_hi);
 //  
-//  				h_tgt[in]->Fit("fit_u_fun", "MNR");
+//  				h_tgt[in]->Fit("fit_t_fun", "MNR");
 //  
 // 
 // 		 		h_sim_omega_clone = (TH1F*) h_sim[in]->Clone();
@@ -506,17 +506,17 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 // 		 		h_sim_eta_clone   = (TH1F*) h_sim_eta[in]->Clone();
 // 		 		h_sim_etap_clone  = (TH1F*) h_sim_etap[in]->Clone();
 // 				
-// 				omega_scale_fac = fit_u_fun->GetParameter(0);
-// 				rho_scale_fac   = fit_u_fun->GetParameter(1);
-// 				xphsp_scale_fac = fit_u_fun->GetParameter(2);
-// 				eta_scale_fac   = fit_u_fun->GetParameter(3);
-// 				etap_scale_fac  = fit_u_fun->GetParameter(4);
+// 				omega_scale_fac = fit_t_fun->GetParameter(0);
+// 				rho_scale_fac   = fit_t_fun->GetParameter(1);
+// 				xphsp_scale_fac = fit_t_fun->GetParameter(2);
+// 				eta_scale_fac   = fit_t_fun->GetParameter(3);
+// 				etap_scale_fac  = fit_t_fun->GetParameter(4);
 // 	
-// 				h_sim_omega_clone->Scale(fit_u_fun->GetParameter(0));		
-// 				h_sim_rho_clone->Scale(fit_u_fun->GetParameter(1));		
-// 				h_sim_xphsp_clone->Scale(fit_u_fun->GetParameter(2));		
-// 				h_sim_eta_clone->Scale(fit_u_fun->GetParameter(3));		
-// 				h_sim_etap_clone->Scale(fit_u_fun->GetParameter(4));		
+// 				h_sim_omega_clone->Scale(fit_t_fun->GetParameter(0));		
+// 				h_sim_rho_clone->Scale(fit_t_fun->GetParameter(1));		
+// 				h_sim_xphsp_clone->Scale(fit_t_fun->GetParameter(2));		
+// 				h_sim_eta_clone->Scale(fit_t_fun->GetParameter(3));		
+// 				h_sim_etap_clone->Scale(fit_t_fun->GetParameter(4));		
 // 				
 // 		 		h_sim_all = (TH1F*) h_sim_xphsp_clone->Clone();
 // 	
@@ -585,7 +585,7 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 			mean_str.Form("Mean: %f RMS: %f Sim: %f ", h_tgt[in]->GetMean(1), h_tgt[in]->GetRMS(1), h_sim[in]->GetBinCenter(h_sim[in]->GetMaximumBin()));
 	
 			TString ratio_str;
-			ratio_str.Form("w_f: %f, r_f: %f, x_f: %f", fit_u_fun->GetParameter(0), fit_u_fun->GetParameter(1), fit_u_fun->GetParameter(2));
+			ratio_str.Form("w_f: %f, r_f: %f, x_f: %f", fit_t_fun->GetParameter(0), fit_t_fun->GetParameter(1), fit_t_fun->GetParameter(2));
 	
 	 		TText fitting_range;
 	
@@ -596,7 +596,7 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 	 		fitting_range.DrawText(0.12, 0.80, mean_str);
 	 		fitting_range.DrawText(0.12, 0.75, ratio_str);
 	
-			ratio_str.Form("e_f: %f, ep_f: %f", fit_u_fun->GetParameter(3), fit_u_fun->GetParameter(4));
+			ratio_str.Form("e_f: %f, ep_f: %f", fit_t_fun->GetParameter(3), fit_t_fun->GetParameter(4));
 	 		fitting_range.DrawText(0.12, 0.70, ratio_str);
 	
 			Int_t lo_limit_bin;
@@ -927,13 +927,13 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 						 << xphsp_scale_fac << "  " << intg_lo << "  " << intg_hi << "  " 
 	                     <<  omega_yield << "  " << fit_local_lo << "   " << fit_local_hi  << endl;
 	
-	//		fit_out_file << fixed << setprecision(4) << setw(9) << (i-1)%u_bin_num << "  " << (i-1)%phi_bin_num 
+	//		fit_out_file << fixed << setprecision(4) << setw(9) << (i-1)%t_bin_num << "  " << (i-1)%phi_bin_num 
 	//          << "  " << omega_scale_fac  << "  " << rho_scale_fac << "  " << xphsp_scale_fac << "  " 
 	//           << intg_lo << "  " << intg_hi << "  "<<  omega_yield << endl;
 	
 	//	 	fit_out_file << setiosflags(ios::fixed | ios::showpoint) << setprecision(5);
 	
-	// 		fit_out_file  << fixed << setprecision(5) << (i-1)%u_bin_num << "  " << (i-1)%phi_bin_num 
+	// 		fit_out_file  << fixed << setprecision(5) << (i-1)%t_bin_num << "  " << (i-1)%phi_bin_num 
 	//            << "  " << Form("%4.4f", omega_scale_fac)  << "  " <<  Form("%4.4f", rho_scale_fac) 
 	//            << "  " << Form("%4.4f", xphsp_scale_fac) << "  " 
 	//            << intg_lo << "  " << intg_hi << "  "<<  omega_yield << endl;
@@ -1586,16 +1586,16 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 
 	}
 
-	cc4->Print(out_dir_str + "u_fit_phi_" + file_name+".png");
-	cc2->Print(out_dir_str + "u_fit_phi_sub_" + file_name+".png");
-	cc6->Print(out_dir_str + "u_fit_phi_zero_" + file_name+".png");
-	cc7->Print(out_dir_str + "u_fit_phi_omega_" + file_name+".png");
+	cc4->Print(out_dir_str + "t_fit_phi_" + file_name+".png");
+	cc2->Print(out_dir_str + "t_fit_phi_sub_" + file_name+".png");
+	cc6->Print(out_dir_str + "t_fit_phi_zero_" + file_name+".png");
+	cc7->Print(out_dir_str + "t_fit_phi_omega_" + file_name+".png");
 
 
-	cc4->Write(out_dir_str + "u_fit_phi_" + file_name+".root");
-	cc2->Write(out_dir_str + "u_fit_phi_sub_" + file_name+".root");
-	cc6->Write(out_dir_str + "u_fit_phi_zero_" + file_name+".root");
-	cc7->Write(out_dir_str + "u_fit_phi_omega_" + file_name+".png");
+	cc4->Write(out_dir_str + "t_fit_phi_" + file_name+".root");
+	cc2->Write(out_dir_str + "t_fit_phi_sub_" + file_name+".root");
+	cc6->Write(out_dir_str + "t_fit_phi_zero_" + file_name+".root");
+	cc7->Write(out_dir_str + "t_fit_phi_omega_" + file_name+".png");
 
 
 	TCanvas* chi2_can = new TCanvas("chi2_can", "Chi2_can", 800, 400);
@@ -1668,8 +1668,8 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 //	exit(0);
 
 
-//	cc4->Print(out_dir_str + "u_fit_phi_" + file_name+".root");
-//	cc2->Print(out_dir_str + "u_fit_phi_sub_" + file_name+".root");
+//	cc4->Print(out_dir_str + "t_fit_phi_" + file_name+".root");
+//	cc2->Print(out_dir_str + "t_fit_phi_sub_" + file_name+".root");
 
 //	exit(0);
 
@@ -1713,17 +1713,17 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name) {
 /// Itteration process to integrate Omega simulation 
 ///
 
-void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
+void t_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 
-	const Int_t u_bin_num_const   = u_bin_num;  
+	const Int_t t_bin_num_const   = t_bin_num;  
 	const Int_t phi_bin_num_const = phi_bin_num;  
-	const Int_t bin_num_const     = u_bin_num_const * phi_bin_num_const;
+	const Int_t bin_num_const     = t_bin_num_const * phi_bin_num_const;
 
 //	exit(0);
 
     TString out_int_dir_str;
 
-	out_int_dir_str = "u_int_fit/";
+	out_int_dir_str = "t_int_fit/";
 
 	is_itt = true;
 
@@ -1733,7 +1733,7 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 
 	TString file_str;
 	
-	file_str = "u_bin_fit/fit_output.pl_" + file_name + ".dat";
+	file_str = "t_bin_fit/fit_output.pl_" + file_name + ".dat";
 
 	file1.open(file_str);
 	
@@ -1787,7 +1787,7 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 
 
 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-	cc4->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc4->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
  
  	TH1F* h_sim       [bin_num_const];
  	TH1F* h_tgt       [bin_num_const];
@@ -1796,11 +1796,11 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 	TH1F* h_sim_eta   [bin_num_const];
  	TH1F* h_sim_etap  [bin_num_const];
 
-	for (Int_t i = 1; i <= u_bin_num*phi_bin_num; i++) {
+	for (Int_t i = 1; i <= t_bin_num*phi_bin_num; i++) {
 
 		TString f_str_temp;
 		f_str_temp.Form("_%i_%i", Int_t((i-1)/phi_bin_num) + 1, (i-1)%phi_bin_num + 1);
-		f_str_temp = "u_fit_phi_" + file_name + f_str_temp;
+		f_str_temp = "t_fit_phi_" + file_name + f_str_temp;
 
 
 //		i = 11;
@@ -1820,22 +1820,22 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 
 //		cout << in << endl;
 
-  		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_omega");
+  		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_omega");
   		TH1F* h_sim[in] = (TH1F*) h_sim_tmp->Clone("h_sim_clone");
 
-		TH1F* h_tgt_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_target");
+		TH1F* h_tgt_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_target");
 		TH1F* h_tgt[in] = (TH1F*) h_tgt_tmp->Clone("h_tgt_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_rho");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_rho");
  		TH1F* h_sim_rho[in] = (TH1F*) h_sim_tmp->Clone("h_sim_rho_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_xphsp");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_xphsp");
  		TH1F* h_sim_xphsp[in] = (TH1F*) h_sim_tmp->Clone("h_sim_xphsp_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_eta");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_eta");
  		TH1F* h_sim_eta[in] = (TH1F*) h_sim_tmp->Clone("h_sim_eta_clone");
 
- 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("u_phi_sim_etap");
+ 		TH1F* h_sim_tmp = (TH1F*) cc3->GetPad(i)->GetPrimitive("t_phi_sim_etap");
  		TH1F* h_sim_etap[in] = (TH1F*) h_sim_tmp->Clone("h_sim_etap_clone");
 // 
 // 
@@ -1899,16 +1899,16 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 		TPad* tar_pad = (TPad*) cc3->GetPad(i);
 
 
-		TF1 *fit_u_fun = new TF1("fit_u_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
+		TF1 *fit_t_fun = new TF1("fit_t_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
 
- 		fit_u_fun->SetParameters(3, 40, 5000);
+ 		fit_t_fun->SetParameters(3, 40, 5000);
 
-		fit_u_fun->SetParLimits(0, 0, 100000);
-		fit_u_fun->SetParLimits(1, 0, 100000);
-		fit_u_fun->SetParLimits(2, 0, 100000);
+		fit_t_fun->SetParLimits(0, 0, 100000);
+		fit_t_fun->SetParLimits(1, 0, 100000);
+		fit_t_fun->SetParLimits(2, 0, 100000);
 
  
-//		h_tgt[in]->Fit("fit_u_fun", "MNR");
+//		h_tgt[in]->Fit("fit_t_fun", "MNR");
 
 		h_sim[in]->SetStats(0);
 
@@ -1943,7 +1943,7 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 // 		mean_str.Form("Mean: %f RMS: %f Sim: %f ", h_tgt[in]->GetMean(1), h_tgt[in]->GetRMS(1), h_sim[in]->GetBinCenter(h_sim[in]->GetMaximumBin()));
 // 
 // 		TString ratio_str;
-// 		ratio_str.Form("w_f: %f, r_f: %f, x_f: %f", fit_u_fun->GetParameter(0), fit_u_fun->GetParameter(1), fit_u_fun->GetParameter(2));
+// 		ratio_str.Form("w_f: %f, r_f: %f, x_f: %f", fit_t_fun->GetParameter(0), fit_t_fun->GetParameter(1), fit_t_fun->GetParameter(2));
 // 
 
 // 
@@ -2153,7 +2153,7 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 
 	}
 
-	cc4->Print(out_int_dir_str + "u_fit_itt_test_" + file_name+".png");
+	cc4->Print(out_int_dir_str + "t_fit_itt_test_" + file_name+".png");
 
 //	cout << "asdasdasdasdas  asdasd <<<  aEnd Loop" << endl;
 
@@ -2207,18 +2207,18 @@ void u_phi_int_sim_itt(TCanvas* cc3, TString file_name) {
 
 
 
-void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
+void t_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
 	
 	cout << "asddddddddddddddddd " << endl;
 
 
 //	cc3->Draw();
 
-	const Int_t u_bin_num_const   = u_bin_num;  
+	const Int_t t_bin_num_const   = t_bin_num;  
 	const Int_t phi_bin_num_const = phi_bin_num;  
 
 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-	cc4->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc4->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TH1F* h_tgt[6];
 	TH1F* h_sim[6];
@@ -2273,16 +2273,16 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
   		fit_local_lo = fit_low_1;
   		fit_local_hi = fit_low_2;
 
-		TF1 *fit_u_fun = new TF1("fit_u_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
+		TF1 *fit_t_fun = new TF1("fit_t_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
 
- 		fit_u_fun->SetParameters(3, 40, 5000);
+ 		fit_t_fun->SetParameters(3, 40, 5000);
 
-		fit_u_fun->SetParLimits(0, 0, 100000);
-		fit_u_fun->SetParLimits(1, 0, 100000);
-		fit_u_fun->SetParLimits(2, 0, 100000);
+		fit_t_fun->SetParLimits(0, 0, 100000);
+		fit_t_fun->SetParLimits(1, 0, 100000);
+		fit_t_fun->SetParLimits(2, 0, 100000);
 
  
-		h_tgt[in]->Fit("fit_u_fun", "MNR");
+		h_tgt[in]->Fit("fit_t_fun", "MNR");
 
 
 
@@ -2291,9 +2291,9 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 	 	TH1F *h_sim_xphsp_clone = (TH1F*) h_sim_xphsp[in]->Clone();
 
 
-		h_sim_omega_clone->Scale(fit_u_fun->GetParameter(0));		
-		h_sim_rho_clone->Scale(fit_u_fun->GetParameter(1));		
-		h_sim_xphsp_clone->Scale(fit_u_fun->GetParameter(2));		
+		h_sim_omega_clone->Scale(fit_t_fun->GetParameter(0));		
+		h_sim_rho_clone->Scale(fit_t_fun->GetParameter(1));		
+		h_sim_xphsp_clone->Scale(fit_t_fun->GetParameter(2));		
 
  	 	h_sim_omega_clone->DrawCopy("same");
  	 	h_sim_rho_clone->DrawCopy("same");
@@ -2360,16 +2360,16 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 
 //		exit(0);
 
-		TF1 *fit_u_fun = new TF1("fit_u_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
+		TF1 *fit_t_fun = new TF1("fit_t_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
 
- 		fit_u_fun->SetParameters(3, 40, 500);
+ 		fit_t_fun->SetParameters(3, 40, 500);
 
-		fit_u_fun->SetParLimits(0, 0, 100000);
-		fit_u_fun->SetParLimits(1, 0, 100000);
-		fit_u_fun->SetParLimits(2, 0, 100000);
+		fit_t_fun->SetParLimits(0, 0, 100000);
+		fit_t_fun->SetParLimits(1, 0, 100000);
+		fit_t_fun->SetParLimits(2, 0, 100000);
 
  
-		h_tgt[in]->Fit("fit_u_fun", "MNR");
+		h_tgt[in]->Fit("fit_t_fun", "MNR");
 
 
 	 	TH1F *h_sim_omega_clone = (TH1F*) h_sim[in]->Clone();
@@ -2377,9 +2377,9 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 	 	TH1F *h_sim_xphsp_clone = (TH1F*) h_sim_xphsp[in]->Clone();
 
 
-		h_sim_omega_clone->Scale(fit_u_fun->GetParameter(0));		
-		h_sim_rho_clone->Scale(fit_u_fun->GetParameter(1));		
-		h_sim_xphsp_clone->Scale(fit_u_fun->GetParameter(2));		
+		h_sim_omega_clone->Scale(fit_t_fun->GetParameter(0));		
+		h_sim_rho_clone->Scale(fit_t_fun->GetParameter(1));		
+		h_sim_xphsp_clone->Scale(fit_t_fun->GetParameter(2));		
 
  	 	h_sim_omega_clone->DrawCopy("same");
  	 	h_sim_rho_clone->DrawCopy("same");
@@ -2445,16 +2445,16 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 
 //		exit(0);
 
-		TF1 *fit_u_fun = new TF1("fit_u_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
+		TF1 *fit_t_fun = new TF1("fit_t_fun", fun_sim_total, fit_local_lo, fit_local_hi, 3);
 
- 		fit_u_fun->SetParameters(3, 40, 500);
+ 		fit_t_fun->SetParameters(3, 40, 500);
 
-		fit_u_fun->SetParLimits(0, 0, 100000);
-		fit_u_fun->SetParLimits(1, 0, 100000);
-		fit_u_fun->SetParLimits(2, 0, 100000);
+		fit_t_fun->SetParLimits(0, 0, 100000);
+		fit_t_fun->SetParLimits(1, 0, 100000);
+		fit_t_fun->SetParLimits(2, 0, 100000);
 
  
-		h_tgt[in]->Fit("fit_u_fun", "MNR");
+		h_tgt[in]->Fit("fit_t_fun", "MNR");
 
 
 	 	TH1F *h_sim_omega_clone = (TH1F*) h_sim[in]->Clone();
@@ -2462,9 +2462,9 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 	 	TH1F *h_sim_xphsp_clone = (TH1F*) h_sim_xphsp[in]->Clone();
 
 
-		h_sim_omega_clone->Scale(fit_u_fun->GetParameter(0));		
-		h_sim_rho_clone->Scale(fit_u_fun->GetParameter(1));		
-		h_sim_xphsp_clone->Scale(fit_u_fun->GetParameter(2));		
+		h_sim_omega_clone->Scale(fit_t_fun->GetParameter(0));		
+		h_sim_rho_clone->Scale(fit_t_fun->GetParameter(1));		
+		h_sim_xphsp_clone->Scale(fit_t_fun->GetParameter(2));		
 
  	 	h_sim_omega_clone->DrawCopy("same");
  	 	h_sim_rho_clone->DrawCopy("same");
@@ -2483,7 +2483,7 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 	}
 
 
-	cc4->Print(out_dir_str + "u_fit_phi_no_const_bg" + file_name+".png");
+	cc4->Print(out_dir_str + "t_fit_phi_no_const_bg" + file_name+".png");
 
 	delete cc4;
 
@@ -2527,14 +2527,14 @@ void u_phi_fit_sim(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t
 /*--------------------------------------------------*/
 /// Invividual fitting with 3rd order poly
 
-void u_phi_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
+void t_phi_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
 	
 	cout << "asddddddddddddddddd " << endl;
 
 //	cc3->Draw();
 
 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-	cc4->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc4->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TH1F* h_tgt[6];
 	TH1F* h_sim[6];
@@ -2584,50 +2584,50 @@ void u_phi_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit
   		fit_local_hi = Find_high_range(tar_pad);
 
 
-		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
-		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
+		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
+		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
 
 
-// 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all_skewed_gauss, fit_local_lo, fit_local_hi, 5);
-// 		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", skewed_gaussion_fun, fit_local_lo, fit_local_hi, 3);
+// 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all_skewed_gauss, fit_local_lo, fit_local_hi, 5);
+// 		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", skewed_gaussion_fun, fit_local_lo, fit_local_hi, 3);
 // 
-// 		fit_u_fun->SetParameters(0.001, 0.7, 0.03, 1);
+// 		fit_t_fun->SetParameters(0.001, 0.7, 0.03, 1);
 // 
-//		TF1 *fit_u_fun = new TF1("fit_u_fun", "gaus", fit_local_lo, fit_local_hi);
-//		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", skewed_gaussion_fun, fit_local_lo, fit_local_hi, 3);
+//		TF1 *fit_t_fun = new TF1("fit_t_fun", "gaus", fit_local_lo, fit_local_hi);
+//		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", skewed_gaussion_fun, fit_local_lo, fit_local_hi, 3);
 
 
-//		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-// 	  	fit_u_fun->SetParLimits(4, 0, 60);
+//		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+// 	  	fit_t_fun->SetParLimits(4, 0, 60);
 
 
 
 
-// // 		TF1 *fit_u_fun = new TF1("fit_u_fun", "TMath::Dilog", fit_local_lo, fit_local_hi);
-//  		TF1 *fit_u_fun = new TF1("fit_u_fun", "", fit_local_lo, fit_local_hi);
+// // 		TF1 *fit_t_fun = new TF1("fit_t_fun", "TMath::Dilog", fit_local_lo, fit_local_hi);
+//  		TF1 *fit_t_fun = new TF1("fit_t_fun", "", fit_local_lo, fit_local_hi);
 // 
-		h_tgt[in]->Fit("fit_u_fun", "MEURN");
+		h_tgt[in]->Fit("fit_t_fun", "MEURN");
 
 	 	h_sim[in]->Draw("same");
 
 	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
    	
 
-		fit_u_fun_pol->SetLineColor(4);
+		fit_t_fun_pol->SetLineColor(4);
 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun->GetParameter(2));
- 		fit_u_fun_pol->FixParameter(3, fit_u_fun->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun->GetParameter(2));
+ 		fit_t_fun_pol->FixParameter(3, fit_t_fun->GetParameter(3));
 
-		fit_u_fun_pol->Draw("same");
+		fit_t_fun_pol->Draw("same");
 
 		h_sim_clone->SetLineColor(6);
-		h_sim_clone->Scale(fit_u_fun->GetParameter(4));		
-//		h_sim_clone->Scale(fit_u_fun->GetParameter(3));		
+		h_sim_clone->Scale(fit_t_fun->GetParameter(4));		
+//		h_sim_clone->Scale(fit_t_fun->GetParameter(3));		
  	 	h_sim_clone->DrawCopy("same");
 
- 		h_sim_clone->Add(fit_u_fun_pol);		
+ 		h_sim_clone->Add(fit_t_fun_pol);		
 		h_sim_clone->SetLineColor(1);
  	 	h_sim_clone->DrawCopy("same");
 
@@ -2677,33 +2677,33 @@ void u_phi_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit
   		fit_local_lo = Find_low_range(tar_pad);
   		fit_local_hi = Find_high_range(tar_pad);
 
- 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
 
- 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-		fit_u_fun->SetParLimits(4, 0, 60);
+ 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+		fit_t_fun->SetParLimits(4, 0, 60);
 
- 		h_tgt[in]->Fit("fit_u_fun", "MEURN");
+ 		h_tgt[in]->Fit("fit_t_fun", "MEURN");
  
  	 	h_sim[in]->Draw("same");
  
  	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 		
-		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
+		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
 
-		fit_u_fun_pol->SetLineColor(4);
+		fit_t_fun_pol->SetLineColor(4);
 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun->GetParameter(2));
- 		fit_u_fun_pol->FixParameter(3, fit_u_fun->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun->GetParameter(2));
+ 		fit_t_fun_pol->FixParameter(3, fit_t_fun->GetParameter(3));
 
-		fit_u_fun_pol->Draw("same");
+		fit_t_fun_pol->Draw("same");
 
 		h_sim_clone->SetLineColor(6);
-		h_sim_clone->Scale(fit_u_fun->GetParameter(4));		
+		h_sim_clone->Scale(fit_t_fun->GetParameter(4));		
  	 	h_sim_clone->DrawCopy("same");
 
- 		h_sim_clone->Add(fit_u_fun_pol);		
+ 		h_sim_clone->Add(fit_t_fun_pol);		
 		h_sim_clone->SetLineColor(1);
  	 	h_sim_clone->DrawCopy("same");
 
@@ -2753,40 +2753,40 @@ void u_phi_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit
   		fit_local_lo = Find_low_range(tar_pad);
   		fit_local_hi = Find_high_range(tar_pad);
 
- 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
 
- 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-		fit_u_fun->SetParLimits(4, 0, 60);
+ 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+		fit_t_fun->SetParLimits(4, 0, 60);
 
- 		h_tgt[in]->Fit("fit_u_fun", "MEURN");
+ 		h_tgt[in]->Fit("fit_t_fun", "MEURN");
  
  	 	h_sim[in]->Draw("same");
  
  	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 		
-		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
+		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
 
-		fit_u_fun_pol->SetLineColor(4);
+		fit_t_fun_pol->SetLineColor(4);
 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun->GetParameter(2));
- 		fit_u_fun_pol->FixParameter(3, fit_u_fun->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun->GetParameter(2));
+ 		fit_t_fun_pol->FixParameter(3, fit_t_fun->GetParameter(3));
 
-		fit_u_fun_pol->Draw("same");
+		fit_t_fun_pol->Draw("same");
 
 		h_sim_clone->SetLineColor(6);
-		h_sim_clone->Scale(fit_u_fun->GetParameter(4));		
+		h_sim_clone->Scale(fit_t_fun->GetParameter(4));		
  	 	h_sim_clone->DrawCopy("same");
 
- 		h_sim_clone->Add(fit_u_fun_pol);		
+ 		h_sim_clone->Add(fit_t_fun_pol);		
 		h_sim_clone->SetLineColor(1);
  	 	h_sim_clone->DrawCopy("same");
 
 	}
 
 
-	cc4->Print(out_dir_str + "u_fit_phi_no_const_bg" + file_name+".png");
+	cc4->Print(out_dir_str + "t_fit_phi_no_const_bg" + file_name+".png");
 
 //	exit(0);
 
@@ -2800,19 +2800,19 @@ void u_phi_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit
 /*--------------------------------------------------*/
 /// Invividual fitting with 2nd order poly
 
-void u_phi_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
+void t_phi_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
 	
-//void u_phi_fit_2(TCanvas* cc3, TString file_name) {
+//void t_phi_fit_2(TCanvas* cc3, TString file_name) {
 
 	cout << "asddddddddddddddddd " << endl;
 
 //	cc3->Draw();
 
-	const Int_t u_bin_num_const   = u_bin_num;  
+	const Int_t t_bin_num_const   = t_bin_num;  
 	const Int_t phi_bin_num_const = phi_bin_num;  
 
 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-	cc4->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc4->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TH1F* h_tgt[6];
 	TH1F* h_sim[6];
@@ -2869,37 +2869,37 @@ void u_phi_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t f
 //		exit(0);
 
 
-//		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
- 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all_2, fit_local_lo, fit_local_hi, 4);
+//		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all_2, fit_local_lo, fit_local_hi, 4);
 
 
-// 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-		fit_u_fun->SetParLimits(3, 0, 60);
+// 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+		fit_t_fun->SetParLimits(3, 0, 60);
 
- 		h_tgt[in]->Fit("fit_u_fun", "MEURN");
+ 		h_tgt[in]->Fit("fit_t_fun", "MEURN");
  
  	 	h_sim[in]->Draw("same");
  
  	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 		
-//		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
-		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br_2, fit_local_lo, fit_local_hi, 3);
+//		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
+		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br_2, fit_local_lo, fit_local_hi, 3);
 
-		fit_u_fun_pol->SetLineColor(4);
+		fit_t_fun_pol->SetLineColor(4);
 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun->GetParameter(2));
-// 		fit_u_fun_pol->FixParameter(3, fit_u_fun->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun->GetParameter(2));
+// 		fit_t_fun_pol->FixParameter(3, fit_t_fun->GetParameter(3));
 
-		fit_u_fun_pol->Draw("same");
+		fit_t_fun_pol->Draw("same");
 
 		h_sim_clone->SetLineColor(6);
-//		h_sim_clone->Scale(fit_u_fun->GetParameter(4));		
-		h_sim_clone->Scale(fit_u_fun->GetParameter(3));		
+//		h_sim_clone->Scale(fit_t_fun->GetParameter(4));		
+		h_sim_clone->Scale(fit_t_fun->GetParameter(3));		
  	 	h_sim_clone->DrawCopy("same");
 
- 		h_sim_clone->Add(fit_u_fun_pol);		
+ 		h_sim_clone->Add(fit_t_fun_pol);		
 		h_sim_clone->SetLineColor(1);
  	 	h_sim_clone->DrawCopy("same");
 
@@ -2949,36 +2949,36 @@ void u_phi_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t f
  		fit_local_lo = Find_low_range(tar_pad);
   		fit_local_hi = Find_high_range(tar_pad);
 
-// 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
- 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all_2, fit_local_lo, fit_local_hi, 4);
+// 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all_2, fit_local_lo, fit_local_hi, 4);
 
- //		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-		fit_u_fun->SetParLimits(4, 0, 60);
+ //		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+		fit_t_fun->SetParLimits(4, 0, 60);
 
- 		h_tgt[in]->Fit("fit_u_fun", "MEURN");
+ 		h_tgt[in]->Fit("fit_t_fun", "MEURN");
  
  	 	h_sim[in]->Draw("same");
  
  	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 		
-//		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
-		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br_2, fit_local_lo, fit_local_hi, 3);
+//		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
+		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br_2, fit_local_lo, fit_local_hi, 3);
 
-		fit_u_fun_pol->SetLineColor(4);
+		fit_t_fun_pol->SetLineColor(4);
 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun->GetParameter(2));
-// 		fit_u_fun_pol->FixParameter(3, fit_u_fun->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun->GetParameter(2));
+// 		fit_t_fun_pol->FixParameter(3, fit_t_fun->GetParameter(3));
 
-		fit_u_fun_pol->Draw("same");
+		fit_t_fun_pol->Draw("same");
 
 		h_sim_clone->SetLineColor(6);
-//		h_sim_clone->Scale(fit_u_fun->GetParameter(4));		
-		h_sim_clone->Scale(fit_u_fun->GetParameter(3));		
+//		h_sim_clone->Scale(fit_t_fun->GetParameter(4));		
+		h_sim_clone->Scale(fit_t_fun->GetParameter(3));		
  	 	h_sim_clone->DrawCopy("same");
 
- 		h_sim_clone->Add(fit_u_fun_pol);		
+ 		h_sim_clone->Add(fit_t_fun_pol);		
 		h_sim_clone->SetLineColor(1);
  	 	h_sim_clone->DrawCopy("same");
 
@@ -3029,43 +3029,43 @@ void u_phi_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t f
   		fit_local_hi = Find_high_range(tar_pad);
 
 
-// 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
- 		TF1 *fit_u_fun = new TF1("fit_u_fun", ftotal_all_2, fit_local_lo, fit_local_hi, 4);
+// 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun = new TF1("fit_t_fun", ftotal_all_2, fit_local_lo, fit_local_hi, 4);
 
-// 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-		fit_u_fun->SetParLimits(4, 0, 60);
+// 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+		fit_t_fun->SetParLimits(4, 0, 60);
 
- 		h_tgt[in]->Fit("fit_u_fun", "MEURN");
+ 		h_tgt[in]->Fit("fit_t_fun", "MEURN");
  
  	 	h_sim[in]->Draw("same");
  
  	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 		
-//		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
-		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_br_2, fit_local_lo, fit_local_hi, 3);
+//		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br, fit_local_lo, fit_local_hi, 4);
+		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_br_2, fit_local_lo, fit_local_hi, 3);
 
-		fit_u_fun_pol->SetLineColor(4);
+		fit_t_fun_pol->SetLineColor(4);
 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun->GetParameter(2));
-// 		fit_u_fun_pol->FixParameter(3, fit_u_fun->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun->GetParameter(2));
+// 		fit_t_fun_pol->FixParameter(3, fit_t_fun->GetParameter(3));
 
-		fit_u_fun_pol->Draw("same");
+		fit_t_fun_pol->Draw("same");
 
 		h_sim_clone->SetLineColor(6);
-//		h_sim_clone->Scale(fit_u_fun->GetParameter(4));		
-		h_sim_clone->Scale(fit_u_fun->GetParameter(3));		
+//		h_sim_clone->Scale(fit_t_fun->GetParameter(4));		
+		h_sim_clone->Scale(fit_t_fun->GetParameter(3));		
  	 	h_sim_clone->DrawCopy("same");
 
- 		h_sim_clone->Add(fit_u_fun_pol);		
+ 		h_sim_clone->Add(fit_t_fun_pol);		
 		h_sim_clone->SetLineColor(1);
  	 	h_sim_clone->DrawCopy("same");
 
 	}
 
 
-	cc4->Print(out_dir_str + "u_fit_phi_no_const_bg" + file_name+".png");
+	cc4->Print(out_dir_str + "t_fit_phi_no_const_bg" + file_name+".png");
 
 
 }
@@ -3103,17 +3103,17 @@ void u_phi_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t f
 /*--------------------------------------------------*/
 /// Individual fit with constant background 3rd order poly version
 
-void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
+void t_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
 	
 	cout << "asddddddddddddddddd " << endl;
 
 //	cc3->Draw();
 
-	const Int_t u_bin_num_const   = u_bin_num;  
+	const Int_t t_bin_num_const   = t_bin_num;  
 	const Int_t phi_bin_num_const = phi_bin_num;  
 
 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-	cc4->Divide(phi_bin_num_const, u_bin_num_const, 0.003, 0.003);
+	cc4->Divide(phi_bin_num_const, t_bin_num_const, 0.003, 0.003);
 
 	TH1F* h_tgt[6];
 	TH1F* h_sim[6];
@@ -3165,78 +3165,78 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
   		fit_local_lo = Find_low_range(tar_pad);
   		fit_local_hi = Find_high_range(tar_pad);
 		
- 		TF1 *fit_u_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
+ 		TF1 *fit_t_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
 
 		cout << fit_local_lo << "    " << fit_local_hi << endl;
 
 //		exit(0);
 		
- 		fit_u_fun1->FixParameter(0, fun_t1->GetParameter(0));
- 		fit_u_fun1->FixParameter(1, fun_t1->GetParameter(1));
- 		fit_u_fun1->FixParameter(2, fun_t1->GetParameter(2));
- 		fit_u_fun1->FixParameter(3, fun_t1->GetParameter(3));
+ 		fit_t_fun1->FixParameter(0, fun_t1->GetParameter(0));
+ 		fit_t_fun1->FixParameter(1, fun_t1->GetParameter(1));
+ 		fit_t_fun1->FixParameter(2, fun_t1->GetParameter(2));
+ 		fit_t_fun1->FixParameter(3, fun_t1->GetParameter(3));
 
-//		fit_u_fun1->FixParameter(4, 0.02);
+//		fit_t_fun1->FixParameter(4, 0.02);
 
-// 		fit_u_fun1->FixParameter(5, 0);
+// 		fit_t_fun1->FixParameter(5, 0);
 
-// 		fit_u_fun1->SetParLimits(4, 0, 1);
- 		fit_u_fun1->SetParLimits(5, 0, fun_t1->GetParameter(4));
+// 		fit_t_fun1->SetParLimits(4, 0, 1);
+ 		fit_t_fun1->SetParLimits(5, 0, fun_t1->GetParameter(4));
  
 
 
 
-//		fit_u_fun1->Draw("same");
+//		fit_t_fun1->Draw("same");
 
 
 // 		TF1 *fa1 = new TF1("fa1","sin(x)/x",0,10); 
 // 		fa1->Draw();
 // 
 
-// 		fit_u_fun->FixParameter(0, 1);
-// 		fit_u_fun->FixParameter(1, 1);		
-// 		fit_u_fun->FixParameter(2, 1);
-// 		fit_u_fun->FixParameter(3, 1);
-// 		fit_u_fun->FixParameter(4, 0.01);
-//		fit_u_fun->FixParameter(5, 2);
+// 		fit_t_fun->FixParameter(0, 1);
+// 		fit_t_fun->FixParameter(1, 1);		
+// 		fit_t_fun->FixParameter(2, 1);
+// 		fit_t_fun->FixParameter(3, 1);
+// 		fit_t_fun->FixParameter(4, 0.01);
+//		fit_t_fun->FixParameter(5, 2);
 
 
-//		fit_u_fun->Draw();
+//		fit_t_fun->Draw();
 
 
-// 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-//		fit_u_fun->SetParLimits(4, 0, 60);
-//		fit_u_fun->SetParLimits(5, 0, 1);
+// 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+//		fit_t_fun->SetParLimits(4, 0, 60);
+//		fit_t_fun->SetParLimits(5, 0, 1);
 // 
   		h_tgt[in]->Fit("fun1111", "MEURN");
 
-//		fit_u_fun1->Draw("same");
+//		fit_t_fun1->Draw("same");
 
 //  
 //  	 	h_sim[in]->Draw("same");
 //  
   	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 // 		
- 		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
 // 
- 		fit_u_fun_pol->SetLineColor(4);
+ 		fit_t_fun_pol->SetLineColor(4);
 // 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun1->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun1->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun1->GetParameter(2));
- 		fit_u_fun_pol->FixParameter(3, fit_u_fun1->GetParameter(3));
- 		fit_u_fun_pol->FixParameter(4, fit_u_fun1->GetParameter(4));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun1->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun1->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun1->GetParameter(2));
+ 		fit_t_fun_pol->FixParameter(3, fit_t_fun1->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(4, fit_t_fun1->GetParameter(4));
  
- 		fit_u_fun_pol->Draw("same");
+ 		fit_t_fun_pol->Draw("same");
 
 
 
 // 
  		h_sim_clone->SetLineColor(6);
- 		h_sim_clone->Scale(fit_u_fun1->GetParameter(5));		
+ 		h_sim_clone->Scale(fit_t_fun1->GetParameter(5));		
   	 	h_sim_clone->DrawCopy("same");
 // 
-  		h_sim_clone->Add(fit_u_fun_pol);		
+  		h_sim_clone->Add(fit_t_fun_pol);		
  		h_sim_clone->SetLineColor(1);
   	 	h_sim_clone->DrawCopy("same");
 // 
@@ -3294,70 +3294,70 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
 
 
 
- 		TF1 *fit_u_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
+ 		TF1 *fit_t_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
 
 
- 		fit_u_fun1->FixParameter(0, fun_t2->GetParameter(0));
- 		fit_u_fun1->FixParameter(1, fun_t2->GetParameter(1));
- 		fit_u_fun1->FixParameter(2, fun_t2->GetParameter(2));
- 		fit_u_fun1->FixParameter(3, fun_t2->GetParameter(3));
-// 		fit_u_fun1->SetParameter(4, 0.01);
+ 		fit_t_fun1->FixParameter(0, fun_t2->GetParameter(0));
+ 		fit_t_fun1->FixParameter(1, fun_t2->GetParameter(1));
+ 		fit_t_fun1->FixParameter(2, fun_t2->GetParameter(2));
+ 		fit_t_fun1->FixParameter(3, fun_t2->GetParameter(3));
+// 		fit_t_fun1->SetParameter(4, 0.01);
 
-// 		fit_u_fun1->SetParLimits(4, 0, 1);
- 		fit_u_fun1->SetParLimits(5, 0, fun_t2->GetParameter(4));
+// 		fit_t_fun1->SetParLimits(4, 0, 1);
+ 		fit_t_fun1->SetParLimits(5, 0, fun_t2->GetParameter(4));
 
 
-//		fit_u_fun1->Draw("same");
+//		fit_t_fun1->Draw("same");
 
 
 // 		TF1 *fa1 = new TF1("fa1","sin(x)/x",0,10); 
 // 		fa1->Draw();
 // 
 
-// 		fit_u_fun->FixParameter(0, 1);
-// 		fit_u_fun->FixParameter(1, 1);		
-// 		fit_u_fun->FixParameter(2, 1);
-// 		fit_u_fun->FixParameter(3, 1);
-// 		fit_u_fun->FixParameter(4, 0.01);
-//		fit_u_fun->FixParameter(5, 2);
+// 		fit_t_fun->FixParameter(0, 1);
+// 		fit_t_fun->FixParameter(1, 1);		
+// 		fit_t_fun->FixParameter(2, 1);
+// 		fit_t_fun->FixParameter(3, 1);
+// 		fit_t_fun->FixParameter(4, 0.01);
+//		fit_t_fun->FixParameter(5, 2);
 
 
-//		fit_u_fun->Draw();
+//		fit_t_fun->Draw();
 
 
-// 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-//		fit_u_fun->SetParLimits(4, 0, 60);
-//		fit_u_fun->SetParLimits(5, 0, 1);
+// 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+//		fit_t_fun->SetParLimits(4, 0, 60);
+//		fit_t_fun->SetParLimits(5, 0, 1);
 // 
   		h_tgt[in]->Fit("fun1111", "MEURN");
 
-//		fit_u_fun1->Draw("same");
+//		fit_t_fun1->Draw("same");
 
 //  
 //  	 	h_sim[in]->Draw("same");
 //  
   	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 // 		
- 		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
 // 
- 		fit_u_fun_pol->SetLineColor(4);
+ 		fit_t_fun_pol->SetLineColor(4);
 // 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun1->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun1->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun1->GetParameter(2));
- 		fit_u_fun_pol->FixParameter(3, fit_u_fun1->GetParameter(3));
- 		fit_u_fun_pol->FixParameter(4, fit_u_fun1->GetParameter(4));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun1->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun1->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun1->GetParameter(2));
+ 		fit_t_fun_pol->FixParameter(3, fit_t_fun1->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(4, fit_t_fun1->GetParameter(4));
  
- 		fit_u_fun_pol->Draw("same");
+ 		fit_t_fun_pol->Draw("same");
 
 
 
 // 
  		h_sim_clone->SetLineColor(6);
- 		h_sim_clone->Scale(fit_u_fun1->GetParameter(5));		
+ 		h_sim_clone->Scale(fit_t_fun1->GetParameter(5));		
   	 	h_sim_clone->DrawCopy("same");
 // 
-  		h_sim_clone->Add(fit_u_fun_pol);		
+  		h_sim_clone->Add(fit_t_fun_pol);		
  		h_sim_clone->SetLineColor(1);
   	 	h_sim_clone->DrawCopy("same");
 
@@ -3414,88 +3414,88 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
   		fit_local_hi = Find_high_range(tar_pad);
 
 
- 		TF1 *fit_u_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
+ 		TF1 *fit_t_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
 
 
- 		fit_u_fun1->FixParameter(0, fun_t3->GetParameter(0));
- 		fit_u_fun1->FixParameter(1, fun_t3->GetParameter(1));
- 		fit_u_fun1->FixParameter(2, fun_t3->GetParameter(2));
- 		fit_u_fun1->FixParameter(3, fun_t3->GetParameter(3));
+ 		fit_t_fun1->FixParameter(0, fun_t3->GetParameter(0));
+ 		fit_t_fun1->FixParameter(1, fun_t3->GetParameter(1));
+ 		fit_t_fun1->FixParameter(2, fun_t3->GetParameter(2));
+ 		fit_t_fun1->FixParameter(3, fun_t3->GetParameter(3));
  
-// 		fit_u_fun1->SetParameter(4, 0.02);
-// 		fit_u_fun1->FixParameter(4, 0.025);
-// 		fit_u_fun1->SetParameter(5, 0.0);
+// 		fit_t_fun1->SetParameter(4, 0.02);
+// 		fit_t_fun1->FixParameter(4, 0.025);
+// 		fit_t_fun1->SetParameter(5, 0.0);
 
- 		fit_u_fun1->SetParLimits(5, 0.0, fun_t3->GetParameter(4));
+ 		fit_t_fun1->SetParLimits(5, 0.0, fun_t3->GetParameter(4));
 
-//		fit_u_fun1->FixParameter(5, 0);
+//		fit_t_fun1->FixParameter(5, 0);
 
 
 		
-// 		fit_u_fun1->SetParLimits(4, 0, );
+// 		fit_t_fun1->SetParLimits(4, 0, );
 
-// 		fit_u_fun1->SetParLimits(4, 0, 1);
+// 		fit_t_fun1->SetParLimits(4, 0, 1);
 
-// 		fit_u_fun1->SetParameter(4, 0.01);
+// 		fit_t_fun1->SetParameter(4, 0.01);
 
-//		fit_u_fun1->Draw("same");
+//		fit_t_fun1->Draw("same");
 
 
 // 		TF1 *fa1 = new TF1("fa1","sin(x)/x",0,10); 
 // 		fa1->Draw();
 // 
 
-// 		fit_u_fun->FixParameter(0, 1);
-// 		fit_u_fun->FixParameter(1, 1);		
-// 		fit_u_fun->FixParameter(2, 1);
-// 		fit_u_fun->FixParameter(3, 1);
-// 		fit_u_fun->FixParameter(4, 0.01);
-//		fit_u_fun->FixParameter(5, 2);
+// 		fit_t_fun->FixParameter(0, 1);
+// 		fit_t_fun->FixParameter(1, 1);		
+// 		fit_t_fun->FixParameter(2, 1);
+// 		fit_t_fun->FixParameter(3, 1);
+// 		fit_t_fun->FixParameter(4, 0.01);
+//		fit_t_fun->FixParameter(5, 2);
 
 
-//		fit_u_fun->Draw();
+//		fit_t_fun->Draw();
 
 
-// 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-//		fit_u_fun->SetParLimits(4, 0, 60);
-//		fit_u_fun->SetParLimits(5, 0, 100);
+// 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+//		fit_t_fun->SetParLimits(4, 0, 60);
+//		fit_t_fun->SetParLimits(5, 0, 100);
  
   		h_tgt[in]->Fit("fun1111", "MEURN");
 
-//		fit_u_fun1->Draw("same");
+//		fit_t_fun1->Draw("same");
 
 //  
 //  	 	h_sim[in]->Draw("same");
 //  
   	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 // 		
- 		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
+ 		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
 // 
- 		fit_u_fun_pol->SetLineColor(4);
+ 		fit_t_fun_pol->SetLineColor(4);
 // 
- 		fit_u_fun_pol->FixParameter(0, fit_u_fun1->GetParameter(0));
- 		fit_u_fun_pol->FixParameter(1, fit_u_fun1->GetParameter(1));
- 		fit_u_fun_pol->FixParameter(2, fit_u_fun1->GetParameter(2));
- 		fit_u_fun_pol->FixParameter(3, fit_u_fun1->GetParameter(3));
- 		fit_u_fun_pol->FixParameter(4, fit_u_fun1->GetParameter(4));
+ 		fit_t_fun_pol->FixParameter(0, fit_t_fun1->GetParameter(0));
+ 		fit_t_fun_pol->FixParameter(1, fit_t_fun1->GetParameter(1));
+ 		fit_t_fun_pol->FixParameter(2, fit_t_fun1->GetParameter(2));
+ 		fit_t_fun_pol->FixParameter(3, fit_t_fun1->GetParameter(3));
+ 		fit_t_fun_pol->FixParameter(4, fit_t_fun1->GetParameter(4));
  
- 		fit_u_fun_pol->Draw("same");
+ 		fit_t_fun_pol->Draw("same");
 
 
 
 // 
  		h_sim_clone->SetLineColor(6);
- 		h_sim_clone->Scale(fit_u_fun1->GetParameter(5));		
+ 		h_sim_clone->Scale(fit_t_fun1->GetParameter(5));		
   	 	h_sim_clone->DrawCopy("same");
 // 
-  		h_sim_clone->Add(fit_u_fun_pol);		
+  		h_sim_clone->Add(fit_t_fun_pol);		
  		h_sim_clone->SetLineColor(1);
   	 	h_sim_clone->DrawCopy("same");
 
  	}
 
 	
-	cc4->Print(out_dir_str + "u_fit_phi_const_bg" + file_name+".png");
+	cc4->Print(out_dir_str + "t_fit_phi_const_bg" + file_name+".png");
 
 }
 
@@ -3508,14 +3508,14 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
 // /// Individual fit with constant background 2nd order poly version
 // 
 // 
-// void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
+// void t_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t fit_mid_1, Double_t fit_mid_2, Double_t fit_high_1, Double_t fit_high_2) {
 // 	
 // 	cout << "asddddddddddddddddd " << endl;
 // 
 // //	cc3->Draw();
 // 
 // 	TCanvas* cc4 = new TCanvas("cc4", "cc4", 1600, 800);
-// 	cc4->Divide(phi_bin_num, u_bin_num, 0.003, 0.003);
+// 	cc4->Divide(phi_bin_num, t_bin_num, 0.003, 0.003);
 // 
 // 	TH1F* h_tgt[6];
 // 	TH1F* h_sim[6];
@@ -3562,72 +3562,72 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
 //  		fit_local_lo = fit_low_1;
 //  		fit_local_hi = fit_low_2;
 // 
-//  		TF1 *fit_u_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
+//  		TF1 *fit_t_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
 // 
 // 
-//  		fit_u_fun1->FixParameter(0, fun_t1->GetParameter(0));
-//  		fit_u_fun1->FixParameter(1, fun_t1->GetParameter(1));
-//  		fit_u_fun1->FixParameter(2, fun_t1->GetParameter(2));
-//  		fit_u_fun1->FixParameter(3, fun_t1->GetParameter(3));
+//  		fit_t_fun1->FixParameter(0, fun_t1->GetParameter(0));
+//  		fit_t_fun1->FixParameter(1, fun_t1->GetParameter(1));
+//  		fit_t_fun1->FixParameter(2, fun_t1->GetParameter(2));
+//  		fit_t_fun1->FixParameter(3, fun_t1->GetParameter(3));
 // 
 // 
-// // 		fit_u_fun1->SetParLimits(4, 0, 1);
-// // 		fit_u_fun1->SetParLimits(5, 0, fun_t1->GetParameter(5));
+// // 		fit_t_fun1->SetParLimits(4, 0, 1);
+// // 		fit_t_fun1->SetParLimits(5, 0, fun_t1->GetParameter(5));
 //  
 // 
 // 
 // 
-// //		fit_u_fun1->Draw("same");
+// //		fit_t_fun1->Draw("same");
 // 
 // 
 // // 		TF1 *fa1 = new TF1("fa1","sin(x)/x",0,10); 
 // // 		fa1->Draw();
 // // 
 // 
-// // 		fit_u_fun->FixParameter(0, 1);
-// // 		fit_u_fun->FixParameter(1, 1);		
-// // 		fit_u_fun->FixParameter(2, 1);
-// // 		fit_u_fun->FixParameter(3, 1);
-// // 		fit_u_fun->FixParameter(4, 0.01);
-// //		fit_u_fun->FixParameter(5, 2);
+// // 		fit_t_fun->FixParameter(0, 1);
+// // 		fit_t_fun->FixParameter(1, 1);		
+// // 		fit_t_fun->FixParameter(2, 1);
+// // 		fit_t_fun->FixParameter(3, 1);
+// // 		fit_t_fun->FixParameter(4, 0.01);
+// //		fit_t_fun->FixParameter(5, 2);
 // 
 // 
-// //		fit_u_fun->Draw();
+// //		fit_t_fun->Draw();
 // 
 // 
-// // 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-// //		fit_u_fun->SetParLimits(4, 0, 60);
-// //		fit_u_fun->SetParLimits(5, 0, 1);
+// // 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+// //		fit_t_fun->SetParLimits(4, 0, 60);
+// //		fit_t_fun->SetParLimits(5, 0, 1);
 // // 
 //   		h_tgt[in]->Fit("fun1111", "MEURN");
 // 
-// //		fit_u_fun1->Draw("same");
+// //		fit_t_fun1->Draw("same");
 // 
 // //  
 // //  	 	h_sim[in]->Draw("same");
 // //  
 //   	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 // // 		
-//  		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
+//  		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
 // // 
-//  		fit_u_fun_pol->SetLineColor(4);
+//  		fit_t_fun_pol->SetLineColor(4);
 // // 
-//  		fit_u_fun_pol->FixParameter(0, fit_u_fun1->GetParameter(0));
-//  		fit_u_fun_pol->FixParameter(1, fit_u_fun1->GetParameter(1));
-//  		fit_u_fun_pol->FixParameter(2, fit_u_fun1->GetParameter(2));
-//  		fit_u_fun_pol->FixParameter(3, fit_u_fun1->GetParameter(3));
-//  		fit_u_fun_pol->FixParameter(4, fit_u_fun1->GetParameter(4));
+//  		fit_t_fun_pol->FixParameter(0, fit_t_fun1->GetParameter(0));
+//  		fit_t_fun_pol->FixParameter(1, fit_t_fun1->GetParameter(1));
+//  		fit_t_fun_pol->FixParameter(2, fit_t_fun1->GetParameter(2));
+//  		fit_t_fun_pol->FixParameter(3, fit_t_fun1->GetParameter(3));
+//  		fit_t_fun_pol->FixParameter(4, fit_t_fun1->GetParameter(4));
 //  
-//  		fit_u_fun_pol->Draw("same");
+//  		fit_t_fun_pol->Draw("same");
 // 
 // 
 // 
 // // 
 //  		h_sim_clone->SetLineColor(6);
-//  		h_sim_clone->Scale(fit_u_fun1->GetParameter(5));		
+//  		h_sim_clone->Scale(fit_t_fun1->GetParameter(5));		
 //   	 	h_sim_clone->DrawCopy("same");
 // // 
-//   		h_sim_clone->Add(fit_u_fun_pol);		
+//   		h_sim_clone->Add(fit_t_fun_pol);		
 //  		h_sim_clone->SetLineColor(1);
 //   	 	h_sim_clone->DrawCopy("same");
 // // 
@@ -3677,70 +3677,70 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
 //  		fit_local_lo = fit_mid_1;
 //  		fit_local_hi = fit_mid_2;
 // 
-//  		TF1 *fit_u_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
+//  		TF1 *fit_t_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo, fit_local_hi, 6);
 // 
 // 
-//  		fit_u_fun1->FixParameter(0, fun_t2->GetParameter(0));
-//  		fit_u_fun1->FixParameter(1, fun_t2->GetParameter(1));
-//  		fit_u_fun1->FixParameter(2, fun_t2->GetParameter(2));
-//  		fit_u_fun1->FixParameter(3, fun_t2->GetParameter(3));
-// // 		fit_u_fun1->SetParameter(4, 0.01);
+//  		fit_t_fun1->FixParameter(0, fun_t2->GetParameter(0));
+//  		fit_t_fun1->FixParameter(1, fun_t2->GetParameter(1));
+//  		fit_t_fun1->FixParameter(2, fun_t2->GetParameter(2));
+//  		fit_t_fun1->FixParameter(3, fun_t2->GetParameter(3));
+// // 		fit_t_fun1->SetParameter(4, 0.01);
 // 
-// // 		fit_u_fun1->SetParLimits(4, 0, 1);
-// // 		fit_u_fun1->SetParLimits(5, 0, fun_t2->GetParameter(5));
+// // 		fit_t_fun1->SetParLimits(4, 0, 1);
+// // 		fit_t_fun1->SetParLimits(5, 0, fun_t2->GetParameter(5));
 // 
 // 
-// //		fit_u_fun1->Draw("same");
+// //		fit_t_fun1->Draw("same");
 // 
 // 
 // // 		TF1 *fa1 = new TF1("fa1","sin(x)/x",0,10); 
 // // 		fa1->Draw();
 // // 
 // 
-// // 		fit_u_fun->FixParameter(0, 1);
-// // 		fit_u_fun->FixParameter(1, 1);		
-// // 		fit_u_fun->FixParameter(2, 1);
-// // 		fit_u_fun->FixParameter(3, 1);
-// // 		fit_u_fun->FixParameter(4, 0.01);
-// //		fit_u_fun->FixParameter(5, 2);
+// // 		fit_t_fun->FixParameter(0, 1);
+// // 		fit_t_fun->FixParameter(1, 1);		
+// // 		fit_t_fun->FixParameter(2, 1);
+// // 		fit_t_fun->FixParameter(3, 1);
+// // 		fit_t_fun->FixParameter(4, 0.01);
+// //		fit_t_fun->FixParameter(5, 2);
 // 
 // 
-// //		fit_u_fun->Draw();
+// //		fit_t_fun->Draw();
 // 
 // 
-// // 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-// //		fit_u_fun->SetParLimits(4, 0, 60);
-// //		fit_u_fun->SetParLimits(5, 0, 1);
+// // 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+// //		fit_t_fun->SetParLimits(4, 0, 60);
+// //		fit_t_fun->SetParLimits(5, 0, 1);
 // // 
 //   		h_tgt[in]->Fit("fun1111", "MEURN");
 // 
-// //		fit_u_fun1->Draw("same");
+// //		fit_t_fun1->Draw("same");
 // 
 // //  
 // //  	 	h_sim[in]->Draw("same");
 // //  
 //   	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 // // 		
-//  		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
+//  		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
 // // 
-//  		fit_u_fun_pol->SetLineColor(4);
+//  		fit_t_fun_pol->SetLineColor(4);
 // // 
-//  		fit_u_fun_pol->FixParameter(0, fit_u_fun1->GetParameter(0));
-//  		fit_u_fun_pol->FixParameter(1, fit_u_fun1->GetParameter(1));
-//  		fit_u_fun_pol->FixParameter(2, fit_u_fun1->GetParameter(2));
-//  		fit_u_fun_pol->FixParameter(3, fit_u_fun1->GetParameter(3));
-//  		fit_u_fun_pol->FixParameter(4, fit_u_fun1->GetParameter(4));
+//  		fit_t_fun_pol->FixParameter(0, fit_t_fun1->GetParameter(0));
+//  		fit_t_fun_pol->FixParameter(1, fit_t_fun1->GetParameter(1));
+//  		fit_t_fun_pol->FixParameter(2, fit_t_fun1->GetParameter(2));
+//  		fit_t_fun_pol->FixParameter(3, fit_t_fun1->GetParameter(3));
+//  		fit_t_fun_pol->FixParameter(4, fit_t_fun1->GetParameter(4));
 //  
-//  		fit_u_fun_pol->Draw("same");
+//  		fit_t_fun_pol->Draw("same");
 // 
 // 
 // 
 // // 
 //  		h_sim_clone->SetLineColor(6);
-//  		h_sim_clone->Scale(fit_u_fun1->GetParameter(5));		
+//  		h_sim_clone->Scale(fit_t_fun1->GetParameter(5));		
 //   	 	h_sim_clone->DrawCopy("same");
 // // 
-//   		h_sim_clone->Add(fit_u_fun_pol);		
+//   		h_sim_clone->Add(fit_t_fun_pol);		
 //  		h_sim_clone->SetLineColor(1);
 //   	 	h_sim_clone->DrawCopy("same");
 // 
@@ -3791,78 +3791,78 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
 //  		fit_local_lo = fit_high_1;
 //  		fit_local_hi = fit_high_2;
 // 
-//  		TF1 *fit_u_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo+0.3, fit_local_hi, 6);
+//  		TF1 *fit_t_fun1 = new TF1("fun1111", ftotal_const_bg_fun, fit_local_lo+0.3, fit_local_hi, 6);
 // 
 // 
-//  		fit_u_fun1->FixParameter(0, fun_t3->GetParameter(0));
-//  		fit_u_fun1->FixParameter(1, fun_t3->GetParameter(1));
-//  		fit_u_fun1->FixParameter(2, fun_t3->GetParameter(2));
-//  		fit_u_fun1->FixParameter(3, fun_t3->GetParameter(3));
+//  		fit_t_fun1->FixParameter(0, fun_t3->GetParameter(0));
+//  		fit_t_fun1->FixParameter(1, fun_t3->GetParameter(1));
+//  		fit_t_fun1->FixParameter(2, fun_t3->GetParameter(2));
+//  		fit_t_fun1->FixParameter(3, fun_t3->GetParameter(3));
 // 
 // 
-// // 		fit_u_fun1->SetParLimits(4, 0, 1);
-// // 		fit_u_fun1->SetParLimits(5, 0, fun_t3->GetParameter(5));
+// // 		fit_t_fun1->SetParLimits(4, 0, 1);
+// // 		fit_t_fun1->SetParLimits(5, 0, fun_t3->GetParameter(5));
 // 
-// // 		fit_u_fun1->SetParameter(4, 0.01);
+// // 		fit_t_fun1->SetParameter(4, 0.01);
 // 
-// //		fit_u_fun1->Draw("same");
+// //		fit_t_fun1->Draw("same");
 // 
 // 
 // // 		TF1 *fa1 = new TF1("fa1","sin(x)/x",0,10); 
 // // 		fa1->Draw();
 // // 
 // 
-// // 		fit_u_fun->FixParameter(0, 1);
-// // 		fit_u_fun->FixParameter(1, 1);		
-// // 		fit_u_fun->FixParameter(2, 1);
-// // 		fit_u_fun->FixParameter(3, 1);
-// // 		fit_u_fun->FixParameter(4, 0.01);
-// //		fit_u_fun->FixParameter(5, 2);
+// // 		fit_t_fun->FixParameter(0, 1);
+// // 		fit_t_fun->FixParameter(1, 1);		
+// // 		fit_t_fun->FixParameter(2, 1);
+// // 		fit_t_fun->FixParameter(3, 1);
+// // 		fit_t_fun->FixParameter(4, 0.01);
+// //		fit_t_fun->FixParameter(5, 2);
 // 
 // 
-// //		fit_u_fun->Draw();
+// //		fit_t_fun->Draw();
 // 
 // 
-// // 		fit_u_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
-// //		fit_u_fun->SetParLimits(4, 0, 60);
-// //		fit_u_fun->SetParLimits(5, 0, 100);
+// // 		fit_t_fun->SetParameters(10.0, -50.0, 75, -36.0, 5);
+// //		fit_t_fun->SetParLimits(4, 0, 60);
+// //		fit_t_fun->SetParLimits(5, 0, 100);
 //  
 //   		h_tgt[in]->Fit("fun1111", "MEURN");
 // 
-// //		fit_u_fun1->Draw("same");
+// //		fit_t_fun1->Draw("same");
 // 
 // //  
 // //  	 	h_sim[in]->Draw("same");
 // //  
 //   	 	TH1F *h_sim_clone = (TH1F*) h_sim[in]->Clone();
 // // 		
-//  		TF1 *fit_u_fun_pol = new TF1("fit_u_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
+//  		TF1 *fit_t_fun_pol = new TF1("fit_t_fun_pol", ftotal_const_bg_bg_only, fit_local_lo, fit_local_hi, 5);
 // // 
-//  		fit_u_fun_pol->SetLineColor(4);
+//  		fit_t_fun_pol->SetLineColor(4);
 // // 
-//  		fit_u_fun_pol->FixParameter(0, fit_u_fun1->GetParameter(0));
-//  		fit_u_fun_pol->FixParameter(1, fit_u_fun1->GetParameter(1));
-//  		fit_u_fun_pol->FixParameter(2, fit_u_fun1->GetParameter(2));
-//  		fit_u_fun_pol->FixParameter(3, fit_u_fun1->GetParameter(3));
-//  		fit_u_fun_pol->FixParameter(4, fit_u_fun1->GetParameter(4));
+//  		fit_t_fun_pol->FixParameter(0, fit_t_fun1->GetParameter(0));
+//  		fit_t_fun_pol->FixParameter(1, fit_t_fun1->GetParameter(1));
+//  		fit_t_fun_pol->FixParameter(2, fit_t_fun1->GetParameter(2));
+//  		fit_t_fun_pol->FixParameter(3, fit_t_fun1->GetParameter(3));
+//  		fit_t_fun_pol->FixParameter(4, fit_t_fun1->GetParameter(4));
 //  
-//  		fit_u_fun_pol->Draw("same");
+//  		fit_t_fun_pol->Draw("same");
 // 
 // 
 // 
 // // 
 //  		h_sim_clone->SetLineColor(6);
-//  		h_sim_clone->Scale(fit_u_fun1->GetParameter(5));		
+//  		h_sim_clone->Scale(fit_t_fun1->GetParameter(5));		
 //   	 	h_sim_clone->DrawCopy("same");
 // // 
-//   		h_sim_clone->Add(fit_u_fun_pol);		
+//   		h_sim_clone->Add(fit_t_fun_pol);		
 //  		h_sim_clone->SetLineColor(1);
 //   	 	h_sim_clone->DrawCopy("same");
 // 
 //  	}
 // 
 // 	
-// 	cc4->Print(out_dir_str + "u_fit_phi_const_bg" + file_name+".png");
+// 	cc4->Print(out_dir_str + "t_fit_phi_const_bg" + file_name+".png");
 // 
 // }
 
@@ -3872,7 +3872,7 @@ void u_phi_fit_const_bg(TCanvas* cc3, TString file_name, Double_t fit_low_1, Dou
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
 ///
-void u_phi_fit(TCanvas* cc3) {
+void t_phi_fit(TCanvas* cc3) {
 	
 	cout << "asddddddddddddddddd " << endl;
 
@@ -3982,7 +3982,7 @@ void u_phi_fit(TCanvas* cc3) {
 
 Double_t Find_low_range_full(TPad* tar_pad) {
 
-  	TH1F* h_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_target");
+  	TH1F* h_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_target");
 	
  	Int_t lo_end_bin = h_tt->FindFirstBinAbove(0.0);
  	Int_t hi_end_bin = h_tt->FindLastBinAbove(0.0);
@@ -4034,7 +4034,7 @@ Double_t Find_low_range_full(TPad* tar_pad) {
 
 Double_t Find_high_range_full(TPad* tar_pad) {
 
-  	TH1F* h_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_target");
+  	TH1F* h_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_target");
 	
  	Int_t lo_end_bin = h_tt->FindFirstBinAbove(0.0);
  	Int_t hi_end_bin = h_tt->FindLastBinAbove(0.0);
@@ -4094,9 +4094,9 @@ Double_t Find_high_range_full(TPad* tar_pad) {
 Double_t Find_low_range(TPad* tar_pad) {
 
 
-  	TH1F* h_tgt_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_target");
+  	TH1F* h_tgt_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_target");
 // 
-  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_sim_omega");
+  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_sim_omega");
 // 
 // 	
 	
@@ -4212,9 +4212,9 @@ Double_t Find_low_range(TPad* tar_pad) {
 Double_t Find_high_range(TPad* tar_pad) {
 
 
-  	TH1F* h_tgt_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_target");
+  	TH1F* h_tgt_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_target");
 // 
-  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_sim_omega");
+  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_sim_omega");
 // 
 // 	
 //  	Double_t tgt_lo_end = h_tgt_tt->GetBinCenter( h_tgt_tt->FindFirstBinAbove(0.0) );
@@ -4370,36 +4370,36 @@ void average_kin(TFile* file_tmp, TString file_name) {
 
 	kin_file << " 1.000000" << endl;
 
-	Double_t w_ave, w_ave_err, q2_ave，q2_ave_err, u_ave, u_ave_err, t_ave, t_ave_err;
+	Double_t w_ave, w_ave_err, q2_ave，q2_ave_err, t_ave, t_ave_err, t_ave, t_ave_err;
 
 	TCanvas* can_w;
-	can_w = (TCanvas*)file_tmp->Get("W_u_bin");
+	can_w = (TCanvas*)file_tmp->Get("W_t_bin");
 
 	TCanvas* can_q2;
-	can_q2 = (TCanvas*)file_tmp->Get("Q2_u_bin");
+	can_q2 = (TCanvas*)file_tmp->Get("Q2_t_bin");
 
 	TCanvas* can_u;
-	can_u = (TCanvas*)file_tmp->Get("u_u_bin");
+	can_u = (TCanvas*)file_tmp->Get("t_t_bin");
 
 	TCanvas* can_t;
-	can_t = (TCanvas*)file_tmp->Get("t_u_bin");
+	can_t = (TCanvas*)file_tmp->Get("t_t_bin");
 
 
-	cout << u_bin_num << endl;
+	cout << t_bin_num << endl;
 
 //	exit(0);
 
 
-  	for (Int_t i = 1; i <=u_bin_num; i++) {
+  	for (Int_t i = 1; i <=t_bin_num; i++) {
  
-//  		TH1F* h_w  = (TH1F*) can_w ->GetPad(i)->GetPrimitive("u_target");
-//  		TH1F* h_q2 = (TH1F*) can_q2->GetPad(i)->GetPrimitive("u_target");
-//  		TH1F* h_u  = (TH1F*) can_u ->GetPad(i)->GetPrimitive("u_target");
+//  		TH1F* h_w  = (TH1F*) can_w ->GetPad(i)->GetPrimitive("t_target");
+//  		TH1F* h_q2 = (TH1F*) can_q2->GetPad(i)->GetPrimitive("t_target");
+//  		TH1F* h_u  = (TH1F*) can_u ->GetPad(i)->GetPrimitive("t_target");
 
- 		TH1F* h_w  = (TH1F*) can_w ->GetPad(i)->GetPrimitive("u_sim_omega");
- 		TH1F* h_q2 = (TH1F*) can_q2->GetPad(i)->GetPrimitive("u_sim_omega");
- 		TH1F* h_u  = (TH1F*) can_u ->GetPad(i)->GetPrimitive("u_sim_omega");
- 		TH1F* h_t  = (TH1F*) can_t ->GetPad(i)->GetPrimitive("u_sim_omega");
+ 		TH1F* h_w  = (TH1F*) can_w ->GetPad(i)->GetPrimitive("t_sim_omega");
+ 		TH1F* h_q2 = (TH1F*) can_q2->GetPad(i)->GetPrimitive("t_sim_omega");
+ 		TH1F* h_u  = (TH1F*) can_u ->GetPad(i)->GetPrimitive("t_sim_omega");
+ 		TH1F* h_t  = (TH1F*) can_t ->GetPad(i)->GetPrimitive("t_sim_omega");
 
 		w_ave      = h_w->GetMean();
 		w_ave_err  = h_w->GetRMS();
@@ -4407,22 +4407,22 @@ void average_kin(TFile* file_tmp, TString file_name) {
 		q2_ave     = h_q2->GetMean();
 		q2_ave_err = h_q2->GetRMS();
 
-		u_ave      = h_u->GetMean();
-		u_ave_err  = h_u->GetRMS();
+		t_ave      = h_u->GetMean();
+		t_ave_err  = h_u->GetRMS();
 
 		t_ave      = h_t->GetMean();
 		t_ave_err  = h_t->GetRMS();
 
 		cout << w_ave << " " << w_ave_err << " " << q2_ave << " " << q2_ave_err 
-			 << " " << u_ave << " " << u_ave_err << " " << t_ave << " " << t_ave_err << endl;
+			 << " " << t_ave << " " << t_ave_err << " " << t_ave << " " << t_ave_err << endl;
 
 		
 // 		kin_file << fixed << setprecision(5) << " " << w_ave << " " << w_ave_err << " " << q2_ave << " " << q2_ave_err 
-// 			     << " " << u_ave << " " << u_ave_err  << " " << Form("%.2f", u_ave) << endl;
+// 			     << " " << t_ave << " " << t_ave_err  << " " << Form("%.2f", t_ave) << endl;
 
 		kin_file << fixed << setprecision(5) << " " << w_ave << " " << w_ave_err << " " 
 				 << q2_ave << " " << q2_ave_err << " " << t_ave << " " << t_ave_err << " " 
-                 << u_ave  << " " << u_ave_err  << " "<< Form("%.2f", u_ave) << endl;
+                 << t_ave  << " " << t_ave_err  << " "<< Form("%.2f", t_ave) << endl;
 
 		delete h_w;
 		delete h_q2;
@@ -4453,7 +4453,7 @@ void average_kin(TFile* file_tmp, TString file_name) {
 /// Find integration range low limit
 Double_t Find_int_lo(TPad* tar_pad) {
 
-  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_sim_omega");
+  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_sim_omega");
 	
  	Int_t sim_lo_end_bin = h_sim_tt->FindFirstBinAbove(0.0);
  	Int_t sim_hi_end_bin = h_sim_tt->FindLastBinAbove(0.0);
@@ -4489,7 +4489,7 @@ Double_t Find_int_lo(TPad* tar_pad) {
 /// Find integration range high limit
 Double_t Find_int_hi(TPad* tar_pad) {
 
-  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_sim_omega");
+  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_sim_omega");
 	
  	Int_t sim_lo_end_bin = h_sim_tt->FindFirstBinAbove(0.0);
  	Int_t sim_hi_end_bin = h_sim_tt->FindLastBinAbove(0.0);
@@ -4525,7 +4525,7 @@ Double_t Find_int_hi(TPad* tar_pad) {
 /// Find integration range low limit
 Double_t Find_int_lo_refit(TPad* tar_pad) {
 
-  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_sim_omega");
+  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_sim_omega");
 	
  	Int_t sim_lo_end_bin = h_sim_tt->FindFirstBinAbove(0.0);
  	Int_t sim_hi_end_bin = h_sim_tt->FindLastBinAbove(0.0);
@@ -4561,7 +4561,7 @@ Double_t Find_int_lo_refit(TPad* tar_pad) {
 /// Find integration range high limit
 Double_t Find_int_hi_refit(TPad* tar_pad) {
 
-  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_sim_omega");
+  	TH1F* h_sim_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_sim_omega");
 	
  	Int_t sim_lo_end_bin = h_sim_tt->FindFirstBinAbove(0.0);
  	Int_t sim_hi_end_bin = h_sim_tt->FindLastBinAbove(0.0);
@@ -4602,7 +4602,7 @@ bool include_etap(TPad* tar_pad) {
 
 	bool inc_etap;
 	
-  	TH1F* h_tt = (TH1F*) tar_pad->GetPrimitive("u_phi_target");
+  	TH1F* h_tt = (TH1F*) tar_pad->GetPrimitive("t_phi_target");
 	
  	Int_t lo_end_bin = h_tt->FindFirstBinAbove(0.0);
  	Int_t hi_end_bin = h_tt->FindLastBinAbove(0.0);

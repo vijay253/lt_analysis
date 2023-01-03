@@ -68,15 +68,15 @@ TFile* file_pre;
 void bg_background_test () {
 
 
-//	gROOT->LoadMacro("u_phi_fit_functions.C");
+//	gROOT->LoadMacro("t_phi_fit_functions.C");
 
 	
-	file_pre = new TFile(out_dir_str + "presnetation_plots.root","recreate"); 
+	file_pre = new TFile(out_dir_str + "presentation_plots.root","recreate"); 
 
-	gROOT->ProcessLine(".L u_phi_fit_functions.C");
+	gROOT->ProcessLine(".L t_phi_fit_functions.C");
 	gROOT->ProcessLine(".L fitting_functions.C");
 	gROOT->ProcessLine(".L recon_kin.C");
-	gROOT->ProcessLine(".L get_u_phi_bin.C");
+	gROOT->ProcessLine(".L get_t_phi_bin.C");
 
 	TString file_name;
 
@@ -112,7 +112,6 @@ void bg_background_test () {
 
 	}
 
-
 	cout << Get_t_bin() << "    " << Get_phi_bin() << endl;
 
 	// HARD CODED
@@ -120,18 +119,24 @@ void bg_background_test () {
 	TString q2_setting[2]     = {"5.5", "4.4", "3.3", "3.3", "2.115", "0.5"};
 	
 	TString eps_55[2]        = {"0.1838","0.5291"};
+	TString hms_angle_55_l[2]  = {"+0000", "+3000"};
+	TString hms_angle_55_h[3]  = {"-2730",  "+0000", "+3000"};
+	
 	TString eps_44[2]        = {"0.4805","0.7148"};
+
+	
 	TString eps_33_W314[2]   = {"0.3935","0.6668"};
+
+	
 	TString eps_33_W232[2]   = {"0.5736","0.8791"};
+
+	
 	TString eps_21[2]        = {"0.2477","0.7864"};
+
+	
 	TString eps_05[2]        = {"0.4515","0.6979"};
 	
-	TString hms_angle_160_l[2]  = {"+0970", "+3000"};
-	TString hms_angle_160_h[3]  = {"-2730",  "+0000", "+3000"};       
-	
-	TString hms_angle_245_l[2]  = {"+1350", "+3000"};
-	TString hms_angle_245_h[3]  = {"-3000", "+0000", "+3000"};
-
+              
 	for (int i = 0; i < 2; i++) {
 
 		q2 = q2_setting[i];
@@ -468,7 +473,7 @@ void fit_bg (TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t
 // 
 //  
 // 	/*--------------------------------------------------*/
-// 	/// Individual u_phi binning
+// 	/// Individual t_phi binning
 // 	// Calculate t-phi bin ratio and average ratio
 // 
 
@@ -477,7 +482,7 @@ void fit_bg (TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t
 
 
 	TCanvas* c5;
-	c5 = (TCanvas*)file1->Get("missmass_u_phi_bin");
+	c5 = (TCanvas*)file1->Get("missmass_t_phi_bin");
 
 
 
@@ -491,46 +496,46 @@ void fit_bg (TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t
 	if(bg_refit) {
 
 		average_kin(file1, file_name);
-		u_phi_fit_sim(c5, file_name);
+		t_phi_fit_sim(c5, file_name);
 	
 	} else {
 
-	 	u_phi_int_sim_itt(c5, file_name);
+	 	t_phi_int_sim_itt(c5, file_name);
 	 	
 	 	TCanvas* c6;
-	 	c6 = (TCanvas*)file1->Get("Em_u_phi_bin");
+	 	c6 = (TCanvas*)file1->Get("Em_t_phi_bin");
 	 	recon_kin(c6, "Em", file_name);
 	 	
 	 	TCanvas* c6;
-	 	c6 = (TCanvas*)file1->Get("Pm_u_phi_bin");
+	 	c6 = (TCanvas*)file1->Get("Pm_t_phi_bin");
 	 	recon_kin(c6, "Pm", file_name);
 	 	
 	 	TCanvas* c6;
-	 	c6 = (TCanvas*)file1->Get("hsdelta_u_phi_bin");
+	 	c6 = (TCanvas*)file1->Get("hsdelta_t_phi_bin");
 	 	recon_kin(c6, "hsbelta", file_name);
 	 	
 	 	TCanvas* c6;
-	 	c6 = (TCanvas*)file1->Get("hsxptar_u_phi_bin");
+	 	c6 = (TCanvas*)file1->Get("hsxptar_t_phi_bin");
 	 	recon_kin(c6, "hsxptar", file_name);
 	 	    
 	 	TCanvas* c6;
-	 	c6 = (TCanvas*)file1->Get("hsyptar_u_phi_bin");
+	 	c6 = (TCanvas*)file1->Get("hsyptar_t_phi_bin");
 	 	recon_kin(c6, "hsyptar", file_name);
 
 // 	 	TCanvas* c6;
-// 	 	c6 = (TCanvas*)file1->Get("t_u_phi_bin");
+// 	 	c6 = (TCanvas*)file1->Get("t_t_phi_bin");
 // 	 	recon_kin(c6, "t", file_name);
 // 
 // 	 	TCanvas* c6;
-// 	 	c6 = (TCanvas*)file1->Get("u_u_phi_bin");
+// 	 	c6 = (TCanvas*)file1->Get("u_t_phi_bin");
 // 	 	recon_kin(c6, "u", file_name);
 // 
 // 	 	TCanvas* c6;
-// 	 	c6 = (TCanvas*)file1->Get("W_u_phi_bin");
+// 	 	c6 = (TCanvas*)file1->Get("W_t_phi_bin");
 // 	 	recon_kin(c6, "W", file_name);
 // 
 // 	 	TCanvas* c6;
-// 	 	c6 = (TCanvas*)file1->Get("Q2_u_phi_bin");
+// 	 	c6 = (TCanvas*)file1->Get("Q2_t_phi_bin");
 // 	 	recon_kin(c6, "Q2", file_name);
 // 
 
@@ -542,10 +547,10 @@ void fit_bg (TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t
 
 
 	/*--------------------------------------------------*/
-	/// u_phi bin fitting without common background
+	/// t_phi bin fitting without common background
 
 
-//	u_phi_fit_sim(c3, file_name, fit_low_1, fit_low_2, fit_mid_1, fit_mid_2, fit_high_1, fit_high_2);
+//	t_phi_fit_sim(c3, file_name, fit_low_1, fit_low_2, fit_mid_1, fit_mid_2, fit_high_1, fit_high_2);
 //	exit(0);
 
   
@@ -600,7 +605,7 @@ void fit_bg (TString file_name, Double_t fit_low, Double_t fit_high) {
 	
 	TCanvas* c3 = new TCanvas();
 	c3 = (TCanvas*)file1->Get("testtest4");
-	u_phi_fit(c3);
+	t_phi_fit(c3);
 // 
 // //
 // //

@@ -60,7 +60,7 @@ Float_t pt_to_pt_systematic_error = 2.9; // percent
 
 
 //Int_t t_bin_num = 3;
-Int_t u_bin_num;
+Int_t t_bin_num;
 
 
 
@@ -158,9 +158,12 @@ void lt_2D_fit() {
 	g_sig_lt_total = new TGraphErrors();
 	g_sig_tt_total = new TGraphErrors();
 
-	single_setting("160");
- 	single_setting("245");
-
+ 	single_setting("55");
+  	single_setting("44");       
+	single_setting("33");
+  	single_setting("33");
+	single_setting("21");
+	single_setting("05");
 
 	TCanvas* c4 = new TCanvas();
 
@@ -352,7 +355,7 @@ void single_setting(TString q2_set){
 	
 	cout << "asdasdasd "<< u_list.size() << endl;
 
-	u_bin_num = u_list.size();
+	t_bin_num = u_list.size();
 
 //	TCanvas* c1 =  new TCanvas("c1", "c1", 1800, 600); 
 //	TCanvas* c2 =  new TCanvas("c2", "c2", 1800, 600); 
@@ -361,23 +364,23 @@ void single_setting(TString q2_set){
 	TCanvas* c2 =  new TCanvas("c2", "c2", 600, 600); 
 
 // 
-// 	c1->Divide(u_bin_num, 1, 0.003, 0.003);
-// 	c2->Divide(u_bin_num, 1, 0.003, 0.003);
+// 	c1->Divide(t_bin_num, 1, 0.003, 0.003);
+// 	c2->Divide(t_bin_num, 1, 0.003, 0.003);
 // 
 //	exit(0);
 
 
-	const Int_t u_bin_num_int = u_bin_num;
+	const Int_t t_bin_num_int = t_bin_num;
 
-	Double_t lo_cross_sec[u_bin_num_int];
-	Double_t hi_cross_sec[u_bin_num_int];
+	Double_t lo_cross_sec[t_bin_num_int];
+	Double_t hi_cross_sec[t_bin_num_int];
 
-	Double_t lo_cross_sec_err[u_bin_num_int];
-	Double_t hi_cross_sec_err[u_bin_num_int];
+	Double_t lo_cross_sec_err[t_bin_num_int];
+	Double_t hi_cross_sec_err[t_bin_num_int];
 
 
 //	for (Int_t i = 0; i < u_list.size(); i++) {
-	for (Int_t i = 0; i < u_bin_num; i++) {
+	for (Int_t i = 0; i < t_bin_num; i++) {
 
 		c1->cd();
 
@@ -1187,14 +1190,14 @@ void single_setting(TString q2_set){
 
 
 
-	for (Int_t j=0; j < u_bin_num; j++) {
+	for (Int_t j=0; j < t_bin_num; j++) {
 	 	file_unsep << lo_cross_sec[j] <<  "    " <<  1 / sqrt(lo_cross_sec_err[j])   << endl;
 	}
 
 
 
 
-	for (Int_t j=0; j < u_bin_num; j++) {
+	for (Int_t j=0; j < t_bin_num; j++) {
 	 	file_unsep << hi_cross_sec[j] <<  "    " <<  1 / sqrt(hi_cross_sec_err[j])   << endl;
 	}
 

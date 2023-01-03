@@ -74,8 +74,12 @@ void x_fit_in_t() {
 
     lt_ratio_file.open("x_sep/LT_ratio.txt");
 
- 	single_setting("160");
-  	single_setting("245");
+ 	single_setting("55");
+  	single_setting("44");       
+	single_setting("33");
+  	single_setting("33");
+	single_setting("21");
+	single_setting("05");
 // 
      lt_ratio_file.close();
 // 

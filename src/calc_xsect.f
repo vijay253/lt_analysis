@@ -10,8 +10,8 @@ c      character*2 prv_it
 c      common prv_it
 
 c      integer q2_bin
-c      integer u_bin, phi_bin
-c      common u_bin, phi_bin
+c      integer t_bin, phi_bin
+c      common t_bin, phi_bin
       
 c     Get number of the previous iteration.
       
@@ -28,12 +28,20 @@ c     Calculate unseparated cross-sections. Now settings are for the piplus data
 
 c      stop
 
-      call xsect(+1,1.60,0.32)
-      call xsect(+1,1.60,0.59)
-
-      call xsect(+1,2.45,0.27)
-      call xsect(+1,2.45,0.55)
-
+!     call xsect(npol,Q2,eps)
+      call xsect(+1,5.5,0.1838)
+      call xsect(+1,5.5,0.5291)
+      call xsect(+1,4.4,0.4805)
+      call xsect(+1,4.4,0.7148)
+      call xsect(+1,3.3,0.3935)
+      call xsect(+1,3.3,0.6668)
+      call xsect(+1,3.3,0.5736)
+      call xsect(+1,3.3,0.8791)
+      call xsect(+1,2.115,0.2477)
+      call xsect(+1,2.115,0.7864)
+      call xsect(+1,0.5,0.4515)
+      call xsect(+1,0.5,0.6979)
+      
       stop
       end
 
@@ -71,12 +79,12 @@ c      parameter (nt=2,nphi=10)
 
       real phi
 
-      real, Dimension(10) :: u_bin_boundary
+      real, Dimension(10) :: t_bin_boundary
 
       real q2_bin
 
-      integer u_bin, phi_bin
-c      common  u_bin, phi_bin
+      integer t_bin, phi_bin
+c      common  t_bin, phi_bin
 
       character*80:: line
 
@@ -95,10 +103,10 @@ c      common  u_bin, phi_bin
 c   /*--------------------------------------------------*/
 c   Read the u and phi bins 
 
-      open (unit = 22, file = "../u_bin_interval", action='read')
-      read (22,*) q2_bin, u_bin, phi_bin
+      open (unit = 22, file = "../t_bin_interval", action='read')
+      read (22,*) q2_bin, t_bin, phi_bin
 
-      nt = u_bin
+      nt = t_bin
       nphi = phi_bin 
 
 
@@ -113,39 +121,39 @@ c      read (line, end=20)
 
 c      print*,  trim(line)
 
-c      read(line, *) u_bin_boundary(0), u_bin_boundary(1), u_bin_boundary(2)
+c      read(line, *) t_bin_boundary(0), t_bin_boundary(1), t_bin_boundary(2)
 
-c      read(line, *) (u_bin_boundary(j), j = 1, 3)
+c      read(line, *) (t_bin_boundary(j), j = 1, 3)
 
-c      print*, u_bin_boundary(1)
+c      print*, t_bin_boundary(1)
 c       read (22,*) 
-c       read (22,*) q2_bin, u_bin, phi_bin
+c       read (22,*) q2_bin, t_bin, phi_bin
 c       read (22,*) 
 c 
-c       print*,  u_bin, phi_bin
+c       print*,  t_bin, phi_bin
 
 c      do j = 1, 3
-c         print*, u_bin_boundary(j)
+c         print*, t_bin_boundary(j)
 c      end do
 
 
       if(q2_set.eq.1.6) then
 
          read (22, '(A)') line  
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
 
-c        u_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
-c        u_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
+c        t_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
+c        t_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
  
       elseif(q2_set.eq.2.45) then
  
-c        u_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
-c        u_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
+c        t_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
+c        t_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
  
          read (22,*) 
          read (22,*) 
          read (22, '(A)') line  
-         read(line, *) (u_bin_boundary(j), j = 1,  u_bin+1)
+         read(line, *) (t_bin_boundary(j), j = 1,  t_bin+1)
 
       endif
 
@@ -218,7 +226,7 @@ c      pause
       print*, "Check for the reading file "
       print*, ""
 
-      nbin = u_bin
+      nbin = t_bin
 
 
       do it=1,nbin
@@ -226,11 +234,11 @@ c      pause
 c         tm=tmn+(it-0.5)*(tmx-tmn)/nbin
 
 
-         um = (u_bin_boundary(it) + u_bin_boundary(it+1)) / 2
+         um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
-c         print *, "11112222  " , nbin, u_bin_boundary(1), u_bin_boundary(2), u_bin_boundary(3), um 
+c         print *, "11112222  " , nbin, t_bin_boundary(1), t_bin_boundary(2), t_bin_boundary(3), um 
 
-c         print *, nbin, u_bin_boundary(it), u_bin_boundary(it+1)  
+c         print *, nbin, t_bin_boundary(it), t_bin_boundary(it+1)  
 
 c         stop
 
