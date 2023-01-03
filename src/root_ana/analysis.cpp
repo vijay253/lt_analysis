@@ -407,8 +407,6 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	Define_Cuts();
 
 	Missing_Mass_Plot();
-
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
 	TH1F* phi_real_check[t_bin_set];
 	TH1F* phi_rand_check[t_bin_set];
@@ -519,6 +517,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	}
 
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
 	out_dir->cd();
  	phi_no_sub->Write("phi_check_no_sub");
@@ -1125,10 +1124,9 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("cointime>>rand", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
 
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff"); // ERROR!
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff"); // ERROR!
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff"); // ERROR!
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff");
+	data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff");
+	data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff");
 	
 // 	cout << kset << "   " << miss_mass_offset[kset] << "   " << miss_mass_offset[1] << endl;
 // 	cout << all_coin_cut << endl;
@@ -1187,8 +1185,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	//data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm", real_coin_cut, "goff"); // ERROR!
-	//data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff"); // ERROR!
+	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
+	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
@@ -1233,8 +1231,8 @@ void Analysis::Missing_Mass_Plot() {
 	TH1F* mm_off = new TH1F("mm_off", "mm_off", 50, -0.1, 0.12);
 	TH1F* mm_1_off = new TH1F("mm_1_off", "mm1_off", 50, -0.1, 0.12);
 
-	//data_tree_in->Draw(miss_mass_offset_str + " >> mm_off", real_coin_cut, "goff"); // ERROR!
-	//data_tree_in->Draw(miss_mass_offset_str + " >> mm_1_off", rand_coin_cut, "goff"); // ERROR!
+	data_tree_in->Draw(miss_mass_offset_str + " >> mm_off", real_coin_cut, "goff");
+	data_tree_in->Draw(miss_mass_offset_str + " >> mm_1_off", rand_coin_cut, "goff");
 
 	mm_off->Add(mm_1_off, -0.3333333);
  	mm_off->SetMarkerStyle(3);
@@ -1306,17 +1304,17 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("W:Q2", without_diamond_cut);
 	-------------------------------------------------------------------*/
 
-	//data_tree_in->Draw("W:Q2"); // ERROR!
+	data_tree_in->Draw("W:Q2");
 
 	
-	/*TGraph *gr1 = (TGraph*)gPad->GetPrimitive("Graph")->Clone();
+	TGraph *gr1 = (TGraph*)gPad->GetPrimitive("Graph")->Clone();
 	gr1->SetMarkerStyle(7);	
 	gr1->SetMarkerSize(3);	
-	gr1->SetMarkerColor(1);	*/
+	gr1->SetMarkerColor(1);
 
-	//data_tree_in->Draw("W:Q2", real_coin_cut); // ERROR!
+	data_tree_in->Draw("W:Q2", real_coin_cut);
 	
-	/*TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone(); // ERROR!
+	TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone();
 
 	gr2->SetMarkerStyle(7);	
 	gr2->SetMarkerSize(1);	
@@ -1329,17 +1327,17 @@ void Analysis::Missing_Mass_Plot() {
  	number_points->SetTextSize(0.035);
 
  	TString points_str; 
- 	//points_str.Form("Black Events: %i", gr1->GetN()); // ERROR!
+ 	points_str.Form("Black Events: %i", gr1->GetN());
  	number_points->DrawTextNDC(0.7, 0.65, points_str);
 
- 	//points_str.Form("Red Events: %i", gr2->GetN()); // ERROR!
+ 	points_str.Form("Red Events: %i", gr2->GetN());
  	number_points->DrawTextNDC(0.7, 0.75, points_str);
 
- 	//points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN()); // ERROR!
+ 	points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN());
  	number_points->DrawTextNDC(0.7, 0.85, points_str);
 
-	//diamond_setting->Add(gr1); // ERROR!
-	//diamond_setting_cut->Add(gr2); // ERROR!
+	diamond_setting->Add(gr1);
+	diamond_setting_cut->Add(gr2);
 
 	file_out_ana->cd();
 	out_dir->cd();
