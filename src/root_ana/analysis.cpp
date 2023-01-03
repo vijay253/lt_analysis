@@ -1307,24 +1307,22 @@ void Analysis::Missing_Mass_Plot() {
 
 	//data_tree_in->Draw("W:Q2"); // ERROR!
 
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
-	TGraph *gr1 = (TGraph*)gPad->GetPrimitive("Graph")->Clone();
+	/*TGraph *gr1 = (TGraph*)gPad->GetPrimitive("Graph")->Clone();
 	gr1->SetMarkerStyle(7);	
 	gr1->SetMarkerSize(3);	
-	gr1->SetMarkerColor(1);	
+	gr1->SetMarkerColor(1);	*/
 
 	//data_tree_in->Draw("W:Q2", real_coin_cut); // ERROR!
 	
-	TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone();
+	/*TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone(); // ERROR!
 
 	gr2->SetMarkerStyle(7);	
 	gr2->SetMarkerSize(1);	
 	gr2->SetMarkerColor(2);	
 
 	gr1->Draw("AP");
-	gr2->Draw("P");
-
+	gr2->Draw("P");*/
 	
  	TText* number_points = new TText();
  	number_points->SetTextSize(0.035);
@@ -1339,9 +1337,9 @@ void Analysis::Missing_Mass_Plot() {
  	points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN());
  	number_points->DrawTextNDC(0.7, 0.85, points_str);
 
-	diamond_setting->Add(gr1);
-	diamond_setting_cut->Add(gr2);
- 
+	//diamond_setting->Add(gr1); // ERROR!
+	//diamond_setting_cut->Add(gr2); // ERROR!
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl; 
 	file_out_ana->cd();
 	out_dir->cd();
 
