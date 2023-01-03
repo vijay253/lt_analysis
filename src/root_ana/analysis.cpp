@@ -1291,7 +1291,6 @@ void Analysis::Missing_Mass_Plot() {
 	c3->Update();	
 
 
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 
 	///*--------------------------------------------------*/
 	//// Methods to access the TGraph from tree
@@ -1307,7 +1306,8 @@ void Analysis::Missing_Mass_Plot() {
 	-------------------------------------------------------------------*/
 
 	data_tree_in->Draw("W:Q2");
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	
 	TGraph *gr1 = (TGraph*)gPad->GetPrimitive("Graph")->Clone();
 	gr1->SetMarkerStyle(7);	
 	gr1->SetMarkerSize(3);	
