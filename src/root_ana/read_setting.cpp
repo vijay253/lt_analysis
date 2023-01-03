@@ -70,7 +70,6 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 	Read_init();
 	Setting_file_loading_name();
-	cout << "Test" << endl;
 
 	Kin_Pro_Array_Load();
 
@@ -155,7 +154,7 @@ void ReadFile::Setting_file_loading_name() {
 	///*--------------------------------------------------*/
 	// Read center file
 	/*--------------------------------------------------*/
-	center_ntp->ReadFile(off_file_name);
+	//center_ntp->ReadFile(off_file_name);
 
 
 	///*--------------------------------------------------*/
