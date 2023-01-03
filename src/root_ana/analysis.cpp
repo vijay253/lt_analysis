@@ -841,6 +841,9 @@ void Analysis::Yield_Out() {
 
 	file_out_ana->cd();
 
+	cout << "********  " << endl;
+	cout << "yield" << "     " << "yield_err" << "     " << "phi" << "     " << "MandelT" << endl;
+	
 	for (unsigned int itt=0; itt < t_bin_set*phi_bin_num; itt++) {
 
 		// cout << itt << endl;
@@ -858,11 +861,9 @@ void Analysis::Yield_Out() {
 		yield  = yield/acccc_temp;
   		yield_err =  abs(yield) * sqrt(yield_err);
 
-		//yield = yield/1000;
- 		//yield_err = yield_err/1000.;
+		yield = yield/1000;
+ 		yield_err = yield_err/1000.;
 
-	 	cout << "********  " << endl;
-		cout << "yield" << "     " << "yield_err" << "     " << "phi" << "     " << "MandelT" << endl;
 	 	cout << yield << "     " << yield_err << "     " << phi << "     " << MandelT << endl;
 
 		tree_out->Fill();		

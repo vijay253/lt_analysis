@@ -226,9 +226,9 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 //  	cout << "2222222222 " << endl;
 
 	/*--------------------------------------------------*/
-	cout << int(eff_setting_target[set_itt].thpqset[run_itt]*1000) << endl;
+	// cout << int(eff_setting_target[set_itt].thpqset[run_itt]*1000) << endl;
 
-	cout << Q2_vec_mod[list_itt] << "     " << list_itt << "    " << set_itt << endl; 
+	// cout << Q2_vec_mod[list_itt] << "     " << list_itt << "    " << set_itt << endl; 
 	/*--------------------------------------------------*/
 
  	TString run_setting_name; 
@@ -245,7 +245,7 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 
 	// cout << "What is the [problem?? " << endl;
 
-	cout << "**** "<< setting_vec_target[set_itt] << "     " << run_setting_name << endl;
+	// cout << "**** "<< setting_vec_target[set_itt] << "     " << run_setting_name << endl;
 	
 	if (setting_vec_target[set_itt] == run_setting_name) {
 	// 	cout << "AAAA" << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
@@ -571,7 +571,7 @@ void Target_Setup() {
 
 			}
 
-			// cout << "Target Seeeeeettting num tmp    " << setting_num_tmp << endl;
+			cout << "Target Seeeeeettting num tmp    " << setting_num_tmp << endl;
 
 			setting_run_list_target[setting_num_tmp].push_back(ii);
 
