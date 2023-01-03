@@ -1336,7 +1336,7 @@ void Analysis::Missing_Mass_Plot() {
 
  	points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN());
  	number_points->DrawTextNDC(0.7, 0.85, points_str);
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	diamond_setting->Add(gr1);
 	diamond_setting_cut->Add(gr2);
  
@@ -1367,7 +1367,6 @@ void Analysis::Missing_Mass_Plot() {
 // 
 
 	file_out_ana->cd();
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 
 }
 
