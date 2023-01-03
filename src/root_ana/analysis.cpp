@@ -1152,7 +1152,7 @@ void Analysis::Missing_Mass_Plot() {
 	line->DrawLine(coin_center-1,0,coin_center-1,25);
 	line->DrawLine(coin_center+7,0,coin_center+7,25);
 //	line->DrawLine(1,0,1,25);
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+
 // 	test->Update();
 // 	test->cd();
 // 
@@ -1188,7 +1188,7 @@ void Analysis::Missing_Mass_Plot() {
 	-------------------------------------------------------------------*/
 	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
 
