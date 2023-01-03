@@ -693,9 +693,9 @@ void Analysis::Load_Data_Tree() {
 	  -------------------------------------------------------------------
 	  data_tree_in = (TTree*) file_in->Get("h9500");
 	-------------------------------------------------------------------*/
-	//data_tree_in = (TTree*) file_in->Get("Cut_Proton_Events_All");
-	//data_tree_in = (TTree*) file_in->Get("Cut_Proton_Events_nopid");
-	data_tree_in = (TTree*) file_in->Get("Uncut_Proton_Events");
+	//data_tree_in = (TTree*) file_in->Get("Cut_Kaon_Events_All");
+	//data_tree_in = (TTree*) file_in->Get("Cut_Kaon_Events_nopid");
+	data_tree_in = (TTree*) file_in->Get("Uncut_Kaon_Events");
 // 	data_tree_in->SetBranchAddress("missmass", &t_missmass);
 // 	data_tree_in->SetBranchAddress("W", 	   &t_W       );
 // 	data_tree_in->SetBranchAddress("t",        &t_t       );
@@ -1125,10 +1125,11 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("cointime>>rand", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
 
-	//data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff"); // ERROR!
-	//data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff"); // ERROR!
-	//data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff"); // ERROR!
-
+	data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff"); // ERROR!
+	data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff"); // ERROR!
+	data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff"); // ERROR!
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	
 // 	cout << kset << "   " << miss_mass_offset[kset] << "   " << miss_mass_offset[1] << endl;
 // 	cout << all_coin_cut << endl;
  
@@ -1339,7 +1340,7 @@ void Analysis::Missing_Mass_Plot() {
 
 	//diamond_setting->Add(gr1); // ERROR!
 	//diamond_setting_cut->Add(gr2); // ERROR!
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl; 
+
 	file_out_ana->cd();
 	out_dir->cd();
 
