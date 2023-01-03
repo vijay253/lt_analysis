@@ -98,11 +98,11 @@ TString Dummy_Name(int num_itt) {
 
 	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
 
-		dir_str.Form("yields.%i_%i_0000.dummy", int(round(kin_setting.Q2set[num_itt]*100)), int(kin_setting.epsset[num_itt]*100));	
+		dir_str.Form("yields.%i_%i_0000.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100));	
 
 	} else {
 
-		dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*100)), int(kin_setting.epsset[num_itt]*100), int(kin_setting.thpqset[num_itt]*1000));	
+		dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100), int(kin_setting.thpqset[num_itt]*1000));	
 
 	}
 
@@ -125,11 +125,11 @@ TString Target_Name(int num_itt) {
 
 	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
 
-		dir_str.Form("yields.%i_%i_0000.target", int(round(kin_setting.Q2set[num_itt]*100)), int(kin_setting.epsset[num_itt]*100));	
+		dir_str.Form("yields.%i_%i_0000.target", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100));	
 
 	} else {
 
-		dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*100)), int(kin_setting.epsset[num_itt]*100), int(kin_setting.thpqset[num_itt]*1000));	
+		dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100), int(kin_setting.thpqset[num_itt]*1000));	
 
 	}
 
@@ -248,7 +248,7 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 	cout << "**** "<< setting_vec_target[set_itt] << "     " << run_setting_name << endl;
 	
 	if (setting_vec_target[set_itt] == run_setting_name) {
-	  cout << "AAAA" << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
+	// 	cout << "AAAA" << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
 		cout << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
 		setting_num = set_itt;
 	}
