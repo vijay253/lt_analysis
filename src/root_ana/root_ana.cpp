@@ -145,8 +145,7 @@ TString List_Name(int num_itt) {
 
 	TString dir_str;
 
-	cout << "kin_setting.Q2set[num_itt]*100" << "      " << "kin_setting.Q2set[num_itt]"<< endl;
-	cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
+	// cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
 
 	if (int(round(kin_setting.Q2set[num_itt]*10)) >= 10)
 	  {
@@ -165,7 +164,7 @@ TString List_Name(int num_itt) {
 	    }
 	}
 
-	cout << "gyyyy !" << dir_str << endl;
+	// cout << "gyyyy !" << dir_str << endl;
 
 	return dir_str;
 
@@ -227,9 +226,9 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 //  	cout << "2222222222 " << endl;
 
 	/*--------------------------------------------------*/
-	// cout << int(eff_setting_target[set_itt].thpqset[run_itt]*1000) << endl;
+	cout << int(eff_setting_target[set_itt].thpqset[run_itt]*1000) << endl;
 
-	// cout << Q2_vec_mod[list_itt] << "     " << list_itt << "    " << set_itt << endl; 
+	cout << Q2_vec_mod[list_itt] << "     " << list_itt << "    " << set_itt << endl; 
 	/*--------------------------------------------------*/
 
  	TString run_setting_name; 
@@ -246,7 +245,7 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 
 	// cout << "What is the [problem?? " << endl;
 
-	// cout << "**** "<< setting_vec_target[set_itt] << "     " << run_setting_name << endl;
+	cout << "**** "<< setting_vec_target[set_itt] << "     " << run_setting_name << endl;
 	
 	if (setting_vec_target[set_itt] == run_setting_name) {
 	// 	cout << "AAAA" << setting_vec_target[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;

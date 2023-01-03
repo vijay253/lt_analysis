@@ -861,7 +861,7 @@ void Analysis::Yield_Out() {
 		//yield = yield/1000;
  		//yield_err = yield_err/1000.;
 
-	 	cout << "********  ";
+	 	cout << "********  " << endl;
 		cout << "yield" << "     " << "yield_err" << "     " << "phi" << "     " << "MandelT" << endl;
 	 	cout << yield << "     " << yield_err << "     " << phi << "     " << MandelT << endl;
 
