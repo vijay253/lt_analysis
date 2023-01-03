@@ -562,7 +562,7 @@ void Target_Setup() {
 
 	    for (int ii = 0; ii < run_list_vec_target[i]; ii++) { 
 
-			cout << i << "    " <<  ii << endl;
+	      //cout << i << "    " <<  ii << endl;
 
 			int setting_num_tmp;
 
@@ -571,9 +571,11 @@ void Target_Setup() {
 
 			}
 
-			//cout << "Target Seeeeeettting num tmp    " << setting_num_tmp << endl;
+			cout << "Target Seeeeeettting num tmp    " << setting_num_tmp << endl;
 
 			setting_run_list_target[setting_num_tmp].push_back(ii);
+
+			cout << "setting_run_list_target    " << setting_run_list_target[setting_num_tmp].push_back(ii) << endl;
 
    	 	}	
 
@@ -637,7 +639,7 @@ void Target_Analysis() {
 
 			for (int ii = 0; ii < setting_run_list_target[i].size(); ii++) {
 	
-			  cout << "run " << setting_run_list_target[i][ii] << endl;
+//				cout << "run " << setting_run_list_target[i][ii] << endl;
 
 				ana_target[i]->is_run_dummy = false;
 				ana_target[i]->Run_by_Run_Analysis(setting_run_list_target[i][ii]);
