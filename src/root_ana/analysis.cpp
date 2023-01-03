@@ -387,7 +387,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	
 	run_tree = Create_File();
 
-	Para_Run_Def(run_itt); // ERROR!
+	Para_Run_Def(run_itt);
 
 	cout << "Is the run dummy? " << is_run_dummy << endl;
 	
@@ -1125,10 +1125,9 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("cointime>>rand", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
 
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff");
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff");
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff");
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+	//data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff"); // ERROR!
+	//data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff"); // ERROR!
+	//data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff"); // ERROR!
 
 // 	cout << kset << "   " << miss_mass_offset[kset] << "   " << miss_mass_offset[1] << endl;
 // 	cout << all_coin_cut << endl;
@@ -1143,7 +1142,7 @@ void Analysis::Missing_Mass_Plot() {
 	coin_real->SetLineColor(4);
 	coin_rand->Draw("same");
 	coin_rand->SetLineColor(2);
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	
 	TLine *line = new TLine();
 
