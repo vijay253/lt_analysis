@@ -1315,7 +1315,7 @@ void Analysis::Missing_Mass_Plot() {
 	//data_tree_in->Draw("W:Q2", real_coin_cut); // ERROR!
 	
 	TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone();
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 	gr2->SetMarkerStyle(7);	
 	gr2->SetMarkerSize(1);	
 	gr2->SetMarkerColor(2);	
@@ -1326,7 +1326,7 @@ void Analysis::Missing_Mass_Plot() {
 	
  	TText* number_points = new TText();
  	number_points->SetTextSize(0.035);
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
+
  	TString points_str; 
  	points_str.Form("Black Events: %i", gr1->GetN());
  	number_points->DrawTextNDC(0.7, 0.65, points_str);
