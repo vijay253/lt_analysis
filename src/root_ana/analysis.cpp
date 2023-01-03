@@ -280,7 +280,6 @@ void Analysis::Para_Init() {
 	errrr_temp = 0.0;
 	charge_tot = 0.0;
 
-
 	yield_vec.resize(t_bin_set*phi_bin_num);
 	yield_err_vec.resize(t_bin_set*phi_bin_num);
 	phi_vec.resize(t_bin_set*phi_bin_num);
