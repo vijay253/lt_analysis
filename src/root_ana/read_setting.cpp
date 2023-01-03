@@ -75,7 +75,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 	// eff_pro_array_load();
 
-	//Cen_Pro_Array_Load();
+	//abCen_Pro_Array_Load();
 
 	// Sim_Pro_Array_Load();
 
@@ -246,7 +246,7 @@ void ReadFile::Kin_Pro_Array_Load() {
 	kin_pro.NBtset = Array_D_to_I (NBtset_d, set_runs);
 
 	
-	// cout << " Read: "<< int(kin_pro.Q2set[0]*100) << endl;
+	// cout << " Read: "<< int(kin_pro.Q2set[0]*10) << endl;
 	// cout << " Read: "<< kin_pro.polset[0] << endl;
 
 
