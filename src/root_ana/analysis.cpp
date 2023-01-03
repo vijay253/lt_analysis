@@ -117,7 +117,8 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	Set_Coin_Max(10);
 	Set_Coin_Bin(200);
 
-	Set_Expected_MM(0.939565);
+	//Set_Expected_MM(0.939565);
+	Set_Expected_MM(0.493677);
 
 	//Double_t array_temp[6] = {0.0, 0.00574, 0.00554, 0.00254, 0.00253, 0.00260};
 	Double_t array_temp[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
@@ -568,9 +569,9 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("cointime>>rand", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
 
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>all",  t_cut, "goff");
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>real", t_cut, "goff");
-	data_tree_in->Draw("CTime_epCoinTime_ROC1>>rand", t_cut, "goff");
+	data_tree_in->Draw("CTime_ROC1>>all",  t_cut, "goff");
+	data_tree_in->Draw("CTime_ROC1>>real", t_cut, "goff");
+	data_tree_in->Draw("CTime_ROC1>>rand", t_cut, "goff");
 	
 // 	cout << kset << "   " << miss_mass_offset[kset] << "   " << miss_mass_offset[1] << endl;
 // 	cout << all_coin_cut << endl;
@@ -629,8 +630,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
-	data_tree_in->Draw("MMp- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
+	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
+	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
@@ -670,7 +671,7 @@ void Analysis::Missing_Mass_Plot() {
 	  -------------------------------------------------------------------
 	miss_mass_offset_str.Form("missmass-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
 	-------------------------------------------------------------------*/
-	miss_mass_offset_str.Form("MMp-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
+	miss_mass_offset_str.Form("MM-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
 
 	TH1F* mm_off = new TH1F("mm_off", "mm_off", 50, 0.0, 2.0);
 	TH1F* mm_1_off = new TH1F("mm_1_off", "mm1_off", 50, 0.0, 2.0);

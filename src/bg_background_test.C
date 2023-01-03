@@ -12,22 +12,22 @@ TF1* fun_t1 = new TF1();
 TF1* fun_t2 = new TF1();
 TF1* fun_t3 = new TF1();
 
-// const Int_t u_bin_num = 3;
+// const Int_t t_bin_num = 3;
 // const Int_t phi_bin_num = 8;
 
 // 
 
 
-// const Int_t u_bin_num = 2;
+// const Int_t t_bin_num = 2;
 // const Int_t phi_bin_num = 10;
-// const Int_t bin_num = u_bin_num * phi_bin_num;
+// const Int_t bin_num = t_bin_num * phi_bin_num;
 // 
 // 
 
 
 
 
-Int_t u_bin_num;
+Int_t t_bin_num;
 Int_t phi_bin_num;
 
 
@@ -57,7 +57,7 @@ bool bg_refit;
 
 TString out_dir_str;
 
-out_dir_str = "u_bin_fit/";
+out_dir_str = "t_bin_fit/";
 
 
 TString ave_dir_str;
@@ -84,19 +84,17 @@ void bg_background_test () {
 	TString eps;
 	TString theta;
 
-//	file_name = "final_160_32_3000_out_put.root";
-
 	is_itt = false;
 
 	bool bg_refit;
 
 
-	u_bin_num   = Get_u_bin();
+	t_bin_num   = Get_t_bin();
 	phi_bin_num = Get_phi_bin();
 	
-	const Int_t u_bin_num_const   = u_bin_num;  
+	const Int_t t_bin_num_const   = t_bin_num;  
 	const Int_t phi_bin_num_const = phi_bin_num;  
-	const Int_t bin_num_const     = u_bin_num_const * phi_bin_num_const;
+	const Int_t bin_num_const     = t_bin_num_const * phi_bin_num_const;
 
  	acc_yield         =  new Double_t[bin_num_const];
  	acc_sim_yield     =  new Double_t[bin_num_const];
@@ -115,15 +113,21 @@ void bg_background_test () {
 	}
 
 
-	cout << Get_u_bin() << "    " << Get_phi_bin() << endl;
+	cout << Get_t_bin() << "    " << Get_phi_bin() << endl;
 
-	TString q2_setting[2]     = {"160", "245"};
+	// HARD CODED
+
+	TString q2_setting[2]     = {"5.5", "4.4", "3.3", "3.3", "2.115", "0.5"};
 	
-	TString eps_160[2]        = {"32", "59"};
-	TString eps_245[2]        = {"27", "55"};
+	TString eps_55[2]        = {"0.1838","0.5291"};
+	TString eps_44[2]        = {"0.4805","0.7148"};
+	TString eps_33_W314[2]   = {"0.3935","0.6668"};
+	TString eps_33_W232[2]   = {"0.5736","0.8791"};
+	TString eps_21[2]        = {"0.2477","0.7864"};
+	TString eps_05[2]        = {"0.4515","0.6979"};
 	
 	TString hms_angle_160_l[2]  = {"+0970", "+3000"};
-	TString hms_angle_160_h[3]  = {"-2730",  "+0000", "+3000"};
+	TString hms_angle_160_h[3]  = {"-2730",  "+0000", "+3000"};       
 	
 	TString hms_angle_245_l[2]  = {"+1350", "+3000"};
 	TString hms_angle_245_h[3]  = {"-3000", "+0000", "+3000"};
@@ -439,7 +443,7 @@ void fit_bg (TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t
 // 	Double_t w_ave, w_ave_err;
 // 
 // 	TCanvas* can_w;
-// 	can_w = (TCanvas*)file1->Get("W_u_bin");
+// 	can_w = (TCanvas*)file1->Get("W_t_bin");
 //
 //	average_kin(can_w, &w_ave, &w_ave_err);
 
@@ -456,7 +460,7 @@ void fit_bg (TString file_name, Double_t fit_low_1, Double_t fit_low_2, Double_t
 	/// t binning 
 
 	TCanvas* c4;
-	c4 = (TCanvas*)file1->Get("missmass_u_bin");
+	c4 = (TCanvas*)file1->Get("missmass_t_bin");
 //	t_fit_2(c4, file_name, fit_low_1, fit_low_2, fit_mid_1, fit_mid_2, fit_high_1, fit_high_2);
 //	u_fit(c4, file_name, fit_low_1, fit_low_2, fit_mid_1, fit_mid_2, fit_high_1, fit_high_2);
 //	u_fit_full(c4, file_name, fit_low_1, fit_low_2, fit_mid_1, fit_mid_2, fit_high_1, fit_high_2);
@@ -815,7 +819,7 @@ void u_fit(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_low
 // 	cc3->Draw();
 // 
  	TCanvas* cc5 = new TCanvas("cc5", "cc5", 1600, 800);
- 	cc5->Divide(u_bin_num,1, 0.003);
+ 	cc5->Divide(t_bin_num,1, 0.003);
 // 
  	TH1F* h_tgt[3];
  	TH1F* h_sim[3];
@@ -1013,7 +1017,7 @@ void u_fit_full(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fi
 // 	cc3->Draw();
 // 
  	TCanvas* cc5 = new TCanvas("cc5", "cc5", 1600, 800);
- 	cc5->Divide(u_bin_num,1, 0.003);
+ 	cc5->Divide(t_bin_num,1, 0.003);
 // 
  	TH1F* h_tgt[3];
  	TH1F* h_sim[3];
@@ -1236,7 +1240,7 @@ void u_fit(TCanvas* cc3, TString file_name, Double_t fit_low, Double_t fit_high)
 // 	cc3->Draw();
 // 
  	TCanvas* cc5 = new TCanvas("cc5", "cc5", 1600, 800);
- 	cc5->Divide(u_bin_num,1, 0.003);
+ 	cc5->Divide(t_bin_num,1, 0.003);
 // 
  	TH1F* h_tgt[3];
  	TH1F* h_sim[3];
@@ -1407,7 +1411,7 @@ void t_fit_2(TCanvas* cc3, TString file_name, Double_t fit_low_1, Double_t fit_l
 // 	cc3->Draw();
 // 
  	TCanvas* cc5 = new TCanvas("cc5", "cc5", 1600, 800);
- 	cc5->Divide(u_bin_num, 1, 0.003);
+ 	cc5->Divide(t_bin_num, 1, 0.003);
 // 
  	TH1F* h_tgt[3];
  	TH1F* h_sim[3];
@@ -1601,7 +1605,7 @@ void Output_yield_array() {
 	
 		Int_t in;
 	
-		for(Int_t i = 0; i < u_bin_num; i++) {
+		for(Int_t i = 0; i < t_bin_num; i++) {
 			
 			for(Int_t ii = 0; ii < phi_bin_num; ii++) {
 	
@@ -1642,7 +1646,7 @@ void Output_yield_array() {
 
 
 
- 	for(Int_t i = 0; i < u_bin_num * phi_bin_num; i++) {
+ 	for(Int_t i = 0; i < t_bin_num * phi_bin_num; i++) {
  
  		acc_yield[i]         = 0.0;
         acc_sim_yield[i]     = 0.0;

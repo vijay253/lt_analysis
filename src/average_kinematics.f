@@ -8,13 +8,19 @@ c     settings, then different polarities.
 c
 c     Input:  kindata/kindata.*.dat
 c     Output: averages/averages.*.dat
-
-      call average_k(1.60,.32,.59)
-
+!     call average_k(Q2,epslow,epshigh)
+      call average_k(5.5,0.1838,0.5291)
       print*,  "-------------------------------------------------"
-
-      call average_k(2.45,.27,.55)
-
+      call average_k(4.4,0.4805,0.7148)
+      print*,  "-------------------------------------------------"
+      call average_k(3.3,0.3935,0.6668)
+      print*,  "-------------------------------------------------"
+      call average_k(3.3,0.5736,0.8791)
+      print*,  "-------------------------------------------------"
+      call average_k(2.115,0.2477,0.7864)
+      print*,  "-------------------------------------------------"
+      call average_k(0.5,0.4515,0.6979)
+      
       stop
       end
 
@@ -59,9 +65,9 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
       real one,th_pq, nset, ipol, eps_mod
       integer it, ip, lh, nbt, ntbins
 
-      integer u_bin, phi_bin 
+      integer t_bin, phi_bin 
 
-      real, Dimension(10) :: u_bin_boundary
+      real, Dimension(10) :: t_bin_boundary
 
       character*80:: line
 
@@ -117,15 +123,15 @@ c
 
       print*, "BBBBBBBBB", q2_bin       
 
-      open (unit = 22, file = "../u_bin_interval", action='read')
-      read (22,*) q2_bin, u_bin, phi_bin
+      open (unit = 22, file = "../t_bin_interval", action='read')
+      read (22,*) q2_bin, t_bin, phi_bin
 
 
       print*, "BBBBBBBBB", q2_bin       
 
 
 
-c      nt = u_bin
+c      nt = t_bin
 c      nphi = phi_bin 
 c      read (22, '(A)') line  
 c      read (22, '(A)') line  
@@ -136,19 +142,19 @@ c      read (line, end=20)
 
 c      print*,  trim(line)
 
-c      read(line, *) u_bin_boundary(0), u_bin_boundary(1), u_bin_boundary(2)
+c      read(line, *) t_bin_boundary(0), t_bin_boundary(1), t_bin_boundary(2)
 
-c      read(line, *) (u_bin_boundary(j), j = 1, 3)
+c      read(line, *) (t_bin_boundary(j), j = 1, 3)
 
-c      print*, u_bin_boundary(1)
+c      print*, t_bin_boundary(1)
 c       read (22,*) 
-c       read (22,*) q2_bin, u_bin, phi_bin
+c       read (22,*) q2_bin, t_bin, phi_bin
 c       read (22,*) 
 c 
-c       print*,  u_bin, phi_bin
+c       print*,  t_bin, phi_bin
 
 c      do j = 1, 3
-c         print*, u_bin_boundary(j)
+c         print*, t_bin_boundary(j)
 c      end do
 
 
@@ -160,35 +166,35 @@ c      end do
 
          read (22, '(A)') line  
 c         print*, line
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
 
-c         print*, u_bin+1 
+c         print*, t_bin+1 
 
 c         stop
 
-c        u_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
-c        u_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
+c        t_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
+c        t_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
  
       elseif(q2_set.eq.2.45) then
  
-c        u_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
-c        u_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
+c        t_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
+c        t_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
  
          read (22,*) 
          read (22,*) 
          read (22, '(A)') line  
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
 
       endif
 
-c      stop u_bin+1
+c      stop t_bin+1
 
       close(22)
 
-c      print*, u_bin , u_bin_boundary(2), u_bin_boundary(3) 
+c      print*, t_bin , t_bin_boundary(2), t_bin_boundary(3) 
 c      stop
 
-      nbt = u_bin 
+      nbt = t_bin 
 
 c     Get low, high eps. and neg., pos. polarity data.
 
@@ -197,7 +203,7 @@ c     Get low, high eps. and neg., pos. polarity data.
          do lh=1,2
 
             nset=0
-            open(55,file='list.settings.omega')
+            open(55,file='list.settings')
             do while(.true.)
 
 c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
@@ -277,8 +283,8 @@ c                    print*,W,dW,Q2,dQ2,it
 
 c      pause
 
-c       open (unit = 22, file = "u_bin_interval", action='read')
-c       read (22,*) q2_bin, u_bin, phi_bin
+c       open (unit = 22, file = "t_bin_interval", action='read')
+c       read (22,*) q2_bin, t_bin, phi_bin
 c       close(22)
 c 
 c 
@@ -286,13 +292,13 @@ cc c   /*--------------------------------------------------*/
 cc c   Read the u and phi bins 
 cc 
 c
-c      open (unit = 22, file = "../u_bin_interval", action='read')
-c      read (22,*) q2_bin, u_bin, phi_bin
+c      open (unit = 22, file = "../t_bin_interval", action='read')
+c      read (22,*) q2_bin, t_bin, phi_bin
 c
 c        
 c
 c
-cc      nt = u_bin
+cc      nt = t_bin
 cc      nphi = phi_bin 
 cc      read (22, '(A)') line  
 cc      read (22, '(A)') line  
@@ -303,19 +309,19 @@ cc      read (line, end=20)
 c
 cc      print*,  trim(line)
 c
-cc      read(line, *) u_bin_boundary(0), u_bin_boundary(1), u_bin_boundary(2)
+cc      read(line, *) t_bin_boundary(0), t_bin_boundary(1), t_bin_boundary(2)
 c
-cc      read(line, *) (u_bin_boundary(j), j = 1, 3)
+cc      read(line, *) (t_bin_boundary(j), j = 1, 3)
 c
-cc      print*, u_bin_boundary(1)
+cc      print*, t_bin_boundary(1)
 cc       read (22,*) 
-cc       read (22,*) q2_bin, u_bin, phi_bin
+cc       read (22,*) q2_bin, t_bin, phi_bin
 cc       read (22,*) 
 cc 
-cc       print*,  u_bin, phi_bin
+cc       print*,  t_bin, phi_bin
 c
 cc      do j = 1, 3
-cc         print*, u_bin_boundary(j)
+cc         print*, t_bin_boundary(j)
 cc      end do
 c
 c
@@ -329,20 +335,20 @@ c         read (22, '(A)') line
 c
 c         print*, line
 c
-c         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+c         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
 c
-cc        u_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
-cc        u_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
+cc        t_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
+cc        t_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
 c 
 c      elseif(q2_set.eq.2.45) then
 c 
-cc        u_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
-cc        u_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
+cc        t_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
+cc        t_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
 c 
 c         read (22,*) 
 c         read (22,*) 
 c         read (22, '(A)') line  
-c         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+c         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
 c
 c      endif
 c
@@ -365,10 +371,10 @@ c
 
 
 
-c      print*, u_bin, phi_bin
+c      print*, t_bin, phi_bin
 c      stop
       
-      ntbins = u_bin
+      ntbins = t_bin
 
       do ip=1,1
          do lh=1,2
@@ -511,7 +517,7 @@ c      end do
 
       do it=1,ntbins
          tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
-         um = (u_bin_boundary(it) + u_bin_boundary(it+1)) / 2
+         um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
 
          print*, tmin, tmax, ntbins
