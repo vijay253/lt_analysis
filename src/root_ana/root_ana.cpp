@@ -524,6 +524,8 @@ void Dummy_Setup() {
 	/// Setting up the setting_run_list for the Dummy runs
 
 	for (int i=0;  i < run_list_vec_dummy.size(); i++) {
+	  
+	  cout << "Is this working ? " << i << "     " << run_list_vec_dummy[i] << endl;
 
 	    for (int ii = 0; ii < run_list_vec_dummy[i]; ii++) { 
 
