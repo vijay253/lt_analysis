@@ -632,8 +632,6 @@ void Analysis::Para_Run_Def(Int_t num) {
 	
 	out_dir = file_out_ana->mkdir(root_out_dir_name);
 
-	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
-
 
 	/*--------------------------------------------------*/
 	/// Calculate phi and t bins
@@ -644,7 +642,7 @@ void Analysis::Para_Run_Def(Int_t num) {
 		yield_err_sum[i].resize(phi_bin_num);
 	}
 
-
+	cout << "aaaaaaaaaaaaaaaasssssssbbbbbbbbbbbbb" << endl;
 
 }
 
