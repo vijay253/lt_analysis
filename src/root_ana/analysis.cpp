@@ -1328,13 +1328,13 @@ void Analysis::Missing_Mass_Plot() {
  	number_points->SetTextSize(0.035);
 
  	TString points_str; 
- 	points_str.Form("Black Events: %i", gr1->GetN());
+ 	//points_str.Form("Black Events: %i", gr1->GetN()); // ERROR!
  	number_points->DrawTextNDC(0.7, 0.65, points_str);
 
- 	points_str.Form("Red Events: %i", gr2->GetN());
+ 	//points_str.Form("Red Events: %i", gr2->GetN()); // ERROR!
  	number_points->DrawTextNDC(0.7, 0.75, points_str);
 
- 	points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN());
+ 	//points_str.Form("Total Events: %i", gr1->GetN()+gr2->GetN()); // ERROR!
  	number_points->DrawTextNDC(0.7, 0.85, points_str);
 
 	//diamond_setting->Add(gr1); // ERROR!
