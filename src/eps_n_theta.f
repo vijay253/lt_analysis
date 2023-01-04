@@ -31,9 +31,10 @@ ccc Modification for omega
 ccc WL
 ccc Date: 31/March/2016
 
-      parameter (mw=.78265)      !mw
-      parameter (mw2=.61254)     !mw2
-
+!      parameter (mw=.78265)      !mw
+!      parameter (mw2=.61254)     !mw2
+      parameter (mw=0.493677)      !mK
+      parameter (mw2=0.24387)     !mK2
 
 ccc
 ccc/*--------------------------------------------------*/
