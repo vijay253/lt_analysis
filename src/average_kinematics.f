@@ -297,7 +297,7 @@ c     Get Beam energy at first.
       end do
  5    close(55)
       Eb=Eb/1000.               !Mev -> Gev units.
-      print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
+!      print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
       pause
 
 c      do it=1,ntbins
