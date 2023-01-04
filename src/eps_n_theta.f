@@ -74,6 +74,8 @@ c      end if
 *     m12=q2    !error?
       m12=-q2   !mass squared of virtual photon.
 
+      print*,s,omega,q,m12
+      
       e1cm=(s+m12-m22)/(2*w)
       e3cm=(s+m32-m42)/(2*w)
 
