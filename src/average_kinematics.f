@@ -135,7 +135,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
                   do it=1,nbt
  !                    read(66,*) W,dW,Q2,dQ2,tt,dtt
-                     print*,W,dW,Q2,dQ2,it
+!                     print*,W,dW,Q2,dQ2,it
                      if(dW.gt.0.) then
                         aW(it,lh,ip)=aW(it,lh,ip)+W/dW**2
                         eW(it,lh,ip)=eW(it,lh,ip)+1./dW**2
@@ -329,8 +329,8 @@ c     Save data.
 
       write(fn,'(''averages/avek.'',i3.3,''.dat'')')
      *     nint(q2_set*10.)
-!      print*,'fn=',fn
-!     print*
+      print*,'fn=',fn
+      print*
 
 c      open(77,file=fn)
 c      do it=1,ntbins
