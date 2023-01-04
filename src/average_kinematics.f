@@ -173,7 +173,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
       end do                    !ip=1,2
 
-      pause
+c      pause
 
       do ip=1,1
          do lh=1,2
@@ -442,3 +442,5 @@ c      write(*,'(a13,7(F8.5,1x))')
 c     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
 
       end
+
+      include 'eps_n_theta.f'
