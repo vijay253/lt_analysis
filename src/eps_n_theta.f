@@ -104,6 +104,7 @@ c      end if
       eps=1.+2.*(q2+omega**2)/(4.*Eb*(Eb-omega)-q2)
       eps=1./eps
 
+      print*, 'q2', 'w', 'Eb', 'eps'
       print*, q2, w, Eb, eps
 
 c      stop
