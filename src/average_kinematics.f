@@ -104,7 +104,7 @@ c     Get low, high eps. and neg., pos. polarity data.
             open(55,file='./root_ana/list.settings')
             do while(.true.)
 
-               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
+               read(55,*) ipol,q2,eps,th_pq,tmn,tmx,nbt
                if(ipol.eq.pol_set(ip).and.q2.eq.q2_set.and.
      &              eps.eq.eps_set(lh)) then
 
@@ -135,7 +135,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
                   do it=1,nbt
                      read(66,*) W,dW,Q2,dQ2,tt,dtt
-c                    print*,W,dW,Q2,dQ2,it
+                     print*,W,dW,Q2,dQ2,it
                      if(dW.gt.0.) then
                         aW(it,lh,ip)=aW(it,lh,ip)+W/dW**2
                         eW(it,lh,ip)=eW(it,lh,ip)+1./dW**2
