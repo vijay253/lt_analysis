@@ -118,7 +118,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	Set_Coin_Bin(200);
 
 	//Set_Expected_MM(0.939565);
-	Set_Expected_MM(0.493677);
+	Set_Expected_MM(1.115683);
 
 	//Double_t array_temp[6] = {0.0, 0.00574, 0.00554, 0.00254, 0.00253, 0.00260};
 	Double_t array_temp[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
