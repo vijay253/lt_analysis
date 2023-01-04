@@ -167,13 +167,13 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
  9          continue
             close(55)
 
-!            print*,'nset=',nset
+            print*,'nset=',nset
 
          end do                 !lh=1,2
 
       end do                    !ip=1,2
 
-c      pause
+      pause
 
       do ip=1,1
          do lh=1,2
