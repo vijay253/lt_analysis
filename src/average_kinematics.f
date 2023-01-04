@@ -297,7 +297,7 @@ c     Get Beam energy at first.
       end do
  5    close(55)
       Eb=Eb/1000.               !Mev -> Gev units.
-!      print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
+      print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
 
 
 c      do it=1,ntbins
@@ -430,7 +430,7 @@ c      stop
          thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
       else
          thetacm=-1.
-         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
+!         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
       endif
 
       eps=1.+2.*(q2+omega**2)/(4.*Eb*(Eb-omega)-q2)
