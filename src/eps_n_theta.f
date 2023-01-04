@@ -71,6 +71,9 @@ c      end if
       s=w*w
       omega=(s+q2-m22)/(2*m2)
       q=sqrt(q2+omega**2)
+
+      print*,q2
+      
 *     m12=q2    !error?
       m12=-q2   !mass squared of virtual photon.
 
@@ -78,13 +81,18 @@ c      end if
       
       e1cm=(s+m12-m22)/(2*w)
       e3cm=(s+m32-m42)/(2*w)
+      e4cm=(s+m42-m32)/(2*w)
 
+      print*,'ecm',e1cm,e3cm,e4cm
+      
       p1lab=q
       p1cm=p1lab*m2/w
       p3cm=sqrt(e3cm*e3cm-m32)
-      tmin=-((e1cm-e3cm)**2-(p1cm-p3cm)**2)
+      p4cm=sqrt(e4cm*e4cm-m42)
 
-      print*,e1cm,e3cm,p1cm,p3cm
+      print*,'pcm',p1cm,p3cm,p4cm
+
+      tmin=-((e1cm-e3cm)**2-(p1cm-p3cm)**2)
       
       if (tm.ge.tmin) then
          thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
