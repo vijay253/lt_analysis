@@ -82,9 +82,8 @@ c      end if
       p3cm=sqrt(e3cm*e3cm-m32)
       tmin=-((e1cm-e3cm)**2-(p1cm-p3cm)**2)
 
-      print*,'t mininum check in eps n theta check (eps_n_theta.f): ',
-     *     tmin
-
+      print*,e1cm,e3cm,p1cm,p3cm
+      
       if (tm.ge.tmin) then
          thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
       else
