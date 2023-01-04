@@ -329,7 +329,7 @@ c     Save data.
 
       write(fn,'(''averages/avek.'',i3.3,''.dat'')')
      *     nint(q2_set*10.)
-      print*,'fn=',fn
+!      print*,'fn=',fn
       print*
 
 c      open(77,file=fn)
