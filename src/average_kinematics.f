@@ -130,8 +130,8 @@ c                 pause
 c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
                   open(66,file=fn)
-                  print*, "bbbbbbbbbbbbbbbbbbbb ", one
-                  read(66,*) one
+!                 print*, "bbbbbbbbbbbbbbbbbbbb ", one
+!                  read(66,*) one
 
 
                   do it=1,nbt
