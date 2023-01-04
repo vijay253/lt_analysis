@@ -167,7 +167,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
  9          continue
             close(55)
 
-            print*,'nset=',nset
+!            print*,'nset=',nset
 
          end do                 !lh=1,2
 
@@ -430,98 +430,15 @@ c      stop
          thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
       else
          thetacm=-1.
-!         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
+         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
       endif
 
       eps=1.+2.*(q2+omega**2)/(4.*Eb*(Eb-omega)-q2)
       eps=1./eps
 
-      print *, "1!!!!!!!!!!!!  " , eps
+      print *, "!!!!!!!!!!!!  " , eps
 
 c      write(*,'(a13,7(F8.5,1x))')
 c     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
 
       end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-c*-----------------------------------------------------------------------
-c
-c      subroutine eps_n_theta(npol,Eb,w,q2,tm,thetacm,eps)
-c
-cc     To calculate model theta_pq in CM and epsilon. This subroutine is largely
-cc     based on theta_cm.f function, which in turn is based Jochen's script.
-c
-c      implicit none
-c
-c      integer npol
-c      real Eb,w,q2,tm,thetacm,eps
-c
-c      REAL s,omega,q,tmin
-c      REAL p1cm,p3cm,e1cm,e3cm,p1lab
-c
-c      REAL m2,m3,m4
-c      REAL m12,m22,m32,m42
-c
-c      real mp,mp2,mpi,mpi2,mn,mn2
-c      parameter (mp=.93827231)   !mp
-c      parameter (mp2=.88035493)  !mp^2
-c      parameter (mpi=.13956995)   !mpi
-c      parameter (mpi2=.01947977)  !mpi^2
-c      parameter (mn=.93956563)   !mn
-c      parameter (mn2=.88278357)  !mn^2
-c
-c      parameter (m3=mpi)
-c      parameter (m32=mpi2)
-c
-c      if(npol.gt.0) then
-c         m2=mp
-c         m22=mp2
-c         m4=mn
-c         m42=mn2
-c      else
-c         m2=mn
-c         m22=mn2
-c         m4=mp
-c         m42=mp2
-c      end if
-c
-c      s=w*w
-c      omega=(s+q2-m22)/(2*m2)
-c      q=sqrt(q2+omega**2)
-c*     m12=q2    !error?
-c      m12=-q2   !mass squared of virtual photon.
-c
-c      e1cm=(s+m12-m22)/(2*w)
-c      e3cm=(s+m32-m42)/(2*w)
-c      p1lab=q
-c      p1cm=p1lab*m2/w
-c      p3cm=sqrt(e3cm*e3cm-m32)
-c      tmin=-((e1cm-e3cm)**2-(p1cm-p3cm)**2)
-c
-c      if (tm.ge.tmin) then
-c         thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
-c      else
-c         thetacm=-1.
-c         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
-c      endif
-c
-c      eps=1.+2.*(q2+omega**2)/(4.*Eb*(Eb-omega)-q2)
-c      eps=1./eps
-c
-cc      write(*,'(a13,7(F8.5,1x))')
-cc     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
-c
-c      end
