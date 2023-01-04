@@ -1,24 +1,27 @@
       program take_averages
 
+
+      implicit none
+
 c     This program takes averages of W and Q2 over different theta_pq
 c     settings, then different polarities.
 c
 c     Input:  kindata/kindata.*.dat
 c     Output: averages/averages.*.dat
-
+      
 !     call average_k(Q2,epslow,epshigh)
       call average_k(5.5,0.1838,0.5291)
       print*,  "-------------------------------------------------"
-!      call average_k(4.4,0.4805,0.7148)
+      call average_k(4.4,0.4805,0.7148)
       print*,  "-------------------------------------------------"
-!     call average_k(3.3,0.3935,0.6668)
+      call average_k(3.3,0.3935,0.6668)
       print*,  "-------------------------------------------------"
-!     call average_k(3.3,0.5736,0.8791)
+      call average_k(3.3,0.5736,0.8791)
       print*,  "-------------------------------------------------"
-!     call average_k(2.115,0.2477,0.7864)
+      call average_k(2.115,0.2477,0.7864)
       print*,  "-------------------------------------------------"
-!     call average_k(0.5,0.4515,0.6979)
-
+      call average_k(0.5,0.4515,0.6979)
+      
       stop
       end
 
@@ -26,11 +29,18 @@ c     Output: averages/averages.*.dat
 
       subroutine average_k(q2_set,eps_lo_set,eps_hi_set)
 
+
+      implicit none
+
 c     Average W and Q2 over theta_pq settings, then over low and high epsilon
 c     settings, then over neg. and pos. settings,
 c     and save result in averages/aver.* .
 
-      parameter (nu=3)
+c      implicit none
+      
+      integer nu
+
+      parameter (nu=10)
 
       real aveW(nu),errW(nu),aveQ2(nu),errQ2(nu)
       real avW(nu,2),erW(nu,2),avQ2(nu,2),erQ2(nu,2)
@@ -44,11 +54,23 @@ c     and save result in averages/aver.* .
 c      real thetacm_neg(nu),thetacm_pos(nu)
       real thetacm_only(nu)
 
-      real eps_lo(nu),eps_hi(nu)
+      real eps_lo(nu),eps_hi(nu),um, u_min
 
       real eps_set(2)
 
-      integer pol_set(2)
+      integer pol_set(2), j
+
+      real q2_bin, q2_set, eps_lo_set, eps_hi_set, dq2, dtt, dw, eb, eps
+      real tt, wwmx, w, tmn, tmx, tmax, tmin, tm, th_mod, q2
+
+      real one,th_pq, nset, ipol, eps_mod
+      integer it, ip, lh, nbt, ntbins
+
+      integer t_bin, phi_bin 
+
+      real, Dimension(10) :: t_bin_boundary
+
+      character*80:: line
 
       character*40 fn
       character*2 pol
@@ -94,6 +116,87 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
 
       end do
 
+
+
+c c   /*--------------------------------------------------*/
+c c   Read the u and phi bins 
+c 
+
+      print*, "BBBBBBBBB", q2_bin       
+
+      open (unit = 22, file = "./t_bin_interval", action='read')
+      read (22,*) q2_bin, t_bin, phi_bin
+
+
+      print*, "BBBBBBBBB", q2_bin       
+
+
+
+c      nt = t_bin
+c      nphi = phi_bin 
+c      read (22, '(A)') line  
+c      read (22, '(A)') line  
+c      print*,  line
+
+
+c      read (line, end=20) 
+
+c      print*,  trim(line)
+
+c      read(line, *) t_bin_boundary(0), t_bin_boundary(1), t_bin_boundary(2)
+
+c      read(line, *) (t_bin_boundary(j), j = 1, 3)
+
+c      print*, t_bin_boundary(1)
+c       read (22,*) 
+c       read (22,*) q2_bin, t_bin, phi_bin
+c       read (22,*) 
+c 
+c       print*,  t_bin, phi_bin
+
+c      do j = 1, 3
+c         print*, t_bin_boundary(j)
+c      end do
+
+
+
+
+      print*, q2_set
+
+      if(q2_set.eq.1.6) then
+
+         read (22, '(A)') line  
+c         print*, line
+         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
+
+c         print*, t_bin+1 
+
+c         stop
+
+c        t_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
+c        t_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
+ 
+      elseif(q2_set.eq.2.45) then
+ 
+c        t_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
+c        t_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
+ 
+         read (22,*) 
+         read (22,*) 
+         read (22, '(A)') line  
+         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
+
+      endif
+
+c      stop t_bin+1
+
+      close(22)
+
+c      print*, t_bin , t_bin_boundary(2), t_bin_boundary(3) 
+c      stop
+
+      nbt = t_bin 
+
 c     Get low, high eps. and neg., pos. polarity data.
 
       do ip=1,1
@@ -104,7 +207,8 @@ c     Get low, high eps. and neg., pos. polarity data.
             open(55,file='./root_ana/list.settings')
             do while(.true.)
 
-               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
+c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
+               read(55,*,end=9) ipol,q2,eps,th_pq
                if(ipol.eq.pol_set(ip).and.q2.eq.q2_set.and.
      &              eps.eq.eps_set(lh)) then
 
@@ -175,7 +279,103 @@ c                    print*,W,dW,Q2,dQ2,it
 
       end do                    !ip=1,2
 
+
+
+
 c      pause
+
+c       open (unit = 22, file = "t_bin_interval", action='read')
+c       read (22,*) q2_bin, t_bin, phi_bin
+c       close(22)
+c 
+c 
+cc c   /*--------------------------------------------------*/
+cc c   Read the u and phi bins 
+cc 
+c
+c      open (unit = 22, file = "../t_bin_interval", action='read')
+c      read (22,*) q2_bin, t_bin, phi_bin
+c
+c        
+c
+c
+cc      nt = t_bin
+cc      nphi = phi_bin 
+cc      read (22, '(A)') line  
+cc      read (22, '(A)') line  
+cc      print*,  line
+c
+c
+cc      read (line, end=20) 
+c
+cc      print*,  trim(line)
+c
+cc      read(line, *) t_bin_boundary(0), t_bin_boundary(1), t_bin_boundary(2)
+c
+cc      read(line, *) (t_bin_boundary(j), j = 1, 3)
+c
+cc      print*, t_bin_boundary(1)
+cc       read (22,*) 
+cc       read (22,*) q2_bin, t_bin, phi_bin
+cc       read (22,*) 
+cc 
+cc       print*,  t_bin, phi_bin
+c
+cc      do j = 1, 3
+cc         print*, t_bin_boundary(j)
+cc      end do
+c
+c
+c
+c
+c      print*, q2_set
+c
+c      if(q2_set.eq.1.6) then
+c
+c         read (22, '(A)') line  
+c
+c         print*, line
+c
+c         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
+c
+cc        t_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
+cc        t_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
+c 
+c      elseif(q2_set.eq.2.45) then
+c 
+cc        t_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
+cc        t_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
+c 
+c         read (22,*) 
+c         read (22,*) 
+c         read (22, '(A)') line  
+c         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
+c
+c      endif
+c
+c      
+c      
+c
+c
+cc      stop
+c
+c      close(22)
+c
+
+
+
+
+
+
+
+
+
+
+
+c      print*, t_bin, phi_bin
+c      stop
+      
+      ntbins = t_bin
 
       do ip=1,1
          do lh=1,2
@@ -290,8 +490,11 @@ c     So calculate for high eps., neg.-s and pos.-s.
 
 c     Get Beam energy at first.
       Eb=0.
-      open(55,file='beam/Eb_KLT.dat')
-!      open(55,file='Eb_fpi2.dat')
+c      open(55,file='Beam/Eb_fpi2.dat')
+
+
+
+      open(55,file='Eb_fpi2.dat')
       do while(.true.)
          read(55,*) Eb,q2,eps
          write(*,*) Eb,q2,eps
@@ -300,6 +503,9 @@ c     Get Beam energy at first.
  5    close(55)
       Eb=Eb/1000.               !Mev -> Gev units.
       print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
+
+
+
 
 
 c      do it=1,ntbins
@@ -312,17 +518,40 @@ c      end do
 
       do it=1,ntbins
          tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
+         um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
+
+
+         print*, tmin, tmax, ntbins
+         print*, tm, um
+
+
+        
+
+         call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,um,u_min,th_mod,eps_mod)
+
+         print*, th_mod
+
+
+c         stop
+
 c         call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,th_mod,eps_mod)
 c         thetacm_neg(it)=th_mod*180./3.14159
 
-         call eps_n_theta(+1,Eb,aveW(it),aveQ2(it),avett(it),th_mod, 
-     *  eps_mod)
+c         call eps_n_theta(+1,Eb,aveW(it),aveQ2(it),avett(it),th_mod, 
+c     *  eps_mod)
+
+
+
+
+
+
 
          thetacm_only(it)=th_mod*180./3.14159
 
       end do
 
 
+c      stop
 
 
 
@@ -346,12 +575,15 @@ c
 
       open(77,file=fn)
       do it=1,ntbins
-         write(77,'(6f8.5,f10.5,i3)')
+         write(77,'(6f9.5,f10.2,i3)')
      *        aveW(it),errW(it),aveQ2(it),errQ2(it),
      *        avett(it), errtt(it), thetacm_only(it),it
 
 
 
+c      print*, "XXXXXX" 
+
+c      stop
 
 
 c         write(*,'(4f8.5,i3)') aveW(it),errW(it),aveQ2(it),errQ2(it),it
@@ -369,97 +601,97 @@ c         write(*,'(4f8.5,i3)') aveW(it),errW(it),aveQ2(it),errQ2(it),it
 
 
 
-*-----------------------------------------------------------------------
-
-      subroutine eps_n_theta(npol,Eb,w,q2,tm,thetacm,eps)
-
-c     To calculate model theta_pq in CM and epsilon. This subroutine is largely
-c     based on theta_cm.f function, which in turn is based Jochen's script.
-
-      implicit none
-
-      integer npol
-      real Eb,w,q2,tm,thetacm,eps
-
-      REAL s,omega,q,tmin
-      REAL p1cm,p3cm,e1cm,e3cm,p1lab
-
-      REAL m2,m3,m4
-      REAL m12,m22,m32,m42
-
-      real mp,mp2,mpi,mpi2,mn,mn2,mw,mw2
-      parameter (mp=.93827231)   !mp
-      parameter (mp2=.88035493)  !mp^2
-      parameter (mpi=.13956995)   !mpi
-      parameter (mpi2=.01947977)  !mpi^2
-      parameter (mn=.93956563)   !mn
-      parameter (mn2=.88278357)  !mn^2
-
-      parameter (mw=.78265)      !mw
-      parameter (mw2=.61254)     !mw2
-
-
-
-      parameter (m3=mw)
-      parameter (m32=mw2)
-
-      m2=mp
-      m22=mp2
-      m4=mp
-      m42=mp2
-
-
-      s=w*w
-      omega=(s+q2-m22)/(2*m2)
-      q=sqrt(q2+omega**2)
-*     m12=q2    !error?
-      m12=-q2   !mass squared of virtual photon.
-
-      e1cm=(s+m12-m22)/(2*w)
-      e3cm=(s+m32-m42)/(2*w)
-      p1lab=q
-      p1cm=p1lab*m2/w
-
-c      print*,  e3cm, e3cm*e3cm, m32
-
-      p3cm=sqrt(e3cm*e3cm-m32)
-      tmin=-((e1cm-e3cm)**2-(p1cm-p3cm)**2)
-
-c      print*, tm, tmin
-c      stop
-
-      if (tm.ge.tmin) then
-         thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
-      else
-         thetacm=-1.
-         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
-      endif
-
-      eps=1.+2.*(q2+omega**2)/(4.*Eb*(Eb-omega)-q2)
-      eps=1./eps
-
-      print *, "1!!!!!!!!!!!!  " , eps
-
-c      write(*,'(a13,7(F8.5,1x))')
-c     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
-
-      end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 c*-----------------------------------------------------------------------
+c
+c      subroutine eps_n_theta(npol,Eb,w,q2,tm,thetacm,eps)
+c
+cc     To calculate model theta_pq in CM and epsilon. This subroutine is largely
+cc     based on theta_cm.f function, which in turn is based Jochen's script.
+c
+c      implicit none
+c
+c      integer npol
+c      real Eb,w,q2,tm,thetacm,eps
+c
+c      REAL s,omega,q,tmin
+c      REAL p1cm,p3cm,e1cm,e3cm,p1lab
+c
+c      REAL m2,m3,m4
+c      REAL m12,m22,m32,m42
+c
+c      real mp,mp2,mpi,mpi2,mn,mn2,mw,mw2
+c      parameter (mp=.93827231)   !mp
+c      parameter (mp2=.88035493)  !mp^2
+c      parameter (mpi=.13956995)   !mpi
+c      parameter (mpi2=.01947977)  !mpi^2
+c      parameter (mn=.93956563)   !mn
+c      parameter (mn2=.88278357)  !mn^2
+c
+c      parameter (mw=.78265)      !mw
+c      parameter (mw2=.61254)     !mw2
+c
+c
+c
+c      parameter (m3=mw)
+c      parameter (m32=mw2)
+c
+c      m2=mp
+c      m22=mp2
+c      m4=mp
+c      m42=mp2
+c
+c
+c      s=w*w
+c      omega=(s+q2-m22)/(2*m2)
+c      q=sqrt(q2+omega**2)
+c*     m12=q2    !error?
+c      m12=-q2   !mass squared of virtual photon.
+c
+c      e1cm=(s+m12-m22)/(2*w)
+c      e3cm=(s+m32-m42)/(2*w)
+c      p1lab=q
+c      p1cm=p1lab*m2/w
+c
+cc      print*,  e3cm, e3cm*e3cm, m32
+c
+c      p3cm=sqrt(e3cm*e3cm-m32)
+c      tmin=-((e1cm-e3cm)**2-(p1cm-p3cm)**2)
+c
+cc      print*, tm, tmin
+cc      stop
+c
+c      if (tm.ge.tmin) then
+c         thetacm=2*asin(sqrt((tm-tmin)/(4*p1cm*p3cm)))
+c      else
+c         thetacm=-1.
+c         print*, 'eps_n_theta: *** tm=',tm,' <  tmin=',tmin,' ! ***'
+c      endif
+c
+c      eps=1.+2.*(q2+omega**2)/(4.*Eb*(Eb-omega)-q2)
+c      eps=1./eps
+c
+c      print *, "1!!!!!!!!!!!!  " , eps
+c
+cc      write(*,'(a13,7(F8.5,1x))')
+cc     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
+c
+c      end
+c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cc*-----------------------------------------------------------------------
 c
 c      subroutine eps_n_theta(npol,Eb,w,q2,tm,thetacm,eps)
 c
@@ -527,3 +759,7 @@ cc      write(*,'(a13,7(F8.5,1x))')
 cc     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
 c
 c      end
+
+
+      include 'eps_n_theta.f'
+
