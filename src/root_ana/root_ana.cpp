@@ -145,7 +145,7 @@ TString List_Name(int num_itt) {
 
 	TString dir_str;
 
-	// cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
+	cout << kin_setting.Q2set[num_itt]*100 << "      " << kin_setting.Q2set[num_itt]<< endl;
 
 	if (int(round(kin_setting.Q2set[num_itt]*10)) >= 10)
 	  {
