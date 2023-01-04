@@ -135,7 +135,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
                   do it=1,nbt
  !                    read(66,*) W,dW,Q2,dQ2,tt,dtt
-!                     print*,W,dW,Q2,dQ2,it
+                     print*,W,dW,Q2,dQ2,it
                      if(dW.gt.0.) then
                         aW(it,lh,ip)=aW(it,lh,ip)+W/dW**2
                         eW(it,lh,ip)=eW(it,lh,ip)+1./dW**2
@@ -167,7 +167,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
  9          continue
             close(55)
 
-            print*,'nset=',nset
+!            print*,'nset=',nset
 
          end do                 !lh=1,2
 
