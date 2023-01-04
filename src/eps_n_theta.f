@@ -18,6 +18,8 @@ c     based on theta_cm.f function, which in turn is based Jochen's script.
 
       real mw, mw2
 
+      real mK, mK2
+
       parameter (mp=.93827231)   !mp
       parameter (mp2=.88035493)  !mp^2
       parameter (mpi=.13956995)  !mpi
