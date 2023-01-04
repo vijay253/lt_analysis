@@ -173,9 +173,115 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
       end do                    !ip=1,2
 
-c      pause
+      pause
 
+      do ip=1,1
+         do lh=1,2
+            do it=1,ntbins
+               if (eW(it,lh,ip).gt.0.) then
+                  aW(it,lh,ip)=aW(it,lh,ip)/eW(it,lh,ip)
+                  eW(it,lh,ip)=1./sqrt(eW(it,lh,ip))
+*****                  eW(it,lh,ip)=0.001
+               end if
+               if(eQ2(it,lh,ip).gt.0.) then
+                  aQ2(it,lh,ip)=aQ2(it,lh,ip)/eQ2(it,lh,ip)
+                  eQ2(it,lh,ip)=1./sqrt(eQ2(it,lh,ip))
+*****                  eQ2(it,lh,ip)=0.001
+               end if
+
+               if(ett(it,lh,ip).gt.0.) then
+                  att(it,lh,ip)=att(it,lh,ip)/ett(it,lh,ip)
+                  ett(it,lh,ip)=1./sqrt(ett(it,lh,ip))
+*****                  eQ2(it,lh,ip)=0.001
+               end if
+
+
+
+
+c               write(*,'(4f8.5,2i3)') aW(it,lh,ip),eW(it,lh,ip),
+c               aQ2(it,lh,ip),eQ2(it,lh,ip),it,lh
+            end do
+         end do
+      end do
+      pause
+
+c     Average over low and high epsilon.
+
+      do ip=1,1
+         do it=1,ntbins
+            do lh=1,2
+               if(eW(it,lh,ip).gt.0.) then
+                  avW(it,ip)=avW(it,ip)+aW(it,lh,ip)/eW(it,lh,ip)**2
+                  erW(it,ip)=erW(it,ip)+1./eW(it,lh,ip)**2
+               end if
+               if(eQ2(it,lh,ip).gt.0.) then
+                  avQ2(it,ip)=avQ2(it,ip)+aQ2(it,lh,ip)/eQ2(it,lh,ip)**2
+                  erQ2(it,ip)=erQ2(it,ip)+1./eQ2(it,lh,ip)**2
+               end if
+
+
+               if(ett(it,lh,ip).gt.0.) then
+                  avtt(it,ip)=avtt(it,ip)+att(it,lh,ip)/ett(it,lh,ip)**2
+                  ertt(it,ip)=ertt(it,ip)+1./ett(it,lh,ip)**2
+               end if
+
+            end do
+         end do
+      end do
+
+      do ip=1,1
+         do it=1,ntbins
+            if(erW(it,ip).gt.0.) then
+               avW(it,ip)=avW(it,ip)/erW(it,ip)
+               erW(it,ip)=1./sqrt(erW(it,ip))
+            end if
+            if(erQ2(it,ip).gt.0.) then
+               avQ2(it,ip)=avQ2(it,ip)/erQ2(it,ip)
+               erQ2(it,ip)=1./sqrt(erQ2(it,ip))
+            end if
+
+            if(ertt(it,ip).gt.0.) then
+               avtt(it,ip)=avtt(it,ip)/ertt(it,ip)
+               ertt(it,ip)=1./sqrt(ertt(it,ip))
+            end if
+
+
+         end do
+      end do
+
+c     Average over neg. and pos. settings.
+      do it=1,ntbins
+         do ip=1,1
+            if(erW(it,ip).gt.0.) then
+               aveW(it)=aveW(it)+avW(it,ip)/erW(it,ip)**2
+               errW(it)=errW(it)+1./erW(it,ip)**2
+            end if
+            if(erQ2(it,ip).gt.0.) then
+               aveQ2(it)=aveQ2(it)+avQ2(it,ip)/erQ2(it,ip)**2
+               errQ2(it)=errQ2(it)+1./erQ2(it,ip)**2
+            end if
+
+
+            if(ertt(it,ip).gt.0.) then
+               avett(it)=avett(it)+avtt(it,ip)/ertt(it,ip)**2
+               errtt(it)=errtt(it)+1./ertt(it,ip)**2
+            end if
  
+
+        end do
+      end do
+
+      do it=1,ntbins
+         aveW(it)=aveW(it)/errW(it)
+         errW(it)=1./sqrt(errW(it))
+         aveQ2(it)=aveQ2(it)/errQ2(it)
+         errQ2(it)=1./sqrt(errQ2(it))
+
+         avett(it)=avett(it)/errtt(it)
+         errtt(it)=1./sqrt(errtt(it))
+
+      end do
+
 c     Thetacm for neg. and pos. settings. It's turned out the same for
 c     low and high epsilons, but different for negatives and positives.
 c     So calculate for high eps., neg.-s and pos.-s.
