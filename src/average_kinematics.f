@@ -124,7 +124,7 @@ c
 
       print*, "BBBBBBBBB", q2_bin       
 
-      open (unit = 22, file = "../t_bin_interval", action='read')
+      open (unit = 22, file = "./t_bin_interval", action='read')
       read (22,*) q2_bin, t_bin, phi_bin
 
 
@@ -204,7 +204,7 @@ c     Get low, high eps. and neg., pos. polarity data.
          do lh=1,2
 
             nset=0
-            open(55,file='root_ana/list.settings')
+            open(55,file='./root_ana/list.settings')
             do while(.true.)
 
 c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt

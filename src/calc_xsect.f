@@ -103,7 +103,7 @@ c      common  t_bin, phi_bin
 c   /*--------------------------------------------------*/
 c   Read the u and phi bins 
 
-      open (unit = 22, file = "../t_bin_interval", action='read')
+      open (unit = 22, file = "./t_bin_interval", action='read')
       read (22,*) q2_bin, t_bin, phi_bin
 
       nt = t_bin
@@ -171,7 +171,7 @@ c      stop
       tmn=0.
       tmx=0.
       kset=0
-      open(55,file='./list.settings.omega')
+      open(55,file='./root_ana/list.settings')
       do while(ipol.ne.npol_set.or.q2.ne.q2_set.or.eps.ne.eps_set)
          read(55,*) ipol,q2,eps,th_pq,tmn,tmx,nbin,kset
 c         write(6,2)ipol,q2,eps,th_pq,tmn,tmx,nbin,kset
