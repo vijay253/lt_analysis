@@ -98,11 +98,11 @@ TString Dummy_Name(int num_itt) {
 
 	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
 
-		dir_str.Form("yields.%i_%i_0000.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100));	
+		dir_str.Form("yields.%i_%i_0000.dummy", int(round(kin_setting.Q2set[num_itt]*10)), round(int(kin_setting.epsset[num_itt]*100)));	
 
 	} else {
 
-		dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100), int(kin_setting.thpqset[num_itt]*1000));
+		dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), round(int(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
 
 	}
 
@@ -125,11 +125,11 @@ TString Target_Name(int num_itt) {
 
 	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
 
-		dir_str.Form("yields.%i_%i_0000.target", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100));	
+		dir_str.Form("yields.%i_%i_0000.target", int(round(kin_setting.Q2set[num_itt]*10)), round(int(kin_setting.epsset[num_itt]*100)));	
 
 	} else {
 
-		dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100), int(kin_setting.thpqset[num_itt]*1000));	
+		dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), round(int(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
 
 	}
 
@@ -145,14 +145,14 @@ TString List_Name(int num_itt) {
 
 	TString dir_str;
 
-	cout << int(kin_setting.Q2set[num_itt]*10) << "      " << int(kin_setting.Q2set[num_itt])<< endl;
-	cout << int(kin_setting.epsset[num_itt]*1000) << "      " << int(kin_setting.epsset[num_itt])<< endl;
+	//cout << int(kin_setting.Q2set[num_itt]*10) << "      " << int(kin_setting.Q2set[num_itt])<< endl;
+	//cout << int(kin_setting.epsset[num_itt]*1000) << "      " << int(kin_setting.epsset[num_itt])<< endl;
 
 	if (int(round(kin_setting.Q2set[num_itt]*10)) >= 10)
 	  {
-	    dir_str.Form("%i_%i", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100));
+	    dir_str.Form("%i_%i", int(round(kin_setting.Q2set[num_itt]*10)), round(int(kin_setting.epsset[num_itt]*100)));
 	  }else{
-	  dir_str.Form("0%i_%i", int(round(kin_setting.Q2set[num_itt]*10)), int(kin_setting.epsset[num_itt]*100));
+	  dir_str.Form("0%i_%i", int(round(kin_setting.Q2set[num_itt]*10)), round(int(kin_setting.epsset[num_itt]*100)));
 	}
 
 	// cout << "gyyyy !" << dir_str << endl;
