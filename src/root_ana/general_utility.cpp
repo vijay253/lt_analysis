@@ -25,7 +25,7 @@ Int_t* Array_D_to_I (Double_t* tar_arr, Int_t array_size) {
 
 	Int_t* int_array_tmp = new Int_t[array_size];
  	
- 	for(int i=0; i < =array_size ;i++) {
+ 	for(int i=0; i <=array_size ;i++) {
   
 		int_array_tmp[i] = (int)tar_arr[i];
 
