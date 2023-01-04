@@ -203,7 +203,7 @@ c               aQ2(it,lh,ip),eQ2(it,lh,ip),it,lh
             end do
          end do
       end do
-      pause
+c      pause
 
 c     Average over low and high epsilon.
 
@@ -282,6 +282,8 @@ c     Average over neg. and pos. settings.
 
       end do
 
+      pause
+      
 c     Thetacm for neg. and pos. settings. It's turned out the same for
 c     low and high epsilons, but different for negatives and positives.
 c     So calculate for high eps., neg.-s and pos.-s.
