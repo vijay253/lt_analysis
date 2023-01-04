@@ -127,12 +127,12 @@ c     Get low, high eps. and neg., pos. polarity data.
 c                 pause
 
 
-                 print*, 'aaaaaaaaaaaaaaaaaaaa '
+c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
                   open(66,file=fn)
                   read(66,*) one
 
-c                  print*, "bbbbbbbbbbbbbbbbbbbb ", one
+                  print*, "bbbbbbbbbbbbbbbbbbbb ", one
 
 
                   do it=1,nbt
