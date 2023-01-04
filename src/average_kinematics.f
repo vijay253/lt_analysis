@@ -281,8 +281,6 @@ c     Average over neg. and pos. settings.
          errtt(it)=1./sqrt(errtt(it))
 
       end do
-
-      pause
       
 c     Thetacm for neg. and pos. settings. It's turned out the same for
 c     low and high epsilons, but different for negatives and positives.
@@ -300,7 +298,7 @@ c     Get Beam energy at first.
  5    close(55)
       Eb=Eb/1000.               !Mev -> Gev units.
       print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
-
+      pause
 
 c      do it=1,ntbins
 c         tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
