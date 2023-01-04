@@ -327,7 +327,7 @@ c         thetacm_neg(it)=th_mod*180./3.14159
 
 c     Save data.
 
-      write(fn,'(''averages/avek.'',i3.3,''.dat'')')
+      write(fn,'(''averages/avek.'',i2.2,''.dat'')')
      *     nint(q2_set*10.)
       print*,'fn=',fn
       print*
