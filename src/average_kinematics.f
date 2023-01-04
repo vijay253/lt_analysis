@@ -291,9 +291,9 @@ c     Get Beam energy at first.
       open(55,file='beam/Eb_KLT.dat')
 !      open(55,file='Eb_fpi2.dat')
       do while(.true.)
-         read(55,*) Eb,q2,eps
+!         read(55,*) Eb,q2,eps
          write(*,*) Eb,q2,eps
-         if(q2.eq.q2_set.and.eps.eq.eps_hi_set) go to 5
+!         if(q2.eq.q2_set.and.eps.eq.eps_hi_set) go to 5
       end do
  5    close(55)
       Eb=Eb/1000.               !Mev -> Gev units.
