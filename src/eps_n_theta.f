@@ -29,18 +29,24 @@ c     based on theta_cm.f function, which in turn is based Jochen's script.
 ccc/*--------------------------------------------------*/
 ccc Modification for omega 
 ccc WL
-ccc Date: 31/March/2016
+ccc   Date: 31/March/2016
+      
+      parameter (mw=.78265)     !mw
+      parameter (mw2=.61254)    !mw2
 
-!      parameter (mw=.78265)      !mw
-!      parameter (mw2=.61254)     !mw2
-      parameter (mw=0.493677)      !mK
-      parameter (mw2=0.24387)     !mK2
+ccc/*--------------------------------------------------*/
+ccc Modification for kaon 
+ccc RLT3
+ccc   Date: 1/4/23
+      
+      parameter (mK=0.493677)   !mK
+      parameter (mK2=0.24387)   !mK2
 
 ccc
 ccc/*--------------------------------------------------*/
 
-      parameter (m3=mw)
-      parameter (m32=mw2)
+      parameter (m3=mK)
+      parameter (m32=mK2)
 
 c      if(npol.gt.0) then
 c         m2=mp
@@ -60,8 +66,6 @@ c      end if
       m4=mp
       m42=mp2
        
-
-
       s=w*w
       omega=(s+q2-m22)/(2*m2)
       q=sqrt(q2+omega**2)
