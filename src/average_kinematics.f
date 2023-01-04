@@ -314,7 +314,7 @@ c         call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,th_mod,eps_mod)
 c     thetacm_neg(it)=th_mod*180./3.14159
          
          print*,'tm = ',tm
-         call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,th_mod,eps_mod)
+         call eps_n_theta(+1,Eb,aveW(it),aveQ2(it),tm,th_mod,eps_mod)
 
 !         call eps_n_theta(+1,Eb,aveW(it),aveQ2(it),avett(it),th_mod, 
 !     *  eps_mod)
