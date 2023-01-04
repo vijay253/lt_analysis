@@ -9,7 +9,7 @@ c     based on theta_cm.f function, which in turn is based Jochen's script.
       real Eb,w,q2,tm,thetacm,eps
 
       REAL s,omega,q,tmin
-      REAL p1cm,p3cm,e1cm,e3cm,p1lab
+      REAL p1cm,p3cm,p4cm,e1cm,e3cm,e4cm,p1lab
 
       REAL m2,m3,m4
       REAL m12,m22,m32,m42
