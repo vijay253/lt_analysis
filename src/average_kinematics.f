@@ -104,7 +104,7 @@ c     Get low, high eps. and neg., pos. polarity data.
             open(55,file='./root_ana/list.settings')
             do while(.true.)
 
-!               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
+               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
                if(ipol.eq.pol_set(ip).and.q2.eq.q2_set.and.
      &              eps.eq.eps_set(lh)) then
 
@@ -134,7 +134,7 @@ c                 print*, 'aaaaaaaaaaaaaaaaaaaa '
 
 
                   do it=1,nbt
-!                    read(66,*) W,dW,Q2,dQ2,tt,dtt
+ !                    read(66,*) W,dW,Q2,dQ2,tt,dtt
                      print*,W,dW,Q2,dQ2,it
                      if(dW.gt.0.) then
                         aW(it,lh,ip)=aW(it,lh,ip)+W/dW**2
@@ -288,7 +288,7 @@ c     So calculate for high eps., neg.-s and pos.-s.
 
 c     Get Beam energy at first.
       Eb=0.
-      open(55,file='./beam/Eb_KLT.dat')
+      open(55,file='beam/Eb_KLT.dat')
 !      open(55,file='Eb_fpi2.dat')
       do while(.true.)
          read(55,*) Eb,q2,eps
