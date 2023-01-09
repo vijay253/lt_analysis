@@ -147,31 +147,31 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 		TH1F* event_phi_real = new TH1F("phi_real", "phi_real", phi_bin_num, 0, 360);
 		data_tree_in->Draw("ph_q*180/3.1415926 >> phi_real", yield_t_bin_cut, "goff");
 
-		TH1F* event_phi_rand = new TH1F("phi_rand", "phi_rand", phi_bin_num, 0, 360);
-		data_tree_in->Draw("ph_q*180/3.1415926 >> phi_rand", yield_t_bin_cut, "goff");
+		//TH1F* event_phi_rand = new TH1F("phi_rand", "phi_rand", phi_bin_num, 0, 360); // HERE
+		//data_tree_in->Draw("ph_q*180/3.1415926 >> phi_rand", yield_t_bin_cut, "goff"); // HERE
 
 		TH1F* event_phi_real_clone = (TH1F*) event_phi_real->Clone();
-		TH1F* event_phi_rand_clone = (TH1F*) event_phi_rand->Clone();
+		//TH1F* event_phi_rand_clone = (TH1F*) event_phi_rand->Clone(); // HERE
 
 		/*--------------------------------------------------*/
 		/*--------------------------------------------------*/
-		/// Note that the scale factor of 0.463 is documented in the report by Dave Meekins,  
+		/// Note that the scale factor of 0.48579 is updated from 2018/2019 KaonLT HeeP
 		/// the scale factor corrects the difference in the target thickness difference between 
 		///	dummy target and real target 
 
 		if (is_run_dummy) {
 			event_phi_real->Scale(0.48579);		
-			event_phi_rand->Scale(0.48579);		
+			//event_phi_rand->Scale(0.48579);		 // HERE
 		}
 
 		phi_real_check[t_bin_set_tmp-1] = (TH1F*) event_phi_real->Clone(); 
 
-		event_phi_real->Add(event_phi_rand, -0.333333);
+		//event_phi_real->Add(event_phi_rand, -0.333333); // HERE
 
-		event_phi_rand->Scale(0.3333333);
+		//event_phi_rand->Scale(0.3333333); // HERE
 
 		phi_sub_check[t_bin_set_tmp-1] = (TH1F*) event_phi_real->Clone(); 
-		phi_rand_check[t_bin_set_tmp-1] =  (TH1F*) event_phi_rand->Clone(); 
+		//phi_rand_check[t_bin_set_tmp-1] =  (TH1F*) event_phi_rand->Clone();  // HERE
 
 		real_event[t_bin_set_tmp-1]->Add(event_phi_real);	
 
@@ -180,14 +180,14 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 //			int real_err_itt = event_phi_real_clone->GetBinContent(iiii+1); 
 //			int rand_err_itt = event_phi_rand_clone->GetBinContent(iiii+1);
 //			int real_event_err_itt = real_err_itt ;
-
+/* //HERE
 			if (is_run_dummy) {
 				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579 * 0.3333333;
 			} else { 
 //				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579;
 				rand_err = event_phi_rand_clone->GetBinError(iiii+1) *0.3333333;
 			}
-
+*/
 
  			if (is_run_dummy) {
 //				rand_err = event_phi_rand_clone->GetBinError(iiii+1) * 0.48579 * 0.3333333;
@@ -206,7 +206,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 			phi_real_check[t_bin_set_tmp-1]->SetBinError(iiii+1, real_err);
 
-			phi_rand_check[t_bin_set_tmp-1]->SetBinError(iiii+1, rand_err);
+			//phi_rand_check[t_bin_set_tmp-1]->SetBinError(iiii+1, rand_err); // HERE
 
 			phi_sub_check[t_bin_set_tmp-1]->SetBinError(iiii+1, real_event_error);
 
@@ -219,13 +219,13 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 		check_name.Form("%i", t_bin_set_tmp);
 		
 		phi_real_check[t_bin_set_tmp-1] ->SetName("phi_check_real_"+check_name); 
-		phi_rand_check[t_bin_set_tmp-1] ->SetName("phi_check_rand_"+check_name); 
+		//phi_rand_check[t_bin_set_tmp-1] ->SetName("phi_check_rand_"+check_name);  // HERE
 		phi_sub_check[t_bin_set_tmp-1] ->SetName("phi_check_sub_"+check_name); 
 
 		phi_no_sub->cd(t_bin_set_tmp);
 		phi_real_check[t_bin_set_tmp-1]->Draw("PE");
-		phi_rand_check[t_bin_set_tmp-1]->SetLineColor(2);
-		phi_rand_check[t_bin_set_tmp-1]->Draw("same");
+		//phi_rand_check[t_bin_set_tmp-1]->SetLineColor(2); // HERE
+		//phi_rand_check[t_bin_set_tmp-1]->Draw("same"); // HERE
 		phi_no_sub->Update();
 
  		phi_sub->cd(t_bin_set_tmp);
@@ -557,8 +557,8 @@ void Analysis::Missing_Mass_Plot() {
 	cout << "bin: " << coin_bin << "    Min: "<<  coin_min << "     Max: " <<  coin_max << endl;
 
 	coin_all  = new TH1F("all", "all",   coin_bin, coin_min, coin_max);
-	coin_real = new TH1F("real", "real", coin_bin, coin_min, coin_max);
-	coin_rand = new TH1F("rand", "rand", coin_bin, coin_min, coin_max);
+	//coin_real = new TH1F("real", "real", coin_bin, coin_min, coin_max); // HERE
+	//coin_rand = new TH1F("rand", "rand", coin_bin, coin_min, coin_max); // HERE
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
@@ -569,8 +569,8 @@ void Analysis::Missing_Mass_Plot() {
 	-------------------------------------------------------------------*/
 
 	data_tree_in->Draw("CTime_ROC1>>all",  t_cut, "goff");
-	data_tree_in->Draw("CTime_ROC1>>real", t_cut, "goff");
-	data_tree_in->Draw("CTime_ROC1>>rand", t_cut, "goff");
+	//data_tree_in->Draw("CTime_ROC1>>real", t_cut, "goff"); // HERE
+	//data_tree_in->Draw("CTime_ROC1>>rand", t_cut, "goff"); // HERE
 	
 // 	cout << kset << "   " << miss_mass_offset[kset] << "   " << miss_mass_offset[1] << endl;
 // 	cout << all_coin_cut << endl;
@@ -581,10 +581,10 @@ void Analysis::Missing_Mass_Plot() {
 	
 	coin_all->Draw("hist");
 	coin_all->SetLineColor(1);
-	coin_real->Draw("same");
-	coin_real->SetLineColor(4);
-	coin_rand->Draw("same");
-	coin_rand->SetLineColor(2);
+	//coin_real->Draw("same"); // HERE
+	//coin_real->SetLineColor(4); // HERE
+	//coin_rand->Draw("same"); // HERE
+	//coin_rand->SetLineColor(2); // HERE
 	
 	TLine *line = new TLine();
 
@@ -630,7 +630,7 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
 	//data_tree_in->Draw("MM- " + expected_mm_str + " >> mm");
-	data_tree_in->Draw("MM >> mm");
+	data_tree_in->Draw("MM >> mm", t_cut, "goff");
 	
 	//data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1"); // HERE
 	
@@ -760,7 +760,7 @@ void Analysis::Missing_Mass_Plot() {
 	gr1->SetMarkerSize(3);	
 	gr1->SetMarkerColor(1);
 
-	data_tree_in->Draw("W:Q2", real_coin_cut);
+	data_tree_in->Draw("W:Q2", t_cut);
 	
 	TGraph *gr2 = (TGraph* )gPad->GetPrimitive("Graph")->Clone();
 
