@@ -233,10 +233,10 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
  		phi_sub->Update();
 
 		delete event_phi_real;
-		delete event_phi_rand;
+		//delete event_phi_rand; // HERE
 
 		delete event_phi_real_clone;
-		delete event_phi_rand_clone;
+		//delete event_phi_rand_clone; // HERE
 
 	}
 
