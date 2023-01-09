@@ -87,7 +87,7 @@ void t_phi_fit_sim(TCanvas* cc3, TString file_name) {
 	TH1F* raw_data_sum;
 	TH1F* data_omega_sum;
 
-    TH1F* sim_omega_sum;
+	TH1F* sim_omega_sum;
 	TH1F* sim_rho_sum;
 	TH1F* sim_xphsp_sum;
 	TH1F* sim_eta_sum;
@@ -198,13 +198,13 @@ void t_phi_fit_sim(TCanvas* cc3, TString file_name) {
 
 
 		Double_t intg_lo        = 0.0;
-        Double_t intg_hi        = 0.0;
+		Double_t intg_hi        = 0.0;
 
 		Double_t fit_local_lo   = 0.0;
 		Double_t fit_local_hi   = 0.0;
 
-	    Double_t omega_yield    = 0.0;   
-        Double_t omega_yield_err = 0.0;
+		Double_t omega_yield    = 0.0;   
+		Double_t omega_yield_err = 0.0;
 
 		Double_t content_total = 0.0;
 		Double_t content_total_error_sq = 0.0;
@@ -457,10 +457,10 @@ void t_phi_fit_sim(TCanvas* cc3, TString file_name) {
 			etap_scale_fac  = fit_t_fun->GetParameter(4);
 	
 			omega_scale_fac_err = fit_t_fun->GetParError(0);
-            rho_scale_fac_err   = fit_t_fun->GetParError(1);
-            xphsp_scale_fac_err = fit_t_fun->GetParError(2);
-            eta_scale_fac_err   = fit_t_fun->GetParError(3);
-            etap_scale_fac_err  = fit_t_fun->GetParError(4);
+			rho_scale_fac_err   = fit_t_fun->GetParError(1);
+			xphsp_scale_fac_err = fit_t_fun->GetParError(2);
+			eta_scale_fac_err   = fit_t_fun->GetParError(3);
+			etap_scale_fac_err  = fit_t_fun->GetParError(4);
 
 			h_sim_omega_clone->Scale(omega_scale_fac);		
 			h_sim_rho_clone  ->Scale(rho_scale_fac);		

@@ -629,8 +629,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
-	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
+	data_tree_in->Draw("MM- " + expected_mm_str, "goff");
+	data_tree_in->Draw("MM- " + expected_mm_str, "goff");
 
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
@@ -675,9 +675,15 @@ void Analysis::Missing_Mass_Plot() {
 	TH1F* mm_off = new TH1F("mm_off", "mm_off", 50, 0.0, 2.0);
 	TH1F* mm_1_off = new TH1F("mm_1_off", "mm1_off", 50, 0.0, 2.0);
 
-	data_tree_in->Draw(miss_mass_offset_str + " >> mm_off", real_coin_cut, "goff");
-	data_tree_in->Draw(miss_mass_offset_str + " >> mm_1_off", rand_coin_cut, "goff");
-
+	/*-------------------------------------------------------------------
+	  REMOVED FOR KAONLT TESTING
+	  -------------------------------------------------------------------
+	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_off", real_coin_cut, "goff");
+	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_1_off", rand_coin_cut, "goff");
+	-------------------------------------------------------------------*/
+	data_tree_in->Draw(miss_mass_offset_str, "goff");
+	data_tree_in->Draw(miss_mass_offset_str, "goff");
+	
 	mm_off->Add(mm_1_off, -0.3333333);
  	mm_off->SetMarkerStyle(3);
 
@@ -718,13 +724,16 @@ void Analysis::Missing_Mass_Plot() {
 	offset_txt->SetTextSize(0.035);
 	offset_txt->DrawTextNDC(0.65, 0.7, missing_mass_offset);
 
-	
+
+	/*-------------------------------------------------------------------
+	  REMOVED FOR KAONLT TESTING
+	  -------------------------------------------------------------------
 	/// Just to rescale the mm plot if mm_off points are out of the Y range
 	/// Interestingly mm->GetYaxis()->GetXmax() acutually works !
 	if ( mm_off->GetMaximum() > mm->GetYaxis()->GetXmax() ) {
 		mm -> SetMaximum(mm_off->GetMaximum() + mm_off->GetMaximum() * 0.15);
 	}	
-
+	-------------------------------------------------------------------*/
 
 
 	c4->Update();
