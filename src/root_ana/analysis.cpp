@@ -629,8 +629,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("missmass- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	data_tree_in->Draw("MM- " + expected_mm_str, "goff");
-	data_tree_in->Draw("MM- " + expected_mm_str, "goff");
+	data_tree_in->Draw("MM");
+	data_tree_in->Draw("MM");
 
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
@@ -681,8 +681,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_off", real_coin_cut, "goff");
 	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_1_off", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	data_tree_in->Draw(miss_mass_offset_str, "goff");
-	data_tree_in->Draw(miss_mass_offset_str, "goff");
+	data_tree_in->Draw(miss_mass_offset_str);
+	data_tree_in->Draw(miss_mass_offset_str);
 	
 	mm_off->Add(mm_1_off, -0.3333333);
  	mm_off->SetMarkerStyle(3);
