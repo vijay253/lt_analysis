@@ -132,7 +132,7 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 	Missing_Mass_Plot();
 	
 	TH1F* phi_real_check[t_bin_set];
-	TH1F* phi_rand_check[t_bin_set];
+	//TH1F* phi_rand_check[t_bin_set]; // HERE
 
 	TH1F* phi_sub_check[t_bin_set];
 
@@ -197,7 +197,8 @@ void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 				real_err = event_phi_real_clone->GetBinError(iiii+1);
 			}
 
-			real_event_error = sqrt( pow(real_err,2) + pow(rand_err,2) );		
+			//real_event_error = sqrt( pow(real_err,2) + pow(rand_err,2) );		 // HERE
+			real_event_error = real_err;		 // HERE
 
 //			yield_err_sum[t_bin_set_tmp-1][iiii] = yield_err_sum[t_bin_set_tmp-1][iiii] + pow(real_event_error, 2);
 			yield_err_sum[t_bin_set_tmp-1][iiii] = pow(real_event_error, 2);
