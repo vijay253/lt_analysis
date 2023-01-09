@@ -90,8 +90,8 @@ void Analysis::Init() {
 	diamond_setting     = new TMultiGraph();
 	diamond_setting_cut = new TMultiGraph();
 
-	mm_offset_setting = new TH1F( "", "mm", 200, 0.0, 2.0);
-	mm_setting        = new TH1F( "", "mm", 200, 0.0, 2.0);
+	mm_offset_setting = new TH1F( "", "mm", 50, 0.0, 2.0);
+	mm_setting        = new TH1F( "", "mm", 50, 0.0, 2.0);
 
 //	exit(0);
 
@@ -809,7 +809,7 @@ void Analysis::Missing_Mass_Plot() {
 	
 /////	diamond_setting->Add(, 1);   
 
-// 	cointime_setting->Add(coin_all, 1);
+ 	cointime_setting->Add(coin_all, 1);
  	mm_setting->Add(mm, 1);        
  	mm_offset_setting->Add(mm_off, 1); 
 // 
