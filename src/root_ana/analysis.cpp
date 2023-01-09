@@ -657,19 +657,12 @@ void Analysis::Missing_Mass_Plot() {
 
 	c2->Update();	
 
-
-
 	/// Print missing mass text on the plot
 	TString missing_mass_offset;
 	missing_mass_offset.Form("Missing Mass Offset: %f", miss_mass_offset[kset]);
 
 	TText* offset_txt = new TText();
 
-	/*-------------------------------------------------------------------
-	  REMOVED FOR KAONLT TESTING
-	  -------------------------------------------------------------------
-	miss_mass_offset_str.Form("missmass-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
-	-------------------------------------------------------------------*/
 	miss_mass_offset_str.Form("MM-" + expected_mm_str + "-%f", miss_mass_offset[kset]);
 
 	TH1F* mm_off = new TH1F("mm_off", "mm_off", 50, 0.0, 2.0);
