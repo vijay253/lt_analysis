@@ -621,7 +621,7 @@ void Analysis::Missing_Mass_Plot() {
 	expected_mm_str.Form("%f", expected_mm);
 	
 
-	//data_tree_in->Draw("missmass-0.939565 >> mm_1", rand_coin_cut, "goff");
+	data_tree_in->Draw("missmass-1.115683 >> mm_1", rand_coin_cut, "goff");
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
@@ -629,8 +629,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
 	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm", "goff");
-	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1", "goff");
+	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm", real_coin_cut, "goff");
+	data_tree_in->Draw("MM- " + expected_mm_str + " >> mm_1", rand_coin_cut, "goff");
 	
 	mm->Add(mm_1, -0.3333333);
  	mm->SetMarkerStyle(3);
@@ -681,8 +681,8 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_off", real_coin_cut, "goff");
 	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_1_off", rand_coin_cut, "goff");
 	-------------------------------------------------------------------*/
-	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_off", "goff");
-	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_1_off", "goff");
+	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_off", real_coin_cut, "goff");
+	data_tree_in->Draw(miss_mass_offset_str, + " >> mm_1_off", rand_coin_cut, "goff");
 	
 	mm_off->Add(mm_1_off, -0.3333333);
  	mm_off->SetMarkerStyle(3);
