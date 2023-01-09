@@ -621,7 +621,7 @@ void Analysis::Missing_Mass_Plot() {
 	expected_mm_str.Form("%f", expected_mm);
 	
 
-	data_tree_in->Draw("missmass-1.115683 >> mm_1", rand_coin_cut, "goff");
+	data_tree_in->Draw("MM-1.115683 >> mm_1", rand_coin_cut, "goff");
 
 	/*-------------------------------------------------------------------
 	  REMOVED FOR KAONLT TESTING
