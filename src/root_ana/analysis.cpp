@@ -314,12 +314,14 @@ void Analysis::Para_Run_Def(Int_t num) {
 
 	int pos = -100000000;
 
+	/*
  	for(int ii = 0; ii < cen_runs; ii++) {
  		if (cen_ana.center_run_num[ii] == run_num) {
  			pos = ii;
  		}
  	}
-
+	*/
+	
 	//cout << is_run_dummy << endl;
 
 	if (is_run_dummy) {
