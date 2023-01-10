@@ -680,8 +680,9 @@ void Analysis::Missing_Mass_Plot() {
 	data_tree_in->Draw(miss_mass_offset_str + " >> mm_off");
 	data_tree_in->Draw(miss_mass_offset_str + " >> mm_1_off");
 	
-	//data_tree_in->Draw("MM >> mm");	
-	//mm_off->Add(mm_1_off, -0.3333333);
+	//data_tree_in->Draw("MM >> mm"); // ADDED
+	
+	mm_off->Add(mm_1_off, -0.3333333);
  	mm_off->SetMarkerStyle(3);
 
 	TH1F* mm_off_fit = (TH1F*) mm_off->Clone();
