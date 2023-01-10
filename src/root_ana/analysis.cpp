@@ -404,7 +404,7 @@ void Analysis::Load_Data_Tree() {
 
 	//data_file.Form( data_file_dir + "coin%i.root", run_num);
   //data_file.Form( data_file_dir + "Kaon_coin_replay_production_%i_-1.root", run_num); // Uncut data
-  data_file.Form( data_file_dir + "%i_-1_Proc_Data.root", run_num); // Uncut data
+  data_file.Form( data_file_dir + "%i_-1_Proc_Data.root", run_num);
 
 
 	// cout << data_file_dir << endl;
@@ -439,6 +439,11 @@ void Analysis::Load_Data_Tree() {
 // 	data_tree_in->SetBranchAddress("ssyptar",  &t_ssyptar );
 // 	data_tree_in->SetBranchAddress("ssxptar",  &t_ssxptar ); 
 
+	if ( data_tree_in == NULL){
+
+	  printf(Form( "File does not exists.../n" + data_file_dir + "%i_-1_Proc_Data.root", run_num));
+	}
+	
 }
 
 
