@@ -21,14 +21,14 @@ def Setting_by_setting(file_name):
 	eta_scale_factor = 1
 	etap_scale_factor = 1
 
-# 	u_bin_num   = 3
+# 	t_bin_num   = 3
 # 	phi_bin_num = 8
 
 
 
 	
 
-# 	u_bin_num   = 2
+# 	t_bin_num   = 2
 # 	phi_bin_num = 10
 
 
@@ -36,18 +36,18 @@ def Setting_by_setting(file_name):
 	# Loading the 
 
  
-	u_bin_file = open('u_bin_interval', 'r')
+	t_bin_file = open('t_bin_interval', 'r')
 
-	f_str = u_bin_file.readline()
+	f_str = t_bin_file.readline()
 	print f_str.split()
-	u_bin_file.close()
+	t_bin_file.close()
 
- 	u_bin_num   = int(f_str.split()[1])
+ 	t_bin_num   = int(f_str.split()[1])
  	phi_bin_num = int(f_str.split()[2])
 
 
 
-#	print u_bin_num, phi_bin_num
+#	print t_bin_num, phi_bin_num
 #	sys.exit(0)
 
 	dum_name = "yields.omega_" + file_name  + ".dummy.root"
@@ -298,11 +298,11 @@ def Setting_by_setting(file_name):
 #	u_phi_tgt.Write("target_phi")
 
 	c4 = TCanvas()
-	c4.Divide(phi_bin_num, u_bin_num)
+	c4.Divide(phi_bin_num, t_bin_num)
 
 	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 
-	for i in range(1, u_bin_num * phi_bin_num + 1):
+	for i in range(1, t_bin_num * phi_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -413,11 +413,11 @@ def Setting_by_setting(file_name):
 #	u_phi_tgt.Write("target_phi")
 
 	c4 = TCanvas()
-	c4.Divide(phi_bin_num, u_bin_num)
+	c4.Divide(phi_bin_num, t_bin_num)
 
 	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 
-	for i in range(1, u_bin_num * phi_bin_num + 1):
+	for i in range(1, t_bin_num * phi_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -524,11 +524,11 @@ def Setting_by_setting(file_name):
 #	u_phi_tgt.Write("target_phi")
 
 	c4 = TCanvas()
-	c4.Divide(phi_bin_num, u_bin_num)
+	c4.Divide(phi_bin_num, t_bin_num)
 
 	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 
-	for i in range(1, u_bin_num * phi_bin_num + 1):
+	for i in range(1, t_bin_num * phi_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -638,11 +638,11 @@ def Setting_by_setting(file_name):
 #	u_phi_tgt.Write("target_phi")
 
 	c4 = TCanvas()
-	c4.Divide(phi_bin_num, u_bin_num)
+	c4.Divide(phi_bin_num, t_bin_num)
 
 	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 
-	for i in range(1, u_bin_num * phi_bin_num + 1):
+	for i in range(1, t_bin_num * phi_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -752,11 +752,11 @@ def Setting_by_setting(file_name):
 #	u_phi_tgt.Write("target_phi")
 
 	c4 = TCanvas()
-	c4.Divide(phi_bin_num, u_bin_num)
+	c4.Divide(phi_bin_num, t_bin_num)
 
 	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 
-	for i in range(1, u_bin_num * phi_bin_num + 1):
+	for i in range(1, t_bin_num * phi_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -868,11 +868,11 @@ def Setting_by_setting(file_name):
 #	u_phi_tgt.Write("target_phi")
 
 	c4 = TCanvas()
-	c4.Divide(phi_bin_num, u_bin_num)
+	c4.Divide(phi_bin_num, t_bin_num)
 
 	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 
-	for i in range(1, u_bin_num * phi_bin_num + 1):
+	for i in range(1, t_bin_num * phi_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -984,11 +984,11 @@ def Setting_by_setting(file_name):
 ##	u_phi_tgt.Write("target_phi")
 #
 #	c4 = TCanvas()
-#	c4.Divide(phi_bin_num, u_bin_num)
+#	c4.Divide(phi_bin_num, t_bin_num)
 #
 #	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 #
-#	for i in range(1, u_bin_num * phi_bin_num + 1):
+#	for i in range(1, t_bin_num * phi_bin_num + 1):
 #
 #		# ttpad = u_phi_tgt.GetPad(i)
 #
@@ -1094,11 +1094,11 @@ def Setting_by_setting(file_name):
 ##	u_phi_tgt.Write("target_phi")
 #
 #	c4 = TCanvas()
-#	c4.Divide(phi_bin_num, u_bin_num)
+#	c4.Divide(phi_bin_num, t_bin_num)
 #
 #	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 #
-#	for i in range(1, u_bin_num * phi_bin_num + 1):
+#	for i in range(1, t_bin_num * phi_bin_num + 1):
 #
 #		# ttpad = u_phi_tgt.GetPad(i)
 #
@@ -1206,11 +1206,11 @@ def Setting_by_setting(file_name):
 ##	u_phi_tgt.Write("target_phi")
 #
 #	c4 = TCanvas()
-#	c4.Divide(phi_bin_num, u_bin_num)
+#	c4.Divide(phi_bin_num, t_bin_num)
 #
 #	print "asdasasdasd   ", u_phi_tgt.GetNumber(), "         sadfsadf "
 #
-#	for i in range(1, u_bin_num * phi_bin_num + 1):
+#	for i in range(1, t_bin_num * phi_bin_num + 1):
 #
 #		# ttpad = u_phi_tgt.GetPad(i)
 #
@@ -1341,11 +1341,11 @@ def Setting_by_setting(file_name):
 
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1404,7 +1404,7 @@ def Setting_by_setting(file_name):
 
 
 
-	c5.Write("missmass_u_bin")
+	c5.Write("missmass_t_bin")
 
 
 
@@ -1426,7 +1426,7 @@ def Setting_by_setting(file_name):
 # 
 # 	
 # 	
-# 	for i in range(1, u_bin_num + 1):
+# 	for i in range(1, t_bin_num + 1):
 # 
 # 		# ttpad = u_phi_tgt.GetPad(i)
 # 
@@ -1483,11 +1483,11 @@ def Setting_by_setting(file_name):
 
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1545,7 +1545,7 @@ def Setting_by_setting(file_name):
 
 
 
-	c5.Write(plot_str + "_u_bin")
+	c5.Write(plot_str + "_t_bin")
 
 
 
@@ -1568,12 +1568,12 @@ def Setting_by_setting(file_name):
 
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	print "asdasdasdadsa"
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1637,7 +1637,7 @@ def Setting_by_setting(file_name):
 
 
 
-	c5.Write(plot_str + "_u_bin")
+	c5.Write(plot_str + "_t_bin")
 
 
 
@@ -1657,11 +1657,11 @@ def Setting_by_setting(file_name):
 	u_phi_sim_etap = sim_etap_file.Get("u_phi_bin/" + plot_str + "_real_sub")
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1721,7 +1721,7 @@ def Setting_by_setting(file_name):
 		h_sim_etap.Draw("same")
 
 
-	c5.Write(plot_str + "_u_bin")
+	c5.Write(plot_str + "_t_bin")
 
 
 
@@ -1740,11 +1740,11 @@ def Setting_by_setting(file_name):
 	u_phi_sim_etap = sim_etap_file.Get("u_phi_bin/" + plot_str + "_real_sub")
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1797,7 +1797,7 @@ def Setting_by_setting(file_name):
 		h_sim_etap.Draw("same")
 
 
-	c5.Write(plot_str + "_u_bin")
+	c5.Write(plot_str + "_t_bin")
 
 
 
@@ -1816,11 +1816,11 @@ def Setting_by_setting(file_name):
 	u_phi_sim_etap = sim_etap_file.Get("u_phi_bin/" + plot_str + "_real_sub")
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1873,7 +1873,7 @@ def Setting_by_setting(file_name):
 		h_sim_etap.Draw("same")
 
 
-	c5.Write(plot_str + "_u_bin")
+	c5.Write(plot_str + "_t_bin")
 
 
 
@@ -1892,11 +1892,11 @@ def Setting_by_setting(file_name):
 	u_phi_sim_etap = sim_etap_file.Get("u_phi_bin/" + plot_str + "_real_sub")
 
 	c5 = TCanvas()
-	c5.Divide(u_bin_num,1)
+	c5.Divide(t_bin_num,1)
 
 	
 	
-	for i in range(1, u_bin_num + 1):
+	for i in range(1, t_bin_num + 1):
 
 		# ttpad = u_phi_tgt.GetPad(i)
 
@@ -1949,7 +1949,7 @@ def Setting_by_setting(file_name):
 		h_sim_etap.Draw("same")
 
 
-	c5.Write(plot_str + "_u_bin")
+	c5.Write(plot_str + "_t_bin")
 
 
 
