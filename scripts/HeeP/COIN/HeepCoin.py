@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-30 11:55:48 trottar"
+# Time-stamp: "2023-01-14 13:40:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -96,7 +96,7 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-SIMCPATH=lt.SIMCPATH
+LTANAPATH=lt.LTANAPATH
 ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
 
@@ -111,7 +111,7 @@ outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 ###############################################################################################################################################
 
 # Grabs simc number of events and normalizaton factor
-simc_hist = "%s/OUTPUT/Analysis/HeeP/%s" % (SIMCPATH,InSIMCFilename.replace('.root','.hist'))
+simc_hist = "%s/OUTPUT/Analysis/HeeP/%s" % (LTANAPATH,InSIMCFilename.replace('.root','.hist'))
 f_simc = open(simc_hist)
 for line in f_simc:
     print(line)
@@ -153,7 +153,7 @@ except:
 
 # Section for grabing Prompt/Random selection parameters from PARAM file
 PARAMPATH = "%s/DB/PARAM" % UTILPATH
-print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], SIMCPATH))
+print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], LTANAPATH))
 TimingCutFile = "%s/Timing_Parameters.csv" % PARAMPATH # This should match the param file actually being used!
 TimingCutf = open(TimingCutFile)
 try:
@@ -201,7 +201,7 @@ RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpac
 ################################################################################################################################################
 # Grabs PID cut string
 
-log_hist = "%s/log/Analysed_COIN_%s.log" % (SIMCPATH,data_runNums.split(' ')[0])
+log_hist = "%s/log/Analysed_COIN_%s.log" % (LTANAPATH,data_runNums.split(' ')[0])
 f_log = open(log_hist)
 for line in f_log:
     if "coin_ep_cut_prompt_noRF_pid" in line:

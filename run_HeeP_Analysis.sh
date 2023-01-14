@@ -24,6 +24,7 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
 
 # Flag definitions (flags: h, a, o, s)
 while getopts 'haos' flag; do
@@ -152,7 +153,7 @@ fi
 # will create a new root file per run number which are combined using hadd
 if [[ $a_flag = "true" ]]; then
     if [[ $s_flag = "true" ]]; then
-	cd "${SIMCPATH}/scripts/HeeP/SING"
+	cd "${LTANAPATH}/scripts/HeeP/SING"
 	echo
 	echo "Analysing ${SPEC} data..."
 	echo
@@ -166,16 +167,16 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_SING.py "$i" ${SPEC} | tee ../../log/Analysed_SING_${SPEC}_$i.log
 	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_SING.C("$InDATAFilename","$OutDATAFilename")
+	    #.x $LTANAPATH/Analysed_SING.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	cd "${LTANAPATH}/OUTPUT/Analysis/HeeP"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_${SPEC}_Raw_Data.root
 	#rm -f *_-1_${SPEC}_Raw_Data.root
 
-	cd "${SIMCPATH}/scripts/HeeP/SING"    
+	cd "${LTANAPATH}/scripts/HeeP/SING"    
 	echo
 	echo "Analysing ${SPEC} dummy data..."
 	echo
@@ -189,16 +190,16 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_SING.py "$i" ${SPEC} | tee ../../log/Analysed_SING_${SPEC}_$i.log
 	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_SING.C("$InDUMMYFilename","$OutDUMMYFilename")
+	    #.x $LTANAPATH/Analysed_SING.C("$InDUMMYFilename","$OutDUMMYFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	cd "${LTANAPATH}/OUTPUT/Analysis/HeeP"
 	echo
 	echo "Combining root files..."
 	hadd -f ${OutDUMMYFilename}.root *_-1_${SPEC}_Raw_Data.root
 	#rm -f *_-1_${SPEC}_Raw_Data.root	
     else
-	cd "${SIMCPATH}/scripts/HeeP/COIN"
+	cd "${LTANAPATH}/scripts/HeeP/COIN"
 	echo
 	echo "Analysing data..."
 	echo
@@ -212,16 +213,16 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_COIN.py "$i" | tee ../../log/Analysed_COIN_$i.log
 	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
+	    #.x $LTANAPATH/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	cd "${LTANAPATH}/OUTPUT/Analysis/HeeP"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Target.root"; done
 
-	cd "${SIMCPATH}/scripts/HeeP/COIN"    
+	cd "${LTANAPATH}/scripts/HeeP/COIN"    
 	echo
 	echo "Analysing dummy data..."
 	echo
@@ -235,10 +236,10 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_COIN.py "$i" | tee ../../log/Analysed_COIN_$i.log
 	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
+	    #.x $LTANAPATH/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	cd "${LTANAPATH}/OUTPUT/Analysis/HeeP"
 	echo
 	echo "Combining root files..."
 	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
@@ -246,7 +247,7 @@ if [[ $a_flag = "true" ]]; then
     fi
 fi
 
-cd "${SIMCPATH}/scripts"
+cd "${LTANAPATH}/scripts"
 
 DataChargeVal=()
 DataEffVal=()
@@ -289,12 +290,12 @@ echo "${DummyChargeSum} uC"
 
 # Finally, run the plotting script
 if [[ $s_flag = "true" ]]; then
-    cd "${SIMCPATH}/scripts/HeeP/SING"
+    cd "${LTANAPATH}/scripts/HeeP/SING"
     python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData} ${SPEC}
 else
-    cd "${SIMCPATH}/scripts/HeeP/COIN"
+    cd "${LTANAPATH}/scripts/HeeP/COIN"
     python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData}
 fi
 
-cd "${SIMCPATH}"
+cd "${LTANAPATH}"
 evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

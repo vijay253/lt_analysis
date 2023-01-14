@@ -24,6 +24,7 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
 
 # Flag definitions (flags: h, c, a, s)
 while getopts 'hcas' flag; do
@@ -56,7 +57,7 @@ done
 if [[ $s_flag = "true" ]]; then
     ELASFOR="elas_kin"
 
-    cd ${SIMCPATH}/scripts/HeeP/SING
+    cd ${LTANAPATH}/scripts/HeeP/SING
     
     # When compile flage is used... 
     # Run the fortran elastics code for calculating 
@@ -80,7 +81,7 @@ if [[ $s_flag = "true" ]]; then
 
     InputSIMC="Heep_${SPEC}_${KIN}"
 
-    cd ${SIMCPATH}/scripts
+    cd ${LTANAPATH}/scripts
     
     # Python script that gets current values of simc input file
     SIMCINP=`python3 getSetting.py ${InputSIMC}`
@@ -90,7 +91,7 @@ if [[ $s_flag = "true" ]]; then
     BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
     THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
-    cd ${SIMCPATH}/scripts/HeeP/SING
+    cd ${LTANAPATH}/scripts/HeeP/SING
     # Runs fortran code using 'expect' which takes the user input
     # value then saves the created kinematic table as a variable
     # (Fotran script is run in background)
@@ -103,7 +104,7 @@ if [[ $s_flag = "true" ]]; then
 # When analysis flag is used then simc is run
 # for simc input file defined below
 elif [[ $a_flag = "true" ]]; then
-    cd ${SIMCPATH}/scripts/HeeP/COIN
+    cd ${LTANAPATH}/scripts/HeeP/COIN
     KIN=$2
 
     InputSIMC="Heep_Coin_${KIN}"
@@ -112,7 +113,7 @@ elif [[ $a_flag = "true" ]]; then
     echo 
     echo "Running simc analysis for ${InputSIMC}..."
     echo
-    cd ${SIMCPATH}/scripts
+    cd ${LTANAPATH}/scripts
     ./run_simc_tree "${InputSIMC}"
 fi
 

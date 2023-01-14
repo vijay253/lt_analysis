@@ -24,6 +24,7 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
 
 # Flag definitions (flags: h, c, a, s)
 while getopts 'h' flag; do
@@ -92,7 +93,7 @@ InputSIMC_right="Prod_Coin_Q${Q2}W${W}right_${EPSILON}e"
 InputSIMC_left="Prod_Coin_Q${Q2}W${W}left_${EPSILON}e"
 InputSIMC_center="Prod_Coin_Q${Q2}W${W}center_${EPSILON}e"
 
-cd ${SIMCPATH}/scripts
+cd ${LTANAPATH}/scripts
 if [[ -f "$InputSIMC_right" ]]; then
     echo
     echo 

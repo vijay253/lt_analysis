@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 04:44:57 trottar"
+# Time-stamp: "2023-01-14 13:39:00 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -25,13 +25,13 @@ lt=Root(os.path.realpath(__file__))
 
 # Add this to all files for more dynamic pathing
 UTILPATH=lt.UTILPATH
-SIMCPATH=lt.SIMCPATH
+LTANAPATH=lt.LTANAPATH
 
 ################################################################################################################################################
 
 # Open inp_f file to grab energy, momentum, and angles 
 # from simc input file
-inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC
+inp_f = LTANAPATH+"/input/%s.inp" % InputSIMC
 
 with open(inp_f, 'r') as f:
     f_data = f.read()

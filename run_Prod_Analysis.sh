@@ -24,6 +24,7 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
 
 # Flag definitions (flags: h, a, o, s)
 while getopts 'hdat' flag; do
@@ -166,7 +167,7 @@ EffData="coin_production_Prod_efficiency_data_2023_01_01.csv"
 grab_runs () {
     RunList=$1
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
-    cd "${SIMCPATH}/scripts"
+    cd "${LTANAPATH}/scripts"
     RunNumArr=$(python3 getRunNumbers.py $INPDIR)
     echo $RunNumArr
 }
@@ -485,7 +486,7 @@ if [[ $a_flag = "true" ]]; then
 
     # Checks that array isn't empty
     if [ ${#data_right[@]} -ne 0 ]; then
-	cd "${SIMCPATH}/scripts/Prod"
+	cd "${LTANAPATH}/scripts/Prod"
 	echo
 	echo "Analysing right data..."
 	echo
@@ -498,7 +499,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log	    
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
@@ -507,7 +508,7 @@ if [[ $a_flag = "true" ]]; then
 
     # Checks that array isn't empty
     if [ ${#data_left[@]} -ne 0 ]; then
-	cd "${SIMCPATH}/scripts/Prod"
+	cd "${LTANAPATH}/scripts/Prod"
 	echo
 	echo "Analysing left data..."
 	echo
@@ -520,7 +521,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
@@ -529,7 +530,7 @@ if [[ $a_flag = "true" ]]; then
     
     # Checks that array isn't empty
     if [ ${#data_center[@]} -ne 0 ]; then
-	cd "${SIMCPATH}/scripts/Prod"
+	cd "${LTANAPATH}/scripts/Prod"
 	echo
 	echo "Analysing center data..."
 	echo
@@ -542,7 +543,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
@@ -551,7 +552,7 @@ if [[ $a_flag = "true" ]]; then
     
 fi
 
-cd "${SIMCPATH}/scripts"
+cd "${LTANAPATH}/scripts"
 
 # Checks that array isn't empty
 if [ ${#data_right[@]} -ne 0 ]; then
@@ -655,7 +656,7 @@ fi
 # Run the plotting script if t-flag enabled
 # Checks that array isn't empty
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-    cd "${SIMCPATH}/scripts/Prod/binning"    
+    cd "${LTANAPATH}/scripts/Prod/binning"    
     if [ ${#data_right[@]} -eq 0 ]; then
 	python3 find_tBinRange.py ${KIN} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     else
@@ -664,7 +665,7 @@ if [[ $t_flag = "true" || $d_flag = "true" ]]; then
 fi
 
 # Create input for lt_analysis code
-cd "${SIMCPATH}/scripts/Prod/"
+cd "${LTANAPATH}/scripts/Prod/"
 if [ ${#data_right[@]} -eq 0 ]; then
     python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "0" "${data_left[*]}" "${data_center[*]}" "0" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "0" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "0" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "0" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "0" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}" ${TargetType}
 else
@@ -672,7 +673,7 @@ else
 fi
 
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-    cd "${SIMCPATH}"
+    cd "${LTANAPATH}"
     evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
 fi
 

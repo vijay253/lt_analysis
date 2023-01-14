@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 04:52:43 trottar"
+# Time-stamp: "2023-01-14 13:40:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -53,7 +53,7 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-SIMCPATH=lt.SIMCPATH
+LTANAPATH=lt.LTANAPATH
 ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
 
@@ -78,7 +78,7 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-SIMCPATH=lt.SIMCPATH
+LTANAPATH=lt.LTANAPATH
 ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
 

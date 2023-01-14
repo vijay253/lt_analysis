@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-05 08:58:54 trottar"
+# Time-stamp: "2023-01-14 13:37:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -11,9 +11,9 @@
 # Copyright (c) trottar
 #
 
-SIMCPATH="/u/group/c-kaonlt/USERS/${USER}/simc_gfortran"
+LTANAPATH="/u/group/c-kaonlt/USERS/${USER}/lt_analysis"
 
-cd "${SIMCPATH}"
+cd "${LTANAPATH}"
 
 #./set_ProdBin.sh -a $1 $2 $3 $4 $5
 

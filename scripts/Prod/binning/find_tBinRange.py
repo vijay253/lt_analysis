@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 22:55:36 trottar"
+# Time-stamp: "2023-01-14 13:39:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -81,7 +81,7 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-SIMCPATH=lt.SIMCPATH
+LTANAPATH=lt.LTANAPATH
 ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
 
@@ -190,7 +190,7 @@ def find_tbins():
 
     # Write t_bin_interval for lt_analysis scripts
     lines = []
-    with open("{}/scripts/Prod/physics_lists/t_bin_interval_{}_{:.0f}".format(SIMCPATH,Q2.replace("p",""),float(EPSVAL)*100), "w") as file:
+    with open("{}/scripts/Prod/physics_lists/t_bin_interval_{}_{:.0f}".format(LTANAPATH,Q2.replace("p",""),float(EPSVAL)*100), "w") as file:
         file.write("{}\t{}\t{}\n".format(Q2,NumtBins,NumPhiBins))
         for i,t in enumerate(bins):
             lines.append("\t{:.2f}".format(float(t)))
@@ -253,7 +253,7 @@ def defineHists(phi_setting):
 
     # Section for grabing Prompt/Random selection parameters from PARAM file
     PARAMPATH = "%s/DB/PARAM" % UTILPATH
-    print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], SIMCPATH))
+    print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], LTANAPATH))
     TimingCutFile = "%s/Timing_Parameters.csv" % PARAMPATH # This should match the param file actually being used!
     TimingCutf = open(TimingCutFile)
     try:

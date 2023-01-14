@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 11:08:33 trottar"
+# Time-stamp: "2023-01-14 13:41:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -30,12 +30,12 @@ lt=Root(os.path.realpath(__file__))
 
 # Add this to all files for more dynamic pathing
 UTILPATH=lt.UTILPATH
-SIMCPATH=lt.SIMCPATH
+LTANAPATH=lt.LTANAPATH
 
 ################################################################################################################################################
 
 # Open inp_f file to grab prescale values and tracking efficiency
-inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC
+inp_f = LTANAPATH+"/input/%s.inp" % InputSIMC
 
 with open(inp_f, 'r') as f:
     f_data = f.read()

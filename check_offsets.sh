@@ -24,6 +24,7 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
 
 # Flag definitions (flags: h, c, s)
 while getopts 'hcs' flag; do
@@ -55,7 +56,7 @@ done
 
 HEEPFOR="heepcheck"
 
-cd ${SIMCPATH}/scripts
+cd ${LTANAPATH}/scripts
 # When any flag is used then the user input changes argument order
 if [[ $c_flag = "true" && $s_flag = "true" ]]; then
     echo "Compiling ${HEEPFOR}.f..."
