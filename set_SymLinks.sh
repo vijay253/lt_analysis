@@ -29,6 +29,7 @@ LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
 
 # Check symlinks and create/fix if bad
 if [ ! -L "${LTANAPATH}/simc_gfortran" ]; then
+    echo ${LTANAPATH}
     ln -s "${SIMCPATH}" "${LTANAPATH}/simc_gfortran"
 elif [ -L "${LTANAPATH}/simc_gfortran" ]; then
     if [ ! -e "${LTANAPATH}/simc_gfortran" ]; then
