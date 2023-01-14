@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-03 19:52:38 trottar"
+# Time-stamp: "2023-01-14 14:10:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -80,7 +80,7 @@ thpq_left = abs(float(pThetaValCenter[0])-float(pThetaValLeft[0]))
 thpq_center = 0.000
 
 # Open a file in write mode
-with open('physics_lists/list.settings', 'a') as f:
+with open('src/list.settings', 'a') as f:
     if float(runNumRight[0]) != 0.0:
         # Write the value of the variable to the file
         f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
@@ -91,7 +91,7 @@ with open('physics_lists/list.settings', 'a') as f:
 
 if TargetType == "dummy":
     # Open a file in write mode
-    with open('physics_lists/lists/list.dummy_{}_{:.0f}'.format(Q2.replace(".",""),float(EPSVAL)*100), 'a') as f:
+    with open('src/lists/list.dummy_{}_{:.0f}'.format(Q2.replace(".",""),float(EPSVAL)*100), 'a') as f:
         if float(runNumRight[0]) != 0.0:
             # Write the value of the variable to the file
             for i,thpq in enumerate(EbeamValRight):
@@ -111,7 +111,7 @@ if TargetType == "dummy":
                                 float(EffValCenter[i]),EffErrCenter[i],EPSVAL,thpq_center)) 
 else:
     # Open a file in write mode
-    with open('physics_lists/lists/list.{}_{:.0f}'.format(Q2.replace(".",""),float(EPSVAL)*100), 'a') as f:
+    with open('src/lists/list.{}_{:.0f}'.format(Q2.replace(".",""),float(EPSVAL)*100), 'a') as f:
         if float(runNumRight[0]) != 0.0:
             # Write the value of the variable to the file
             for i,thpq in enumerate(EbeamValRight):
