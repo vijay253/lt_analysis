@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-14 14:51:54 trottar"
+# Time-stamp: "2023-01-14 15:22:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -89,6 +89,8 @@ thpq_left = abs(float(pThetaValCenter[0])-float(pThetaValLeft[0]))
 thpq_center = 0.000
 
 f_list_settings = '{}/src/root_ana/list.settings'.format(LTANAPATH)
+if not os.path.exists(f_list_settings):
+    open(f_list_settings, "w").close()
 # First check if line exists
 with open(f_list_settings, 'r') as f:
     lines = f.readlines()
@@ -111,7 +113,8 @@ if TargetType == "dummy":
 else:
     f_list = '{}/src/lists/list.{}_{:.0f}'.format(LTANAPATH,Q2.replace(".",""),float(EPSVAL)*100)
 
-    
+if not os.path.exists(f_list):
+    open(f_list, "w").close()    
 # Open a file in write mode
 with open(f_list, 'r') as f:
     lines = f.readlines()
