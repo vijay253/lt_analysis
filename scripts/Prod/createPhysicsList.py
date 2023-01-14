@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-14 14:21:45 trottar"
+# Time-stamp: "2023-01-14 14:26:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -81,7 +81,7 @@ thpq_left = abs(float(pThetaValCenter[0])-float(pThetaValLeft[0]))
 thpq_center = 0.000
 
 # Open a file in write mode
-with open('{}/src/list.settings'.format(LTANAPATH), 'a') as f:
+with open('{}/src/root_ana/list.settings'.format(LTANAPATH), 'a') as f:
     if float(runNumRight[0]) != 0.0:
         # Write the value of the variable to the file
         f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
