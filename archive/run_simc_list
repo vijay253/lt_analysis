@@ -1,0 +1,53 @@
+#! /bin/bash
+
+RunList=$1
+InputList="/u/group/c-kaonlt/USERS/trottar/simc_gfortran/input/${RunList}"
+
+while true; do
+    read -p "Do you wish to begin a new simc list? (Please answer yes or no) " yn
+    case $yn in
+        [Yy]* )
+            i=-1
+            (
+            ##Reads in input file##
+            while IFS='' read -r line || [[ -n "$line" ]]; do
+                echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                echo "Run read from file: $line"
+                echo ""
+                ##Run number#
+                runtype=$line
+		tmp=tmp
+                ##Finds number of lines of input file##
+                numlines=$(eval "wc -l < ${inputFile}")
+                echo "Job $(( $i + 2 ))/$(( $numlines +1 ))"
+                echo "Running ${runtype}"
+		cd src
+		source /apps/root/6.22.06/setroot_CUE.bash
+		make
+./simc << endofinput 2> "../log/$line.log"
+$line
+endofinput
+		cd util/root_tree
+		make
+./make_root_tree << endofinput
+$line
+endofinput
+		cd ../..
+		mv worksim/$line.root OUTPUTS
+                i=$(( $i + 1 ))
+		if [ $i == $numlines ]; then
+		    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		    echo " "
+		    echo "###############################################################################################################"
+		    echo "############################################ END OF JOB SUBMISSIONS ###########################################"
+		    echo "###############################################################################################################"
+		    echo " "
+		fi
+	    done < "$InputList"
+	    )
+	    break;;
+        [Nn]* ) 
+	    exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done

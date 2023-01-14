@@ -1,0 +1,15 @@
+#!/usr/bin/expect -f
+
+# Store the content of the arguments
+set inp_energy [lindex $argv 0]
+
+# Process to interract with
+spawn ./elas_kin
+
+# If  this message is encounter do...
+expect " Input electron beam energy in GeV." {
+    #... we send it our first argument
+    send "$inp_energy\r"
+}
+# Resume normal interaction with script
+interact

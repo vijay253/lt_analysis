@@ -1,0 +1,17 @@
+#!/usr/bin/expect -f
+
+# Store the content of the arguments
+set inp_energy [lindex $argv 0]
+set inp_theta [lindex $argv 1]
+
+# Process to interract with
+spawn ./heepcheck
+
+# If  this message is encounter do...
+expect " enter electron energy(MeV) and angle; E0=0/:/" {
+    #... we send it our first argument
+    send "$inp_energy\r"
+    send "$inp_theta\r"
+}
+# Resume normal interaction with script
+interact

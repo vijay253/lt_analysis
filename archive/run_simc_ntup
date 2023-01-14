@@ -1,0 +1,13 @@
+cd src
+source /apps/root/6.22.06/setroot_CUE.bash
+make
+./simc << endofinput 2> ../log/$1.log
+$1
+endofinput
+cd util/ntuple
+make
+./make_ntuple << endofinput
+$1
+endofinput
+cd ../..
+

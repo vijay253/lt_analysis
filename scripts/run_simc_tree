@@ -1,0 +1,13 @@
+cd ../src
+source /apps/root/6.22.06/setroot_CUE.bash
+make
+./simc << endofinput 2> "../log/$1.log"
+$1
+endofinput
+cd util/root_tree
+make
+./make_root_tree << endofinput
+$1
+endofinput
+cd ../..
+mv worksim/$1.root OUTPUTS

@@ -1,0 +1,35 @@
+ Enter the input filename (assumed to be in input directory)
+ filename=input/heep_HMS_fall18.inp                                            
+ Use random seed =            0
+ E_bind =   0.0000000000000000      MeV in limits_init (QF only)
+  ****--------  H(e,e'p)  --------****
+    HMS  is detecting electrons
+    SHMS is detecting hadrons (SSA TUNE)
+ Grumpy Dutch Giant welcomes you to Hall C++ at JLab12 - Get to work!
+ NOTE: Will NOT be running events through the P arm Monte Carlo
+ NOTE: Will NOT be calculating Coulomb correction (default for Hydrogen target)
+ RANLUX INITIALIZED BY RLUXGO FROM DEFAULT SEED
+ Initial random vector save to file: OUTPUTS/heep_HMS_fall18_start_random_state.dat                                                                                      
+  
+ Generating Event        1 ...        0  successes so far - Monitor: 0.0000E+00
+ Generating Event     1001 ...      386  successes so far - Monitor: 0.4986E+04
+ Generating Event     2001 ...      775  successes so far - Monitor: 0.4888E+04
+ Generating Event     3001 ...     1148  successes so far - Monitor: 0.4893E+04
+ Generating Event     4001 ...     1490  successes so far - Monitor: 0.4721E+04
+ Generating Event     5001 ...     1847  successes so far - Monitor: 0.4678E+04
+ Generating Event    20001 ...     7376  successes so far - Monitor: 0.4627E+04
+ Generating Event    40001 ...    14704  successes so far - Monitor: 0.4616E+04
+ Generating Event    60001 ...    22074  successes so far - Monitor: 0.4621E+04
+ Generating Event    80001 ...    29408  successes so far - Monitor: 0.4611E+04
+ Generating Event   100001 ...    36628  successes so far - Monitor: 0.4594E+04
+ Generating Event   120001 ...    43949  successes so far - Monitor: 0.4589E+04
+ Generating Event   140001 ...    51203  successes so far - Monitor: 0.4573E+04
+ Generating Event   160001 ...    58534  successes so far - Monitor: 0.4572E+04
+ Generating Event   180001 ...    65853  successes so far - Monitor: 0.4572E+04
+ Generating Event   200001 ...    73141  successes so far - Monitor: 0.4569E+04
+ Generating Event   220001 ...    80422  successes so far - Monitor: 0.4566E+04
+ Generating Event   240001 ...    87686  successes so far - Monitor: 0.4564E+04
+ Generating Event   260001 ...    95002  successes so far - Monitor: 0.4570E+04
+ ---> Last Event    273598 ...   100000  successes
+ ... writing OUTPUTS/heep_HMS_fall18.gen                                                     
+ Come back soon!
