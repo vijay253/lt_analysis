@@ -94,7 +94,7 @@ InputSIMC_left="Prod_Coin_Q${Q2}W${W}left_${EPSILON}e"
 InputSIMC_center="Prod_Coin_Q${Q2}W${W}center_${EPSILON}e"
 
 cd ${LTANAPATH}/scripts
-if [[ -f "$InputSIMC_right" ]]; then
+if [[ -f "${LTANAPATH}/input/${InputSIMC_right}" ]]; then
     echo
     echo 
     echo "Running simc analysis for ${InputSIMC_right}..."
@@ -102,7 +102,7 @@ if [[ -f "$InputSIMC_right" ]]; then
     ./run_simc_tree "${InputSIMC_right}"
 fi
 
-if [[ -f "$InputSIMC_left" ]]; then
+if [[ -f "${LTANAPATH}/input/${InputSIMC_left}" ]]; then
     echo
     echo 
     echo "Running simc analysis for ${InputSIMC_left}..."
@@ -110,7 +110,7 @@ if [[ -f "$InputSIMC_left" ]]; then
     ./run_simc_tree "${InputSIMC_left}"
 fi
 
-if [[ -f "$InputSIMC_center" ]]; then
+if [[ -f "${LTANAPATH}/input/${InputSIMC_center}" ]]; then
     echo
     echo 
     echo "Running simc analysis for ${InputSIMC_center}..."
