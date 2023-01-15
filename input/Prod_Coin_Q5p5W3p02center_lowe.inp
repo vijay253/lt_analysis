@@ -3,6 +3,12 @@
 begin parm experiment
   ngen = 200000			;  POS: # of successes; NEG: # of tries
   EXPER%charge = 1.0		;  total charge (mC)
+  doing_phsp = 0               	;  (ONE = TRUE)	
+  doing_kaon = 1             	;  (ONE = TRUE)
+  doing_pion = 0             	;  (ONE = TRUE)
+  which_pion = 0             	;  (0=p->pi+,1=n->pi-,10/11 for pi+/pi- coherent)
+  doing_decay = 1            	;  1=decay ON, 0=decay OFF.
+  ctau = 780.4               	;  decay length (cm)  
 end parm experiment
 
 begin parm kinematics_main
