@@ -4,10 +4,12 @@ make
 ./simc << endofinput 2> "../log/$1.log"
 $1
 endofinput
+ls
 cd util/root_tree
 make
 ./make_root_tree << endofinput
 $1
 endofinput
+ls
 cd ../..
 mv worksim/$1.root OUTPUTS

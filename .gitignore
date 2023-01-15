@@ -16,7 +16,7 @@
 Tmp*
 
 # Data files
-list.settings.*
+list.*
 *.dat
 
 # Directories
