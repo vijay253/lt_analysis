@@ -71,7 +71,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	Read_init();
 	Setting_file_loading_name();
 	Kin_Pro_Array_Load();
-	cout << "~~~~~~~~~~~~~~~~~" << endl;
+	cout << "!~~~~~~~~~~~~~~~~~" << endl;
 	
 	//Eff_Pro_Array_Load();
 
