@@ -167,7 +167,7 @@ void ReadFile::Setting_file_loading_name() {
 	///*--------------------------------------------------*/
 	// Read Simulated data information file
 	/*--------------------------------------------------*/
-	//simc_ntp->ReadFile(simc_file_name);
+	simc_ntp->ReadFile(simc_file_name);
 
 
 
