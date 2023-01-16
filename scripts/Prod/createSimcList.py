@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:00:44 trottar"
+# Time-stamp: "2023-01-16 16:01:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -64,7 +64,7 @@ OUTPATH=lt.OUTPATH
 simc_right_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameRight.replace('.root','.hist'))
 f_simc_right = open(simc_right_hist)
 for line in f_simc_right:
-    print(line)
+    #print(line)
     if "Ngen" in line:
         val = line.split("=")
         simc_right_nevents = int(val[1])
