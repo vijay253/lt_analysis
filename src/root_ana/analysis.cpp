@@ -39,12 +39,13 @@ void Analysis::Init() {
 	ReadFile* rff = new ReadFile(eff_file, off_file);
 
 	kin_ana = rff->kin_pro;
+	simc_ana = rf->simc_pro;
 	//eff_ana = rff->eff_pro1;
 	//cen_ana = rff->cen_pro;
 
 	//cen_runs = rff->Get_Cen_Runs();
 
-	list_file = rff->Get_List_File();
+	list_file = rf->Get_List_File();
 
 	data_file_dir = "../data/";
 
