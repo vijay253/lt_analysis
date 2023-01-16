@@ -97,15 +97,19 @@ class ReadFile {
 
 		struct simc_profile {
 
-			Double_t* q2_setting;  
-			Double_t* ebeam;  
+		  Int_t* run_num; 
+		  
+		  Double_t* ebeam;
+		  Double_t* q2_setting;  
 
-			Double_t* epsilon;  
-			Double_t* hms_theta;  
-
-			Double_t* normfac;     
-			Int_t* event_num; 	  	  
-
+		  Double_t* thpqset;
+		  
+		  Double_t* epsilon;  
+		  Double_t* hms_theta;  
+		  
+		  Double_t* normfac;     
+		  Int_t* event_num; 	  	  
+		  
 		} simc_pro;
 
 
