@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 17:06:25 trottar"
+# Time-stamp: "2023-01-16 17:28:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -82,7 +82,7 @@ try:
         #sys.exit(1)
     f_simc_right.close()
 except FileNotFoundError:
-    print("No right setting")
+    print("No right setting...")
     
 simc_left_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameLeft.replace('.root','.hist'))
 f_simc_left = open(simc_left_hist)
@@ -148,7 +148,7 @@ def write_to_file(f_out,line):
 try:
     thpq_right = abs(float(pThetaValCenter)-float(pThetaValRight))
 except NameError:
-    print("No right setting")
+    print("")
 thpq_left = abs(float(pThetaValCenter)-float(pThetaValLeft))
 thpq_center = 0.000
 
@@ -168,7 +168,7 @@ with open(f_list, 'r') as f:
             if check_line not in lines:
                 write_to_file(f_list,check_line)
     except NameError:
-        print("No right setting")                
+        print("")                
     if int(runNumLeft[0]) == 1:
         check_line = "0001 {:.5f} {} +{:.3f} {} {}\n".format(float(EbeamValLeft),Q2,thpq_left,simc_left_normfactor,simc_left_nevents)
         if check_line not in lines:
