@@ -18,6 +18,32 @@ using namespace std;
 
 
 
+ReadFile::ReadFile() {
+
+	static int tsttst = 0;
+
+	if (tsttst == 0) {
+
+		cout << " /*--------------------------------------------------*/" << endl;
+		cout << "             loading the scalar information            " << endl << endl;
+//		cout << " /*--------------------------------------------------*/" << endl;
+		tsttst++;
+	}
+
+
+	Read_init();
+	Setting_file_loading();
+
+	Kin_Pro_Array_Load();
+	Eff_Pro_Array_Load();
+	//Cen_Pro_Array_Load();
+
+	Calculate_t_Width();
+
+
+
+}
+
 
 // 
 // /*--------------------------------------------------*/
@@ -297,11 +323,11 @@ void ReadFile::Cen_Pro_Array_Load() {
 
 void ReadFile::Simc_Pro_Array_Load() {
 
-	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
+  //simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
 
-	cout << "~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
+  //	cout << "~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
 	
-	simc_ntp->ReadFile(simc_file_name);
+  //	simc_ntp->ReadFile(simc_file_name);
 
 	Double_t* run_num_d  = Return_array_D("run_num",         simc_ntp);
 	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
