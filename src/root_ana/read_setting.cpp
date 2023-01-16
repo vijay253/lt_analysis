@@ -73,7 +73,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 	Kin_Pro_Array_Load();
 
-	Eff_Pro_Array_Load();
+	//Eff_Pro_Array_Load();
 
 	//Cen_Pro_Array_Load();
 
