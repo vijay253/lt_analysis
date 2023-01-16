@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:07:21 trottar"
+# Time-stamp: "2023-01-16 16:12:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,8 +15,8 @@ import sys, os
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=10:
-    print("!!!!! ERROR !!!!!\n Expected 10 arguments\n Usage is with - Q2 POL EPSVAL EbeamValRight EbeamValLeft EbeamValCenter runNumRight runNumLeft runNumCenter kinematics\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=7:
+    print("!!!!! ERROR !!!!!\n Expected 7 arguments\n Usage is with - Q2 POL EPSVAL runNumRight runNumLeft runNumCenter kinematics\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ################################################################################################################################################
@@ -28,15 +28,11 @@ Q2 = sys.argv[1].replace("p",".")
 POL = sys.argv[2]
 EPSVAL = sys.argv[3]
 
-EbeamValRight = sys.argv[4].split(" ")
-EbeamValLeft = sys.argv[5].split(" ")
-EbeamValCenter = sys.argv[6].split(" ")
+runNumRight = sys.argv[4].split(" ")
+runNumLeft = sys.argv[5].split(" ")
+runNumCenter = sys.arg[6].split(" ")
 
-runNumRight = sys.argv[7].split(" ")
-runNumLeft = sys.argv[8].split(" ")
-runNumCenter = sys.argv[9].split(" ")
-
-kinematics = sys.argv[10].split("_")
+kinematics = sys.argv[7].split("_")
 
 InSIMCFilenameRight = "Prod_Coin_{}.root".format(kinematics[0]+"right_"+kinematics[1])
 InSIMCFilenameLeft = "Prod_Coin_{}.root".format(kinematics[0]+"left_"+kinematics[1])
@@ -64,6 +60,9 @@ simc_right_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilena
 f_simc_right = open(simc_right_hist)
 for line in f_simc_right:
     #print(line)
+    if "Ebeam" in line:
+        val = line.split("=")
+        EbeamValRight = float(val[1])/1000
     if "Ngen" in line:
         val = line.split("=")
         simc_right_nevents = int(val[1])
@@ -81,6 +80,9 @@ simc_left_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenam
 f_simc_left = open(simc_left_hist)
 for line in f_simc_left:
     #print(line)
+    if "Ebeam" in line:
+        val = line.split("=")
+        EbeamValLeft = float(val[1])/1000    
     if "Ngen" in line:
         val = line.split("=")
         simc_left_nevents = int(val[1])
@@ -98,6 +100,9 @@ simc_center_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilen
 f_simc_center = open(simc_center_hist)
 for line in f_simc_center:
     #print(line)
+    if "Ebeam" in line:
+        val = line.split("=")
+        EbeamValCenter = float(val[1])/1000    
     if "Ngen" in line:
         val = line.split("=")
         simc_center_nevents = int(val[1])
