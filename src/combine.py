@@ -11,268 +11,268 @@ peak = TH1F()
 def Setting_by_setting(file_name):
 		
     missmass = []
-
+    
     #	scale_factor = 20
     #	scale_factor = 120
     #	scale_factor = 1
     scale_factor = 1
-
+    
     #/*--------------------------------------------------*/
     # Loading the 
-
- 
+    
+    
     t_bin_file = open('t_bin_interval', 'r')
-
+    
     f_str = t_bin_file.readline()
     print(f_str.split())
     t_bin_file.close()
-
+    
     t_bin_num   = int(f_str.split()[1])
     phi_bin_num = int(f_str.split()[2])
-
-
-
-#    print(t_bin_num, phi_bin_num)
-#    sys.exit(0)
-
+    
+    
+    
+    #    print(t_bin_num, phi_bin_num)
+    #    sys.exit(0)
+    
     dum_name = "yields." + file_name  + ".dummy.root"
     tgt_name = "yields." + file_name  + ".target.root"
     sim_name = "yields." + file_name  + ".sim.root"
-
+    
     dum_file = TFile(dum_name,      "READ")
     tgt_file = TFile(tgt_name,      "READ")
     sim_file = TFile(sim_name, "READ")
-
-
-
-
-#    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsxptar", "hsyptar", "hsytar", "t", "ssytar", "ssyptar", "ssxptar", "th_pq", "phi_pq", "Pmpar", "Pmper", "Pmoop", "Em", "Pm"]
     
-
+    
+    
+    
+    #    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsxptar", "hsyptar", "hsytar", "t", "ssytar", "ssyptar", "ssxptar", "th_pq", "phi_pq", "Pmpar", "Pmper", "Pmoop", "Em", "Pm"]
+    
+    
     print(file_name)
-
-#    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsytar", "ssytar"]
-
-#    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsytar", "hsxptar", "hsyptar", "ssytar", "ssxptar", "ssyptar", "phi_pq", "Pmpar", "Pmper", "Pmoop", "u", "t"]
-
-
-#    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsxtar", "hsytar", "hsxptar", "hsyptar", "ssxtar", "ssytar", "ssxptar", "ssyptar", "phi_pq", "Pmpar", "Pmper", "Pmoop", "u"]
-
-#    plot_name_list = ["missmass_dia", "hsdelta_dia", "Q2_dia", "W_dia", "hsytar_dia", "hsxptar_dia", "hsyptar_dia", "ssytar_dia", "ssxptar_dia", "ssyptar_dia", "phi_pq_dia", "Pmpar_dia", "Pmper_dia", "Pmoop_dia", "u_dia", "t_dia"]
-
+    
+    #    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsytar", "ssytar"]
+    
+    #    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsytar", "hsxptar", "hsyptar", "ssytar", "ssxptar", "ssyptar", "phi_pq", "Pmpar", "Pmper", "Pmoop", "u", "t"]
+    
+    
+    #    plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsxtar", "hsytar", "hsxptar", "hsyptar", "ssxtar", "ssytar", "ssxptar", "ssyptar", "phi_pq", "Pmpar", "Pmper", "Pmoop", "u"]
+    
+    #    plot_name_list = ["missmass_dia", "hsdelta_dia", "Q2_dia", "W_dia", "hsytar_dia", "hsxptar_dia", "hsyptar_dia", "ssytar_dia", "ssxptar_dia", "ssyptar_dia", "phi_pq_dia", "Pmpar_dia", "Pmper_dia", "Pmoop_dia", "u_dia", "t_dia"]
+    
     plot_name_list = ["missmass", "hsdelta", "Q2", "W", "hsytar", "hsxptar", "hsyptar", "ssytar", "ssxptar", "ssyptar", "phi_pq", "Pmpar", "Pmper", "Pmoop", "u", "t", "Em", "Pm"]
 
     file_out = TFile("final_" + file_name + "_out_put.root", "RECREATE")
 
 
     for x in range(len(plot_name_list)):
-#    for x in range(1):
-    
-       missmass[:] = []
-    
-       print(x, plot_name_list[x])
-       plot_name = plot_name_list[x]
-
-       in_plot_name = plot_name + "_dia"
-
-
-
-       #        if (plot_name == "u"): 
-       #           missmass_tmp = tgt_file.Get("t")
-       #           missmass.append(missmass_tmp)
-       #        
-       #            missmass_tmp = dum_file.Get("t")
-       #            missmass.append(missmass_tmp)
-       # 
-       #        else:
-       missmass_tmp = tgt_file.Get(in_plot_name)
-       missmass.append(missmass_tmp)
+        #    for x in range(1):
         
-       missmass_tmp = dum_file.Get(in_plot_name)
-       missmass.append(missmass_tmp)
+        missmass[:] = []
+        
+        print(x, plot_name_list[x])
+        plot_name = plot_name_list[x]
+        
+        in_plot_name = plot_name + "_dia"
+        
+        
+        
+        #        if (plot_name == "u"): 
+        #           missmass_tmp = tgt_file.Get("t")
+        #           missmass.append(missmass_tmp)
+        #        
+        #            missmass_tmp = dum_file.Get("t")
+        #            missmass.append(missmass_tmp)
+        # 
+        #        else:
+        missmass_tmp = tgt_file.Get(in_plot_name)
+        missmass.append(missmass_tmp)
+        
+        missmass_tmp = dum_file.Get(in_plot_name)
+        missmass.append(missmass_tmp)
+        
+        
+        
+        
+        
+        
+        missmass_tmp = sim_file.Get(in_plot_name)
+        missmass.append(missmass_tmp)
+        
+        missmass_tmp = missmass[0].Clone()
+        missmass_tmp_dummy = missmass[1].Clone()
+        
+        missmass_tmp.Add(missmass_tmp_dummy, -1)
+        missmass.append(missmass_tmp)
+        
+        
+        
+        
+        
+    c1 = TCanvas() 
+    
+    #       if(missmass[0].GetMaximum() > missmass[2].GetMaximum()):
+    #         missmass[2].SetMaximum(missmass[0].GetMaximum() + 0.2*missmass[0].GetMaximum());
     
 
-
-
-
-
-       missmass_tmp = sim_file.Get(in_plot_name)
-       missmass.append(missmass_tmp)
-       
-       missmass_tmp = missmass[0].Clone()
-       missmass_tmp_dummy = missmass[1].Clone()
-
-       missmass_tmp.Add(missmass_tmp_dummy, -1)
-       missmass.append(missmass_tmp)
-
-
-
-
-
-       c1 = TCanvas() 
+    missmass[0].Draw()
     
-#       if(missmass[0].GetMaximum() > missmass[2].GetMaximum()):
-#         missmass[2].SetMaximum(missmass[0].GetMaximum() + 0.2*missmass[0].GetMaximum());
+    missmass[1].SetLineColor(3)
+    missmass[1].Draw("same")
     
-
-       missmass[0].Draw()
     
-       missmass[1].SetLineColor(3)
-       missmass[1].Draw("same")
+    missmass[3].SetLineColor(4)
+    missmass[3].Draw("same")
     
-
-       missmass[3].SetLineColor(4)
-       missmass[3].Draw("same")
     
-
-      print("111111111111")
-
-      missmass[2].Scale(scale_factor)
-
-      missmass[2].SetLineColor(2)
-      missmass[2].Draw("same")
-
+    print("111111111111")
     
-      file_out.cd()
-      c1.Write(plot_name)
-
-
-      c2 = TCanvas() 
-
-      missmass[3].Draw()
-
-
-
-      rightmax = 1.1 * missmass[2].GetMaximum()
-
-      if (rightmax != 0) : 
+    missmass[2].Scale(scale_factor)
+    
+    missmass[2].SetLineColor(2)
+    missmass[2].Draw("same")
+    
+    
+    file_out.cd()
+    c1.Write(plot_name)
+    
+    
+    c2 = TCanvas() 
+    
+    missmass[3].Draw()
+    
+    
+    
+    rightmax = 1.1 * missmass[2].GetMaximum()
+    
+    if (rightmax != 0) : 
         scale = missmass[3].GetMaximum()/rightmax
-      else:
+    else:
+        scale = 1
+        
+    missmass[2].Scale(scale)
+    missmass[2].Draw("same")
+
+
+    rightmax = 1.1 * missmass[4].GetMaximum()
+
+    if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+    else:
+        scale = 1
+        
+    missmass[4].Scale(scale)
+    missmass[4].Draw("same")
+
+
+    rightmax = 1.1 * missmass[5].GetMaximum()
+
+    if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+    else:
         scale = 1
 
-      missmass[2].Scale(scale)
-      missmass[2].Draw("same")
-
-
-      rightmax = 1.1 * missmass[4].GetMaximum()
-
-      if (rightmax != 0) : 
-        scale = missmass[3].GetMaximum()/rightmax
-      else:
-        scale = 1
-
-      missmass[4].Scale(scale)
-      missmass[4].Draw("same")
-
-
-      rightmax = 1.1 * missmass[5].GetMaximum()
-
-      if (rightmax != 0) : 
-        scale = missmass[3].GetMaximum()/rightmax
-      else:
-        scale = 1
-
-      missmass[5].Scale(scale)
+    missmass[5].Scale(scale)
     missmass[5].Draw("same")
 
 
-
-
-      rightmax = 1.1 * missmass[6].GetMaximum()
-
-      if (rightmax != 0) : 
+    
+    
+    rightmax = 1.1 * missmass[6].GetMaximum()
+    
+    if (rightmax != 0) : 
         scale = missmass[3].GetMaximum()/rightmax
-      else:
+    else:
         scale = 1
 
-      missmass[6].Scale(scale)
+    missmass[6].Scale(scale)
     missmass[6].Draw("same")
 
-
-
-
-      rightmax = 1.1 * missmass[7].GetMaximum()
-
-      if (rightmax != 0) : 
+    
+    
+    
+    rightmax = 1.1 * missmass[7].GetMaximum()
+    
+    if (rightmax != 0) : 
         scale = missmass[3].GetMaximum()/rightmax
-      else:
+    else:
         scale = 1
 
-      missmass[7].Scale(scale)
-      missmass[7].Draw("same")
+    missmass[7].Scale(scale)
+    missmass[7].Draw("same")
 
-
-
-      #       TGaxis *axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
-      #       gPad->GetUxmax(), gPad->GetUymax(),0,rightmax,510,"+L");
-      #       axis->SetLineColor(kRed);
-      #       axis->SetTextColor(kRed);
-      #       axis->Draw();
-      
-
-
-      #       missmass[4].Draw("same")
-      #       missmass[5].Draw("same")
-      
-      c2.Write(plot_name + "_dummy_sub_sim")
-
-      
-      #       c3 = TCanvas() 
-      # 
-      #       missmass[3].Add(missmass[2], -1);
-      # 
-      #       missmass[3].Draw("hist")
-      # 
-      #       c3.Write(plot_name + "_bg")
-      
-      
-      #       if plot_name == "missmass":
-      # #        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ")
-      # 
-      #         Fit_missmass(missmass[2], missmass[3])      
-      #         
-      
-      #      c4 = TCanvas()
-      
-      
-      
-      # /*--------------------------------------------------*/
-      # Missing mass in u-phi bin
-      
-      
-      t_phi_tgt = tgt_file.Get("t_phi_bin/t_phi_missmass")
-      t_phi_dum = dum_file.Get("t_phi_bin/t_phi_missmass")
-      t_phi_sim = sim_file.Get("t_phi_bin/t_phi_missmass")
-      
-      #    t_phi_tgt.Write("target_phi")
-      
-      c4 = TCanvas()
-      c4.Divide(phi_bin_num, t_bin_num)
-      
-      print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
-      
-      for i in range(1, t_bin_num * phi_bin_num + 1):
-          
-          # ttpad = t_phi_tgt.GetPad(i)
-          
-          h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_miss")
-          h_tgt_sub = h_tgt.Clone("h_miss_sub")
-          
-          h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_miss")
-          h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_miss")
-          
-          #       h_sim.SetName("h_miss_sim")
-          #       h_sim_rho.SetName("h_miss_sim_rho")
-          #       h_sim_xphsp.SetName("h_miss_sim_xphsp")
-          # 
-          h_tgt.SetName("t_phi_target")
-          h_tgt_sub.SetName("t_phi_target")
-          h_sim.SetName("t_phi_sim")
-          
-          h_tgt_sub.Add(h_dum, -1)
+    
+    
+    #       TGaxis *axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
+    #       gPad->GetUxmax(), gPad->GetUymax(),0,rightmax,510,"+L");
+    #       axis->SetLineColor(kRed);
+    #       axis->SetTextColor(kRed);
+    #       axis->Draw();
+    
+    
+    
+    #       missmass[4].Draw("same")
+    #       missmass[5].Draw("same")
+    
+    c2.Write(plot_name + "_dummy_sub_sim")
+    
+    
+    #       c3 = TCanvas() 
+    # 
+    #       missmass[3].Add(missmass[2], -1);
+    # 
+    #       missmass[3].Draw("hist")
+    # 
+    #       c3.Write(plot_name + "_bg")
+    
+    
+    #       if plot_name == "missmass":
+    # #        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ")
+    # 
+    #         Fit_missmass(missmass[2], missmass[3])      
+    #         
+    
+    #      c4 = TCanvas()
+    
+    
+    
+    # /*--------------------------------------------------*/
+    # Missing mass in u-phi bin
+    
+    
+    t_phi_tgt = tgt_file.Get("t_phi_bin/t_phi_missmass")
+    t_phi_dum = dum_file.Get("t_phi_bin/t_phi_missmass")
+    t_phi_sim = sim_file.Get("t_phi_bin/t_phi_missmass")
+    
+    #    t_phi_tgt.Write("target_phi")
+    
+    c4 = TCanvas()
+    c4.Divide(phi_bin_num, t_bin_num)
+    
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
+    
+    for i in range(1, t_bin_num * phi_bin_num + 1):
+        
+        # ttpad = t_phi_tgt.GetPad(i)
+        
+        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_miss")
+        h_tgt_sub = h_tgt.Clone("h_miss_sub")
+        
+        h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_miss")
+        h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_miss")
+        
+        #       h_sim.SetName("h_miss_sim")
+        #       h_sim_rho.SetName("h_miss_sim_rho")
+        #       h_sim_xphsp.SetName("h_miss_sim_xphsp")
+        # 
+        h_tgt.SetName("t_phi_target")
+        h_tgt_sub.SetName("t_phi_target")
+        h_sim.SetName("t_phi_sim")
+        
+        h_tgt_sub.Add(h_dum, -1)
           
     for ii in range(1, h_tgt_sub.GetNbinsX()):
-              
+        
         #         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
         #            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
         
@@ -290,7 +290,7 @@ def Setting_by_setting(file_name):
         
         
     c4.cd(i);
-
+        
     h_sim.SetLineColor(2);
     h_dum.SetLineColor(3);
     
