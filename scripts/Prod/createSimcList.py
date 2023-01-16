@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:12:09 trottar"
+# Time-stamp: "2023-01-16 16:13:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -30,7 +30,7 @@ EPSVAL = sys.argv[3]
 
 runNumRight = sys.argv[4].split(" ")
 runNumLeft = sys.argv[5].split(" ")
-runNumCenter = sys.arg[6].split(" ")
+runNumCenter = sys.argv[6].split(" ")
 
 kinematics = sys.argv[7].split("_")
 
