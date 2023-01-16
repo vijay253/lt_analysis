@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 17:02:40 trottar"
+# Time-stamp: "2023-01-16 17:04:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -57,30 +57,33 @@ OUTPATH=lt.OUTPATH
 
 # Grabs simc number of events and normalizaton factor
 simc_right_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameRight.replace('.root','.hist'))
-f_simc_right = open(simc_right_hist)
-angle_flag = False
-for line in f_simc_right:
-    #print(line)
-    if "Ebeam" in line:
-        val = line.split("=")
-        EbeamValRight = float(val[1].replace("MeV\n",""))/1000
-    if "angle" in line and angle_flag == False:
-        angle_flag = True
-        val = line.split("=")
-        pThetaValRight = float(val[1].replace("deg\n","").split("          ")[1])
-    if "Ngen" in line:
-        val = line.split("=")
-        simc_right_nevents = int(val[1])
-    if "normfac" in line:
-        val = line.split("=")
-        simc_right_normfactor = float(val[1])
-if 'simc_right_nevents' and 'simc_right_normfactor' in locals():
-    print('\n\nsimc_right_nevents = ',simc_right_nevents,'\nsimc_right_normfactor = ',simc_right_normfactor,'\n\n')
-else:
-    print("ERROR: Invalid simc right hist file %s" % simc_right_hist)
-    #sys.exit(1)
-f_simc_right.close()
-
+try:
+    f_simc_right = open(simc_right_hist)
+    angle_flag = False
+    for line in f_simc_right:
+        #print(line)
+        if "Ebeam" in line:
+            val = line.split("=")
+            EbeamValRight = float(val[1].replace("MeV\n",""))/1000
+        if "angle" in line and angle_flag == False:
+            angle_flag = True
+            val = line.split("=")
+            pThetaValRight = float(val[1].replace("deg\n","").split("          ")[1])
+        if "Ngen" in line:
+            val = line.split("=")
+            simc_right_nevents = int(val[1])
+        if "normfac" in line:
+            val = line.split("=")
+            simc_right_normfactor = float(val[1])
+    if 'simc_right_nevents' and 'simc_right_normfactor' in locals():
+        print('\n\nsimc_right_nevents = ',simc_right_nevents,'\nsimc_right_normfactor = ',simc_right_normfactor,'\n\n')
+    else:
+        print("ERROR: Invalid simc right hist file %s" % simc_right_hist)
+        #sys.exit(1)
+    f_simc_right.close()
+except FileNotFoundError:
+    print("No right setting")
+    
 simc_left_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameLeft.replace('.root','.hist'))
 f_simc_left = open(simc_left_hist)
 angle_flag = False
