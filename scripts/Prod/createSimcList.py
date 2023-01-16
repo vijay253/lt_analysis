@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:15:05 trottar"
+# Time-stamp: "2023-01-16 16:25:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -63,6 +63,10 @@ for line in f_simc_right:
     if "Ebeam" in line:
         val = line.split("=")
         EbeamValRight = float(val[1].replace("MeV\n",""))/1000
+    if "angle" in line:
+        val = line.split("=")
+        pThetaValRight = float(val[1].split("           ")[1])
+        print("!!!!!!!!!!!!!!!!!!!!",pThetaValRight)
     if "Ngen" in line:
         val = line.split("=")
         simc_right_nevents = int(val[1])
@@ -126,6 +130,11 @@ def write_to_file(f_out,line):
 
 ################################################################################################################################################
 
+# Define thpq vector relative to middle setting
+thpq_right = abs(float(pThetaValCenter)-float(pThetaValRight))
+thpq_left = abs(float(pThetaValCenter)-float(pThetaValLeft))
+thpq_center = 0.000
+
 f_list = '{}/src/lists/list.simc_{}_{:.0f}'.format(LTANAPATH,Q2.replace(".",""),float(EPSVAL)*100)
 
 if not os.path.exists(f_list):
@@ -136,15 +145,15 @@ with open(f_list, 'r') as f:
     if int(runNumRight[0]) == 0:
         # Write the value of the variable to the file
         # convert uC to C (10^-6C=1uC)
-        check_line = "{} {} {} {}\n".format(EbeamValRight,Q2,simc_right_normfactor,simc_right_nevents)
+        check_line = "{} {} -{:.3f} {} {}\n".format(EbeamValRight,Q2,thpq_right,simc_right_normfactor,simc_right_nevents)
         # Check if the line already exists
         if check_line not in lines:
             write_to_file(f_list,check_line)
     if int(runNumLeft[0]) == 1:
-        check_line = "{} {} {} {}\n".format(EbeamValLeft,Q2,simc_left_normfactor,simc_left_nevents)
+        check_line = "{} {} +{:.3f} {} {}\n".format(EbeamValLeft,Q2,thpq_left,simc_left_normfactor,simc_left_nevents)
         if check_line not in lines:
             write_to_file(f_list,check_line)
     if int(runNumCenter[0]) == 2:
-        check_line = "{} {} {} {}\n".format(EbeamValCenter,Q2,simc_center_normfactor,simc_center_nevents)
+        check_line = "{} {} {:.3f} {} {}\n".format(EbeamValCenter,Q2,thpq_center,simc_center_normfactor,simc_center_nevents)
         if check_line not in lines:
             write_to_file(f_list,check_line)
