@@ -69,16 +69,14 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	//off_file_name = off_file_name_tmp;
 
 	Read_init();
-	Setting_file_loading_name();
-	
-	cout << "!~~~~~~~~~~~~~~~~~" << endl;
+	Setting_file_loading_name();      
 
 	Kin_Pro_Array_Load();
 	
 	//Eff_Pro_Array_Load();
 
 	//Cen_Pro_Array_Load();
-
+	cout << "!~~~~~~~~~~~~~~~~~" << endl;
 	Simc_Pro_Array_Load();
 
 	Calculate_t_Width();
