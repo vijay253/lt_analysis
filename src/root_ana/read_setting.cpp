@@ -323,7 +323,7 @@ void ReadFile::Simc_Pro_Array_Load() {
 	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
 	simc_ntp->ReadFile(simc_file_name);
 
-	simc_pro.run_num 		 = Return_array_D("run_num",        simc_ntp);
+	Double_t* run_num_d  = Return_array_D("run_num",         simc_ntp);
 	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
 	simc_pro.q2_setting 		 = Return_array_D("q2",        simc_ntp);
 	simc_pro.thpqset 		 = Return_array_D("thpqset",        simc_ntp);
@@ -335,7 +335,10 @@ void ReadFile::Simc_Pro_Array_Load() {
 // 	cout << simc_pro.q2_setting[1] << endl;
 // 	cout << simc_pro.q2_setting[2] << endl;
 // 	cout << simc_pro.q2_setting[3] << endl;
+	
+	num_runs = SizeOfArray(run_num_d);
 
+	simc_pro.run_num = Array_D_to_I (run_num_d, num_runs);
 
 	Int_t num_tem = SizeOfArray(event_num_temp);
                                            
