@@ -10,12 +10,12 @@ peak = TH1F()
 
 def Setting_by_setting(file_name):
 		
-	missmass = []
+    missmass = []
 
-        #	scale_factor = 20
-        #	scale_factor = 120
-        #	scale_factor = 1
-        scale_factor = 1
+	        #	scale_factor = 20
+	        #	scale_factor = 120
+	        #	scale_factor = 1
+	        scale_factor = 1
 
 # 	t_bin_num   = 3
 # 	phi_bin_num = 8
@@ -260,7 +260,7 @@ def Setting_by_setting(file_name):
 	c4 = TCanvas()
 	c4.Divide(phi_bin_num, t_bin_num)
 
-	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 
 	for i in range(1, t_bin_num * phi_bin_num + 1):
 
@@ -345,7 +345,7 @@ def Setting_by_setting(file_name):
 	c4 = TCanvas()
 	c4.Divide(phi_bin_num, t_bin_num)
 
-	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 
 	for i in range(1, t_bin_num * phi_bin_num + 1):
 
@@ -426,7 +426,7 @@ def Setting_by_setting(file_name):
 	c4 = TCanvas()
 	c4.Divide(phi_bin_num, t_bin_num)
 
-	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 
 	for i in range(1, t_bin_num * phi_bin_num + 1):
 
@@ -511,7 +511,7 @@ def Setting_by_setting(file_name):
 	c4 = TCanvas()
 	c4.Divide(phi_bin_num, t_bin_num)
 
-	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 
 	for i in range(1, t_bin_num * phi_bin_num + 1):
 
@@ -595,7 +595,7 @@ def Setting_by_setting(file_name):
 	c4 = TCanvas()
 	c4.Divide(phi_bin_num, t_bin_num)
 
-	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 
 	for i in range(1, t_bin_num * phi_bin_num + 1):
 
@@ -682,7 +682,7 @@ def Setting_by_setting(file_name):
 	c4 = TCanvas()
 	c4.Divide(phi_bin_num, t_bin_num)
 
-	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 
 	for i in range(1, t_bin_num * phi_bin_num + 1):
 
@@ -775,7 +775,7 @@ def Setting_by_setting(file_name):
 #	c4 = TCanvas()
 #	c4.Divide(phi_bin_num, t_bin_num)
 #
-#	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+#	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 #
 #	for i in range(1, t_bin_num * phi_bin_num + 1):
 #
@@ -885,7 +885,7 @@ def Setting_by_setting(file_name):
 #	c4 = TCanvas()
 #	c4.Divide(phi_bin_num, t_bin_num)
 #
-#	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+#	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 #
 #	for i in range(1, t_bin_num * phi_bin_num + 1):
 #
@@ -997,7 +997,7 @@ def Setting_by_setting(file_name):
 #	c4 = TCanvas()
 #	c4.Divide(phi_bin_num, t_bin_num)
 #
-#	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "         sadfsadf ")
+#	print("asdasasdasd   ", t_phi_tgt.GetNumber(), "	         sadfsadf ")
 #
 #	for i in range(1, t_bin_num * phi_bin_num + 1):
 #
@@ -1653,10 +1653,10 @@ q2_setting     = ["160", "245"]
 
 #q2_setting     = ["160"]
 
-eps_160        = ["32",  "59"]
-#eps_160        = ["32"]
+eps_160	        = ["32",  "59"]
+#eps_160	        = ["32"]
 
-eps_245        = ["27", "55"]
+eps_245	        = ["27", "55"]
 
 hms_angle_160_l  = ['+0970',  '+3000']
 hms_angle_160_h  = ['-2730',  '+0000', '+3000']
@@ -1872,9 +1872,9 @@ for setting in q2_setting:
 
 # def func_advanced (x, p) :
 #     if (x[0] < 1.25) :
-#         return p[0] + p[1]*x[0] + p[2]*x[0]*x[0]
+#	         return p[0] + p[1]*x[0] + p[2]*x[0]*x[0]
 #     else :
-#         return p[0] + p[1]*x[0] + 0.9*x[0]*x[0]
+#	         return p[0] + p[1]*x[0] + 0.9*x[0]*x[0]
 
 
 
