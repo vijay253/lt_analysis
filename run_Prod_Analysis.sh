@@ -874,7 +874,7 @@ if [[ $TargetType != "simc" ]]; then
 	python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" "${DatapThetaValRight[*]}" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "${DataEffErrRight[*]}" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "${DataChargeValRight[*]}" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "${DataChargeErrRight[*]}" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}" ${TargetType}
     fi
 else
-    python3 createSimcList.py ${Q2} ${POL} ${EPSVAL} "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${KIN}
+    python3 createSimcList.py ${Q2} ${POL} ${EPSVAL} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${KIN}
 fi
 
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
