@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:26:51 trottar"
+# Time-stamp: "2023-01-16 16:30:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -86,7 +86,11 @@ for line in f_simc_left:
     #print(line)
     if "Ebeam" in line:
         val = line.split("=")
-        EbeamValLeft = float(val[1].replace("MeV\n",""))/1000    
+        EbeamValLeft = float(val[1].replace("MeV\n",""))/1000
+    if "angle" in line:
+        val = line.split("=")
+        pThetaValLeft = float(val[1].replace("deg\n","").split("           ")[1])
+        print("!!!!!!!!!!!!!!!!!!!!",pThetaValLeft)        
     if "Ngen" in line:
         val = line.split("=")
         simc_left_nevents = int(val[1])
@@ -106,7 +110,11 @@ for line in f_simc_center:
     #print(line)
     if "Ebeam" in line:
         val = line.split("=")
-        EbeamValCenter = float(val[1].replace("MeV\n",""))/1000    
+        EbeamValCenter = float(val[1].replace("MeV\n",""))/1000
+    if "angle" in line:
+        val = line.split("=")
+        pThetaValCenter = float(val[1].replace("deg\n","").split("           ")[1])
+        print("!!!!!!!!!!!!!!!!!!!!",pThetaValCenter)        
     if "Ngen" in line:
         val = line.split("=")
         simc_center_nevents = int(val[1])
