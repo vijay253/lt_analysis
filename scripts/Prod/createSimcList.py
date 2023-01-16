@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:48:11 trottar"
+# Time-stamp: "2023-01-16 16:49:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,12 +58,13 @@ OUTPATH=lt.OUTPATH
 # Grabs simc number of events and normalizaton factor
 simc_right_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameRight.replace('.root','.hist'))
 f_simc_right = open(simc_right_hist)
+angle_flag = False
 for line in f_simc_right:
     #print(line)
     if "Ebeam" in line:
         val = line.split("=")
         EbeamValRight = float(val[1].replace("MeV\n",""))/1000
-    if "angle" in line and !angle_flag:
+    if "angle" in line and angle_flag == False:
         angle_flag = True
         val = line.split("=")
         print("!!!!!!!!!!!!!!!!!!!!",val[1].replace("deg\n","").split("          ")[1])
@@ -84,6 +85,7 @@ f_simc_right.close()
 
 simc_left_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameLeft.replace('.root','.hist'))
 f_simc_left = open(simc_left_hist)
+angle_flag = False
 for line in f_simc_left:
     #print(line)
     if "Ebeam" in line:
@@ -108,6 +110,7 @@ f_simc_left.close()
 
 simc_center_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameCenter.replace('.root','.hist'))
 f_simc_center = open(simc_center_hist)
+angle_flag = False
 for line in f_simc_center:
     #print(line)
     if "Ebeam" in line:
