@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 15:59:50 trottar"
+# Time-stamp: "2023-01-16 16:00:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -39,9 +39,9 @@ runNumCenter = sys.argv[9].split(" ")
 
 kinematics = sys.argv[10].split("_")
 
-InSIMCFilenameRight = "Prod_Coin_{}.root".format(kinematics[0]+"right"+kinematics[1])
-InSIMCFilenameLeft = "Prod_Coin_{}.root".format(kinematics[0]+"left"+kinematics[1])
-InSIMCFilenameCenter = "Prod_Coin_{}.root".format(kinematics[0]+"center"+kinematics[1])
+InSIMCFilenameRight = "Prod_Coin_{}.root".format(kinematics[0]+"right_"+kinematics[1])
+InSIMCFilenameLeft = "Prod_Coin_{}.root".format(kinematics[0]+"left_"+kinematics[1])
+InSIMCFilenameCenter = "Prod_Coin_{}.root".format(kinematics[0]+"center_"+kinematics[1])
 
 ################################################################################################################################################
 '''
