@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:02:11 trottar"
+# Time-stamp: "2023-01-16 16:06:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -35,7 +35,6 @@ EbeamValCenter = sys.argv[6].split(" ")
 runNumRight = sys.argv[7].split(" ")
 runNumLeft = sys.argv[8].split(" ")
 runNumCenter = sys.argv[9].split(" ")
-
 
 kinematics = sys.argv[10].split("_")
 
@@ -129,21 +128,18 @@ if not os.path.exists(f_list):
 # Open a file in write mode
 with open(f_list, 'r') as f:
     lines = f.readlines()
-    if float(runNumRight[0]) != 0.0:
+    if int(runNumRight[0]) == 0:
         # Write the value of the variable to the file
-        for i,thpq in enumerate(EbeamValRight):
-            # convert uC to C (10^-6C=1uC)
-            check_line = "{} {} {} {}\n".format(EbeamValRight[i],Q2,simc_right_normfactor,simc_right_nevents)
-            # Check if the line already exists
-            if check_line not in lines:
-                write_to_file(f_list,check_line)
-    if float(runNumLeft[0]) != 0.0:
-        for i,thpq in enumerate(EbeamValLeft):
-            check_line = "{} {} {} {}\n".format(EbeamValLeft[i],Q2,simc_left_normfactor,simc_left_nevents)
-            if check_line not in lines:
-                write_to_file(f_list,check_line)
-    if float(runNumCenter[0]) != 0.0:
-        for i,thpq in enumerate(EbeamValCenter):
-            check_line = "{} {} {} {}\n".format(EbeamValCenter[i],Q2,simc_center_normfactor,simc_center_nevents)
-            if check_line not in lines:
-                write_to_file(f_list,check_line)
+        # convert uC to C (10^-6C=1uC)
+        check_line = "{} {} {} {}\n".format(EbeamValRight[i],Q2,simc_right_normfactor,simc_right_nevents)
+        # Check if the line already exists
+        if check_line not in lines:
+            write_to_file(f_list,check_line)
+    if int(runNumLeft[0]) == 1:
+        check_line = "{} {} {} {}\n".format(EbeamValLeft[i],Q2,simc_left_normfactor,simc_left_nevents)
+        if check_line not in lines:
+            write_to_file(f_list,check_line)
+    if int(runNumCenter[0]) == 2:
+        check_line = "{} {} {} {}\n".format(EbeamValCenter[i],Q2,simc_center_normfactor,simc_center_nevents)
+        if check_line not in lines:
+            write_to_file(f_list,check_line)
