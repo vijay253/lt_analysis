@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:45:27 trottar"
+# Time-stamp: "2023-01-16 16:48:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -63,7 +63,8 @@ for line in f_simc_right:
     if "Ebeam" in line:
         val = line.split("=")
         EbeamValRight = float(val[1].replace("MeV\n",""))/1000
-    if "angle" in line:
+    if "angle" in line and !angle_flag:
+        angle_flag = True
         val = line.split("=")
         print("!!!!!!!!!!!!!!!!!!!!",val[1].replace("deg\n","").split("          ")[1])
         pThetaValRight = float(val[1].replace("deg\n","").split("          ")[1])
