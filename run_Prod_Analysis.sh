@@ -787,7 +787,7 @@ if [[ ${#data_right[@]} -ne 0 && $TargetType != "simc" ]]; then
 fi
 
 # Checks that array isn't empty
-if [ ${#data_left[@]} -ne 0 && $TargetType != "simc" ]; then
+if [[ ${#data_left[@]} -ne 0 && $TargetType != "simc" ]]; then
     DataChargeValLeft=()
     DataChargeErrLeft=()
     DataEffValLeft=()
@@ -820,7 +820,7 @@ if [ ${#data_left[@]} -ne 0 && $TargetType != "simc" ]; then
 fi
 
 # Checks that array isn't empty
-if [ ${#data_center[@]} -ne 0 && $TargetType != "simc" ]; then
+if [[ ${#data_center[@]} -ne 0 && $TargetType != "simc" ]]; then
     DataChargeValCenter=()
     DataChargeErrCenter=()
     DataEffValCenter=()
