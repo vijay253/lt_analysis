@@ -156,7 +156,7 @@ void ReadFile::Setting_file_loading_name() {
 
 	/*--------------------------------------------------*/	
 	/// Knematics setting loading 
-	//setting_ntp->ReadFile(eff_file_name);
+	setting_ntp->ReadFile(eff_file_name);
 
 	///*--------------------------------------------------*/
 	// Read center file
@@ -167,7 +167,7 @@ void ReadFile::Setting_file_loading_name() {
 	///*--------------------------------------------------*/
 	// Read Simulated data information file
 	/*--------------------------------------------------*/
-	//simc_ntp->ReadFile(simc_file_name);
+	simc_ntp->ReadFile(simc_file_name);
 
 
 
