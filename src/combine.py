@@ -77,164 +77,164 @@ def Setting_by_setting(file_name):
 
 
 
-#        if (plot_name == "u"): 
-#           missmass_tmp = tgt_file.Get("t")
-#           missmass.append(missmass_tmp)
-#        
-#            missmass_tmp = dum_file.Get("t")
-#            missmass.append(missmass_tmp)
-# 
-#        else:
+       #        if (plot_name == "u"): 
+       #           missmass_tmp = tgt_file.Get("t")
+       #           missmass.append(missmass_tmp)
+       #        
+       #            missmass_tmp = dum_file.Get("t")
+       #            missmass.append(missmass_tmp)
+       # 
+       #        else:
        missmass_tmp = tgt_file.Get(in_plot_name)
        missmass.append(missmass_tmp)
         
-        missmass_tmp = dum_file.Get(in_plot_name)
-        missmass.append(missmass_tmp)
+       missmass_tmp = dum_file.Get(in_plot_name)
+       missmass.append(missmass_tmp)
     
 
 
 
 
 
-        missmass_tmp = sim_file.Get(in_plot_name)
-        missmass.append(missmass_tmp)
-        
-        missmass_tmp = missmass[0].Clone()
-        missmass_tmp_dummy = missmass[1].Clone()
-
-       missmass_tmp.Add(missmass_tmp_dummy, -1)
-        missmass.append(missmass_tmp)
-
-
-
-
-
-       c1 = TCanvas() 
-    
-#        if(missmass[0].GetMaximum() > missmass[2].GetMaximum()):
-#           missmass[2].SetMaximum(missmass[0].GetMaximum() + 0.2*missmass[0].GetMaximum());
-    
-
-        missmass[0].Draw()
-    
-       missmass[1].SetLineColor(3)
-        missmass[1].Draw("same")
-    
-
-       missmass[3].SetLineColor(4)
-        missmass[3].Draw("same")
-    
-
-       print("111111111111")
-
-       missmass[2].Scale(scale_factor)
-
-       missmass[2].SetLineColor(2)
-        missmass[2].Draw("same")
-
-    
-       file_out.cd()
-       c1.Write(plot_name)
-
-
-       c2 = TCanvas() 
-
-       missmass[3].Draw()
-
-
-
-       rightmax = 1.1 * missmass[2].GetMaximum()
-
-       if (rightmax != 0) : 
-          scale = missmass[3].GetMaximum()/rightmax
-       else:
-          scale = 1
-
-       missmass[2].Scale(scale)
-        missmass[2].Draw("same")
-
-
-       rightmax = 1.1 * missmass[4].GetMaximum()
-
-       if (rightmax != 0) : 
-          scale = missmass[3].GetMaximum()/rightmax
-       else:
-          scale = 1
-
-       missmass[4].Scale(scale)
-        missmass[4].Draw("same")
-
-
-       rightmax = 1.1 * missmass[5].GetMaximum()
-
-       if (rightmax != 0) : 
-          scale = missmass[3].GetMaximum()/rightmax
-       else:
-          scale = 1
-
-       missmass[5].Scale(scale)
-        missmass[5].Draw("same")
-
-
-
-
-       rightmax = 1.1 * missmass[6].GetMaximum()
-
-       if (rightmax != 0) : 
-          scale = missmass[3].GetMaximum()/rightmax
-       else:
-          scale = 1
-
-       missmass[6].Scale(scale)
-        missmass[6].Draw("same")
-
-
-
-
-       rightmax = 1.1 * missmass[7].GetMaximum()
-
-       if (rightmax != 0) : 
-          scale = missmass[3].GetMaximum()/rightmax
-       else:
-          scale = 1
-
-       missmass[7].Scale(scale)
-        missmass[7].Draw("same")
-
-
-
-#        TGaxis *axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
-#        gPad->GetUxmax(), gPad->GetUymax(),0,rightmax,510,"+L");
-#        axis->SetLineColor(kRed);
-#        axis->SetTextColor(kRed);
-#        axis->Draw();
+       missmass_tmp = sim_file.Get(in_plot_name)
+       missmass.append(missmass_tmp)
        
+       missmass_tmp = missmass[0].Clone()
+       missmass_tmp_dummy = missmass[1].Clone()
+
+      missmass_tmp.Add(missmass_tmp_dummy, -1)
+       missmass.append(missmass_tmp)
 
 
-#        missmass[4].Draw("same")
-#        missmass[5].Draw("same")
 
-       c2.Write(plot_name + "_dummy_sub_sim")
 
-       
-#        c3 = TCanvas() 
+
+      c1 = TCanvas() 
+    
+#       if(missmass[0].GetMaximum() > missmass[2].GetMaximum()):
+#         missmass[2].SetMaximum(missmass[0].GetMaximum() + 0.2*missmass[0].GetMaximum());
+    
+
+       missmass[0].Draw()
+    
+      missmass[1].SetLineColor(3)
+       missmass[1].Draw("same")
+    
+
+      missmass[3].SetLineColor(4)
+       missmass[3].Draw("same")
+    
+
+      print("111111111111")
+
+      missmass[2].Scale(scale_factor)
+
+      missmass[2].SetLineColor(2)
+       missmass[2].Draw("same")
+
+    
+      file_out.cd()
+      c1.Write(plot_name)
+
+
+      c2 = TCanvas() 
+
+      missmass[3].Draw()
+
+
+
+      rightmax = 1.1 * missmass[2].GetMaximum()
+
+      if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+      else:
+        scale = 1
+
+      missmass[2].Scale(scale)
+       missmass[2].Draw("same")
+
+
+      rightmax = 1.1 * missmass[4].GetMaximum()
+
+      if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+      else:
+        scale = 1
+
+      missmass[4].Scale(scale)
+       missmass[4].Draw("same")
+
+
+      rightmax = 1.1 * missmass[5].GetMaximum()
+
+      if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+      else:
+        scale = 1
+
+      missmass[5].Scale(scale)
+       missmass[5].Draw("same")
+
+
+
+
+      rightmax = 1.1 * missmass[6].GetMaximum()
+
+      if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+      else:
+        scale = 1
+
+      missmass[6].Scale(scale)
+       missmass[6].Draw("same")
+
+
+
+
+      rightmax = 1.1 * missmass[7].GetMaximum()
+
+      if (rightmax != 0) : 
+        scale = missmass[3].GetMaximum()/rightmax
+      else:
+        scale = 1
+
+      missmass[7].Scale(scale)
+       missmass[7].Draw("same")
+
+
+
+#       TGaxis *axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
+#       gPad->GetUxmax(), gPad->GetUymax(),0,rightmax,510,"+L");
+#       axis->SetLineColor(kRed);
+#       axis->SetTextColor(kRed);
+#       axis->Draw();
+      
+
+
+#       missmass[4].Draw("same")
+#       missmass[5].Draw("same")
+
+      c2.Write(plot_name + "_dummy_sub_sim")
+
+      
+#       c3 = TCanvas() 
 # 
-#        missmass[3].Add(missmass[2], -1);
+#       missmass[3].Add(missmass[2], -1);
 # 
-#        missmass[3].Draw("hist")
+#       missmass[3].Draw("hist")
 # 
-#        c3.Write(plot_name + "_bg")
+#       c3.Write(plot_name + "_bg")
 
 
-#        if plot_name == "missmass":
-# #          print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ")
+#       if plot_name == "missmass":
+# #        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ")
 # 
-#           Fit_missmass(missmass[2], missmass[3])       
-#           
+#         Fit_missmass(missmass[2], missmass[3])      
+#         
  
-#       c4 = TCanvas()
-       
-       
+#      c4 = TCanvas()
+      
+      
 
     # /*--------------------------------------------------*/
     # Missing mass in u-phi bin
@@ -249,71 +249,71 @@ def Setting_by_setting(file_name):
     c4 = TCanvas()
     c4.Divide(phi_bin_num, t_bin_num)
 
-    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 
     for i in range(1, t_bin_num * phi_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_miss")
-        h_tgt_sub = h_tgt.Clone("h_miss_sub")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_miss")
+       h_tgt_sub = h_tgt.Clone("h_miss_sub")
 
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_miss")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_miss")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_miss")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_miss")
     
-#        h_sim.SetName("h_miss_sim")
-#        h_sim_rho.SetName("h_miss_sim_rho")
-#        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#       h_sim.SetName("h_miss_sim")
+#       h_sim_rho.SetName("h_miss_sim_rho")
+#       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 # 
-       h_tgt.SetName("t_phi_target")
-       h_tgt_sub.SetName("t_phi_target")
-       h_sim.SetName("t_phi_sim")
+      h_tgt.SetName("t_phi_target")
+      h_tgt_sub.SetName("t_phi_target")
+      h_sim.SetName("t_phi_sim")
 
-       h_tgt_sub.Add(h_dum, -1)
+      h_tgt_sub.Add(h_dum, -1)
 
-       for ii in range(1, h_tgt_sub.GetNbinsX()):
+      for ii in range(1, h_tgt_sub.GetNbinsX()):
 
-#           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-#              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+#            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-#           if(h_dum.GetBinContent(ii) == 0): 
-#              sub_error = h_tgt.GetBinError(ii)
-#           elif(h_tgt.GetBinContent(ii) == 0): 
-#              sub_error = 1.0
-#           else: 
-#             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+#         if(h_dum.GetBinContent(ii) == 0): 
+#            sub_error = h_tgt.GetBinError(ii)
+#         elif(h_tgt.GetBinContent(ii) == 0): 
+#            sub_error = 1.0
+#         else: 
+#           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 
-          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-          h_tgt_sub.SetBinError(ii, sub_error)
+        h_tgt_sub.SetBinError(ii, sub_error)
  
 
 
-       c4.cd(i);
+      c4.cd(i);
 
-       h_sim.SetLineColor(2);
-       h_dum.SetLineColor(3);
+      h_sim.SetLineColor(2);
+      h_dum.SetLineColor(3);
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same")
-
-
+#      h_tgt.Draw();
+#      h_dum.Draw("same")
 
 
-#       h_tgt.Draw()
 
 
-       h_tgt_sub.DrawCopy();
-
-       h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
-       h_temp.SetName("t_phi_target")
+#      h_tgt.Draw()
 
 
-       h_sim.Scale(scale_factor)
+      h_tgt_sub.DrawCopy();
 
-       h_sim.Draw("same")
+      h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
+      h_temp.SetName("t_phi_target")
 
-       print(i, " asdasdasdasd ")
+
+      h_sim.Scale(scale_factor)
+
+      h_sim.Draw("same")
+
+      print(i, " asdasdasdasd ")
 
     c4.Write("missmass_t_phi_bin")
 
@@ -334,70 +334,70 @@ def Setting_by_setting(file_name):
     c4 = TCanvas()
     c4.Divide(phi_bin_num, t_bin_num)
 
-    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 
     for i in range(1, t_bin_num * phi_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_Em")
-        h_tgt_sub = h_tgt.Clone("h_Em_sub")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_Em")
+       h_tgt_sub = h_tgt.Clone("h_Em_sub")
 
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_Em")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_Em")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_Em")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_Em")
     
-#        h_sim.SetName("h_miss_sim")
-#        h_sim_rho.SetName("h_miss_sim_rho")
-#        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#       h_sim.SetName("h_miss_sim")
+#       h_sim_rho.SetName("h_miss_sim_rho")
+#       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 # 
-       h_tgt.SetName("t_phi_target")
-       h_tgt_sub.SetName("t_phi_target")
-       h_sim.SetName("t_phi_sim")
+      h_tgt.SetName("t_phi_target")
+      h_tgt_sub.SetName("t_phi_target")
+      h_sim.SetName("t_phi_sim")
 
-       h_tgt_sub.Add(h_dum, -1)
+      h_tgt_sub.Add(h_dum, -1)
 
-       for ii in range(1, h_tgt_sub.GetNbinsX()):
+      for ii in range(1, h_tgt_sub.GetNbinsX()):
 
-#           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-#              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+#            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-#           if(h_dum.GetBinContent(ii) == 0): 
-#              sub_error = h_tgt.GetBinError(ii)
-#           elif(h_tgt.GetBinContent(ii) == 0): 
-#              sub_error = 1.0
-#           else: 
-#             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+#         if(h_dum.GetBinContent(ii) == 0): 
+#            sub_error = h_tgt.GetBinError(ii)
+#         elif(h_tgt.GetBinContent(ii) == 0): 
+#            sub_error = 1.0
+#         else: 
+#           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 
-          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-          h_tgt_sub.SetBinError(ii, sub_error)
+        h_tgt_sub.SetBinError(ii, sub_error)
  
 
 
-       c4.cd(i);
+      c4.cd(i);
 
-       h_sim.SetLineColor(2);
-       h_dum.SetLineColor(3);
+      h_sim.SetLineColor(2);
+      h_dum.SetLineColor(3);
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same")
-
-
+#      h_tgt.Draw();
+#      h_dum.Draw("same")
 
 
-#       h_tgt.Draw()
 
 
-       h_tgt_sub.DrawCopy();
-       h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
-       h_temp.SetName("t_phi_target")
+#      h_tgt.Draw()
 
 
-       h_sim.Scale(scale_factor)
+      h_tgt_sub.DrawCopy();
+      h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
+      h_temp.SetName("t_phi_target")
 
-       h_sim.Draw("same")
 
-       print(i, " asdasdasdasd ")
+      h_sim.Scale(scale_factor)
+
+      h_sim.Draw("same")
+
+      print(i, " asdasdasdasd ")
 
     c4.Write("Em_t_phi_bin")
 
@@ -415,71 +415,71 @@ def Setting_by_setting(file_name):
     c4 = TCanvas()
     c4.Divide(phi_bin_num, t_bin_num)
 
-    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 
     for i in range(1, t_bin_num * phi_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_Pm")
-        h_tgt_sub = h_tgt.Clone("h_Pm_sub")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_Pm")
+       h_tgt_sub = h_tgt.Clone("h_Pm_sub")
 
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_Pm")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_Pm")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_Pm")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_Pm")
 
     
-#        h_sim.SetName("h_miss_sim")
-#        h_sim_rho.SetName("h_miss_sim_rho")
-#        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#       h_sim.SetName("h_miss_sim")
+#       h_sim_rho.SetName("h_miss_sim_rho")
+#       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 # 
-       h_tgt.SetName("t_phi_target")
-       h_tgt_sub.SetName("t_phi_target")
-       h_sim.SetName("t_phi_sim")
+      h_tgt.SetName("t_phi_target")
+      h_tgt_sub.SetName("t_phi_target")
+      h_sim.SetName("t_phi_sim")
 
-       h_tgt_sub.Add(h_dum, -1)
+      h_tgt_sub.Add(h_dum, -1)
 
-       for ii in range(1, h_tgt_sub.GetNbinsX()):
+      for ii in range(1, h_tgt_sub.GetNbinsX()):
 
-#           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-#              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+#            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-#           if(h_dum.GetBinContent(ii) == 0): 
-#              sub_error = h_tgt.GetBinError(ii)
-#           elif(h_tgt.GetBinContent(ii) == 0): 
-#              sub_error = 1.0
-#           else: 
-#             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+#         if(h_dum.GetBinContent(ii) == 0): 
+#            sub_error = h_tgt.GetBinError(ii)
+#         elif(h_tgt.GetBinContent(ii) == 0): 
+#            sub_error = 1.0
+#         else: 
+#           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 
-          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-          h_tgt_sub.SetBinError(ii, sub_error)
+        h_tgt_sub.SetBinError(ii, sub_error)
  
 
 
-       c4.cd(i);
+      c4.cd(i);
 
-       h_sim.SetLineColor(2);
-       h_dum.SetLineColor(3);
+      h_sim.SetLineColor(2);
+      h_dum.SetLineColor(3);
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same")
-
-
+#      h_tgt.Draw();
+#      h_dum.Draw("same")
 
 
-#       h_tgt.Draw()
 
 
-       h_tgt_sub.DrawCopy();
-       h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
-       h_temp.SetName("t_phi_target")
+#      h_tgt.Draw()
 
 
-       h_sim.Scale(scale_factor)
+      h_tgt_sub.DrawCopy();
+      h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
+      h_temp.SetName("t_phi_target")
 
-       h_sim.Draw("same")
 
-       print(i, " asdasdasdasd ")
+      h_sim.Scale(scale_factor)
+
+      h_sim.Draw("same")
+
+      print(i, " asdasdasdasd ")
 
     c4.Write("Pm_t_phi_bin")
 
@@ -500,70 +500,70 @@ def Setting_by_setting(file_name):
     c4 = TCanvas()
     c4.Divide(phi_bin_num, t_bin_num)
 
-    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 
     for i in range(1, t_bin_num * phi_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
-        h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
+       h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
 
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
-         
-#        h_sim.SetName("h_miss_sim")
-#        h_sim_rho.SetName("h_miss_sim_rho")
-#        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
+        
+#       h_sim.SetName("h_miss_sim")
+#       h_sim_rho.SetName("h_miss_sim_rho")
+#       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 # 
-       h_tgt.SetName("t_phi_target")
-       h_tgt_sub.SetName("t_phi_target")
-       h_sim.SetName("t_phi_sim")
+      h_tgt.SetName("t_phi_target")
+      h_tgt_sub.SetName("t_phi_target")
+      h_sim.SetName("t_phi_sim")
 
-       h_tgt_sub.Add(h_dum, -1)
+      h_tgt_sub.Add(h_dum, -1)
 
-       for ii in range(1, h_tgt_sub.GetNbinsX()):
+      for ii in range(1, h_tgt_sub.GetNbinsX()):
 
-#           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-#              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+#            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-#           if(h_dum.GetBinContent(ii) == 0): 
-#              sub_error = h_tgt.GetBinError(ii)
-#           elif(h_tgt.GetBinContent(ii) == 0): 
-#              sub_error = 1.0
-#           else: 
-#             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+#         if(h_dum.GetBinContent(ii) == 0): 
+#            sub_error = h_tgt.GetBinError(ii)
+#         elif(h_tgt.GetBinContent(ii) == 0): 
+#            sub_error = 1.0
+#         else: 
+#           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 
-          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-          h_tgt_sub.SetBinError(ii, sub_error)
+        h_tgt_sub.SetBinError(ii, sub_error)
  
 
 
-       c4.cd(i);
+      c4.cd(i);
 
-       h_sim.SetLineColor(2);
-       h_dum.SetLineColor(3);
+      h_sim.SetLineColor(2);
+      h_dum.SetLineColor(3);
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same")
-
-
+#      h_tgt.Draw();
+#      h_dum.Draw("same")
 
 
-#       h_tgt.Draw()
 
 
-       h_tgt_sub.DrawCopy();
-       h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
-       h_temp.SetName("t_phi_target")
+#      h_tgt.Draw()
 
 
-       h_sim.Scale(scale_factor)
+      h_tgt_sub.DrawCopy();
+      h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
+      h_temp.SetName("t_phi_target")
 
-       h_sim.Draw("same")
 
-       print(i, " asdasdasdasd ")
+      h_sim.Scale(scale_factor)
+
+      h_sim.Draw("same")
+
+      print(i, " asdasdasdasd ")
 
     c4.Write(plot_name + "_t_phi_bin")
 
@@ -584,72 +584,72 @@ def Setting_by_setting(file_name):
     c4 = TCanvas()
     c4.Divide(phi_bin_num, t_bin_num)
 
-    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 
     for i in range(1, t_bin_num * phi_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
-        h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
+       h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
 
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
 
     
-#        h_sim.SetName("h_miss_sim")
-#        h_sim_rho.SetName("h_miss_sim_rho")
-#        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#       h_sim.SetName("h_miss_sim")
+#       h_sim_rho.SetName("h_miss_sim_rho")
+#       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 # 
-       h_tgt.SetName("t_phi_target")
-       h_tgt_sub.SetName("t_phi_target")
-       h_sim.SetName("t_phi_sim")
+      h_tgt.SetName("t_phi_target")
+      h_tgt_sub.SetName("t_phi_target")
+      h_sim.SetName("t_phi_sim")
 
-       h_tgt_sub.Add(h_dum, -1)
+      h_tgt_sub.Add(h_dum, -1)
 
-       for ii in range(1, h_tgt_sub.GetNbinsX()):
+      for ii in range(1, h_tgt_sub.GetNbinsX()):
 
-#           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-#              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+#            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-#           if(h_dum.GetBinContent(ii) == 0): 
-#              sub_error = h_tgt.GetBinError(ii)
-#           elif(h_tgt.GetBinContent(ii) == 0): 
-#              sub_error = 1.0
-#           else: 
-#             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+#         if(h_dum.GetBinContent(ii) == 0): 
+#            sub_error = h_tgt.GetBinError(ii)
+#         elif(h_tgt.GetBinContent(ii) == 0): 
+#            sub_error = 1.0
+#         else: 
+#           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 
-          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-          h_tgt_sub.SetBinError(ii, sub_error)
+        h_tgt_sub.SetBinError(ii, sub_error)
  
 
 
-       c4.cd(i);
+      c4.cd(i);
 
-       h_sim.SetLineColor(2);
-       h_dum.SetLineColor(3);
+      h_sim.SetLineColor(2);
+      h_dum.SetLineColor(3);
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same")
-
-
-
-
-#       h_tgt.Draw()
-
-
-       h_tgt_sub.DrawCopy();
-       h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
-       h_temp.SetName("t_phi_target")
+#      h_tgt.Draw();
+#      h_dum.Draw("same")
 
 
 
-       h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+#      h_tgt.Draw()
 
-       print(i, " asdasdasdasd ")
+
+      h_tgt_sub.DrawCopy();
+      h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
+      h_temp.SetName("t_phi_target")
+
+
+
+      h_sim.Scale(scale_factor)
+
+      h_sim.Draw("same")
+
+      print(i, " asdasdasdasd ")
 
     c4.Write(plot_name + "_t_phi_bin")
 
@@ -671,72 +671,72 @@ def Setting_by_setting(file_name):
     c4 = TCanvas()
     c4.Divide(phi_bin_num, t_bin_num)
 
-    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 
     for i in range(1, t_bin_num * phi_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
-        h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
+       h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
 
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
 
     
-#        h_sim.SetName("h_miss_sim")
-#        h_sim_rho.SetName("h_miss_sim_rho")
-#        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#       h_sim.SetName("h_miss_sim")
+#       h_sim_rho.SetName("h_miss_sim_rho")
+#       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 # 
-       h_tgt.SetName("t_phi_target")
-       h_tgt_sub.SetName("t_phi_target")
-       h_sim.SetName("t_phi_sim")
+      h_tgt.SetName("t_phi_target")
+      h_tgt_sub.SetName("t_phi_target")
+      h_sim.SetName("t_phi_sim")
 
-       h_tgt_sub.Add(h_dum, -1)
+      h_tgt_sub.Add(h_dum, -1)
 
-       for ii in range(1, h_tgt_sub.GetNbinsX()):
+      for ii in range(1, h_tgt_sub.GetNbinsX()):
 
-#           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-#              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+#            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-#           if(h_dum.GetBinContent(ii) == 0): 
-#              sub_error = h_tgt.GetBinError(ii)
-#           elif(h_tgt.GetBinContent(ii) == 0): 
-#              sub_error = 1.0
-#           else: 
-#             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+#         if(h_dum.GetBinContent(ii) == 0): 
+#            sub_error = h_tgt.GetBinError(ii)
+#         elif(h_tgt.GetBinContent(ii) == 0): 
+#            sub_error = 1.0
+#         else: 
+#           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 
-          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 
-          h_tgt_sub.SetBinError(ii, sub_error)
+        h_tgt_sub.SetBinError(ii, sub_error)
  
 
 
-       c4.cd(i);
+      c4.cd(i);
 
-       h_sim.SetLineColor(2);
-       h_dum.SetLineColor(3);
+      h_sim.SetLineColor(2);
+      h_dum.SetLineColor(3);
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same")
-
-
-
-
-#       h_tgt.Draw()
-
-
-       h_tgt_sub.DrawCopy();
-       h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
-       h_temp.SetName("t_phi_target")
+#      h_tgt.Draw();
+#      h_dum.Draw("same")
 
 
 
-       h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+#      h_tgt.Draw()
 
-       print(i, " asdasdasdasd ")
+
+      h_tgt_sub.DrawCopy();
+      h_temp = c4.cd(i).GetPrimitive("t_phi_target_copy")
+      h_temp.SetName("t_phi_target")
+
+
+
+      h_sim.Scale(scale_factor)
+
+      h_sim.Draw("same")
+
+      print(i, " asdasdasdasd ")
 
     c4.Write(plot_name + "_t_phi_bin")
 
@@ -764,91 +764,91 @@ def Setting_by_setting(file_name):
 #    c4 = TCanvas()
 #    c4.Divide(phi_bin_num, t_bin_num)
 #
-#    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+#    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 #
 #    for i in range(1, t_bin_num * phi_bin_num + 1):
 #
-#       # ttpad = t_phi_tgt.GetPad(i)
+#      # ttpad = t_phi_tgt.GetPad(i)
 #
-#        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
-#        h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
+#       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
+#       h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
 #
-#       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
 #
-#       h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("h_" + plot_name)
 #
-#       h_sim_eta = t_phi_sim_eta.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim_etap = t_phi_sim_etap.GetPad(i).GetPrimitive("h_" + plot_name)
-#
-#    
+#      h_sim_eta = t_phi_sim_eta.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_etap = t_phi_sim_etap.GetPad(i).GetPrimitive("h_" + plot_name)
 #
 #    
-##        h_sim.SetName("h_miss_sim")
-##        h_sim_rho.SetName("h_miss_sim_rho")
-##        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#
+#    
+##       h_sim.SetName("h_miss_sim")
+##       h_sim_rho.SetName("h_miss_sim_rho")
+##       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 ## 
-#       h_tgt.SetName("t_phi_target")
-#       h_tgt_sub.SetName("t_phi_target")
-#       h_sim.SetName("t_phi_sim_omega")
-#       h_sim_rho.SetName("t_phi_sim_rho")
-#       h_sim_xphsp.SetName("t_phi_sim_xphsp")
-#       h_sim_eta.SetName("t_phi_sim_eta")
-#       h_sim_etap.SetName("t_phi_sim_etap")
+#      h_tgt.SetName("t_phi_target")
+#      h_tgt_sub.SetName("t_phi_target")
+#      h_sim.SetName("t_phi_sim_omega")
+#      h_sim_rho.SetName("t_phi_sim_rho")
+#      h_sim_xphsp.SetName("t_phi_sim_xphsp")
+#      h_sim_eta.SetName("t_phi_sim_eta")
+#      h_sim_etap.SetName("t_phi_sim_etap")
 #
-#       h_tgt_sub.Add(h_dum, -1)
+#      h_tgt_sub.Add(h_dum, -1)
 #
-#       for ii in range(1, h_tgt_sub.GetNbinsX()):
+#      for ii in range(1, h_tgt_sub.GetNbinsX()):
 #
-##           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-##              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+##         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+##            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 #
-##           if(h_dum.GetBinContent(ii) == 0): 
-##              sub_error = h_tgt.GetBinError(ii)
-##           elif(h_tgt.GetBinContent(ii) == 0): 
-##              sub_error = 1.0
-##           else: 
-##             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+##         if(h_dum.GetBinContent(ii) == 0): 
+##            sub_error = h_tgt.GetBinError(ii)
+##         elif(h_tgt.GetBinContent(ii) == 0): 
+##            sub_error = 1.0
+##         else: 
+##           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 #
-#          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 #
-#          h_tgt_sub.SetBinError(ii, sub_error)
+#        h_tgt_sub.SetBinError(ii, sub_error)
 # 
 #
 #
-#       c4.cd(i);
+#      c4.cd(i);
 #
-#       h_sim.SetLineColor(2);
-#       h_dum.SetLineColor(3);
+#      h_sim.SetLineColor(2);
+#      h_dum.SetLineColor(3);
 #
-##       h_tgt.Draw();
-##       h_dum.Draw("same")
-#
-#
+##      h_tgt.Draw();
+##      h_dum.Draw("same")
 #
 #
-##       h_tgt.Draw()
 #
 #
-#       h_tgt_sub.DrawCopy();
-#
-#       h_sim.Scale(omega_scale_factor)
-#       h_sim_rho.Scale(rho_scale_factor)
-#       h_sim_xphsp.Scale(xphsp_scale_factor)
-#       h_sim_eta.Scale(eta_scale_factor)
-#       h_sim_etap.Scale(etap_scale_factor)
+##      h_tgt.Draw()
 #
 #
-#       h_sim.Draw("same")
-#       h_sim_rho.Draw("same")
-#       h_sim_xphsp.Draw("same")
+#      h_tgt_sub.DrawCopy();
 #
-#       h_sim_eta.Draw("same")
-#       h_sim_etap.Draw("same")
+#      h_sim.Scale(omega_scale_factor)
+#      h_sim_rho.Scale(rho_scale_factor)
+#      h_sim_xphsp.Scale(xphsp_scale_factor)
+#      h_sim_eta.Scale(eta_scale_factor)
+#      h_sim_etap.Scale(etap_scale_factor)
 #
 #
-#       print(i, " asdasdasdasd ")
+#      h_sim.Draw("same")
+#      h_sim_rho.Draw("same")
+#      h_sim_xphsp.Draw("same")
+#
+#      h_sim_eta.Draw("same")
+#      h_sim_etap.Draw("same")
+#
+#
+#      print(i, " asdasdasdasd ")
 #
 #    c4.Write(plot_name + "_t_phi_bin")
 #
@@ -874,91 +874,91 @@ def Setting_by_setting(file_name):
 #    c4 = TCanvas()
 #    c4.Divide(phi_bin_num, t_bin_num)
 #
-#    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+#    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 #
 #    for i in range(1, t_bin_num * phi_bin_num + 1):
 #
-#       # ttpad = t_phi_tgt.GetPad(i)
+#      # ttpad = t_phi_tgt.GetPad(i)
 #
-#        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
-#        h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
+#       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
+#       h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
 #
-#       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
 #
-#       h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("h_" + plot_name)
 #
-#       h_sim_eta = t_phi_sim_eta.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim_etap = t_phi_sim_etap.GetPad(i).GetPrimitive("h_" + plot_name)
-#
-#    
+#      h_sim_eta = t_phi_sim_eta.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_etap = t_phi_sim_etap.GetPad(i).GetPrimitive("h_" + plot_name)
 #
 #    
-##        h_sim.SetName("h_miss_sim")
-##        h_sim_rho.SetName("h_miss_sim_rho")
-##        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#
+#    
+##       h_sim.SetName("h_miss_sim")
+##       h_sim_rho.SetName("h_miss_sim_rho")
+##       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 ## 
-#       h_tgt.SetName("t_phi_target")
-#       h_tgt_sub.SetName("t_phi_target")
-#       h_sim.SetName("t_phi_sim_omega")
-#       h_sim_rho.SetName("t_phi_sim_rho")
-#       h_sim_xphsp.SetName("t_phi_sim_xphsp")
-#       h_sim_eta.SetName("t_phi_sim_eta")
-#       h_sim_etap.SetName("t_phi_sim_etap")
+#      h_tgt.SetName("t_phi_target")
+#      h_tgt_sub.SetName("t_phi_target")
+#      h_sim.SetName("t_phi_sim_omega")
+#      h_sim_rho.SetName("t_phi_sim_rho")
+#      h_sim_xphsp.SetName("t_phi_sim_xphsp")
+#      h_sim_eta.SetName("t_phi_sim_eta")
+#      h_sim_etap.SetName("t_phi_sim_etap")
 #
-#       h_tgt_sub.Add(h_dum, -1)
+#      h_tgt_sub.Add(h_dum, -1)
 #
-#       for ii in range(1, h_tgt_sub.GetNbinsX()):
+#      for ii in range(1, h_tgt_sub.GetNbinsX()):
 #
-##           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-##              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+##         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+##            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 #
-##           if(h_dum.GetBinContent(ii) == 0): 
-##              sub_error = h_tgt.GetBinError(ii)
-##           elif(h_tgt.GetBinContent(ii) == 0): 
-##              sub_error = 1.0
-##           else: 
-##             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+##         if(h_dum.GetBinContent(ii) == 0): 
+##            sub_error = h_tgt.GetBinError(ii)
+##         elif(h_tgt.GetBinContent(ii) == 0): 
+##            sub_error = 1.0
+##         else: 
+##           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 #
-#          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 #
-#          h_tgt_sub.SetBinError(ii, sub_error)
+#        h_tgt_sub.SetBinError(ii, sub_error)
 # 
 #
 #
-#       c4.cd(i);
+#      c4.cd(i);
 #
-#       h_sim.SetLineColor(2);
-#       h_dum.SetLineColor(3);
+#      h_sim.SetLineColor(2);
+#      h_dum.SetLineColor(3);
 #
-##       h_tgt.Draw();
-##       h_dum.Draw("same")
-#
-#
+##      h_tgt.Draw();
+##      h_dum.Draw("same")
 #
 #
-##       h_tgt.Draw()
 #
 #
-#       h_tgt_sub.DrawCopy();
-#
-#       h_sim.Scale(omega_scale_factor)
-#       h_sim_rho.Scale(rho_scale_factor)
-#       h_sim_xphsp.Scale(xphsp_scale_factor)
-#       h_sim_eta.Scale(eta_scale_factor)
-#       h_sim_etap.Scale(etap_scale_factor)
+##      h_tgt.Draw()
 #
 #
-#       h_sim.Draw("same")
-#       h_sim_rho.Draw("same")
-#       h_sim_xphsp.Draw("same")
+#      h_tgt_sub.DrawCopy();
 #
-#       h_sim_eta.Draw("same")
-#       h_sim_etap.Draw("same")
+#      h_sim.Scale(omega_scale_factor)
+#      h_sim_rho.Scale(rho_scale_factor)
+#      h_sim_xphsp.Scale(xphsp_scale_factor)
+#      h_sim_eta.Scale(eta_scale_factor)
+#      h_sim_etap.Scale(etap_scale_factor)
 #
 #
-#       print(i, " asdasdasdasd ")
+#      h_sim.Draw("same")
+#      h_sim_rho.Draw("same")
+#      h_sim_xphsp.Draw("same")
+#
+#      h_sim_eta.Draw("same")
+#      h_sim_etap.Draw("same")
+#
+#
+#      print(i, " asdasdasdasd ")
 #
 #    c4.Write(plot_name + "_t_phi_bin")
 #
@@ -986,91 +986,91 @@ def Setting_by_setting(file_name):
 #    c4 = TCanvas()
 #    c4.Divide(phi_bin_num, t_bin_num)
 #
-#    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "        sadfsadf ")
+#    print("asdasasdasd   ", t_phi_tgt.GetNumber(), "       sadfsadf ")
 #
 #    for i in range(1, t_bin_num * phi_bin_num + 1):
 #
-#       # ttpad = t_phi_tgt.GetPad(i)
+#      # ttpad = t_phi_tgt.GetPad(i)
 #
-#        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
-#        h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
+#       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("h_" + plot_name)
+#       h_tgt_sub = h_tgt.Clone("h_" + plot_name + "_sub")
 #
-#       h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_dum = t_phi_dum.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim = t_phi_sim.GetPad(i).GetPrimitive("h_" + plot_name)
 #
-#       h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("h_" + plot_name)
 #
-#       h_sim_eta = t_phi_sim_eta.GetPad(i).GetPrimitive("h_" + plot_name)
-#       h_sim_etap = t_phi_sim_etap.GetPad(i).GetPrimitive("h_" + plot_name)
-#
-#    
+#      h_sim_eta = t_phi_sim_eta.GetPad(i).GetPrimitive("h_" + plot_name)
+#      h_sim_etap = t_phi_sim_etap.GetPad(i).GetPrimitive("h_" + plot_name)
 #
 #    
-##        h_sim.SetName("h_miss_sim")
-##        h_sim_rho.SetName("h_miss_sim_rho")
-##        h_sim_xphsp.SetName("h_miss_sim_xphsp")
+#
+#    
+##       h_sim.SetName("h_miss_sim")
+##       h_sim_rho.SetName("h_miss_sim_rho")
+##       h_sim_xphsp.SetName("h_miss_sim_xphsp")
 ## 
-#       h_tgt.SetName("t_phi_target")
-#       h_tgt_sub.SetName("t_phi_target")
-#       h_sim.SetName("t_phi_sim_omega")
-#       h_sim_rho.SetName("t_phi_sim_rho")
-#       h_sim_xphsp.SetName("t_phi_sim_xphsp")
-#       h_sim_eta.SetName("t_phi_sim_eta")
-#       h_sim_etap.SetName("t_phi_sim_etap")
+#      h_tgt.SetName("t_phi_target")
+#      h_tgt_sub.SetName("t_phi_target")
+#      h_sim.SetName("t_phi_sim_omega")
+#      h_sim_rho.SetName("t_phi_sim_rho")
+#      h_sim_xphsp.SetName("t_phi_sim_xphsp")
+#      h_sim_eta.SetName("t_phi_sim_eta")
+#      h_sim_etap.SetName("t_phi_sim_etap")
 #
-#       h_tgt_sub.Add(h_dum, -1)
+#      h_tgt_sub.Add(h_dum, -1)
 #
-#       for ii in range(1, h_tgt_sub.GetNbinsX()):
+#      for ii in range(1, h_tgt_sub.GetNbinsX()):
 #
-##           if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
-##              sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+##         if(h_tgt.GetBinContent(ii)== 0 or h_dum.GetBinContent(ii) == 0): 
+##            sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 #
-##           if(h_dum.GetBinContent(ii) == 0): 
-##              sub_error = h_tgt.GetBinError(ii)
-##           elif(h_tgt.GetBinContent(ii) == 0): 
-##              sub_error = 1.0
-##           else: 
-##             sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
+##         if(h_dum.GetBinContent(ii) == 0): 
+##            sub_error = h_tgt.GetBinError(ii)
+##         elif(h_tgt.GetBinContent(ii) == 0): 
+##            sub_error = 1.0
+##         else: 
+##           sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2) * h_tgt_sub.GetBinContent(ii)
 #
-#          sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
+#        sub_error = sqrt( h_tgt.GetBinError(ii)**2 + h_dum.GetBinError(ii)**2 )
 #
-#          h_tgt_sub.SetBinError(ii, sub_error)
+#        h_tgt_sub.SetBinError(ii, sub_error)
 # 
 #
 #
-#       c4.cd(i);
+#      c4.cd(i);
 #
-#       h_sim.SetLineColor(2);
-#       h_dum.SetLineColor(3);
+#      h_sim.SetLineColor(2);
+#      h_dum.SetLineColor(3);
 #
-##       h_tgt.Draw();
-##       h_dum.Draw("same")
-#
-#
+##      h_tgt.Draw();
+##      h_dum.Draw("same")
 #
 #
-##       h_tgt.Draw()
 #
 #
-#       h_tgt_sub.DrawCopy();
-#
-#       h_sim.Scale(omega_scale_factor)
-#       h_sim_rho.Scale(rho_scale_factor)
-#       h_sim_xphsp.Scale(xphsp_scale_factor)
-#       h_sim_eta.Scale(eta_scale_factor)
-#       h_sim_etap.Scale(etap_scale_factor)
+##      h_tgt.Draw()
 #
 #
-#       h_sim.Draw("same")
-#       h_sim_rho.Draw("same")
-#       h_sim_xphsp.Draw("same")
+#      h_tgt_sub.DrawCopy();
 #
-#       h_sim_eta.Draw("same")
-#       h_sim_etap.Draw("same")
+#      h_sim.Scale(omega_scale_factor)
+#      h_sim_rho.Scale(rho_scale_factor)
+#      h_sim_xphsp.Scale(xphsp_scale_factor)
+#      h_sim_eta.Scale(eta_scale_factor)
+#      h_sim_etap.Scale(etap_scale_factor)
 #
 #
-#       print(i, " asdasdasdasd ")
+#      h_sim.Draw("same")
+#      h_sim_rho.Draw("same")
+#      h_sim_xphsp.Draw("same")
+#
+#      h_sim_eta.Draw("same")
+#      h_sim_etap.Draw("same")
+#
+#
+#      print(i, " asdasdasdasd ")
 #
 #    c4.Write(plot_name + "_t_phi_bin")
 #
@@ -1117,36 +1117,36 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("missmass_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive("missmass_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive("missmass_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("missmass_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive("missmass_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive("missmass_real_var")
 
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName("missmass_t_sim")
-#        h_sim_rho.SetName("missmass_t_sim_rho")
-#        h_sim_xphsp.SetName("missmass_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName("missmass_t_sim")
+#       h_sim_rho.SetName("missmass_t_sim_rho")
+#       h_sim_xphsp.SetName("missmass_t_sim_xphsp")
 
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
 
     c5.Write("missmass_t_bin")
@@ -1173,38 +1173,38 @@ def Setting_by_setting(file_name):
 #    
 #    for i in range(1, t_bin_num + 1):
 # 
-#        # ttpad = t_phi_tgt.GetPad(i)
+#       # ttpad = t_phi_tgt.GetPad(i)
 # 
-#        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("W_real_var")
-#        h_dum = t_phi_dum.GetPad(i).GetPrimitive("W_real_var")
-#        h_sim = t_phi_sim.GetPad(i).GetPrimitive("W_real_var")
-#        h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("W_real_var")
-#        h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("W_real_var")
+#       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive("W_real_var")
+#       h_dum = t_phi_dum.GetPad(i).GetPrimitive("W_real_var")
+#       h_sim = t_phi_sim.GetPad(i).GetPrimitive("W_real_var")
+#       h_sim_rho = t_phi_sim_rho.GetPad(i).GetPrimitive("W_real_var")
+#       h_sim_xphsp = t_phi_sim_xphsp.GetPad(i).GetPrimitive("W_real_var")
 #    
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName("W_t_sim")
-#        h_sim_rho.SetName("W_t_sim_rho")
-#        h_sim_xphsp.SetName("W_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName("W_t_sim")
+#       h_sim_rho.SetName("W_t_sim_rho")
+#       h_sim_xphsp.SetName("W_t_sim_xphsp")
 # 
-#        h_sim.SetLineColor(2)
-#        h_dum.SetLineColor(3)
+#       h_sim.SetLineColor(2)
+#       h_dum.SetLineColor(3)
 # 
-# #       h_tgt.Draw();
-# #       h_dum.Draw("same");
+# #      h_tgt.Draw();
+# #      h_dum.Draw("same");
 # 
-#        h_tgt.Add(h_dum, -1)
+#       h_tgt.Add(h_dum, -1)
 # 
-#        c5.cd(i);
+#       c5.cd(i);
 # 
-#        h_tgt.Draw()
+#       h_tgt.Draw()
 # 
-#        h_sim.Scale(omega_scale_factor)
-#        h_sim_rho.Scale(rho_scale_factor)
-#        h_sim_xphsp.Scale(xphsp_scale_factor)
+#       h_sim.Scale(omega_scale_factor)
+#       h_sim_rho.Scale(rho_scale_factor)
+#       h_sim_xphsp.Scale(xphsp_scale_factor)
 # 
-#        h_sim.Draw("same")
-#        h_sim_rho.Draw("same")
-#        h_sim_xphsp.Draw("same")
+#       h_sim.Draw("same")
+#       h_sim_rho.Draw("same")
+#       h_sim_xphsp.Draw("same")
 # 
 # 
 # 
@@ -1228,35 +1228,35 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
 
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName(plot_str + "_t_sim")
-#        h_sim_rho.SetName(plot_str + "_t_sim_rho")
-#        h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName(plot_str + "_t_sim")
+#       h_sim_rho.SetName(plot_str + "_t_sim_rho")
+#       h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
     c5.Write(plot_str + "_t_bin")
 
@@ -1280,37 +1280,37 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
 
-       print("111111111111    asdasdasdadsa")
+      print("111111111111    asdasdasdadsa")
     
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName(plot_str + "_t_sim")
-#        h_sim_rho.SetName(plot_str + "_t_sim_rho")
-#        h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName(plot_str + "_t_sim")
+#       h_sim_rho.SetName(plot_str + "_t_sim_rho")
+#       h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
     c5.Write(plot_str + "_t_bin")
 
@@ -1333,35 +1333,35 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
     
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName(plot_str + "_t_sim")
-#        h_sim_rho.SetName(plot_str + "_t_sim_rho")
-#        h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName(plot_str + "_t_sim")
+#       h_sim_rho.SetName(plot_str + "_t_sim_rho")
+#       h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
     c5.Write(plot_str + "_t_bin")
 
@@ -1383,35 +1383,35 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
     
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName(plot_str + "_t_sim")
-#        h_sim_rho.SetName(plot_str + "_t_sim_rho")
-#        h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName(plot_str + "_t_sim")
+#       h_sim_rho.SetName(plot_str + "_t_sim_rho")
+#       h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
     c5.Write(plot_str + "_t_bin")
 
@@ -1433,35 +1433,35 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
     
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName(plot_str + "_t_sim")
-#        h_sim_rho.SetName(plot_str + "_t_sim_rho")
-#        h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName(plot_str + "_t_sim")
+#       h_sim_rho.SetName(plot_str + "_t_sim_rho")
+#       h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
     c5.Write(plot_str + "_t_bin")
 
@@ -1483,35 +1483,35 @@ def Setting_by_setting(file_name):
     
     for i in range(1, t_bin_num + 1):
 
-       # ttpad = t_phi_tgt.GetPad(i)
+      # ttpad = t_phi_tgt.GetPad(i)
 
-        h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
-       h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
+       h_tgt = t_phi_tgt.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_dum = t_phi_dum.GetPad(i).GetPrimitive(plot_str + "_real_var")
+      h_sim = t_phi_sim.GetPad(i).GetPrimitive(plot_str + "_real_var")
     
-#        # h_tgt.SetName("missmass_t_real")
-#        h_sim.SetName(plot_str + "_t_sim")
-#        h_sim_rho.SetName(plot_str + "_t_sim_rho")
-#        h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
+#       # h_tgt.SetName("missmass_t_real")
+#       h_sim.SetName(plot_str + "_t_sim")
+#       h_sim_rho.SetName(plot_str + "_t_sim_rho")
+#       h_sim_xphsp.SetName(plot_str + "_t_sim_xphsp")
 
-       h_tgt.SetName("t_target")
-       h_sim.SetName("t_sim")
+      h_tgt.SetName("t_target")
+      h_sim.SetName("t_sim")
 
-       h_sim.SetLineColor(2)
-       h_dum.SetLineColor(3)
+      h_sim.SetLineColor(2)
+      h_dum.SetLineColor(3)
 
-#       h_tgt.Draw();
-#       h_dum.Draw("same");
+#      h_tgt.Draw();
+#      h_dum.Draw("same");
 
-       h_tgt.Add(h_dum, -1)
+      h_tgt.Add(h_dum, -1)
 
-       c5.cd(i);
+      c5.cd(i);
 
-       h_tgt.Draw()
+      h_tgt.Draw()
 
-       h_sim.Scale(scale_factor)
+      h_sim.Scale(scale_factor)
 
-       h_sim.Draw("same")
+      h_sim.Draw("same")
 
     c5.Write(plot_str + "_t_bin")
 
@@ -1574,7 +1574,7 @@ def Fit_missmass(missmass_sim, missmass_tot):
 #    c5 = TCanvas() 
 # 
 #    missmass_sub.SetOption("E")
-#     missmass_sub.Draw()
+#    missmass_sub.Draw()
 # 
 
 #    f1.Draw("same")
@@ -1642,10 +1642,10 @@ q2_setting    = ["160", "245"]
 
 #q2_setting    = ["160"]
 
-eps_160       = ["32",  "59"]
-#eps_160       = ["32"]
+eps_160      = ["32",  "59"]
+#eps_160      = ["32"]
 
-eps_245       = ["27", "55"]
+eps_245      = ["27", "55"]
 
 hms_angle_160_l  = ['+0970',  '+3000']
 hms_angle_160_h  = ['-2730',  '+0000', '+3000']
@@ -1657,44 +1657,44 @@ for setting in q2_setting:
 
 
     if float(setting) == 160:
-       for eps in eps_160:
-          if float(eps) == 32:
-             for angle in hms_angle_160_l:
-                print(setting + "_"+ eps  + "_" + angle)
-                Setting_by_setting(setting + "_"+ eps  + "_" + angle)
+      for eps in eps_160:
+        if float(eps) == 32:
+           for angle in hms_angle_160_l:
+             print(setting + "_"+ eps  + "_" + angle)
+             Setting_by_setting(setting + "_"+ eps  + "_" + angle)
 
-                #exit(0);
+             #exit(0);
 
-          else:
-             for angle in hms_angle_160_h:
-                print(setting + "_"+ eps  + "_" + angle)
-                Setting_by_setting(setting + "_"+ eps  + "_" + angle)
-       
-
-
-    else:       
-       for eps in eps_245:
-          if float(eps) == 27:
-             for angle in hms_angle_245_l:
-                print(setting + "_"+ eps  + "_" + angle)
-                Setting_by_setting(setting + "_"+ eps  + "_" + angle)
-          else:
-             for angle in hms_angle_245_h:
-                print(setting + "_"+ eps  + "_" + angle)
-                Setting_by_setting(setting + "_"+ eps  + "_" + angle)
+        else:
+           for angle in hms_angle_160_h:
+             print(setting + "_"+ eps  + "_" + angle)
+             Setting_by_setting(setting + "_"+ eps  + "_" + angle)
+      
 
 
+    else:      
+      for eps in eps_245:
+        if float(eps) == 27:
+           for angle in hms_angle_245_l:
+             print(setting + "_"+ eps  + "_" + angle)
+             Setting_by_setting(setting + "_"+ eps  + "_" + angle)
+        else:
+           for angle in hms_angle_245_h:
+             print(setting + "_"+ eps  + "_" + angle)
+             Setting_by_setting(setting + "_"+ eps  + "_" + angle)
 
 
 
 
-#                Setting_by_setting(setting + "_"+ eps  + "_" + angle)
 
-       
 
-#          for angle in hms_angle_160_l:
-#          print(setting + "_"+ eps  + "_" + angle)
 #             Setting_by_setting(setting + "_"+ eps  + "_" + angle)
+
+      
+
+#        for angle in hms_angle_160_l:
+#        print(setting + "_"+ eps  + "_" + angle)
+#           Setting_by_setting(setting + "_"+ eps  + "_" + angle)
 
 
 
@@ -1811,13 +1811,13 @@ for setting in q2_setting:
 #    missmass_tmp = tgt_file.Get(plot_name)
 #    missmass.append(missmass_tmp)
 # #    
-#     missmass_tmp = dum_file.Get(plot_name)
-#     missmass.append(missmass_tmp)
+#    missmass_tmp = dum_file.Get(plot_name)
+#    missmass.append(missmass_tmp)
 # #    
 # 
 # 
-#     missmass_tmp = sim_file.Get(plot_name)
-#     missmass.append(missmass_tmp)
+#    missmass_tmp = sim_file.Get(plot_name)
+#    missmass.append(missmass_tmp)
 # #
 # 
 # 
@@ -1832,16 +1832,16 @@ for setting in q2_setting:
 #    c1 = TCanvas() 
 # 
 #    if(missmass[0].GetMaximum() > missmass[2].GetMaximum()):
-#        missmass[2].SetMaximum(missmass[0].GetMaximum() + 0.2*missmass[0].GetMaximum());
+#       missmass[2].SetMaximum(missmass[0].GetMaximum() + 0.2*missmass[0].GetMaximum());
 # 
 # 
 #    missmass[2].SetLineColor(2)
-#     missmass[2].Draw()
+#    missmass[2].Draw()
 # 
 #    missmass[1].SetLineColor(3)
-#     missmass[1].Draw("same")
+#    missmass[1].Draw("same")
 # 
-#     missmass[0].Draw("same")
+#    missmass[0].Draw("same")
 # 
 # 
 #    file_out.cd()
@@ -1861,9 +1861,9 @@ for setting in q2_setting:
 
 # def func_advanced (x, p) :
 #    if (x[0] < 1.25) :
-#        return p[0] + p[1]*x[0] + p[2]*x[0]*x[0]
+#       return p[0] + p[1]*x[0] + p[2]*x[0]*x[0]
 #    else :
-#        return p[0] + p[1]*x[0] + 0.9*x[0]*x[0]
+#       return p[0] + p[1]*x[0] + 0.9*x[0]*x[0]
 
 
 
