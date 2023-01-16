@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:49:21 trottar"
+# Time-stamp: "2023-01-16 16:50:19 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -67,9 +67,7 @@ for line in f_simc_right:
     if "angle" in line and angle_flag == False:
         angle_flag = True
         val = line.split("=")
-        print("!!!!!!!!!!!!!!!!!!!!",val[1].replace("deg\n","").split("          ")[1])
         pThetaValRight = float(val[1].replace("deg\n","").split("          ")[1])
-        print("!!!!!!!!!!!!!!!!!!!!",pThetaValRight)
     if "Ngen" in line:
         val = line.split("=")
         simc_right_nevents = int(val[1])
@@ -91,10 +89,10 @@ for line in f_simc_left:
     if "Ebeam" in line:
         val = line.split("=")
         EbeamValLeft = float(val[1].replace("MeV\n",""))/1000
-    if "angle" in line:
+    if "angle" in line and angle_flag == False:
+        angle_flag = True
         val = line.split("=")
-        pThetaValLeft = float(val[1].replace("deg\n","").split("           ")[1])
-        print("!!!!!!!!!!!!!!!!!!!!",pThetaValLeft)        
+        pThetaValLeft = float(val[1].replace("deg\n","").split("          ")[1])
     if "Ngen" in line:
         val = line.split("=")
         simc_left_nevents = int(val[1])
@@ -116,10 +114,10 @@ for line in f_simc_center:
     if "Ebeam" in line:
         val = line.split("=")
         EbeamValCenter = float(val[1].replace("MeV\n",""))/1000
-    if "angle" in line:
+    if "angle" in line and angle_flag == False:
+        angle_flag = True
         val = line.split("=")
-        pThetaValCenter = float(val[1].replace("deg\n","").split("           ")[1])
-        print("!!!!!!!!!!!!!!!!!!!!",pThetaValCenter)        
+        pThetaValCenter = float(val[1].replace("deg\n","").split("          ")[1])
     if "Ngen" in line:
         val = line.split("=")
         simc_center_nevents = int(val[1])
