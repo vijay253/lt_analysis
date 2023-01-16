@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:13:34 trottar"
+# Time-stamp: "2023-01-16 16:14:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,7 +62,7 @@ for line in f_simc_right:
     #print(line)
     if "Ebeam" in line:
         val = line.split("=")
-        EbeamValRight = float(val[1])/1000
+        EbeamValRight = float(val[1].replace("MeV\n",""))/1000
     if "Ngen" in line:
         val = line.split("=")
         simc_right_nevents = int(val[1])
@@ -82,7 +82,7 @@ for line in f_simc_left:
     #print(line)
     if "Ebeam" in line:
         val = line.split("=")
-        EbeamValLeft = float(val[1])/1000    
+        EbeamValLeft = float(val[1].replace("MeV\n",""))/1000    
     if "Ngen" in line:
         val = line.split("=")
         simc_left_nevents = int(val[1])
@@ -102,7 +102,7 @@ for line in f_simc_center:
     #print(line)
     if "Ebeam" in line:
         val = line.split("=")
-        EbeamValCenter = float(val[1])/1000    
+        EbeamValCenter = float(val[1].replace("MeV\n",""))/1000    
     if "Ngen" in line:
         val = line.split("=")
         simc_center_nevents = int(val[1])
