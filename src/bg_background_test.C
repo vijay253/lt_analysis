@@ -119,8 +119,8 @@ void bg_background_test () {
 	TString q2_setting[2]     = {"5.5", "4.4", "3.3", "3.3", "2.115", "0.5"};
 	
 	TString eps_55[2]        = {"0.1838","0.5291"};
-	TString hms_angle_55_l[2]  = {"+0000", "+3000"};
-	TString hms_angle_55_h[3]  = {"-2730",  "+0000", "+3000"};
+	TString hms_angle_55_l[2]  = {"+0000", "+2295"};
+	TString hms_angle_55_h[3]  = {"-3055",  "+0000", "+3015"};
 	
 	TString eps_44[2]        = {"0.4805","0.7148"};
 
