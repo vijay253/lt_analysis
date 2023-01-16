@@ -38,9 +38,8 @@ void Analysis::Init() {
 
 	ReadFile* rff = new ReadFile(eff_file, off_file);
 
-	//kin_ana = rff->kin_pro;
-	simc_ana = rff->simc_pro;
-	//eff_ana = rff->eff_pro1;
+	kin_ana = rff->kin_pro;
+	//	eff_ana = rff->eff_pro1;
 	//cen_ana = rff->cen_pro;
 
 	//cen_runs = rff->Get_Cen_Runs();
