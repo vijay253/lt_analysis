@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:14:36 trottar"
+# Time-stamp: "2023-01-16 16:15:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -136,15 +136,15 @@ with open(f_list, 'r') as f:
     if int(runNumRight[0]) == 0:
         # Write the value of the variable to the file
         # convert uC to C (10^-6C=1uC)
-        check_line = "{} {} {} {}\n".format(EbeamValRight[0],Q2,simc_right_normfactor,simc_right_nevents)
+        check_line = "{} {} {} {}\n".format(EbeamValRight,Q2,simc_right_normfactor,simc_right_nevents)
         # Check if the line already exists
         if check_line not in lines:
             write_to_file(f_list,check_line)
     if int(runNumLeft[0]) == 1:
-        check_line = "{} {} {} {}\n".format(EbeamValLeft[0],Q2,simc_left_normfactor,simc_left_nevents)
+        check_line = "{} {} {} {}\n".format(EbeamValLeft,Q2,simc_left_normfactor,simc_left_nevents)
         if check_line not in lines:
             write_to_file(f_list,check_line)
     if int(runNumCenter[0]) == 2:
-        check_line = "{} {} {} {}\n".format(EbeamValCenter[0],Q2,simc_center_normfactor,simc_center_nevents)
+        check_line = "{} {} {} {}\n".format(EbeamValCenter,Q2,simc_center_normfactor,simc_center_nevents)
         if check_line not in lines:
             write_to_file(f_list,check_line)
