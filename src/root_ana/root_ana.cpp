@@ -98,24 +98,18 @@ TString Dummy_Name(int num_itt) {
 
 	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
 
-		dir_str.Form("yields.%i_%i_0000.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)));	
+	  dir_str.Form("yields.%i_%i_0000.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)));	
 
-	} else {
-
-	  if (int(kin_setting.thpqset[num_itt]*1000) > 0){
+	} else if (int(kin_setting.thpqset[num_itt]*1000) > 0) {
 	    
-	  }else{
 	    
-	    dir_str.Form("yields.%i_%i_+%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
+	  dir_str.Form("yields.%i_%i_+%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
 	    
-	  }
+	}else{
 	  
 	  dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
 
 	}
-
-
-
 
 	return dir_str;
 
@@ -133,20 +127,16 @@ TString Target_Name(int num_itt) {
 
 	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
 
-		dir_str.Form("yields.%i_%i_0000.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)));	
+	  dir_str.Form("yields.%i_%i_0000.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)));	
 
-	} else {
+	} else if (int(kin_setting.thpqset[num_itt]*1000) > 0){
 
-	  if (int(kin_setting.thpqset[num_itt]*1000) > 0){
-
-	    dir_str.Form("yields.%i_%i_+%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
+	  dir_str.Form("yields.%i_%i_+%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
 	    
-	  }else{
+	}else{
 
-	    dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
+	  dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
 	    
-	  }       
-
 	}
 
 	return dir_str;
@@ -191,12 +181,15 @@ int Return_Setting_dummy(int list_itt, int run_itt, int set_itt) {
 
 	if (int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000) == 0) {
 
-		run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_0000.dummy", int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000)); 
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_0000.dummy", int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000)); 
 
-	} else {
+	} else 	if (int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000) > 0) {
 
-		run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_%i.dummy", int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000));
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_+%i.dummy", int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000));
 
+	}else{
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_%i.dummy", int(eff_setting_dummy[set_itt].thpqset[run_itt]*1000));
+	  
 	}
 
 	// cout << "**** "<< setting_vec_dummy[set_itt] << "     " << run_setting_name << endl;
@@ -242,12 +235,15 @@ int Return_Setting_target(int list_itt, int run_itt, int set_itt) {
 
 	if (int(eff_setting_target[set_itt].thpqset[run_itt]*1000) == 0) {
 
-		run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_0000.target", int(eff_setting_target[set_itt].thpqset[run_itt]*1000)); 
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_0000.target", int(eff_setting_target[set_itt].thpqset[run_itt]*1000)); 
 
-	} else {
+	} else 	if (int(eff_setting_target[set_itt].thpqset[run_itt]*1000) > 0) {
 
-		run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_%i.target", int(eff_setting_target[set_itt].thpqset[run_itt]*1000));
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_+%i.target", int(eff_setting_target[set_itt].thpqset[run_itt]*1000));
 
+	}else{
+
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_%i.target", int(eff_setting_target[set_itt].thpqset[run_itt]*1000));
 	}
 
 	//cout << "What is the problem?? " << endl;
@@ -277,12 +273,15 @@ int Return_Setting(int list_itt, int run_itt, int set_itt) {
 
 	if (int(eff_setting[set_itt].thpqset[run_itt]*1000) == 0) {
 
-		run_setting_name.Form( "yields." + Q2_vec[list_itt] + "_0000.dummy", int(eff_setting[set_itt].thpqset[run_itt]*1000)); 
+	  run_setting_name.Form( "yields." + Q2_vec[list_itt] + "_0000.dummy", int(eff_setting[set_itt].thpqset[run_itt]*1000)); 
+		
+	} else 	if (int(eff_setting[set_itt].thpqset[run_itt]*1000) > 0) {
 
-	} else {
+	  run_setting_name.Form( "yields." + Q2_vec[list_itt] + "_+%i.dummy", int(eff_setting[set_itt].thpqset[run_itt]*1000));
 
-		run_setting_name.Form( "yields." + Q2_vec[list_itt] + "_%i.dummy", int(eff_setting[set_itt].thpqset[run_itt]*1000));
+	}else{
 
+	  run_setting_name.Form( "yields." + Q2_vec[list_itt] + "_%i.dummy", int(eff_setting[set_itt].thpqset[run_itt]*1000));
 	}
 
 
