@@ -94,7 +94,7 @@ ReadFile::ReadFile(TString simc_file_name_tmp) {
 	///*--------------------------------------------------*/
 	// Read Simulated data information file
 	/*--------------------------------------------------*/
-
+	cout << "!!~~~~~~~~~~~~~~~~~~~" << simc_file_name_tmp << endl;
 	simc_file_name = simc_file_name_tmp;
 	cout << "!!~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
 	//Simc_Pro_Array_Load();
