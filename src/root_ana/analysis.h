@@ -57,7 +57,7 @@ class Analysis {
 		ReadFile::kinematics_profile kin_ana;
 		ReadFile::efficiency_profile eff_ana;
 		ReadFile::center_profile 	 cen_ana;
-		ReadFile::sim_profile 	 	 sim_ana;
+		ReadFile::simc_profile 	 	 simc_ana;
 
 		bool is_run_dummy;
 		bool is_run_simc;
@@ -106,7 +106,7 @@ class Analysis {
      	TH1F* mm_setting;	
 
 
-//		TString sim_file;
+//		TString simc_file;
 
 		
 
@@ -161,7 +161,7 @@ class Analysis {
 
 		TList* list;
 		
-		TString sim_ana_name;
+		TString simc_ana_name;
 
 	private:
 

@@ -28,8 +28,8 @@ class ReadFile {
 
 		void Cen_Pro_Array_Load();
 
-		void Sim_Pro_Array_Load();
-		void Sim_Pro_Array_Omega_Load();
+		void Simc_Pro_Array_Load();
+		void Simc_Pro_Array_Omega_Load();
 
 		void Calculate_t_Width();
 
@@ -95,7 +95,7 @@ class ReadFile {
 
 
 
-		struct sim_profile {
+		struct simc_profile {
 
 			Double_t* q2_setting;  
 			Double_t* ebeam;  
@@ -106,7 +106,7 @@ class ReadFile {
 			Double_t* normfac;     
 			Int_t* event_num; 	  	  
 
-		} sim_pro;
+		} simc_pro;
 
 
 		~ReadFile();
@@ -154,7 +154,7 @@ class ReadFile {
 		TNtuple* setting_ntp;
 		TNtuple* eff_ntp;
 		TNtuple* center_ntp; 
-		TNtuple* sim_ntp; 
+		TNtuple* simc_ntp; 
 
 		Int_t set_runs;
 		Int_t num_runs;
@@ -162,7 +162,7 @@ class ReadFile {
 
 		TString eff_file_name;
 		TString off_file_name;
-		TString sim_file_name;
+		TString simc_file_name;
 
 
 };
