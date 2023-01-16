@@ -131,9 +131,13 @@ class ReadFile {
 
 		bool Get_Dummy() { return dummy_tar; };
 
+		bool Get_Simc() { return simc_tar; };
+
 		TString Get_List_File() { return list_file; };
 
 		bool dummy_tar;
+
+		bool simc_tar;
 
 		void Ntuple_Reset();
 

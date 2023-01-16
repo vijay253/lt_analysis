@@ -86,6 +86,7 @@ void Analysis::Init() {
 	list = new TList;
 
 	is_run_dummy = false;
+	is_run_simc = false;
 
 	diamond_setting     = new TMultiGraph();
 	diamond_setting_cut = new TMultiGraph();
@@ -103,10 +104,13 @@ void Analysis::Init() {
 void Analysis::Run_by_Run_Analysis(Int_t run_itt){
 
 	is_run_dummy = false;
+	is_run_simc = false;
 
 	cout << " sadadout_dirout_dir " << run_itt << endl;
 
 	cout << "Is the run dummy? " << is_run_dummy << endl;
+
+	cout << "Is the run simc? " << is_run_simc << endl;
 	
 	run_tree = Create_File();
 
@@ -325,9 +329,11 @@ void Analysis::Para_Run_Def(Int_t num) {
 	//cout << is_run_dummy << endl;
 
 	if (is_run_dummy) {
-		target = "Dummy"; 
-	} else {
-		target = "Real";
+	  target = "Dummy"; 
+	} else if (is_run_simc) {
+	  target = "Simc";
+	} else{
+	  target = "Real";
 	}
 	
  	//coin_center = cen_ana.center_mean[pos];	// ERROR!

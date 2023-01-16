@@ -116,6 +116,8 @@ void ReadFile::Read_init() {
 	// sim_ntp = new TNtuple("sim","sim", "q2:ebeam:normfac:event_num");
 
 	dummy_tar = false;
+	
+	simc_tar = false;
 
 //	string temp_str;
 //	temp_str = list_file;

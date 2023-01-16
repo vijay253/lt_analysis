@@ -17,9 +17,11 @@ int main() {
   Initialization();
 
 	Dummy_Load();
+	Simc_Load();
 	Target_Load();
 
 	Dummy_Setup();
+	Simc_Setup();
 	Target_Setup();
 
 	cout << endl << "/*--------------------------------------------------*/ " << endl;
@@ -27,6 +29,7 @@ int main() {
 //	cout         << "/*--------------------------------------------------*/ " << endl << endl;
 	
 	Dummy_Analysis();
+	Simc_Analysis();
 	Target_Analysis();
 
 //	cout << endl << "/*--------------------------------------------------*/ "  << endl;
@@ -72,12 +75,15 @@ void Initialization() {
 	/// Mod
 	
  	output_file_dummy  = new TFile*[set_runs];
+	output_file_simc  = new TFile*[set_runs];
  	output_file_target = new TFile*[set_runs];
 
  	ana_dummy 	       = new Analysis*[set_runs];
+	ana_simc 	       = new Analysis*[set_runs];
  	ana_target         = new Analysis*[set_runs];
 
  	eff_setting_dummy  = new ReadFile::eff_pro[set_runs];
+	eff_setting_simc  = new ReadFile::eff_pro[set_runs];
  	eff_setting_target = new ReadFile::eff_pro[set_runs];
 
 	cout << "Set Runs !!!  : " << set_runs << endl;
@@ -115,6 +121,31 @@ TString Dummy_Name(int num_itt) {
 
 }
 
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+
+TString Simc_Name(int num_itt) {
+
+	TString dir_str;
+
+	if (int(kin_setting.thpqset[num_itt]*1000) == 0) {
+
+	  dir_str.Form("yields.%i_%i_0000.simc", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)));	
+
+	} else if (int(kin_setting.thpqset[num_itt]*1000) > 0) {
+	    
+	    
+	  dir_str.Form("yields.%i_%i_+%i.simc", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
+	    
+	}else{
+	  
+	  dir_str.Form("yields.%i_%i_%i.simc", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
+
+	}
+
+	return dir_str;
+
+}
 
 
 
@@ -198,6 +229,43 @@ int Return_Setting_dummy(int list_itt, int run_itt, int set_itt) {
 
 	// 	cout << "AAAA" << setting_vec_dummy[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
 		cout << setting_vec_dummy[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
+
+		setting_num = set_itt;
+	}
+
+	return setting_num;
+
+}
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// Return Setting Number for Simc Runs
+int Return_Setting_simc(int list_itt, int run_itt, int set_itt) {
+
+	Int_t iii = 0;
+
+	
+ 	TString run_setting_name; 
+
+	if (int(eff_setting_simc[set_itt].thpqset[run_itt]*1000) == 0) {
+
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_0000.simc", int(eff_setting_simc[set_itt].thpqset[run_itt]*1000)); 
+
+	} else 	if (int(eff_setting_simc[set_itt].thpqset[run_itt]*1000) > 0) {
+
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_+%i.simc", int(eff_setting_simc[set_itt].thpqset[run_itt]*1000));
+
+	}else{
+	  run_setting_name.Form( "yields." + Q2_vec_mod[list_itt] + "_%i.simc", int(eff_setting_simc[set_itt].thpqset[run_itt]*1000));
+	  
+	}
+
+	// cout << "**** "<< setting_vec_simc[set_itt] << "     " << run_setting_name << endl;
+	
+	if (setting_vec_simc[set_itt] == run_setting_name) {
+
+	// 	cout << "AAAA" << setting_vec_simc[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
+		cout << setting_vec_simc[set_itt] << "  " << list_itt << "   " << run_itt  << "  " << set_itt << endl;
 
 		setting_num = set_itt;
 	}
@@ -333,6 +401,11 @@ void Cout_out_lists() {
 		cout << "Dummy run list:  " << a << "    " << lists_vec_dummy[a] << endl;
 	}
 
+	cout << endl;
+
+ 	for (int a=0; a < lists_vec_simc.size(); a++) {
+		cout << "Simc run list:  " << a << "    " << lists_vec_simc[a] << endl;
+	}
 
 
 
@@ -354,6 +427,12 @@ void Cout_out_lists() {
 
 	cout << endl;
 
+ 	for (int a=0; a < setting_vec_simc.size(); a++) {
+		cout << "Simc Setting list:  " << a << "    " << setting_vec_simc[a] << endl;
+	}
+	
+	cout << endl;
+
  	for (int a=0; a < run_list_vec.size(); a++) {
 		cout << "Run list vec:  " << a << "    " << run_list_vec[a] << endl;
 	}
@@ -369,6 +448,12 @@ void Cout_out_lists() {
 
 	for (int a=0; a < run_list_vec_dummy.size(); a++) {
 		cout << "Run list dummy vec:  " << a << "    " << run_list_vec_dummy[a] << endl;
+	}
+
+	cout << endl;
+
+	for (int a=0; a < run_list_vec_simc.size(); a++) {
+		cout << "Run list simc vec:  " << a << "    " << run_list_vec_simc[a] << endl;
 	}
 
 	cout << endl;
@@ -446,6 +531,74 @@ void Dummy_Load() {
 	setting_run_list_dummy.resize(ii);
 
 }
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// Loading Functions
+
+/*--------------------------------------------------*/
+/// Loading efficiency fill the untility arrays etc for the Simc Runs
+
+void Simc_Load() {
+
+	Int_t ii = 0;
+
+	for (Int_t i = 0; i < set_runs; i++) {
+
+		if (kin_setting.polset[i] > 0) {
+
+			output_file_simc[ii] = fo->Create_Out_File(Simc_Name(i));
+
+			list_name = list_dir + "list.simc_" + List_Name(i);
+			lists_vec_itt = find (lists_vec.begin(), lists_vec.end(), list_name);
+
+			if (!rf->File_exist(list_name) && rf->File_empty(list_name)) {
+
+				cout << "List file for Setting " << list_name << " doesn't exist !! " << endl;
+
+			} else {
+
+
+				if(lists_vec_itt == lists_vec.end()) {
+	
+					lists_vec.push_back(list_name);
+					rf->Eff_file_loading(list_name);
+	
+					num_runs = rf->Get_Num_Runs();
+		
+					/// Mod
+	 				run_list_vec_simc.push_back(num_runs);
+	
+				}
+	
+				Q2_vec_mod_itt = find(Q2_vec_mod.begin(), Q2_vec_mod.end(), List_Name(i));
+	
+				if(Q2_vec_mod_itt == Q2_vec_mod.end()) {
+					Q2_vec_mod.push_back(List_Name(i));
+				}
+	
+				eff_setting_simc[ii] = rf->eff_pro1;
+	
+				ana_simc[ii] = new Analysis(rf->eff_pro1);
+	
+				setting_vec_simc.push_back(Simc_Name(i));
+	
+	 			cout << Simc_Name(i) << endl;
+	
+				rf->Ntuple_Reset();
+	
+				ii++;
+	
+			}
+				
+		}
+
+	}
+
+	setting_run_list_simc.resize(ii);
+
+}
+
 
 //*--------------------------------------------------*/
 /// Loading efficiency fill the untility arrays etc for the Target Runs
@@ -549,6 +702,42 @@ void Dummy_Setup() {
 	}
 }
 
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// Setting-up Functions
+
+void Simc_Setup() {
+
+	cout << endl;
+	cout << "/*--------------------------------------------------*/" << endl;
+	cout << "             Setting up the simc runs                " << endl << endl;
+//	cout << "/*--------------------------------------------------*/" << endl;
+
+	/*--------------------------------------------------*/
+	/// Setting up the setting_run_list for the Simc runs
+
+	for (int i=0;  i < run_list_vec_simc.size(); i++) {
+	  
+	  cout << "Is this working ? " << i << "     " << run_list_vec_simc[i] << endl;
+
+	    for (int ii = 0; ii < run_list_vec_simc[i]; ii++) { 
+
+			int setting_num_tmp;
+
+			for (int iii = 0; iii < setting_vec_simc.size(); iii++) {
+				setting_num_tmp = Return_Setting_simc(i, ii, iii);
+			}
+
+			// cout << "Simc Seeeeeettting num tmp    " << setting_num_tmp << endl;
+
+			setting_run_list_simc[setting_num_tmp].push_back(ii);
+
+   	 	}	
+	}
+}
+
+
 /*--------------------------------------------------*/
 /// Setting up the setting_run_list for the Target runs
 
@@ -629,6 +818,46 @@ void Dummy_Analysis() {
 
 
 }
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// Analyzing Functions
+
+/*--------------------------------------------------*/
+/// Analyzing data run by run for the Simc Runs
+
+void Simc_Analysis() {
+
+	for(int i = 0; i < setting_run_list_simc.size(); i++) {
+//	for(int i = 0; i < 1; i++) {
+
+		if (setting_run_list_simc[i].size() != 0 ) {
+
+ 			ana_simc[i]->file_out_ana =  output_file_simc[i];
+// 
+ 			for (int ii = 0; ii < setting_run_list_simc[i].size(); ii++) {
+// 
+// 				cout << "run " << setting_run_list_simc[i][ii] << endl;
+// 
+				ana_simc[i]->is_run_simc = true;
+				ana_simc[i]->Run_by_Run_Analysis(setting_run_list_simc[i][ii]);
+//				cout << ii << endl;
+// 
+ 			}
+// 
+ 			cout << "******************" << endl;
+ 			ana_simc[i]->Yield_Out();
+
+		}
+
+	}
+
+
+
+
+}
+
+
 
 /*--------------------------------------------------*/
 /// Analyzing data run by run for the Target Runs
