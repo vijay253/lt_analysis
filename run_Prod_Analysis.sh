@@ -754,7 +754,7 @@ fi
 cd "${LTANAPATH}/scripts"
 
 # Checks that array isn't empty
-if [ ${#data_right[@]} -ne 0 && $TargetType != "simc" ]; then
+if [[ ${#data_right[@]} -ne 0 && $TargetType != "simc" ]]; then
     DataChargeValRight=()
     DataChargeErrRight=()
     DataEffValRight=()
