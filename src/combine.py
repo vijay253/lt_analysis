@@ -6,8 +6,6 @@ from math import sqrt, exp
 
 peak = TH1F()
 
-
-
 def Setting_by_setting(file_name):
 		
     missmass = []
