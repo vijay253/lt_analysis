@@ -270,7 +270,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0000) # LEFT, Q2=5p5, W=3p02
+		data_left+=(0001) # LEFT, Q2=5p5, W=3p02
 		echo "Run Numbers: [${data_left[@]}]"
 		echo	    
 	    else
@@ -289,7 +289,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
-		data_center+=(0000) # CENTER, Q2=5p5, W=3p02
+		data_center+=(0002) # CENTER, Q2=5p5, W=3p02
 		echo "Run Numbers: [${data_center[@]}]"
 		echo	    
 	    else
@@ -342,7 +342,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0000) # LEFT, Q2=4p4, W=2p74
+		data_left+=(0001) # LEFT, Q2=4p4, W=2p74
 		echo "Run Numbers: [${data_left[@]}]"
 		echo	    	    
 	    else
@@ -361,7 +361,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
-		data_center+=(0000) # CENTER, Q2=4p4, W=2p74
+		data_center+=(0002) # CENTER, Q2=4p4, W=2p74
 		echo "Run Numbers: [${data_center[@]}]"
 		echo	    	    	    
 	    else
@@ -414,7 +414,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0000) # LEFT, Q2=3p0, W=3p14
+		data_left+=(0001) # LEFT, Q2=3p0, W=3p14
 		echo "Run Numbers: [${data_left[@]}]"
 		echo	    	    	    	    
 	    else
@@ -433,7 +433,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
-		data_center+=(0000) # CENTER, Q2=3p0, W=3p14
+		data_center+=(0002) # CENTER, Q2=3p0, W=3p14
 		echo "Run Numbers: [${data_center[@]}]"
 		echo	    	    	    	    
 	    else
@@ -486,7 +486,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0000) # LEFT, Q2=3p0, W=2p32
+		data_left+=(0001) # LEFT, Q2=3p0, W=2p32
 		echo "Run Numbers: [${data_left[@]}]"
 		echo	    	    	    	    
 	    else
@@ -505,7 +505,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
-		data_center+=(0000) # CENTER, Q2=3p0, W=2p32
+		data_center+=(0002) # CENTER, Q2=3p0, W=2p32
 		echo "Run Numbers: [${data_center[@]}]"
 		echo	    	    	    	    
 	    else
@@ -558,7 +558,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0000) # LEFT, Q2=2p1, W=2p95
+		data_left+=(0001) # LEFT, Q2=2p1, W=2p95
 		echo "Run Numbers: [${data_left[@]}]"
 		echo	    	    	    	    
 	    else
@@ -577,7 +577,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
-		data_center+=(0000) # CENTER, Q2=2p1, W=2p95
+		data_center+=(0002) # CENTER, Q2=2p1, W=2p95
 		echo "Run Numbers: [${data_center[@]}]"
 		echo	    	    	    	    
 	    else
@@ -630,7 +630,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0000) # LEFT, Q2=0p5, W=2p40
+		data_left+=(0001) # LEFT, Q2=0p5, W=2p40
 		echo "Run Numbers: [${data_left[@]}]"
 		echo	    	    	    	    
 	    else
@@ -649,7 +649,7 @@ do
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
-		data_center+=(0000) # CENTER, Q2=0p5, W=2p40
+		data_center+=(0002) # CENTER, Q2=0p5, W=2p40
 		echo "Run Numbers: [${data_center[@]}]"
 		echo	    	    	    	    
 	    else
