@@ -102,7 +102,15 @@ TString Dummy_Name(int num_itt) {
 
 	} else {
 
-		dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
+	  if (int(kin_setting.thpqset[num_itt]*1000) > 0){
+	    
+	  }else{
+	    
+	    dir_str.Form("yields.%i_%i_+%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
+	    
+	  }
+	  
+	  dir_str.Form("yields.%i_%i_%i.dummy", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));
 
 	}
 
@@ -129,7 +137,15 @@ TString Target_Name(int num_itt) {
 
 	} else {
 
-		dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
+	  if (int(kin_setting.thpqset[num_itt]*1000) > 0){
+
+	    dir_str.Form("yields.%i_%i_+%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
+	    
+	  }else{
+
+	    dir_str.Form("yields.%i_%i_%i.target", int(round(kin_setting.Q2set[num_itt]*10)), int(round(kin_setting.epsset[num_itt]*100)), int(kin_setting.thpqset[num_itt]*1000));	
+	    
+	  }       
 
 	}
 
