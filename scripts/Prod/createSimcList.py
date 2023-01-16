@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 17:05:48 trottar"
+# Time-stamp: "2023-01-16 17:06:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -159,13 +159,16 @@ if not os.path.exists(f_list):
 # Open a file in write mode
 with open(f_list, 'r') as f:
     lines = f.readlines()
-    if int(runNumRight[0]) == 0:
-        # Write the value of the variable to the file
-        # convert uC to C (10^-6C=1uC)
-        check_line = "0000 {:.5f} {} -{:.3f} {} {}\n".format(float(EbeamValRight),Q2,thpq_right,simc_right_normfactor,simc_right_nevents)
-        # Check if the line already exists
-        if check_line not in lines:
-            write_to_file(f_list,check_line)
+    try:
+        if int(runNumRight[0]) == 0:
+            # Write the value of the variable to the file
+            # convert uC to C (10^-6C=1uC)
+            check_line = "0000 {:.5f} {} -{:.3f} {} {}\n".format(float(EbeamValRight),Q2,thpq_right,simc_right_normfactor,simc_right_nevents)
+            # Check if the line already exists
+            if check_line not in lines:
+                write_to_file(f_list,check_line)
+    except NameError:
+        print("No right setting")                
     if int(runNumLeft[0]) == 1:
         check_line = "0001 {:.5f} {} +{:.3f} {} {}\n".format(float(EbeamValLeft),Q2,thpq_left,simc_left_normfactor,simc_left_nevents)
         if check_line not in lines:
