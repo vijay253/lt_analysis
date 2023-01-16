@@ -97,7 +97,7 @@ ReadFile::ReadFile(TString simc_file_name_tmp) {
 	cout << "!!~~~~~~~~~~~~~~~~~~~" << simc_file_name_tmp << endl;
 	simc_file_name = simc_file_name_tmp;
 	cout << "!!~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
-	//Simc_Pro_Array_Load();
+	Simc_Pro_Array_Load();
 
 //	cout << "Angle Check "<< simc_pro.hms_theta[2] << endl;
 //	exit(0);
@@ -156,7 +156,7 @@ void ReadFile::Setting_file_loading_name() {
 
 	/*--------------------------------------------------*/	
 	/// Knematics setting loading 
-	setting_ntp->ReadFile(eff_file_name);
+	//setting_ntp->ReadFile(eff_file_name);
 
 	///*--------------------------------------------------*/
 	// Read center file
