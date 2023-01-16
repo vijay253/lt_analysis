@@ -33,9 +33,9 @@ def Setting_by_setting(file_name):
     #    print(t_bin_num, phi_bin_num)
     #    sys.exit(0)
     
-    dum_name = "yields." + file_name  + ".dummy.root"
-    tgt_name = "yields." + file_name  + ".target.root"
-    sim_name = "yields." + file_name  + ".sim.root"
+    dum_name = "file_out/yields." + file_name  + ".dummy.root"
+    tgt_name = "file_out/yields." + file_name  + ".target.root"
+    sim_name = "file_out/yields." + file_name  + ".sim.root"
     
     dum_file = TFile(dum_name,      "READ")
     tgt_file = TFile(tgt_name,      "READ")
