@@ -1197,8 +1197,8 @@ def ftotal(x, par):
 q2_setting    = ["55"]
 
 eps_55        = ["18","53"];
-hms_angle_55_l  = ["+0000", "+2295"];
-hms_angle_55_h  = ["-3055",  "+0000", "+3015"];
+hms_angle_55_l  = ["0000", "+2295"];
+hms_angle_55_h  = ["-3055",  "0000", "+3015"];
 
 for setting in q2_setting:
 
