@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-14 15:22:36 trottar"
+# Time-stamp: "2023-01-16 00:41:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -84,7 +84,7 @@ def write_to_file(f_out,line):
 ################################################################################################################################################
 
 # Define thpq vector relative to middle setting
-thpq_right = -abs(float(pThetaValCenter[0])-float(pThetaValRight[0]))
+thpq_right = abs(float(pThetaValCenter[0])-float(pThetaValRight[0]))
 thpq_left = abs(float(pThetaValCenter[0])-float(pThetaValLeft[0]))
 thpq_center = 0.000
 
@@ -95,12 +95,12 @@ if not os.path.exists(f_list_settings):
 with open(f_list_settings, 'r') as f:
     lines = f.readlines()
     if float(runNumRight[0]) != 0.0:
-        check_line = "{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset)
+        check_line = "{} {} {} -{:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset)
         # Check if the line already exists
         if check_line not in lines:
             write_to_file(f_list_settings,check_line)
     if float(runNumLeft[0]) != 0.0:
-        check_line = "{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset)
+        check_line = "{} {} {} +{:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset)
         if check_line not in lines:
             write_to_file(f_list_settings,check_line)
     if float(runNumCenter[0]) != 0.0:
@@ -122,7 +122,7 @@ with open(f_list, 'r') as f:
         # Write the value of the variable to the file
         for i,thpq in enumerate(EbeamValRight):
             # convert uC to C (10^-6C=1uC)
-            check_line = "{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+            check_line = "{} {} {} {} {} {:.5f} {} {} -{:.3f}\n" \
                     .format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i], \
                             float(EffValRight[i]),EffErrRight[i],EPSVAL,thpq_right)
             # Check if the line already exists
@@ -130,7 +130,7 @@ with open(f_list, 'r') as f:
                 write_to_file(f_list,check_line)
     if float(runNumLeft[0]) != 0.0:
         for i,thpq in enumerate(EbeamValLeft):
-            check_line = "{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+            check_line = "{} {} {} {} {} {:.5f} {} {} +{:.3f}\n" \
                     .format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i], \
                             float(EffValLeft[i]),EffErrLeft[i],EPSVAL,thpq_left)
             if check_line not in lines:
