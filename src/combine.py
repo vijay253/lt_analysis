@@ -1225,27 +1225,16 @@ hms_angle_55_h[3]  = {"-3055",  "+0000", "+3015"};
 for setting in q2_setting:
     
 
-    if float(setting) == 160:
-        for eps in eps_160:
-            if float(eps) == 32:
-                for angle in hms_angle_160_l:
+    if float(setting) == 55:
+        for eps in eps_55:
+            if float(eps) == 18:
+                for angle in hms_angle_55_l:
                     print(setting + "_"+ eps  + "_" + angle)
                     Setting_by_setting(setting + "_"+ eps  + "_" + angle)
 
                     #exit(0);
 
             else:
-                for angle in hms_angle_160_h:
-                    print(setting + "_"+ eps  + "_" + angle)
-                    Setting_by_setting(setting + "_"+ eps  + "_" + angle)
-
-    else:      
-        for eps in eps_245:
-            if float(eps) == 27:
-                for angle in hms_angle_245_l:
-                    print(setting + "_"+ eps  + "_" + angle)
-                    Setting_by_setting(setting + "_"+ eps  + "_" + angle)
-            else:
-                for angle in hms_angle_245_h:
+                for angle in hms_angle_55_h:
                     print(setting + "_"+ eps  + "_" + angle)
                     Setting_by_setting(setting + "_"+ eps  + "_" + angle)
