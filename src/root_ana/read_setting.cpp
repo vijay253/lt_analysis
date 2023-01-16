@@ -79,7 +79,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 	//Cen_Pro_Array_Load();
 
-	//Simc_Pro_Array_Load();
+	Simc_Pro_Array_Load();
 
 	Calculate_t_Width();
 
