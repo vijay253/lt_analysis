@@ -60,6 +60,7 @@ class Analysis {
 		ReadFile::sim_profile 	 	 sim_ana;
 
 		bool is_run_dummy;
+		bool is_run_simc;
 
 		void Load_Data_Tree();
 
