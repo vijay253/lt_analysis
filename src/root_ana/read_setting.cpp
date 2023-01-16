@@ -106,8 +106,8 @@ ReadFile::ReadFile(TString simc_file_name_tmp) {
 void ReadFile::Read_init() {
 
 
-	/*--------------------------------------------------*/
-	/// Loading the offset settings
+	/*--------------------------------------------------*/	
+/// Loading the offset settings
 
 	setting_ntp = new TNtuple("setting","setting", "polset:Q2set:epsset:thpqset:tmnset:tmxset:NBtset:kset");
 	eff_ntp = new TNtuple("eff","eff", "run_num:Q2:ebeam:charge:charge_err:tot_eff:tot_eff_err:epsset:thpqset");
@@ -166,7 +166,7 @@ void ReadFile::Setting_file_loading_name() {
 	///*--------------------------------------------------*/
 	// Read Simulated data information file
 	/*--------------------------------------------------*/
-	simc_ntp->ReadFile(simc_file_name);
+	//simc_ntp->ReadFile(simc_file_name);
 
 
 
@@ -320,11 +320,8 @@ void ReadFile::Cen_Pro_Array_Load() {
 
 void ReadFile::Simc_Pro_Array_Load() {
 
-	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
 
-	cout << "~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
-	
-	simc_ntp->ReadFile(simc_file_name);
+  //simc_ntp->ReadFile(simc_file_name);
 
 	Double_t* run_num_d  = Return_array_D("run_num",         simc_ntp);
 	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
