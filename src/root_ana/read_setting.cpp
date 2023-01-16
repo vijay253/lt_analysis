@@ -69,16 +69,16 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	//off_file_name = off_file_name_tmp;
 
 	Read_init();
-	//Setting_file_loading_name();
-	Eff_file_loading(eff_file_name);
-	cout << "~~~~~~~~~~~~~~~~~~~~" << endl;
+
 	Kin_Pro_Array_Load();
 
+	Setting_file_loading_name();
+	
 	//Eff_Pro_Array_Load();
 
 	//Cen_Pro_Array_Load();
 
-	Simc_Pro_Array_Load();
+	//Simc_Pro_Array_Load();
 
 	Calculate_t_Width();
 
@@ -321,11 +321,11 @@ void ReadFile::Cen_Pro_Array_Load() {
 
 void ReadFile::Simc_Pro_Array_Load() {
 
-  //simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
+	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
 
-  //	cout << "~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
 	
-  //	simc_ntp->ReadFile(simc_file_name);
+	simc_ntp->ReadFile(simc_file_name);
 
 	Double_t* run_num_d  = Return_array_D("run_num",         simc_ntp);
 	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
