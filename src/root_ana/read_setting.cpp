@@ -35,8 +35,8 @@ ReadFile::ReadFile() {
 	Setting_file_loading();
 
 	Kin_Pro_Array_Load();
-	// eff_pro_array_load();
-	Cen_Pro_Array_Load();
+	Eff_Pro_Array_Load();
+	//Cen_Pro_Array_Load();
 
 	Calculate_t_Width();
 
@@ -73,11 +73,11 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 	Kin_Pro_Array_Load();
 
-	// eff_pro_array_load();
+	Eff_Pro_Array_Load();
 
 	//Cen_Pro_Array_Load();
 
-	// Sim_Pro_Array_Load();
+	Simc_Pro_Array_Load();
 
 	Calculate_t_Width();
 
@@ -89,16 +89,16 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 // /*--------------------------------------------------*/
 // 
-ReadFile::ReadFile(TString sim_file_name_tmp) {
+ReadFile::ReadFile(TString simc_file_name_tmp) {
 
 	///*--------------------------------------------------*/
 	// Read Simulated data information file
 	/*--------------------------------------------------*/
 
-	sim_file_name = sim_file_name_tmp;
-	Sim_Pro_Array_Load();
+	simc_file_name = simc_file_name_tmp;
+	Simc_Pro_Array_Load();
 
-//	cout << "Angle Check "<< sim_pro.hms_theta[2] << endl;
+//	cout << "Angle Check "<< simc_pro.hms_theta[2] << endl;
 //	exit(0);
 
 }
@@ -113,7 +113,7 @@ void ReadFile::Read_init() {
 	eff_ntp = new TNtuple("eff","eff", "run_num:Q2:ebeam:charge:charge_err:tot_eff:tot_eff_err:epsset:thpqset");
 	center_ntp = new TNtuple("center","center", "center_run_num:center_mean:center_sigma");
 
-	// sim_ntp = new TNtuple("sim","sim", "q2:ebeam:normfac:event_num");
+	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
 
 	dummy_tar = false;
 	
@@ -141,8 +141,12 @@ void ReadFile::Setting_file_loading() {
   ///*--------------------------------------------------*/
   // Read center file
   /*--------------------------------------------------*/
-  center_ntp->ReadFile(off_file_name);
+  //center_ntp->ReadFile(off_file_name);
 
+  ///*--------------------------------------------------*/
+  // Read Simulated data information file
+  /*--------------------------------------------------*/
+  simc_ntp->ReadFile(simc_file_name);
 
 }
 
@@ -162,7 +166,7 @@ void ReadFile::Setting_file_loading_name() {
 	///*--------------------------------------------------*/
 	// Read Simulated data information file
 	/*--------------------------------------------------*/
-	// sim_ntp->ReadFile(sim_file_name);
+	simc_ntp->ReadFile(simc_file_name);
 
 
 
@@ -314,27 +318,28 @@ void ReadFile::Cen_Pro_Array_Load() {
 
 
 
-void ReadFile::Sim_Pro_Array_Load() {
+void ReadFile::Simc_Pro_Array_Load() {
 
-	sim_ntp = new TNtuple("sim","sim", "ebeam:q2:normfac:event_num");
-	sim_ntp->ReadFile(sim_file_name);
+	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
+	simc_ntp->ReadFile(simc_file_name);
+
+	simc_pro.run_num 		 = Return_array_D("run_num",        simc_ntp);
+	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
+	simc_pro.q2_setting 		 = Return_array_D("q2",        simc_ntp);
+	simc_pro.thpqset 		 = Return_array_D("thpqset",        simc_ntp);
+ 	simc_pro.normfac    		 = Return_array_D("normfac",   simc_ntp);
+	Double_t* event_num_temp = Return_array_D("event_num", simc_ntp);
 
 
-	sim_pro.ebeam 		     = Return_array_D("ebeam",     sim_ntp);
-	sim_pro.q2_setting 		 = Return_array_D("q2",        sim_ntp);
- 	sim_pro.normfac    		 = Return_array_D("normfac",   sim_ntp);
-	Double_t* event_num_temp = Return_array_D("event_num", sim_ntp);
-
-
-// 	cout << sim_pro.q2_setting[0] << endl;
-// 	cout << sim_pro.q2_setting[1] << endl;
-// 	cout << sim_pro.q2_setting[2] << endl;
-// 	cout << sim_pro.q2_setting[3] << endl;
+// 	cout << simc_pro.q2_setting[0] << endl;
+// 	cout << simc_pro.q2_setting[1] << endl;
+// 	cout << simc_pro.q2_setting[2] << endl;
+// 	cout << simc_pro.q2_setting[3] << endl;
 
 
 	Int_t num_tem = SizeOfArray(event_num_temp);
                                            
-	sim_pro.event_num = Array_D_to_I(event_num_temp, num_tem);
+	simc_pro.event_num = Array_D_to_I(event_num_temp, num_tem);
 //	cout << "center size: " << SizeOfArray(center_run_num_d) << endl; 
 
 }

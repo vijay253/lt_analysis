@@ -65,7 +65,8 @@ void Initialization() {
 
 	set_runs = rf->Get_Set_Runs();
 
-	dummy_tar = rf->Get_Dummy(); 
+	dummy_tar = rf->Get_Dummy();
+	simc_tar = rf->Get_Simc();
 
 //  	output_file = new TFile*[set_runs];
 //  	ana 		= new Analysis*[set_runs];
