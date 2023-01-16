@@ -1196,31 +1196,11 @@ def ftotal(x, par):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#file_list = ["160"]
-
-#for setting in file_list:
-#    Setting_by_setting(setting)
-
-
-
 q2_setting    = ["5.5"]
 
-eps_55[2]        = ["0.1838","0.5291"];
-hms_angle_55_l[2]  = ["+0000", "+2295"];
-hms_angle_55_h[3]  = ["-3055",  "+0000", "+3015"];
+eps_55        = ["0.1838","0.5291"];
+hms_angle_55_l  = ["+0000", "+2295"];
+hms_angle_55_h  = ["-3055",  "+0000", "+3015"];
 
 for setting in q2_setting:
     
@@ -1238,3 +1218,4 @@ for setting in q2_setting:
                 for angle in hms_angle_55_h:
                     print(setting + "_"+ eps  + "_" + angle)
                     Setting_by_setting(setting + "_"+ eps  + "_" + angle)
+
