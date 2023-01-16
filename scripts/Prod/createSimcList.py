@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 16:01:36 trottar"
+# Time-stamp: "2023-01-16 16:02:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -81,7 +81,7 @@ f_simc_right.close()
 simc_left_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameLeft.replace('.root','.hist'))
 f_simc_left = open(simc_left_hist)
 for line in f_simc_left:
-    print(line)
+    #print(line)
     if "Ngen" in line:
         val = line.split("=")
         simc_left_nevents = int(val[1])
@@ -98,7 +98,7 @@ f_simc_left.close()
 simc_center_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,InSIMCFilenameCenter.replace('.root','.hist'))
 f_simc_center = open(simc_center_hist)
 for line in f_simc_center:
-    print(line)
+    #print(line)
     if "Ngen" in line:
         val = line.split("=")
         simc_center_nevents = int(val[1])
