@@ -18,32 +18,6 @@ using namespace std;
 
 
 
-ReadFile::ReadFile() {
-
-	static int tsttst = 0;
-
-	if (tsttst == 0) {
-
-		cout << " /*--------------------------------------------------*/" << endl;
-		cout << "             loading the scalar information            " << endl << endl;
-//		cout << " /*--------------------------------------------------*/" << endl;
-		tsttst++;
-	}
-
-
-	Read_init();
-	Setting_file_loading();
-
-	Kin_Pro_Array_Load();
-	Eff_Pro_Array_Load();
-	//Cen_Pro_Array_Load();
-
-	Calculate_t_Width();
-
-
-
-}
-
 
 // 
 // /*--------------------------------------------------*/
@@ -89,6 +63,22 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 
 
 
+// /*--------------------------------------------------*/
+// 
+ReadFile::ReadFile(TString simc_file_name_tmp) {
+
+	///*--------------------------------------------------*/
+	// Read Simulated data information file
+	/*--------------------------------------------------*/
+	cout << "!!~~~~~~~~~~~~~~~~~~~" << simc_file_name_tmp << endl;
+	simc_file_name = simc_file_name_tmp;
+	cout << "!!~~~~~~~~~~~~~~~~~~~" << simc_file_name << endl;
+	Simc_Pro_Array_Load();
+
+//	cout << "Angle Check "<< simc_pro.hms_theta[2] << endl;
+//	exit(0);
+
+}
 
 void ReadFile::Read_init() {
 
