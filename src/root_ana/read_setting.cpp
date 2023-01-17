@@ -63,12 +63,14 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	}
 
 
-	cout << "Efficiency File...\n" << eff_file_name_tmp << endl;
+	cout << "Efficiency Settings File...\n" << eff_file_name_tmp << endl;
 
 	eff_file_name = eff_file_name_tmp;
 	simc_file_name = off_file_name_tmp;
 	//off_file_name = off_file_name_tmp;
 
+	cout << "Simc Settings File...\n" << simc_file_name << endl;
+	
 	Read_init();
 	Setting_file_loading_name();      
 
@@ -328,7 +330,7 @@ void ReadFile::Simc_Pro_Array_Load() {
 	
   //	simc_ntp->ReadFile(simc_file_name);
 
-	simc_pro.q2_setting 		 = Return_array_D("Q2",        simc_ntp);
+	simc_pro.q2_setting 		 = Return_array_D("Q2set",        simc_ntp);
 	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
 	simc_pro.epsilon 		 = Return_array_D("epsset",        simc_ntp);
 	simc_pro.thpqset 		 = Return_array_D("thpqset",        simc_ntp);
