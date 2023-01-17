@@ -66,6 +66,7 @@ ReadFile::ReadFile(TString eff_file_name_tmp, TString off_file_name_tmp) {
 	cout << "Efficiency File...\n" << eff_file_name_tmp << endl;
 
 	eff_file_name = eff_file_name_tmp;
+	simc_file_name = off_file_name_tmp
 	//off_file_name = off_file_name_tmp;
 
 	Read_init();

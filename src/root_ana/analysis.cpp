@@ -23,7 +23,10 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
   eff_file = "list.settings";
 
-  off_file = "offset.dat";  // Not used
+  //off_file = "offset.dat";  // Not used
+
+  simc_file = "list.simc"
+  
   eff_ana = eff_struc;
 
   Init();
@@ -36,7 +39,7 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
 void Analysis::Init() {
 
-	ReadFile* rff = new ReadFile(eff_file, off_file);
+	ReadFile* rff = new ReadFile(eff_file, simc_file);
 
 	kin_ana = rff->kin_pro;
 	//	eff_ana = rff->eff_pro1;
