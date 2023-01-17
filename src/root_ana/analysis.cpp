@@ -25,7 +25,7 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
   //off_file = "offset.dat";  // Not used
 
-  simc_file = "list.simc"
+  simc_file = "list.simc";
   
   eff_ana = eff_struc;
 
