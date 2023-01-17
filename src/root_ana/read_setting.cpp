@@ -114,7 +114,7 @@ void ReadFile::Read_init() {
 	eff_ntp = new TNtuple("eff","eff", "run_num:Q2:ebeam:charge:charge_err:tot_eff:tot_eff_err:epsset:thpqset");
 	center_ntp = new TNtuple("center","center", "center_run_num:center_mean:center_sigma");
 
-	simc_ntp = new TNtuple("simc","simc", "run_num:ebeam:q2:thpqset:normfac:event_num");
+	simc_ntp = new TNtuple("simc","simc", "Q2set:ebeam:epsset:thpqset:normfac:event_num");
 
 	dummy_tar = false;
 	
@@ -327,9 +327,9 @@ void ReadFile::Simc_Pro_Array_Load() {
 	
   //	simc_ntp->ReadFile(simc_file_name);
 
-	Double_t* simc_run_num_d  = Return_array_D("run_num",         simc_ntp);
+	simc_pro.q2_setting 		 = Return_array_D("Q2",        simc_ntp);
 	simc_pro.ebeam 		     = Return_array_D("ebeam",     simc_ntp);
-	simc_pro.q2_setting 		 = Return_array_D("q2",        simc_ntp);
+	simc_pro.epsilon 		 = Return_array_D("epsset",        simc_ntp);
 	simc_pro.thpqset 		 = Return_array_D("thpqset",        simc_ntp);
  	simc_pro.normfac    		 = Return_array_D("normfac",   simc_ntp);
 	Double_t* event_num_temp = Return_array_D("event_num", simc_ntp);
@@ -340,9 +340,6 @@ void ReadFile::Simc_Pro_Array_Load() {
 // 	cout << simc_pro.q2_setting[2] << endl;
 // 	cout << simc_pro.q2_setting[3] << endl;
 	
-	num_runs = SizeOfArray(simc_run_num_d);
-
-	simc_pro.run_num = Array_D_to_I (simc_run_num_d, num_runs);
 
 	Int_t num_tem = SizeOfArray(event_num_temp);
                                            

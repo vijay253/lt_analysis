@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-16 17:30:05 trottar"
+# Time-stamp: "2023-01-16 19:20:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -152,7 +152,7 @@ except NameError:
 thpq_left = abs(float(pThetaValCenter)-float(pThetaValLeft))
 thpq_center = 0.000
 
-f_list = '{}/src/lists/list.simc_{}_{:.0f}'.format(LTANAPATH,Q2.replace(".",""),float(EPSVAL)*100)
+f_list = '{}/src/root_ana/list.simc'.format(LTANAPATH)
 
 if not os.path.exists(f_list):
     open(f_list, "w").close()    
@@ -162,17 +162,17 @@ with open(f_list, 'r') as f:
     try:
         if int(runNumRight[0]) == 0:
             # Write the value of the variable to the file
-            check_line = "0000 {:.5f} {} -{:.3f} {} {}\n".format(float(EbeamValRight),Q2,thpq_right,simc_right_normfactor,simc_right_nevents)
+            check_line = "{} {:.5f} {} -{:.3f} {} {}\n".format(Q2,float(EbeamValRight),EPSVAL,thpq_right,simc_right_normfactor,simc_right_nevents)
             # Check if the line already exists
             if check_line not in lines:
                 write_to_file(f_list,check_line)
     except NameError:
         print("")                
     if int(runNumLeft[0]) == 1:
-        check_line = "0001 {:.5f} {} +{:.3f} {} {}\n".format(float(EbeamValLeft),Q2,thpq_left,simc_left_normfactor,simc_left_nevents)
+        check_line = "{} {:.5f} {} +{:.3f} {} {}\n".format(Q2,float(EbeamValLeft),EPSVAL,thpq_left,simc_left_normfactor,simc_left_nevents)
         if check_line not in lines:
             write_to_file(f_list,check_line)
     if int(runNumCenter[0]) == 2:
-        check_line = "0002 {:.5f} {} {:.3f} {} {}\n".format(float(EbeamValCenter),Q2,thpq_center,simc_center_normfactor,simc_center_nevents)
+        check_line = "{} {:.5f} {} {:.3f} {} {}\n".format(Q2,float(EbeamValCenter),EPSVAL,thpq_center,simc_center_normfactor,simc_center_nevents)
         if check_line not in lines:
             write_to_file(f_list,check_line)
