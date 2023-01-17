@@ -139,6 +139,7 @@ class Analysis {
 
  		TString eff_file;
  		TString off_file;
+		TString simc_file;
 
 		TChain* chain;
 		
