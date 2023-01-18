@@ -326,6 +326,18 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 a2, b2 = np.polyfit(xla, hila, 1)
                 a3, b3 = np.polyfit(xra, lora, 1)
                 a4, b4 = np.polyfit(xra, hira, 1)
+
+                paramDict = {
+
+                    "a1" : a1,
+                    "b1" : b1,
+                    "a2" : a2,
+                    "b2" : b2,
+                    "a3" : a3,
+                    "b3" : b3,
+                    "a4" : a4,
+                    "b4" : b4
+                }
 	
                 for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
@@ -506,17 +518,5 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             Q2vsW_hilo_cut.Draw("colz")
             c1_kinhl.Print(Analysis_Distributions+endc+endf)
 	
-
-    paramDict = {
-
-        "a1" : a1,
-        "b1" : b1,
-        "a2" : a2,
-        "b2" : b2,
-        "a3" : a3,
-        "b3" : b3,
-        "a4" : a4,
-        "b4" : b4
-    }
             
     return paramDict
