@@ -86,9 +86,10 @@ def DiamondPlot(Q2Val,WVal,phi_setting,tmin,tmax,target):
     lenl = 10000
     if(target == '0'): target = ""
     print (FilenameOverride,target)
-    for file in glob.glob(OUTPATH+'/**/'+FilenameOverride+'*'+target+'*Analysed_Data.root',recursive = True): 
-	        # Searches through OUTPUT recursively for files matching the wild card format, taking the shortest one
-        	# Shortest file assumed to be full analyisis as it will not have "part" or "week" or "dummy" labels
+    #    for file in glob.glob(OUTPATH+'/**/'+FilenameOverride+'*'+target+'*Analysed_Data.root',recursive = True):
+    for file in glob.glob(OUTPATH+'/*'+FilenameOverride+'*'+target+'*.root'):
+	# Searches through OUTPUT recursively for files matching the wild card format, taking the shortest one
+        # Shortest file assumed to be full analyisis as it will not have "part" or "week" or "dummy" labels
         #print(file)
         if "high" in file:
             if (len(file) < lenh):
