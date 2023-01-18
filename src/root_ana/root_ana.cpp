@@ -548,7 +548,7 @@ void Simc_Load() {
 		if (kin_setting.polset[i] > 0) {
 
 			output_file_simc[i] = fo->Create_Out_File(Simc_Name(i));
-
+			cout << "~~~~~~~~~~~~~" << List_Name(i) << endl;
 //			list_name = List_Name(i) + "omega";
 			list_name = list_dir + "list.simc_" + List_Name(i);
 			//list_name = List_Name(i) + "_" + simc_ana_name;
