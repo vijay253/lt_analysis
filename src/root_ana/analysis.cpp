@@ -11,8 +11,6 @@ using namespace std;
 
 Analysis::Analysis() {
 
-// 	Init();
-
 }
 
 
@@ -31,8 +29,32 @@ Analysis::Analysis(ReadFile::efficiency_profile eff_struc) {
 
   Init();
 
+  graph_yield_check = new TGraphErrors();
+  mm_peak_check = new TGraphErrors();
+
+  yield_setting     = 0.0;
+  yield_setting_err = 0.0;
+
+  chain = new TChain();
+  list = new TList();
+
+  coin_beta_check_offset_setting = new TH2F("coin_beta_check_offset", "coin_beta_check", 200, -15, 15,  200, 0, 2);
+
+  diamond_setting = new TMultiGraph();
+
+  st_itt = 0;
+
 }
 
+/*--------------------------------------------------*/
+/// Only for simulation data
+
+Analysis::Analysis(TString sim_data_type) {
+
+	sim_ana_name = sim_data_type;
+	weight_app = "";
+
+}
 
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
