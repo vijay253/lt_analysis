@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-18 15:09:23 trottar"
+# Time-stamp: "2023-01-18 15:15:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -59,7 +59,7 @@ data_charge_center = int(sys.argv[15])/1000
 InData_efficiency_right = sys.argv[16]
 InData_efficiency_left = sys.argv[17]
 InData_efficiency_center = sys.argv[18]
-efficiency_table = sys.argv[19]2
+efficiency_table = sys.argv[19]
 target = sys.argv[20]
 
 ###############################################################################################################################################
