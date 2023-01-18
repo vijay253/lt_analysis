@@ -108,7 +108,7 @@ def DiamondPlot(Q2Val,WVal,phi_setting,tmin,tmax,target):
 
     if (highe_input == False and mide_input == False and lowe_input == False):
         print("!!!!! ERROR !!!!!\n Invalid Kinematic \n!!!!! ERROR !!!!!")
-        continue
+        sys.exit(1)
 
     ##############################################################################################################################################
     labelh = ""
