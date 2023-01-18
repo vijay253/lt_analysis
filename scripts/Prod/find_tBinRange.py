@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-18 15:35:08 trottar"
+# Time-stamp: "2023-01-18 18:08:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,6 +62,8 @@ InData_efficiency_left = sys.argv[18]
 InData_efficiency_center = sys.argv[19]
 efficiency_table = sys.argv[20]
 target = sys.argv[21]
+
+particle = "kaon"
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -211,7 +213,7 @@ def defineHists(phi_setting):
 
     ################################################################################################################################################
     # Call diamond cut script
-    DiamondPlot(float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
+    DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
 
     ################################################################################################################################################
     # Define root file trees of interest
