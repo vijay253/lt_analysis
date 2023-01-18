@@ -531,11 +531,11 @@ do
     if [[ $Q2 = "2p1" && $W = "2p95" ]]; then
 	if [[ $i = "RIGHT" ]]; then
 	    if [[ $TargetType = "dummy" ]]; then
-		file_right="Q2p115W2p95right_${EPSILON}e_dummy"
+		file_right="Q2p1W2p95right_${EPSILON}e_dummy"
 	    elif [[ $TargetType = "simc" ]]; then
-		file_right="Q2p115W2p95right_${EPSILON}e_simc"		
+		file_right="Q2p1W2p95right_${EPSILON}e_simc"		
 	    else
-		file_right="Q2p115W2p95right_${EPSILON}e"
+		file_right="Q2p1W2p95right_${EPSILON}e"
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for right file ${file_right}..."
@@ -550,11 +550,11 @@ do
 	    fi
 	elif [[ $i = "LEFT" ]]; then
 	    if [[ $TargetType = "dummy" ]]; then
-		file_left="Q2p115W2p95left_${EPSILON}e_dummy"
+		file_left="Q2p1W2p95left_${EPSILON}e_dummy"
 	    elif [[ $TargetType = "simc" ]]; then
-		file_left="Q2p115W2p95left_${EPSILON}e_simc"		
+		file_left="Q2p1W2p95left_${EPSILON}e_simc"		
 	    else
-		file_left="Q2p115W2p95left_${EPSILON}e"
+		file_left="Q2p1W2p95left_${EPSILON}e"
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for left file ${file_left}..."
@@ -569,11 +569,11 @@ do
 	    fi
 	elif [[ $i = "CENTER" ]]; then
 	    if [[ $TargetType = "dummy" ]]; then
-		file_center="Q2p115W2p95center_${EPSILON}e_dummy"
+		file_center="Q2p1W2p95center_${EPSILON}e_dummy"
 	    elif [[ $TargetType = "simc" ]]; then
-		file_center="Q2p115W2p95center_${EPSILON}e_simc"		
+		file_center="Q2p1W2p95center_${EPSILON}e_simc"		
 	    else
-		file_center="Q2p115W2p95center_${EPSILON}e"
+		file_center="Q2p1W2p95center_${EPSILON}e"
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for center file ${file_center}..."
@@ -593,11 +593,11 @@ do
 	    EPSVAL=0.7864
 	fi
 	if [[ $TargetType = "dummy" ]]; then
-	    KIN="Q2p115W2p95_${EPSILON}e_dummy"
+	    KIN="Q2p1W2p95_${EPSILON}e_dummy"
 	elif [[ $TargetType = "simc" ]]; then
-	    KIN="Q2p115W2p95_${EPSILON}e_simc"	    
+	    KIN="Q2p1W2p95_${EPSILON}e_simc"	    
 	else
-	    KIN="Q2p115W2p95_${EPSILON}e"
+	    KIN="Q2p1W2p95_${EPSILON}e"
 	fi
     fi        
     if [[ $Q2 = "0p5" && $W = "2p40" ]]; then
