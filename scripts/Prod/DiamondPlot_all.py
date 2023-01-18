@@ -201,9 +201,6 @@ def DiamondPlot(Q2Val,WVal,phi_setting,tmin,tmax,target):
                 rootName = lowe_input
                 print("\n***** Low Epsilon File Found! *****\n")
         print ("Attempting to process %s" %(rootName))
-        lt.SetPath(os.path.realpath(__file__)).checkDir(OUTPATH)
-        lt.SetPath(os.path.realpath(__file__)).checkFile(rootName)
-        print("Output path checks out, outputting to %s" % (OUTPATH))
 
 	###############################################################################################################################################
         ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
