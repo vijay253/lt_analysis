@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-18 15:15:08 trottar"
+# Time-stamp: "2023-01-18 15:29:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
 
-if len(sys.argv)-1!=20:
-    print("!!!!! ERROR !!!!!\n Expected 20 arguments\n Usage is with - KIN Q2 EPSVAL OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=21:
+    print("!!!!! ERROR !!!!!\n Expected 21 arguments\n Usage is with - KIN W Q2 EPSVAL OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -42,25 +42,26 @@ DEBUG = False # Flag for no cut plots
 
 # Input params
 kinematics = sys.argv[1]
-Q2 = sys.argv[2]
-EPSVAL = sys.argv[3]
-InDATAFilename = sys.argv[4]
-OutFilename = sys.argv[5]
-tmin = float(sys.argv[6])
-tmax = float(sys.argv[7])
-NumtBins = int(sys.argv[8])
-NumPhiBins = int(sys.argv[9])
-runNumRight = sys.argv[10]
-runNumLeft = sys.argv[11]
-runNumCenter = sys.argv[12]
-data_charge_right = int(sys.argv[13])/1000
-data_charge_left = int(sys.argv[14])/1000
-data_charge_center = int(sys.argv[15])/1000
-InData_efficiency_right = sys.argv[16]
-InData_efficiency_left = sys.argv[17]
-InData_efficiency_center = sys.argv[18]
-efficiency_table = sys.argv[19]
-target = sys.argv[20]
+W = sys.argv[2]
+Q2 = sys.argv[3]
+EPSVAL = sys.argv[4]
+InDATAFilename = sys.argv[5]
+OutFilename = sys.argv[6]
+tmin = float(sys.argv[7])
+tmax = float(sys.argv[8])
+NumtBins = int(sys.argv[9])
+NumPhiBins = int(sys.argv[10])
+runNumRight = sys.argv[11]
+runNumLeft = sys.argv[12]
+runNumCenter = sys.argv[13]
+data_charge_right = int(sys.argv[14])/1000
+data_charge_left = int(sys.argv[15])/1000
+data_charge_center = int(sys.argv[16])/1000
+InData_efficiency_right = sys.argv[17]
+InData_efficiency_left = sys.argv[18]
+InData_efficiency_center = sys.argv[19]
+efficiency_table = sys.argv[20]
+target = sys.argv[21]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
