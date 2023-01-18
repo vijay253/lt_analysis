@@ -90,7 +90,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
     for file in glob.glob(OUTPATH+'/*'+FilenameOverride+'*'+target+'*.root'):
 	# Searches through OUTPUT recursively for files matching the wild card format, taking the shortest one
         # Shortest file assumed to be full analyisis as it will not have "part" or "week" or "dummy" labels
-        print(file)
+        #print(file)
         if "high" in file:
             if (len(file) < lenh):
                 highe_input = file
@@ -152,8 +152,8 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
 
     W_cut = ROOT.TH1D("W_cut", "High Epsilon W Dist for Prompt Events (Prompt Cut); W", 400, Wmin, Wmax)
     Q2_cut = ROOT.TH1D("Q2_cut", "High Epsilon Q2 Dist for Prompt Events (Prompt  Cut); Q2", 400, Q2min, Q2max)
-    t_cut = ROOT.TH1D("t_cut", "High Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 2.0)
-    t_mi_cut = ROOT.TH1D("t_mi_cut", "Mid Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 2.0)
+    t_cut = ROOT.TH1D("t_cut", "High Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 1.5)
+    t_mi_cut = ROOT.TH1D("t_mi_cut", "Mid Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 1.5)
 
     Q2vsW_lolo_cut = ROOT.TH2D("Q2vsW_low_lowcut", "Low Epsilon Q2 vs W Dist for Prompt Events (Diamond Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
     Q2vsW_hilo_cut = ROOT.TH2D("Q2vsW_high_lowcut", "High Epsilon Q2 vs W Dist for Prompt Events (Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
@@ -321,8 +321,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 hira = np.array(hir)
                 xla = np.array(xvl)
                 xra = np.array(xvr)
-
-
 	
                 a1, b1 = np.polyfit(xla, lola, 1)
                 a2, b2 = np.polyfit(xla, hila, 1)
@@ -508,3 +506,17 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             Q2vsW_hilo_cut.Draw("colz")
             c1_kinhl.Print(Analysis_Distributions+endc+endf)
 	
+
+    paramDict = {
+
+        "a1" : a1,
+        "b1" : b1,
+        "a2" : a2,
+        "b2" : b2,
+        "a3" : a3,
+        "b3" : b3,
+        "a4" : a4,
+        "b4" : b4
+    }
+            
+    return paramDict

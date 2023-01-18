@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-18 18:23:55 trottar"
+# Time-stamp: "2023-01-18 18:47:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -213,7 +213,9 @@ def defineHists(phi_setting):
 
     ################################################################################################################################################
     # Call diamond cut script
-    DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
+    paramDict = DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
+
+    print(paramDict)
 
     ################################################################################################################################################
     # Define root file trees of interest
