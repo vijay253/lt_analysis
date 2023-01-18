@@ -550,7 +550,8 @@ void Simc_Load() {
 			output_file_simc[i] = fo->Create_Out_File(Simc_Name(i));
 
 //			list_name = List_Name(i) + "omega";
-			list_name = List_Name(i) + "_" + simc_ana_name;
+			list_name = list_dir + "list.simc_" + List_Name(i);
+			//list_name = List_Name(i) + "_" + simc_ana_name;
 	
 			simc_vec.push_back(list_name);
 				
