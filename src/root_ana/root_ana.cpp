@@ -826,3 +826,28 @@ void Target_Analysis() {
 
 
 
+/*--------------------------------------------------*/
+
+void Cleanup() {
+
+
+	delete rf;
+	delete simc_rf;
+	delete fo;
+
+
+	delete output_file_dummy; 
+    delete output_file_target;
+    delete output_file_simc;   
+                      
+    delete ana_dummy; 	      
+    delete ana_target; 
+    delete ana_simc;           
+
+	delete eff_setting_dummy;
+	delete eff_setting_target;
+
+	simc_vec.clear();
+
+}
+

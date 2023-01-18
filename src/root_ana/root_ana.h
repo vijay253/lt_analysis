@@ -70,8 +70,10 @@ std::vector<TString>::iterator lists_vec_itt;
 
 std::vector<TString>  lists_vec_target, lists_vec_dummy, lists_vec_simc;
 
+std::vector<TString> simc_vec;
 
 TString list_name;
+TString simc_ana_name;
 
 Analysis **ana;
 Analysis **ana_target;
@@ -86,6 +88,7 @@ Analysis **ana_simc;
 
 
 ReadFile* rf;
+ReadFile* sim_rf;
 
 File_Output *fo; 
 
@@ -117,5 +120,10 @@ void Simc_Setup();
 void Target_Analysis();
 void Dummy_Analysis();
 void Simc_Analysis();
+
+void Cleanup();
+
+
+TString simc_file_inc;
 
 #endif
