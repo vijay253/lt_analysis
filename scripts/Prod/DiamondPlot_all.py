@@ -19,48 +19,40 @@ import re # Regexp package - for string manipulation
 from ROOT import TCanvas, TExec, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyle, gPad, TGaxis, TLine, TMath, TPaveText, TArc, TGraphPolar, TPaletteAxis, TString
 from ROOT import kBlack, kBlue, kRed
 from array import array
+import pandas as pd
 
-################################################################################################################################################
+###############################################################################################################################################
+
 '''
 ltsep package import and pathing definitions
 '''
 
 # Import package for cuts
-import ltsep as lt 
+from ltsep import Root
+
+lt=Root(os.path.realpath(__file__),"Plot_Prod")
 
 # Add this to all files for more dynamic pathing
-USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER") # Grab user info for file finding
-HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
-REPLAYPATH = lt.SetPath(os.path.realpath(__file__)).getPath("REPLAYPATH")
-UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
-ANATYPE = lt.SetPath(os.path.realpath(__file__)).getPath("ANATYPE")
+USER=lt.USER # Grab user info for file finding
+HOST=lt.HOST
+REPLAYPATH=lt.REPLAYPATH
+UTILPATH=lt.UTILPATH
+LTANAPATH=lt.LTANAPATH
+ANATYPE=lt.ANATYPE
+OUTPATH=lt.OUTPATH
 
 #################################################################################################################################################
-
-# Add more path setting as needed in a similar manner
-OUTPATH=UTILPATH+"/OUTPUT/Analysis/PionLT"
 
 print("!!! Ensure all relevant Analysed_Data.root file names have same precision of Q2 and W  !!!")
 
 print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER, HOST, REPLAYPATH))
 
-import pandas as pd
+def DiamondPlot(Q2Val,WVal,phi_setting,tmin,tmax,target):
 
-df = pd.read_csv(UTILPATH+"/scripts/online_physics/PionLT/Diamond_t_cuts.csv", index_col='Id')
-
-for i in range (0, len(df)):
-    Q2Val = df.iat[i,0]
-    WVal = df.iat[i,1]
-    angle = df.iat[i,2]
-    tmin = df.iat[i,3]
-    tmax = df.iat[i,4]
-    target = df.iat[i,5]
     Q2min = Q2Val - 2 # Minimum value of Q2 on the Q2 vs W plot
     Q2max = Q2Val + 2 # Maximum value of Q2 on the Q2 vs W plot
     Wmin = WVal - 0.5 # min y-range for Q2vsW plot
     Wmax = WVal + 0.5 # max y-range for Q2vsW plot
-    ID = i+1
-
     Qs = str(Q2Val).replace('.','p')
 
     if (len(Qs)<4 and '6p' not in Qs and '5p' not in Qs):
@@ -69,16 +61,14 @@ for i in range (0, len(df)):
     if len(Ws)<4:
         Ws = Ws + '0'
     
-    #FilenameOverride = 'Q'+Qs+'W'+Ws+angle
+    #FilenameOverride = 'Q'+Qs+'W'+Ws+phi_setting
     FilenameOverride = 'Q'+Qs+'W'+Ws
-    target = angle
+    target = phi_setting
     
     if (target == '0'):
-        #Pion_Analysis_Distributions = OUTPATH+"/DiamondPlots/%s_Diamond_Cut.pdf" %((FilenameOverride))
-        Pion_Analysis_Distributions = "/volatile/hallc/c-pionlt/jmurphy/%s_Diamond_Cut.pdf" %((FilenameOverride))
+        Analysis_Distributions = OUTPATH+"/%s_Diamond_Cut.pdf" %((FilenameOverride))
     elif (target != '0'):
-        #Pion_Analysis_Distributions = OUTPATH+"/DiamondPlots/%s_%s_Diamond_Cut.pdf" %((FilenameOverride,target))
-        Pion_Analysis_Distributions = "/volatile/hallc/c-pionlt/jmurphy/%s_%s_Diamond_Cut.pdf" %((FilenameOverride,target))
+        Analysis_Distributions = OUTPATH+"/%s_%s_Diamond_Cut.pdf" %((FilenameOverride,target))
 
     #sys.exit(1)
     
@@ -148,26 +138,26 @@ for i in range (0, len(df)):
 
 
     Title = ""
-    Q2vsW_pions_cut = ROOT.TH2D("Q2vsW_pions_cut", labelh, 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_mide_cut = ROOT.TH2D("Q2vsW_pions_mide_cut",labelm, 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_lowe_cut = ROOT.TH2D("Q2vsW_pions_lowe_cut", labell, 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_cut = ROOT.TH2D("Q2vsW_cut", labelh, 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_mide_cut = ROOT.TH2D("Q2vsW_mide_cut",labelm, 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_lowe_cut = ROOT.TH2D("Q2vsW_lowe_cut", labell, 400, Q2min, Q2max, 400, Wmin, Wmax)
     
 
-    Q2vsW_pions_hi_cut = ROOT.TH2D("Q2vsW_pions_high_cut", "High Epsilon Q2 vs W Dist for Prompt Events (Prompt Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_mi_cut = ROOT.TH2D("Q2vsW_pions_middle_cut","Mid Epsilon Q2 vs W Dist for Prompt Events (Prompt Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_lo_cut = ROOT.TH2D("Q2vsW_pions_low_cut", "Low Epsilon Q2 vs W Dist for Prompt Events (Prompt Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_hi_cut = ROOT.TH2D("Q2vsW_high_cut", "High Epsilon Q2 vs W Dist for Prompt Events (Prompt Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_mi_cut = ROOT.TH2D("Q2vsW_middle_cut","Mid Epsilon Q2 vs W Dist for Prompt Events (Prompt Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_lo_cut = ROOT.TH2D("Q2vsW_low_cut", "Low Epsilon Q2 vs W Dist for Prompt Events (Prompt Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
 
 
 
-    W_pions_cut = ROOT.TH1D("W_pions_cut", "High Epsilon W Dist for Prompt Events (Prompt Cut); W", 400, Wmin, Wmax)
-    Q2_pions_cut = ROOT.TH1D("Q2_pions_cut", "High Epsilon Q2 Dist for Prompt Events (Prompt  Cut); Q2", 400, Q2min, Q2max)
-    t_pions_cut = ROOT.TH1D("t_pions_cut", "High Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 2.0)
-    t_pions_mi_cut = ROOT.TH1D("t_pions_mi_cut", "Mid Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 2.0)
+    W_cut = ROOT.TH1D("W_cut", "High Epsilon W Dist for Prompt Events (Prompt Cut); W", 400, Wmin, Wmax)
+    Q2_cut = ROOT.TH1D("Q2_cut", "High Epsilon Q2 Dist for Prompt Events (Prompt  Cut); Q2", 400, Q2min, Q2max)
+    t_cut = ROOT.TH1D("t_cut", "High Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 2.0)
+    t_mi_cut = ROOT.TH1D("t_mi_cut", "Mid Epsilon -t Dist for Prompt Events (t-Range  Cut); -t", 400, 0.0, 2.0)
 
-    Q2vsW_pions_lolo_cut = ROOT.TH2D("Q2vsW_pions_low_lowcut", "Low Epsilon Q2 vs W Dist for Prompt Events (Diamond Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_hilo_cut = ROOT.TH2D("Q2vsW_pions_high_lowcut", "High Epsilon Q2 vs W Dist for Prompt Events (Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_milo_cut = ROOT.TH2D("Q2vsW_pions_mid_lowcut","Mid Epsilon Q2 vs W Dist for Prompt Events (Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
-    Q2vsW_pions_himi_cut = ROOT.TH2D("Q2vsW_pions_high_midcut", "High Epsilon Q2 vs W Dist for Prompt Events (Mid-Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_lolo_cut = ROOT.TH2D("Q2vsW_low_lowcut", "Low Epsilon Q2 vs W Dist for Prompt Events (Diamond Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_hilo_cut = ROOT.TH2D("Q2vsW_high_lowcut", "High Epsilon Q2 vs W Dist for Prompt Events (Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_milo_cut = ROOT.TH2D("Q2vsW_mid_lowcut","Mid Epsilon Q2 vs W Dist for Prompt Events (Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
+    Q2vsW_himi_cut = ROOT.TH2D("Q2vsW_high_midcut", "High Epsilon Q2 vs W Dist for Prompt Events (Mid-Diamond and t Cut); Q2; W", 400, Q2min, Q2max, 400, Wmin, Wmax)
 
     a1 = 0
     b1 = 0
@@ -223,38 +213,38 @@ for i in range (0, len(df)):
         infile = ROOT.TFile.Open(rootName, "READ")
 
 	# Assumes 2021 trees do not have Prompt MM cut, as some do not right now. *** NEED TO BE REPLAYED AGAIN WITH THIS BRANCH ***
-        if "lowe" in rootName:
-            Cut_Pion_Events_Prompt_MM_tree = infile.Get("Cut_Pion_Events_Prompt")
-        else:
-            Cut_Pion_Events_Prompt_MM_tree = infile.Get("Cut_Pion_Events_Prompt_MM")
+        if particle == "kaon":
+            Cut_Events_all_RF_tree = infile.Get("Cut_Kaon_Events_all_RF")
+        if particle == "pion":
+            Cut_Events_all_RF_tree = infile.Get("Cut_Pion_Events_all_RF")
 
 	##############################################################################################################################################
         countB = 0
         countA = 0
         badfit = True
         if (k==2):
-            # for event in Cut_Pion_Events_Prompt_tree:
-            for event in Cut_Pion_Events_Prompt_MM_tree:
-                Q2vsW_pions_cut.Fill(event.Q2, event.W)
-                Q2vsW_pions_hi_cut.Fill(event.Q2, event.W)
+            # for event in Cut_Events_Prompt_tree:
+            for event in Cut_Events_all_RF_tree:
+                Q2vsW_cut.Fill(event.Q2, event.W)
+                Q2vsW_hi_cut.Fill(event.Q2, event.W)
         elif (k==1):
-            # for event in Cut_Pion_Events_Prompt_tree:
-            for event in Cut_Pion_Events_Prompt_MM_tree:
-                Q2vsW_pions_mide_cut.Fill(event.Q2, event.W)
-                Q2vsW_pions_mi_cut.Fill(event.Q2, event.W)
+            # for event in Cut_Events_Prompt_tree:
+            for event in Cut_Events_all_RF_tree:
+                Q2vsW_mide_cut.Fill(event.Q2, event.W)
+                Q2vsW_mi_cut.Fill(event.Q2, event.W)
         elif (k==0):
-            # for event in Cut_Pion_Events_Prompt_tree:
-            for event in Cut_Pion_Events_Prompt_MM_tree:
-                Q2vsW_pions_lowe_cut.Fill(event.Q2, event.W)
-                Q2vsW_pions_lo_cut.Fill(event.Q2, event.W)
-                W_pions_cut.Fill(event.W)
-                Q2_pions_cut.Fill(event.Q2)
+            # for event in Cut_Events_Prompt_tree:
+            for event in Cut_Events_all_RF_tree:
+                Q2vsW_lowe_cut.Fill(event.Q2, event.W)
+                Q2vsW_lo_cut.Fill(event.Q2, event.W)
+                W_cut.Fill(event.W)
+                Q2_cut.Fill(event.Q2)
                 countB +=1
 
             ##############################################################################################################################################
             #Does assume 400 bins for Q2 and W, centered at kinematic values with ranges of +/-2 and +/-0.5 respectively
-            minQ = Q2_pions_cut.FindFirstBinAbove(0)
-            maxQ = Q2_pions_cut.FindLastBinAbove(0)
+            minQ = Q2_cut.FindFirstBinAbove(0)
+            maxQ = Q2_cut.FindLastBinAbove(0)
             fitrange = int((maxQ-minQ)/8)
             #print(fitrange)
             minbin = 2
@@ -281,24 +271,24 @@ for i in range (0, len(df)):
                     check4 = False 
                     # Designed to remove outliers from fit, skips over bins that have empty bins on either side when determining histogram width
                     while (check1 == False or check2 == False or check3 == False or check4 == False):
-                        #fbl = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)
-                        #lbl = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)
-                        #fbr = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)
-                        #lbr = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)
-                        if (Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
-                            fbl = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1
+                        #fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)
+                        #lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)
+                        #fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)
+                        #lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
+                            fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1
                         else: 
                             check1 = True 
-                        if (Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
-                            lbl = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
+                            lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1
                         else:
                             check2 = True
-                        if (Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1)==0):
-                            fbr = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1)==0):
+                            fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1
                         else:
                             check3 = True
-                        if (Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1)==0):
-                            lbr = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1)==0):
+                            lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1
                         else:
                             check4 = True 
                         if (fbl > lbl or fbr > lbr):                     
@@ -311,14 +301,14 @@ for i in range (0, len(df)):
                     #print("Bins",b,"good")
                     #print(fbl,lbl,fbr,lbr)
                     #for i in range (fbl,lbl):
-                    # print (Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
-                    minYl = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
+                    # print (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
+                    minYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
                     lol.append(minYl)
-                    maxYl = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
+                    maxYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
                     hil.append(maxYl)
-                    minYr = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
+                    minYr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
                     lor.append(minYr)
-                    maxYr = Q2vsW_pions_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
+                    maxYr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
                     hir.append(maxYr)
                     xl = 1.0*(b+fitl)/400*(Q2max-Q2min)+Q2min
                     xr = 1.0*(b+fitr)/400*(Q2max-Q2min)+Q2min
@@ -341,9 +331,9 @@ for i in range (0, len(df)):
                 a3, b3 = np.polyfit(xra, lora, 1)
                 a4, b4 = np.polyfit(xra, hira, 1)
 	
-                for event in Cut_Pion_Events_Prompt_MM_tree:
+                for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
-                        Q2vsW_pions_lolo_cut.Fill(event.Q2, event.W)
+                        Q2vsW_lolo_cut.Fill(event.Q2, event.W)
                         countA +=1
                 if (1.0*(countB-countA)/countB<0.1):
                     #badfit=False
@@ -358,42 +348,35 @@ for i in range (0, len(df)):
 
         if (lowe_input != False and k>0): 
             if (k==2):
-                # for event in Cut_Pion_Events_Prompt_tree:
-                for event in Cut_Pion_Events_Prompt_MM_tree:
+                # for event in Cut_Events_Prompt_tree:
+                for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         if (tmax != False):
                             if(-event.MandelT<1):
-                                Q2vsW_pions_hilo_cut.Fill(event.Q2, event.W)
-                                t_pions_cut.Fill(-event.MandelT)
+                                Q2vsW_hilo_cut.Fill(event.Q2, event.W)
+                                t_cut.Fill(-event.MandelT)
                         else:
                             print("!!!!! Error! tmax not found! Skipping t-range cut !!!!!")
-                            Q2vsW_pions_hilo_cut.Fill(event.Q2, event.W)
+                            Q2vsW_hilo_cut.Fill(event.Q2, event.W)
             elif (k==1):
-                # for event in Cut_Pion_Events_Prompt_tree:
-                for event in Cut_Pion_Events_Prompt_MM_tree:
+                # for event in Cut_Events_Prompt_tree:
+                for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         if (tmax != False):
                             if(-event.MandelT<tmax):
-                                Q2vsW_pions_milo_cut.Fill(event.Q2, event.W)
-                                t_pions_mi_cut.Fill(-event.MandelT)
+                                Q2vsW_milo_cut.Fill(event.Q2, event.W)
+                                t_mi_cut.Fill(-event.MandelT)
                         else:
                             print("!!!!! Error! tmax not found! Skipping t-range cut !!!!!")
-                            Q2vsW_pions_milo_cut.Fill(event.Q2, event.W)
+                            Q2vsW_milo_cut.Fill(event.Q2, event.W)
         
 
         print("Histograms filled")
 
         infile.Close()
-    df.loc[ID,'a1'] = a1
-    df.loc[ID,'b1'] = b1
-    df.loc[ID,'a2'] = a2
-    df.loc[ID,'b2'] = b2
-    df.loc[ID,'a3'] = a3
-    df.loc[ID,'b3'] = b3
-    df.loc[ID,'a4'] = a4
-    df.loc[ID,'b4'] = b4
+
     ##############################################################################################################################################
-    c1_pions_kin = TCanvas("c1_pions_kin", "Pions Kinematic Distributions", 100, 0, 1000, 900)
+    c1_kin = TCanvas("c1_kin", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
     gStyle.SetTitleFontSize(0.03)
     gStyle.SetPalette(86)
     ex1 = TExec("ex1","gStyle->SetPalette(86)")
@@ -403,42 +386,42 @@ for i in range (0, len(df)):
     pages = 2
     if (highe_input !=False):
 	#print("test high")
-        Q2vsW_pions_cut.Draw("col")
+        Q2vsW_cut.Draw("col")
         ex1.Draw()
-        Q2vsW_pions_cut.Draw("col same")
+        Q2vsW_cut.Draw("col same")
         if (mide_input !=False):
             #print("test high mid")
             ex2.Draw()
-            Q2vsW_pions_mide_cut.Draw("col same")
+            Q2vsW_mide_cut.Draw("col same")
             pages = 3
             if (lowe_input !=False):
                 #print("test high mid low")
                 ex3.Draw()
-                Q2vsW_pions_lowe_cut.Draw("col same")
+                Q2vsW_lowe_cut.Draw("col same")
                 pages = 6
         elif (lowe_input !=False):
             #print("test high low")
             ex2.Draw()
-            Q2vsW_pions_lowe_cut.Draw("col same")
+            Q2vsW_lowe_cut.Draw("col same")
             pages = 4
     elif (mide_input !=False):
 	#print("test mid")
-        Q2vsW_pions_mide_cut.Draw("colz")
+        Q2vsW_mide_cut.Draw("colz")
         ex1.Draw()
-        Q2vsW_pions_mide_cut.Draw("col same")
+        Q2vsW_mide_cut.Draw("col same")
         if (lowe_input !=False):
             #print("test mid low")
             ex2.Draw()
-            Q2vsW_pions_lowe_cut.Draw("col same")
+            Q2vsW_lowe_cut.Draw("col same")
             pages = 4
     elif (lowe_input !=False):
         #print("test low")
-        Q2vsW_pions_lowe_cut.Draw("colz")
+        Q2vsW_lowe_cut.Draw("colz")
         ex1.Draw()
-        Q2vsW_pions_lowe_cut.Draw("col same")
+        Q2vsW_lowe_cut.Draw("col same")
 
 
-    c1_pions_kin.Print(Pion_Analysis_Distributions + "(")
+    c1_kin.Print(Analysis_Distributions + "(")
 
 
 
@@ -457,23 +440,23 @@ for i in range (0, len(df)):
     gStyle.SetPalette(55)
 
     if (tmax != False):
-        c1_pions_kint = TCanvas("c1_pions_kint", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-        t_pions_cut.Draw("colz")
-        c1_pions_kint.Print(Pion_Analysis_Distributions)
+        c1_kint = TCanvas("c1_kint", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+        t_cut.Draw("colz")
+        c1_kint.Print(Analysis_Distributions)
     if (highe_input != False):
-        c1_pions_kinh = TCanvas("c1_pions_kinh", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-        Q2vsW_pions_hi_cut.Draw("colz")
-        c1_pions_kinh.Print(Pion_Analysis_Distributions+end)
+        c1_kinh = TCanvas("c1_kinh", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+        Q2vsW_hi_cut.Draw("colz")
+        c1_kinh.Print(Analysis_Distributions+end)
     if (mide_input != False):
-        c1_pions_kinm = TCanvas("c1_pions_kinm", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-        Q2vsW_pions_mi_cut.Draw("colz")
-        c1_pions_kinm.Print(Pion_Analysis_Distributions+end+endm)
+        c1_kinm = TCanvas("c1_kinm", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+        Q2vsW_mi_cut.Draw("colz")
+        c1_kinm.Print(Analysis_Distributions+end+endm)
     if (lowe_input != False):
-        c1_pions_kinl = TCanvas("c1_pions_kinl", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-        Q2vsW_pions_lo_cut.Draw("colz")
-        c1_pions_kinl.Print(Pion_Analysis_Distributions)
-        c1_pions_kinll = TCanvas("c1_pions_kinll", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-        Q2vsW_pions_lolo_cut.Draw("colz")
+        c1_kinl = TCanvas("c1_kinl", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+        Q2vsW_lo_cut.Draw("colz")
+        c1_kinl.Print(Analysis_Distributions)
+        c1_kinll = TCanvas("c1_kinll", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+        Q2vsW_lolo_cut.Draw("colz")
         #    lol.clear()
         #   lor.clear()
         #  hil.clear()
@@ -515,17 +498,15 @@ for i in range (0, len(df)):
         line2f.Draw()
         line3f.Draw()
         line4f.Draw()
-        c1_pions_kinll.Print(Pion_Analysis_Distributions+end)
+        c1_kinll.Print(Analysis_Distributions+end)
 
         if (mide_input != False):
-            c1_pions_kinml = TCanvas("c1_pions_kinml", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-            Q2vsW_pions_milo_cut.Draw("colz")
-            c1_pions_kinml.Print(Pion_Analysis_Distributions+endc)
+            c1_kinml = TCanvas("c1_kinml", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+            Q2vsW_milo_cut.Draw("colz")
+            c1_kinml.Print(Analysis_Distributions+endc)
 
         if (highe_input != False):
-            c1_pions_kinhl = TCanvas("c1_pions_kinhl", "Pions Kinematic Distributions", 100, 0, 1000, 900)
-            Q2vsW_pions_hilo_cut.Draw("colz")
-            c1_pions_kinhl.Print(Pion_Analysis_Distributions+endc+endf)
+            c1_kinhl = TCanvas("c1_kinhl", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
+            Q2vsW_hilo_cut.Draw("colz")
+            c1_kinhl.Print(Analysis_Distributions+endc+endf)
 	
-
-df.to_csv(UTILPATH+"/scripts/online_physics/PionLT/Diamond_t_cuts.csv")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-14 14:09:36 trottar"
+# Time-stamp: "2023-01-18 14:52:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
 
-if len(sys.argv)-1!=19:
-    print("!!!!! ERROR !!!!!\n Expected 19 arguments\n Usage is with - KIN Q2 EPSVAL OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=20:
+    print("!!!!! ERROR !!!!!\n Expected 20 arguments\n Usage is with - KIN Q2 EPSVAL OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -59,7 +59,8 @@ data_charge_center = int(sys.argv[15])/1000
 InData_efficiency_right = sys.argv[16]
 InData_efficiency_left = sys.argv[17]
 InData_efficiency_center = sys.argv[18]
-efficiency_table = sys.argv[19]
+efficiency_table = sys.argv[19]2
+target = sys.argv[20]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -88,6 +89,15 @@ OUTPATH=lt.OUTPATH
 foutname = OUTPATH+"/" + OutFilename + ".root"
 fouttxt  = OUTPATH+"/" + OutFilename + ".txt"
 outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
+
+################################################################################################################################################
+'''
+Importing diamond cut script
+'''
+
+from DiamondPlot_all import DiamondPlot
+
+DiamondPlot(Q2,W,phi_setting,tmin,tmax,target)
 
 ################################################################################################################################################
 
