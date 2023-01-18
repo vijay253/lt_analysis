@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-18 18:08:42 trottar"
+# Time-stamp: "2023-01-18 18:23:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -249,7 +249,7 @@ def defineHists(phi_setting):
         runNum = runNumCenter.split(' ')[0]
         InData_efficiency = InData_efficiency_center
 
-    sys.path.append('../../')
+    sys.path.append('../')
     from getDataTable import calculate_effError
 
     tot_effError_data = [calculate_effError(run,efficiency_table) for run in runNums.split(' ')]
