@@ -327,17 +327,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 a3, b3 = np.polyfit(xra, lora, 1)
                 a4, b4 = np.polyfit(xra, hira, 1)
 
-                paramDict = {
 
-                    "a1" : a1,
-                    "b1" : b1,
-                    "a2" : a2,
-                    "b2" : b2,
-                    "a3" : a3,
-                    "b3" : b3,
-                    "a4" : a4,
-                    "b4" : b4
-                }
 	
                 for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
@@ -382,6 +372,18 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
         print("Histograms filled")
 
         infile.Close()
+        
+    paramDict = {
+            
+        "a1" : a1,
+        "b1" : b1,
+        "a2" : a2,
+        "b2" : b2,
+        "a3" : a3,
+        "b3" : b3,
+        "a4" : a4,
+        "b4" : b4
+    }
 
     ##############################################################################################################################################
     c1_kin = TCanvas("c1_kin", "%s Kinematic Distributions" % particle, 100, 0, 1000, 900)
