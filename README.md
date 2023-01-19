@@ -1,4 +1,4 @@
-![LT_Analyisis Workflow](./Docs/LT_Analysis_Workflow.png)
+![LT_Analyisis Workflow](Docs/LT_Analysis_Workflow.png)
 
 /*--------------------------------------------------*/
 Installation instruction
