@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-18 18:47:23 trottar"
+# Time-stamp: "2023-01-19 14:45:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
 
-if len(sys.argv)-1!=21:
-    print("!!!!! ERROR !!!!!\n Expected 21 arguments\n Usage is with - KIN W Q2 EPSVAL OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=22:
+    print("!!!!! ERROR !!!!!\n Expected 22 arguments\n Usage is with - KIN W Q2 EPSVAL OutDATAFilename OutSIMCFilename OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -46,22 +46,23 @@ W = sys.argv[2]
 Q2 = sys.argv[3]
 EPSVAL = sys.argv[4]
 InDATAFilename = sys.argv[5]
-OutFilename = sys.argv[6]
-tmin = float(sys.argv[7])
-tmax = float(sys.argv[8])
-NumtBins = int(sys.argv[9])
-NumPhiBins = int(sys.argv[10])
-runNumRight = sys.argv[11]
-runNumLeft = sys.argv[12]
-runNumCenter = sys.argv[13]
-data_charge_right = int(sys.argv[14])/1000
-data_charge_left = int(sys.argv[15])/1000
-data_charge_center = int(sys.argv[16])/1000
-InData_efficiency_right = sys.argv[17]
-InData_efficiency_left = sys.argv[18]
-InData_efficiency_center = sys.argv[19]
-efficiency_table = sys.argv[20]
-target = sys.argv[21]
+InSIMCFilename = sys.argv[6]
+OutFilename = sys.argv[7]
+tmin = float(sys.argv[8])
+tmax = float(sys.argv[9])
+NumtBins = int(sys.argv[10])
+NumPhiBins = int(sys.argv[11])
+runNumRight = sys.argv[12]
+runNumLeft = sys.argv[13]
+runNumCenter = sys.argv[14]
+data_charge_right = int(sys.argv[15])/1000
+data_charge_left = int(sys.argv[16])/1000
+data_charge_center = int(sys.argv[17])/1000
+InData_efficiency_right = sys.argv[18]
+InData_efficiency_left = sys.argv[19]
+InData_efficiency_center = sys.argv[20]
+efficiency_table = sys.argv[21]
+target = sys.argv[22]
 
 particle = "kaon"
 
@@ -218,13 +219,46 @@ def defineHists(phi_setting):
     print(paramDict)
 
     ################################################################################################################################################
-    # Define root file trees of interest
+    # Define simc root file trees of interest
 
-    rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
-    if not os.path.isfile(rootFile):
+    InSIMCFilename = InSIMCFilename.split("_")
+    rootFileSimc = OUTPATH+"/"+InSIMCFilename[0]+"%s_"+InSIMCFilename[1]".root" % (phi_setting.lower())
+    if not os.path.isfile(rootFileSimc):
         return {}
 
-    InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+    InFile_SIMC = ROOT.TFile.Open(rootFileSimc, "OPEN")
+
+    TBRANCH_SIMC  = InFile_SIMC.Get("h10")
+
+    ###############################################################################################################################################
+
+    # Grabs simc number of events and normalizaton factor
+    simc_hist = "%s/OUTPUT/Analysis/%sLT/%s" % (LTANAPATH,ANATYPE,rootFileSimc.replace('.root','.hist'))
+    f_simc = open(simc_hist)
+    for line in f_simc:
+        print(line)
+z        if "Ngen" in line:
+            val = line.split("=")
+            simc_nevents = int(val[1])
+        if "normfac" in line:
+            val = line.split("=")
+            simc_normfactor = float(val[1])
+    if 'simc_nevents' and 'simc_normfactor' in locals():
+        print('\n\nsimc_nevents = ',simc_nevents,'\nsimc_normfactor = ',simc_normfactor,'\n\n')
+        print('\n\ndata_charge = ',data_charge,'\ndummy_charge = ',dummy_charge,'\n\n')
+    else:
+        print("ERROR: Invalid simc hist file %s" % simc_hist)
+        sys.exit(1)
+    f_simc.close()    
+    
+    ################################################################################################################################################
+    # Define data root file trees of interest
+
+    rootFileData = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
+    if not os.path.isfile(rootFileData):
+        return {}
+
+    InFile_DATA = ROOT.TFile.Open(rootFileData, "OPEN")
 
     #TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
@@ -315,6 +349,38 @@ def defineHists(phi_setting):
     ################################################################################################################################################
     # Plot definitions
 
+    H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta", 200, -20.0, 20.0)
+    H_hsxptar_SIMC  = ROOT.TH1D("H_hsxptar_SIMC","HMS xptar", 200, -0.1, 0.1)
+    H_hsyptar_SIMC  = ROOT.TH1D("H_hsyptar_SIMC","HMS yptar", 200, -0.1, 0.1)
+    H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp", 200, -25.0, 25.0)
+    H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp", 200, -25.0, 25.0)
+    H_ssxpfp_SIMC   = ROOT.TH1D("H_ssxpfp_SIMC","SHMS xpfp", 200, -0.09, 0.09)
+    H_ssypfp_SIMC   = ROOT.TH1D("H_ssypfp_SIMC","SHMS ypfp", 200, -0.05, 0.04)
+    H_hsxfp_SIMC    = ROOT.TH1D("H_hsxfp_SIMC","HMS xfp", 200, -40.0, 40.0)
+    H_hsyfp_SIMC    = ROOT.TH1D("H_hsyfp_SIMC","HMS yfp", 200, -20.0, 20.0)
+    H_hsxpfp_SIMC   = ROOT.TH1D("H_hsxpfp_SIMC","HMS xpfp", 200, -0.09, 0.05)
+    H_hsypfp_SIMC   = ROOT.TH1D("H_hsypfp_SIMC","HMS ypfp", 200, -0.05, 0.04)
+    H_ssdelta_SIMC  = ROOT.TH1D("H_ssdelta_SIMC","SHMS delta", 200, -20.0, 20.0)
+    H_ssxptar_SIMC  = ROOT.TH1D("H_ssxptar_SIMC","SHMS xptar", 200, -0.1, 0.1)
+    H_ssyptar_SIMC  = ROOT.TH1D("H_ssyptar_SIMC","SHMS yptar", 200, -0.04, 0.04)
+    H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 200, 0.0, 10.0)
+    H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 200, 0.0, 10.0)
+    H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W ", 200, 0.0, 10.0)
+    H_t_SIMC       = ROOT.TH1D("H_t_SIMC","-t", 200, -1.0, 1.5)  
+    H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 200, 0., 1.0)
+    H_MM_SIMC  = ROOT.TH1D("H_MM_SIMC","MM_{K}", 200, 0.0, 2.0)
+    H_th_SIMC  = ROOT.TH1D("H_th_SIMC","X' tar", 200, -0.1, 0.1)
+    H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 200, -0.1, 0.1)
+    H_ph_q_SIMC  = ROOT.TH1D("H_ph_q_SIMC","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+    H_th_q_SIMC  = ROOT.TH1D("H_th_q_SIMC","Theta Detected (th_xq)", 200, -0.2, 0.2)
+    H_ph_recoil_SIMC  = ROOT.TH1D("H_ph_recoil_SIMC","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+    H_th_recoil_SIMC  = ROOT.TH1D("H_th_recoil_SIMC","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+    H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 200, 0.0, 10.0)
+    H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 200, 0.0, 10.0)
+    H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx", 200, -10.0, 10.0)
+    H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy ", 200, -10.0, 10.0)
+    H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz", 200, -10.0, 10.0)
+
     H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 200, -20.0, 20.0)
     H_hsxptar_DATA  = ROOT.TH1D("H_hsxptar_DATA","HMS xptar", 200, -0.1, 0.1)
     H_hsyptar_DATA  = ROOT.TH1D("H_hsyptar_DATA","HMS yptar", 200, -0.1, 0.1)
@@ -393,6 +459,51 @@ def defineHists(phi_setting):
     CoinTime_vs_beta_DATA = ROOT.TH2D("CoinTime_vs_beta_DATA", "CTime vs SHMS #beta; Coin_Time; SHMS_#beta", 100, -2, 2, 100, 0.6, 1.4)
     MM_vs_beta_DATA = ROOT.TH2D("MM_vs_beta_DATA", "Missing Mass vs SHMS #beta; MM; SHMS_#beta", 100, 0, 2, 200, 0, 2)
     phiq_vs_t_DATA = ROOT.TH2D("phiq_vs_t_DATA","; #phi ;t", 12, -3.14, 3.14, 24, tmin, tmax)
+
+    ################################################################################################################################################
+    # Fill histograms for various trees called above
+
+    for evt in TBRANCH_SIMC:
+
+      # Define the acceptance cuts  
+
+      # Select the cuts
+      SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
+      HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)
+      #........................................
+
+      #Fill SIMC events
+      print("\nPlotting %s simc..." % phi_setting)
+      if(HMS_Acceptance & SHMS_Acceptance):
+
+          H_ssxfp_SIMC.Fill(evt.ssxfp, evt.Weight)
+          H_ssyfp_SIMC.Fill(evt.ssyfp, evt.Weight)
+          H_ssxpfp_SIMC.Fill(evt.ssxpfp, evt.Weight)
+          H_ssypfp_SIMC.Fill(evt.ssypfp, evt.Weight)
+          H_hsxfp_SIMC.Fill(evt.hsxfp, evt.Weight)
+          H_hsyfp_SIMC.Fill(evt.hsyfp, evt.Weight)
+          H_hsxpfp_SIMC.Fill(evt.hsxpfp, evt.Weight)
+          H_hsypfp_SIMC.Fill(evt.hsypfp, evt.Weight)
+          H_ssdelta_SIMC.Fill(evt.ssdelta, evt.Weight) 
+          H_hsdelta_SIMC.Fill(evt.hsdelta, evt.Weight)	
+          H_ssxptar_SIMC.Fill(evt.ssxptar, evt.Weight)
+          H_ssyptar_SIMC.Fill(evt.ssyptar, evt.Weight)
+          H_hsxptar_SIMC.Fill(evt.hsxptar, evt.Weight)	
+          H_hsyptar_SIMC.Fill(evt.hsyptar, evt.Weight)
+
+          H_ph_q_SIMC.Fill(evt.phipq, evt.Weight)
+          H_th_q_SIMC.Fill(evt.thetapq, evt.Weight)
+
+          H_pmiss_SIMC.Fill(evt.Pm, evt.Weight)	
+          H_emiss_SIMC.Fill(evt.Em, evt.Weight)	
+          H_pmx_SIMC.Fill(evt.Pmx, evt.Weight)
+          H_pmy_SIMC.Fill(evt.Pmy, evt.Weight)
+          H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
+          H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
+          H_W_SIMC.Fill(evt.W, evt.Weight)
+          H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
+          H_MM_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight))
+
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
@@ -498,7 +609,41 @@ def defineHists(phi_setting):
           P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
 
           ibin+=1
+          
+    ################################################################################################################################################
+    # Normalize simc by normfactor/nevents
+    # Normalize data by effective charge
 
+    normfac_simc = (simc_normfactor)/(simc_nevents)
+    H_ssxfp_DATA.Scale(normfac_data)
+    H_ssyfp_DATA.Scale(normfac_data)
+    H_ssxpfp_DATA.Scale(normfac_data)
+    H_ssypfp_DATA.Scale(normfac_data)
+    H_hsxfp_DATA.Scale(normfac_data)
+    H_hsyfp_DATA.Scale(normfac_data)
+    H_hsxpfp_DATA.Scale(normfac_data)
+    H_hsypfp_DATA.Scale(normfac_data)
+    H_ssxptar_DATA.Scale(normfac_data)
+    H_ssyptar_DATA.Scale(normfac_data)
+    H_hsxptar_DATA.Scale(normfac_data)
+    H_hsyptar_DATA.Scale(normfac_data)
+    H_ssdelta_DATA.Scale(normfac_data)
+    H_hsdelta_DATA.Scale(normfac_data)
+    H_Q2_DATA.Scale(normfac_data)
+    H_t_DATA.Scale(normfac_data)
+    H_epsilon_DATA.Scale(normfac_data)
+    H_MM_DATA.Scale(normfac_data)
+    H_ph_q_DATA.Scale(normfac_data)
+    H_th_q_DATA.Scale(normfac_data)
+    H_ph_recoil_DATA.Scale(normfac_data)
+    H_th_recoil_DATA.Scale(normfac_data)
+    H_pmiss_DATA.Scale(normfac_data)
+    H_emiss_DATA.Scale(normfac_data)
+    H_pmx_DATA.Scale(normfac_data)
+    H_pmy_DATA.Scale(normfac_data)
+    H_pmz_DATA.Scale(normfac_data)
+    H_W_DATA.Scale(normfac_data)
+          
     if phi_setting == "Right":
         normfac_data = 1/(data_charge_right)
     if phi_setting == "Left":
