@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 18:47:56 trottar"
+# Time-stamp: "2023-01-19 18:50:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -237,7 +237,7 @@ def defineHists(phi_setting):
     simc_hist = rootFileSimc.replace('.root','.hist')
     f_simc = open(simc_hist)
     for line in f_simc:
-        print(line)
+        #print(line)
         if "Ngen" in line:
             val = line.split("=")
             simc_nevents = int(val[1])
