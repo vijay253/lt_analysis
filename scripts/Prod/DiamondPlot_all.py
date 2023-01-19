@@ -239,94 +239,94 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 Q2_cut.Fill(event.Q2)
                 countB +=1
 
-        ##############################################################################################################################################
-        #Does assume 400 bins for Q2 and W, centered at kinematic values with ranges of +/-2 and +/-0.5 respectively
-        minQ = Q2_cut.FindFirstBinAbove(0)
-        maxQ = Q2_cut.FindLastBinAbove(0)
-        fitrange = int((maxQ-minQ)/8)
-        #print(fitrange)
-        minbin = 2
-        badfile = False
-        #print (minQ, minQ/400*(Q2max-Q2min)+Q2min,maxQ,maxQ/400*(Q2max-Q2min)+Q2min,fitrange)
-        fitl = 200-fitrange*2
-        fitr = 200+fitrange
-        while (badfit == True):
-            lol.clear()
-            lor.clear()
-            hil.clear()
-            hir.clear()
-            xvl.clear()
-            xvr.clear()
-            for b in range (0,fitrange):
-
-                fbl = 1
-                lbl = 400
-                fbr = 1
-                lbr = 400
-                check1 = False
-                check2 = False
-                check3 = False
-                check4 = False 
-                # Designed to remove outliers from fit, skips over bins that have empty bins on either side when determining histogram width
-                while (check1 == False or check2 == False or check3 == False or check4 == False):
-                    #fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)
-                    #lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)
-                    #fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)
-                    #lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)
-                    if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
-                        fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1
-                    else: 
-                        check1 = True 
-                    if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
-                        lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1
-                    else:
-                        check2 = True
-                    if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1)==0):
-                        fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1
-                    else:
-                        check3 = True
-                    if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1)==0):
-                        lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1
-                    else:
-                        check4 = True 
-                    if (fbl > lbl or fbr > lbr):                     
-                        print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file \n!!!!! ERROR !!!!!")
-                        lowe_input = False
-                        badfile = True
+            ##############################################################################################################################################
+            #Does assume 400 bins for Q2 and W, centered at kinematic values with ranges of +/-2 and +/-0.5 respectively
+            minQ = Q2_cut.FindFirstBinAbove(0)
+            maxQ = Q2_cut.FindLastBinAbove(0)
+            fitrange = int((maxQ-minQ)/8)
+            #print(fitrange)
+            minbin = 2
+            badfile = False
+            #print (minQ, minQ/400*(Q2max-Q2min)+Q2min,maxQ,maxQ/400*(Q2max-Q2min)+Q2min,fitrange)
+            fitl = 200-fitrange*2
+            fitr = 200+fitrange
+            while (badfit == True):
+                lol.clear()
+                lor.clear()
+                hil.clear()
+                hir.clear()
+                xvl.clear()
+                xvr.clear()
+                for b in range (0,fitrange):
+        
+                    fbl = 1
+                    lbl = 400
+                    fbr = 1
+                    lbr = 400
+                    check1 = False
+                    check2 = False
+                    check3 = False
+                    check4 = False 
+                    # Designed to remove outliers from fit, skips over bins that have empty bins on either side when determining histogram width
+                    while (check1 == False or check2 == False or check3 == False or check4 == False):
+                        #fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)
+                        #lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)
+                        #fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)
+                        #lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
+                            fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1
+                        else: 
+                            check1 = True 
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
+                            lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1
+                        else:
+                            check2 = True
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1)==0):
+                            fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1
+                        else:
+                            check3 = True
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1)==0):
+                            lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1
+                        else:
+                            check4 = True 
+                        if (fbl > lbl or fbr > lbr):                     
+                            print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file \n!!!!! ERROR !!!!!")
+                            lowe_input = False
+                            badfile = True
+                            break
+                    if (badfile == True):
                         break
+                    #print("Bins",b,"good")
+                    #print(fbl,lbl,fbr,lbr)
+                    #for i in range (fbl,lbl):
+                    # print (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
+                    minYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
+                    lol.append(minYl)
+                    maxYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
+                    hil.append(maxYl)
+                    minYr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
+                    lor.append(minYr)
+                    maxYr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
+                    hir.append(maxYr)
+                    xl = 1.0*(b+fitl)/400*(Q2max-Q2min)+Q2min
+                    xr = 1.0*(b+fitr)/400*(Q2max-Q2min)+Q2min
+                    xvl.append(xl)
+                    xvr.append(xr)
                 if (badfile == True):
                     break
-                #print("Bins",b,"good")
-                #print(fbl,lbl,fbr,lbr)
-                #for i in range (fbl,lbl):
-                # print (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
-                minYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
-                lol.append(minYl)
-                maxYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
-                hil.append(maxYl)
-                minYr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
-                lor.append(minYr)
-                maxYr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(minbin,1,fbr,lbr)/400*(Wmax-Wmin)+Wmin
-                hir.append(maxYr)
-                xl = 1.0*(b+fitl)/400*(Q2max-Q2min)+Q2min
-                xr = 1.0*(b+fitr)/400*(Q2max-Q2min)+Q2min
-                xvl.append(xl)
-                xvr.append(xr)
-            if (badfile == True):
-                break
-
-            lola = np.array(lol)
-            hila = np.array(hil)
-            lora = np.array(lor)
-            hira = np.array(hir)
-            xla = np.array(xvl)
-            xra = np.array(xvr)
-
-            a1, b1 = np.polyfit(xla, lola, 1)
-            a2, b2 = np.polyfit(xla, hila, 1)
-            a3, b3 = np.polyfit(xra, lora, 1)
-            a4, b4 = np.polyfit(xra, hira, 1)
-            print("\n\n\n\n\n\n",a1)
+        
+                lola = np.array(lol)
+                hila = np.array(hil)
+                lora = np.array(lor)
+                hira = np.array(hir)
+                xla = np.array(xvl)
+                xra = np.array(xvr)
+	
+                a1, b1 = np.polyfit(xla, lola, 1)
+                a2, b2 = np.polyfit(xla, hila, 1)
+                a3, b3 = np.polyfit(xra, lora, 1)
+                a4, b4 = np.polyfit(xra, hira, 1)
+                print("\n\n\n\n\n\n",a1)
 
 	
                 for event in Cut_Events_all_RF_tree:
