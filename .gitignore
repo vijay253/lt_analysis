@@ -19,6 +19,7 @@ Tmp*
 # Data files
 list.*
 *.dat
+t_bin_interval*
 
 # Directories
 __pycache__
