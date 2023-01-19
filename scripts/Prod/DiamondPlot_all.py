@@ -330,9 +330,9 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
 
 	
                 for event in Cut_Events_all_RF_tree:
+                    print("\n\n\n\n\n\n",a1)
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         Q2vsW_lolo_cut.Fill(event.Q2, event.W)
-                        print("\n\n\n\n\n\n",a1)
                         countA +=1
                 if (1.0*(countB-countA)/countB<0.1):
                     #badfit=False
@@ -348,8 +348,8 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
         if (lowe_input != False and k>0): 
             if (k==2):
                 for event in Cut_Events_all_RF_tree:
+                    print("\n\n\n\n\n\n",a1)
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
-                        print("\n\n\n\n\n\n",a1)
                         if (tmax != False):
                             if(-event.MandelT<1):
                                 Q2vsW_hilo_cut.Fill(event.Q2, event.W)
@@ -359,8 +359,8 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             Q2vsW_hilo_cut.Fill(event.Q2, event.W)
             elif (k==1):
                 for event in Cut_Events_all_RF_tree:
+                    print("\n\n\n\n\n\n",a1)
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
-                        print("\n\n\n\n\n\n",a1)
                         if (tmax != False):
                             if(-event.MandelT<tmax):
                                 Q2vsW_milo_cut.Fill(event.Q2, event.W)
