@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 15:03:48 trottar"
+# Time-stamp: "2023-01-19 15:13:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -214,9 +214,10 @@ def defineHists(phi_setting):
 
     ################################################################################################################################################
     # Call diamond cut script
-    paramDict = DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
 
-    print(paramDict)
+    #paramDict = DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
+
+    #print(paramDict)
 
     ################################################################################################################################################
     # Define simc root file trees of interest
@@ -772,6 +773,37 @@ def defineHists(phi_setting):
         "H_pmy_DATA" :     H_pmy_DATA,
         "H_pmz_DATA" :     H_pmz_DATA,
         "H_W_DATA" :     H_W_DATA,
+        "H_hsdelta_SIMC" :     H_hsdelta_SIMC,
+        "H_hsxptar_SIMC" :     H_hsxptar_SIMC,
+        "H_hsyptar_SIMC" :     H_hsyptar_SIMC,
+        "H_ssxfp_SIMC" :     H_ssxfp_SIMC  ,
+        "H_ssyfp_SIMC" :     H_ssyfp_SIMC  ,
+        "H_ssxpfp_SIMC" :     H_ssxpfp_SIMC ,
+        "H_ssypfp_SIMC" :     H_ssypfp_SIMC ,
+        "H_hsxfp_SIMC" :     H_hsxfp_SIMC  ,
+        "H_hsyfp_SIMC" :     H_hsyfp_SIMC  ,
+        "H_hsxpfp_SIMC" :     H_hsxpfp_SIMC ,
+        "H_hsypfp_SIMC" :     H_hsypfp_SIMC ,
+        "H_ssdelta_SIMC" :     H_ssdelta_SIMC,
+        "H_ssxptar_SIMC" :     H_ssxptar_SIMC,
+        "H_ssyptar_SIMC" :     H_ssyptar_SIMC,
+        "H_q_SIMC" :     H_q_SIMC      ,
+        "H_Q2_SIMC" :     H_Q2_SIMC     ,
+        "H_t_SIMC" :     H_t_SIMC     ,
+        "H_epsilon_SIMC" :     H_epsilon_SIMC,
+        "H_MM_SIMC" :     H_MM_SIMC,
+        "H_th_SIMC" :     H_th_SIMC,
+        "H_ph_SIMC" :     H_ph_SIMC,
+        "H_ph_q_SIMC" :     H_ph_q_SIMC,
+        "H_th_q_SIMC" :     H_th_q_SIMC,
+        "H_ph_recoil_SIMC" :     H_ph_recoil_SIMC,
+        "H_th_recoil_SIMC" :     H_th_recoil_SIMC,
+        "H_pmiss_SIMC" :     H_pmiss_SIMC,
+        "H_emiss_SIMC" :     H_emiss_SIMC,
+        "H_pmx_SIMC" :     H_pmx_SIMC,
+        "H_pmy_SIMC" :     H_pmy_SIMC,
+        "H_pmz_SIMC" :     H_pmz_SIMC,
+        "H_W_SIMC" :     H_W_SIMC,        
         "H_ct_ep_DATA" :     H_ct_ep_DATA,
         "H_cal_etottracknorm_DATA" :     H_cal_etottracknorm_DATA,
         "H_cer_npeSum_DATA" :     H_cer_npeSum_DATA,
@@ -900,6 +932,7 @@ CQ2 = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_Q2_DATA"].SetLineColor(i+1)
     hist["H_Q2_DATA"].Draw("same, E1")
+    hist["H_Q2_SIMC"].Draw("same, E1")
 
 CQ2.Print(outputpdf)
 
@@ -908,6 +941,7 @@ CW = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_W_DATA"].SetLineColor(i+1)
     hist["H_W_DATA"].Draw("same, E1")
+    hist["H_W_SIMC"].Draw("same, E1")    
     
 CW.Print(outputpdf)
 
