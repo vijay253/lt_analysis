@@ -347,7 +347,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
 
         if (lowe_input != False and k>0): 
             if (k==2):
-                # for event in Cut_Events_Prompt_tree:
                 for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         print("\n\n\n\n\n\n",a1)
@@ -359,7 +358,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             print("!!!!! Error! tmax not found! Skipping t-range cut !!!!!")
                             Q2vsW_hilo_cut.Fill(event.Q2, event.W)
             elif (k==1):
-                # for event in Cut_Events_Prompt_tree:
                 for event in Cut_Events_all_RF_tree:
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         print("\n\n\n\n\n\n",a1)
