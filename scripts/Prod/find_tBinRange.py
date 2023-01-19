@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 17:21:06 trottar"
+# Time-stamp: "2023-01-19 17:29:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -235,7 +235,7 @@ def defineHists(phi_setting):
     ###############################################################################################################################################
 
     # Grabs simc number of events and normalizaton factor
-    simc_hist = OUTPATH+rootFileSimc.replace('.root','.hist')
+    simc_hist = rootFileSimc.replace('.root','.hist')
     f_simc = open(simc_hist)
     for line in f_simc:
         print(line)
