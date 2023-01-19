@@ -701,12 +701,14 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    echo "Combining run $i with ${OutDATAFilename}_Right.root..."  
 	    hadd -f ${OutDATAFilename}_Right.root ${i}_-1_Raw_Data.root
+	    echo "Renaming Raw_Data to Proc_Data..."
+	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
 	echo
 	#echo "Combining root files..."  
 	#hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
-	echo "Renaming Raw_Data to Proc_Data..."
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
+	#echo "Renaming Raw_Data to Proc_Data..."
+	#for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
 
     # Checks that array isn't empty
@@ -727,12 +729,14 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    echo "Combining run $i with ${OutDATAFilename}_Left.root..."  
 	    hadd -f ${OutDATAFilename}_Left.root ${i}_-1_Raw_Data.root
+	    echo "Renaming Raw_Data to Proc_Data..."
+	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
 	echo
 	#echo "Combining root files..."  
 	#hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
-	echo "Renaming Raw_Data to Proc_Data..."
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
+	#echo "Renaming Raw_Data to Proc_Data..."
+	#for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
 
     # Checks that array isn't empty
@@ -753,12 +757,14 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    echo "Combining run $i with ${OutDATAFilename}_Center.root..."  
 	    hadd -f ${OutDATAFilename}_Center.root ${i}_-1_Raw_Data.root
+	    echo "Renaming Raw_Data to Proc_Data..."
+	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
 	echo
 	#echo "Combining root files..."  
 	#hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
-	echo "Renaming Raw_Data to Proc_Data..."
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
+	#echo "Renaming Raw_Data to Proc_Data..."
+	#for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
     
 fi
