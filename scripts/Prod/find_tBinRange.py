@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 16:38:25 trottar"
+# Time-stamp: "2023-01-19 16:48:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -224,6 +224,7 @@ def defineHists(phi_setting):
     # Names don't match so need to do some string rearrangement
     InSIMCFilename = "Prod_Coin_{}.root".format(kinematics[0]+phi_setting.lower()+"_"+kinematics[1])
     rootFileSimc = OUTPATH+"/"+InSIMCFilename
+    print("~~~~~~~~",rootFileSimc)
     if not os.path.isfile(rootFileSimc):
         return {}
 
