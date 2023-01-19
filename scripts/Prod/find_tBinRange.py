@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 17:38:23 trottar"
+# Time-stamp: "2023-01-19 18:00:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -438,7 +438,7 @@ def defineHists(phi_setting):
     H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 200, 0.0, 10.0)
     H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)
     H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.0, 10.0)
-    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, -1.0, 1.5)  
+    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, -1.0, 1.5)
     H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0., 1.0)
     H_MM_DATA_rand  = ROOT.TH1D("H_MM_DATA_rand","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)
@@ -498,11 +498,12 @@ def defineHists(phi_setting):
 
           H_pmiss_SIMC.Fill(evt.Pm, evt.Weight)	
           H_emiss_SIMC.Fill(evt.Em, evt.Weight)	
-          H_pmx_SIMC.Fill(evt.Pmx, evt.Weight)
-          H_pmy_SIMC.Fill(evt.Pmy, evt.Weight)
-          H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
+          #H_pmx_SIMC.Fill(evt.Pmx, evt.Weight)
+          #H_pmy_SIMC.Fill(evt.Pmy, evt.Weight)
+          #H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
           H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
           H_W_SIMC.Fill(evt.W, evt.Weight)
+          H_t_DATA.Fill(-evt.t)
           H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
           H_MM_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight))
 
@@ -617,34 +618,34 @@ def defineHists(phi_setting):
     # Normalize data by effective charge
 
     normfac_simc = (simc_normfactor)/(simc_nevents)
-    H_ssxfp_DATA.Scale(normfac_data)
-    H_ssyfp_DATA.Scale(normfac_data)
-    H_ssxpfp_DATA.Scale(normfac_data)
-    H_ssypfp_DATA.Scale(normfac_data)
-    H_hsxfp_DATA.Scale(normfac_data)
-    H_hsyfp_DATA.Scale(normfac_data)
-    H_hsxpfp_DATA.Scale(normfac_data)
-    H_hsypfp_DATA.Scale(normfac_data)
-    H_ssxptar_DATA.Scale(normfac_data)
-    H_ssyptar_DATA.Scale(normfac_data)
-    H_hsxptar_DATA.Scale(normfac_data)
-    H_hsyptar_DATA.Scale(normfac_data)
-    H_ssdelta_DATA.Scale(normfac_data)
-    H_hsdelta_DATA.Scale(normfac_data)
-    H_Q2_DATA.Scale(normfac_data)
-    H_t_DATA.Scale(normfac_data)
-    H_epsilon_DATA.Scale(normfac_data)
-    H_MM_DATA.Scale(normfac_data)
-    H_ph_q_DATA.Scale(normfac_data)
-    H_th_q_DATA.Scale(normfac_data)
-    H_ph_recoil_DATA.Scale(normfac_data)
-    H_th_recoil_DATA.Scale(normfac_data)
-    H_pmiss_DATA.Scale(normfac_data)
-    H_emiss_DATA.Scale(normfac_data)
-    H_pmx_DATA.Scale(normfac_data)
-    H_pmy_DATA.Scale(normfac_data)
-    H_pmz_DATA.Scale(normfac_data)
-    H_W_DATA.Scale(normfac_data)
+    H_ssxfp_SIMC.Scale(normfac_simc)
+    H_ssyfp_SIMC.Scale(normfac_simc)
+    H_ssxpfp_SIMC.Scale(normfac_simc)
+    H_ssypfp_SIMC.Scale(normfac_simc)
+    H_hsxfp_SIMC.Scale(normfac_simc)
+    H_hsyfp_SIMC.Scale(normfac_simc)
+    H_hsxpfp_SIMC.Scale(normfac_simc)
+    H_hsypfp_SIMC.Scale(normfac_simc)
+    H_ssxptar_SIMC.Scale(normfac_simc)
+    H_ssyptar_SIMC.Scale(normfac_simc)
+    H_hsxptar_SIMC.Scale(normfac_simc)
+    H_hsyptar_SIMC.Scale(normfac_simc)
+    H_ssdelta_SIMC.Scale(normfac_simc)
+    H_hsdelta_SIMC.Scale(normfac_simc)
+    H_Q2_SIMC.Scale(normfac_simc)
+    H_t_SIMC.Scale(normfac_simc)
+    H_epsilon_SIMC.Scale(normfac_simc)
+    H_MM_SIMC.Scale(normfac_simc)
+    H_ph_q_SIMC.Scale(normfac_simc)
+    H_th_q_SIMC.Scale(normfac_simc)
+    H_ph_recoil_SIMC.Scale(normfac_simc)
+    H_th_recoil_SIMC.Scale(normfac_simc)
+    H_pmiss_SIMC.Scale(normfac_simc)
+    H_emiss_SIMC.Scale(normfac_simc)
+    #H_pmx_SIMC.Scale(normfac_simc)
+    #H_pmy_SIMC.Scale(normfac_simc)
+    #H_pmz_SIMC.Scale(normfac_simc)
+    H_W_SIMC.Scale(normfac_simc)
           
     if phi_setting == "Right":
         normfac_data = 1/(data_charge_right)
@@ -1227,9 +1228,9 @@ Cpmiss_x = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_pmx_DATA"].SetLineColor(i+1)
     hist["H_pmx_DATA"].Draw("same, E1")
-    hist["H_pmx_SIMC"].SetLineColor(40)
-    hist["H_pmx_SIMC"].SetLineStyle(10-i)
-    hist["H_pmx_SIMC"].Draw("same, E1")
+    #hist["H_pmx_SIMC"].SetLineColor(40)
+    #hist["H_pmx_SIMC"].SetLineStyle(10-i)
+    #hist["H_pmx_SIMC"].Draw("same, E1")
     
 Cpmiss_x.Print(outputpdf)
 
@@ -1238,9 +1239,9 @@ Cpmiss_y = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_pmy_DATA"].SetLineColor(i+1)
     hist["H_pmy_DATA"].Draw("same, E1")
-    hist["H_pmy_SIMC"].SetLineColor(40)
-    hist["H_pmy_SIMC"].SetLineStyle(10-i)
-    hist["H_pmy_SIMC"].Draw("same, E1")
+    #hist["H_pmy_SIMC"].SetLineColor(40)
+    #hist["H_pmy_SIMC"].SetLineStyle(10-i)
+    #hist["H_pmy_SIMC"].Draw("same, E1")
     
 Cpmiss_y.Print(outputpdf)
 
@@ -1249,9 +1250,9 @@ Cpmiss_z = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_pmz_DATA"].SetLineColor(i+1)
     hist["H_pmz_DATA"].Draw("same, E1")
-    hist["H_pmz_SIMC"].SetLineColor(40)
-    hist["H_pmz_SIMC"].SetLineStyle(10-i)
-    hist["H_pmz_SIMC"].Draw("same, E1")
+    #hist["H_pmz_SIMC"].SetLineColor(40)
+    #hist["H_pmz_SIMC"].SetLineStyle(10-i)
+    #hist["H_pmz_SIMC"].Draw("same, E1")
     
 Cpmiss_z.Print(outputpdf)
 
