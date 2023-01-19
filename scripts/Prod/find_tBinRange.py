@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 14:55:05 trottar"
+# Time-stamp: "2023-01-19 15:03:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -221,6 +221,7 @@ def defineHists(phi_setting):
     ################################################################################################################################################
     # Define simc root file trees of interest
 
+    # Names don't match so need to do some string rearrangement
     InSIMCFilename = InSIMCFilename.split("_")
     rootFileSimc = OUTPATH+"/"+InSIMCFilename[0]+"%s_"+InSIMCFilename[1]+".root" % (phi_setting.lower())
     if not os.path.isfile(rootFileSimc):
@@ -237,7 +238,7 @@ def defineHists(phi_setting):
     f_simc = open(simc_hist)
     for line in f_simc:
         print(line)
-z        if "Ngen" in line:
+        if "Ngen" in line:
             val = line.split("=")
             simc_nevents = int(val[1])
         if "normfac" in line:
