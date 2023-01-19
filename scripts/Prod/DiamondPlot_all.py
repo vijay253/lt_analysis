@@ -217,17 +217,17 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
         countB = 0
         countA = 0
         badfit = True
-        if (k==2):
+        if (k==2): # High
             # for event in Cut_Events_Prompt_tree:
             for event in Cut_Events_all_RF_tree:
                 Q2vsW_cut.Fill(event.Q2, event.W)
                 Q2vsW_hi_cut.Fill(event.Q2, event.W)
-        elif (k==1):
+        elif (k==1): # Mid
             # for event in Cut_Events_Prompt_tree:
             for event in Cut_Events_all_RF_tree:
                 Q2vsW_mide_cut.Fill(event.Q2, event.W)
                 Q2vsW_mi_cut.Fill(event.Q2, event.W)
-        elif (k==0):
+        elif (k==0): # Low
             # for event in Cut_Events_Prompt_tree:
             for event in Cut_Events_all_RF_tree:
                 Q2vsW_lowe_cut.Fill(event.Q2, event.W)
