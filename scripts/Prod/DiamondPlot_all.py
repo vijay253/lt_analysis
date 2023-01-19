@@ -373,7 +373,8 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
         print("Histograms filled")
 
         infile.Close()
-
+        
+    '''
     df.loc[ID,'a1'] = a1
     df.loc[ID,'b1'] = b1
     df.loc[ID,'a2'] = a2
@@ -382,7 +383,8 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
     df.loc[ID,'b3'] = b3
     df.loc[ID,'a4'] = a4
     df.loc[ID,'b4'] = b4        
-        
+    '''
+    
     paramDict = {
             
         "a1" : a1,
