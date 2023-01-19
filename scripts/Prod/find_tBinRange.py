@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 15:32:52 trottar"
+# Time-stamp: "2023-01-19 15:42:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -47,6 +47,7 @@ Q2 = sys.argv[3]
 EPSVAL = sys.argv[4]
 InDATAFilename = sys.argv[5]
 InSIMCFilename = sys.argv[6]
+print("`¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬",InSIMCFilename)
 OutFilename = sys.argv[7]
 tmin = float(sys.argv[8])
 tmax = float(sys.argv[9])
@@ -223,10 +224,8 @@ def defineHists(phi_setting):
     # Define simc root file trees of interest
 
     # Names don't match so need to do some string rearrangement
-    InSIMCFilename_arr = InSIMCFilename.split("_")
-    InSIMCFilename = InSIMCFilename_arr[0]+"%s_"+InSIMCFilename_arr[1]
-    print("~~~~~~~~~~~~~~~",InSIMCFilename)
-    rootFileSimc = OUTPATH+"/"+InSIMCFilename+".root" % (phi_setting.lower())
+    InSIMCFilename = InSIMCFilename.split("_")
+    rootFileSimc = OUTPATH+"/"+InSIMCFilename[0]+"%s_"+InSIMCFilename[1]+".root" % (phi_setting.lower())
     if not os.path.isfile(rootFileSimc):
         return {}
 
