@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 18:27:56 trottar"
+# Time-stamp: "2023-01-19 18:43:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -462,7 +462,8 @@ def defineHists(phi_setting):
 
     ################################################################################################################################################
     # Fill histograms for various trees called above
-
+    
+    print("\nPlotting %s simc..." % phi_setting)
     for evt in TBRANCH_SIMC:
 
       # Define the acceptance cuts  
@@ -473,7 +474,6 @@ def defineHists(phi_setting):
       #........................................
 
       #Fill SIMC events
-      print("\nPlotting %s simc..." % phi_setting)
       if(HMS_Acceptance & SHMS_Acceptance):
 
           H_ssxfp_SIMC.Fill(evt.ssxfp, evt.Weight)
