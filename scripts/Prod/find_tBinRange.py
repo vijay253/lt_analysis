@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 15:42:36 trottar"
+# Time-stamp: "2023-01-19 15:52:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -224,8 +224,7 @@ def defineHists(phi_setting):
     # Define simc root file trees of interest
 
     # Names don't match so need to do some string rearrangement
-    InSIMCFilename = InSIMCFilename.split("_")
-    rootFileSimc = OUTPATH+"/"+InSIMCFilename[0]+"%s_"+InSIMCFilename[1]+".root" % (phi_setting.lower())
+    rootFileSimc = OUTPATH+"/"+InSIMCFilename.split("_")[0]+"%s_"+InSIMCFilename.split("_")[1]+".root" % (phi_setting.lower())
     if not os.path.isfile(rootFileSimc):
         return {}
 
@@ -933,7 +932,9 @@ CQ2 = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_Q2_DATA"].SetLineColor(i+1)
     hist["H_Q2_DATA"].Draw("same, E1")
-    hist["H_Q2_SIMC"].Draw("same, E1")
+    hist["H_Q2_SIMC"].SetLineColor(40)
+    hist["H_Q2_SIMC"].SetLineStyle(10-i)
+    hist["H_Q2_SIMC"].Draw("same, E1")    
 
 CQ2.Print(outputpdf)
 
@@ -942,7 +943,9 @@ CW = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_W_DATA"].SetLineColor(i+1)
     hist["H_W_DATA"].Draw("same, E1")
-    hist["H_W_SIMC"].Draw("same, E1")    
+    hist["H_W_SIMC"].SetLineColor(40)
+    hist["H_W_SIMC"].SetLineStyle(10-i)
+    hist["H_W_SIMC"].Draw("same, E1")        
     
 CW.Print(outputpdf)
 
@@ -955,7 +958,10 @@ binmax = []
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    hist["H_t_DATA"].Draw("same, E1")    
+    hist["H_t_DATA"].Draw("same, E1")
+    hist["H_t_SIMC"].SetLineColor(40)
+    hist["H_t_SIMC"].SetLineStyle(10-i)
+    hist["H_t_SIMC"].Draw("same, E1")
     binmax.append(hist["H_t_DATA"].GetMaximum())
 binmax = max(binmax)
     
@@ -982,7 +988,10 @@ Cepsilon = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_epsilon_DATA"].SetLineColor(i+1)
     hist["H_epsilon_DATA"].Draw("same, E1")
-
+    hist["H_epsilon_SIMC"].SetLineColor(40)
+    hist["H_epsilon_SIMC"].SetLineStyle(10-i)
+    hist["H_epsilon_SIMC"].Draw("same, E1")
+    
 Cepsilon.Print(outputpdf)
 
 CMM = TCanvas()
@@ -990,7 +999,10 @@ CMM = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_MM_DATA"].SetLineColor(i+1)
     hist["H_MM_DATA"].Draw("same, E1")
-
+    hist["H_MM_SIMC"].SetLineColor(40)
+    hist["H_MM_SIMC"].SetLineStyle(10-i)
+    hist["H_MM_SIMC"].Draw("same, E1")
+    
 CMM.Print(outputpdf)
 
 xfp = TCanvas()
