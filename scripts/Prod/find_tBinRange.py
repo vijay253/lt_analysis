@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 16:27:42 trottar"
+# Time-stamp: "2023-01-19 16:38:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -214,9 +214,9 @@ def defineHists(phi_setting):
     ################################################################################################################################################
     # Call diamond cut script
 
-    paramDict = DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
+    #paramDict = DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
 
-    print(paramDict)
+    #print(paramDict)
 
     ################################################################################################################################################
     # Define simc root file trees of interest
@@ -833,6 +833,8 @@ histlist = []
 for phiset in phisetlist:
     histlist.append(defineHists(phiset))
 
+print("~~~~~~~~~~~~~~~~~~",histlist)    
+
 print("\n\n")
 
 settingList = []
@@ -846,7 +848,7 @@ for i,hist in enumerate(histlist):
 eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
 l_eff_plt = ROOT.TLegend(0.115,0.35,0.33,0.5)
-'''
+
 eff_plt.SetGrid()
 
 for i,hist in enumerate(histlist):
@@ -875,7 +877,7 @@ for i,hist in enumerate(histlist):
     l_eff_plt.AddEntry(hist["G_data_eff"],hist["phi_setting"])
 
 l_eff_plt.Draw()
-'''
+
 eff_plt.Print(outputpdf + '(')
         
 # Plot histograms
