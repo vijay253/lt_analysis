@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 15:13:56 trottar"
+# Time-stamp: "2023-01-19 15:23:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -223,8 +223,8 @@ def defineHists(phi_setting):
     # Define simc root file trees of interest
 
     # Names don't match so need to do some string rearrangement
-    InSIMCFilename = InSIMCFilename.split("_")
-    rootFileSimc = OUTPATH+"/"+InSIMCFilename[0]+"%s_"+InSIMCFilename[1]+".root" % (phi_setting.lower())
+    InSIMCFilename_arr = InSIMCFilename.split("_")
+    rootFileSimc = OUTPATH+"/"+InSIMCFilename_arr[0]+"%s_"+InSIMCFilename_arr[1]+".root" % (phi_setting.lower())
     if not os.path.isfile(rootFileSimc):
         return {}
 
