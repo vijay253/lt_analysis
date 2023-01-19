@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 16:48:15 trottar"
+# Time-stamp: "2023-01-19 16:57:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -41,7 +41,7 @@ if len(sys.argv)-1!=21:
 DEBUG = False # Flag for no cut plots
 
 # Input params
-kinematics = sys.argv[1]
+kinematics = sys.argv[1].split("_")
 W = sys.argv[2]
 Q2 = sys.argv[3]
 EPSVAL = sys.argv[4]
