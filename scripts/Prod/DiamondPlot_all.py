@@ -20,6 +20,7 @@ from ROOT import TCanvas, TExec, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyl
 from ROOT import kBlack, kBlue, kRed
 from array import array
 import pandas as pd
+import glob
 
 ###############################################################################################################################################
 
@@ -71,10 +72,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
         Analysis_Distributions = OUTPATH+"/%s_%s_Diamond_Cut.pdf" %((FilenameOverride,target))
 
     #sys.exit(1)
-    
-
-
-    import glob
 
     lowe_input = False
     mide_input = False
@@ -90,7 +87,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
     for file in glob.glob(OUTPATH+'/*'+FilenameOverride+'*'+target+'*.root'):
 	# Searches through OUTPUT recursively for files matching the wild card format, taking the shortest one
         # Shortest file assumed to be full analyisis as it will not have "part" or "week" or "dummy" labels
-        #print(file)
+        print(file)
         if "high" in file:
             if (len(file) < lenh):
                 highe_input = file
@@ -273,19 +270,23 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                         #lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)
                         #fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)
                         #lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)
-                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1). /
+                            GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
                             fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1
                         else: 
                             check1 = True 
-                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1). /
+                            GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
                             lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1
                         else:
                             check2 = True
-                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1)==0):
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1). /
+                            GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1)==0):
                             fbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindFirstBinAbove(0,1,fbr,lbr)+1
                         else:
                             check3 = True
-                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1)==0):
+                        if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1). /
+                            GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1)==0):
                             lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1
                         else:
                             check4 = True 
