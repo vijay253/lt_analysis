@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 18:15:47 trottar"
+# Time-stamp: "2023-01-19 18:27:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -224,7 +224,6 @@ def defineHists(phi_setting):
     # Names don't match so need to do some string rearrangement
     InSIMCFilename = "Prod_Coin_{}.root".format(kinematics[0]+phi_setting.lower()+"_"+kinematics[1])
     rootFileSimc = OUTPATH+"/"+InSIMCFilename
-    print("~~~~~~~~",rootFileSimc)
     if not os.path.isfile(rootFileSimc):
         return {}
 
@@ -299,7 +298,6 @@ def defineHists(phi_setting):
     # Define total efficiency vs run number plots
     G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError_data)),np.array(tot_effError_data)*np.array([float(x) for x in InData_efficiency.split(' ')]))
 
-    print("~~~~~~~~~~~~~~~~",G_data_eff)
     ###############################################################################################################################################
     # Grab windows for random subtraction
 
@@ -503,7 +501,7 @@ def defineHists(phi_setting):
           #H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
           H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
           H_W_SIMC.Fill(evt.W, evt.Weight)
-          H_t_DATA.Fill(-evt.t)
+          H_t_DATA.Fill(evt.t)
           H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
           H_MM_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
 
@@ -738,7 +736,6 @@ def defineHists(phi_setting):
     H_W_DATA.Add(H_W_DATA_rand,-1)
     H_ct_ep_DATA.Add(H_ct_ep_DATA_rand,-1)
 
-    print("~~~~~~~~~~~~",G_data_eff)
     histDict = {
         "phi_setting" : phi_setting,
         "runNums" : runNums.split(' '),
@@ -833,8 +830,6 @@ phisetlist = ["Right","Left","Center"]
 histlist = []
 for phiset in phisetlist:
     histlist.append(defineHists(phiset))
-
-print("~~~~~~~~~~~~~~~~~~",histlist)    
 
 print("\n\n")
 
