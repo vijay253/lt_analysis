@@ -113,7 +113,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
     labelm = ""
     labell = ""
     if (highe_input !=False):
-        #print("test high")
+        print("test high")
         labelh = "#splitline{Q2 vs W Dist for Prompt Events (Prompt Cut)}{High (Blue) Epsilon}; Q2; W"
         if (mide_input !=False):
             labelh = "#splitline{Q2 vs W Dist for Prompt Events (Prompt Cut)}{High (Blue) and Mid (Red) Epsilon}; Q2; W"
@@ -122,7 +122,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 labelh = "#splitline{Q2 vs W Dist for Prompt Events (Prompt Cut)}{High (Blue), Mid (Red), and Low (Green) Epsilon}; Q2; W"
                 #print("test high mid low")
         elif (lowe_input !=False):
-            #print("test high low")
+            print("test high low")
             labelh = "#splitline{Q2 vs W Dist for Prompt Events (Prompt Cut)}{High (Blue) and Low (Red) Epsilon}; Q2; W"
     elif (mide_input !=False):
         #print("test mid")
@@ -131,7 +131,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             #print("test mid low")
             labelm = "#splitline{Q2 vs W Dist for Prompt Events (Prompt Cut)}{Mid (Blue) and Low (Red) Epsilon}; Q2; W"
     elif (lowe_input !=False):
-        #print("test low")
+        print("test low")
         labell = "#splitline{Q2 vs W Dist for Prompt Events (Prompt Cut)}{Low (Blue) Epsilon}; Q2; W"
 
 
