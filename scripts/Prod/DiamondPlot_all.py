@@ -290,7 +290,11 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)-1
                         else:
                             check4 = True 
-
+                        if (fbl > lbl or fbr > lbr):                     
+                            print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file \n!!!!! ERROR !!!!!")
+                            lowe_input = False
+                            badfile = True
+                            break
                     if (badfile == True):
                         break
                     print("Bins",b,"good")

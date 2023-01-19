@@ -14,6 +14,7 @@
 *_-1_0_-1
 *_0_-1
 Tmp*
+*.log
 
 # Data files
 list.*
