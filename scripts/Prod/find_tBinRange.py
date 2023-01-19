@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 16:16:33 trottar"
+# Time-stamp: "2023-01-19 16:27:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -298,7 +298,8 @@ def defineHists(phi_setting):
 
     # Define total efficiency vs run number plots
     G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError_data)),np.array(tot_effError_data)*np.array([float(x) for x in InData_efficiency.split(' ')]))
-    
+
+    print("~~~~~~~~~~~~~~~~",G_data_eff)
     ###############################################################################################################################################
     # Grab windows for random subtraction
 
@@ -735,7 +736,8 @@ def defineHists(phi_setting):
     H_pmz_DATA.Add(H_pmz_DATA_rand,-1)
     H_W_DATA.Add(H_W_DATA_rand,-1)
     H_ct_ep_DATA.Add(H_ct_ep_DATA_rand,-1)
-    
+
+    print("~~~~~~~~~~~~",G_data_eff)
     histDict = {
         "phi_setting" : phi_setting,
         "runNums" : runNums.split(' '),
@@ -844,7 +846,7 @@ for i,hist in enumerate(histlist):
 eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
 l_eff_plt = ROOT.TLegend(0.115,0.35,0.33,0.5)
-
+'''
 eff_plt.SetGrid()
 
 for i,hist in enumerate(histlist):
@@ -873,7 +875,7 @@ for i,hist in enumerate(histlist):
     l_eff_plt.AddEntry(hist["G_data_eff"],hist["phi_setting"])
 
 l_eff_plt.Draw()
-
+'''
 eff_plt.Print(outputpdf + '(')
         
 # Plot histograms
