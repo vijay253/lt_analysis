@@ -685,7 +685,6 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 
     # Checks that array isn't empty
     if [ ${#data_right[@]} -ne 0 ]; then
-	cd "${LTANAPATH}/scripts/Prod"
 	echo
 	echo "Analysing right data..."
 	echo
@@ -696,12 +695,13 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo "Analysing right data run $i..."
 	    echo "-----------------------------"
 	    echo
+	    cd "${LTANAPATH}/scripts/Prod"
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
 	    echo
+	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    echo "Combining run $i with ${OutDATAFilename}_Right.root..."  
 	    hadd -f ${OutDATAFilename}_Right.root ${i}_-1_Raw_Data.root
 	done
-	cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	#echo "Combining root files..."  
 	#hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
@@ -711,7 +711,6 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 
     # Checks that array isn't empty
     if [ ${#data_left[@]} -ne 0 ]; then
-	cd "${LTANAPATH}/scripts/Prod"
 	echo
 	echo "Analysing left data..."
 	echo
@@ -722,11 +721,13 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo "Analysing left data run $i..."
 	    echo "-----------------------------"
 	    echo
+	    cd "${LTANAPATH}/scripts/Prod"
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    echo
+	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    echo "Combining run $i with ${OutDATAFilename}_Left.root..."  
 	    hadd -f ${OutDATAFilename}_Left.root ${i}_-1_Raw_Data.root
 	done
-	cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	#echo "Combining root files..."  
 	#hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
@@ -736,7 +737,6 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 
     # Checks that array isn't empty
     if [ ${#data_center[@]} -ne 0 ]; then
-	cd "${LTANAPATH}/scripts/Prod"
 	echo
 	echo "Analysing center data..."
 	echo
@@ -747,11 +747,13 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo "Analysing center data run $i..."
 	    echo "-----------------------------"
 	    echo
+	    cd "${LTANAPATH}/scripts/Prod"
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    echo
+	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    echo "Combining run $i with ${OutDATAFilename}_Center.root..."  
 	    hadd -f ${OutDATAFilename}_Center.root ${i}_-1_Raw_Data.root
 	done
-	cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	#echo "Combining root files..."  
 	#hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
