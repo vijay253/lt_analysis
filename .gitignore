@@ -4,10 +4,8 @@
 *.d
 *.so
 *.pcm
-*.png
 *.ps
 *.eps
-*.pdf
 .nfs*
 *.root
 *.root*
