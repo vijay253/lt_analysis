@@ -407,7 +407,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
     gStyle.SetOptStat(0)
     pages = 2
     if (highe_input !=False):
-	print("test high")
+        print("test high")
         Q2vsW_cut.Draw("col")
         ex1.Draw()
         Q2vsW_cut.Draw("col same")
