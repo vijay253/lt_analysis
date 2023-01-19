@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 17:29:48 trottar"
+# Time-stamp: "2023-01-19 17:38:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -247,7 +247,6 @@ def defineHists(phi_setting):
             simc_normfactor = float(val[1])
     if 'simc_nevents' and 'simc_normfactor' in locals():
         print('\n\nsimc_nevents = ',simc_nevents,'\nsimc_normfactor = ',simc_normfactor,'\n\n')
-        print('\n\ndata_charge = ',data_charge,'\ndummy_charge = ',dummy_charge,'\n\n')
     else:
         print("ERROR: Invalid simc hist file %s" % simc_hist)
         sys.exit(1)
