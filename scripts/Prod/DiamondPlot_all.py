@@ -245,8 +245,10 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             minbin = 3
             badfile = False
             #print (minQ, minQ/400*(Q2max-Q2min)+Q2min,maxQ,maxQ/400*(Q2max-Q2min)+Q2min,fitrange)
-            fitl = 200-fitrange*2
-            fitr = 200+fitrange
+            fitl = Q2vsW_lowe_cut.FindBin(Q2Val)-fitrange*2
+            fitr = Q2vsW_lowe_cut.FindBin(Q2Val)+fitrange
+            #fitl = 200-fitrange*2
+            #fitr = 200+fitrange
             while (badfit == True):
                 lol.clear()
                 lor.clear()
