@@ -241,11 +241,11 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             minQ = Q2_cut.FindFirstBinAbove(0)
             maxQ = Q2_cut.FindLastBinAbove(0)
             fitrange = int((maxQ-minQ)/8)
-            print("fitrange ",fitrange)
+            #print("fitrange: ",fitrange)
             minbin = 1
             badfile = False
             #print (minQ, minQ/400*(Q2max-Q2min)+Q2min,maxQ,maxQ/400*(Q2max-Q2min)+Q2min,fitrange)
-            print("Q2 Bin Val: ",Q2vsW_lowe_cut.FindBin(Q2Val))
+            print("Q2Val Bin Val: ",Q2vsW_lowe_cut.FindBin(Q2Val))
             fitl = Q2vsW_lowe_cut.FindBin(Q2Val)-fitrange*2
             fitr = Q2vsW_lowe_cut.FindBin(Q2Val)+fitrange
             #fitl = 200-fitrange*2
@@ -267,7 +267,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                     check2 = False
                     check3 = False
                     check4 = False
-                    print("Hello Sailor!")
                     # Designed to remove outliers from fit, skips over bins that have empty bins on either side when determining histogram width
                     while (check1 == False or check2 == False or check3 == False or check4 == False):
                         #fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)
@@ -294,8 +293,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(1,1,fbr,lbr)-1
                         else:
                             check4 = True
-                        print("fbl,lbl",fbl,lbl)
-                        print("fbr,lbr",fbr,lbr)
                         if (fbl > lbl or fbr > lbr):                     
                             print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file or change Q2min/Q2max range! \n!!!!! ERROR !!!!!")
                             lowe_input = False
@@ -303,8 +300,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             break
                     if (badfile == True):
                         break
-                    print("Bins",b,"good")
-                    print(fbl,lbl,fbr,lbr)
+                    #print("Bins",b,"good")
                     #for i in range (fbl,lbl):
                     #print(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
                     minYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
@@ -333,8 +329,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 a2, b2 = np.polyfit(xla, hila, 1)
                 a3, b3 = np.polyfit(xra, lora, 1)
                 a4, b4 = np.polyfit(xra, hira, 1)
-                print("\n\n\n\n\n\n",a1)
-
 	
                 for event in Cut_Events_all_RF_tree:
                     print("\n\n\n\n\n\n",a1)
