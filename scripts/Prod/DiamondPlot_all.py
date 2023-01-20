@@ -245,7 +245,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             minbin = 3
             badfile = False
             #print (minQ, minQ/400*(Q2max-Q2min)+Q2min,maxQ,maxQ/400*(Q2max-Q2min)+Q2min,fitrange)
-            fitl = 200-fitrange
+            fitl = 200-fitrange*2
             fitr = 200+fitrange
             while (badfit == True):
                 lol.clear()
@@ -303,7 +303,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                     print("Bins",b,"good")
                     print(fbl,lbl,fbr,lbr)
                     #for i in range (fbl,lbl):
-                    print(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
+                    #print(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).GetBinContent(i))
                     minYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
                     lol.append(minYl)
                     maxYl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(minbin,1,fbl,lbl)/400*(Wmax-Wmin)+Wmin
