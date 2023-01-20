@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 20:45:07 trottar"
+# Time-stamp: "2023-01-19 20:46:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -183,7 +183,6 @@ def find_tbins():
 
     H_t_BinTest = []
     for val in settingList:
-        print("val ", val)
         if val == "Right":
             for r in H_t_Right:
                 H_t_BinTest.append(r)
@@ -194,10 +193,6 @@ def find_tbins():
             for c in H_t_Center:
                 H_t_BinTest.append(c)
 
-    print("H_t_Right ", H_t_Right)
-    print("H_t_Left ", H_t_Left)
-    print("H_t_Center ", H_t_Center)
-    
     n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, NumtBins))
 
     rn, rbins = np.histogram(H_t_Right, bins=bins)
@@ -849,7 +844,6 @@ print("\n\n")
 
 settingList = []
 for i,hist in enumerate(histlist):
-    print("hist['phi_setting'']",hist["phi_setting"])
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
     else:
