@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 20:31:29 trottar"
+# Time-stamp: "2023-01-19 20:37:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -192,6 +192,10 @@ def find_tbins():
         if val == "Center":
             for c in H_t_Center:
                 H_t_BinTest.append(c)
+
+    print("H_t_Right ", H_t_Right)
+    print("H_t_Left ", H_t_Left)
+    print("H_t_Center ", H_t_Center)
     
     n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, NumtBins))
 
@@ -849,8 +853,6 @@ for i,hist in enumerate(histlist):
     else:
         settingList.append(hist["phi_setting"])
         
-print("~~~~~~~~~~~~~~~",settingList)
-
 eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
 l_eff_plt = ROOT.TLegend(0.115,0.35,0.33,0.5)
