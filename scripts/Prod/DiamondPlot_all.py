@@ -263,7 +263,8 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                     check1 = False
                     check2 = False
                     check3 = False
-                    check4 = False 
+                    check4 = False
+                    print("Hello Sailor!")
                     # Designed to remove outliers from fit, skips over bins that have empty bins on either side when determining histogram width
                     while (check1 == False or check2 == False or check3 == False or check4 == False):
                         #fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)
