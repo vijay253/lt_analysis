@@ -242,7 +242,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             maxQ = Q2_cut.FindLastBinAbove(0)
             fitrange = int((maxQ-minQ)/8)
             print("fitrange ",fitrange)
-            minbin = 2
+            minbin = 1
             badfile = False
             #print (minQ, minQ/400*(Q2max-Q2min)+Q2min,maxQ,maxQ/400*(Q2max-Q2min)+Q2min,fitrange)
             fitl = 200-fitrange*2
@@ -277,7 +277,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             check1 = True 
                         if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1). \
                             GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(0,1,fbl,lbl)-1)==0):
-                            lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(1,1,fbl,lbl)-1
+                            lbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindLastBinAbove(1,1,fbl,lbl)-1 # ERROR!
                         else:
                             check2 = True
                         if (Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1). \
