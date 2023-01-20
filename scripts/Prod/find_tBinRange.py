@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 20:38:50 trottar"
+# Time-stamp: "2023-01-19 20:41:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -183,7 +183,7 @@ def find_tbins():
 
     H_t_BinTest = []
     for val in settingList:
-        print(val)
+        print("val ", val)
         if val == "Right":
             for r in H_t_Right:
                 H_t_BinTest.append(r)
