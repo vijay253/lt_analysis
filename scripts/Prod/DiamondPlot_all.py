@@ -297,7 +297,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                         print("fbl,lbl",fbl,lbl)
                         print("fbr,lbr",fbr,lbr)
                         if (fbl > lbl or fbr > lbr):                     
-                            print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file \n!!!!! ERROR !!!!!")
+                            print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file or change Q2min/Q2max range! \n!!!!! ERROR !!!!!")
                             lowe_input = False
                             badfile = True
                             break
