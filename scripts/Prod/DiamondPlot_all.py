@@ -272,7 +272,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                         #lbr = Q2vsW_lowe_cut.ProjectionY("y",b+fitr,b+fitr+1).FindLastBinAbove(0,1,fbr,lbr)
                         if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1). \
                             GetBinContent(Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1)==0):
-                            fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(0,1,fbl,lbl)+1
+                            fbl = Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1).FindFirstBinAbove(1,1,fbl,lbl)+1
                         else: 
                             check1 = True 
                         if (Q2vsW_lowe_cut.ProjectionY("y",b+fitl,b+fitl+1). \
