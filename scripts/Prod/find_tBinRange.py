@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 18:50:17 trottar"
+# Time-stamp: "2023-01-19 20:21:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -215,8 +215,15 @@ def defineHists(phi_setting):
     # Call diamond cut script
 
     paramDict = DiamondPlot(particle,float(Q2.replace("p",".")),float(W.replace("p",".")),phi_setting,tmin,tmax,target)
-
-    print(paramDict)
+    
+    a1 = paramDict["a1"]
+    b1 = paramDict["b1"]
+    a2 = paramDict["a2"]
+    b2 = paramDict["b2"]
+    a3 = paramDict["a3"]
+    b3 = paramDict["b3"]
+    a4 = paramDict["a4"]
+    b4 = paramDict["b4"]
 
     ################################################################################################################################################
     # Define simc root file trees of interest
@@ -471,10 +478,11 @@ def defineHists(phi_setting):
       # Select the cuts
       SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
       HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)
+      Diamond = (evt.W/evt.Q2>a1+b1/evt.Q2) & (evt.W/evt.Q2<a2+b2/evt.Q2) & (evt.W/evt.Q2>a3+b3/evt.Q2) & (evt.W/evt.Q2<a4+b4/evt.Q2)
       #........................................
 
       #Fill SIMC events
-      if(HMS_Acceptance & SHMS_Acceptance):
+      if(HMS_Acceptance & SHMS_Acceptance & Diamond):
 
           H_ssxfp_SIMC.Fill(evt.ssxfp, evt.Weight)
           H_ssyfp_SIMC.Fill(evt.ssyfp, evt.Weight)
@@ -523,10 +531,11 @@ def defineHists(phi_setting):
 
         HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
         HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)
+        Diamond = (evt.W/evt.Q2>a1+b1/evt.Q2) & (evt.W/evt.Q2<a2+b2/evt.Q2) & (evt.W/evt.Q2>a3+b3/evt.Q2) & (evt.W/evt.Q2<a4+b4/evt.Q2)
 
         #........................................
                 
-        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
+        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance & Diamond):
 
           MM_vs_CoinTime_DATA.Fill(evt.MM, evt.CTime_ROC1)
           CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_eta)
