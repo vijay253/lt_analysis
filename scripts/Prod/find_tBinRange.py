@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 20:41:03 trottar"
+# Time-stamp: "2023-01-19 20:45:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -849,6 +849,7 @@ print("\n\n")
 
 settingList = []
 for i,hist in enumerate(histlist):
+    print("hist['phi_setting'']",hist["phi_setting"])
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
     else:
