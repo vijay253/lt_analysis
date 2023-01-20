@@ -50,8 +50,8 @@ print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER, HOST, R
 
 def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
 
-    Q2min = Q2Val - 2.0 # Minimum value of Q2 on the Q2 vs W plot
-    Q2max = Q2Val + 2.0 # Maximum value of Q2 on the Q2 vs W plot
+    Q2min = Q2Val - 1.5 # Minimum value of Q2 on the Q2 vs W plot
+    Q2max = Q2Val + 1.5 # Maximum value of Q2 on the Q2 vs W plot
     Wmin = WVal - 0.5 # min y-range for Q2vsW plot
     Wmax = WVal + 0.5 # max y-range for Q2vsW plot
     Qs = str(Q2Val).replace('.','p')
@@ -300,10 +300,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             print("!!!!! ERROR !!!!!\n Bad Fit! Check lowe file \n!!!!! ERROR !!!!!")
                             lowe_input = False
                             badfile = True
-                            #break
-                            continue
-                            Q2min = Q2min - 0.1
-                            Q2max = Q2max - 0.1
+                            break
                     if (badfile == True):
                         break
                     print("Bins",b,"good")
