@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 20:46:14 trottar"
+# Time-stamp: "2023-01-19 20:58:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -939,9 +939,9 @@ CQ2 = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_Q2_DATA"].SetLineColor(i+1)
     hist["H_Q2_DATA"].Draw("same, E1")
-    hist["H_Q2_SIMC"].SetLineColor(40)
-    hist["H_Q2_SIMC"].SetLineStyle(10-i)
-    hist["H_Q2_SIMC"].Draw("same, E1")    
+    #hist["H_Q2_SIMC"].SetLineColor(40)
+    #hist["H_Q2_SIMC"].SetLineStyle(10-i)
+    #hist["H_Q2_SIMC"].Draw("same, E1")    
 
 CQ2.Print(outputpdf)
 
@@ -950,9 +950,9 @@ CW = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_W_DATA"].SetLineColor(i+1)
     hist["H_W_DATA"].Draw("same, E1")
-    hist["H_W_SIMC"].SetLineColor(40)
-    hist["H_W_SIMC"].SetLineStyle(10-i)
-    hist["H_W_SIMC"].Draw("same, E1")        
+    #hist["H_W_SIMC"].SetLineColor(40)
+    #hist["H_W_SIMC"].SetLineStyle(10-i)
+    #hist["H_W_SIMC"].Draw("same, E1")        
     
 CW.Print(outputpdf)
 
@@ -966,9 +966,9 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     hist["H_t_DATA"].Draw("same, E1")
-    hist["H_t_SIMC"].SetLineColor(40)
-    hist["H_t_SIMC"].SetLineStyle(10-i)
-    hist["H_t_SIMC"].Draw("same, E1")
+    #hist["H_t_SIMC"].SetLineColor(40)
+    #hist["H_t_SIMC"].SetLineStyle(10-i)
+    #hist["H_t_SIMC"].Draw("same, E1")
     binmax.append(hist["H_t_DATA"].GetMaximum())
 binmax = max(binmax)
     
@@ -995,9 +995,9 @@ Cepsilon = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_epsilon_DATA"].SetLineColor(i+1)
     hist["H_epsilon_DATA"].Draw("same, E1")
-    hist["H_epsilon_SIMC"].SetLineColor(40)
-    hist["H_epsilon_SIMC"].SetLineStyle(10-i)
-    hist["H_epsilon_SIMC"].Draw("same, E1")
+    #hist["H_epsilon_SIMC"].SetLineColor(40)
+    #hist["H_epsilon_SIMC"].SetLineStyle(10-i)
+    #hist["H_epsilon_SIMC"].Draw("same, E1")
     
 Cepsilon.Print(outputpdf)
 
@@ -1006,9 +1006,9 @@ CMM = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_MM_DATA"].SetLineColor(i+1)
     hist["H_MM_DATA"].Draw("same, E1")
-    hist["H_MM_SIMC"].SetLineColor(40)
-    hist["H_MM_SIMC"].SetLineStyle(10-i)
-    hist["H_MM_SIMC"].Draw("same, E1")
+    #hist["H_MM_SIMC"].SetLineColor(40)
+    #hist["H_MM_SIMC"].SetLineStyle(10-i)
+    #hist["H_MM_SIMC"].Draw("same, E1")
     
 CMM.Print(outputpdf)
 
@@ -1017,9 +1017,9 @@ xfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssxfp_DATA"].SetLineColor(i+1)
     hist["H_ssxfp_DATA"].Draw("same, E1")
-    hist["H_ssxfp_SIMC"].SetLineColor(40)
-    hist["H_ssxfp_SIMC"].SetLineStyle(10-i)
-    hist["H_ssxfp_SIMC"].Draw("same, E1")
+    #hist["H_ssxfp_SIMC"].SetLineColor(40)
+    #hist["H_ssxfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssxfp_SIMC"].Draw("same, E1")
     
 xfp.Print(outputpdf)
 
@@ -1028,9 +1028,9 @@ yfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssyfp_DATA"].SetLineColor(i+1)
     hist["H_ssyfp_DATA"].Draw("same, E1")
-    hist["H_ssyfp_SIMC"].SetLineColor(40)
-    hist["H_ssyfp_SIMC"].SetLineStyle(10-i)
-    hist["H_ssyfp_SIMC"].Draw("same, E1")
+    #hist["H_ssyfp_SIMC"].SetLineColor(40)
+    #hist["H_ssyfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssyfp_SIMC"].Draw("same, E1")
     
 yfp.Print(outputpdf)
 
@@ -1039,9 +1039,9 @@ xpfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssxpfp_DATA"].SetLineColor(i+1)
     hist["H_ssxpfp_DATA"].Draw("same, E1")
-    hist["H_ssxpfp_SIMC"].SetLineColor(40)
-    hist["H_ssxpfp_SIMC"].SetLineStyle(10-i)
-    hist["H_ssxpfp_SIMC"].Draw("same, E1")
+    #hist["H_ssxpfp_SIMC"].SetLineColor(40)
+    #hist["H_ssxpfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssxpfp_SIMC"].Draw("same, E1")
     
 xpfp.Print(outputpdf)
 
@@ -1050,9 +1050,9 @@ ypfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssxpfp_DATA"].SetLineColor(i+1)
     hist["H_ssxpfp_DATA"].Draw("same, E1")
-    hist["H_ssxpfp_SIMC"].SetLineColor(40)
-    hist["H_ssxpfp_SIMC"].SetLineStyle(10-i)
-    hist["H_ssxpfp_SIMC"].Draw("same, E1")
+    #hist["H_ssxpfp_SIMC"].SetLineColor(40)
+    #hist["H_ssxpfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssxpfp_SIMC"].Draw("same, E1")
     
 ypfp.Print(outputpdf)
 
@@ -1061,9 +1061,9 @@ hxfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsxfp_DATA"].SetLineColor(i+1)
     hist["H_hsxfp_DATA"].Draw("same, E1")
-    hist["H_hsxfp_SIMC"].SetLineColor(40)
-    hist["H_hsxfp_SIMC"].SetLineStyle(10-i)
-    hist["H_hsxfp_SIMC"].Draw("same, E1")
+    #hist["H_hsxfp_SIMC"].SetLineColor(40)
+    #hist["H_hsxfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsxfp_SIMC"].Draw("same, E1")
     
 hxfp.Print(outputpdf)
 
@@ -1072,9 +1072,9 @@ hyfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsyfp_DATA"].SetLineColor(i+1)
     hist["H_hsyfp_DATA"].Draw("same, E1")
-    hist["H_hsyfp_SIMC"].SetLineColor(40)
-    hist["H_hsyfp_SIMC"].SetLineStyle(10-i)
-    hist["H_hsyfp_SIMC"].Draw("same, E1")
+    #hist["H_hsyfp_SIMC"].SetLineColor(40)
+    #hist["H_hsyfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsyfp_SIMC"].Draw("same, E1")
     
 hyfp.Print(outputpdf)
 
@@ -1083,9 +1083,9 @@ hxpfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsxpfp_DATA"].SetLineColor(i+1)
     hist["H_hsxpfp_DATA"].Draw("same, E1")
-    hist["H_hsxpfp_SIMC"].SetLineColor(40)
-    hist["H_hsxpfp_SIMC"].SetLineStyle(10-i)
-    hist["H_hsxpfp_SIMC"].Draw("same, E1")
+    #hist["H_hsxpfp_SIMC"].SetLineColor(40)
+    #hist["H_hsxpfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsxpfp_SIMC"].Draw("same, E1")
     
 hxpfp.Print(outputpdf)
 
@@ -1094,9 +1094,9 @@ hypfp = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsypfp_DATA"].SetLineColor(i+1)
     hist["H_hsypfp_DATA"].Draw("same, E1")
-    hist["H_hsypfp_SIMC"].SetLineColor(40)
-    hist["H_hsypfp_SIMC"].SetLineStyle(10-i)
-    hist["H_hsypfp_SIMC"].Draw("same, E1")
+    #hist["H_hsypfp_SIMC"].SetLineColor(40)
+    #hist["H_hsypfp_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsypfp_SIMC"].Draw("same, E1")
     
 hypfp.Print(outputpdf)
 
@@ -1105,9 +1105,9 @@ xptar = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssxptar_DATA"].SetLineColor(i+1)
     hist["H_ssxptar_DATA"].Draw("same, E1")
-    hist["H_ssxptar_SIMC"].SetLineColor(40)
-    hist["H_ssxptar_SIMC"].SetLineStyle(10-i)
-    hist["H_ssxptar_SIMC"].Draw("same, E1")
+    #hist["H_ssxptar_SIMC"].SetLineColor(40)
+    #hist["H_ssxptar_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssxptar_SIMC"].Draw("same, E1")
     
 xptar.Print(outputpdf)
 
@@ -1116,9 +1116,9 @@ yptar = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssyptar_DATA"].SetLineColor(i+1)
     hist["H_ssyptar_DATA"].Draw("same, E1")
-    hist["H_ssyptar_SIMC"].SetLineColor(40)
-    hist["H_ssyptar_SIMC"].SetLineStyle(10-i)
-    hist["H_ssyptar_SIMC"].Draw("same, E1")
+    #hist["H_ssyptar_SIMC"].SetLineColor(40)
+    #hist["H_ssyptar_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssyptar_SIMC"].Draw("same, E1")
     
 yptar.Print(outputpdf)
 
@@ -1127,9 +1127,9 @@ hxptar = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsxptar_DATA"].SetLineColor(i+1)
     hist["H_hsxptar_DATA"].Draw("same, E1")
-    hist["H_hsxptar_SIMC"].SetLineColor(40)
-    hist["H_hsxptar_SIMC"].SetLineStyle(10-i)
-    hist["H_hsxptar_SIMC"].Draw("same, E1")
+    #hist["H_hsxptar_SIMC"].SetLineColor(40)
+    #hist["H_hsxptar_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsxptar_SIMC"].Draw("same, E1")
     
 hxptar.Print(outputpdf)
 
@@ -1138,9 +1138,9 @@ hyptar = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsyptar_DATA"].SetLineColor(i+1)
     hist["H_hsyptar_DATA"].Draw("same, E1")
-    hist["H_hsyptar_SIMC"].SetLineColor(40)
-    hist["H_hsyptar_SIMC"].SetLineStyle(10-i)
-    hist["H_hsyptar_SIMC"].Draw("same, E1")
+    #hist["H_hsyptar_SIMC"].SetLineColor(40)
+    #hist["H_hsyptar_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsyptar_SIMC"].Draw("same, E1")
     
 hyptar.Print(outputpdf)
 
@@ -1149,9 +1149,9 @@ Delta = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ssdelta_DATA"].SetLineColor(i+1)
     hist["H_ssdelta_DATA"].Draw("same, E1")
-    hist["H_ssdelta_SIMC"].SetLineColor(40)
-    hist["H_ssdelta_SIMC"].SetLineStyle(10-i)
-    hist["H_ssdelta_SIMC"].Draw("same, E1")
+    #hist["H_ssdelta_SIMC"].SetLineColor(40)
+    #hist["H_ssdelta_SIMC"].SetLineStyle(10-i)
+    #hist["H_ssdelta_SIMC"].Draw("same, E1")
     
 Delta.Print(outputpdf)
 
@@ -1160,9 +1160,9 @@ hDelta = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_hsdelta_DATA"].SetLineColor(i+1)
     hist["H_hsdelta_DATA"].Draw("same, E1")
-    hist["H_hsdelta_SIMC"].SetLineColor(40)
-    hist["H_hsdelta_SIMC"].SetLineStyle(10-i)
-    hist["H_hsdelta_SIMC"].Draw("same, E1")
+    #hist["H_hsdelta_SIMC"].SetLineColor(40)
+    #hist["H_hsdelta_SIMC"].SetLineStyle(10-i)
+    #hist["H_hsdelta_SIMC"].Draw("same, E1")
     
 hDelta.Print(outputpdf)
 
@@ -1171,9 +1171,9 @@ Cph_q = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_ph_q_DATA"].SetLineColor(i+1)
     hist["H_ph_q_DATA"].Draw("same, E1")
-    hist["H_ph_q_SIMC"].SetLineColor(40)
-    hist["H_ph_q_SIMC"].SetLineStyle(10-i)
-    hist["H_ph_q_SIMC"].Draw("same, E1")
+    #hist["H_ph_q_SIMC"].SetLineColor(40)
+    #hist["H_ph_q_SIMC"].SetLineStyle(10-i)
+    #hist["H_ph_q_SIMC"].Draw("same, E1")
     
 Cph_q.Print(outputpdf)
 
@@ -1182,9 +1182,9 @@ Cth_q = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_th_q_DATA"].SetLineColor(i+1)
     hist["H_th_q_DATA"].Draw("same, E1")
-    hist["H_th_q_SIMC"].SetLineColor(40)
-    hist["H_th_q_SIMC"].SetLineStyle(10-i)
-    hist["H_th_q_SIMC"].Draw("same, E1")
+    #hist["H_th_q_SIMC"].SetLineColor(40)
+    #hist["H_th_q_SIMC"].SetLineStyle(10-i)
+    #hist["H_th_q_SIMC"].Draw("same, E1")
     
 Cth_q.Print(outputpdf)
 
@@ -1209,9 +1209,9 @@ Cpmiss = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_pmiss_DATA"].SetLineColor(i+1)
     hist["H_pmiss_DATA"].Draw("same, E1")
-    hist["H_pmiss_SIMC"].SetLineColor(40)
-    hist["H_pmiss_SIMC"].SetLineStyle(10-i)
-    hist["H_pmiss_SIMC"].Draw("same, E1")
+    #hist["H_pmiss_SIMC"].SetLineColor(40)
+    #hist["H_pmiss_SIMC"].SetLineStyle(10-i)
+    #hist["H_pmiss_SIMC"].Draw("same, E1")
     
 Cpmiss.Print(outputpdf)
 
@@ -1220,9 +1220,9 @@ Cemiss = TCanvas()
 for i,hist in enumerate(histlist):
     hist["H_emiss_DATA"].SetLineColor(i+1)
     hist["H_emiss_DATA"].Draw("same, E1")
-    hist["H_emiss_SIMC"].SetLineColor(40)
-    hist["H_emiss_SIMC"].SetLineStyle(10-i)
-    hist["H_emiss_SIMC"].Draw("same, E1")
+    #hist["H_emiss_SIMC"].SetLineColor(40)
+    #hist["H_emiss_SIMC"].SetLineStyle(10-i)
+    #hist["H_emiss_SIMC"].Draw("same, E1")
     
 Cemiss.Print(outputpdf)
 
