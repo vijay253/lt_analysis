@@ -331,7 +331,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                 a4, b4 = np.polyfit(xra, hira, 1)
 	
                 for event in Cut_Events_all_RF_tree:
-                    print("\n\n\n\n\n\n",a1)
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         Q2vsW_lolo_cut.Fill(event.Q2, event.W)
                         countA +=1
@@ -350,7 +349,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
             if (k==2):
                 for event in Cut_Events_all_RF_tree:
-                    print("\n\n\n\n\n\n",a1)
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         if (tmax != False):
                             if(-event.MandelT<1):
@@ -361,7 +359,6 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             Q2vsW_hilo_cut.Fill(event.Q2, event.W)
             elif (k==1):
                 for event in Cut_Events_all_RF_tree:
-                    print("\n\n\n\n\n\n",a1)
                     if (event.W/event.Q2>a1+b1/event.Q2 and event.W/event.Q2<a2+b2/event.Q2 and event.W/event.Q2>a3+b3/event.Q2 and event.W/event.Q2<a4+b4/event.Q2):
                         if (tmax != False):
                             if(-event.MandelT<tmax):
