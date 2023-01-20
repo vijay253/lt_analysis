@@ -301,6 +301,7 @@ def DiamondPlot(particle,Q2Val,WVal,phi_setting,tmin,tmax,target):
                             lowe_input = False
                             badfile = True
                             #break
+                            continue
                             Q2min = Q2min - 0.1
                             Q2max = Q2max - 0.1
                     if (badfile == True):
