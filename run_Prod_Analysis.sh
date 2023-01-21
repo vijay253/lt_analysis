@@ -24,7 +24,8 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
-LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
+#LTANAPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f17`
+LTANAPATH=`/u/group/c-kaonlt/USERS/vijay/lt_analysis/`
 
 # Flag definitions (flags: h, a, o, s)
 while getopts 'hdat' flag; do
@@ -191,7 +192,8 @@ EffData="coin_production_Prod_efficiency_data_2023_01_01.csv"
 grab_runs () {
     RunList=$1
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
-    cd "${LTANAPATH}/scripts"
+#    cd "${LTANAPATH}/scripts"
+    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts"
     RunNumArr=$(python3 getRunNumbers.py $INPDIR)
     echo $RunNumArr
 }
@@ -681,7 +683,9 @@ OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
 # will create a new root file per run number which are combined using hadd
-if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
+if [[ $a_flag = "true" || $TargetType != "simc" ]]; then
+#if [[ $a_flag = "true" ]]; then
+echo "test"
 
     # Checks that array isn't empty
     if [ ${#data_right[@]} -ne 0 ]; then
@@ -695,10 +699,12 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo "Analysing right data run $i..."
 	    echo "-----------------------------"
 	    echo
-	    cd "${LTANAPATH}/scripts/Prod"
+#	    cd "${LTANAPATH}/scripts/Prod"
+	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
 	    echo
-	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+#	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
 	    echo "Combining run $i with ${OutDATAFilename}_Right.root..."  
 	    hadd -f ${OutDATAFilename}_Right.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
@@ -723,10 +729,12 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo "Analysing left data run $i..."
 	    echo "-----------------------------"
 	    echo
-	    cd "${LTANAPATH}/scripts/Prod"
+#	    cd "${LTANAPATH}/scripts/Prod"
+	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
 	    echo
-	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+#	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
 	    echo "Combining run $i with ${OutDATAFilename}_Left.root..."  
 	    hadd -f ${OutDATAFilename}_Left.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
@@ -751,10 +759,12 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo "Analysing center data run $i..."
 	    echo "-----------------------------"
 	    echo
-	    cd "${LTANAPATH}/scripts/Prod"
+#	    cd "${LTANAPATH}/scripts/Prod"
+	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
 	    echo
-	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+#	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
 	    echo "Combining run $i with ${OutDATAFilename}_Center.root..."  
 	    hadd -f ${OutDATAFilename}_Center.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
@@ -769,7 +779,8 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
     
 fi
 
-cd "${LTANAPATH}/scripts"
+#cd "${LTANAPATH}/scripts"
+cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts"
 
 # Checks that array isn't empty
 if [[ ${#data_right[@]} -ne 0 && $TargetType != "simc" ]]; then
@@ -884,7 +895,8 @@ if [[ $TargetType != "simc" ]]; then
 fi
 
 # Create input for lt_analysis code
-cd "${LTANAPATH}/scripts/Prod/"
+#cd "${LTANAPATH}/scripts/Prod/"
+cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod/"
 if [[ $TargetType != "simc" ]]; then
     if [ ${#data_right[@]} -eq 0 ]; then
 	python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "0" "${data_left[*]}" "${data_center[*]}" "0" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "0" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "0" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "0" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "0" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}" ${TargetType}
@@ -896,7 +908,8 @@ else
 fi
 
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-    cd "${LTANAPATH}"
+  #  cd "${LTANAPATH}"
+    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis"
     evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
 fi
 

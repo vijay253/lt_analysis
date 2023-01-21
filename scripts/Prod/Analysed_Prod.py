@@ -53,8 +53,10 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-LTANAPATH=lt.LTANAPATH
-ANATYPE=lt.ANATYPE
+#LTANAPATH=lt.LTANAPATH
+#LTANAPATH=lt.LTANAPATH
+#ANATYPE=lt.ANATYPE
+ANATYPE='Kaon'
 OUTPATH=lt.OUTPATH
 
 ##############################################################################################################################################
@@ -83,8 +85,9 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-LTANAPATH=lt.LTANAPATH
-ANATYPE=lt.ANATYPE
+#LTANAPATH=lt.LTANAPATH
+#ANATYPE=lt.ANATYPE
+ANATYPE='Kaon'
 OUTPATH=lt.OUTPATH
 
 proc_root = lt.setup_ana()

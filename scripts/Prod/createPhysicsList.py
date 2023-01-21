@@ -71,7 +71,8 @@ lt=Root(os.path.realpath(__file__))
 
 # Add this to all files for more dynamic pathing
 UTILPATH=lt.UTILPATH
-LTANAPATH=lt.LTANAPATH
+#LTANAPATH=lt.LTANAPATH
+LTANAPATH="/u/group/c-kaonlt/USERS/vijay/lt_analysis"
 
 ################################################################################################################################################
 
