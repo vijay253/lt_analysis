@@ -913,7 +913,7 @@ fi
 
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
   #  cd "${LTANAPATH}"
-    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis"
-    evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
+    cd "/lustre19/expphy/volatile/hallc/c-kaonlt/vijay/ROOTfiles/KaonLT_Analysis/PhysicsAnalysis/PionLT/Analysis/KaonLT"
+    evince "${OutFullAnalysisFilename}.pdf"
 fi
 
