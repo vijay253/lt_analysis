@@ -28,8 +28,9 @@ SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 LTANAPATH=`/u/group/c-kaonlt/USERS/vijay/lt_analysis/`
 
 # Flag definitions (flags: h, a, o, s)
-while getopts 'hdat' flag; do
-    case "${flag}" in
+#while getopts 'hdat' flag; do
+while getopts "hdat" flag; do
+    case ${flag} in
         h) 
         echo "--------------------------------------------------------------"
         echo "./run_Prod_Analysis.sh -{flags} {variable arguments, see help}"
@@ -683,10 +684,9 @@ OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
 # will create a new root file per run number which are combined using hadd
-if [[ $a_flag = "true" || $TargetType != "simc" ]]; then
+if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #if [[ $a_flag = "true" ]]; then
-echo "test"
-
+#    echo "test"
     # Checks that array isn't empty
     if [ ${#data_right[@]} -ne 0 ]; then
 	echo
@@ -880,12 +880,16 @@ if [[ ${#data_center[@]} -ne 0 && $TargetType != "simc" ]]; then
     DataChargeSumCenter=$(IFS=+; echo "$((${DataChargeValCenter[*]}))") # Only works for integers
     echo "Total Charge Center: ${DataChargeSumCenter} uC"
 fi
+#echo "test"
 
 # Run the plotting script if t-flag enabled
 # Checks that array isn't empty
 if [[ $TargetType != "simc" ]]; then
+    echo "test"
     if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-	cd "${LTANAPATH}/scripts/Prod"    
+#	cd "${LTANAPATH}/scripts/Prod"  
+	echo "test"
+	cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	if [ ${#data_right[@]} -eq 0 ]; then
 	    python3 find_tBinRange.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData} ${TargetType}
 	else
