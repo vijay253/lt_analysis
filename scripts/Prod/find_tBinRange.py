@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-19 21:07:56 trottar"
+# Time-stamp: "2023-01-21 15:54:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -85,7 +85,8 @@ USER=lt.USER # Grab user info for file finding
 HOST=lt.HOST
 REPLAYPATH=lt.REPLAYPATH
 UTILPATH=lt.UTILPATH
-LTANAPATH=lt.LTANAPATH
+#LTANAPATH=lt.LTANAPATH
+LTANAPATH="/u/group/c-kaonlt/USERS/vijay/lt_analysis"
 ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
 
@@ -232,7 +233,8 @@ def defineHists(phi_setting):
     InSIMCFilename = "Prod_Coin_{}.root".format(kinematics[0]+phi_setting.lower()+"_"+kinematics[1])
     rootFileSimc = OUTPATH+"/"+InSIMCFilename
     if not os.path.isfile(rootFileSimc):
-        return {}
+        print("\n\nERROR: No simc file found called {}\n\n".format(rootFileSimc))
+        #return {}
 
     InFile_SIMC = ROOT.TFile.Open(rootFileSimc, "OPEN")
 
@@ -254,7 +256,7 @@ def defineHists(phi_setting):
     if 'simc_nevents' and 'simc_normfactor' in locals():
         print('\n\nsimc_nevents = ',simc_nevents,'\nsimc_normfactor = ',simc_normfactor,'\n\n')
     else:
-        print("ERROR: Invalid simc hist file %s" % simc_hist)
+        print("\n\nERROR: Invalid simc hist file %s\n\n" % simc_hist)
         sys.exit(1)
     f_simc.close()    
     
@@ -263,6 +265,7 @@ def defineHists(phi_setting):
 
     rootFileData = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
     if not os.path.isfile(rootFileData):
+        print("\n\nERROR: No data file found called {}\n\n".format(rootFileData))
         return {}
 
     InFile_DATA = ROOT.TFile.Open(rootFileData, "OPEN")
@@ -463,13 +466,14 @@ def defineHists(phi_setting):
     # 2D histograms
 
     MM_vs_CoinTime_DATA = ROOT.TH2D("MM_vs_CoinTime_DATA","Missing Mass vs CTime; MM; Coin_Time",100, 0, 2, 100, -2, 2)
-    CoinTime_vs_beta_DATA = ROOT.TH2D("CoinTime_vs_beta_DATA", "CTime vs SHMS #beta; Coin_Time; SHMS_#beta", 100, -2, 2, 100, 0.6, 1.4)
+    CoinTime_vs_beta_DATA = ROOT.TH2D("CoinTime_vs_beta_DATA", "CTime vs SHMS #beta; Coin_Time; SHMS_#beta", 100, -2, 2, 100, 0, 2)
     MM_vs_beta_DATA = ROOT.TH2D("MM_vs_beta_DATA", "Missing Mass vs SHMS #beta; MM; SHMS_#beta", 100, 0, 2, 200, 0, 2)
     phiq_vs_t_DATA = ROOT.TH2D("phiq_vs_t_DATA","; #phi ;t", 12, -3.14, 3.14, 24, tmin, tmax)
+    Q2_vs_W_DATA = ROOT.TH2D("Q2_vs_W_DATA", "Q^{2} vs W; Q^{2}; W", 200, 0.0, 10.0, 200, 0.0, 10.0)
 
     ################################################################################################################################################
     # Fill histograms for various trees called above
-    
+    '''
     print("\nPlotting %s simc..." % phi_setting)
     for evt in TBRANCH_SIMC:
 
@@ -512,7 +516,7 @@ def defineHists(phi_setting):
           H_t_DATA.Fill(evt.t)
           H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
           H_MM_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
-
+    '''
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
@@ -541,6 +545,7 @@ def defineHists(phi_setting):
           CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_eta)
           MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_eta)
           phiq_vs_t_DATA.Fill(evt.ph_q, -evt.MandelT)
+          Q2_vs_W_DATA.Fill(evt.Q2, evt.W)
             
           H_ct_ep_DATA.Fill(evt.CTime_ROC1)
 
@@ -822,6 +827,7 @@ def defineHists(phi_setting):
         "CoinTime_vs_beta_DATA" : CoinTime_vs_beta_DATA,
         "MM_vs_beta_DATA" : MM_vs_beta_DATA,
         "phiq_vs_t_DATA" : phiq_vs_t_DATA,
+        "Q2_vs_W_DATA" : Q2_vs_W_DATA,
         "InFile_DATA" : InFile_DATA,
     }
 
@@ -1294,6 +1300,18 @@ for i,hist in enumerate(histlist):
     hist["MM_vs_beta_DATA"].SetTitle(phisetlist[i])
 
 Cmmbeta.Print(outputpdf)
+
+Cqw = TCanvas()
+
+Cqw.Divide(2,2)
+
+for i,hist in enumerate(histlist):
+    Cqw.cd(i+1)
+    hist["Q2_vs_W_DATA"].SetLineColor(i+1)
+    hist["Q2_vs_W_DATA"].Draw("same, COLZ")
+    hist["Q2_vs_W_DATA"].SetTitle(phisetlist[i])
+
+Cqw.Print(outputpdf)
 
 Cpht = TCanvas()
 
