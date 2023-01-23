@@ -62,9 +62,9 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
     W=$4
     TargetType=$(echo "$5" | tr '[:upper:]' '[:lower:]')
     echo "Epsilon must be - high - low - Case Sensitive!"
-    echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
-    echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
-    if [[ -z "$2" || ! "$EPSILON" =~ high|low ]]; then # Check the 1st argument was provided and that it's one of the valid options
+    echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5 - 0p375 - 0p425]"
+    echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40 - 2p2]"
+    if [[ -z "$2" || ! "$EPSILON" =~ high|low|mid|left1|left2|right1|right2 ]]; then # Check the 1st argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid epsilon..."
 	while true; do
@@ -72,31 +72,31 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
 	    read -p "Epsilon must be - high - low - Case Sensitive! - or press ctrl-c to exit : " EPSILON
 	    case $EPSILON in
 		'');; # If blank, prompt again
-		'high'|'low') break;; # If a valid option, break the loop and continue
+		'high'|'low'|'mid'|'left1'|'left2'|'right1'|'right2') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
-    if [[ -z "$3" || ! "$Q2" =~ 5p5|4p4|3p0|2p1|0p5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$3" || ! "$Q2" =~ 5p5|4p4|3p0|2p1|0p5|0p375|0p425 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid Q2..."
 	while true; do
 	    echo ""
-	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5] - or press ctrl-c to exit : " Q2
+	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5 - 0p375 - 0p425] - or press ctrl-c to exit : " Q2
 	    case $Q2 in
 		'');; # If blank, prompt again
-		'5p5'|'4p4'|'3p0'|'2p1'|'0p5') break;; # If a valid option, break the loop and continue
+		'5p5'|'4p4'|'3p0'|'2p1'|'0p5'|'0p375'|'0p425') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
-    if [[ -z "$4" || ! "$W" =~ 3p02|2p74|3p14|2p32|2p95|2p40 ]]; then # Check the 3rd argument was provided and that it's one of the valid options
+    if [[ -z "$4" || ! "$W" =~ 3p02|2p74|3p14|2p32|2p95|2p40|2p2 ]]; then # Check the 3rd argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid W..."
 	while true; do
 	    echo ""
-	    read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40] - or press ctrl-c to exit : " W
+	    read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40 - 2p2] - or press ctrl-c to exit : " W
 	    case $W in
 		'');; # If blank, prompt again
-		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; # If a valid option, break the loop and continue
+		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40'|'2p2') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
@@ -115,46 +115,46 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
     
 else
     
-    EPSILON=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+    EPSILON=$(echo "$1" | tr '[:upper:]' '[:lower:]' ':midle:')
     Q2=$2
     W=$3
     TargetType=$(echo "$4" | tr '[:upper:]' '[:lower:]')
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
     echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
-    if [[ -z "$1" || ! "$EPSILON" =~ high|low ]]; then # Check the 1st argument was provided and that it's one of the valid options
+    if [[ -z "$1" || ! "$EPSILON" =~ high|low|mid ]]; then # Check the 1st argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid epsilon..."
 	while true; do
 	    echo ""
-	    read -p "Epsilon must be - high - low - Case Sensitive! - or press ctrl-c to exit : " EPSILON
+	    read -p "Epsilon must be - high - low - mid- Case Sensitive! - or press ctrl-c to exit : " EPSILON
 	    case $EPSILON in
 		'');; # If blank, prompt again
-		'high'|'low') break;; # If a valid option, break the loop and continue
+		'high'|'low'|'mid') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
-    if [[ -z "$2" || ! "$Q2" =~ 5p5|4p4|3p0|2p1|0p5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$2" || ! "$Q2" =~ 5p5|4p4|3p0|2p1|0p5|0p375|0p425 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid Q2..."
 	while true; do
 	    echo ""
-	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5] - or press ctrl-c to exit : " Q2
+	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5- 0p375 - 0p425] - or press ctrl-c to exit : " Q2
 	    case $Q2 in
 		'');; # If blank, prompt again
-		'5p5'|'4p4'|'3p0'|'2p1'|'0p5') break;; # If a valid option, break the loop and continue
+		'5p5'|'4p4'|'3p0'|'2p1'|'0p5'|'0p375'|'0p425') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
-    if [[ -z "$3" || ! "$W" =~ 3p02|2p74|3p14|2p32|2p95|2p40 ]]; then # Check the 3rd argument was provided and that it's one of the valid options
+    if [[ -z "$3" || ! "$W" =~ 3p02|2p74|3p14|2p32|2p95|2p40|2p2 ]]; then # Check the 3rd argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid W..."
 	while true; do
 	    echo ""
-	    read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40] - or press ctrl-c to exit : " W
+	    read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40 - 2p2] - or press ctrl-c to exit : " W
 	    case $W in
 		'');; # If blank, prompt again
-		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; # If a valid option, break the loop and continue
+		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40'|'2p2') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
@@ -215,7 +215,7 @@ data_right=()
 data_left=()
 data_center=()
 # Get run numbers for left, right, and, center settings
-declare -a PHI=("RIGHT" "LEFT" "CENTER")
+declare -a PHI=("RIGHT" "LEFT" "CENTER" "LEFT1" "LEFT2" "RIGHT1" "RIGHT2")
 for i in "${PHI[@]}"
 do
     if [[ $d_flag = "true" ]]; then
@@ -675,6 +675,143 @@ do
 	    KIN="Q0p5W2p40_${EPSILON}e"
 	fi
     fi    
+    if [[ $Q2 = "0p375" && $W = "2p2" ]]; then
+	if [[ $i = "RIGHT" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right="Q0p375W2p2right_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right="Q0p375W2p2right_${EPSILON}e_simc"		
+	    else
+		file_right="Q0p375W2p2right_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right file ${file_right}..."
+		data_right+=(0000) # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right file ${file_right}..."
+		IFS=', ' read -r -a data_right <<< "$( grab_runs ${file_right} )"		 # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "RIGHT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right="Q0p375W2p2right1_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right="Q0p375W2p2right1_${EPSILON}e_simc"		
+	    else
+		file_right="Q0p375W2p2right1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right file ${file_right}..."
+		data_right+=(0000) # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right file ${file_right}..."
+		IFS=', ' read -r -a data_right <<< "$( grab_runs ${file_right} )"		 # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "RIGHT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right="Q0p375W2p2right2_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right="Q0p375W2p2right2_${EPSILON}e_simc"		
+	    else
+		file_right="Q0p375W2p2right_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right file ${file_right}..."
+		data_right+=(0000) # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right file ${file_right}..."
+		IFS=', ' read -r -a data_right <<< "$( grab_runs ${file_right} )"		 # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left="Q0p375W2p2left1_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left="Q0p375W2p2left1_${EPSILON}e_simc"		
+	    else
+		file_left="Q0p375W2p2left1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left file ${file_left}..."
+		data_left+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left file ${file_left}..."
+		IFS=', ' read -r -a data_left <<< "$( grab_runs ${file_left} )"		 # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left="Q0p375W2p2left2_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left="Q0p375W2p2left2_${EPSILON}e_simc"		
+	    else
+		file_left="Q0p375W2p2left2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left file ${file_left}..."
+		data_left+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left file ${file_left}..."
+		IFS=', ' read -r -a data_left <<< "$( grab_runs ${file_left} )"		 # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "CENTER" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_center="Q0p375W2p2center_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_center="Q0p375W2p2center_${EPSILON}e_simc"		
+	    else
+		file_center="Q0p375W2p2center_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for center file ${file_center}..."
+		data_center+=(0002) # CENTER, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_center[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for center file ${file_center}..."
+		IFS=', ' read -r -a data_center <<< "$( grab_runs ${file_center} )"		 # CENTER, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_center[@]}]"
+		echo
+	    fi
+	fi
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.4515
+	elif [[ ${EPSILON} == "mid" ]]; then
+	    EPSVAL=0.523              #just test
+	else
+	    EPSVAL=0.6979
+	fi
+	if [[ $TargetType = "dummy" ]]; then
+	    KIN="Q0p375W2p2_${EPSILON}e_dummy"
+	elif [[ $TargetType = "simc" ]]; then
+	    KIN="Q0p375W2p2_${EPSILON}e_simc"	    
+	else
+	    KIN="Q0p375W2p2_${EPSILON}e"
+	fi
+    fi    
+
 done
 
 # Define input and output file names
