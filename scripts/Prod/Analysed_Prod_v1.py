@@ -74,7 +74,7 @@ cut_f = '/DB/CUTS/run_type/coin_prod.cuts'
 
 # defining Cuts
 if particle == "kaon":
-    cuts = ["coin_epi_cut_all_noRF","coin_epi_cut_prompt_noRF","coin_epi_cut_rand_noRF","coin_epi_cut_all_RF","coin_epi_cut_prompt_RF","coin_epi_cut_rand_RF"]  # chagned to pion
+    cuts = ["coin_epi_cut_prompt_noRF","coin_epi_cut_rand_noRF"]  # chagned to pion
 if particle == "pion":
     cuts = ["coin_epi_cut_all_noRF","coin_epi_cut_prompt_noRF","coin_epi_cut_rand_noRF","coin_epi_cut_all_RF","coin_epi_cut_prompt_RF","coin_epi_cut_rand_RF"]
 
