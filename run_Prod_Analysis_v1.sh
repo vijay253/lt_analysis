@@ -555,7 +555,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
-	    echo
+	    root -b -q  "PlotScript.C(\"$i\")"
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
 	    echo "Combining run $i with ${OutDATAFilename}_Right2.root..."  
@@ -579,6 +579,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
+	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -586,6 +587,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    hadd -f ${OutDATAFilename}_Right1.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
+
 	done
 	echo
     fi
@@ -605,6 +607,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
+	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -630,6 +633,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
+	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -655,6 +659,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
+	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
