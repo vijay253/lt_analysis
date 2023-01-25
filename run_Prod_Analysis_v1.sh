@@ -693,11 +693,9 @@ if [[ ${#data_right2[@]} -ne 0 && $TargetType != "simc" ]]; then
 	DatapThetaValRight2+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValRight2+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeValRight[@]} uC"
     done
  
-   #       and later converted to C
-    DataChargeSumRight=$(IFS=+; echo "$((${DataChargeValRight2[*]}))") # Only works for integers
+    DataChargeSumRight2=$(IFS=+; echo "$((${DataChargeValRight2[*]}))") # Only works for integers
     echo "Total Charge Right2: ${DataChargeSumRight2} uC"
 fi
 
@@ -725,11 +723,10 @@ if [[ ${#data_right1[@]} -ne 0 && $TargetType != "simc" ]]; then
 	DatapThetaValRight1+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValRight1+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeValRight[@]} uC"
     done
  
    #       and later converted to C
-    DataChargeSumRight=$(IFS=+; echo "$((${DataChargeValRight1[*]}))") # Only works for integers
+    DataChargeSumRight1=$(IFS=+; echo "$((${DataChargeValRight1[*]}))") # Only works for integers
     echo "Total Charge Right1: ${DataChargeSumRight1} uC"
 fi
 
@@ -756,12 +753,7 @@ if [[ ${#data_center[@]} -ne 0 && $TargetType != "simc" ]]; then
 	DatapThetaValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeValCenter[@]} uC"
     done
-    #echo ${DataChargeVal[*]}
-    # Sums the array to get the total effective charge
-    # Note: this must be done as an array! This is why uC is used at this step
-    #       and later converted to C
     DataChargeSumCenter=$(IFS=+; echo "$((${DataChargeValCenter[*]}))") # Only works for integers
     echo "Total Charge Center: ${DataChargeSumCenter} uC"
 fi
@@ -789,13 +781,8 @@ if [[ ${#data_left1[@]} -ne 0 && $TargetType != "simc" ]]; then
 	DatapThetaValLeft1+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValLeft1+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeValLeft[@]} uC"
-    done
-    #echo ${DataChargeVal[*]}
-    # Sums the array to get the total effective charge
-    # Note: this must be done as an array! This is why uC is used at this step
-    #       and later converted to C
-    DataChargeSumLeft=$(IFS=+; echo "$((${DataChargeValLeft1[*]}))") # Only works for integers
+  done
+    DataChargeSumLeft1=$(IFS=+; echo "$((${DataChargeValLeft1[*]}))") # Only works for integers
     echo "Total Charge Left1: ${DataChargeSumLeft1} uC"
 fi
 # Checks that array isn't empty
@@ -821,13 +808,8 @@ if [[ ${#data_left2[@]} -ne 0 && $TargetType != "simc" ]]; then
 	DatapThetaValLeft2+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValLeft2+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeValLeft[@]} uC"
     done
-    #echo ${DataChargeVal[*]}
-    # Sums the array to get the total effective charge
-    # Note: this must be done as an array! This is why uC is used at this step
-    #       and later converted to C
-    DataChargeSumLeft=$(IFS=+; echo "$((${DataChargeValLeft2[*]}))") # Only works for integers
+    DataChargeSumLeft2=$(IFS=+; echo "$((${DataChargeValLeft2[*]}))") # Only works for integers
     echo "Total Charge Left2: ${DataChargeSumLeft2} uC"
 fi
 
