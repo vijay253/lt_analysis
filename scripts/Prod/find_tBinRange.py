@@ -112,8 +112,8 @@ def find_tbins():
     H_t_Left = []
     H_t_Center = []
 
-    #for val in ['Right', 'Left', 'Center']:
-    for val in settingList:
+    for val in ['Right', 'Left', 'Center']:
+    #for val in settingList:
         rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
             continue
@@ -473,7 +473,7 @@ def defineHists(phi_setting):
 
     ################################################################################################################################################
     # Fill histograms for various trees called above
-    '''
+    
     print("\nPlotting %s simc..." % phi_setting)
     for evt in TBRANCH_SIMC:
 
@@ -486,7 +486,7 @@ def defineHists(phi_setting):
       #........................................
 
       #Fill SIMC events
-      if(HMS_Acceptance & SHMS_Acceptance & Diamond):
+      if(HMS_Acceptance & SHMS_Acceptance):
 
           H_ssxfp_SIMC.Fill(evt.ssxfp, evt.Weight)
           H_ssyfp_SIMC.Fill(evt.ssyfp, evt.Weight)
@@ -516,7 +516,7 @@ def defineHists(phi_setting):
           H_t_DATA.Fill(evt.t)
           H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
           H_MM_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
-    '''
+    
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
@@ -539,91 +539,90 @@ def defineHists(phi_setting):
 
         #........................................
                 
-        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance & Diamond):
+        if(HMS_Acceptance & SHMS_Acceptance):
 
-          MM_vs_CoinTime_DATA.Fill(evt.MM, evt.CTime_ROC1)
-          CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_eta)
-          MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_eta)
-          phiq_vs_t_DATA.Fill(evt.ph_q, -evt.MandelT)
-          Q2_vs_W_DATA.Fill(evt.Q2, evt.W)
+            MM_vs_CoinTime_DATA.Fill(evt.MM, evt.CTime_ROC1)
+            CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_beta)
+            MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_beta)
+            phiq_vs_t_DATA.Fill(evt.ph_q, -evt.MandelT)
+            Q2_vs_W_DATA.Fill(evt.Q2, evt.W)
             
-          H_ct_ep_DATA.Fill(evt.CTime_ROC1)
+            H_ct_ep_DATA.Fill(evt.CTime_ROC1)
 
-          H_ssxfp_DATA.Fill(evt.ssxfp)
-          H_ssyfp_DATA.Fill(evt.ssyfp)
-          H_ssxpfp_DATA.Fill(evt.ssxpfp)
-          H_ssypfp_DATA.Fill(evt.ssypfp)
-          H_ssdelta_DATA.Fill(evt.ssdelta)
-          H_ssxptar_DATA.Fill(evt.ssxptar)
-          H_ssyptar_DATA.Fill(evt.ssyptar)
+            H_ssxfp_DATA.Fill(evt.ssxfp)
+            H_ssyfp_DATA.Fill(evt.ssyfp)
+            H_ssxpfp_DATA.Fill(evt.ssxpfp)
+            H_ssypfp_DATA.Fill(evt.ssypfp)
+            H_ssdelta_DATA.Fill(evt.ssdelta)
+            H_ssxptar_DATA.Fill(evt.ssxptar)
+            H_ssyptar_DATA.Fill(evt.ssyptar)
 
-          H_hsxfp_DATA.Fill(evt.hsxfp)
-          H_hsyfp_DATA.Fill(evt.hsyfp)
-          H_hsxpfp_DATA.Fill(evt.hsxpfp)
-          H_hsypfp_DATA.Fill(evt.hsypfp)
-          H_hsdelta_DATA.Fill(evt.hsdelta)
-          H_hsxptar_DATA.Fill(evt.hsxptar)	
-          H_hsyptar_DATA.Fill(evt.hsyptar)
+            H_hsxfp_DATA.Fill(evt.hsxfp)
+            H_hsyfp_DATA.Fill(evt.hsyfp)
+            H_hsxpfp_DATA.Fill(evt.hsxpfp)
+            H_hsypfp_DATA.Fill(evt.hsypfp)
+            H_hsdelta_DATA.Fill(evt.hsdelta)
+            H_hsxptar_DATA.Fill(evt.hsxptar)	
+            H_hsyptar_DATA.Fill(evt.hsyptar)
 
-          H_ph_q_DATA.Fill(evt.ph_q)
-          H_th_q_DATA.Fill(evt.th_q)
-          H_ph_recoil_DATA.Fill(evt.ph_recoil)
-          H_th_recoil_DATA.Fill(evt.th_recoil)
+            H_ph_q_DATA.Fill(evt.ph_q)
+            H_th_q_DATA.Fill(evt.th_q)
+            H_ph_recoil_DATA.Fill(evt.ph_recoil)
+            H_th_recoil_DATA.Fill(evt.th_recoil)
 
-          H_pmiss_DATA.Fill(evt.pmiss)	
-          H_emiss_DATA.Fill(evt.emiss)	
-          #H_emiss_DATA.Fill(evt.emiss_nuc)
-          H_pmx_DATA.Fill(evt.pmx)
-          H_pmy_DATA.Fill(evt.pmy)
-          H_pmz_DATA.Fill(evt.pmz)
-          H_Q2_DATA.Fill(evt.Q2)
-          H_t_DATA.Fill(-evt.MandelT)
-          H_W_DATA.Fill(evt.W)
-          H_epsilon_DATA.Fill(evt.epsilon)
-          H_MM_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))
-          #H_MM_DATA.Fill(pow(evt.MM, 2))  
-          #H_MM_DATA.Fill(evt.Mrecoil)
+            H_pmiss_DATA.Fill(evt.pmiss)	
+            H_emiss_DATA.Fill(evt.emiss)	
+            #H_emiss_DATA.Fill(evt.emiss_nuc)
+            H_pmx_DATA.Fill(evt.pmx)
+            H_pmy_DATA.Fill(evt.pmy)
+            H_pmz_DATA.Fill(evt.pmz)
+            H_Q2_DATA.Fill(evt.Q2)
+            H_t_DATA.Fill(-evt.MandelT)
+            H_W_DATA.Fill(evt.W)
+            H_epsilon_DATA.Fill(evt.epsilon)
+            H_MM_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))
+            #H_MM_DATA.Fill(pow(evt.MM, 2))  
+            #H_MM_DATA.Fill(evt.Mrecoil)
+            
+            ###################################################################################################################################################
+            
+            # Random subtraction
+            H_ssxfp_DATA_rand.Fill(evt.ssxfp)
+            H_ssyfp_DATA_rand.Fill(evt.ssyfp)
+            H_ssxpfp_DATA_rand.Fill(evt.ssxpfp)
+            H_ssypfp_DATA_rand.Fill(evt.ssypfp)
+            H_ssdelta_DATA_rand.Fill(evt.ssdelta)
+            H_ssxptar_DATA_rand.Fill(evt.ssxptar)
+            H_ssyptar_DATA_rand.Fill(evt.ssyptar)
 
-          ###################################################################################################################################################
-
-          # Random subtraction
-
-          H_ssxfp_DATA_rand.Fill(evt.ssxfp)
-          H_ssyfp_DATA_rand.Fill(evt.ssyfp)
-          H_ssxpfp_DATA_rand.Fill(evt.ssxpfp)
-          H_ssypfp_DATA_rand.Fill(evt.ssypfp)
-          H_ssdelta_DATA_rand.Fill(evt.ssdelta)
-          H_ssxptar_DATA_rand.Fill(evt.ssxptar)
-          H_ssyptar_DATA_rand.Fill(evt.ssyptar)
-
-          H_hsxfp_DATA_rand.Fill(evt.hsxfp)
-          H_hsyfp_DATA_rand.Fill(evt.hsyfp)
-          H_hsxpfp_DATA_rand.Fill(evt.hsxpfp)
-          H_hsypfp_DATA_rand.Fill(evt.hsypfp)
-          H_hsdelta_DATA_rand.Fill(evt.hsdelta)
-          H_hsxptar_DATA_rand.Fill(evt.hsxptar)	
-          H_hsyptar_DATA_rand.Fill(evt.hsyptar)
-
-          H_pmiss_DATA_rand.Fill(evt.pmiss)	
-          H_emiss_DATA_rand.Fill(evt.emiss)	
-          #H_emiss_DATA_rand.Fill(evt.emiss_nuc)
-          H_pmx_DATA_rand.Fill(evt.pmx)
-          H_pmy_DATA_rand.Fill(evt.pmy)
-          H_pmz_DATA_rand.Fill(evt.pmz)
-          H_Q2_DATA_rand.Fill(evt.Q2)
-          H_t_DATA_rand.Fill(-evt.MandelT)
-          H_W_DATA_rand.Fill(evt.W)
-          H_epsilon_DATA_rand.Fill(evt.epsilon)
-          H_MM_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  )
-
-          H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
-          H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
-
-          P_cal_etottracknorm_DATA.Fill(evt.P_cal_etottracknorm)
-          P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
-          P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
-
-          ibin+=1
+            H_hsxfp_DATA_rand.Fill(evt.hsxfp)
+            H_hsyfp_DATA_rand.Fill(evt.hsyfp)
+            H_hsxpfp_DATA_rand.Fill(evt.hsxpfp)
+            H_hsypfp_DATA_rand.Fill(evt.hsypfp)
+            H_hsdelta_DATA_rand.Fill(evt.hsdelta)
+            H_hsxptar_DATA_rand.Fill(evt.hsxptar)	
+            H_hsyptar_DATA_rand.Fill(evt.hsyptar)
+            
+            H_pmiss_DATA_rand.Fill(evt.pmiss)	
+            H_emiss_DATA_rand.Fill(evt.emiss)	
+            #H_emiss_DATA_rand.Fill(evt.emiss_nuc)
+            H_pmx_DATA_rand.Fill(evt.pmx)
+            H_pmy_DATA_rand.Fill(evt.pmy)
+            H_pmz_DATA_rand.Fill(evt.pmz)
+            H_Q2_DATA_rand.Fill(evt.Q2)
+            H_t_DATA_rand.Fill(-evt.MandelT)
+            H_W_DATA_rand.Fill(evt.W)
+            H_epsilon_DATA_rand.Fill(evt.epsilon)
+            H_MM_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  )
+            
+            H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
+            H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
+            
+            P_cal_etottracknorm_DATA.Fill(evt.P_cal_etottracknorm)
+            P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
+            P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
+            
+    ibin+=1
           
     ################################################################################################################################################
     # Normalize simc by normfactor/nevents
@@ -721,7 +720,7 @@ def defineHists(phi_setting):
     H_pmz_DATA_rand.Scale(normfac_data/nWindows)
     H_W_DATA_rand.Scale(normfac_data/nWindows)
     #H_ct_ep_DATA_rand.Scale(normfac_data/nWindows)
-
+    
     ###
     # Data Random subtraction
     H_ssxfp_DATA.Add(H_ssxfp_DATA_rand,-1)
