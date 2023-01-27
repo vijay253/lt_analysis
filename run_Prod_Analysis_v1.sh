@@ -537,6 +537,7 @@ done
 InDATAFilename="Proc_Data_${KIN}.root"
 OutDATAFilename="Analysed_Data_${KIN}"
 OutFullAnalysisFilename="FullAnalysis_${KIN}"
+#echo $KIN
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
 # will create a new root file per run number which are combined using hadd
@@ -817,22 +818,21 @@ if [[ ${#data_left2[@]} -ne 0 && $TargetType != "simc" ]]; then
     DataChargeSumLeft2=$(IFS=+; echo "$((${DataChargeValLeft2[*]}))") # Only works for integers
     echo "Total Charge Left2: ${DataChargeSumLeft2} uC"
 fi
+echo $KIN
 
 # Run the plotting script if t-flag enabled
 # Checks that array isn't empty
 if [[ $TargetType != "simc" ]]; then
-    echo "test"
     if [[ $t_flag = "true" || $d_flag = "true" ]]; then
 #	cd "${LTANAPATH}/scripts/Prod"  
-	echo "test"
 	cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
-	if [ ${#data_right[@]} -eq 0 ]; then
-	    python3 find_tBinRange.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData} ${TargetType}
-	else
-	    python3 find_tBinRange.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData} ${TargetType}
-	fi
+#	if [[ $EPSILON == "low"]]; then
+	python3 find_tBinRange_v1.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "${data_left1[*]}" "${data_left2[*]}" "${data_center[*]}" ${DataChargeSumLeft1} ${DataChargeSumLeft2} ${DataChargeSumCenter} "${DataEffValLeft1[*]}" "${DataEffValLeft2[*]}" "${DataEffValCenter[*]}" ${EffData} ${TargetType}
+	
     fi
 fi
+echo "test"
+
 
 # Create input for lt_analysis code
 #cd "${LTANAPATH}/scripts/Prod/"
