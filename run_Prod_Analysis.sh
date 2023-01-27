@@ -214,8 +214,12 @@ echo
 data_right=()
 data_left=()
 data_center=()
+data_right1=()
+data_right2=()
+data_left1=()
+data_left2=()
 # Get run numbers for left, right, and, center settings
-declare -a PHI=("RIGHT" "LEFT" "CENTER" "LEFT1" "LEFT2" "RIGHT1" "RIGHT2")
+declare -a PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHI[@]}"
 do
     if [[ $d_flag = "true" ]]; then
@@ -675,104 +679,30 @@ do
 	    KIN="Q0p5W2p40_${EPSILON}e"
 	fi
     fi    
-    if [[ $Q2 = "0p375" && $W = "2p2" ]]; then
-	if [[ $i = "RIGHT" ]]; then
-	    if [[ $TargetType = "dummy" ]]; then
-		file_right="Q0p375W2p2right_${EPSILON}e_dummy"
-	    elif [[ $TargetType = "simc" ]]; then
-		file_right="Q0p375W2p2right_${EPSILON}e_simc"		
-	    else
-		file_right="Q0p375W2p2right_${EPSILON}e"
-	    fi
-	    if [[ $TargetType = "simc" ]]; then
-		echo "Reading in run numbers for right file ${file_right}..."
-		data_right+=(0000) # RIGHT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_right[@]}]"
-		echo	    	    	    	    
-	    else
-		echo "Reading in run numbers for right file ${file_right}..."
-		IFS=', ' read -r -a data_right <<< "$( grab_runs ${file_right} )"		 # RIGHT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_right[@]}]"
-		echo
-	    fi
+done
 
-	elif [[ $i = "RIGHT1" ]]; then
+declare -a PHI0P375HE=("RIGHT1" "CENTER" "LEFT1" "LEFT2")         # Q1 & high epsilon setting
+for i in "${PHI0P375HE[@]}"
+do
+    if [[ $Q2 = "0p375" && $W = "2p2" && $EPSILON = "high" ]]; then
+	if [[ $i = "RIGHT1" ]]; then
 	    if [[ $TargetType = "dummy" ]]; then
-		file_right="Q0p375W2p2right1_${EPSILON}e_dummy"
+		file_right1="Q0p375W2p2right_${EPSILON}e_dummy"
+	   
 	    elif [[ $TargetType = "simc" ]]; then
-		file_right="Q0p375W2p2right1_${EPSILON}e_simc"		
+		file_right1="Q0p375W2p2right_${EPSILON}e_simc"		
 	    else
-		file_right="Q0p375W2p2right1_${EPSILON}e"
+		file_right1="Q0p375W2p2right_${EPSILON}e"
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
-		echo "Reading in run numbers for right file ${file_right}..."
-		data_right+=(0000) # RIGHT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_right[@]}]"
+		echo "Reading in run numbers for right file ${file_right1}..."
+		data_right+=(0000) 
+		echo "Run Numbers: [${data_right1[@]}]"
 		echo	    	    	    	    
 	    else
-		echo "Reading in run numbers for right file ${file_right}..."
-		IFS=', ' read -r -a data_right <<< "$( grab_runs ${file_right} )"		 # RIGHT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_right[@]}]"
-		echo
-	    fi
-
-	elif [[ $i = "RIGHT2" ]]; then
-	    if [[ $TargetType = "dummy" ]]; then
-		file_right="Q0p375W2p2right2_${EPSILON}e_dummy"
-	    elif [[ $TargetType = "simc" ]]; then
-		file_right="Q0p375W2p2right2_${EPSILON}e_simc"		
-	    else
-		file_right="Q0p375W2p2right_${EPSILON}e"
-	    fi
-	    if [[ $TargetType = "simc" ]]; then
-		echo "Reading in run numbers for right file ${file_right}..."
-		data_right+=(0000) # RIGHT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_right[@]}]"
-		echo	    	    	    	    
-	    else
-		echo "Reading in run numbers for right file ${file_right}..."
-		IFS=', ' read -r -a data_right <<< "$( grab_runs ${file_right} )"		 # RIGHT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_right[@]}]"
-		echo
-	    fi
-
-	elif [[ $i = "LEFT1" ]]; then
-	    if [[ $TargetType = "dummy" ]]; then
-		file_left="Q0p375W2p2left1_${EPSILON}e_dummy"
-	    elif [[ $TargetType = "simc" ]]; then
-		file_left="Q0p375W2p2left1_${EPSILON}e_simc"		
-	    else
-		file_left="Q0p375W2p2left1_${EPSILON}e"
-	    fi
-	    if [[ $TargetType = "simc" ]]; then
-		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0001) # LEFT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_left[@]}]"
-		echo	    	    	    	    
-	    else
-		echo "Reading in run numbers for left file ${file_left}..."
-		IFS=', ' read -r -a data_left <<< "$( grab_runs ${file_left} )"		 # LEFT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_left[@]}]"
-		echo
-	    fi
-
-	elif [[ $i = "LEFT2" ]]; then
-	    if [[ $TargetType = "dummy" ]]; then
-		file_left="Q0p375W2p2left2_${EPSILON}e_dummy"
-	    elif [[ $TargetType = "simc" ]]; then
-		file_left="Q0p375W2p2left2_${EPSILON}e_simc"		
-	    else
-		file_left="Q0p375W2p2left2_${EPSILON}e"
-	    fi
-	    if [[ $TargetType = "simc" ]]; then
-		echo "Reading in run numbers for left file ${file_left}..."
-		data_left+=(0001) # LEFT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_left[@]}]"
-		echo	    	    	    	    
-	    else
-		echo "Reading in run numbers for left file ${file_left}..."
-		IFS=', ' read -r -a data_left <<< "$( grab_runs ${file_left} )"		 # LEFT, Q2=0p5, W=2p40
-		echo "Run Numbers: [${data_left[@]}]"
+		echo "Reading in run numbers for right file ${file_right1}..."
+		IFS=', ' read -r -a data_right1 <<< "$( grab_runs ${file_right1} )"		
+		echo "Run Numbers: [${data_right1[@]}]"
 		echo
 	    fi
 
@@ -791,11 +721,264 @@ do
 		echo	    	    	    	    
 	    else
 		echo "Reading in run numbers for center file ${file_center}..."
-		IFS=', ' read -r -a data_center <<< "$( grab_runs ${file_center} )"		 # CENTER, Q2=0p5, W=2p40
+		IFS=', ' read -r -a data_center <<< "$( grab_runs ${file_center} )"		
 		echo "Run Numbers: [${data_center[@]}]"
 		echo
 	    fi
+
+	elif [[ $i = "LEFT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left1="Q0p375W2p2left1_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left1="Q0p375W2p2left1_${EPSILON}e_simc"		
+	    else
+		file_left1="Q0p375W2p2left1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		data_left1+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		IFS=', ' read -r -a data_left1 <<< "$( grab_runs ${file_left1} )"		
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left2="Q0p375W2p2left2_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left2="Q0p375W2p2left2_${EPSILON}e_simc"		
+	    else
+		file_left2="Q0p375W2p2left2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		data_left2+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		IFS=', ' read -r -a data_left2 <<< "$( grab_runs ${file_left2} )"		 
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo
+	    fi
+
 	fi
+
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.4515
+	elif [[ ${EPSILON} == "mid" ]]; then
+	    EPSVAL=0.523              #just test
+	else
+	    EPSVAL=0.6979
+	fi
+	if [[ $TargetType = "dummy" ]]; then
+	    KIN="Q0p375W2p2_${EPSILON}e_dummy"
+	elif [[ $TargetType = "simc" ]]; then
+	    KIN="Q0p375W2p2_${EPSILON}e_simc"	    
+	else
+	    KIN="Q0p375W2p2_${EPSILON}e"
+	fi
+    fi    
+
+done
+
+declare -a PHI0P375ME=("RIGHT2" "RIGHT1" "CENTER" "LEFT1" "LEFT2")         # Q1 & mid epsilon setting
+for i in "${PHI0P375ME[@]}"
+do
+    if [[ $Q2 = "0p375" && $W = "2p2"  && $EPSILON = "mid" ]]; then
+	if [[ $i = "RIGHT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right2="Q0p375W2p2right2_${EPSILON}e_dummy"
+	   
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right2="Q0p375W2p2right2_${EPSILON}e_simc"		
+	    else
+		file_right2="Q0p375W2p2right2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right2 file ${file_right2}..."
+		data_right2+=(0000) # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right2[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right2 file ${file_right2}..."
+		IFS=', ' read -r -a data_right2 <<< "$( grab_runs ${file_right2} )"		 
+		echo "Run Numbers: [${data_right2[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "RIGHT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right1="Q0p375W2p2right1_${EPSILON}e_dummy"
+	   
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right1="Q0p375W2p2right1_${EPSILON}e_simc"		
+	    else
+		file_right1="Q0p375W2p2right1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right1 file ${file_right1}..."
+		data_right1+=(0000) # RIGHT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_right1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right1 file ${file_right1}..."
+		IFS=', ' read -r -a data_right1 <<< "$( grab_runs ${file_right1} )"		 
+		echo "Run Numbers: [${data_right1[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "CENTER" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_center="Q0p375W2p2center_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_center="Q0p375W2p2center_${EPSILON}e_simc"		
+	    else
+		file_center="Q0p375W2p2center_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for center file ${file_center}..."
+		data_center+=(0002) # CENTER, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_center[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for center file ${file_center}..."
+		IFS=', ' read -r -a data_center <<< "$( grab_runs ${file_center} )"		
+		echo "Run Numbers: [${data_center[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left1="Q0p375W2p2left1_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left1="Q0p375W2p2left1_${EPSILON}e_simc"		
+	    else
+		file_left1="Q0p375W2p2left1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		data_left1+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		IFS=', ' read -r -a data_left1 <<< "$( grab_runs ${file_left1} )"	
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left2="Q0p375W2p2left2_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left2="Q0p375W2p2left2_${EPSILON}e_simc"		
+	    else
+		file_left2="Q0p375W2p2left2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		data_left2+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		IFS=', ' read -r -a data_left2 <<< "$( grab_runs ${file_left2} )"	 
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo
+	    fi
+
+	fi
+
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.4515
+	elif [[ ${EPSILON} == "mid" ]]; then
+	    EPSVAL=0.523              #just test
+	else
+	    EPSVAL=0.6979
+	fi
+	if [[ $TargetType = "dummy" ]]; then
+	    KIN="Q0p375W2p2_${EPSILON}e_dummy"
+	elif [[ $TargetType = "simc" ]]; then
+	    KIN="Q0p375W2p2_${EPSILON}e_simc"	    
+	else
+	    KIN="Q0p375W2p2_${EPSILON}e"
+	fi
+    fi    
+
+done
+
+declare -a PHI0P375ME=("CENTER" "LEFT1" "LEFT2")         # Q1 & low epsilon setting
+for i in "${PHI0P375ME[@]}"
+do
+    if [[ $Q2 = "0p375" && $W = "2p2"  && $EPSILON = "low" ]]; then
+
+	if [[ $i = "CENTER" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_center="Q0p375W2p2center_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_center="Q0p375W2p2center_${EPSILON}e_simc"		
+	    else
+		file_center="Q0p375W2p2center_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for center file ${file_center}..."
+		data_center+=(0002) # CENTER, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_center[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for center file ${file_center}..."
+		IFS=', ' read -r -a data_center <<< "$( grab_runs ${file_center} )"    
+		echo "Run Numbers: [${data_center[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left1="Q0p375W2p2left1_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left1="Q0p375W2p2left1_${EPSILON}e_simc"		
+	    else
+		file_left1="Q0p375W2p2left1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		data_left1+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		IFS=', ' read -r -a data_left1 <<< "$( grab_runs ${file_left1} )"	  
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left2="Q0p375W2p2left2_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left2="Q0p375W2p2left2_${EPSILON}e_simc"		
+	    else
+		file_left2="Q0p375W2p2left2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		data_left2+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		IFS=', ' read -r -a data_left2 <<< "$( grab_runs ${file_left2} )"	 
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo
+	    fi
+
+	fi
+
 	if [[ ${EPSILON} == "low" ]]; then
 	    EPSVAL=0.4515
 	elif [[ ${EPSILON} == "mid" ]]; then
@@ -822,23 +1005,21 @@ OutFullAnalysisFilename="FullAnalysis_${KIN}"
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
 # will create a new root file per run number which are combined using hadd
 if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
-#if [[ $a_flag = "true" ]]; then
-#    echo "test"
     # Checks that array isn't empty
-    if [ ${#data_right[@]} -ne 0 ]; then
+    if [ ${#data_right2[@]} -ne 0 ]; then
 	echo
-	echo "Analysing right data..."
 	echo
-	for i in "${data_right[@]}"
+	for i in "${data_right2[@]}"
 	do
 	    echo
 	    echo "-----------------------------"
-	    echo "Analysing right data run $i..."
+	    echo "Analysing right2 data run $i..."
 	    echo "-----------------------------"
 	    echo
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
-	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+#	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -848,43 +1029,34 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
 	echo
-	#echo "Combining root files..."  
-	#hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
-	#echo "Renaming Raw_Data to Proc_Data..."
-	#for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
 
-    # Checks that array isn't empty
-    if [ ${#data_left[@]} -ne 0 ]; then
+    if [ ${#data_right1[@]} -ne 0 ]; then
 	echo
-	echo "Analysing left data..."
 	echo
-	for i in "${data_left[@]}"
+	for i in "${data_right1[@]}"
 	do
 	    echo
 	    echo "-----------------------------"
-	    echo "Analysing left data run $i..."
+	    echo "Analysing right1 data run $i..."
 	    echo "-----------------------------"
 	    echo
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
-	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+#	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
-	    echo "Combining run $i with ${OutDATAFilename}_Left.root..."  
-	    hadd -f ${OutDATAFilename}_Left.root ${i}_-1_Raw_Data.root
+	    echo "Combining run $i with ${OutDATAFilename}_Right.root..."  
+	    hadd -f ${OutDATAFilename}_Right.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
 	echo
-	#echo "Combining root files..."  
-	#hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
-	#echo "Renaming Raw_Data to Proc_Data..."
-	#for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
 
-    # Checks that array isn't empty
+
     if [ ${#data_center[@]} -ne 0 ]; then
 	echo
 	echo "Analysing center data..."
@@ -898,7 +1070,8 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
-	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+#	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -912,6 +1085,58 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	#hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
 	#echo "Renaming Raw_Data to Proc_Data..."
 	#for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
+    fi
+
+    # Checks that array isn't empty
+    if [ ${#data_left1[@]} -ne 0 ]; then
+	echo
+	echo "Analysing left1 data..."
+	echo
+	for i in "${data_left1[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing left1 data run $i..."
+	    echo "-----------------------------"
+	    echo
+#	    cd "${LTANAPATH}/scripts/Prod"
+	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
+#	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
+	    echo
+#	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    echo "Combining run $i with ${OutDATAFilename}_Left.root..."  
+	    hadd -f ${OutDATAFilename}_Left.root ${i}_-1_Raw_Data.root
+	    echo "Renaming Raw_Data to Proc_Data..."
+	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
+	done
+    fi
+
+    # Checks that array isn't empty
+    if [ ${#data_left2[@]} -ne 0 ]; then
+	echo
+	echo "Analysing left2 data..."
+	echo
+	for i in "${data_left2[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing left2 data run $i..."
+	    echo "-----------------------------"
+	    echo
+#	    cd "${LTANAPATH}/scripts/Prod"
+	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
+#	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
+	    echo
+#	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    echo "Combining run $i with ${OutDATAFilename}_Left.root..."  
+	    hadd -f ${OutDATAFilename}_Left.root ${i}_-1_Raw_Data.root
+	    echo "Renaming Raw_Data to Proc_Data..."
+	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
+	done
     fi
     
 fi
