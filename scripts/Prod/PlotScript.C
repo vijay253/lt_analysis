@@ -23,7 +23,7 @@
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
 
-void PlotScript(string InDATAFilename = "", string OutFilename = "")
+void PlotScript(string RunNum = "")
 {
   TString Hostname = gSystem->HostName();
   TString User = (gSystem->GetUserInfo())->fUser;
@@ -52,17 +52,12 @@ void PlotScript(string InDATAFilename = "", string OutFilename = "")
   }
 
   // Add more as needed for your own envrionment
-  if(InDATAFilename == "") {
-    cout << "Enter a DATA ROOT Filename to analyse: ";
-    cin >> InDATAFilename;
+  if(RunNum == "") {
+    cout << "Enter Run Number: ";
+    cin >> RunNum;
   }  
-
-  if(OutFilename == "") {
-    cout << "Enter a output Filename: ";
-    cin >> OutFilename;
-  }
-  
-  TString TInDATAFilename = InDATAFilename ;
+ 
+  TString TInDATAFilename = RunNum+"_-1_Proc_Data.root" ;
   rootFile_DATA = ROOTfilePath+"/"+TInDATAFilename;
 
   if (gSystem->AccessPathName(rootFile_DATA) == kTRUE){
@@ -72,7 +67,7 @@ void PlotScript(string InDATAFilename = "", string OutFilename = "")
   
 
   TFile *InFile_DATA = new TFile(rootFile_DATA, "READ");
-  TString TOutFilename = OutFilename;
+  TString TOutFilename = RunNum+"_PiCoinTime";
   //Output file names 
   TString foutname = OutPath+"/" + TOutFilename + ".root";
   TString fouttxt  = OutPath+"/" + TOutFilename + ".txt";
@@ -83,7 +78,7 @@ void PlotScript(string InDATAFilename = "", string OutFilename = "")
   
   Double_t PI_COIN_TIME;TBRANCH->SetBranchAddress("CTime_ROC1", &PI_COIN_TIME);
    
-  TH1D *PiCoinTime  = new TH1D("PiCoinTime","CTime_ROC1; PiCoinTime;", 300, -50, 50);      
+  TH1D *PiCoinTime  = new TH1D("PiCoinTime","CTime_ROC1; PiCoinTime;", 300, -20, 20);      
  
   for(Long64_t i = 0; i < nEntries_TBRANCH; i++)
     {
@@ -96,7 +91,7 @@ void PlotScript(string InDATAFilename = "", string OutFilename = "")
     }
 
   TCanvas *c = new TCanvas("c", " Pion coin time");
-  PiCoinTime->Draw(" same weight");
+  PiCoinTime->Draw("");
   c->Print(outputpdf);
   
   //xfp->Print(outputpdf + '(');
