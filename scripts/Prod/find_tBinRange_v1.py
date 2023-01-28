@@ -46,6 +46,7 @@ W = sys.argv[2]
 Q2 = sys.argv[3]
 EPSVAL = sys.argv[4]
 InDATAFilename = sys.argv[5]
+#InDATAFilename = "Analysed_Data_Q0p375W2p2_lowe_Left1.root"
 OutFilename = sys.argv[6]
 tmin = float(sys.argv[7])
 tmax = float(sys.argv[8])
@@ -99,7 +100,9 @@ outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 Importing diamond cut script
 '''
 
-from DiamondPlot_all import DiamondPlot
+from DiamondPlot_all_v1 import DiamondPlot
+print("test")
+print(kinematics[0])
 
 ################################################################################################################################################
 
@@ -112,50 +115,52 @@ def find_tbins():
     H_t_Left = []
     H_t_Center = []
 
-    for val in ['Right', 'Left', 'Center']:
+    for val in ['Lef1', 'Left2', 'Center']:
     #for val in settingList:
         rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
             continue
         else:
-            if val == 'Right':
-                InFile_RIGHT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+            if val == 'Left1':
+                InFile_LEFT1_DATA = ROOT.TFile.Open(rootFile, "OPEN")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Uncut_Kaon_Events")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_noRF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_RF")
+                TBRANCH_LEFT1_DATA   = InFile_LEFT1_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_RF")
                 print("Creating right t-bin histogram...")
                 # Grab t bin range
-                for i,evt in enumerate(TBRANCH_RIGHT_DATA):
+                for i,evt in enumerate(TBRANCH_LEFT1_DATA):
                     # Progress bar
-                    Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
+                    Misc.progressBar(i, TBRANCH_LEFT1_DATA.GetEntries())
                     if (tmin <= -evt.MandelT <= tmax):
                         H_t_Right.append(-evt.MandelT)   
                 #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
                 
-                InFile_RIGHT_DATA.Close()            
+                InFile_LEFT1_DATA.Close()            
                 
-            if val == 'Left':
-                InFile_LEFT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+            if val == 'Left2':
+                InFile_LEFT2_DATA = ROOT.TFile.Open(rootFile, "OPEN")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Uncut_Kaon_Events")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_RF")
+                TBRANCH_LEFT2_DATA   = InFile_LEFT2_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_RF")
                 print("\nCreating left t-bin histogram...")
                 # Grab t bin range
-                for i,evt in enumerate(TBRANCH_LEFT_DATA):
+                for i,evt in enumerate(TBRANCH_LEFT2_DATA):
                     # Progress bar
-                    Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
+                    Misc.progressBar(i, TBRANCH_LEFT2_DATA.GetEntries())
                     if (tmin <= -evt.MandelT <= tmax):
                         H_t_Left.append(-evt.MandelT)
                 #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
-                InFile_LEFT_DATA.Close()
+                InFile_LEFT2_DATA.Close()
                 
             if val == 'Center':
                 InFile_CENTER_DATA = ROOT.TFile.Open(rootFile, "OPEN")
@@ -163,8 +168,9 @@ def find_tbins():
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_noRF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_RF")
-                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_RF")
+                TBRANCH_CENTER_DATA    = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+               #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_RF")
                 print("\nCreating center t-bin histogram...")
                 # Grab t bin range
@@ -184,10 +190,10 @@ def find_tbins():
 
     H_t_BinTest = []
     for val in settingList:
-        if val == "Right":
+        if val == "Left1":
             for r in H_t_Right:
                 H_t_BinTest.append(r)
-        if val == "Left":
+        if val == "Left2":
             for l in H_t_Left:
                 H_t_BinTest.append(l)
         if val == "Center":
@@ -274,7 +280,8 @@ def defineHists(phi_setting):
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+    TBRANCH_DATA   = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
     
@@ -282,11 +289,11 @@ def defineHists(phi_setting):
     # Grab and calculate efficiency
 
     
-    if phi_setting == "Right":
+    if phi_setting == "Left1":
         runNums= runNumRight
         runNum = runNumRight.split(' ')[0]
         InData_efficiency = InData_efficiency_right
-    if phi_setting == "Left":
+    if phi_setting == "Left2":
         runNums= runNumLeft
         runNum = runNumLeft.split(' ')[0]
         InData_efficiency = InData_efficiency_left
@@ -658,9 +665,9 @@ def defineHists(phi_setting):
     #H_pmz_SIMC.Scale(normfac_simc)
     H_W_SIMC.Scale(normfac_simc)
           
-    if phi_setting == "Right":
+    if phi_setting == "Left1":
         normfac_data = 1/(data_charge_right)
-    if phi_setting == "Left":
+    if phi_setting == "Left2":
         normfac_data = 1/(data_charge_left)
     if phi_setting == "Center":
         normfac_data = 1/(data_charge_center)        
@@ -840,7 +847,7 @@ ROOT.gStyle.SetOptStat(0)
 # Call histogram function above to define dictonaries for right, left, center settings
 # Put these all into an array so that if we are missing a setting it is easier to remove
 # Plus it makes the code below less repetitive
-phisetlist = ["Right","Left","Center"]
+phisetlist = ["Left1","Left2","Center"]
 histlist = []
 for phiset in phisetlist:
     histlist.append(defineHists(phiset))
@@ -1380,9 +1387,9 @@ d_Right_Data.cd()
 for i,hist in enumerate(histlist):
     if bool(hist):
         continue
-    if hist["phi_setting"] == "Right":
+    if hist["phi_setting"] == "Left1":
         d_Right_Data.cd()
-    if hist["phi_setting"] == "Left":
+    if hist["phi_setting"] == "Left2":
         d_Left_Data.cd()
     if hist["phi_setting"] == "Center":
         d_Center_Data.cd()
