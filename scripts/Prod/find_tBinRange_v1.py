@@ -31,6 +31,7 @@ from functools import reduce
 
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
+######################################## lowe
 
 if len(sys.argv)-1!=21:
     print("!!!!! ERROR !!!!!\n Expected 21 arguments\n Usage is with - KIN W Q2 EPSVAL OutDATAFilename OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
@@ -41,6 +42,42 @@ if len(sys.argv)-1!=21:
 DEBUG = False # Flag for no cut plots
 
 # Input params
+
+kinematics = sys.argv[1].split("_")
+W = sys.argv[2]
+Q2 = sys.argv[3]
+EPSVAL = sys.argv[4]
+InDATAFilename = sys.argv[5]
+OutFilename = sys.argv[6]
+tmin = float(sys.argv[7])
+tmax = float(sys.argv[8])
+NumtBins = int(sys.argv[9])
+NumPhiBins = int(sys.argv[10])
+runNumCenter = sys.argv[11]
+runNumLeft1 = sys.argv[12]
+runNumLeft2 = sys.argv[13]
+data_charge_center = int(sys.argv[14])/1000
+data_charge_left1 = int(sys.argv[15])/1000
+data_charge_left2 = int(sys.argv[16])/1000
+InData_efficiency_center = sys.argv[17]
+InData_efficiency_left1 = sys.argv[18]
+InData_efficiency_left2 = sys.argv[19]
+efficiency_table = sys.argv[20]
+target = sys.argv[21]
+
+############################### mide
+# Check the number of arguments provided to the script
+'''
+
+if len(sys.argv)-1!=27:
+    print("!!!!! ERROR !!!!!\n Expected 27 arguments\n Usage is with - KIN W Q2 EPSVAL OutDATAFilename OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table target\n!!!!! ERROR !!!!!")
+    sys.exit(1)
+
+##################################################################################################################################################    
+
+DEBUG = False # Flag for no cut plots
+
+
 kinematics = sys.argv[1].split("_")
 W = sys.argv[2]
 Q2 = sys.argv[3]
@@ -52,18 +89,24 @@ tmin = float(sys.argv[7])
 tmax = float(sys.argv[8])
 NumtBins = int(sys.argv[9])
 NumPhiBins = int(sys.argv[10])
-runNumRight = sys.argv[11]
-runNumLeft = sys.argv[12]
+runNumRight2 = sys.argv[11]
+runNumRight1 = sys.argv[12]
 runNumCenter = sys.argv[13]
-data_charge_right = int(sys.argv[14])/1000
-data_charge_left = int(sys.argv[15])/1000
-data_charge_center = int(sys.argv[16])/1000
-InData_efficiency_right = sys.argv[17]
-InData_efficiency_left = sys.argv[18]
-InData_efficiency_center = sys.argv[19]
-efficiency_table = sys.argv[20]
-target = sys.argv[21]
-
+runNumLeft1 = sys.argv[14]
+runNumLeft2 = sys.argv[15]
+data_charge_right2 = int(sys.argv[16])/1000
+data_charge_right1 = int(sys.argv[17])/1000
+data_charge_center = int(sys.argv[18])/1000
+data_charge_left1 = int(sys.argv[19])/1000
+data_charge_left2 = int(sys.argv[20])/1000
+InData_efficiency_right2 = sys.argv[21]
+InData_efficiency_right1 = sys.argv[22]
+InData_efficiency_center = sys.argv[23]
+InData_efficiency_left1 = sys.argv[24]
+InData_efficiency_left2 = sys.argv[25]
+efficiency_table = sys.argv[26]
+target = sys.argv[27]
+'''
 particle = "kaon"
 
 ###############################################################################################################################################
@@ -115,7 +158,7 @@ def find_tbins():
     H_t_Left = []
     H_t_Center = []
 
-    for val in ['Lef1', 'Left2', 'Center']:
+    for val in ['Center' , 'Lef1', 'Left2']:
     #for val in settingList:
         rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
@@ -287,21 +330,21 @@ def defineHists(phi_setting):
     
     ################################################################################################################################################
     # Grab and calculate efficiency
-
     
-    if phi_setting == "Left1":
-        runNums= runNumRight
-        runNum = runNumRight.split(' ')[0]
-        InData_efficiency = InData_efficiency_right
-    if phi_setting == "Left2":
-        runNums= runNumLeft
-        runNum = runNumLeft.split(' ')[0]
-        InData_efficiency = InData_efficiency_left
     if phi_setting == "Center":
         runNums= runNumCenter
         runNum = runNumCenter.split(' ')[0]
         InData_efficiency = InData_efficiency_center
 
+    if phi_setting == "Left1":
+        runNums= runNumLeft1
+        runNum = runNumLeft1.split(' ')[0]
+        InData_efficiency = InData_efficiency_left1
+    if phi_setting == "Left2":
+        runNums= runNumLeft2
+        runNum = runNumLeft2.split(' ')[0]
+        InData_efficiency = InData_efficiency_left2
+ 
     sys.path.append('../')
     from getDataTable import calculate_effError
 
@@ -665,12 +708,13 @@ def defineHists(phi_setting):
     #H_pmz_SIMC.Scale(normfac_simc)
     H_W_SIMC.Scale(normfac_simc)
           
-    if phi_setting == "Left1":
-        normfac_data = 1/(data_charge_right)
-    if phi_setting == "Left2":
-        normfac_data = 1/(data_charge_left)
     if phi_setting == "Center":
         normfac_data = 1/(data_charge_center)        
+    if phi_setting == "Left1":
+        normfac_data = 1/(data_charge_left1)
+    if phi_setting == "Left2":
+        normfac_data = 1/(data_charge_left2)
+
     H_ssxfp_DATA.Scale(normfac_data)
     H_ssyfp_DATA.Scale(normfac_data)
     H_ssxpfp_DATA.Scale(normfac_data)
