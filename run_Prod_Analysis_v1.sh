@@ -517,8 +517,8 @@ do
 
 	if [[ ${EPSILON} == "low" ]]; then
 	    EPSVAL=0.4515
-	elif [[ ${EPSILON} == "mid" ]]; then
-	    EPSVAL=0.523              #just test
+	elif [[ ${EPSILON} == "high" ]]; then
+	    EPSVAL=0.7600              #just test
 	else
 	    EPSVAL=0.6979
 	fi
@@ -818,7 +818,6 @@ if [[ ${#data_left2[@]} -ne 0 && $TargetType != "simc" ]]; then
     DataChargeSumLeft2=$(IFS=+; echo "$((${DataChargeValLeft2[*]}))") # Only works for integers
     echo "Total Charge Left2: ${DataChargeSumLeft2} uC"
 fi
-echo $KIN
 
 # Run the plotting script if t-flag enabled
 # Checks that array isn't empty
@@ -826,22 +825,29 @@ if [[ $TargetType != "simc" ]]; then
     if [[ $t_flag = "true" || $d_flag = "true" ]]; then
 #	cd "${LTANAPATH}/scripts/Prod"  
 	cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
-#	if [[ $EPSILON == "low"]]; then
+	if [[ $EPSILON == low ]]; then
+	python3 find_tBinRange_v1.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "${data_center[*]}" "${data_left1[*]}" "${data_left2[*]}" ${DataChargeSumCenter} ${DataChargeSumLeft1} ${DataChargeSumLeft2} "${DataEffValCenter[*]}" "${DataEffValLeft1[*]}" "${DataEffValLeft2[*]}" ${EffData} ${TargetType}
+	fi
+
+	if [[ $EPSILON == mid ]]; then
+	python3 find_tBinRange_v1.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "${data_right2[*]}" "${data_right1[*]}" "${data_center[*]}" "${data_left1[*]}" "${data_left2r[*]}" ${DataChargeSumRight2} ${DataChargeSumRight1} ${DataChargeSumCenter} ${DataChargeSumLeft1} ${DataChargeSumLeft2}  "${DataEffVaRight2[*]}" "${DataEffValRight1[*]}" "${DataEffValCenter[*]}" "${DataEffValLeft1[*]}" "${DataEffValLeft2[*]}" ${EffData} ${TargetType}
+	fi
+
+	if [[ $EPSILON == high ]]; then
 	python3 find_tBinRange_v1.py ${KIN} ${W} ${Q2} ${EPSVAL} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "${data_left1[*]}" "${data_left2[*]}" "${data_center[*]}" ${DataChargeSumLeft1} ${DataChargeSumLeft2} ${DataChargeSumCenter} "${DataEffValLeft1[*]}" "${DataEffValLeft2[*]}" "${DataEffValCenter[*]}" ${EffData} ${TargetType}
-	
+	fi
+
     fi
 fi
-echo "test"
-
 
 # Create input for lt_analysis code
 #cd "${LTANAPATH}/scripts/Prod/"
 cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod/"
 if [[ $TargetType != "simc" ]]; then
-    if [ ${#data_right[@]} -eq 0 ]; then
+    if [ ${#data_left1[@]} -eq 0 ]; then
 	python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "0" "${data_left[*]}" "${data_center[*]}" "0" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "0" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "0" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "0" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "0" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}" ${TargetType}
     else
-	python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" "${DatapThetaValRight[*]}" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "${DataEffErrRight[*]}" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "${DataChargeValRight[*]}" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "${DataChargeErrRight[*]}" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}" ${TargetType}
+	python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "${data_center[*]}" "${data_left1[*]}" "${data_left2[*]}" "${DatapThetaValCenter[*]}" "${DatapThetaValLeft1[*]}" "${DatapThetaValLeft2[*]}" "${DataEbeamValCenter[*]}" "${DataEbeamValLeft1[*]}" "${DataEbeamValLeft2[*]}" "${DataEffValCenter[*]}" "${DataEffValLeft1[*]}"  "${DataEffValLeft2[*]}" "${DataEffErrCenter[*]}" "${DataEffErrLeft1[*]}"  "${DataEffErrLeft2[*]}" "${DataChargeValCenter[*]}" "${DataChargeValLeft1[*]}" "${DataChargeValLeft2[*]}" "${DataChargeErrCenter[*]}" "${DataChargeErrLeft1[*]}" "${DataChargeErrLeft2[*]}" ${TargetType}
     fi
 else
     python3 createSimcList.py ${Q2} ${POL} ${EPSVAL} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${KIN}
@@ -852,4 +858,3 @@ if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     cd "/lustre19/expphy/volatile/hallc/c-kaonlt/vijay/ROOTfiles/KaonLT_Analysis/PhysicsAnalysis/PionLT/Analysis/KaonLT"
     evince "${OutFullAnalysisFilename}.pdf"
 fi
-
