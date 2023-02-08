@@ -1380,25 +1380,36 @@ void t_plots()
   //-t for all three e
   TCanvas *c13 = new TCanvas("c13", " c13");
   //High epsilon  
-
   htheC->SetStats(0);
   htheC->SetLineColor(kGreen);
-  htheC->Add(htheCR,-1); 
+  htheC->Add(htheCR,-1);
+  TAxis *In1 = htheC->GetXaxis();
+  Double_t heC =  htheC->Integral(In1->FindBin(0.005), In1->FindBin(0.08), "");
+  cout<< " High epsilon C events: "<<heC<<endl;
   htheC->Draw("Weight");
 
   htheR1->SetStats(0);
   htheR1->SetLineColor(kGreen);
   htheR1->Add(htheR1R,-1); 
+  TAxis *In2 = htheR1->GetXaxis();
+  Double_t heR1 =  htheR1->Integral(In2->FindBin(0.005), In2->FindBin(0.08), "");
+  cout<< " High epsilon R1 events: "<<heR1<<endl;
   htheR1->Draw("same Weight");
 
   htheL1->SetStats(0);
   htheL1->SetLineColor(kGreen);
   htheL1->Add(htheL1R, -1); 
+  TAxis *In3 = htheL1->GetXaxis();
+  Double_t heL1 =  htheL1->Integral(In3->FindBin(0.005), In3->FindBin(0.08), "");
+  cout<< " High epsilon L1 events: "<<heL1<<endl;
   htheL1->Draw("same Weight");
 
   htheL2->SetStats(0);
   htheL2->SetLineColor(kGreen);
   htheL2->Add(htheL2R, -1); 
+  TAxis *In4 = htheL2->GetXaxis();
+  Double_t heL2 =  htheL2->Integral(In4->FindBin(0.005), In4->FindBin(0.08), "");
+  cout<< " High epsilon L2 events: "<<heL2<<endl; 
   htheL2->Draw("same Weight");
  
   // Mid epsilon
@@ -1406,26 +1417,41 @@ void t_plots()
   htmeC->SetStats(0);
   htmeC->SetLineColor(kBlue);
   htmeC->Add(htmeCR,-1); 
+  TAxis *In5 = htmeC->GetXaxis();
+  Double_t meC =  htmeC->Integral(In5->FindBin(0.005), In5->FindBin(0.08), "");
+  cout<< " Mid epsilon C events: "<<meC<<endl; 
   htmeC->Draw("same Weight");
 
   htmeR1->SetStats(0);
   htmeR1->SetLineColor(kBlue);
   htmeR1->Add(htmeR1R,-1); 
+  TAxis *In6 = htmeR1->GetXaxis();
+  Double_t meR1 =  htmeR1->Integral(In6->FindBin(0.005), In6->FindBin(0.08), "");
+  cout<< " Mid epsilon R1 events: "<<meR1<<endl; 
   htmeR1->Draw("same Weight");
 
   htmeR2->SetStats(0);
   htmeR2->SetLineColor(kBlue);
   htmeR2->Add(htmeR2R,-1); 
+  TAxis *In7 = htmeR2->GetXaxis();
+  Double_t meR2 =  htmeR2->Integral(In7->FindBin(0.005), In7->FindBin(0.08), "");
+  cout<< " Mid epsilon R2 events: "<<meR2<<endl; 
   htmeR2->Draw("same Weight");
 
   htmeL1->SetStats(0);
   htmeL1->SetLineColor(kBlue);
   htmeL1->Add(htmeL1R, -1); 
+  TAxis *In8 = htmeL1->GetXaxis();
+  Double_t meL1 =  htmeL1->Integral(In8->FindBin(0.005), In8->FindBin(0.08), "");
+  cout<< " Mid epsilon L1 events: "<<meL1<<endl; 
   htmeL1->Draw("same Weight");
 
   htmeL2->SetStats(0);
   htmeL2->SetLineColor(kBlue);
   htmeL2->Add(htmeL2R, -1); 
+  TAxis *In9 = htmeL2->GetXaxis();
+  Double_t meL2 =  htmeL2->Integral(In9->FindBin(0.005), In9->FindBin(0.08), "");
+  cout<< " Mid epsilon L2 events: "<<meL2<<endl; 
   htmeL2->Draw("same Weight");
 
   //Low epsilon
@@ -1433,16 +1459,25 @@ void t_plots()
   htC->SetStats(0);
   htC->SetLineColor(kRed);
   htC->Add(htCR,-1); 
+  TAxis *In10 = htC->GetXaxis();
+  Double_t leC =  htC->Integral(In10->FindBin(0.005), In10->FindBin(0.08), "");
+  cout<< " Low epsilon C events: "<<leC<<endl; 
   htC->Draw("same Weight");
 
   htL1->SetStats(0);
   htL1->SetLineColor(kRed);
   htL1->Add(htL1R, -1); 
+  TAxis *In11 = htL1->GetXaxis();
+  Double_t leL1 =  htL1->Integral(In11->FindBin(0.005), In11->FindBin(0.08), "");
+  cout<< " Low epsilon L1 events: "<<leL1<<endl; 
   htL1->Draw("same Weight");
  
   htL2->SetStats(0);
   htL2->SetLineColor(kRed);
   htL2->Add(htL2R, -1); 
+  TAxis *In12 = htL2->GetXaxis();
+  Double_t leL2 =  htL2->Integral(In12->FindBin(0.005), In12->FindBin(0.08), "");
+  cout<< " Low epsilon L2 events: "<<leL2<<endl; 
   htL2->Draw(" same Weight");
 
   auto legt = new TLegend(0.7,0.7,0.30,0.9); // 0.1 0.7
@@ -1458,6 +1493,8 @@ void t_plots()
   lthigh->SetLineColor(kBlack);
   ltlow->Draw("same"); 
   lthigh->Draw("same");
+
+
 
   c13->Print(outputpdf + ')');
 }
