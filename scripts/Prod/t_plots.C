@@ -1445,11 +1445,11 @@ void t_plots()
   htL2->Add(htL2R, -1); 
   htL2->Draw(" same Weight");
 
-  auto legt = new TLegend(0.1,0.7,0.30,0.9);
-  legt->SetHeader("All epsilon","C");
-  legt->AddEntry(htheC,"High epsilon","l");
-  legt->AddEntry(htmeC,"Mid epsilon","l");
-  legt->AddEntry(htC,"Low epsilon","l");
+  auto legt = new TLegend(0.7,0.7,0.30,0.9); // 0.1 0.7
+  legt->SetHeader("All epsilon at Q2 = 0.38 GeV2","C");
+  legt->AddEntry(htheC,"High epsilon (4)","l");
+  legt->AddEntry(htmeC,"Mid epsilon (5)","l");
+  legt->AddEntry(htC,"Low epsilon (3)","l");
   legt->Draw("same");
 
   TLine *ltlow  = new TLine(0.005, -80.0, 0.005, 1800);
