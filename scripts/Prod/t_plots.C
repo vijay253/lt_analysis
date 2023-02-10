@@ -1479,7 +1479,132 @@ void t_plots()
   Double_t leL2 =  htL2->Integral(In12->FindBin(0.005), In12->FindBin(0.08), "");
   cout<< " Low epsilon L2 events: "<<leL2<<endl; 
   htL2->Draw(" same Weight");
+  //choose -t
+  
+  cout<<In1->FindBin(0.005)<<endl;
+  cout<<In1->FindBin(0.08)<<endl;
+  Double_t Events1 = 0.0;
+  Double_t Events2 = 0.0;
+  Double_t Events3 = 0.0;
+  Double_t Events4 = 0.0;
+  Double_t Events5 = 0.0;
+  Double_t Events6 = 0.0;
+  Double_t Events7 = 0.0;
+  Double_t Events8 = 0.0;
+  Double_t Events9 = 0.0;
+  Double_t Events10 = 0.0;
+  Double_t Events11 = 0.0;
+  Double_t Events12 = 0.0;
 
+  // if(In1->FindBin(0.005) >=41 && In1->FindBin(0.005) <= 246)  
+    {
+      //      for(Long64_t i = 41; i < 61; i++)       // 1st t
+      //      for(Long64_t i = 44; i < 61; i++)       // 1st t  updated one
+      // for(Long64_t i = 61; i < 70; i++)           // 2nd t
+      //      for(Long64_t i = 70; i < 81; i++)     // 3rd t
+      //     for(Long64_t i = 81; i < 93; i++)     // 4th t
+      // for(Long64_t i = 93; i < 107; i++)           // 5th t
+      //      for(Long64_t i = 107; i < 126; i++)           // 6th t
+      //      for(Long64_t i = 126; i < 153; i++)           // 7th t
+      // for(Long64_t i = 153; i < 247; i++)           // 8th t
+      for(Long64_t i = 41; i < 45; i++)           // 8th t
+	
+	{
+	  Events1 += htheC->GetBinContent(i);
+	  Events2 += htheR1->GetBinContent(i);
+	  Events3 += htheL1->GetBinContent(i);
+	  Events4 += htheL2->GetBinContent(i);
+	  Events5 += htmeC->GetBinContent(i);
+	  Events6 += htmeR1->GetBinContent(i);
+	  Events7 += htmeR2->GetBinContent(i);
+	  Events8 += htmeL1->GetBinContent(i);
+	  Events9 += htmeL2->GetBinContent(i);
+	  Events10 += htC->GetBinContent(i);
+	  Events11 += htL1->GetBinContent(i);
+	  Events12 += htL2->GetBinContent(i);
+	}   
+      
+      cout<< "  "<<Events1<<endl;    
+      cout<< "  "<<Events2<<endl;    
+      cout<< "  "<<Events3<<endl;    
+      cout<< "  "<<Events4<<endl;    
+      cout<< "  "<<Events5<<endl;    
+      cout<< "  "<<Events6<<endl;    
+      cout<< "  "<<Events7<<endl;    
+      cout<< "  "<<Events8<<endl;    
+      cout<< "  "<<Events9<<endl;    
+      cout<< "  "<<Events10<<endl;    
+      cout<< "  "<<Events11<<endl;    
+      cout<< "  "<<Events12<<endl;    
+    }
+    
+    cout<<" Total Events: " <<Events1 + Events2 +Events3 +Events4 +Events5 +Events6 +Events7 +Events8 +Events9 +Events10 +Events11 +Events12 <<endl;
+  
+
+    //  TLine *ltlow  = new TLine(0.005, -80.0, 0.005, 1800);
+    //TLine *lthigh = new TLine(0.08, -80.0, 0.08, 1800.0);
+  // ltlow->SetLineColor(kBlack);
+  //lthigh->SetLineColor(kBlack);
+  //  ltlow->Draw("same"); 
+  //lthigh->Draw("same");
+
+    Double_t Ymin = -92.0;
+    Double_t Ymax = 1790.0;
+
+  Double_t fstedge = ((TAxis*)htheC->GetXaxis())->GetBinCenter(44);
+  cout<<" fstedge "<<fstedge<<endl;
+  TLine *fstedgel = new TLine(fstedge, Ymin, fstedge, Ymax);
+  fstedgel->SetLineColor(kBlack);
+  fstedgel->Draw("same");
+
+  Double_t lastedge = ((TAxis*)htheC->GetXaxis())->GetBinCenter(246);
+  cout<<" lastedge "<<lastedge<<endl;
+  TLine *lastedgel = new TLine(lastedge, Ymin, lastedge, Ymax);
+  lastedgel->SetLineColor(kBlack);
+  lastedgel->Draw("same");
+
+  Double_t bin_center1 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(60);
+  cout<<" 1 "<<bin_center1<<endl;
+  TLine *lt1  = new TLine(bin_center1, Ymin, bin_center1, Ymax);
+  lt1->SetLineColor(kBlack);
+  lt1->Draw("same");
+
+  Double_t bin_center2 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(69);
+  cout<<"2 "<<bin_center2<<endl;
+  TLine *lt2  = new TLine(bin_center2, Ymin, bin_center2, Ymax);
+  lt2->SetLineColor(kBlack);
+  lt2->Draw("same");
+
+  Double_t bin_center3 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(80);
+  cout<<"3 "<<bin_center3<<endl;
+  TLine *lt3  = new TLine(bin_center3, Ymin, bin_center3, Ymax);
+  lt3->SetLineColor(kBlack);
+  lt3->Draw("same");
+
+  Double_t bin_center4 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(92);
+  cout<<"4 "<<bin_center4<<endl;
+  TLine *lt4  = new TLine(bin_center4, Ymin, bin_center4, Ymax);
+  lt4->SetLineColor(kBlack);
+  lt4->Draw("same");
+
+  Double_t bin_center5 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(106);
+  cout<<"5 "<<bin_center5<<endl;
+  TLine *lt5  = new TLine(bin_center5, Ymin, bin_center5, Ymax);
+  lt5->SetLineColor(kBlack);
+  lt5->Draw("same");
+
+  Double_t bin_center6 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(125);
+  cout<<"6 "<<bin_center6<<endl;
+  TLine *lt6  = new TLine(bin_center6, Ymin, bin_center6, Ymax);
+  lt6->SetLineColor(kBlack);
+  lt6->Draw("same");
+
+  Double_t bin_center7 = ((TAxis*)htheC->GetXaxis())->GetBinCenter(152);
+  cout<<"7 "<<bin_center7<<endl;
+  TLine *lt7  = new TLine(bin_center7, Ymin, bin_center7, Ymax);
+  lt7->SetLineColor(kBlack);
+  lt7->Draw("same");
+  
   auto legt = new TLegend(0.7,0.7,0.30,0.9); // 0.1 0.7
   legt->SetHeader("All epsilon at Q2 = 0.38 GeV2","C");
   legt->AddEntry(htheC,"High epsilon (4)","l");
@@ -1487,14 +1612,5 @@ void t_plots()
   legt->AddEntry(htC,"Low epsilon (3)","l");
   legt->Draw("same");
 
-  TLine *ltlow  = new TLine(0.005, -80.0, 0.005, 1800);
-  TLine *lthigh = new TLine(0.08, -80.0, 0.08, 1800.0);
-  ltlow->SetLineColor(kBlack);
-  lthigh->SetLineColor(kBlack);
-  ltlow->Draw("same"); 
-  lthigh->Draw("same");
-
-
-
-  c13->Print(outputpdf + ')');
+ c13->Print(outputpdf + ')');
 }
