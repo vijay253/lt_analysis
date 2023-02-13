@@ -398,7 +398,7 @@ c      stop
 
 
 c               write(*,'(4f8.5,2i3)') aW(it,lh,ip),eW(it,lh,ip),
-c               aQ2(it,lh,ip),eQ2(it,lh,ip),it,lh
+cx               aQ2(it,lh,ip),eQ2(it,lh,ip),it,lh
             end do
          end do
       end do

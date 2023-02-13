@@ -10,8 +10,8 @@ c      character*2 prv_it
 c      common prv_it
 
 c      integer q2_bin
-c      integer t_bin, phi_bin
-c      common t_bin, phi_bin
+c      integer u_bin, phi_bin
+c      common u_bin, phi_bin
       
 c     Get number of the previous iteration.
       
@@ -28,20 +28,12 @@ c     Calculate unseparated cross-sections. Now settings are for the piplus data
 
 c      stop
 
-!     call xsect(npol,Q2,eps)
-      call xsect(+1,5.5,0.1838)
-      call xsect(+1,5.5,0.5291)
-      call xsect(+1,4.4,0.4805)
-      call xsect(+1,4.4,0.7148)
-      call xsect(+1,3.3,0.3935)
-      call xsect(+1,3.3,0.6668)
-      call xsect(+1,3.3,0.5736)
-      call xsect(+1,3.3,0.8791)
-      call xsect(+1,2.115,0.2477)
-      call xsect(+1,2.115,0.7864)
-      call xsect(+1,0.5,0.4515)
-      call xsect(+1,0.5,0.6979)
-      
+      call xsect(+1,1.60,0.32)
+      call xsect(+1,1.60,0.59)
+
+c      call xsect(+1,2.45,0.27)
+c      call xsect(+1,2.45,0.55)
+
       stop
       end
 
@@ -71,7 +63,7 @@ c      parameter (nt=2,nphi=10)
       real r,dr,w,dw,q2,dq2,tt,dtt,th_pos,th_cm
       real tm,tmn,tmx
       real um
-      real eps_mod,th_mod,x_mod,um_min
+      real eps_mod,th_mod,x_mod
       real x_real,dx_real
 
       integer ipol
@@ -79,16 +71,20 @@ c      parameter (nt=2,nphi=10)
 
       real phi
 
-      real, Dimension(10) :: t_bin_boundary
+      real, Dimension(4) :: u_bin_boundary
 
       real q2_bin
 
-      integer t_bin, phi_bin
-c      common  t_bin, phi_bin
+      integer u_bin, phi_bin
+c      common  u_bin, phi_bin
 
       character*80:: line
 
       integer j
+      real*8 pi
+
+      parameter (pi=3.14159265) 
+
 
 
       include './kin_xyz.inc'
@@ -103,10 +99,10 @@ c      common  t_bin, phi_bin
 c   /*--------------------------------------------------*/
 c   Read the u and phi bins 
 
-      open (unit = 22, file = "./t_bin_interval", action='read')
-      read (22,*) q2_bin, t_bin, phi_bin
+      open (unit = 22, file = "../u_bin_interval", action='read')
+      read (22,*) q2_bin, u_bin, phi_bin
 
-      nt = t_bin
+      nt = u_bin
       nphi = phi_bin 
 
 
@@ -121,39 +117,39 @@ c      read (line, end=20)
 
 c      print*,  trim(line)
 
-c      read(line, *) t_bin_boundary(0), t_bin_boundary(1), t_bin_boundary(2)
+c      read(line, *) u_bin_boundary(0), u_bin_boundary(1), u_bin_boundary(2)
 
-c      read(line, *) (t_bin_boundary(j), j = 1, 3)
+c      read(line, *) (u_bin_boundary(j), j = 1, 3)
 
-c      print*, t_bin_boundary(1)
+c      print*, u_bin_boundary(1)
 c       read (22,*) 
-c       read (22,*) q2_bin, t_bin, phi_bin
+c       read (22,*) q2_bin, u_bin, phi_bin
 c       read (22,*) 
 c 
-c       print*,  t_bin, phi_bin
+c       print*,  u_bin, phi_bin
 
 c      do j = 1, 3
-c         print*, t_bin_boundary(j)
+c         print*, u_bin_boundary(j)
 c      end do
 
 
       if(q2_set.eq.1.6) then
 
          read (22, '(A)') line  
-         read(line, *) (t_bin_boundary(j), j = 1, t_bin+1)
+         read(line, *) (u_bin_boundary(j), j = 1, u_bin + 1)
 
-c        t_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
-c        t_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
+c        u_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
+c        u_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
  
       elseif(q2_set.eq.2.45) then
  
-c        t_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
-c        t_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
+c        u_bin_boundary = (/ 0.0, 0.212, 0.33, 0.60/)
+c        u_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
  
          read (22,*) 
          read (22,*) 
          read (22, '(A)') line  
-         read(line, *) (t_bin_boundary(j), j = 1,  t_bin+1)
+         read(line, *) (u_bin_boundary(j), j = 1, u_bin + 1)
 
       endif
 
@@ -171,7 +167,7 @@ c      stop
       tmn=0.
       tmx=0.
       kset=0
-      open(55,file='./root_ana/list.settings')
+      open(55,file='./list.settings.omega')
       do while(ipol.ne.npol_set.or.q2.ne.q2_set.or.eps.ne.eps_set)
          read(55,*) ipol,q2,eps,th_pq,tmn,tmx,nbin,kset
 c         write(6,2)ipol,q2,eps,th_pq,tmn,tmx,nbin,kset
@@ -226,19 +222,18 @@ c      pause
       print*, "Check for the reading file "
       print*, ""
 
-      nbin = t_bin
-
+      nbin = u_bin
 
       do it=1,nbin
 
 c         tm=tmn+(it-0.5)*(tmx-tmn)/nbin
 
 
-         um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
+         um = (u_bin_boundary(it) + u_bin_boundary(it+1)) / 2
 
-c         print *, "11112222  " , nbin, t_bin_boundary(1), t_bin_boundary(2), t_bin_boundary(3), um 
+         print *, "11112222  " , nbin, u_bin_boundary(1), u_bin_boundary(2), u_bin_boundary(3), um 
 
-c         print *, nbin, t_bin_boundary(it), t_bin_boundary(it+1)  
+c         print *, nbin, u_bin_boundary(it+2), u_bin_boundary(nbin+1),  
 
 c         stop
 
@@ -268,31 +263,12 @@ c        stop
 
          do ip=1,nphi
 
-c            phi=(ip-0.5)*2.*3.14159/nphi + 10 * 3.14159 / 180
-c            phi=(ip-0.5)*2.*3.14159/nphi + 25.7 * 3.14159 / 180
             phi=(ip-0.5)*2.*3.14159/nphi
-
-
-            if (phi .le. 0.0) then
-                
-             phi= phi + 2 * 3.14159   
-                
-            else if (phi .gt. 2 * 3.14159 ) then
-
-             phi= phi - 2 * 3.14159   
-
-c            else if (phi .eq. 360) then
-c             phi = 0
-
-            end if
-
-            
-
   
 c            phi=(ip-1)*2.*3.14159/nphi
             read(51,*) r,dr
 
-c            print *, "ratio check: ", r, dr
+            print *, "ratio checkaaaaaaa: ", r, dr
 
 
 c            stop
@@ -314,7 +290,7 @@ c            call xmodel_ghm(npol_set,Eb,q2_set,w,q2,um,tm,phi,
 c     *           eps_mod,th_mod,x_mod)
 
             call xmodel_ghm_two_model(npol_set,Eb,q2_set,w,q2,um,tm,phi,
-     *           eps_mod,th_mod,x_mod,um_min)
+     *           eps_mod,th_mod,x_mod)
 
 
 c           stop
@@ -373,11 +349,8 @@ c /*--------------------------------------------------*/
 
 c ratio is data/simc - see GH logbook, p.55
 
-               x_real=x_mod*r
-               dx_real=x_mod*dr/r
-
-
-
+             x_real=x_mod*r
+             dx_real=x_mod*dr/r
 
              if (x_real.eq.0.0) then
                 dx_real = -1000
@@ -418,8 +391,8 @@ c   This is where data output to file happens
             print*, "kkkkkk  ", x_mod, eps_mod, th_mod 
 
             write(61,40) x_real,dx_real,x_mod,eps_mod,
-     *           th_mod*180./3.14159,phi*180./3.14159,tm,um,um_min,w,q2
- 40         format(3G15.5,f8.5,2f7.2,5f8.5)
+     *           th_mod*180./pi,phi*180./pi,tm,um,w,q2
+ 40         format(3G15.5,f8.5,2f7.2,4f8.5)
 
          end do                 !phi
 
@@ -586,8 +559,8 @@ c      sig = sig/2./pi      !dsig/dtdphicm in microbarns/GeV^2/rad
 
 c      if (phi.lt.0.3) then
          write(6,102) eps_mod,tm,sigL,sigT,sigTT,sigLT, sig
- 102     format('xmodel: eps=',f5.3,' t=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
-     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6)
+ 102     format( ('xmodel: eps=',f5.3,' t=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
+     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6) )
 c     endif
 
       end
@@ -753,8 +726,8 @@ c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
 c      if (phi.lt.0.3) then
          write(6,102) eps,up,sigL,sigT,sigTT,sigLT, sig
- 102     format('xmodel: eps=',f5.3,' u=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
-     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6)
+ 102     format( ('xmodel: eps=',f5.3,' u=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
+     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6) )
 c     endif
 
       end
@@ -765,13 +738,13 @@ c /*--------------------------------------------------*/
 c /*--------------------------------------------------*/
 
       subroutine xmodel_ghm_two_model(npol_set,Eb,q2_set,w_gev,q2_gev,u_gev,tm,phicm,
-     *     eps,th_mod,x_mod,um_min)
+     *     eps,th_mod,x_mod)
 
-      implicit none
+c      implicit none
 
       integer npol_set
       real Eb, q2_set, w, q2, phi, th_mod
-      real thetacm, x_mod, u_gev, Mp, m_p, up, u_min, um_min
+      real thetacm, x_mod, u_gev, Mp, m_p
       real q2_gev,w_gev,eps, tm, phicm
 
       real*8 sig
@@ -783,7 +756,7 @@ c      real*8 q2_gev,w_gev,eps,tp
       real*8 l0, l1, l2, l3
       real*8 lt0,lt1,lt2,lt3
       real*8 tt0,tt1,tt2,tt3
-      real*8 sigt,sigl,siglt,sigtt,wfactor
+      real*8 sigt,sigl,siglt,sigtt,wfactor,up
 
       parameter (Mp=938.27231) ! Proton Mass in MeV
       parameter (m_p=Mp/1000)  ! Proton Mass in GeV
@@ -791,14 +764,8 @@ c      real*8 q2_gev,w_gev,eps,tp
       
       up = abs(u_gev)      ! just to make sure it's positive
 
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, u_min, thetacm, eps)
-      
-      um_min = u_min
+      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm,eps)
 
-      if (up.lt. u_min) then
-         u_gev = u_min
-         up = abs(u_gev)
-      endif
 
       print*,"w_gev   =   ",  w_gev 
       print*,"q2_gev  =   ",  q2_gev
@@ -813,22 +780,22 @@ cc/*--------------------------------------------------*/
       if (q2_set.eq.1.6) then
 
 c        print*, "Q2=1.60 parameterization is used" 
-        t0  =            7.73587                   
-        t1  =            -7.9672                    
-        t2  =             0.0000                    
-        t3  =             0.0000                    
-        l0  =            13.2553                             
-        l1  =           -47.2633                               
-        l2  =             0.0000                                 
-        l3  =             0.0000                                     
-        lt0 =            -0.3439                     
-        lt1 =             5.9217                     
-        lt2 =             0.0000                    
-        lt3 =             0.0000                    
-        tt0 =             8.1221                    
-        tt1 =          -139.8422                    
-        tt2 =             0.0000                    
-        tt3 =             0.0000                   
+        t0  =    -14.33725            
+        t1  =      -0.1419             
+        t2  =       0.2082             
+        t3  =       0.0000             
+        l0  =      11.5206             
+        l1  =      -0.1996             
+        l2  =       0.0749             
+        l3  =       0.0000                   
+        lt0 =      -0.0209                    
+        lt1 =       0.3192                    
+        lt2 =       0.0000                    
+        lt3 =       0.0000                    
+        tt0 =       0.0864                    
+        tt1 =      -1.7213                    
+        tt2 =       0.0000                    
+        tt3 =       0.0000                    
               
               
               
@@ -837,22 +804,22 @@ c        print*, "Q2=1.60 parameterization is used"
 
 c        print*, "Q2=2.45 parameterization is used" 
 
-        t0  =          6.16527  
-        t1  =          -4.2124  
-        t2  =           0.0000  
-        t3  =           0.0000  
-        l0  =          12.2546       
-        l1  =         -29.8629       
-        l2  =           0.0000       
-        l3  =           0.0000       
-        lt0 =          -0.3620  
-        lt1 =           3.1028  
-        lt2 =           0.0000  
-        lt3 =           0.0000  
-        tt0 =          -7.4032  
-        tt1 =          63.4705  
-        tt2 =           0.0000  
-        tt3 =           0.0000  
+        t0  =      0.49938 
+        t1  =      -7.1474 
+        t2  =       0.0185 
+        t3  =       0.0000 
+        l0  =      -3.4009 
+        l1  =      -0.2585 
+        l2  =       0.0909 
+        l3  =       0.0000 
+        lt0 =      -0.0511 
+        lt1 =       0.3161 
+        lt2 =       0.0000 
+        lt3 =       0.0000 
+        tt0 =      -0.0803 
+        tt1 =       0.8514 
+        tt2 =       0.0000 
+        tt3 =       0.0000 
 
       else
           print*, "No parameterization is aviliable for Q2=", q2_set
@@ -882,13 +849,29 @@ c     // Sigma T
 c      sigt = t1 * exp( -t2 * up) + t3;
 
 c      sigt = t0 + t1 * up + t2 * log(q2_gev) + t3 * up * log(q2_gev)
-
-
-       
-
-       sigt = t0 / sqrt(q2_gev) + t1 * up / sqrt(q2_gev) + t2 / sqrt(q2_gev) + t3 * up / sqrt(q2_gev)
-
 c      sigt = t0 
+
+
+      if (q2_set.eq.1.6) then
+
+          sigt = t0 * (up + t1)*(up + t1) + t2 ;
+
+      else if (q2_set.eq.2.45) then
+
+          sigt = t0 * exp( t1 * up ) + t2;
+
+      else
+          print*, "No parameterization is aviliable for Q2=", q2_set
+          stop
+      endif
+
+
+
+
+
+
+
+
        
 c     /*--------------------------------------------------*/
 c     // Sigma L
@@ -898,16 +881,18 @@ c      sigl= l1 * exp( l2 * up ) + l3 / up
 c      sigl = l1 * (up-l2)**2 + l3
 
 c      sigl = l0 + l1 * up + l2 * log(q2_gev) + l3 * up * log(q2_gev)
-      sigl = l0/(q2_gev*q2_gev) + l1 * up/(q2_gev*q2_gev) + l2 / q2_gev + l3 * up / q2_gev
+
+      sigl = l0 * (up + l1)*(up + l1) + l2 
 
 
 c     /*--------------------------------------------------*/
 c     // Sigma LT  
-      siglt = (lt0/q2_gev + lt1 * up/q2_gev + lt2 / q2_gev + lt3 * up / q2_gev) * sin(thetacm)
+      siglt=(lt0+lt1*up+lt2*log(q2_gev)+lt3*up*log(q2_gev))*sin(thetacm)
 
 c     /*--------------------------------------------------*/
 c     // Sigma TT  
-      sigtt = (tt0/q2_gev + tt1 * up/q2_gev + tt2 / q2_gev + tt3 * up / q2_gev) * sin(thetacm) * sin(thetacm)
+      sigtt=(tt0+tt1*up+tt2*log(q2_gev)+tt3*up*log(q2_gev))*sin(thetacm)*sin(thetacm)
+
 c      sigtt = (tt1 * exp( tt2 * up ) + tt3 / up) * sin(thetacm)  * sin(thetacm)
 
 c      print*, "theta check ", thetacm, sin(thetacm)
@@ -915,7 +900,7 @@ c      stop
 
 * Since I have nothing better to go on, for now I assume W scales as
 * 1/(W^2-mp^2)^2.
-      wfactor= 1 / ((w_gev**2-m_p**2)**2)
+      wfactor=((2.47**2-m_p**2)**2)/((w_gev**2-m_p**2)**2)
 
       sigl = sigl*wfactor
       sigt = sigt*wfactor
@@ -925,8 +910,8 @@ c      stop
 c      print*, eps, phicm
 c     stop
 
-      sig = sigt + eps*sigl + sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt 
-     * + eps*cos(2.*phicm)*sigtt
+      sig = sigt + eps*sigl +eps*cos(2.*phicm)*sigtt
+     *     + sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt
 
 c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
@@ -935,8 +920,6 @@ c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
       x_mod = sig     !2pi * dsig/dtdphicm in microbarns/GeV^2
 
       th_mod = thetacm
-
-
 
 c      if (phi.lt.0.3) then
         
@@ -947,23 +930,11 @@ c     1        ' sigLT=',f10.8,' sigTT=',f10.8,' x_mod=',f15.14,
 c     1   ' wfactor=', f10.6, ' mp=',f5.4, ' w_gev=',f6.4)
 c
 
-      print*, t0, t1 , q2_gev, up, w_gev, wfactor, eps, sigT, sigL, sig 
-c      stop
 
+      write(6,102) eps,up,sigT,sigL,sigLT,sigTT,sig
+ 102     format( ('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.5,' sigL=',f7.5,
+     1        ' sigLT=',f10.8,' sigTT=',f10.8,' x_mod=',f15.14) )
 
-      print*, "asdasdasdas ", u_min 
-
-
-      write(6,102) eps,up,sigT,sigL,sigLT,sigTT,sig,u_min
- 102     format('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.5,' sigL=',f7.5,
-     1        ' sigLT=',f10.8,' sigTT=',f10.8,' x_mod=',f15.14, 
-     1        ' umin=', f10.8)
-
-
-
-
-
-      
 
 
 
@@ -1006,7 +977,7 @@ c      real*8 q2_gev,w_gev,eps,tp
       
       up = abs(u_gev)      ! just to make sure it's positive
 
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm, eps)
+      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm,eps)
 
 
 c      a =  0.18881E+00
@@ -1139,8 +1110,8 @@ c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
 c      if (phi.lt.0.3) then
          write(6,102) eps,up,sigT,sigL,sigLT,sigTT, sig
- 102     format('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.2,' sigL=',f6.2,
-     1        ' sigLT=',f5.2,' sigTT=',f5.2,' x_mod=',f10.6)
+ 102     format( ('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.2,' sigL=',f6.2,
+     1        ' sigLT=',f5.2,' sigTT=',f5.2,' x_mod=',f10.6) )
 c     endif
 
       end
@@ -1170,12 +1141,11 @@ c      real*8 q2_gev,w_gev,eps,tp
       real*8 m_pi0sq
       real*8 pi
 
-      pi = 3.1415926
-
+      parameter (pi=3.14159265) 
       
       up = abs(u_gev)      ! just to make sure it's positive
 
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm, eps)
+      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm,eps)
 
 c      a =  0.82472E-01
 c      b =  0.71359E+01
@@ -1338,8 +1308,8 @@ c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
 c      if (phi.lt.0.3) then
          write(6,102) eps,up,sigT,sigL,sigLT,sigTT, sig
- 102     format('xmodel: eps=',f5.4,' u=',f5.4,' sigT=',f9.6,' sigL=',f9.6,
-     1        ' sigLT=',f9.6,' sigTT=',f9.6,' x_mod=',f9.6)
+ 102     format( ('xmodel: eps=',f5.4,' u=',f5.4,' sigT=',f9.6,' sigL=',f9.6,
+     1        ' sigLT=',f9.6,' sigTT=',f9.6,' x_mod=',f9.6) )
 c     endif
 
         
