@@ -56,7 +56,7 @@ void t_plots()
 
   // Low epsilon analysis
   cout<<" Analysing low epsilon data..." <<endl;
- 
+  //Data  
   TString TInDATAFilenameC = "Analysed_Data_Q0p375W2p2_lowe_Center.root";
   TString TInDATAFilenameL1 = "Analysed_Data_Q0p375W2p2_lowe_Left1.root";
   TString TInDATAFilenameL2 = "Analysed_Data_Q0p375W2p2_lowe_Left2.root";
@@ -64,6 +64,12 @@ void t_plots()
   TString rootFile_DATAC  = ROOTfilePath+"/"+TInDATAFilenameC;
   TString rootFile_DATAL1 = ROOTfilePath+"/"+TInDATAFilenameL1;
   TString rootFile_DATAL2 = ROOTfilePath+"/"+TInDATAFilenameL2;
+  //SIMC
+
+  TString TInSIMCFilenameC = "Pion_2p7_Q1_center.root";
+
+  TString rootFile_SIMCC  = ROOTfilePath+"/"+TInSIMCFilenameC;
+
 
   if (gSystem->AccessPathName(rootFile_DATAC) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_DATAC <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
@@ -77,21 +83,35 @@ void t_plots()
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_DATAL2 <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     exit;
   }
-  
 
+  if (gSystem->AccessPathName(rootFile_SIMCC) == kTRUE){
+    cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_SIMCC <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
+    exit;
+  }
+
+
+  //Data
   TFile *InFile_DATAC = new TFile(rootFile_DATAC, "READ");
   TFile *InFile_DATAL1 = new TFile(rootFile_DATAL1, "READ");
   TFile *InFile_DATAL2 = new TFile(rootFile_DATAL2, "READ");
+  //SIMC
+
+  TFile *InFile_SIMCC = new TFile(rootFile_SIMCC, "READ");
 
   //Output file names 
   TString foutname   = OutPath+"/" + "Analysed_Qp375W2p2" + ".root";
   TString fouttxt    = OutPath+"/" + "Analysed_Qp375W2p2" + ".txt";
   TString outputpdf  = OutPath+"/" + "Analysed_Qp375W2p2" + ".pdf";
 
+  //Data
   TTree* TBRANCHC  = (TTree*)InFile_DATAC->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHC  = (Long64_t)TBRANCHC->GetEntries();  
   TTree* TBRANCHL1 = (TTree*)InFile_DATAL1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHL1  = (Long64_t)TBRANCHL1->GetEntries();  
   TTree* TBRANCHL2 = (TTree*)InFile_DATAL2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHL2  = (Long64_t)TBRANCHL2->GetEntries();  
-  
+  //SIMC  
+  TTree* TSIMCC  = (TTree*)InFile_SIMCC->Get("h10");Long64_t nEntries_TSIMCC  = (Long64_t)TSIMCC->GetEntries();  
+
+  //DATA VARIABLES
+
   Double_t WC;TBRANCHC->SetBranchAddress("W", &WC);
   Double_t Q2C;TBRANCHC->SetBranchAddress("Q2", &Q2C);
  
@@ -117,11 +137,45 @@ void t_plots()
   Double_t tcoinL1;TBRANCHL1->SetBranchAddress("CTime_ROC1", &tcoinL1);
   Double_t tcoinL2;TBRANCHL2->SetBranchAddress("CTime_ROC1", &tcoinL2);
 
-  TH2D *hQ2WC  = new TH2D("hQ2WC","W; Q2; W", 300, 0.2, 0.6, 300, 2.1, 2.3);      
-  TH2D *hQ2WC1  = new TH2D("hQ2WC1","W; Q2; W", 300, 0.2, 0.6, 300, 2.1, 2.3);      
+  //SIMC VARIABLES
 
-  TH2D *hQ2WCR  = new TH2D("hQ2WCR","W; Q2; W", 300, 0.2, 0.6, 300, 2.1, 2.3);      
-  TH2D *hQ2WC1R  = new TH2D("hQ2WC1R","W; Q2; W", 300, 0.2, 0.6, 300, 2.1, 2.3);      
+  //SHMS SIMC variables                                                                                                                                                                                
+  Float_t ssdelta;TSIMCC->SetBranchAddress("ssdelta", &ssdelta);
+  Float_t ssxptar;TSIMCC->SetBranchAddress("ssxptar", &ssxptar);
+  Float_t ssyptar;TSIMCC->SetBranchAddress("ssyptar", &ssyptar);
+  Float_t ssxfp;TSIMCC->SetBranchAddress("ssxfp", &ssxfp);
+  Float_t ssyfp;TSIMCC->SetBranchAddress("ssyfp", &ssyfp);
+  Float_t ssxpfp;TSIMCC->SetBranchAddress("ssxpfp", &ssxpfp);
+  Float_t ssypfp;TSIMCC->SetBranchAddress("ssypfp", &ssypfp);
+
+  //HMS SIMC variables                                                                                                                                                                                
+  Float_t hsdelta;TSIMCC->SetBranchAddress("hsdelta", &hsdelta);
+  Float_t hsxptar;TSIMCC->SetBranchAddress("hsxptar", &hsxptar);
+  Float_t hsyptar;TSIMCC->SetBranchAddress("hsyptar", &hsyptar);
+  Float_t hsxfp;TSIMCC->SetBranchAddress("hsxfp", &hsxfp);
+  Float_t hsyfp;TSIMCC->SetBranchAddress("hsyfp", &hsyfp);
+  Float_t hsxpfp;TSIMCC->SetBranchAddress("hsxpfp", &hsxpfp);
+  Float_t hsypfp;TSIMCC->SetBranchAddress("hsypfp", &hsypfp);
+
+  Float_t q;TSIMCC->SetBranchAddress("q", &q);
+  Float_t Q2_simc;TSIMCC->SetBranchAddress("Q2", &Q2_simc);
+  Float_t W_simc;TSIMCC->SetBranchAddress("W", &W_simc);
+  Float_t t_simc;TSIMCC->SetBranchAddress("t", &t_simc);
+  Float_t ti_simc;TSIMCC->SetBranchAddress("ti", &ti_simc);
+  Float_t epsilon_simc;TSIMCC->SetBranchAddress("epsilon", &epsilon_simc);
+  Float_t missmass;TSIMCC->SetBranchAddress("missmass", &missmass);
+  Float_t Em;TSIMCC->SetBranchAddress("Em", &Em);
+  Float_t Pm;TSIMCC->SetBranchAddress("Pm", &Pm);
+  Float_t Weight;TSIMCC->SetBranchAddress("Weight", &Weight);
+  Float_t phipq;TSIMCC->SetBranchAddress("phipq", &phipq);
+
+  //DATA HISTOGRAMS
+
+  TH2D *hQ2WC  = new TH2D("hQ2WC","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
+  TH2D *hQ2WC1  = new TH2D("hQ2WC1","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
+
+  TH2D *hQ2WCR  = new TH2D("hQ2WCR","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
+  TH2D *hQ2WC1R  = new TH2D("hQ2WC1R","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
 
   TH1D *htC  = new TH1D("htC","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htL1  = new TH1D("htL1","MandelT; MandelT;", 300, -0.01, 0.1);      
@@ -147,11 +201,18 @@ void t_plots()
   TH1D *htcoinL1  = new TH1D("htcoinL1","CTime_ROC1; CTime_ROC1;", 300, -20.0, 20.0);      
   TH1D *htcoinL2  = new TH1D("htcoinL2","CTime_ROC1; CTime_ROC1;", 300, -20.0, 20.0);      
 
+  //SIMC HISTOGRAMS
+
+  TH1D *H_t_S  = new TH1D("H_t_S","t; t;", 300, -0.01, 0.1); 
+  TH1D *H_ti_S  = new TH1D("H_ti_S","ti; ti;", 300, -0.01, 0.1); 
+  TH1D *H_t_RE  = new TH1D("H_t_RE"," t Resolution (t-ti); t Resolution;", 300, -0.03, 0.03); 
+  TH2D *H_t_RE_t = new TH2D("H_t_RE_t","t Resolution vs t; t Resolution; t ", 300, -0.02, 0.03, 300, 0.0, 0.04);      
+
   TCutG *Diamond = new TCutG("Diamond",5);
   Diamond->SetVarX("Q2");
   Diamond->SetVarY("W");
-  Diamond->SetPoint(0,0.363783,2.18318);Diamond->SetPoint(1,0.311469,2.22694); 
-  Diamond->SetPoint(2,0.37837,2.21236); Diamond->SetPoint(3,0.452314,2.16293);
+  Diamond->SetPoint(0,0.363783,2.18318);Diamond->SetPoint(1,0.311069,2.22644); //Diamond->SetPoint(1,0.311469,2.22694); Diamond->SetPoint(2,0.37837,2.21236); 
+  Diamond->SetPoint(2,0.37737,2.21136); Diamond->SetPoint(3,0.452314,2.16293);
   Diamond->SetPoint(4,0.363783,2.18318); 
 
   // ULong64_t Q2C1[60000000];
@@ -169,6 +230,8 @@ void t_plots()
   Double_t qL1[nEntries_TBRANCHL1];
   Double_t wL1[nEntries_TBRANCHL1]; 
   
+
+  //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
 
     {
@@ -209,6 +272,23 @@ void t_plots()
 	  hmmCR->Fill(mmC);
 	}	
     }  
+
+  //SIMC CENTER
+
+  for(Long64_t i = 0; i < nEntries_TSIMCC; i++)
+
+    {
+      TSIMCC->GetEntry(i);
+      Double_t fact = 10136000.0/20000.0;
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96)
+	
+	{
+	  H_t_RE->Fill((t_simc-ti_simc), fact*Weight);
+	  H_t_RE_t->Fill((t_simc-ti_simc), t_simc, fact*Weight);
+	}    
+    }  
+  
 
   for(Long64_t i = 0; i < nEntries_TBRANCHL1; i++)
   
@@ -399,7 +479,7 @@ void t_plots()
 
   TCanvas *c6 = new TCanvas("c6", " c6");
 
-  c6->Divide(2);
+  c6->Divide(2,0,0.05);
   c6->cd(1);
   Diamond->SetLineColor(kRed);
   // hQ2WC->Add(hQ2WCR, -1);
@@ -410,8 +490,32 @@ void t_plots()
   // hQ2WC1->SetStats(0);
   Diamond->SetLineColor(kRed);
   hQ2WC1->Draw("COL");
-  Diamond->Draw("same");   
+  Diamond->Draw("same");
+  //c6->SetLeftMargin(0.15);   
   c6->Print(outputpdf);
+
+  TCanvas *cRE = new TCanvas("cRE", " cRE");
+
+  TF1 *Gauss = new TF1("Gauss","gaus(0)",-0.004,0.006);
+  Gauss->SetLineColor(kRed);
+  H_t_RE->Fit("Gauss", "RQ"); 
+  H_t_RE->SetStats(0);
+  H_t_RE->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE->Draw("Weight");
+
+  //  auto legRE = new TLegend(0.8,0.7,0.30,0.9); 
+  auto legRE = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE->SetHeader("Center setting at low #epsilon ","C");
+  legRE->SetTextSize(0.03);
+  legRE->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss->GetParameter(2)), "lep"); 
+  legRE->Draw("same");
+  cRE->Print(outputpdf);
+
+  TCanvas *cREt = new TCanvas("cREt", " cREt");
+
+  H_t_RE_t->SetStats(0);
+  H_t_RE_t->Draw("COL");  
+  cREt->Print(outputpdf);
 
   /**
      TCanvas *c7 = new TCanvas("c7", " c7");
@@ -558,11 +662,11 @@ void t_plots()
 
   // HISTOGRAMS
 
-  TH2D *hQ2WMEC  = new TH2D("hQ2WMERC","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
-  TH2D *hQ2WMEC1  = new TH2D("hQ2WMERC1","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WMEC  = new TH2D("hQ2WMERC","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WMEC1  = new TH2D("hQ2WMERC1","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
 
-  TH2D *hQ2WMECR  = new TH2D("hQ2WMECR","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
-  TH2D *hQ2WMEC1R  = new TH2D("hQ2WMEC1R","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WMECR  = new TH2D("hQ2WMECR","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WMEC1R  = new TH2D("hQ2WMEC1R","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
 
   TH1D *htmeR1  = new TH1D("htmeR1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeR2  = new TH1D("htmeR2","MandelT; MandelT;",   300, -0.01, 0.1);      
@@ -947,7 +1051,7 @@ void t_plots()
   c11me->Print(outputpdf);
 	    	    
   TCanvas *c12me = new TCanvas("c12me", " c12me");
-  c12me->Divide(2);
+  c12me->Divide(2, 0, 0.05);
   c12me->cd(1); 
   hQ2WMEC->Draw("COL");
   Diamond->SetLineColor(kRed);
@@ -1040,11 +1144,11 @@ void t_plots()
 
   // HISTOGRAMS
 
-  TH2D *hQ2WHEC  = new TH2D("hQ2WHERC","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
-  TH2D *hQ2WHEC1  = new TH2D("hQ2WHERC1","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WHEC  = new TH2D("hQ2WHERC","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WHEC1  = new TH2D("hQ2WHERC1","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
 
-  TH2D *hQ2WHECR  = new TH2D("hQ2WHECR","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
-  TH2D *hQ2WHEC1R  = new TH2D("hQ2WHEC1R","W; Q2; W", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WHECR  = new TH2D("hQ2WHECR","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+  TH2D *hQ2WHEC1R  = new TH2D("hQ2WHEC1R","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
 
   TH1D *htheR1  = new TH1D("htheR1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htheC   = new TH1D("htheC","MandelT; MandelT;",    300, -0.01, 0.1);      
@@ -1364,7 +1468,7 @@ void t_plots()
   c11->Print(outputpdf);
 	    	    
   TCanvas *c12 = new TCanvas("c12", " c12");
-  c12->Divide(2);
+  c12->Divide(2, 0, 0.05); 
   c12->cd(1); 
   hQ2WHEC->Draw("COL");
   Diamond->SetLineColor(kRed);
@@ -1506,8 +1610,8 @@ void t_plots()
       // for(Long64_t i = 93; i < 107; i++)           // 5th t
       //      for(Long64_t i = 107; i < 126; i++)           // 6th t
       //      for(Long64_t i = 126; i < 153; i++)           // 7th t
-      // for(Long64_t i = 153; i < 247; i++)           // 8th t
-      for(Long64_t i = 41; i < 45; i++)           // 8th t
+      for(Long64_t i = 153; i < 247; i++)           // 8th t
+	//for(Long64_t i = 41; i < 45; i++)           //test
 	
 	{
 	  Events1 += htheC->GetBinContent(i);
@@ -1549,7 +1653,7 @@ void t_plots()
   //lthigh->Draw("same");
 
     Double_t Ymin = -92.0;
-    Double_t Ymax = 1790.0;
+    Double_t Ymax = 1708.0;
 
   Double_t fstedge = ((TAxis*)htheC->GetXaxis())->GetBinCenter(44);
   cout<<" fstedge "<<fstedge<<endl;
