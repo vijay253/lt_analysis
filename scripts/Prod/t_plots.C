@@ -206,6 +206,14 @@ void t_plots()
   TH1D *H_t_S  = new TH1D("H_t_S","t; t;", 300, -0.01, 0.1); 
   TH1D *H_ti_S  = new TH1D("H_ti_S","ti; ti;", 300, -0.01, 0.1); 
   TH1D *H_t_RE  = new TH1D("H_t_RE"," t Resolution (t-ti); t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE1  = new TH1D("H_t_RE1"," t Resolution (t-ti) 1 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE2  = new TH1D("H_t_RE2"," t Resolution (t-ti) 2 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE3  = new TH1D("H_t_RE3"," t Resolution (t-ti) 3 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE4  = new TH1D("H_t_RE4"," t Resolution (t-ti) 4 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE5  = new TH1D("H_t_RE5"," t Resolution (t-ti) 5 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE6  = new TH1D("H_t_RE6"," t Resolution (t-ti) 6 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE7  = new TH1D("H_t_RE7"," t Resolution (t-ti) 7 bin; t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE8  = new TH1D("H_t_RE8"," t Resolution (t-ti) 8 bin; t Resolution;", 300, -0.03, 0.03); 
   TH2D *H_t_RE_t = new TH2D("H_t_RE_t","t Resolution vs t; t Resolution; t ", 300, -0.02, 0.03, 300, 0.0, 0.04);      
 
   TCutG *Diamond = new TCutG("Diamond",5);
@@ -287,9 +295,48 @@ void t_plots()
 	  H_t_RE->Fill((t_simc-ti_simc), fact*Weight);
 	  H_t_RE_t->Fill((t_simc-ti_simc), t_simc, fact*Weight);
 	}    
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.00595 && t_simc <= 0.0118167)
+	{
+	  H_t_RE1->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.0118167 && t_simc <= 0.0151167)
+	{
+	  H_t_RE2->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.0151167 && t_simc <= 0.01915)
+	{
+	  H_t_RE3->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.01915 && t_simc <= 0.02355)
+	{
+	  H_t_RE4->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.02355 && t_simc <= 0.0286833)
+	{
+	  H_t_RE5->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.0286833 && t_simc <= 0.03565)
+	{
+	  H_t_RE6->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.03565 && t_simc <= 0.04555)
+	{
+	  H_t_RE7->Fill((t_simc-ti_simc), fact*Weight);
+	}
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.96 && t_simc >= 0.04555 && t_simc <= 0.0800167)
+	{
+	  H_t_RE8->Fill((t_simc-ti_simc), fact*Weight);
+	}
     }  
   
-
   for(Long64_t i = 0; i < nEntries_TBRANCHL1; i++)
   
     {
@@ -516,6 +563,110 @@ void t_plots()
   H_t_RE_t->SetStats(0);
   H_t_RE_t->Draw("COL");  
   cREt->Print(outputpdf);
+
+  TCanvas *cRE1 = new TCanvas("cRE1", " cRE1");
+  TF1 *Gauss1 = new TF1("Gauss1","gaus(0)",-0.004,0.006);
+  Gauss1->SetLineColor(kRed);
+  H_t_RE1->Fit("Gauss1", "RQ"); 
+  H_t_RE1->SetStats(0);
+  H_t_RE1->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE1->Draw("Weight");
+  auto legRE1 = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE1->SetHeader("Center setting at low #epsilon ","C");
+  legRE1->SetTextSize(0.03);
+  legRE1->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss1->GetParameter(2)), "lep"); 
+  legRE1->Draw("same");
+
+  cRE1->Print(outputpdf);
+
+  TCanvas *cRE2 = new TCanvas("cRE2", " cRE2");
+  TF1 *Gauss2 = new TF1("Gauss2","gaus(0)",-0.004,0.006);
+  Gauss2->SetLineColor(kRed);
+  H_t_RE2->Fit("Gauss2", "RQ"); 
+  H_t_RE2->SetStats(0);
+  H_t_RE2->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE2->Draw("Weight");
+  auto legRE2 = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE2->SetHeader("Center setting at low #epsilon ","C");
+  legRE2->SetTextSize(0.03);
+  legRE2->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss2->GetParameter(2)), "lep"); 
+  legRE2->Draw("same");
+
+  cRE2->Print(outputpdf);
+
+  TCanvas *cRE3 = new TCanvas("cRE3", " cRE3");
+  TF1 *Gauss3 = new TF1("Gauss3","gaus(0)",-0.004,0.006);
+  Gauss3->SetLineColor(kRed);
+  H_t_RE3->Fit("Gauss3", "RQ"); 
+  H_t_RE3->SetStats(0);
+  H_t_RE3->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE3->Draw("Weight");
+  auto legRE3 = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE3->SetHeader("Center setting at low #epsilon ","C");
+  legRE3->SetTextSize(0.03);
+  legRE3->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss3->GetParameter(2)), "lep"); 
+  legRE3->Draw("same");
+
+  cRE3->Print(outputpdf);
+
+  TCanvas *cRE4 = new TCanvas("cRE4", " cRE4");
+  TF1 *Gauss4 = new TF1("Gauss4","gaus(0)",-0.004,0.006);
+  Gauss4->SetLineColor(kRed);
+  H_t_RE4->Fit("Gauss4", "RQ"); 
+  H_t_RE4->SetStats(0);
+  H_t_RE4->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE4->Draw("Weight");
+  auto legRE4 = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE4->SetHeader("Center setting at low #epsilon ","C");
+  legRE4->SetTextSize(0.03);
+  legRE4->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss4->GetParameter(2)), "lep"); 
+  legRE4->Draw("same");
+
+  cRE4->Print(outputpdf);
+
+  TCanvas *cRE5 = new TCanvas("cRE5", " cRE5");
+  TF1 *Gauss5 = new TF1("Gauss5","gaus(0)",-0.004,0.006);
+  Gauss5->SetLineColor(kRed);
+  H_t_RE5->Fit("Gauss5", "RQ"); 
+  H_t_RE5->SetStats(0);
+  H_t_RE5->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE5->Draw("Weight");
+  auto legRE5 = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE5->SetHeader("Center setting at low #epsilon ","C");
+  legRE5->SetTextSize(0.03);
+  legRE5->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss5->GetParameter(2)), "lep"); 
+  legRE5->Draw("same");
+
+  cRE5->Print(outputpdf);
+
+  TCanvas *cRE6 = new TCanvas("cRE6", " cRE6");
+  TF1 *Gauss6 = new TF1("Gauss6","gaus(0)",-0.004,0.006);
+  Gauss6->SetLineColor(kRed);
+  H_t_RE6->Fit("Gauss6", "RQ"); 
+  H_t_RE6->SetStats(0);
+  H_t_RE6->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE6->Draw("Weight");
+  auto legRE6 = new TLegend(0.1,0.7,0.40,0.9); 
+  legRE6->SetHeader("Center setting at low #epsilon ","C");
+  legRE6->SetTextSize(0.03);
+  legRE6->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss6->GetParameter(2)), "lep"); 
+  legRE6->Draw("same");
+
+  cRE6->Print(outputpdf);
+
+  TCanvas *cRE7 = new TCanvas("cRE7", " cRE7");
+
+  H_t_RE7->SetStats(0);
+  H_t_RE7->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE7->Draw("Weight");
+  cRE7->Print(outputpdf);
+
+  TCanvas *cRE8 = new TCanvas("cRE8", " cRE8");
+
+  H_t_RE8->SetStats(0);
+  H_t_RE8->GetYaxis()->SetTitle("Weighted Yield");  
+  H_t_RE8->Draw("Weight");
+  cRE8->Print(outputpdf);
 
   /**
      TCanvas *c7 = new TCanvas("c7", " c7");
