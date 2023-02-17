@@ -216,12 +216,12 @@ void t_plots()
   TH1D *H_t_RE8  = new TH1D("H_t_RE8"," t Resolution (t-ti) 8 bin; t Resolution;", 300, -0.03, 0.03); 
   TH2D *H_t_RE_t = new TH2D("H_t_RE_t","t Resolution vs t; t Resolution; t ", 300, -0.02, 0.03, 300, 0.0, 0.04);      
 
-  TCutG *Diamond = new TCutG("Diamond",5);
-  Diamond->SetVarX("Q2");
-  Diamond->SetVarY("W");
-  Diamond->SetPoint(0,0.363783,2.18318);Diamond->SetPoint(1,0.311069,2.22644); //Diamond->SetPoint(1,0.311469,2.22694); Diamond->SetPoint(2,0.37837,2.21236); 
-  Diamond->SetPoint(2,0.37737,2.21136); Diamond->SetPoint(3,0.452314,2.16293);
-  Diamond->SetPoint(4,0.363783,2.18318); 
+  TCutG *Dcut = new TCutG("Dcut",5);
+  Dcut->SetVarX("Q2");
+  Dcut->SetVarY("W");
+  Dcut->SetPoint(0,0.363783,2.18318);Dcut->SetPoint(1,0.311069,2.22644); //Diamond->SetPoint(1,0.311469,2.22694); Diamond->SetPoint(2,0.37837,2.21236); 
+  Dcut->SetPoint(2,0.37737,2.21136); Dcut->SetPoint(3,0.452314,2.16293);
+  Dcut->SetPoint(4,0.363783,2.18318); 
 
   // ULong64_t Q2C1[60000000];
   //ULong64_t WC1[600000000];
@@ -260,7 +260,7 @@ void t_plots()
 	htcoinC->Fill(tcoinC);
       }
       
-      Double_t Diamond_cut = (Diamond->IsInside(Q2C, WC));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2C, WC));  
       
       if(tcoinC>=-1.0 && tcoinC <= 1.0 && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
 	{
@@ -355,7 +355,7 @@ void t_plots()
 	htcoinL1->Fill(tcoinL1);
       }
 
-      Double_t Diamond_cut = (Diamond->IsInside(Q2L1, WL1));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2L1, WL1));  
       
       if(tcoinL1>=-1.0 && tcoinL1 <= 1.0 && mmL1>= 0.92 && mmL1 <=0.98 && Diamond_cut)
 	{
@@ -394,7 +394,7 @@ void t_plots()
 	htcoinL2->Fill(tcoinL2);
       }
 
-      Double_t Diamond_cut = (Diamond->IsInside(Q2L2, WL2));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2L2, WL2));  
       
       if(tcoinL2>=-1.0 && tcoinL2 <= 1.0 && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
@@ -528,16 +528,16 @@ void t_plots()
 
   c6->Divide(2,0,0.05);
   c6->cd(1);
-  Diamond->SetLineColor(kRed);
+  Dcut->SetLineColor(kRed);
   // hQ2WC->Add(hQ2WCR, -1);
   // hQ2WC->SetStats(0);
   hQ2WC->Draw("COL");
-  Diamond->Draw("same");  
+  Dcut->Draw("same");  
   c6->cd(2);
   // hQ2WC1->SetStats(0);
-  Diamond->SetLineColor(kRed);
+  Dcut->SetLineColor(kRed);
   hQ2WC1->Draw("COL");
-  Diamond->Draw("same");
+  Dcut->Draw("same");
   //c6->SetLeftMargin(0.15);   
   c6->Print(outputpdf);
 
@@ -713,7 +713,7 @@ void t_plots()
   htC->Write();  
   htL1->Write();  
   htL2->Write();
-  hQ2WC->GetListOfFunctions()->Add(Diamond,"L");  
+  hQ2WC->GetListOfFunctions()->Add(Dcut,"L");  
   hQ2WC->Write();
   hQ2WC->GetListOfFunctions()->Clear("L");  
   OutHisto_file->Close();
@@ -873,7 +873,7 @@ void t_plots()
 	htcoinmeR1->Fill(tcoinmeR1);
       }
 
-      Double_t Diamond_cut = (Diamond->IsInside(Q2MER1, WMER1));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2MER1, WMER1));  
       
       if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0 && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
@@ -910,7 +910,7 @@ void t_plots()
 	htcoinmeR2->Fill(tcoinmeR2);
       }
            
-      Double_t Diamond_cut = (Diamond->IsInside(Q2MER2, WMER2));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2MER2, WMER2));  
      
       if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0 && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
@@ -949,7 +949,7 @@ void t_plots()
 	htcoinmeC->Fill(tcoinmeC);
       }
       
-      Double_t Diamond_cut = (Diamond->IsInside(Q2MEC, WMEC));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2MEC, WMEC));  
       
       if(tcoinmeC>=-1.0 && tcoinmeC <= 1.0 && mmmeC>= 0.92 && mmmeC <=0.98 && Diamond_cut)
 	{
@@ -991,7 +991,7 @@ void t_plots()
 	htcoinmeL1->Fill(tcoinmeL1);
       }
       
-      Double_t Diamond_cut = (Diamond->IsInside(Q2MEL1, WMEL1));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2MEL1, WMEL1));  
 
       if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0 && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
 	{
@@ -1031,7 +1031,7 @@ void t_plots()
 	htcoinmeL2->Fill(tcoinmeL2);
       }
       
-      Double_t Diamond_cut = (Diamond->IsInside(Q2MEL2, WMEL2));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2MEL2, WMEL2));  
       
       if(tcoinmeL2>=-1.0 && tcoinmeL2 <= 1.0 && mmmeL2>= 0.92 && mmmeL2 <=0.98 && Diamond_cut)
 	
@@ -1205,13 +1205,13 @@ void t_plots()
   c12me->Divide(2, 0, 0.05);
   c12me->cd(1); 
   hQ2WMEC->Draw("COL");
-  Diamond->SetLineColor(kRed);
-  Diamond->Draw("same");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
 
   c12me->cd(2); 
   hQ2WMEC1->Draw("COL");
-  Diamond->SetLineColor(kRed);
-  Diamond->Draw("same");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
 
   c12me->Print(outputpdf);
 
@@ -1348,7 +1348,7 @@ void t_plots()
       {
 	htcoinheR1->Fill(tcoinheR1);
       }
-      Double_t Diamond_cut = (Diamond->IsInside(Q2HER1, WHER1));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2HER1, WHER1));  
       
       if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0 && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
@@ -1387,7 +1387,7 @@ void t_plots()
 	htcoinheC->Fill(tcoinheC);
       }
       
-      Double_t Diamond_cut = (Diamond->IsInside(Q2HEC, WHEC));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2HEC, WHEC));  
       
       if(tcoinheC>=-1.0 && tcoinheC <= 1.0 && mmheC>= 0.92 && mmheC <=0.98 && Diamond_cut)
 	{
@@ -1429,7 +1429,7 @@ void t_plots()
 	htcoinheL1->Fill(tcoinheL1);
       }
 
-      Double_t Diamond_cut = (Diamond->IsInside(Q2HEL1, WHEL1));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2HEL1, WHEL1));  
 
       if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0 && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
 	{
@@ -1469,7 +1469,7 @@ void t_plots()
 	htcoinheL2->Fill(tcoinheL2);
       }
 
-      Double_t Diamond_cut = (Diamond->IsInside(Q2HEL2, WHEL2));  
+      Double_t Diamond_cut = (Dcut->IsInside(Q2HEL2, WHEL2));  
 
       if(tcoinheL2>=-1.0 && tcoinheL2 <= 1.0 && mmheL2>= 0.92 && mmheL2 <=0.98 && Diamond_cut)
   
@@ -1622,13 +1622,13 @@ void t_plots()
   c12->Divide(2, 0, 0.05); 
   c12->cd(1); 
   hQ2WHEC->Draw("COL");
-  Diamond->SetLineColor(kRed);
-  Diamond->Draw("same");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
 
   c12->cd(2); 
   hQ2WHEC1->Draw("COL");
-  Diamond->SetLineColor(kRed);
-  Diamond->Draw("same");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
 
   c12->Print(outputpdf);
 
@@ -1867,5 +1867,166 @@ void t_plots()
   legt->AddEntry(htC,"Low epsilon (3)","l");
   legt->Draw("same");
 
- c13->Print(outputpdf + ')');
+ c13->Print(outputpdf);
+
+  //Phi for all three e
+  TCanvas *c14 = new TCanvas("c14", " c14");
+  //High epsilon  
+
+  hph_qheC->SetStats(0);
+  hph_qheC->SetLineColor(kGreen);
+  hph_qheC->Draw("Weight");
+
+  hph_qheL2->SetStats(0);
+  hph_qheL2->SetLineColor(kGreen);
+  hph_qheL2->Draw("same Weight");
+  
+  hph_qheL1->SetStats(0);
+  hph_qheL1->SetLineColor(kGreen);
+  hph_qheL1->Draw("same Weight");
+ 
+  hph_qheR1->SetStats(0);
+  hph_qheR1->SetLineColor(kGreen);
+  hph_qheR1->Draw("same Weight");
+
+  //Mid epsilon
+
+  hph_qmeR2->SetStats(0);
+  hph_qmeR2->SetLineColor(kBlue);
+  hph_qmeR2->Draw("same Weight");
+  
+  hph_qmeC->SetStats(0);
+  hph_qmeC->SetLineColor(kBlue);
+  hph_qmeC->Draw("same Weight");
+
+  hph_qmeL2->SetStats(0);
+  hph_qmeL2->SetLineColor(kBlue);
+  hph_qmeL2->Draw("same Weight");
+  
+  hph_qmeL1->SetStats(0);
+  hph_qmeL1->SetLineColor(kBlue);
+  hph_qmeL1->Draw("same Weight");
+ 
+  hph_qmeR1->SetStats(0);
+  hph_qmeR1->SetLineColor(kBlue);
+  hph_qmeR1->Draw("same Weight");
+
+  //Low epsilon
+
+  hph_qL2->SetStats(0);
+  hph_qL2->SetLineColor(kRed);
+  hph_qL2->Draw("same Weight");
+
+  hph_qL1->SetStats(0);
+  hph_qL1->SetLineColor(kRed);
+  hph_qL1->Draw("same Weight");
+
+  hph_qC->SetStats(0);
+  hph_qC->SetLineColor(kRed);
+  hph_qC->Draw("same Weight");
+
+  //Check phi edges
+
+  Double_t Phiymin = 0.0;
+  Double_t Phiymax = 10000.0;
+
+  Double_t fstphiedge = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(56);
+  cout<<" fstphiedge "<<fstphiedge<<endl;
+  TLine *fstphiedgel = new TLine(fstphiedge, Phiymin, fstphiedge, Phiymax);
+  fstphiedgel->SetLineColor(kBlack);
+  fstphiedgel->Draw("same");
+
+  Double_t lstphiedge = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(245);
+  cout<<" lstphiedge "<<lstphiedge<<endl;
+  TLine *lstphiedgel = new TLine(lstphiedge, Phiymin, lstphiedge, Phiymax);
+  lstphiedgel->SetLineColor(kBlack);
+  lstphiedgel->Draw("same");
+
+  Double_t fstphi1 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(67.8125);
+  TLine *fstphi1l = new TLine(fstphi1, Phiymin, fstphi1, Phiymax);
+  fstphi1l->SetLineColor(kBlack);
+  fstphi1l->Draw("same");
+
+  Double_t fstphi2 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(79.625);
+  TLine *fstphi2l = new TLine(fstphi2, Phiymin, fstphi2, Phiymax);
+  fstphi2l->SetLineColor(kBlack);
+  fstphi2l->Draw("same");
+
+  Double_t fstphi3 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(91.4375);
+  TLine *fstphi3l = new TLine(fstphi3, Phiymin, fstphi3, Phiymax);
+  fstphi3l->SetLineColor(kBlack);
+  fstphi3l->Draw("same");
+
+  Double_t fstphi4 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(103.25);
+  TLine *fstphi4l = new TLine(fstphi4, Phiymin, fstphi4, Phiymax);
+  fstphi4l->SetLineColor(kBlack);
+  fstphi4l->Draw("same");
+
+  Double_t fstphi5 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(115.0625);
+  TLine *fstphi5l = new TLine(fstphi5, Phiymin, fstphi5, Phiymax);
+  fstphi5l->SetLineColor(kBlack);
+  fstphi5l->Draw("same");
+
+  Double_t fstphi6 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(126.875);
+  TLine *fstphi6l = new TLine(fstphi6, Phiymin, fstphi6, Phiymax);
+  fstphi6l->SetLineColor(kBlack);
+  fstphi6l->Draw("same");
+
+  Double_t fstphi7 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(138.6875);
+  TLine *fstphi7l = new TLine(fstphi7, Phiymin, fstphi7, Phiymax);
+  fstphi7l->SetLineColor(kBlack);
+  fstphi7l->Draw("same");
+
+  Double_t fstphi8 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(150.5);
+  TLine *fstphi8l = new TLine(fstphi8, Phiymin, fstphi8, Phiymax);
+  fstphi8l->SetLineColor(kBlack);
+  fstphi8l->Draw("same");
+
+  Double_t fstphi9 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(162.3125);
+  TLine *fstphi9l = new TLine(fstphi9, Phiymin, fstphi9, Phiymax);
+  fstphi9l->SetLineColor(kBlack);
+  fstphi9l->Draw("same");
+
+  Double_t fstphi10 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(174.125);
+  TLine *fstphi10l = new TLine(fstphi10, Phiymin, fstphi10, Phiymax);
+  fstphi10l->SetLineColor(kBlack);
+  fstphi10l->Draw("same");
+
+  Double_t fstphi11 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(185.9375);
+  TLine *fstphi11l = new TLine(fstphi11, Phiymin, fstphi11, Phiymax);
+  fstphi11l->SetLineColor(kBlack);
+  fstphi11l->Draw("same");
+
+  Double_t fstphi12 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(197.75);
+  TLine *fstphi12l = new TLine(fstphi12, Phiymin, fstphi12, Phiymax);
+  fstphi12l->SetLineColor(kBlack);
+  fstphi12l->Draw("same");
+
+  Double_t fstphi13 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(209.5625);
+  TLine *fstphi13l = new TLine(fstphi13, Phiymin, fstphi13, Phiymax);
+  fstphi13l->SetLineColor(kBlack);
+  fstphi13l->Draw("same");
+
+  Double_t fstphi14 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(221.375);
+  TLine *fstphi14l = new TLine(fstphi14, Phiymin, fstphi14, Phiymax);
+  fstphi14l->SetLineColor(kBlack);
+  fstphi14l->Draw("same");
+
+  Double_t fstphi15 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(233.1875);
+  TLine *fstphi15l = new TLine(fstphi15, Phiymin, fstphi15, Phiymax);
+  fstphi15l->SetLineColor(kBlack);
+  fstphi15l->Draw("same");
+
+  /**
+  TAxis *PhiC = hph_qheC->GetXaxis();
+  Double_t Eve;
+
+  for(Long64_t i = 0; i < 301; i++)       
+    {
+      Eve = hph_qheC->GetBinContent(i);
+      cout<<"  Eve "<< i << Eve <<endl;   
+    }
+  **/
+ c14->Print(outputpdf + ')');
+ 
 }
