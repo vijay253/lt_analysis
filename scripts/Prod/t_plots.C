@@ -189,6 +189,11 @@ void t_plots()
   TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 300, -5.0, 5.0);      
   TH1D *hph_qL2  = new TH1D("hph_qL2","ph_q; ph_q;", 300, -5.0, 5.0);      
 
+  TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qL1R  = new TH1D("hph_qL1R","ph_q; ph_q;", 300, -5.0, 5.0);      
+  TH1D *hph_qL2R  = new TH1D("hph_qL2R","ph_q; ph_q;", 300, -5.0, 5.0);      
+
+
   TH1D *hmmC  = new TH1D("hmmC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmL1  = new TH1D("hmmL1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmL2  = new TH1D("hmmL2","MM; MM;", 300, 0.8, 1.2);      
@@ -248,7 +253,6 @@ void t_plots()
       if(tcoinC>=-1.0 && tcoinC <= 1.0 && mmC>= 0.92 && mmC <=0.98)
 	{
 	  hQ2WC->Fill(Q2C, WC);
-	  hph_qC->Fill(ph_qC);
 	}
       
       if(tcoinC>=-1.0 && tcoinC <= 1.0)    
@@ -266,11 +270,13 @@ void t_plots()
 	{
 	  hQ2WC1->Fill(Q2C, WC);	      	  
   	  htC->Fill(-tC);
+	  hph_qC->Fill(ph_qC);
 	}	      
       
       if(((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)) && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
 	{
 	  htCR->Fill(-tC);
+	  hph_qCR->Fill(ph_qC);
 	  hQ2WCR->Fill(Q2C, WC);
 	}
       
@@ -341,12 +347,7 @@ void t_plots()
   
     {
       TBRANCHL1->GetEntry(i);
-      
-      if(tcoinL1>=-1.0 && tcoinL1 <= 1.0 && mmL1>= 0.92 && mmL1 <=0.98)
-	{
-	  hph_qL1->Fill(ph_qL1);	  
-	}
-      
+            
       if(tcoinL1>=-1.0 && tcoinL1 <= 1.0)	
 	{
 	  hmmL1->Fill(mmL1);
@@ -360,12 +361,14 @@ void t_plots()
       if(tcoinL1>=-1.0 && tcoinL1 <= 1.0 && mmL1>= 0.92 && mmL1 <=0.98 && Diamond_cut)
 	{
 	  htL1->Fill(-tL1);
+	  hph_qL1->Fill(ph_qL1);	  
 	}      
       
       if(((tcoinL1>=-15.0 && tcoinL1 <= -9.0) || (tcoinL1>=7.0 && tcoinL1 <=13.0)) && mmL1>= 0.92 && mmL1 <=0.98 && Diamond_cut)	
 	
 	{
 	  htL1R->Fill(-tL1);
+	  hph_qL1R->Fill(ph_qL1);	  
 	}
       
       if (((tcoinL1>=-15.0 && tcoinL1 <= -9.0) || (tcoinL1>=7.0 && tcoinL1 <=13.0)))
@@ -379,10 +382,6 @@ void t_plots()
     {
       TBRANCHL2->GetEntry(i);
       
-      if(tcoinL2>=-1.0 && tcoinL2 <= 1.0 && mmL2>= 0.92 && mmL2 <=0.98)
-	{
-	  hph_qL2->Fill(ph_qL2);
-	}
       
       if(tcoinL2>=-1.0 && tcoinL2 <= 1.0)
 	
@@ -399,11 +398,13 @@ void t_plots()
       if(tcoinL2>=-1.0 && tcoinL2 <= 1.0 && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
 	  htL2->Fill(-tL2);
+	  hph_qL2->Fill(ph_qL2);
 	}
 
       if(((tcoinL2>=-15.0 && tcoinL2 <= -9.0) || (tcoinL2>=7.0 && tcoinL2 <=13.0)) && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
 	  htL2R->Fill(-tL2);
+	  hph_qL2R->Fill(ph_qL2);
 	}
       if (((tcoinL2>=-15.0 && tcoinL2 <= -9.0) || (tcoinL2>=7.0 && tcoinL2 <=13.0)))
 	{
@@ -420,6 +421,11 @@ void t_plots()
   htCR->Scale(1.0/6.0);
   htL1R->Scale(1.0/6.0);
   htL2R->Scale(1.0/6.0);
+
+  hph_qCR->Scale(1.0/6.0);
+  hph_qL1R->Scale(1.0/6.0);
+  hph_qL2R->Scale(1.0/6.0);
+
 
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
@@ -487,14 +493,17 @@ void t_plots()
   TCanvas *c4 = new TCanvas("c4", " c4"); 
   hph_qL2->SetStats(0);
   hph_qL2->SetLineColor(kBlack);
+  hph_qL2->Add(hph_qL2R, -1);
   hph_qL2->Draw(" Weight");
 
   hph_qL1->SetStats(0);
   hph_qL1->SetLineColor(kRed);
+  hph_qL1->Add(hph_qL1R, -1);
   hph_qL1->Draw("same Weight");
 
   hph_qC->SetStats(0);
   hph_qC->SetLineColor(kGreen);
+  hph_qC->Add(hph_qCR, -1);
   hph_qC->Draw("same Weight");
 
   c4->Print(outputpdf);
@@ -837,6 +846,13 @@ void t_plots()
   TH1D *hph_qmeL1  = new TH1D("hph_qmeL1","ph_q; ph_q;",   300, -5.0, 5.0);      
   TH1D *hph_qmeL2  = new TH1D("hph_qmeL2","ph_q; ph_q;",   300, -5.0, 5.0);      
 
+  TH1D *hph_qmeR1R  = new TH1D("hph_qmeR1R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qmeR2R  = new TH1D("hph_qmeR2R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qmeCR   = new TH1D("hph_qmeCR","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qmeL1R  = new TH1D("hph_qmeL1R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qmeL2R  = new TH1D("hph_qmeL2R","ph_q; ph_q;",   300, -5.0, 5.0);      
+
+
   TH1D *hmmmeR1  = new TH1D("hmmmeR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeR2  = new TH1D("hmmmeR2","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeC   = new TH1D("hmmmeC","MM; MM;", 300, 0.8, 1.2);      
@@ -860,10 +876,6 @@ void t_plots()
     {
       TBRANCHMIDER1->GetEntry(i);
       
-      if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0 && mmmeR1>= 0.92 && mmmeR1 <=0.98)
-	{
-	  hph_qmeR1->Fill(ph_qmeR1);
-	}
       if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0)    
 	{
 	  hmmmeR1->Fill(mmmeR1);	  
@@ -878,11 +890,13 @@ void t_plots()
       if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0 && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
 	  htmeR1->Fill(-tmeR1);
+	  hph_qmeR1->Fill(ph_qmeR1);
 	}
 
       if(((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)) && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
 	  htmeR1R->Fill(-tmeR1);
+	  hph_qmeR1R->Fill(ph_qmeR1);
 	}
       
       if (((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)))
@@ -897,10 +911,6 @@ void t_plots()
     {
       TBRANCHMIDER2->GetEntry(i);
       
-      if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0 && mmmeR2>= 0.92 && mmmeR2 <=0.98)
-	{
-	  hph_qmeR2->Fill(ph_qmeR2);
-	}
       if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0)    
 	{
 	  hmmmeR2->Fill(mmmeR2);	  
@@ -915,11 +925,13 @@ void t_plots()
       if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0 && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
 	  htmeR2->Fill(-tmeR2);
+	  hph_qmeR2->Fill(ph_qmeR2);
 	}
 
       if(((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)) && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
 	  htmeR2R->Fill(-tmeR2);
+	  hph_qmeR2R->Fill(ph_qmeR2);
 	}
       
       if (((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)))
@@ -937,7 +949,6 @@ void t_plots()
       if(tcoinmeC>=-1.0 && tcoinmeC <= 1.0 && mmmeC>= 0.92 && mmmeC <=0.98)
 	{
 	  hQ2WMEC->Fill(Q2MEC, WMEC);
-	  hph_qmeC->Fill(ph_qmeC);
 	}
  
       if(tcoinmeC>=-1.0 && tcoinmeC <= 1.0)    
@@ -955,12 +966,14 @@ void t_plots()
 	{
 	  hQ2WMEC1->Fill(Q2MEC, WMEC);	      	  
 	  htmeC->Fill(-tmeC);
+	  hph_qmeC->Fill(ph_qmeC);
 	}	      
 
            
       if(((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC <=13.0)) && mmmeC>= 0.92 && mmmeC <=0.98 && Diamond_cut)
   	{
 	  htmeCR->Fill(-tmeC);
+	  hph_qmeCR->Fill(ph_qmeC);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
 	}
       
@@ -976,12 +989,7 @@ void t_plots()
   
     {
       TBRANCHMIDEL1->GetEntry(i);
-      
-      if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0 && mmmeL1>= 0.92 && mmmeL1 <=0.98)
-	{
-	  hph_qmeL1->Fill(ph_qmeL1);	  
-	}
-      
+            
       if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0)    
 	{
 	  hmmmeL1->Fill(mmmeL1);
@@ -996,12 +1004,14 @@ void t_plots()
       if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0 && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
 	{
 	  htmeL1->Fill(-tmeL1);
+	  hph_qmeL1->Fill(ph_qmeL1);	  
 	}
 
       if(((tcoinmeL1>=-15.0 && tcoinmeL1 <= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1 <=13.0)) && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
  	
 	{
 	  htmeL1R->Fill(-tmeL1);
+	  hph_qmeL1R->Fill(ph_qmeL1);	  
 	}
       
       if(((tcoinmeL1>=-15.0 && tcoinmeL1 <= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1 <=13.0)))
@@ -1014,13 +1024,7 @@ void t_plots()
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDEL2; i++)
     {
       TBRANCHMIDEL2->GetEntry(i);
-      
-      if(tcoinmeL2>=-1.0 && tcoinmeL2 <= 1.0 && mmmeL2>= 0.92 && mmmeL2 <=0.98)
-  
-	{
-	  hph_qmeL2->Fill(ph_qmeL2);
-	}
-      
+            
       if(tcoinmeL2>=-1.0 && tcoinmeL2 <= 1.0)
 	
 	{
@@ -1037,11 +1041,13 @@ void t_plots()
 	
 	{
 	  htmeL2->Fill(-tmeL2);
+	  hph_qmeL2->Fill(ph_qmeL2);
 	}
 
       if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)) && mmmeL2>= 0.92 && mmmeL2 <=0.98 && Diamond_cut)
 	{
 	  htmeL2R->Fill(-tmeL2);
+	  hph_qmeL2R->Fill(ph_qmeL2);
 	}
 
       if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)))
@@ -1063,6 +1069,12 @@ void t_plots()
   htmeCR->Scale(1.0/6.0);
   htmeL1R->Scale(1.0/6.0);
   htmeL2R->Scale(1.0/6.0);
+
+  hph_qmeR1R->Scale(1.0/6.0);
+  hph_qmeR2R->Scale(1.0/6.0);
+  hph_qmeCR->Scale(1.0/6.0);
+  hph_qmeL1R->Scale(1.0/6.0);
+  hph_qmeL2R->Scale(1.0/6.0);
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
 
@@ -1146,14 +1158,17 @@ void t_plots()
   TCanvas *c10me = new TCanvas("c10me", " c10me"); 
   hph_qmeR2->SetStats(0);
   hph_qmeR2->SetLineColor(kYellow);
+  hph_qmeR2->Add(hph_qmeR2R, -1);
   hph_qmeR2->Draw(" Weight");
   
   hph_qmeC->SetStats(0);
   hph_qmeC->SetLineColor(kGreen);
+  hph_qmeC->Add(hph_qmeCR, -1);
   hph_qmeC->Draw("same Weight");
 
   hph_qmeL2->SetStats(0);
   hph_qmeL2->SetLineColor(kBlack);
+  hph_qmeL2->Add(hph_qmeL2R, -1);
   hph_qmeL2->Draw("same Weight");
   
   hph_qmeL1->SetStats(0);
@@ -1162,6 +1177,7 @@ void t_plots()
  
   hph_qmeR1->SetStats(0);
   hph_qmeR1->SetLineColor(kBlue);
+  hph_qmeL1->Add(hph_qmeL1R, -1);
   hph_qmeR1->Draw("same Weight");
 
   c10me->Print(outputpdf);
@@ -1311,10 +1327,17 @@ void t_plots()
   TH1D *htheL1R  = new TH1D("htheL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htheL2R  = new TH1D("htheL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
+
   TH1D *hph_qheR1  = new TH1D("hph_qheR1","ph_q; ph_q;",   300, -5.0, 5.0);      
   TH1D *hph_qheC   = new TH1D("hph_qheC","ph_q; ph_q;",   300, -5.0, 5.0);      
   TH1D *hph_qheL1  = new TH1D("hph_qheL1","ph_q; ph_q;",   300, -5.0, 5.0);      
   TH1D *hph_qheL2  = new TH1D("hph_qheL2","ph_q; ph_q;",   300, -5.0, 5.0);      
+
+  TH1D *hph_qheR1R  = new TH1D("hph_qheR1R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qheCR   = new TH1D("hph_qheCR","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qheL1R  = new TH1D("hph_qheL1R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qheL2R  = new TH1D("hph_qheL2R","ph_q; ph_q;",   300, -5.0, 5.0);      
+
 
   TH1D *hmmheR1  = new TH1D("hmmheR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmheC   = new TH1D("hmmheC","MM; MM;", 300, 0.8, 1.2);      
@@ -1336,10 +1359,6 @@ void t_plots()
     {
       TBRANCHHIGHER1->GetEntry(i);
       
-      if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0 && mmheR1>= 0.92 && mmheR1 <=0.98)
-	{
-	  hph_qheR1->Fill(ph_qheR1);
-	}
       if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0)    
 	{
 	  hmmheR1->Fill(mmheR1);	  
@@ -1353,11 +1372,13 @@ void t_plots()
       if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0 && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
 	  htheR1->Fill(-theR1);
+	  hph_qheR1->Fill(ph_qheR1);
 	}
       
       if(((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)) && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
 	  htheR1R->Fill(-theR1);
+	  hph_qheR1R->Fill(ph_qheR1);
 	}
       
       if (((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)))
@@ -1375,7 +1396,6 @@ void t_plots()
       if(tcoinheC>=-1.0 && tcoinheC <= 1.0 && mmheC>= 0.92 && mmheC <=0.98)
 	{
 	  hQ2WHEC->Fill(Q2HEC, WHEC);
-	  hph_qheC->Fill(ph_qheC);
 	}
  
       if(tcoinheC>=-1.0 && tcoinheC <= 1.0)    
@@ -1393,12 +1413,14 @@ void t_plots()
 	{
 	  hQ2WHEC1->Fill(Q2HEC, WHEC);	      	  
 	  htheC->Fill(-theC);
+	  hph_qheC->Fill(ph_qheC);
 	}	      
 
            
       if(((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0)) && mmheC>= 0.92 && mmheC <=0.98 && Diamond_cut)
   	{
 	  htheCR->Fill(-theC);
+	  hph_qheCR->Fill(ph_qheC);
 	  hQ2WHECR->Fill(Q2HEC, WHEC);
 	}
       
@@ -1415,10 +1437,6 @@ void t_plots()
     {
       TBRANCHHIGHEL1->GetEntry(i);
       
-      if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0 && mmheL1>= 0.92 && mmheL1 <=0.98)
-	{
-	  hph_qheL1->Fill(ph_qheL1);	  
-	}
       
       if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0)    
 	{
@@ -1434,12 +1452,14 @@ void t_plots()
       if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0 && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
 	{
 	  htheL1->Fill(-theL1);
+	  hph_qheL1->Fill(ph_qheL1);	  
 	}      
 
       if(((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0)) && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
  	
 	{
 	  htheL1R->Fill(-theL1);
+	  hph_qheL1R->Fill(ph_qheL1);	  
 	}
       
       if(((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0)))
@@ -1452,13 +1472,7 @@ void t_plots()
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEL2; i++)
     {
       TBRANCHHIGHEL2->GetEntry(i);
-      
-      if(tcoinheL2>=-1.0 && tcoinheL2 <= 1.0 && mmheL2>= 0.92 && mmheL2 <=0.98)
-  
-	{
-	  hph_qheL2->Fill(ph_qheL2);
-	}
-      
+            
       if(tcoinheL2>=-1.0 && tcoinheL2 <= 1.0)
 	
 	{
@@ -1475,11 +1489,13 @@ void t_plots()
   
 	{
 	  htheL2->Fill(-theL2);
+	  hph_qheL2->Fill(ph_qheL2);
 	}
 
       if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)) && mmheL2>= 0.92 && mmheL2 <=0.98 && Diamond_cut)
 	{
 	  htheL2R->Fill(-theL2);
+	  hph_qheL2R->Fill(ph_qheL2);
 	}
 
       if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)))
@@ -1499,6 +1515,12 @@ void t_plots()
   htheCR->Scale(1.0/6.0);
   htheL1R->Scale(1.0/6.0);
   htheL2R->Scale(1.0/6.0);
+
+  hph_qheR1R->Scale(1.0/6.0);
+  hph_qheCR->Scale(1.0/6.0);
+  hph_qheL1R->Scale(1.0/6.0);
+  hph_qheL2R->Scale(1.0/6.0);
+  
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
  
@@ -1574,18 +1596,22 @@ void t_plots()
   
   hph_qheC->SetStats(0);
   hph_qheC->SetLineColor(kGreen);
+  hph_qheC->Add(hph_qheCR, -1);
   hph_qheC->Draw(" Weight");
 
   hph_qheL2->SetStats(0);
   hph_qheL2->SetLineColor(kBlack);
+  hph_qheL2->Add(hph_qheL2R, -1);
   hph_qheL2->Draw("same Weight");
   
   hph_qheL1->SetStats(0);
   hph_qheL1->SetLineColor(kRed);
+  hph_qheL1->Add(hph_qheL1R, -1);
   hph_qheL1->Draw("same Weight");
  
   hph_qheR1->SetStats(0);
   hph_qheR1->SetLineColor(kBlue);
+  hph_qheR1->Add(hph_qheR1R, -1);
   hph_qheR1->Draw("same Weight");
   c10->Print(outputpdf);
 
@@ -1928,7 +1954,7 @@ void t_plots()
   //Check phi edges
 
   Double_t Phiymin = 0.0;
-  Double_t Phiymax = 10000.0;
+  Double_t Phiymax = 1150.0;
 
   Double_t fstphiedge = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(56);
   cout<<" fstphiedge "<<fstphiedge<<endl;
