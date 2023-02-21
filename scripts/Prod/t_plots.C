@@ -185,14 +185,16 @@ void t_plots()
   TH1D *htL1R  = new TH1D("htL1R","MandelT; MandelT;", 300, -0.01, 0.1);      
   TH1D *htL2R  = new TH1D("htL2R","MandelT; MandelT;", 300, -0.01, 0.1);      
 
-  TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 300, -5.0, 5.0);      
-  TH1D *hph_qL2  = new TH1D("hph_qL2","ph_q; ph_q;", 300, -5.0, 5.0);      
+  //  TH1D *hph_qtest  = new TH1D("hph_qtest","ph_q; ph_q;", 22, -4.5, 4.5);      
+  TH2D *hpht  = new TH2D("pht","; ; ", 300, -0.01, 0.1, 22, -4.5, 4.5);      
 
-  TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qL1R  = new TH1D("hph_qL1R","ph_q; ph_q;", 300, -5.0, 5.0);      
-  TH1D *hph_qL2R  = new TH1D("hph_qL2R","ph_q; ph_q;", 300, -5.0, 5.0);      
+  TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 22, -4.5, 4.5);      
+  TH1D *hph_qL2  = new TH1D("hph_qL2","ph_q; ph_q;", 22, -4.5, 4.5);      
 
+  TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qL1R  = new TH1D("hph_qL1R","ph_q; ph_q;", 22, -4.5, 4.5);      
+  TH1D *hph_qL2R  = new TH1D("hph_qL2R","ph_q; ph_q;", 22, -4.5, 4.5);      
 
   TH1D *hmmC  = new TH1D("hmmC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmL1  = new TH1D("hmmL1","MM; MM;", 300, 0.8, 1.2);      
@@ -224,7 +226,7 @@ void t_plots()
   TCutG *Dcut = new TCutG("Dcut",5);
   Dcut->SetVarX("Q2");
   Dcut->SetVarY("W");
-  Dcut->SetPoint(0,0.363783,2.18318);Dcut->SetPoint(1,0.311069,2.22644); //Diamond->SetPoint(1,0.311469,2.22694); Diamond->SetPoint(2,0.37837,2.21236); 
+  Dcut->SetPoint(0,0.363783,2.18318);Dcut->SetPoint(1,0.311069,2.22644);  
   Dcut->SetPoint(2,0.37737,2.21136); Dcut->SetPoint(3,0.452314,2.16293);
   Dcut->SetPoint(4,0.363783,2.18318); 
 
@@ -271,6 +273,7 @@ void t_plots()
 	  hQ2WC1->Fill(Q2C, WC);	      	  
   	  htC->Fill(-tC);
 	  hph_qC->Fill(ph_qC);
+	  hpht->Fill(-tC, ph_qC);
 	}	      
       
       if(((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)) && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
@@ -426,7 +429,6 @@ void t_plots()
   hph_qL1R->Scale(1.0/6.0);
   hph_qL2R->Scale(1.0/6.0);
 
-
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
   htcoinL2->SetStats(0);
@@ -549,6 +551,12 @@ void t_plots()
   Dcut->Draw("same");
   //c6->SetLeftMargin(0.15);   
   c6->Print(outputpdf);
+
+  TCanvas *ctest = new TCanvas("ctest", " ctest");
+  hpht->Scale(1.0/513.0);
+  hpht->Draw("COLZ");
+  ctest->Print(outputpdf);
+
 
   TCanvas *cRE = new TCanvas("cRE", " cRE");
 
@@ -840,17 +848,17 @@ void t_plots()
   TH1D *htmeL1R  = new TH1D("htmeL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeL2R  = new TH1D("htmeL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
-  TH1D *hph_qmeR1  = new TH1D("hph_qmeR1","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeR2  = new TH1D("hph_qmeR2","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeC   = new TH1D("hph_qmeC","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeL1  = new TH1D("hph_qmeL1","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeL2  = new TH1D("hph_qmeL2","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qmeR1  = new TH1D("hph_qmeR1","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeR2  = new TH1D("hph_qmeR2","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeC   = new TH1D("hph_qmeC","ph_q; ph_q;",    22, -4.5, 4.5);      
+  TH1D *hph_qmeL1  = new TH1D("hph_qmeL1","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeL2  = new TH1D("hph_qmeL2","ph_q; ph_q;",   22, -4.5, 4.5);      
 
-  TH1D *hph_qmeR1R  = new TH1D("hph_qmeR1R","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeR2R  = new TH1D("hph_qmeR2R","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeCR   = new TH1D("hph_qmeCR","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeL1R  = new TH1D("hph_qmeL1R","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qmeL2R  = new TH1D("hph_qmeL2R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qmeR1R  = new TH1D("hph_qmeR1R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeR2R  = new TH1D("hph_qmeR2R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeCR   = new TH1D("hph_qmeCR","ph_q; ph_q;",    22, -4.5, 4.5);      
+  TH1D *hph_qmeL1R  = new TH1D("hph_qmeL1R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeL2R  = new TH1D("hph_qmeL2R","ph_q; ph_q;",   22, -4.5, 4.5);      
 
 
   TH1D *hmmmeR1  = new TH1D("hmmmeR1","MM; MM;", 300, 0.8, 1.2);      
@@ -1328,15 +1336,15 @@ void t_plots()
   TH1D *htheL2R  = new TH1D("htheL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
 
-  TH1D *hph_qheR1  = new TH1D("hph_qheR1","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qheC   = new TH1D("hph_qheC","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qheL1  = new TH1D("hph_qheL1","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qheL2  = new TH1D("hph_qheL2","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qheR1  = new TH1D("hph_qheR1","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qheC   = new TH1D("hph_qheC","ph_q; ph_q;",    22, -4.5, 4.5);      
+  TH1D *hph_qheL1  = new TH1D("hph_qheL1","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qheL2  = new TH1D("hph_qheL2","ph_q; ph_q;",   22, -4.5, 4.5);      
 
-  TH1D *hph_qheR1R  = new TH1D("hph_qheR1R","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qheCR   = new TH1D("hph_qheCR","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qheL1R  = new TH1D("hph_qheL1R","ph_q; ph_q;",   300, -5.0, 5.0);      
-  TH1D *hph_qheL2R  = new TH1D("hph_qheL2R","ph_q; ph_q;",   300, -5.0, 5.0);      
+  TH1D *hph_qheR1R  = new TH1D("hph_qheR1R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qheCR   = new TH1D("hph_qheCR","ph_q; ph_q;",    22, -4.5, 4.5);      
+  TH1D *hph_qheL1R  = new TH1D("hph_qheL1R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qheL2R  = new TH1D("hph_qheL2R","ph_q; ph_q;",   22, -4.5, 4.5);      
 
 
   TH1D *hmmheR1  = new TH1D("hmmheR1","MM; MM;", 300, 0.8, 1.2);      
@@ -1828,7 +1836,7 @@ void t_plots()
   //lthigh->SetLineColor(kBlack);
   //  ltlow->Draw("same"); 
   //lthigh->Draw("same");
-
+    
     Double_t Ymin = -92.0;
     Double_t Ymax = 1750.0;
 
@@ -1952,107 +1960,110 @@ void t_plots()
   hph_qC->Draw("same Weight");
 
   //Check phi edges
-
+  
   Double_t Phiymin = 0.0;
-  Double_t Phiymax = 1150.0;
-
-  Double_t fstphiedge = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(56);
-  cout<<" fstphiedge "<<fstphiedge<<endl;
-  TLine *fstphiedgel = new TLine(fstphiedge, Phiymin, fstphiedge, Phiymax);
-  fstphiedgel->SetLineColor(kBlack);
-  fstphiedgel->Draw("same");
-
-  Double_t lstphiedge = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(245);
-  cout<<" lstphiedge "<<lstphiedge<<endl;
-  TLine *lstphiedgel = new TLine(lstphiedge, Phiymin, lstphiedge, Phiymax);
-  lstphiedgel->SetLineColor(kBlack);
-  lstphiedgel->Draw("same");
-
-  Double_t fstphi1 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(67.8125);
+  Double_t Phiymax = 12750.0;
+  
+  Double_t fstphi1 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(4);
   TLine *fstphi1l = new TLine(fstphi1, Phiymin, fstphi1, Phiymax);
   fstphi1l->SetLineColor(kBlack);
   fstphi1l->Draw("same");
 
-  Double_t fstphi2 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(79.625);
+  Double_t fstphi2 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(5);
   TLine *fstphi2l = new TLine(fstphi2, Phiymin, fstphi2, Phiymax);
   fstphi2l->SetLineColor(kBlack);
   fstphi2l->Draw("same");
 
-  Double_t fstphi3 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(91.4375);
+  Double_t fstphi3 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(6);
   TLine *fstphi3l = new TLine(fstphi3, Phiymin, fstphi3, Phiymax);
   fstphi3l->SetLineColor(kBlack);
   fstphi3l->Draw("same");
 
-  Double_t fstphi4 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(103.25);
+  Double_t fstphi4 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(7);
   TLine *fstphi4l = new TLine(fstphi4, Phiymin, fstphi4, Phiymax);
   fstphi4l->SetLineColor(kBlack);
   fstphi4l->Draw("same");
 
-  Double_t fstphi5 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(115.0625);
+  Double_t fstphi5 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(8);
   TLine *fstphi5l = new TLine(fstphi5, Phiymin, fstphi5, Phiymax);
   fstphi5l->SetLineColor(kBlack);
   fstphi5l->Draw("same");
 
-  Double_t fstphi6 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(126.875);
+  Double_t fstphi6 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(9);
   TLine *fstphi6l = new TLine(fstphi6, Phiymin, fstphi6, Phiymax);
   fstphi6l->SetLineColor(kBlack);
   fstphi6l->Draw("same");
 
-  Double_t fstphi7 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(138.6875);
+  Double_t fstphi7 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(10);
   TLine *fstphi7l = new TLine(fstphi7, Phiymin, fstphi7, Phiymax);
   fstphi7l->SetLineColor(kBlack);
   fstphi7l->Draw("same");
 
-  Double_t fstphi8 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(150.5);
+  Double_t fstphi8 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(11);
   TLine *fstphi8l = new TLine(fstphi8, Phiymin, fstphi8, Phiymax);
   fstphi8l->SetLineColor(kBlack);
   fstphi8l->Draw("same");
 
-  Double_t fstphi9 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(162.3125);
+  Double_t fstphi9 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(12);
   TLine *fstphi9l = new TLine(fstphi9, Phiymin, fstphi9, Phiymax);
   fstphi9l->SetLineColor(kBlack);
   fstphi9l->Draw("same");
 
-  Double_t fstphi10 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(174.125);
+  Double_t fstphi10 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(13);
   TLine *fstphi10l = new TLine(fstphi10, Phiymin, fstphi10, Phiymax);
   fstphi10l->SetLineColor(kBlack);
   fstphi10l->Draw("same");
 
-  Double_t fstphi11 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(185.9375);
+  Double_t fstphi11 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(14);
   TLine *fstphi11l = new TLine(fstphi11, Phiymin, fstphi11, Phiymax);
   fstphi11l->SetLineColor(kBlack);
   fstphi11l->Draw("same");
 
-  Double_t fstphi12 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(197.75);
+  Double_t fstphi12 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(15);
   TLine *fstphi12l = new TLine(fstphi12, Phiymin, fstphi12, Phiymax);
   fstphi12l->SetLineColor(kBlack);
   fstphi12l->Draw("same");
 
-  Double_t fstphi13 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(209.5625);
+  Double_t fstphi13 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(16);
   TLine *fstphi13l = new TLine(fstphi13, Phiymin, fstphi13, Phiymax);
   fstphi13l->SetLineColor(kBlack);
   fstphi13l->Draw("same");
 
-  Double_t fstphi14 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(221.375);
+  Double_t fstphi14 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(17);
   TLine *fstphi14l = new TLine(fstphi14, Phiymin, fstphi14, Phiymax);
   fstphi14l->SetLineColor(kBlack);
   fstphi14l->Draw("same");
 
-  Double_t fstphi15 = ((TAxis*)hph_qheC->GetXaxis())->GetBinCenter(233.1875);
+  Double_t fstphi15 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(18);
   TLine *fstphi15l = new TLine(fstphi15, Phiymin, fstphi15, Phiymax);
   fstphi15l->SetLineColor(kBlack);
   fstphi15l->Draw("same");
 
-  /**
-  TAxis *PhiC = hph_qheC->GetXaxis();
-  Double_t Eve;
+  Double_t fstphi16 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(19);
+  TLine *fstphi16l = new TLine(fstphi16, Phiymin, fstphi16, Phiymax);
+  fstphi16l->SetLineColor(kBlack);
+  fstphi16l->Draw("same");
 
-  for(Long64_t i = 0; i < 301; i++)       
+  Double_t fstphi17 = ((TAxis*)hph_qheC->GetXaxis())->GetBinLowEdge(20);
+  TLine *fstphi17l = new TLine(fstphi17, Phiymin, fstphi17, Phiymax);
+  fstphi17l->SetLineColor(kBlack);
+  fstphi17l->Draw("same");
+
+  TAxis *PhiC = hph_qheC->GetXaxis();
+  Double_t Yield;
+  Double_t YieldErr;
+
+  // TAxis *tes = htheC->GetXaxis();
+  Double_t test =  hpht->Integral(44, 60, 4, 5, "");
+  cout<< "test" << test <<endl;
+
+ for(Long64_t i = 1; i <= 22; i++)       
     {
-      Eve = hph_qheC->GetBinContent(i);
-      cout<<"  Eve "<< i << Eve <<endl;   
+      Yield = hph_qheC->GetBinContent(i);
+      YieldErr = hph_qheC->GetBinError(i);
+      cout<<" Bin No. "<< i << " "<< "Yield" << " " << Yield <<" +-"<< YieldErr <<endl;   
     }
-  **/
+
  c14->Print(outputpdf + ')');
  
 }
