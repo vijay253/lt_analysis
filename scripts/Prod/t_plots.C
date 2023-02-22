@@ -580,65 +580,72 @@ void t_plots()
   cY->Print(outputpdf);
 
   cout<< "Center Setting Yield"<<endl;
-
   cout<<"1 t-bin" <<endl;
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(44, 60, i, i, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(44, 60, i, i, err, "");;
+      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
     }
   cout<<"2 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(61, 69 , i, i, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(61, 69 , i, i,err, "");;
+      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(70, 80, i, i, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(70, 80, i, i,err, "");;
+      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(81, 92, i, i, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(81, 92, i, i,err, "");;
+      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(93, 106, i, i, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(93, 106, i, i,err, "");;
+      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(107, 125, i, i, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(107, 125, i, i,err, "");;
+      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(126, 152, i, i, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(126, 152, i, i,err, "");;
+      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYC->Integral(153, 246, i, i, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYC->IntegralAndError(153, 246, i, i,err, "");;
+      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   TCanvas *cYL1 = new TCanvas("cYL1", " cYL1");
@@ -651,63 +658,72 @@ void t_plots()
   cout<< "Left 1 Setting Yield"<<endl;
 
   cout<<"1 t-bin" <<endl;
+
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(44, 60, i, i, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(44, 60, i, i, err, "");;
+      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
     }
   cout<<"2 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(61, 69 , i, i, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(61, 69 , i, i,err, "");;
+      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(70, 80, i, i, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(70, 80, i, i,err, "");;
+      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(81, 92, i, i, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(81, 92, i, i,err, "");;
+      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(93, 106, i, i, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(93, 106, i, i,err, "");;
+      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(107, 125, i, i, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(107, 125, i, i,err, "");;
+      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(126, 152, i, i, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(126, 152, i, i,err, "");;
+      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL1->Integral(153, 246, i, i, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL1->IntegralAndError(153, 246, i, i,err, "");;
+      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   TCanvas *cYL2 = new TCanvas("cYL2", " cYL2");
@@ -722,61 +738,69 @@ void t_plots()
   cout<<"1 t-bin" <<endl;
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(44, 60, i, i, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(44, 60, i, i, err, "");;
+      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
     }
   cout<<"2 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(61, 69 , i, i, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(61, 69 , i, i,err, "");;
+      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(70, 80, i, i, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(70, 80, i, i,err, "");;
+      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(81, 92, i, i, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(81, 92, i, i,err, "");;
+      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(93, 106, i, i, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(93, 106, i, i,err, "");;
+      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(107, 125, i, i, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(107, 125, i, i,err, "");;
+      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(126, 152, i, i, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(126, 152, i, i,err, "");;
+      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
   for(Long64_t i = 4; i <= 19; i++)       
     {
-      Double_t Yield = hYL2->Integral(153, 246, i, i, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield <<endl;   
+      Double_t err;
+      Double_t Yield = hYL2->IntegralAndError(153, 246, i, i,err, "");;
+      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<< "End of the Yield calculations for low epsilon" <<endl;
@@ -2009,59 +2033,59 @@ void t_plots()
   Double_t Events12 = 0.0;
 
   // if(In1->FindBin(0.005) >=41 && In1->FindBin(0.005) <= 246)  
-    {
-      //      for(Long64_t i = 41; i < 61; i++)       // 1st t
-      //      for(Long64_t i = 44; i < 61; i++)       // 1st t  updated one
-      // for(Long64_t i = 61; i < 70; i++)           // 2nd t
-      //      for(Long64_t i = 70; i < 81; i++)     // 3rd t
-      //     for(Long64_t i = 81; i < 93; i++)     // 4th t
-      // for(Long64_t i = 93; i < 107; i++)           // 5th t
-      //      for(Long64_t i = 107; i < 126; i++)           // 6th t
-      //      for(Long64_t i = 126; i < 153; i++)           // 7th t
-      for(Long64_t i = 153; i < 247; i++)           // 8th t
-	//for(Long64_t i = 41; i < 45; i++)           //test
+  {
+    //      for(Long64_t i = 41; i < 61; i++)       // 1st t
+    //      for(Long64_t i = 44; i < 61; i++)       // 1st t  updated one
+    // for(Long64_t i = 61; i < 70; i++)           // 2nd t
+    //      for(Long64_t i = 70; i < 81; i++)     // 3rd t
+    //     for(Long64_t i = 81; i < 93; i++)     // 4th t
+    // for(Long64_t i = 93; i < 107; i++)           // 5th t
+    //      for(Long64_t i = 107; i < 126; i++)           // 6th t
+    //      for(Long64_t i = 126; i < 153; i++)           // 7th t
+    for(Long64_t i = 153; i < 247; i++)           // 8th t
+      //for(Long64_t i = 41; i < 45; i++)           //test
 	
-	{
-	  Events1 += htheC->GetBinContent(i);
-	  Events2 += htheR1->GetBinContent(i);
-	  Events3 += htheL1->GetBinContent(i);
-	  Events4 += htheL2->GetBinContent(i);
-	  Events5 += htmeC->GetBinContent(i);
-	  Events6 += htmeR1->GetBinContent(i);
-	  Events7 += htmeR2->GetBinContent(i);
-	  Events8 += htmeL1->GetBinContent(i);
-	  Events9 += htmeL2->GetBinContent(i);
-	  Events10 += htC->GetBinContent(i);
-	  Events11 += htL1->GetBinContent(i);
-	  Events12 += htL2->GetBinContent(i);
-	}   
+      {
+	Events1 += htheC->GetBinContent(i);
+	Events2 += htheR1->GetBinContent(i);
+	Events3 += htheL1->GetBinContent(i);
+	Events4 += htheL2->GetBinContent(i);
+	Events5 += htmeC->GetBinContent(i);
+	Events6 += htmeR1->GetBinContent(i);
+	Events7 += htmeR2->GetBinContent(i);
+	Events8 += htmeL1->GetBinContent(i);
+	Events9 += htmeL2->GetBinContent(i);
+	Events10 += htC->GetBinContent(i);
+	Events11 += htL1->GetBinContent(i);
+	Events12 += htL2->GetBinContent(i);
+      }   
       
-      cout<< "  "<<Events1<<endl;    
-      cout<< "  "<<Events2<<endl;    
-      cout<< "  "<<Events3<<endl;    
-      cout<< "  "<<Events4<<endl;    
-      cout<< "  "<<Events5<<endl;    
-      cout<< "  "<<Events6<<endl;    
-      cout<< "  "<<Events7<<endl;    
-      cout<< "  "<<Events8<<endl;    
-      cout<< "  "<<Events9<<endl;    
-      cout<< "  "<<Events10<<endl;    
-      cout<< "  "<<Events11<<endl;    
-      cout<< "  "<<Events12<<endl;    
-    }
+    cout<< "  "<<Events1<<endl;    
+    cout<< "  "<<Events2<<endl;    
+    cout<< "  "<<Events3<<endl;    
+    cout<< "  "<<Events4<<endl;    
+    cout<< "  "<<Events5<<endl;    
+    cout<< "  "<<Events6<<endl;    
+    cout<< "  "<<Events7<<endl;    
+    cout<< "  "<<Events8<<endl;    
+    cout<< "  "<<Events9<<endl;    
+    cout<< "  "<<Events10<<endl;    
+    cout<< "  "<<Events11<<endl;    
+    cout<< "  "<<Events12<<endl;    
+  }
     
-    cout<<" Total Events: " <<Events1 + Events2 +Events3 +Events4 +Events5 +Events6 +Events7 +Events8 +Events9 +Events10 +Events11 +Events12 <<endl;
+  cout<<" Total Events: " <<Events1 + Events2 +Events3 +Events4 +Events5 +Events6 +Events7 +Events8 +Events9 +Events10 +Events11 +Events12 <<endl;
   
 
-    //  TLine *ltlow  = new TLine(0.005, -80.0, 0.005, 1800);
-    //TLine *lthigh = new TLine(0.08, -80.0, 0.08, 1800.0);
+  //  TLine *ltlow  = new TLine(0.005, -80.0, 0.005, 1800);
+  //TLine *lthigh = new TLine(0.08, -80.0, 0.08, 1800.0);
   // ltlow->SetLineColor(kBlack);
   //lthigh->SetLineColor(kBlack);
   //  ltlow->Draw("same"); 
   //lthigh->Draw("same");
     
-    Double_t Ymin = -92.0;
-    Double_t Ymax = 1750.0;
+  Double_t Ymin = -92.0;
+  Double_t Ymax = 1750.0;
 
   Double_t fstedge = ((TAxis*)htheC->GetXaxis())->GetBinCenter(44);
   cout<<" fstedge "<<fstedge<<endl;
@@ -2124,7 +2148,7 @@ void t_plots()
   legt->AddEntry(htC,"Low epsilon (3)","l");
   legt->Draw("same");
 
- c13->Print(outputpdf);
+  c13->Print(outputpdf);
 
   //Phi for all three e
   TCanvas *c14 = new TCanvas("c14", " c14");
@@ -2272,6 +2296,6 @@ void t_plots()
   fstphi17l->SetLineColor(kBlack);
   fstphi17l->Draw("same");
 
- c14->Print(outputpdf + ')');
+  c14->Print(outputpdf + ')');
  
 }
