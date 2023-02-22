@@ -803,6 +803,85 @@ void t_plots()
       cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
+
+  TH2D *Clone = (TH2D*)hYC->Clone("Clone");
+  Clone->Add(hYL1,+1);
+  Clone->Add(hYL2,+1);
+  Clone->SetTitle("Total Yield for low epsilon");
+  TCanvas *cYtle = new TCanvas("cYtle", " cYtle");
+  Clone->Draw("COLZ");
+  cYtle->Print(outputpdf);
+
+  cout<< "Total Yield for low epsilon"<<endl;
+  cout<<"1 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(44, 60, i, i, err, "");;
+      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
+    }
+  cout<<"2 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(61, 69 , i, i,err, "");;
+      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+    }
+  cout<<"3 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(70, 80, i, i,err, "");;
+      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+    }
+  cout<<"4 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(81, 92, i, i,err, "");;
+      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+    }
+
+  cout<<"5 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(93, 106, i, i,err, "");;
+      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+    }
+
+  cout<<"6 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(107, 125, i, i,err, "");;
+      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+    }
+
+  cout<<"7 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(126, 152, i, i,err, "");;
+      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+    }
+ 
+  cout<<"8 t-bin" <<endl;
+
+  for(Long64_t i = 4; i <= 19; i++)       
+    {
+      Double_t err;
+      Double_t Yield = Clone->IntegralAndError(153, 246, i, i,err, "");;
+      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+    }
+
   cout<< "End of the Yield calculations for low epsilon" <<endl;
 
   TCanvas *cRE = new TCanvas("cRE", " cRE");
