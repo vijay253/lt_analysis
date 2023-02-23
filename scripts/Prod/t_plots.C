@@ -177,6 +177,8 @@ void t_plots()
   TH2D *hQ2WCR  = new TH2D("hQ2WCR","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
   TH2D *hQ2WC1R  = new TH2D("hQ2WC1R","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
 
+  Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0800167, 0.1};
+
   TH1D *htC  = new TH1D("htC","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htL1  = new TH1D("htL1","MandelT; MandelT;", 300, -0.01, 0.1);      
   TH1D *htL2  = new TH1D("htL2","MandelT; MandelT;", 300, -0.01, 0.1);      
@@ -185,13 +187,13 @@ void t_plots()
   TH1D *htL1R  = new TH1D("htL1R","MandelT; MandelT;", 300, -0.01, 0.1);      
   TH1D *htL2R  = new TH1D("htL2R","MandelT; MandelT;", 300, -0.01, 0.1);      
 
-  TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 22, -4.5, 4.5);      
-  TH1D *hph_qL2  = new TH1D("hph_qL2","ph_q; ph_q;", 22, -4.5, 4.5);      
+  TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hph_qL2  = new TH1D("hph_qL2","ph_q; ph_q;", 18, -22.5, 382.5);      
 
-  TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qL1R  = new TH1D("hph_qL1R","ph_q; ph_q;", 22, -4.5, 4.5);      
-  TH1D *hph_qL2R  = new TH1D("hph_qL2R","ph_q; ph_q;", 22, -4.5, 4.5);      
+  TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",  18, -22.5, 382.5);      
+  TH1D *hph_qL1R  = new TH1D("hph_qL1R","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hph_qL2R  = new TH1D("hph_qL2R","ph_q; ph_q;",18, -22.5, 382.5);      
 
   TH1D *hmmC  = new TH1D("hmmC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmL1  = new TH1D("hmmL1","MM; MM;", 300, 0.8, 1.2);      
@@ -205,14 +207,14 @@ void t_plots()
   TH1D *htcoinL1  = new TH1D("htcoinL1","CTime_ROC1; CTime_ROC1;", 300, -20.0, 20.0);      
   TH1D *htcoinL2  = new TH1D("htcoinL2","CTime_ROC1; CTime_ROC1;", 300, -20.0, 20.0);      
 
-  TH2D *hYC   = new TH2D("hYC"," Yield C;t-Bin; Phi-Bin ", 300, -0.01, 0.1, 22, -4.5, 4.5);      
-  TH2D *hYCR  = new TH2D("hYCR"," Yield in Bins; t-Bin; Phi-Bin", 300, -0.01, 0.1, 22, -4.5, 4.5);      
+  TH2D *hYC   = new TH2D("hYC"," Yield C;t-Bin; Phi-Bin ", 10, bins, 18, -22.5, 382.5);      
+  TH2D *hYCR  = new TH2D("hYCR"," Yield in Bins; t-Bin; Phi-Bin", 8, bins, 18, -22.5, 382.5);      
 
-  TH2D *hYL1   = new TH2D("hYL1"," Yield L1;t-Bin; Phi-Bin ", 300, -0.01, 0.1, 22, -4.5, 4.5);      
-  TH2D *hYL1R  = new TH2D("hYL1R"," Yield L1; t-Bin; Phi-Bin", 300, -0.01, 0.1, 22, -4.5, 4.5);      
+  TH2D *hYL1   = new TH2D("hYL1"," Yield L1;t-Bin; Phi-Bin ", 10 , bins, 18, -22.5, 382.5);      
+  TH2D *hYL1R  = new TH2D("hYL1R"," Yield L1; t-Bin; Phi-Bin", 10, bins, 18, -22.5, 382.5);      
 
-  TH2D *hYL2   = new TH2D("hYL2"," Yield L2;t-Bin; Phi-Bin ", 300, -0.01, 0.1, 22, -4.5, 4.5);      
-  TH2D *hYL2R  = new TH2D("hYL2R"," Yield L2; t-Bin; Phi-Bin", 300, -0.01, 0.1, 22, -4.5, 4.5);      
+  TH2D *hYL2   = new TH2D("hYL2"," Yield L2;t-Bin; Phi-Bin ", 10, bins, 18, -22.5, 382.5);      
+  TH2D *hYL2R  = new TH2D("hYL2R"," Yield L2; t-Bin; Phi-Bin", 10, bins, 18, -22.5, 382.5);      
 
 
   //SIMC HISTOGRAMS
@@ -279,16 +281,16 @@ void t_plots()
 	{
 	  hQ2WC1->Fill(Q2C, WC);	      	  
   	  htC->Fill(-tC);
-	  hph_qC->Fill(ph_qC);
-	  hYC->Fill(-tC, ph_qC);
+	  hph_qC->Fill(ph_qC*57.2958 + 180);
+	  hYC->Fill(-tC, ph_qC*57.2958 + 180);
 	}	      
       
       if(((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)) && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
 	{
 	  htCR->Fill(-tC);
-	  hph_qCR->Fill(ph_qC);
+	  hph_qCR->Fill(ph_qC*57.2958 + 180);
 	  hQ2WCR->Fill(Q2C, WC);
-	  hYCR->Fill(-tC, ph_qC);
+	  hYCR->Fill(-tC, ph_qC*57.2958 + 180);
 	}
       
       if (((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)))
@@ -372,16 +374,16 @@ void t_plots()
       if(tcoinL1>=-1.0 && tcoinL1 <= 1.0 && mmL1>= 0.92 && mmL1 <=0.98 && Diamond_cut)
 	{
 	  htL1->Fill(-tL1);
-	  hph_qL1->Fill(ph_qL1);	  
-	  hYL1->Fill(-tL1, ph_qL1);
+	  hph_qL1->Fill(ph_qL1*57.2958 + 180);	  
+	  hYL1->Fill(-tL1, ph_qL1*57.2958 + 180);
 	}      
       
       if(((tcoinL1>=-15.0 && tcoinL1 <= -9.0) || (tcoinL1>=7.0 && tcoinL1 <=13.0)) && mmL1>= 0.92 && mmL1 <=0.98 && Diamond_cut)	
 	
 	{
 	  htL1R->Fill(-tL1);
-	  hph_qL1R->Fill(ph_qL1);	  
-	  hYL1R->Fill(-tL1, ph_qL1);
+	  hph_qL1R->Fill(ph_qL1*57.2958 + 180);	  
+	  hYL1R->Fill(-tL1, ph_qL1*57.2958 + 180);
 	}
       
       if (((tcoinL1>=-15.0 && tcoinL1 <= -9.0) || (tcoinL1>=7.0 && tcoinL1 <=13.0)))
@@ -411,15 +413,15 @@ void t_plots()
       if(tcoinL2>=-1.0 && tcoinL2 <= 1.0 && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
 	  htL2->Fill(-tL2);
-	  hph_qL2->Fill(ph_qL2);
-	  hYL2->Fill(-tL2, ph_qL2);
+	  hph_qL2->Fill(ph_qL2*57.2958 + 180);
+	  hYL2->Fill(-tL2, ph_qL2*57.2958 + 180);
 	}
 
       if(((tcoinL2>=-15.0 && tcoinL2 <= -9.0) || (tcoinL2>=7.0 && tcoinL2 <=13.0)) && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
 	  htL2R->Fill(-tL2);
-	  hph_qL2R->Fill(ph_qL2);
-	  hYL2R->Fill(-tL2, ph_qL2);
+	  hph_qL2R->Fill(ph_qL2*57.2958 + 180);
+	  hYL2R->Fill(-tL2, ph_qL2*57.2958 + 180);
 	}
 
       if (((tcoinL2>=-15.0 && tcoinL2 <= -9.0) || (tcoinL2>=7.0 && tcoinL2 <=13.0)))
@@ -581,73 +583,77 @@ void t_plots()
 
   cout<< "Center Setting Yield"<<endl;
   cout<<"1 t-bin" <<endl;
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Double_t j = 2; j <= 9; j++)
     {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
+      for(Long64_t i = 2; i <= 17; i++)       
+	{
+	  Double_t err;
+	  Double_t Yield = hYC->IntegralAndError(j, j, i, i, err, "");;
+	  cout<< j-1 << "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
+	}
     }
+  /**
   cout<<"2 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYC->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
-
+  **/
   TCanvas *cYL1 = new TCanvas("cYL1", " cYL1");
   hYL1->Add(hYL1R, -1);  
   hYL1->Scale(scaleFL1);  
@@ -659,71 +665,71 @@ void t_plots()
 
   cout<<"1 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
+      cout<<" 1 "<< "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
     }
   cout<<"2 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL1->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   TCanvas *cYL2 = new TCanvas("cYL2", " cYL2");
@@ -736,71 +742,71 @@ void t_plots()
   cout<< "Left 2 Setting Yield"<<endl;
 
   cout<<"1 t-bin" <<endl;
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
+      cout<<" 1 "<< "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
     }
   cout<<"2 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = hYL2->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
 
@@ -815,74 +821,74 @@ void t_plots()
   cout<< "Total Yield for low epsilon"<<endl;
   cout<<"1 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-3 << "  " << " " << Yield <<" +-"<<err <<endl;   
+      cout<<" 1 "<< "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
     }
   cout<<"2 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
   cout<<"3 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
   cout<<"4 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"5 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"6 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
   cout<<"7 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err <<endl;   
+      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
     }
  
   cout<<"8 t-bin" <<endl;
 
-  for(Long64_t i = 4; i <= 19; i++)       
+  for(Long64_t i = 2; i <= 17; i++)       
     {
       Double_t err;
       Double_t Yield = Clone->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-3 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
     }
 
-  cout<< "End of the Yield calculations for low epsilon" <<endl;
+  cout<< "End of the low e Yield calculations " <<endl;
 
   TCanvas *cRE = new TCanvas("cRE", " cRE");
 
@@ -1174,18 +1180,29 @@ void t_plots()
   TH1D *htmeL1R  = new TH1D("htmeL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeL2R  = new TH1D("htmeL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
-  TH1D *hph_qmeR1  = new TH1D("hph_qmeR1","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qmeR2  = new TH1D("hph_qmeR2","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qmeC   = new TH1D("hph_qmeC","ph_q; ph_q;",    22, -4.5, 4.5);      
-  TH1D *hph_qmeL1  = new TH1D("hph_qmeL1","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qmeL2  = new TH1D("hph_qmeL2","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeR1  = new TH1D("hph_qmeR1","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qmeR2  = new TH1D("hph_qmeR2","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qmeC   = new TH1D("hph_qmeC","ph_q; ph_q;",    18, -22.5, 382.5);      
+  TH1D *hph_qmeL1  = new TH1D("hph_qmeL1","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qmeL2  = new TH1D("hph_qmeL2","ph_q; ph_q;",   18, -22.5, 382.5);      
 
-  TH1D *hph_qmeR1R  = new TH1D("hph_qmeR1R","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qmeR2R  = new TH1D("hph_qmeR2R","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qmeCR   = new TH1D("hph_qmeCR","ph_q; ph_q;",    22, -4.5, 4.5);      
-  TH1D *hph_qmeL1R  = new TH1D("hph_qmeL1R","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qmeL2R  = new TH1D("hph_qmeL2R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qmeR1R  = new TH1D("hph_qmeR1R","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qmeR2R  = new TH1D("hph_qmeR2R","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qmeCR   = new TH1D("hph_qmeCR","ph_q; ph_q;",    18, -22.5, 382.5);      
+  TH1D *hph_qmeL1R  = new TH1D("hph_qmeL1R","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qmeL2R  = new TH1D("hph_qmeL2R","ph_q; ph_q;",   18, -22.5, 382.5);      
 
+  TH2D *hYmeR1   = new TH2D("hYmeR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeR2   = new TH2D("hYmeR2"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeC    = new TH2D("hYmeC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeL1   = new TH2D("hYmeL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeL2   = new TH2D("hYmeL2"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+
+  TH2D *hYmeR1R   = new TH2D("hYmeR1R"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeR2R   = new TH2D("hYmeR2R"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeCR    = new TH2D("hYmeCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeL1R   = new TH2D("hYmeL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmeL2R   = new TH2D("hYmeL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
 
   TH1D *hmmmeR1  = new TH1D("hmmmeR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeR2  = new TH1D("hmmmeR2","MM; MM;", 300, 0.8, 1.2);      
@@ -1224,13 +1241,15 @@ void t_plots()
       if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0 && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
 	  htmeR1->Fill(-tmeR1);
-	  hph_qmeR1->Fill(ph_qmeR1);
+	  hph_qmeR1->Fill(ph_qmeR1*57.2958 + 180);
+	  hYmeR1->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
 	}
 
       if(((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)) && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
 	  htmeR1R->Fill(-tmeR1);
-	  hph_qmeR1R->Fill(ph_qmeR1);
+	  hph_qmeR1R->Fill(ph_qmeR1*57.2958 + 180);
+	  hYmeR1R->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
 	}
       
       if (((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)))
@@ -1259,13 +1278,16 @@ void t_plots()
       if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0 && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
 	  htmeR2->Fill(-tmeR2);
-	  hph_qmeR2->Fill(ph_qmeR2);
+	  hph_qmeR2->Fill(ph_qmeR2*57.2958 + 180);
+	  hYmeR2->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
 	}
 
       if(((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)) && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
 	  htmeR2R->Fill(-tmeR2);
-	  hph_qmeR2R->Fill(ph_qmeR2);
+	  hph_qmeR2R->Fill(ph_qmeR2*57.2958 + 180);
+	  hYmeR2R->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
+
 	}
       
       if (((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)))
@@ -1300,14 +1322,17 @@ void t_plots()
 	{
 	  hQ2WMEC1->Fill(Q2MEC, WMEC);	      	  
 	  htmeC->Fill(-tmeC);
-	  hph_qmeC->Fill(ph_qmeC);
+	  hph_qmeC->Fill(ph_qmeC*57.2958 + 180);
+	  hYmeC->Fill(-tmeC, ph_qmeC*57.2958 + 180);
+
 	}	      
 
            
       if(((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC <=13.0)) && mmmeC>= 0.92 && mmmeC <=0.98 && Diamond_cut)
   	{
 	  htmeCR->Fill(-tmeC);
-	  hph_qmeCR->Fill(ph_qmeC);
+	  hph_qmeCR->Fill(ph_qmeC*57.2958 + 180);
+	  hYmeCR->Fill(-tmeC, ph_qmeC*57.2958 + 180);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
 	}
       
@@ -1338,14 +1363,17 @@ void t_plots()
       if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0 && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
 	{
 	  htmeL1->Fill(-tmeL1);
-	  hph_qmeL1->Fill(ph_qmeL1);	  
+	  hph_qmeL1->Fill(ph_qmeL1*57.2958 + 180);	  
+	  hYmeL1->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
+
 	}
 
       if(((tcoinmeL1>=-15.0 && tcoinmeL1 <= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1 <=13.0)) && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
  	
 	{
 	  htmeL1R->Fill(-tmeL1);
-	  hph_qmeL1R->Fill(ph_qmeL1);	  
+	  hph_qmeL1R->Fill(ph_qmeL1*57.2958 + 180);	  
+	  hYmeL1R->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
 	}
       
       if(((tcoinmeL1>=-15.0 && tcoinmeL1 <= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1 <=13.0)))
@@ -1375,13 +1403,16 @@ void t_plots()
 	
 	{
 	  htmeL2->Fill(-tmeL2);
-	  hph_qmeL2->Fill(ph_qmeL2);
+	  hph_qmeL2->Fill(ph_qmeL2*57.2958 + 180);
+	  hYmeL2->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
 	}
 
       if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)) && mmmeL2>= 0.92 && mmmeL2 <=0.98 && Diamond_cut)
 	{
 	  htmeL2R->Fill(-tmeL2);
-	  hph_qmeL2R->Fill(ph_qmeL2);
+	  hph_qmeL2R->Fill(ph_qmeL2*57.2958 + 180);
+	  hYmeL2R->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
+
 	}
 
       if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)))
@@ -1409,6 +1440,19 @@ void t_plots()
   hph_qmeCR->Scale(1.0/6.0);
   hph_qmeL1R->Scale(1.0/6.0);
   hph_qmeL2R->Scale(1.0/6.0);
+
+  hYmeR1R->Scale(1.0/6.0);
+  hYmeR2R->Scale(1.0/6.0);
+  hYmeCR->Scale(1.0/6.0);
+  hYmeL1R->Scale(1.0/6.0);
+  hYmeL2R->Scale(1.0/6.0);
+
+  Double_t SFMER1  = 1.0/213.121;
+  Double_t SFMER2  = 1.0/326.60;
+  Double_t SFMEC   = 1.0/260.320;
+  Double_t SFMEL1  = 1.0/348.721;
+  Double_t SFMEL2  = 1.0/417.783;
+
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
 
@@ -1565,6 +1609,70 @@ void t_plots()
 
   c12me->Print(outputpdf);
 
+  TCanvas *cYmeR1 = new TCanvas("cYmeR1", " cYmeR1");
+  hYmeR1->Add(hYmeR1R, -1);  
+  hYmeR1->Scale(SFMER1);  
+  hYmeR1->SetStats(0);
+  hYmeR1->Draw("COLZ");
+  cYmeR1->Print(outputpdf);
+
+  cout<< "R1 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYmeR2 = new TCanvas("cYmeR2", " cYmeR2");
+  hYmeR2->Add(hYmeR2R, -1);  
+  hYmeR2->Scale(SFMER2);  
+  hYmeR2->SetStats(0);
+  hYmeR2->Draw("COLZ");
+  cYmeR2->Print(outputpdf);
+
+  cout<< "R2 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYmeC = new TCanvas("cYmeC", " cYmeC");
+  hYmeC->Add(hYmeCR, -1);  
+  hYmeC->Scale(SFMEC);  
+  hYmeC->SetStats(0);
+  hYmeC->Draw("COLZ");
+  cYmeC->Print(outputpdf);
+
+  cout<< "C Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYmeL1 = new TCanvas("cYmeL1", " cYmeL1");
+  hYmeL1->Add(hYmeL1R, -1);  
+  hYmeL1->Scale(SFMEL1);  
+  hYmeL1->SetStats(0);
+  hYmeL1->Draw("COLZ");
+  cYmeL1->Print(outputpdf);
+
+  cout<< "L1 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYmeL2 = new TCanvas("cYmeL2", " cYmeL2");
+  hYmeL2->Add(hYmeL2R, -1);  
+  hYmeL2->Scale(SFMEL2);  
+  hYmeL2->SetStats(0);
+  hYmeL2->Draw("COLZ");
+  cYmeL2->Print(outputpdf);
+
+  cout<< "L2 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TH2D *Cloneme = (TH2D*)hYmeR1->Clone("Cloneme");
+  Cloneme->Add(hYmeR2,+1);
+  Cloneme->Add(hYmeC,+1);
+  Cloneme->Add(hYmeL1,+1);
+  Cloneme->Add(hYmeL2,+1);
+  Cloneme->SetTitle("Total Yield for mid epsilon");
+  TCanvas *cYtme = new TCanvas("cYtme", " cYtme");
+  Cloneme->Draw("COLZ");
+  cYtme->Print(outputpdf);
+
+  cout<< "Total Yield for mid epsilon"<<endl;
+  cout<<"..."<<endl;
+
+  cout<<"End of the mid e Yield calculations "<<endl;
 
   //High epsilon analysis Feb 07, 2023
 
@@ -1662,15 +1770,25 @@ void t_plots()
   TH1D *htheL2R  = new TH1D("htheL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
 
-  TH1D *hph_qheR1  = new TH1D("hph_qheR1","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qheC   = new TH1D("hph_qheC","ph_q; ph_q;",    22, -4.5, 4.5);      
-  TH1D *hph_qheL1  = new TH1D("hph_qheL1","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qheL2  = new TH1D("hph_qheL2","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qheR1  = new TH1D("hph_qheR1","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qheC   = new TH1D("hph_qheC","ph_q; ph_q;",    18, -22.5, 382.5);      
+  TH1D *hph_qheL1  = new TH1D("hph_qheL1","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qheL2  = new TH1D("hph_qheL2","ph_q; ph_q;",   18, -22.5, 382.5);      
 
-  TH1D *hph_qheR1R  = new TH1D("hph_qheR1R","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qheCR   = new TH1D("hph_qheCR","ph_q; ph_q;",    22, -4.5, 4.5);      
-  TH1D *hph_qheL1R  = new TH1D("hph_qheL1R","ph_q; ph_q;",   22, -4.5, 4.5);      
-  TH1D *hph_qheL2R  = new TH1D("hph_qheL2R","ph_q; ph_q;",   22, -4.5, 4.5);      
+  TH1D *hph_qheR1R  = new TH1D("hph_qheR1R","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qheCR   = new TH1D("hph_qheCR","ph_q; ph_q;",    18, -22.5, 382.5);      
+  TH1D *hph_qheL1R  = new TH1D("hph_qheL1R","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qheL2R  = new TH1D("hph_qheL2R","ph_q; ph_q;",   18, -22.5, 382.5);      
+
+  TH2D *hYheR1   = new TH2D("hYheR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYheC    = new TH2D("hYheC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
+  TH2D *hYheL1   = new TH2D("hYheL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYheL2   = new TH2D("hYheL2"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+
+  TH2D *hYheR1R   = new TH2D("hYheR1R"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYheCR    = new TH2D("hYheCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
+  TH2D *hYheL1R   = new TH2D("hYheL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYheL2R   = new TH2D("hYheL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
 
 
   TH1D *hmmheR1  = new TH1D("hmmheR1","MM; MM;", 300, 0.8, 1.2);      
@@ -1706,13 +1824,15 @@ void t_plots()
       if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0 && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
 	  htheR1->Fill(-theR1);
-	  hph_qheR1->Fill(ph_qheR1);
+	  hph_qheR1->Fill(ph_qheR1*57.2958 + 180);
+	  hYheR1->Fill(-theR1, ph_qheR1*57.2958 + 180);
 	}
       
       if(((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)) && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
 	  htheR1R->Fill(-theR1);
-	  hph_qheR1R->Fill(ph_qheR1);
+	  hph_qheR1R->Fill(ph_qheR1*57.2958 + 180);
+	  hYheR1R->Fill(-theR1, ph_qheR1*57.2958 + 180);
 	}
       
       if (((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)))
@@ -1747,15 +1867,17 @@ void t_plots()
 	{
 	  hQ2WHEC1->Fill(Q2HEC, WHEC);	      	  
 	  htheC->Fill(-theC);
-	  hph_qheC->Fill(ph_qheC);
+	  hph_qheC->Fill(ph_qheC*57.2958 + 180);
+	  hYheC->Fill(-theC, ph_qheC*57.2958 + 180);
 	}	      
 
            
       if(((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0)) && mmheC>= 0.92 && mmheC <=0.98 && Diamond_cut)
   	{
 	  htheCR->Fill(-theC);
-	  hph_qheCR->Fill(ph_qheC);
+	  hph_qheCR->Fill(ph_qheC*57.2958 + 180);
 	  hQ2WHECR->Fill(Q2HEC, WHEC);
+	  hYheCR->Fill(-theC, ph_qheC*57.2958 + 180);
 	}
       
       if(((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0)))
@@ -1786,14 +1908,16 @@ void t_plots()
       if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0 && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
 	{
 	  htheL1->Fill(-theL1);
-	  hph_qheL1->Fill(ph_qheL1);	  
+	  hph_qheL1->Fill(ph_qheL1*57.2958 + 180);	  
+	  hYheL1->Fill(-theL1, ph_qheL1*57.2958 + 180);
 	}      
 
       if(((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0)) && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
  	
 	{
 	  htheL1R->Fill(-theL1);
-	  hph_qheL1R->Fill(ph_qheL1);	  
+	  hph_qheL1R->Fill(ph_qheL1*57.2958 + 180);	  
+	  hYheL1R->Fill(-theL1, ph_qheL1*57.2958 + 180);
 	}
       
       if(((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0)))
@@ -1823,13 +1947,15 @@ void t_plots()
   
 	{
 	  htheL2->Fill(-theL2);
-	  hph_qheL2->Fill(ph_qheL2);
+	  hph_qheL2->Fill(ph_qheL2*57.2958 + 180);
+	  hYheL2->Fill(-theL2, ph_qheL2*57.2958 + 180);
 	}
 
       if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)) && mmheL2>= 0.92 && mmheL2 <=0.98 && Diamond_cut)
 	{
 	  htheL2R->Fill(-theL2);
-	  hph_qheL2R->Fill(ph_qheL2);
+	  hph_qheL2R->Fill(ph_qheL2*57.2958 + 180);
+	  hYheL2R->Fill(-theL2, ph_qheL2*57.2958 + 180);
 	}
 
       if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)))
@@ -1854,6 +1980,16 @@ void t_plots()
   hph_qheCR->Scale(1.0/6.0);
   hph_qheL1R->Scale(1.0/6.0);
   hph_qheL2R->Scale(1.0/6.0);
+
+  hYheR1R->Scale(1.0/6.0);
+  hYheCR->Scale(1.0/6.0);
+  hYheL1R->Scale(1.0/6.0);
+  hYheL2R->Scale(1.0/6.0);
+
+  Double_t SFHER1  = 1.0/132.549;
+  Double_t SFHEC   = 1.0/380.856;
+  Double_t SFHEL1  = 1.0/183.703;
+  Double_t SFHEL2  = 1.0/196.02;
   
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
@@ -1991,6 +2127,60 @@ void t_plots()
   Dcut->Draw("same");
 
   c12->Print(outputpdf);
+
+  TCanvas *cYheR1 = new TCanvas("cYheR1", " cYheR1");
+  hYheR1->Add(hYheR1R, -1);  
+  hYheR1->Scale(SFHER1);  
+  hYheR1->SetStats(0);
+  hYheR1->Draw("COLZ");
+  cYheR1->Print(outputpdf);
+
+  cout<< "R1 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYheC = new TCanvas("cYheC", " cYheC");
+  hYheC->Add(hYheCR, -1);  
+  hYheC->Scale(SFHEC);  
+  hYheC->SetStats(0);
+  hYheC->Draw("COLZ");
+  cYheC->Print(outputpdf);
+
+  cout<< "C Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYheL1 = new TCanvas("cYheL1", " cYheL1");
+  hYheL1->Add(hYheL1R, -1);  
+  hYheL1->Scale(SFHEL1);  
+  hYheL1->SetStats(0);
+  hYheL1->Draw("COLZ");
+  cYheL1->Print(outputpdf);
+
+  cout<< "L1 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TCanvas *cYheL2 = new TCanvas("cYheL2", " cYheL2");
+  hYheL2->Add(hYheL2R, -1);  
+  hYheL2->Scale(SFHEL2);  
+  hYheL2->SetStats(0);
+  hYheL2->Draw("COLZ");
+  cYheL2->Print(outputpdf);
+
+  cout<< "L2 Setting Yield"<<endl;
+  cout<<"..."<<endl;
+
+  TH2D *Clonehe = (TH2D*)hYheR1->Clone("Clonehe");
+  Clonehe->Add(hYheC,+1);
+  Clonehe->Add(hYheL1,+1);
+  Clonehe->Add(hYheL2,+1);
+  Clonehe->SetTitle("Total Yield for High epsilon");
+  TCanvas *cYthe = new TCanvas("cYthe", " cYthe");
+  Clonehe->Draw("COLZ");
+  cYthe->Print(outputpdf);
+
+  cout<< "Total Yield for high epsilon"<<endl;
+  cout<<"..."<<endl;
+
+  cout<<"End of the high e Yield calculations "<<endl;
 
   //-t for all three e
   TCanvas *c13 = new TCanvas("c13", " c13");
@@ -2286,7 +2476,7 @@ void t_plots()
   hph_qC->Draw("same Weight");
 
   //Check phi edges
-  
+  /**
   Double_t Phiymin = 0.0;
   Double_t Phiymax = 12750.0;
   
@@ -2374,6 +2564,7 @@ void t_plots()
   TLine *fstphi17l = new TLine(fstphi17, Phiymin, fstphi17, Phiymax);
   fstphi17l->SetLineColor(kBlack);
   fstphi17l->Draw("same");
+  **/
 
   c14->Print(outputpdf + ')');
  
