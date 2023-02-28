@@ -177,15 +177,23 @@ void t_plots()
   TH2D *hQ2WCR  = new TH2D("hQ2WCR","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
   TH2D *hQ2WC1R  = new TH2D("hQ2WC1R","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
 
-  Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0800167, 0.1};
+  Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0701167, 0.1};
 
   TH1D *htC  = new TH1D("htC","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htL1  = new TH1D("htL1","MandelT; MandelT;", 300, -0.01, 0.1);      
   TH1D *htL2  = new TH1D("htL2","MandelT; MandelT;", 300, -0.01, 0.1);      
 
+  TH1D *htInC  = new TH1D("htInC","MandelT; MandelT;",   10, bins);      
+  TH1D *htInL1  = new TH1D("htInL1","MandelT; MandelT;", 10, bins);      
+  TH1D *htInL2  = new TH1D("htInL2","MandelT; MandelT;", 10, bins);      
+
   TH1D *htCR  = new TH1D("htCR","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htL1R  = new TH1D("htL1R","MandelT; MandelT;", 300, -0.01, 0.1);      
   TH1D *htL2R  = new TH1D("htL2R","MandelT; MandelT;", 300, -0.01, 0.1);      
+
+  TH1D *htInCR  = new TH1D("htInCR","MandelT; MandelT;",   10, bins);      
+  TH1D *htInL1R  = new TH1D("htInL1R","MandelT; MandelT;", 10, bins);      
+  TH1D *htInL2R  = new TH1D("htInL2R","MandelT; MandelT;", 10, bins);      
 
   TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 18, -22.5, 382.5);      
@@ -281,6 +289,7 @@ void t_plots()
 	{
 	  hQ2WC1->Fill(Q2C, WC);	      	  
   	  htC->Fill(-tC);
+	  htInC->Fill(-tC);	
 	  hph_qC->Fill(ph_qC*57.2958 + 180);
 	  hYC->Fill(-tC, ph_qC*57.2958 + 180);
 	}	      
@@ -288,6 +297,7 @@ void t_plots()
       if(((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)) && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
 	{
 	  htCR->Fill(-tC);
+	  htInCR->Fill(-tC);	
 	  hph_qCR->Fill(ph_qC*57.2958 + 180);
 	  hQ2WCR->Fill(Q2C, WC);
 	  hYCR->Fill(-tC, ph_qC*57.2958 + 180);
@@ -374,6 +384,7 @@ void t_plots()
       if(tcoinL1>=-1.0 && tcoinL1 <= 1.0 && mmL1>= 0.92 && mmL1 <=0.98 && Diamond_cut)
 	{
 	  htL1->Fill(-tL1);
+ 	  htInL1->Fill(-tL1);
 	  hph_qL1->Fill(ph_qL1*57.2958 + 180);	  
 	  hYL1->Fill(-tL1, ph_qL1*57.2958 + 180);
 	}      
@@ -382,6 +393,7 @@ void t_plots()
 	
 	{
 	  htL1R->Fill(-tL1);
+ 	  htInL1R->Fill(-tL1);
 	  hph_qL1R->Fill(ph_qL1*57.2958 + 180);	  
 	  hYL1R->Fill(-tL1, ph_qL1*57.2958 + 180);
 	}
@@ -413,6 +425,7 @@ void t_plots()
       if(tcoinL2>=-1.0 && tcoinL2 <= 1.0 && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
 	  htL2->Fill(-tL2);
+ 	  htInL2->Fill(-tL2);
 	  hph_qL2->Fill(ph_qL2*57.2958 + 180);
 	  hYL2->Fill(-tL2, ph_qL2*57.2958 + 180);
 	}
@@ -420,6 +433,7 @@ void t_plots()
       if(((tcoinL2>=-15.0 && tcoinL2 <= -9.0) || (tcoinL2>=7.0 && tcoinL2 <=13.0)) && mmL2>= 0.92 && mmL2 <=0.98 && Diamond_cut)
 	{
 	  htL2R->Fill(-tL2);
+ 	  htInL2R->Fill(-tL2);
 	  hph_qL2R->Fill(ph_qL2*57.2958 + 180);
 	  hYL2R->Fill(-tL2, ph_qL2*57.2958 + 180);
 	}
@@ -442,6 +456,10 @@ void t_plots()
   htCR->Scale(1.0/6.0);
   htL1R->Scale(1.0/6.0);
   htL2R->Scale(1.0/6.0);
+
+  htInCR->Scale(1.0/6.0);
+  htInL1R->Scale(1.0/6.0);
+  htInL2R->Scale(1.0/6.0);
 
   hph_qCR->Scale(1.0/6.0);
   hph_qL1R->Scale(1.0/6.0);
@@ -512,7 +530,26 @@ void t_plots()
   htL2->Add(htL2R, -1); 
   htL2->Draw(" same Weight");
 
-  c3->Print(outputpdf);
+ c3->Print(outputpdf);
+
+  TCanvas *c3In = new TCanvas("c3In", " c3In");
+ 
+  htInL2->SetStats(0);
+  htInL2->SetLineColor(kBlack);
+  htInL2->Add(htInL2R, -1); 
+  htInL2->Draw(" Weight");
+
+  htInC->SetStats(0);
+  htInC->SetLineColor(kGreen);
+  htInC->Add(htInCR,-1); 
+  htInC->Draw("same Weight");
+
+  htInL1->SetStats(0);
+  htInL1->SetLineColor(kRed);
+  htInL1->Add(htInL1R, -1); 
+  htInL1->Draw("same Weight");
+ 
+  c3In->Print(outputpdf);
 
   TCanvas *c4 = new TCanvas("c4", " c4"); 
   hph_qL2->SetStats(0);
@@ -582,78 +619,18 @@ void t_plots()
   cY->Print(outputpdf);
 
   cout<< "Center Setting Yield"<<endl;
-  cout<<"1 t-bin" <<endl;
+  cout<< "  "<<endl;
+
   for(Double_t j = 2; j <= 9; j++)
     {
       for(Long64_t i = 2; i <= 17; i++)       
 	{
 	  Double_t err;
 	  Double_t Yield = hYC->IntegralAndError(j, j, i, i, err, "");;
-	  cout<< j-1 << "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
+	  cout<<Yield <<" +- "<<err << "  "<< j-1 << "  "<< i-1 << endl;   
 	}
     }
-  /**
-  cout<<"2 t-bin" <<endl;
 
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
-  cout<<"3 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-  cout<<"4 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"5 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"6 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"7 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
- 
-  cout<<"8 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYC->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-  **/
   TCanvas *cYL1 = new TCanvas("cYL1", " cYL1");
   hYL1->Add(hYL1R, -1);  
   hYL1->Scale(scaleFL1);  
@@ -663,74 +640,18 @@ void t_plots()
 
   cout<< "Left 1 Setting Yield"<<endl;
 
-  cout<<"1 t-bin" <<endl;
+  cout<< "  "<<endl;
 
-  for(Long64_t i = 2; i <= 17; i++)       
+  for(Double_t j = 2; j <= 9; j++)
     {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
-    }
-  cout<<"2 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
-  cout<<"3 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-  cout<<"4 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      for(Long64_t i = 2; i <= 17; i++)       
+	{
+	  Double_t err;
+	  Double_t Yield = hYL1->IntegralAndError(j, j, i, i, err, "");;
+	  cout<<Yield <<" +- "<<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	}
     }
 
-  cout<<"5 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"6 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"7 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
- 
-  cout<<"8 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL1->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
 
   TCanvas *cYL2 = new TCanvas("cYL2", " cYL2");
   hYL2->Add(hYL2R, -1);  
@@ -741,74 +662,17 @@ void t_plots()
 
   cout<< "Left 2 Setting Yield"<<endl;
 
-  cout<<"1 t-bin" <<endl;
-  for(Long64_t i = 2; i <= 17; i++)       
+  cout<< "  "<<endl;
+
+  for(Double_t j = 2; j <= 9; j++)
     {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
+      for(Long64_t i = 2; i <= 17; i++)       
+	{
+	  Double_t err;
+	  Double_t Yield = hYL2->IntegralAndError(j, j, i, i, err, "");;
+	  cout<<Yield <<" +-" <<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	}
     }
-  cout<<"2 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
-  cout<<"3 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-  cout<<"4 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"5 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"6 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"7 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
- 
-  cout<<"8 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = hYL2->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
 
   TH2D *Clone = (TH2D*)hYC->Clone("Clone");
   Clone->Add(hYL1,+1);
@@ -819,73 +683,15 @@ void t_plots()
   cYtle->Print(outputpdf);
 
   cout<< "Total Yield for low epsilon"<<endl;
-  cout<<"1 t-bin" <<endl;
 
-  for(Long64_t i = 2; i <= 17; i++)       
+  for(Double_t j = 2; j <= 9; j++)
     {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(44, 60, i, i, err, "");;
-      cout<<" 1 "<< "  "<< i-1 << "  " << " " << Yield <<" +-"<<err <<endl;   
-    }
-  cout<<"2 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(61, 69 , i, i,err, "");;
-      cout<<" 2 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
-  cout<<"3 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(70, 80, i, i,err, "");;
-      cout<<" 3 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-  cout<<"4 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(81, 92, i, i,err, "");;
-      cout<<" 4 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"5 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(93, 106, i, i,err, "");;
-      cout<<" 5 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"6 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(107, 125, i, i,err, "");;
-      cout<<" 6 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
-    }
-
-  cout<<"7 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(126, 152, i, i,err, "");;
-      cout<<" 7 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err <<endl;   
-    }
- 
-  cout<<"8 t-bin" <<endl;
-
-  for(Long64_t i = 2; i <= 17; i++)       
-    {
-      Double_t err;
-      Double_t Yield = Clone->IntegralAndError(153, 246, i, i,err, "");;
-      cout<<" 8 "<< "  "<< i-1 << "  " << " " << Yield  <<" +-"<<err<<endl;   
+      for(Long64_t i = 2; i <= 17; i++)       
+	{
+	  Double_t err;
+	  Double_t Yield = Clone->IntegralAndError(j, j, i, i, err, "");;
+	  cout<<Yield <<" +-" <<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	}
     }
 
   cout<< "End of the low e Yield calculations " <<endl;
@@ -895,7 +701,7 @@ void t_plots()
   TF1 *Gauss = new TF1("Gauss","gaus(0)",-0.004,0.006);
   Gauss->SetLineColor(kRed);
   H_t_RE->Fit("Gauss", "RQ"); 
-  H_t_RE->SetStats(0);
+  // H_t_RE->SetStats(0);
   H_t_RE->GetYaxis()->SetTitle("Weighted Yield");  
   H_t_RE->Draw("Weight");
 
@@ -1174,11 +980,23 @@ void t_plots()
   TH1D *htmeL1  = new TH1D("htmeL1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeL2  = new TH1D("htmeL2","MandelT; MandelT;",   300, -0.01, 0.1);      
 
+  TH1D *htmeInR1  = new TH1D("htmeInR1","MandelT; MandelT;",   10, bins);      
+  TH1D *htmeInR2  = new TH1D("htmeInR2","MandelT; MandelT;",   10, bins);      
+  TH1D *htmeInC   = new TH1D("htmeInC","MandelT; MandelT;",    10, bins);      
+  TH1D *htmeInL1  = new TH1D("htmeInL1","MandelT; MandelT;",   10, bins);      
+  TH1D *htmeInL2  = new TH1D("htmeInL2","MandelT; MandelT;",   10, bins);      
+
   TH1D *htmeR1R  = new TH1D("htmeR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeR2R  = new TH1D("htmeR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeCR   = new TH1D("htmeCR","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeL1R  = new TH1D("htmeL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeL2R  = new TH1D("htmeL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *htmeInR1R  = new TH1D("htmeInR1R","MandelT; MandelT;",   10, bins);      
+  TH1D *htmeInR2R  = new TH1D("htmeInR2R","MandelT; MandelT;",   10, bins);      
+  TH1D *htmeInCR   = new TH1D("htmeInCR","MandelT; MandelT;",    10, bins);      
+  TH1D *htmeInL1R  = new TH1D("htmeInL1R","MandelT; MandelT;",   10, bins);      
+  TH1D *htmeInL2R  = new TH1D("htmeInL2R","MandelT; MandelT;",   10, bins);      
 
   TH1D *hph_qmeR1  = new TH1D("hph_qmeR1","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qmeR2  = new TH1D("hph_qmeR2","ph_q; ph_q;",   18, -22.5, 382.5);      
@@ -1241,6 +1059,7 @@ void t_plots()
       if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0 && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
 	  htmeR1->Fill(-tmeR1);
+	  htmeInR1->Fill(-tmeR1);
 	  hph_qmeR1->Fill(ph_qmeR1*57.2958 + 180);
 	  hYmeR1->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
 	}
@@ -1248,6 +1067,7 @@ void t_plots()
       if(((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)) && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
 	  htmeR1R->Fill(-tmeR1);
+	  htmeInR1R->Fill(-tmeR1);
 	  hph_qmeR1R->Fill(ph_qmeR1*57.2958 + 180);
 	  hYmeR1R->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
 	}
@@ -1278,6 +1098,7 @@ void t_plots()
       if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0 && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
 	  htmeR2->Fill(-tmeR2);
+	  htmeInR2->Fill(-tmeR2);
 	  hph_qmeR2->Fill(ph_qmeR2*57.2958 + 180);
 	  hYmeR2->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
 	}
@@ -1285,6 +1106,7 @@ void t_plots()
       if(((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)) && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
 	  htmeR2R->Fill(-tmeR2);
+	  htmeInR2R->Fill(-tmeR2);
 	  hph_qmeR2R->Fill(ph_qmeR2*57.2958 + 180);
 	  hYmeR2R->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
 
@@ -1322,6 +1144,7 @@ void t_plots()
 	{
 	  hQ2WMEC1->Fill(Q2MEC, WMEC);	      	  
 	  htmeC->Fill(-tmeC);
+	  htmeInC->Fill(-tmeC);
 	  hph_qmeC->Fill(ph_qmeC*57.2958 + 180);
 	  hYmeC->Fill(-tmeC, ph_qmeC*57.2958 + 180);
 
@@ -1331,6 +1154,7 @@ void t_plots()
       if(((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC <=13.0)) && mmmeC>= 0.92 && mmmeC <=0.98 && Diamond_cut)
   	{
 	  htmeCR->Fill(-tmeC);
+	  htmeInCR->Fill(-tmeC);
 	  hph_qmeCR->Fill(ph_qmeC*57.2958 + 180);
 	  hYmeCR->Fill(-tmeC, ph_qmeC*57.2958 + 180);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
@@ -1363,6 +1187,7 @@ void t_plots()
       if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0 && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
 	{
 	  htmeL1->Fill(-tmeL1);
+	  htmeInL1->Fill(-tmeL1);
 	  hph_qmeL1->Fill(ph_qmeL1*57.2958 + 180);	  
 	  hYmeL1->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
 
@@ -1372,6 +1197,7 @@ void t_plots()
  	
 	{
 	  htmeL1R->Fill(-tmeL1);
+	  htmeInL1R->Fill(-tmeL1);
 	  hph_qmeL1R->Fill(ph_qmeL1*57.2958 + 180);	  
 	  hYmeL1R->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
 	}
@@ -1403,6 +1229,7 @@ void t_plots()
 	
 	{
 	  htmeL2->Fill(-tmeL2);
+	  htmeInL2->Fill(-tmeL2);
 	  hph_qmeL2->Fill(ph_qmeL2*57.2958 + 180);
 	  hYmeL2->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
 	}
@@ -1410,6 +1237,7 @@ void t_plots()
       if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)) && mmmeL2>= 0.92 && mmmeL2 <=0.98 && Diamond_cut)
 	{
 	  htmeL2R->Fill(-tmeL2);
+	  htmeInL2R->Fill(-tmeL2);
 	  hph_qmeL2R->Fill(ph_qmeL2*57.2958 + 180);
 	  hYmeL2R->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
 
@@ -1434,6 +1262,12 @@ void t_plots()
   htmeCR->Scale(1.0/6.0);
   htmeL1R->Scale(1.0/6.0);
   htmeL2R->Scale(1.0/6.0);
+
+  htmeInR1R->Scale(1.0/6.0);
+  htmeInR2R->Scale(1.0/6.0);
+  htmeInCR->Scale(1.0/6.0);
+  htmeInL1R->Scale(1.0/6.0);
+  htmeInL2R->Scale(1.0/6.0);
 
   hph_qmeR1R->Scale(1.0/6.0);
   hph_qmeR2R->Scale(1.0/6.0);
@@ -1532,6 +1366,35 @@ void t_plots()
   htmeL2->Add(htmeL2R, -1); 
   htmeL2->Draw("same Weight");
   c9me->Print(outputpdf);
+
+  TCanvas *c9meIn = new TCanvas("c9meIn", " c9meIn"); 
+
+  htmeInL2->SetStats(0);
+  htmeInL2->SetLineColor(kBlack);
+  htmeInL2->Add(htmeInL2R, -1); 
+  htmeInL2->Draw("Weight");
+
+  htmeInC->SetStats(0);
+  htmeInC->SetLineColor(kGreen);
+  htmeInC->Add(htmeInCR,-1); 
+  htmeInC->Draw("same Weight");
+
+  htmeInR1->SetStats(0);
+  htmeInR1->SetLineColor(kBlue);
+  htmeInR1->Add(htmeInR1R,-1); 
+  htmeInR1->Draw("same Weight");
+
+  htmeInR2->SetStats(0);
+  htmeInR2->SetLineColor(kYellow);
+  htmeInR2->Add(htmeInR2R,-1); 
+  htmeInR2->Draw("same Weight");
+
+  htmeInL1->SetStats(0);
+  htmeInL1->SetLineColor(kRed);
+  htmeInL1->Add(htmeInL1R, -1); 
+  htmeInL1->Draw("same Weight");
+
+  c9meIn->Print(outputpdf);
   
   TCanvas *c10me = new TCanvas("c10me", " c10me"); 
   hph_qmeR2->SetStats(0);
@@ -1764,11 +1627,20 @@ void t_plots()
   TH1D *htheL1  = new TH1D("htheL1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htheL2  = new TH1D("htheL2","MandelT; MandelT;",   300, -0.01, 0.1);      
 
+  TH1D *htheInR1  = new TH1D("htheInR1","MandelT; MandelT;",   10, bins);      
+  TH1D *htheInC   = new TH1D("htheInC","MandelT; MandelT;",    10, bins);      
+  TH1D *htheInL1  = new TH1D("htheInL1","MandelT; MandelT;",   10, bins);      
+  TH1D *htheInL2  = new TH1D("htheInL2","MandelT; MandelT;",   10, bins);      
+
   TH1D *htheR1R  = new TH1D("htheR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htheCR   = new TH1D("htheCR","MandelT; MandelT;",     300, -0.01, 0.1);      
   TH1D *htheL1R  = new TH1D("htheL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htheL2R  = new TH1D("htheL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
+  TH1D *htheInR1R  = new TH1D("htheInR1R","MandelT; MandelT;",   10, bins);      
+  TH1D *htheInCR   = new TH1D("htheInCR","MandelT; MandelT;",    10, bins);      
+  TH1D *htheInL1R  = new TH1D("htheInL1R","MandelT; MandelT;",   10, bins);      
+  TH1D *htheInL2R  = new TH1D("htheInL2R","MandelT; MandelT;",   10, bins);      
 
   TH1D *hph_qheR1  = new TH1D("hph_qheR1","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qheC   = new TH1D("hph_qheC","ph_q; ph_q;",    18, -22.5, 382.5);      
@@ -1824,6 +1696,7 @@ void t_plots()
       if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0 && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
 	  htheR1->Fill(-theR1);
+	  htheInR1->Fill(-theR1);
 	  hph_qheR1->Fill(ph_qheR1*57.2958 + 180);
 	  hYheR1->Fill(-theR1, ph_qheR1*57.2958 + 180);
 	}
@@ -1831,6 +1704,7 @@ void t_plots()
       if(((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)) && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
 	  htheR1R->Fill(-theR1);
+	  htheInR1R->Fill(-theR1);
 	  hph_qheR1R->Fill(ph_qheR1*57.2958 + 180);
 	  hYheR1R->Fill(-theR1, ph_qheR1*57.2958 + 180);
 	}
@@ -1867,6 +1741,7 @@ void t_plots()
 	{
 	  hQ2WHEC1->Fill(Q2HEC, WHEC);	      	  
 	  htheC->Fill(-theC);
+	  htheInC->Fill(-theC);
 	  hph_qheC->Fill(ph_qheC*57.2958 + 180);
 	  hYheC->Fill(-theC, ph_qheC*57.2958 + 180);
 	}	      
@@ -1875,6 +1750,7 @@ void t_plots()
       if(((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0)) && mmheC>= 0.92 && mmheC <=0.98 && Diamond_cut)
   	{
 	  htheCR->Fill(-theC);
+	  htheInCR->Fill(-theC);
 	  hph_qheCR->Fill(ph_qheC*57.2958 + 180);
 	  hQ2WHECR->Fill(Q2HEC, WHEC);
 	  hYheCR->Fill(-theC, ph_qheC*57.2958 + 180);
@@ -1908,6 +1784,7 @@ void t_plots()
       if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0 && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
 	{
 	  htheL1->Fill(-theL1);
+	  htheInL1->Fill(-theL1);
 	  hph_qheL1->Fill(ph_qheL1*57.2958 + 180);	  
 	  hYheL1->Fill(-theL1, ph_qheL1*57.2958 + 180);
 	}      
@@ -1916,6 +1793,7 @@ void t_plots()
  	
 	{
 	  htheL1R->Fill(-theL1);
+	  htheInL1R->Fill(-theL1);
 	  hph_qheL1R->Fill(ph_qheL1*57.2958 + 180);	  
 	  hYheL1R->Fill(-theL1, ph_qheL1*57.2958 + 180);
 	}
@@ -1947,6 +1825,7 @@ void t_plots()
   
 	{
 	  htheL2->Fill(-theL2);
+	  htheInL2->Fill(-theL2);
 	  hph_qheL2->Fill(ph_qheL2*57.2958 + 180);
 	  hYheL2->Fill(-theL2, ph_qheL2*57.2958 + 180);
 	}
@@ -1954,6 +1833,7 @@ void t_plots()
       if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)) && mmheL2>= 0.92 && mmheL2 <=0.98 && Diamond_cut)
 	{
 	  htheL2R->Fill(-theL2);
+	  htheInL2R->Fill(-theL2);
 	  hph_qheL2R->Fill(ph_qheL2*57.2958 + 180);
 	  hYheL2R->Fill(-theL2, ph_qheL2*57.2958 + 180);
 	}
@@ -1975,6 +1855,12 @@ void t_plots()
   htheCR->Scale(1.0/6.0);
   htheL1R->Scale(1.0/6.0);
   htheL2R->Scale(1.0/6.0);
+
+  htheInR1R->Scale(1.0/6.0);
+  htheInCR->Scale(1.0/6.0);
+  htheInL1R->Scale(1.0/6.0);
+  htheInL2R->Scale(1.0/6.0);
+
 
   hph_qheR1R->Scale(1.0/6.0);
   hph_qheCR->Scale(1.0/6.0);
@@ -2061,6 +1947,28 @@ void t_plots()
   htheL2->Add(htheL2R, -1); 
   htheL2->Draw("same Weight");
   c9->Print(outputpdf);
+
+  TCanvas *c9In = new TCanvas("c9In", " c9In"); 
+  htheInC->SetStats(0);
+  htheInC->SetLineColor(kGreen);
+  htheInC->Add(htheInCR,-1); 
+  htheInC->Draw("Weight");
+
+  htheInR1->SetStats(0);
+  htheInR1->SetLineColor(kBlue);
+  htheInR1->Add(htheInR1R,-1); 
+  htheInR1->Draw("same Weight");
+
+  htheInL1->SetStats(0);
+  htheInL1->SetLineColor(kRed);
+  htheInL1->Add(htheInL1R, -1); 
+  htheInL1->Draw("same Weight");
+
+  htheInL2->SetStats(0);
+  htheInL2->SetLineColor(kBlack);
+  htheInL2->Add(htheInL2R, -1); 
+  htheInL2->Draw("same Weight");
+  c9In->Print(outputpdf);
   
   TCanvas *c10 = new TCanvas("c10", " c10"); 
   
@@ -2182,6 +2090,12 @@ void t_plots()
 
   cout<<"End of the high e Yield calculations "<<endl;
 
+
+  // t limit for the analysis
+
+  Double_t tmn = 0.00595;
+  Double_t tmx = 0.07;
+
   //-t for all three e
   TCanvas *c13 = new TCanvas("c13", " c13");
   //High epsilon  
@@ -2189,7 +2103,7 @@ void t_plots()
   htheC->SetLineColor(kGreen);
   htheC->Add(htheCR,-1);
   TAxis *In1 = htheC->GetXaxis();
-  Double_t heC =  htheC->Integral(In1->FindBin(0.005), In1->FindBin(0.08), "");
+  Double_t heC =  htheC->Integral(In1->FindBin(tmn), In1->FindBin(tmx), "");
   cout<< " High epsilon C events: "<<heC<<endl;
   htheC->Draw("Weight");
 
@@ -2197,7 +2111,7 @@ void t_plots()
   htheR1->SetLineColor(kGreen);
   htheR1->Add(htheR1R,-1); 
   TAxis *In2 = htheR1->GetXaxis();
-  Double_t heR1 =  htheR1->Integral(In2->FindBin(0.005), In2->FindBin(0.08), "");
+  Double_t heR1 =  htheR1->Integral(In2->FindBin(tmn), In2->FindBin(tmx), "");
   cout<< " High epsilon R1 events: "<<heR1<<endl;
   htheR1->Draw("same Weight");
 
@@ -2205,7 +2119,7 @@ void t_plots()
   htheL1->SetLineColor(kGreen);
   htheL1->Add(htheL1R, -1); 
   TAxis *In3 = htheL1->GetXaxis();
-  Double_t heL1 =  htheL1->Integral(In3->FindBin(0.005), In3->FindBin(0.08), "");
+  Double_t heL1 =  htheL1->Integral(In3->FindBin(tmn), In3->FindBin(tmx), "");
   cout<< " High epsilon L1 events: "<<heL1<<endl;
   htheL1->Draw("same Weight");
 
@@ -2213,7 +2127,7 @@ void t_plots()
   htheL2->SetLineColor(kGreen);
   htheL2->Add(htheL2R, -1); 
   TAxis *In4 = htheL2->GetXaxis();
-  Double_t heL2 =  htheL2->Integral(In4->FindBin(0.005), In4->FindBin(0.08), "");
+  Double_t heL2 =  htheL2->Integral(In4->FindBin(tmn), In4->FindBin(tmx), "");
   cout<< " High epsilon L2 events: "<<heL2<<endl; 
   htheL2->Draw("same Weight");
  
@@ -2223,7 +2137,7 @@ void t_plots()
   htmeC->SetLineColor(kBlue);
   htmeC->Add(htmeCR,-1); 
   TAxis *In5 = htmeC->GetXaxis();
-  Double_t meC =  htmeC->Integral(In5->FindBin(0.005), In5->FindBin(0.08), "");
+  Double_t meC =  htmeC->Integral(In5->FindBin(tmn), In5->FindBin(tmx), "");
   cout<< " Mid epsilon C events: "<<meC<<endl; 
   htmeC->Draw("same Weight");
 
@@ -2231,7 +2145,7 @@ void t_plots()
   htmeR1->SetLineColor(kBlue);
   htmeR1->Add(htmeR1R,-1); 
   TAxis *In6 = htmeR1->GetXaxis();
-  Double_t meR1 =  htmeR1->Integral(In6->FindBin(0.005), In6->FindBin(0.08), "");
+  Double_t meR1 =  htmeR1->Integral(In6->FindBin(tmn), In6->FindBin(tmx), "");
   cout<< " Mid epsilon R1 events: "<<meR1<<endl; 
   htmeR1->Draw("same Weight");
 
@@ -2239,7 +2153,7 @@ void t_plots()
   htmeR2->SetLineColor(kBlue);
   htmeR2->Add(htmeR2R,-1); 
   TAxis *In7 = htmeR2->GetXaxis();
-  Double_t meR2 =  htmeR2->Integral(In7->FindBin(0.005), In7->FindBin(0.08), "");
+  Double_t meR2 =  htmeR2->Integral(In7->FindBin(tmn), In7->FindBin(tmx), "");
   cout<< " Mid epsilon R2 events: "<<meR2<<endl; 
   htmeR2->Draw("same Weight");
 
@@ -2247,7 +2161,7 @@ void t_plots()
   htmeL1->SetLineColor(kBlue);
   htmeL1->Add(htmeL1R, -1); 
   TAxis *In8 = htmeL1->GetXaxis();
-  Double_t meL1 =  htmeL1->Integral(In8->FindBin(0.005), In8->FindBin(0.08), "");
+  Double_t meL1 =  htmeL1->Integral(In8->FindBin(tmn), In8->FindBin(tmx), "");
   cout<< " Mid epsilon L1 events: "<<meL1<<endl; 
   htmeL1->Draw("same Weight");
 
@@ -2255,7 +2169,7 @@ void t_plots()
   htmeL2->SetLineColor(kBlue);
   htmeL2->Add(htmeL2R, -1); 
   TAxis *In9 = htmeL2->GetXaxis();
-  Double_t meL2 =  htmeL2->Integral(In9->FindBin(0.005), In9->FindBin(0.08), "");
+  Double_t meL2 =  htmeL2->Integral(In9->FindBin(tmn), In9->FindBin(tmx), "");
   cout<< " Mid epsilon L2 events: "<<meL2<<endl; 
   htmeL2->Draw("same Weight");
 
@@ -2265,7 +2179,7 @@ void t_plots()
   htC->SetLineColor(kRed);
   htC->Add(htCR,-1); 
   TAxis *In10 = htC->GetXaxis();
-  Double_t leC =  htC->Integral(In10->FindBin(0.005), In10->FindBin(0.08), "");
+  Double_t leC =  htC->Integral(In10->FindBin(tmn), In10->FindBin(tmx), "");
   cout<< " Low epsilon C events: "<<leC<<endl; 
   htC->Draw("same Weight");
 
@@ -2273,7 +2187,7 @@ void t_plots()
   htL1->SetLineColor(kRed);
   htL1->Add(htL1R, -1); 
   TAxis *In11 = htL1->GetXaxis();
-  Double_t leL1 =  htL1->Integral(In11->FindBin(0.005), In11->FindBin(0.08), "");
+  Double_t leL1 =  htL1->Integral(In11->FindBin(tmn), In11->FindBin(tmx), "");
   cout<< " Low epsilon L1 events: "<<leL1<<endl; 
   htL1->Draw("same Weight");
  
@@ -2281,13 +2195,15 @@ void t_plots()
   htL2->SetLineColor(kRed);
   htL2->Add(htL2R, -1); 
   TAxis *In12 = htL2->GetXaxis();
-  Double_t leL2 =  htL2->Integral(In12->FindBin(0.005), In12->FindBin(0.08), "");
+  Double_t leL2 =  htL2->Integral(In12->FindBin(tmn), In12->FindBin(tmx), "");
   cout<< " Low epsilon L2 events: "<<leL2<<endl; 
   htL2->Draw(" same Weight");
+
   //choose -t
-  
-  cout<<In1->FindBin(0.005)<<endl;
-  cout<<In1->FindBin(0.08)<<endl;
+
+  cout<<In1->FindBin(tmn)<<endl;
+  cout<<In1->FindBin(tmx)<<endl;
+
   Double_t Events1 = 0.0;
   Double_t Events2 = 0.0;
   Double_t Events3 = 0.0;
@@ -2301,50 +2217,106 @@ void t_plots()
   Double_t Events11 = 0.0;
   Double_t Events12 = 0.0;
 
+  
+  // calculations of events in each t
+
+  /**
+  for(Long64_t i = 2; i <=9; i++) 
+    {
+      Events1 = htheInC->GetBinContent(i);
+      cout<<i<<"  = "<<Events1<<endl;
+      Events2 = htheInR1->GetBinContent(i);
+      cout<<i<<"  = "<<Events2<<endl;        
+      Events3 = htheInL1->GetBinContent(i);
+      cout<<i<<"  = "<<Events3<<endl;
+      Events4 = htheInL2->GetBinContent(i);
+      cout<<i<<"  = "<<Events4<<endl;
+
+      cout<<"Total Events he"<< " i "<<" = "<<Events1+Events2+Events3+Events4<<endl;
+    }
+
+  for(Long64_t i = 2; i <=9; i++) 
+    {
+      
+      Events5 = htmeInC->GetBinContent(i);
+      cout<<i<<"  = "<<Events5<<endl;
+      Events6 = htmeInR1->GetBinContent(i);
+      cout<<i<<"  = "<<Events6<<endl;
+      Events7 = htmeInR2->GetBinContent(i);
+      cout<<i<<"  = "<<Events7<<endl;
+      Events8 = htmeInL1->GetBinContent(i);
+      cout<<i<<"  = "<<Events8<<endl;
+      Events9 = htmeInL2->GetBinContent(i);
+      cout<<i<<"  = "<<Events9<<endl;
+
+      cout<<"Total Events me"<< " i "<<" = "<<Events5+Events6+Events7+Events8+Events9<<endl;
+    }
+
+  for(Long64_t i = 2; i <=9; i++) 
+    
+    {
+      
+      Events10 = htInC->GetBinContent(i);
+      cout<<i<<"  = "<<Events10<<endl;
+      Events11 = htInL1->GetBinContent(i);
+      cout<<i<<"  = "<<Events11<<endl;
+      Events12 = htInL2->GetBinContent(i);
+      cout<<i<<"  = "<<Events12<<endl;
+
+      cout<<"Total Events Le"<< " i "<<" = "<<Events10+Events11+Events12<<endl;
+
+    }
+
+  **/
+
+  /**  
   // if(In1->FindBin(0.005) >=41 && In1->FindBin(0.005) <= 246)  
   {
-    //      for(Long64_t i = 41; i < 61; i++)       // 1st t
-    //      for(Long64_t i = 44; i < 61; i++)       // 1st t  updated one
+    // for(Long64_t i = 41; i < 61; i++)       // 1st t
+    // for(Long64_t i = 44; i < 61; i++)       // 1st t  updated one
     // for(Long64_t i = 61; i < 70; i++)           // 2nd t
-    //      for(Long64_t i = 70; i < 81; i++)     // 3rd t
-    //     for(Long64_t i = 81; i < 93; i++)     // 4th t
-    // for(Long64_t i = 93; i < 107; i++)           // 5th t
+    //     for(Long64_t i = 70; i < 81; i++)     // 3rd t
+    // for(Long64_t i = 81; i < 93; i++)     // 4th t
+    for(Long64_t i = 93; i < 107; i++)           // 5th t
     //      for(Long64_t i = 107; i < 126; i++)           // 6th t
     //      for(Long64_t i = 126; i < 153; i++)           // 7th t
-    for(Long64_t i = 153; i < 247; i++)           // 8th t
+    // for(Long64_t i = 153; i < 247; i++)           // 8th t
       //for(Long64_t i = 41; i < 45; i++)           //test
 	
       {
-	Events1 += htheC->GetBinContent(i);
-	Events2 += htheR1->GetBinContent(i);
-	Events3 += htheL1->GetBinContent(i);
-	Events4 += htheL2->GetBinContent(i);
-	Events5 += htmeC->GetBinContent(i);
-	Events6 += htmeR1->GetBinContent(i);
-	Events7 += htmeR2->GetBinContent(i);
-	Events8 += htmeL1->GetBinContent(i);
-	Events9 += htmeL2->GetBinContent(i);
+	//	Events1 += htheC->GetBinContent(i);
+	//	Events2 += htheR1->GetBinContent(i);
+	//	Events3 += htheL1->GetBinContent(i);
+	//	Events4 += htheL2->GetBinContent(i);
+	//	Events5 += htmeC->GetBinContent(i);
+	//	Events6 += htmeR1->GetBinContent(i);
+	//	Events7 += htmeR2->GetBinContent(i);
+	//	Events8 += htmeL1->GetBinContent(i);
+	//	Events9 += htmeL2->GetBinContent(i);
 	Events10 += htC->GetBinContent(i);
 	Events11 += htL1->GetBinContent(i);
 	Events12 += htL2->GetBinContent(i);
       }   
       
-    cout<< "  "<<Events1<<endl;    
-    cout<< "  "<<Events2<<endl;    
-    cout<< "  "<<Events3<<endl;    
-    cout<< "  "<<Events4<<endl;    
-    cout<< "  "<<Events5<<endl;    
-    cout<< "  "<<Events6<<endl;    
-    cout<< "  "<<Events7<<endl;    
-    cout<< "  "<<Events8<<endl;    
-    cout<< "  "<<Events9<<endl;    
+    //    cout<< "  "<<Events1<<endl;    
+    //    cout<< "  "<<Events2<<endl;    
+    //    cout<< "  "<<Events3<<endl;    
+    //    cout<< "  "<<Events4<<endl;    
+    //   cout<< "  "<<Events5<<endl;    
+    //   cout<< "  "<<Events6<<endl;    
+    //   cout<< "  "<<Events7<<endl;    
+    //   cout<< "  "<<Events8<<endl;    
+    //    cout<< "  "<<Events9<<endl;    
     cout<< "  "<<Events10<<endl;    
     cout<< "  "<<Events11<<endl;    
     cout<< "  "<<Events12<<endl;    
   }
     
-  cout<<" Total Events: " <<Events1 + Events2 +Events3 +Events4 +Events5 +Events6 +Events7 +Events8 +Events9 +Events10 +Events11 +Events12 <<endl;
+  //  cout<<" Total Events: " <<Events1 + Events2 +Events3 +Events4 +Events5 +Events6 +Events7 +Events8 +Events9 +Events10 +Events11 +Events12 <<endl;
+  cout<<" Total Events: " <<Events10 +Events11 +Events12 <<endl;
   
+  **/
+  cout<<" Integral show is commented out "<<endl;
 
   //  TLine *ltlow  = new TLine(0.005, -80.0, 0.005, 1800);
   //TLine *lthigh = new TLine(0.08, -80.0, 0.08, 1800.0);
@@ -2362,7 +2334,7 @@ void t_plots()
   fstedgel->SetLineColor(kBlack);
   fstedgel->Draw("same");
 
-  Double_t lastedge = ((TAxis*)htheC->GetXaxis())->GetBinCenter(246);
+  Double_t lastedge = ((TAxis*)htheC->GetXaxis())->GetBinCenter(219);
   cout<<" lastedge "<<lastedge<<endl;
   TLine *lastedgel = new TLine(lastedge, Ymin, lastedge, Ymax);
   lastedgel->SetLineColor(kBlack);
