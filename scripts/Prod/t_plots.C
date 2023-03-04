@@ -1430,81 +1430,94 @@ void t_plots()
   ht8L2->Draw("same Weight");
   ctL22->Print(outputpdf);
 
-  ofstream outleC("kindata/kindata.pl_38_e_C.dat");
+  /**
+  ofstream outmeC("kindata/kindata.pl_38_63_+0000.dat");
+  ofstream outmeL1("kindata/kindata.pl_38_63_-2000.dat");
+  ofstream outmeL2("kindata/kindata.pl_38_63_-4000.dat");
+  ofstream outmeR1("kindata/kindata.pl_38_63_+2000.dat");
+  ofstream outmeR2("kindata/kindata.pl_38_63_+3120.dat");
+
+  ofstream outheC("kindata/kindata.pl_38_78_+0000.dat");
+  ofstream outheL1("kindata/kindata.pl_38_78_-2015.dat");
+  ofstream outheL2("kindata/kindata.pl_38_78_-4000.dat");
+  ofstream outheR1("kindata/kindata.pl_38_78_+2680.dat");
+  **/
+
+  ofstream outleC("kindata/kindata.pl_38_29_+0000.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
-	outleC<<" "<<1.000000<<endl;
+	outleC<<1.000<<endl;
       if(i==1)
-	outleC<<" "<<hW1C->GetMean()<<" "<<hW1C->GetMeanError()<<" "<<hQ21C->GetMean()<<" "<<hQ21C->GetMeanError()<<" "<<ht1C->GetMean()<<" "<<ht1C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW1C->GetMean()<<"\t"<<hW1C->GetMeanError()<<"\t"<<hQ21C->GetMean()<<"\t"<<hQ21C->GetMeanError()<<"\t"<<ht1C->GetMean()<<"\t"<<ht1C->GetMeanError()<<"\t"<< i <<endl;
       if(i==2)
-	outleC<<" "<<hW2C->GetMean()<<" "<<hW2C->GetMeanError()<<" "<<hQ22C->GetMean()<<" "<< hQ22C->GetMeanError()<<" "<<ht2C->GetMean()<<" "<<ht2C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW2C->GetMean()<<"\t"<<hW2C->GetMeanError()<<"\t"<<hQ22C->GetMean()<<"\t"<< hQ22C->GetMeanError()<<"\t"<<ht2C->GetMean()<<"\t"<<ht2C->GetMeanError()<<"\t"<< i <<endl;
       if(i==3)
-	outleC<<" "<<hW3C->GetMean()<<" "<<hW3C->GetMeanError()<<" "<<hQ23C->GetMean()<<" "<< hQ23C->GetMeanError()<<" "<<ht3C->GetMean()<<" "<<ht3C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW3C->GetMean()<<"\t"<<hW3C->GetMeanError()<<"\t"<<hQ23C->GetMean()<<"\t"<< hQ23C->GetMeanError()<<"\t"<<ht3C->GetMean()<<"\t"<<ht3C->GetMeanError()<<"\t"<< i <<endl;
       if(i==4)
-	outleC<<" "<<hW4C->GetMean()<<" "<<hW4C->GetMeanError()<<" "<<hQ24C->GetMean()<<" "<< hQ24C->GetMeanError()<<" "<<ht4C->GetMean()<<" "<<ht4C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW4C->GetMean()<<"\t"<<hW4C->GetMeanError()<<"\t"<<hQ24C->GetMean()<<"\t"<< hQ24C->GetMeanError()<<"\t"<<ht4C->GetMean()<<"\t"<<ht4C->GetMeanError()<<"\t"<< i <<endl;
       if(i==5)
-	outleC<<" "<<hW5C->GetMean()<<" "<<hW5C->GetMeanError()<<" "<<hQ25C->GetMean()<<" "<< hQ25C->GetMeanError()<<" "<<ht5C->GetMean()<<" "<<ht5C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW5C->GetMean()<<"\t"<<hW5C->GetMeanError()<<"\t"<<hQ25C->GetMean()<<"\t"<< hQ25C->GetMeanError()<<"\t"<<ht5C->GetMean()<<"\t"<<ht5C->GetMeanError()<<"\t"<< i <<endl;
       if(i==6)
-	outleC<<" "<<hW6C->GetMean()<<" "<<hW6C->GetMeanError()<<" "<<hQ26C->GetMean()<<" "<< hQ26C->GetMeanError()<<" "<<ht6C->GetMean()<<" "<<ht6C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW6C->GetMean()<<"\t"<<hW6C->GetMeanError()<<"\t"<<hQ26C->GetMean()<<"\t"<< hQ26C->GetMeanError()<<"\t"<<ht6C->GetMean()<<"\t"<<ht6C->GetMeanError()<<"\t"<< i <<endl;
       if(i==7)
-	outleC<<" "<<hW7C->GetMean()<<" "<<hW7C->GetMeanError()<<" "<<hQ27C->GetMean()<<" "<< hQ27C->GetMeanError()<<" "<<ht7C->GetMean()<<" "<<ht7C->GetMeanError()<<" "<< i <<endl;
+	outleC<<hW7C->GetMean()<<"\t"<<hW7C->GetMeanError()<<"\t"<<hQ27C->GetMean()<<"\t"<< hQ27C->GetMeanError()<<"\t"<<ht7C->GetMean()<<"\t"<<ht7C->GetMeanError()<<"\t"<< i <<endl;
       if(i==8)
-	outleC<<" "<<hW8C->GetMean()<<" "<<hW8C->GetMeanError()<<" "<<hQ28C->GetMean()<<" "<< hQ28C->GetMeanError()<<" "<<ht8C->GetMean()<<" "<<ht8C->GetMeanError()<<" "<< i <<endl;      
+	outleC<<hW8C->GetMean()<<"\t"<<hW8C->GetMeanError()<<"\t"<<hQ28C->GetMean()<<"\t"<< hQ28C->GetMeanError()<<"\t"<<ht8C->GetMean()<<"\t"<<ht8C->GetMeanError()<<"\t"<< i <<endl;      
       if(i==9)
-	outleC<<" "<<1.000000<<endl;
+	outleC<<1.000000<<endl;
     } 
   outleC.close();
 
-  ofstream outleL1("kindata/kindata.pl_38_e_L1.dat");
+  ofstream outleL1("kindata/kindata.pl_38_29_-1995.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
-	outleL1<<" "<<1.000000<<endl;
+	outleL1<<1.000000<<endl;
       if(i==1)
-	outleL1<<" "<<hW1L1->GetMean()<<" "<<hW1L1->GetMeanError()<<" "<<hQ21L1->GetMean()<<" "<<hQ21L1->GetMeanError()<<" "<<ht1L1->GetMean()<<" "<<ht1L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW1L1->GetMean()<<"\t"<<hW1L1->GetMeanError()<<"\t"<<hQ21L1->GetMean()<<"\t"<<hQ21L1->GetMeanError()<<"\t"<<ht1L1->GetMean()<<"\t"<<ht1L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==2)
-	outleL1<<" "<<hW2L1->GetMean()<<" "<<hW2L1->GetMeanError()<<" "<<hQ22L1->GetMean()<<" "<< hQ22L1->GetMeanError()<<" "<<ht2L1->GetMean()<<" "<<ht2L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW2L1->GetMean()<<"\t"<<hW2L1->GetMeanError()<<"\t"<<hQ22L1->GetMean()<<"\t"<< hQ22L1->GetMeanError()<<"\t"<<ht2L1->GetMean()<<"\t"<<ht2L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==3)
-	outleL1<<" "<<hW3L1->GetMean()<<" "<<hW3L1->GetMeanError()<<" "<<hQ23L1->GetMean()<<" "<< hQ23L1->GetMeanError()<<" "<<ht3L1->GetMean()<<" "<<ht3L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW3L1->GetMean()<<"\t"<<hW3L1->GetMeanError()<<"\t"<<hQ23L1->GetMean()<<"\t"<< hQ23L1->GetMeanError()<<"\t"<<ht3L1->GetMean()<<"\t"<<ht3L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==4)
-	outleL1<<" "<<hW4L1->GetMean()<<" "<<hW4L1->GetMeanError()<<" "<<hQ24L1->GetMean()<<" "<< hQ24L1->GetMeanError()<<" "<<ht4L1->GetMean()<<" "<<ht4L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW4L1->GetMean()<<"\t"<<hW4L1->GetMeanError()<<"\t"<<hQ24L1->GetMean()<<"\t"<< hQ24L1->GetMeanError()<<"\t"<<ht4L1->GetMean()<<"\t"<<ht4L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==5)
-	outleL1<<" "<<hW5L1->GetMean()<<" "<<hW5L1->GetMeanError()<<" "<<hQ25L1->GetMean()<<" "<< hQ25L1->GetMeanError()<<" "<<ht5L1->GetMean()<<" "<<ht5L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW5L1->GetMean()<<"\t"<<hW5L1->GetMeanError()<<"\t"<<hQ25L1->GetMean()<<"\t"<< hQ25L1->GetMeanError()<<"\t"<<ht5L1->GetMean()<<"\t"<<ht5L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==6)
-	outleL1<<" "<<hW6L1->GetMean()<<" "<<hW6L1->GetMeanError()<<" "<<hQ26L1->GetMean()<<" "<< hQ26L1->GetMeanError()<<" "<<ht6L1->GetMean()<<" "<<ht6L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW6L1->GetMean()<<"\t"<<hW6L1->GetMeanError()<<"\t"<<hQ26L1->GetMean()<<"\t"<< hQ26L1->GetMeanError()<<"\t"<<ht6L1->GetMean()<<"\t"<<ht6L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==7)
-	outleL1<<" "<<hW7L1->GetMean()<<" "<<hW7L1->GetMeanError()<<" "<<hQ27L1->GetMean()<<" "<< hQ27L1->GetMeanError()<<" "<<ht7L1->GetMean()<<" "<<ht7L1->GetMeanError()<<" "<< i <<endl;
+	outleL1<<hW7L1->GetMean()<<"\t"<<hW7L1->GetMeanError()<<"\t"<<hQ27L1->GetMean()<<"\t"<< hQ27L1->GetMeanError()<<"\t"<<ht7L1->GetMean()<<"\t"<<ht7L1->GetMeanError()<<"\t"<< i <<endl;
       if(i==8)
-	outleL1<<" "<<hW8L1->GetMean()<<" "<<hW8L1->GetMeanError()<<" "<<hQ28L1->GetMean()<<" "<< hQ28L1->GetMeanError()<<" "<<ht8L1->GetMean()<<" "<<ht8L1->GetMeanError()<<" "<< i <<endl;      
+	outleL1<<hW8L1->GetMean()<<"\t"<<hW8L1->GetMeanError()<<"\t"<<hQ28L1->GetMean()<<"\t"<< hQ28L1->GetMeanError()<<"\t"<<ht8L1->GetMean()<<"\t"<<ht8L1->GetMeanError()<<"\t"<< i <<endl;      
       if(i==9)
-	outleL1<<" "<<1.000000<<endl;
+	outleL1<<1.000000<<endl;
     } 
   outleL1.close();
 
-  ofstream outleL2("kindata/kindata.pl_38_e_L2.dat");
+  ofstream outleL2("kindata/kindata.pl_38_29_-4005.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
-	outleL2<<" "<<1.000000<<endl;
+	outleL2<<1.000000<<endl;
       if(i==1)
-	outleL2<<" "<<hW1L2->GetMean()<<" "<<hW1L2->GetMeanError()<<" "<<hQ21L2->GetMean()<<" "<<hQ21L2->GetMeanError()<<" "<<ht1L2->GetMean()<<" "<<ht1L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW1L2->GetMean()<<"\t"<<hW1L2->GetMeanError()<<"\t"<<hQ21L2->GetMean()<<"\t"<<hQ21L2->GetMeanError()<<"\t"<<ht1L2->GetMean()<<"\t"<<ht1L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==2)
-	outleL2<<" "<<hW2L2->GetMean()<<" "<<hW2L2->GetMeanError()<<" "<<hQ22L2->GetMean()<<" "<< hQ22L2->GetMeanError()<<" "<<ht2L2->GetMean()<<" "<<ht2L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW2L2->GetMean()<<"\t"<<hW2L2->GetMeanError()<<"\t"<<hQ22L2->GetMean()<<"\t"<< hQ22L2->GetMeanError()<<"\t"<<ht2L2->GetMean()<<"\t"<<ht2L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==3)
-	outleL2<<" "<<hW3L2->GetMean()<<" "<<hW3L2->GetMeanError()<<" "<<hQ23L2->GetMean()<<" "<< hQ23L2->GetMeanError()<<" "<<ht3L2->GetMean()<<" "<<ht3L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW3L2->GetMean()<<"\t"<<hW3L2->GetMeanError()<<"\t"<<hQ23L2->GetMean()<<"\t"<< hQ23L2->GetMeanError()<<"\t"<<ht3L2->GetMean()<<"\t"<<ht3L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==4)
-	outleL2<<" "<<hW4L2->GetMean()<<" "<<hW4L2->GetMeanError()<<" "<<hQ24L2->GetMean()<<" "<< hQ24L2->GetMeanError()<<" "<<ht4L2->GetMean()<<" "<<ht4L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW4L2->GetMean()<<"\t"<<hW4L2->GetMeanError()<<"\t"<<hQ24L2->GetMean()<<"\t"<< hQ24L2->GetMeanError()<<"\t"<<ht4L2->GetMean()<<"\t"<<ht4L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==5)
-	outleL2<<" "<<hW5L2->GetMean()<<" "<<hW5L2->GetMeanError()<<" "<<hQ25L2->GetMean()<<" "<< hQ25L2->GetMeanError()<<" "<<ht5L2->GetMean()<<" "<<ht5L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW5L2->GetMean()<<"\t"<<hW5L2->GetMeanError()<<"\t"<<hQ25L2->GetMean()<<"\t"<< hQ25L2->GetMeanError()<<"\t"<<ht5L2->GetMean()<<"\t"<<ht5L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==6)
-	outleL2<<" "<<hW6L2->GetMean()<<" "<<hW6L2->GetMeanError()<<" "<<hQ26L2->GetMean()<<" "<< hQ26L2->GetMeanError()<<" "<<ht6L2->GetMean()<<" "<<ht6L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW6L2->GetMean()<<"\t"<<hW6L2->GetMeanError()<<"\t"<<hQ26L2->GetMean()<<"\t"<< hQ26L2->GetMeanError()<<"\t"<<ht6L2->GetMean()<<"\t"<<ht6L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==7)
-	outleL2<<" "<<hW7L2->GetMean()<<" "<<hW7L2->GetMeanError()<<" "<<hQ27L2->GetMean()<<" "<< hQ27L2->GetMeanError()<<" "<<ht7L2->GetMean()<<" "<<ht7L2->GetMeanError()<<" "<< i <<endl;
+	outleL2<<hW7L2->GetMean()<<"\t"<<hW7L2->GetMeanError()<<"\t"<<hQ27L2->GetMean()<<"\t"<< hQ27L2->GetMeanError()<<"\t"<<ht7L2->GetMean()<<"\t"<<ht7L2->GetMeanError()<<"\t"<< i <<endl;
       if(i==8)
-	outleL2<<" "<<hW8L2->GetMean()<<" "<<hW8L2->GetMeanError()<<" "<<hQ28L2->GetMean()<<" "<< hQ28L2->GetMeanError()<<" "<<ht8L2->GetMean()<<" "<<ht8L2->GetMeanError()<<" "<< i <<endl;      
+	outleL2<<hW8L2->GetMean()<<"\t"<<hW8L2->GetMeanError()<<"\t"<<hQ28L2->GetMean()<<"\t"<< hQ28L2->GetMeanError()<<"\t"<<ht8L2->GetMean()<<"\t"<<ht8L2->GetMeanError()<<"\t"<< i <<endl;      
       if(i==9)
-	outleL2<<" "<<1.000000<<endl;
+	outleL2<<1.000000<<endl;
     } 
   outleL2.close();
 
