@@ -1431,19 +1431,19 @@ void t_plots()
   ctL22->Print(outputpdf);
 
   /**
-  ofstream outmeC("kindata/kindata.pl_38_63_+0000.dat");
-  ofstream outmeL1("kindata/kindata.pl_38_63_-2000.dat");
-  ofstream outmeL2("kindata/kindata.pl_38_63_-4000.dat");
-  ofstream outmeR1("kindata/kindata.pl_38_63_+2000.dat");
-  ofstream outmeR2("kindata/kindata.pl_38_63_+3120.dat");
+  ofstream outmeC("kindata/kindata.pl_375_629_+0000.dat");
+  ofstream outmeL1("kindata/kindata.pl_375_629_-2000.dat");
+  ofstream outmeL2("kindata/kindata.pl_375_629_-4000.dat");
+  ofstream outmeR1("kindata/kindata.pl_375_629_+2000.dat");
+  ofstream outmeR2("kindata/kindata.pl_375_629_+3120.dat");
 
-  ofstream outheC("kindata/kindata.pl_38_78_+0000.dat");
-  ofstream outheL1("kindata/kindata.pl_38_78_-2015.dat");
-  ofstream outheL2("kindata/kindata.pl_38_78_-4000.dat");
-  ofstream outheR1("kindata/kindata.pl_38_78_+2680.dat");
+  ofstream outheC("kindata/kindata.pl_375_781_+0000.dat");
+  ofstream outheL1("kindata/kindata.pl_375_781_-2015.dat");
+  ofstream outheL2("kindata/kindata.pl_375_781_-4000.dat");
+  ofstream outheR1("kindata/kindata.pl_375_781_+2680.dat");
   **/
 
-  ofstream outleC("kindata/kindata.pl_38_29_+0000.dat");
+  ofstream outleC("kindata/kindata.pl_375_286_+0000.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
@@ -1469,7 +1469,7 @@ void t_plots()
     } 
   outleC.close();
 
-  ofstream outleL1("kindata/kindata.pl_38_29_-1995.dat");
+  ofstream outleL1("kindata/kindata.pl_375_286_-1995.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
@@ -1495,7 +1495,7 @@ void t_plots()
     } 
   outleL1.close();
 
-  ofstream outleL2("kindata/kindata.pl_38_29_-4005.dat");
+  ofstream outleL2("kindata/kindata.pl_375_286_-4005.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
@@ -1948,6 +1948,286 @@ void t_plots()
 
   TH2D *hQ2WMECR  = new TH2D("hQ2WMECR","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
   TH2D *hQ2WMEC1R  = new TH2D("hQ2WMEC1R","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+
+  //W
+
+  TH1D *hW1meC   = new TH1D("hW1meC","W 1 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW2meC   = new TH1D("hW2meC","W 2 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW3meC   = new TH1D("hW3meC","W 3 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW4meC   = new TH1D("hW4meC","W 4 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW5meC   = new TH1D("hW5meC","W 5 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW6meC   = new TH1D("hW6meC","W 6 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW7meC   = new TH1D("hW7meC","W 7 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW8meC   = new TH1D("hW8meC","W 8 t C; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meR1   = new TH1D("hW1meR1","W 1 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW2meR1   = new TH1D("hW2meR1","W 2 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW3meR1   = new TH1D("hW3meR1","W 3 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW4meR1   = new TH1D("hW4meR1","W 4 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW5meR1   = new TH1D("hW5meR1","W 5 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW6meR1   = new TH1D("hW6meR1","W 6 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW7meR1   = new TH1D("hW7meR1","W 7 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW8meR1   = new TH1D("hW8meR1","W 8 t R1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meR2   = new TH1D("hW1meR2","W 1 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW2meR2   = new TH1D("hW2meR2","W 2 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW3meR2   = new TH1D("hW3meR2","W 3 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW4meR2   = new TH1D("hW4meR2","W 4 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW5meR2   = new TH1D("hW5meR2","W 5 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW6meR2   = new TH1D("hW6meR2","W 6 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW7meR2   = new TH1D("hW7meR2","W 7 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW8meR2   = new TH1D("hW8meR2","W 8 t R2; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meL1   = new TH1D("hW1meL1","W 1 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW2meL1   = new TH1D("hW2meL1","W 2 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW3meL1   = new TH1D("hW3meL1","W 3 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW4meL1   = new TH1D("hW4meL1","W 4 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW5meL1   = new TH1D("hW5meL1","W 5 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW6meL1   = new TH1D("hW6meL1","W 6 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW7meL1   = new TH1D("hW7meL1","W 7 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW8meL1   = new TH1D("hW8meL1","W 8 t L1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meL2   = new TH1D("hW1meL2","W 1 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW2meL2   = new TH1D("hW2meL2","W 2 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW3meL2   = new TH1D("hW3meL2","W 3 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW4meL2   = new TH1D("hW4meL2","W 4 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW5meL2   = new TH1D("hW5meL2","W 5 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW6meL2   = new TH1D("hW6meL2","W 6 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW7meL2   = new TH1D("hW7meL2","W 7 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW8meL2   = new TH1D("hW8meL2","W 8 t L2; W;", 300, 2.1, 2.3);
+
+  //W Random
+
+  TH1D *hW1meCR   = new TH1D("hW1meCR","W 1 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW2meCR   = new TH1D("hW2meCR","W 2 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW3meCR   = new TH1D("hW3meCR","W 3 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW4meCR   = new TH1D("hW4meCR","W 4 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW5meCR   = new TH1D("hW5meCR","W 5 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW6meCR   = new TH1D("hW6meCR","W 6 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW7meCR   = new TH1D("hW7meCR","W 7 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW8meCR   = new TH1D("hW8meCR","W 8 t C; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meR1R   = new TH1D("hW1meR1R","W 1 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW2meR1R   = new TH1D("hW2meR1R","W 2 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW3meR1R   = new TH1D("hW3meR1R","W 3 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW4meR1R   = new TH1D("hW4meR1R","W 4 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW5meR1R   = new TH1D("hW5meR1R","W 5 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW6meR1R   = new TH1D("hW6meR1R","W 6 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW7meR1R   = new TH1D("hW7meR1R","W 7 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW8meR1R   = new TH1D("hW8meR1R","W 8 t R1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meR2R   = new TH1D("hW1meR2R","W 1 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW2meR2R   = new TH1D("hW2meR2R","W 2 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW3meR2R   = new TH1D("hW3meR2R","W 3 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW4meR2R   = new TH1D("hW4meR2R","W 4 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW5meR2R   = new TH1D("hW5meR2R","W 5 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW6meR2R   = new TH1D("hW6meR2R","W 6 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW7meR2R   = new TH1D("hW7meR2R","W 7 t R2; W;", 300, 2.1, 2.3);
+  TH1D *hW8meR2R   = new TH1D("hW8meR2R","W 8 t R2; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meL1R   = new TH1D("hW1meL1R","W 1 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW2meL1R   = new TH1D("hW2meL1R","W 2 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW3meL1R   = new TH1D("hW3meL1R","W 3 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW4meL1R   = new TH1D("hW4meL1R","W 4 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW5meL1R   = new TH1D("hW5meL1R","W 5 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW6meL1R   = new TH1D("hW6meL1R","W 6 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW7meL1R   = new TH1D("hW7meL1R","W 7 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW8meL1R   = new TH1D("hW8meL1R","W 8 t L1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1meL2R   = new TH1D("hW1meL2R","W 1 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW2meL2R   = new TH1D("hW2meL2R","W 2 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW3meL2R   = new TH1D("hW3meL2R","W 3 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW4meL2R   = new TH1D("hW4meL2R","W 4 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW5meL2R   = new TH1D("hW5meL2R","W 5 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW6meL2R   = new TH1D("hW6meL2R","W 6 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW7meL2R   = new TH1D("hW7meL2R","W 7 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW8meL2R   = new TH1D("hW8meL2R","W 8 t L2; W;", 300, 2.1, 2.3);
+
+  //Q2
+
+  TH1D *hQ21meC   = new TH1D("hQ21meC","Q2 1 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22meC   = new TH1D("hQ22meC","Q2 2 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23meC   = new TH1D("hQ23meC","Q2 3 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24meC   = new TH1D("hQ24meC","Q2 4 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25meC   = new TH1D("hQ25meC","Q2 5 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26meC   = new TH1D("hQ26meC","Q2 6 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27meC   = new TH1D("hQ27meC","Q2 7 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28meC   = new TH1D("hQ28meC","Q2 8 t C; Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21meR1  = new TH1D("hQ21meR1","Q2 1 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22meR1  = new TH1D("hQ22meR1","Q2 2 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23meR1  = new TH1D("hQ23meR1","Q2 3 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24meR1  = new TH1D("hQ24meR1","Q2 4 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25meR1  = new TH1D("hQ25meR1","Q2 5 t R1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26meR1  = new TH1D("hQ26meR1","Q2 6 t R1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27meR1  = new TH1D("hQ27meR1","Q2 7 t R1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28meR1  = new TH1D("hQ28meR1","Q2 8 t R1 Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21meR2  = new TH1D("hQ21meR2","Q2 1 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ22meR2  = new TH1D("hQ22meR2","Q2 2 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ23meR2  = new TH1D("hQ23meR2","Q2 3 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ24meR2  = new TH1D("hQ24meR2","Q2 4 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ25meR2  = new TH1D("hQ25meR2","Q2 5 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ26meR2  = new TH1D("hQ26meR2","Q2 6 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ27meR2  = new TH1D("hQ27meR2","Q2 7 t R2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ28meR2  = new TH1D("hQ28meR2","Q2 8 t R2 Q2;", 300, 0.2, 0.6);      
+
+  TH1D *hQ21meL1  = new TH1D("hQ21meL1","Q2 1 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22meL1  = new TH1D("hQ22meL1","Q2 2 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23meL1  = new TH1D("hQ23meL1","Q2 3 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24meL1  = new TH1D("hQ24meL1","Q2 4 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25meL1  = new TH1D("hQ25meL1","Q2 5 t L1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26meL1  = new TH1D("hQ26meL1","Q2 6 t L1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27meL1  = new TH1D("hQ27meL1","Q2 7 t L1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28meL1  = new TH1D("hQ28meL1","Q2 8 t L1 Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21meL2  = new TH1D("hQ21meL2","Q2 1 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ22meL2  = new TH1D("hQ22meL2","Q2 2 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ23meL2  = new TH1D("hQ23meL2","Q2 3 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ24meL2  = new TH1D("hQ24meL2","Q2 4 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ25meL2  = new TH1D("hQ25meL2","Q2 5 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ26meL2  = new TH1D("hQ26meL2","Q2 6 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ27meL2  = new TH1D("hQ27meL2","Q2 7 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ28meL2  = new TH1D("hQ28meL2","Q2 8 t L2 Q2;", 300, 0.2, 0.6);      
+
+  //Q2 Random
+
+  TH1D *hQ21meCR   = new TH1D("hQ21meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22meCR   = new TH1D("hQ22meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23meCR   = new TH1D("hQ23meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24meCR   = new TH1D("hQ24meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25meCR   = new TH1D("hQ25meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26meCR   = new TH1D("hQ26meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27meCR   = new TH1D("hQ27meCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28meCR   = new TH1D("hQ28meCR","Q2; Q2;", 300, 0.2, 0.6);
+
+  TH1D *hQ21meR1R  = new TH1D("hQ21meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22meR1R  = new TH1D("hQ22meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23meR1R  = new TH1D("hQ23meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24meR1R  = new TH1D("hQ24meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25meR1R  = new TH1D("hQ25meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26meR1R  = new TH1D("hQ26meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27meR1R  = new TH1D("hQ27meR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28meR1R  = new TH1D("hQ28meR1R","Q2; Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21meR2R  = new TH1D("hQ21meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ22meR2R  = new TH1D("hQ22meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ23meR2R  = new TH1D("hQ23meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ24meR2R  = new TH1D("hQ24meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ25meR2R  = new TH1D("hQ25meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ26meR2R  = new TH1D("hQ26meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ27meR2R  = new TH1D("hQ27meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ28meR2R  = new TH1D("hQ28meLRR","Q2; Q2;", 300, 0.2, 0.6);      
+      
+  TH1D *hQ21meL1R  = new TH1D("hQ21meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22meL1R  = new TH1D("hQ22meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23meL1R  = new TH1D("hQ23meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24meL1R  = new TH1D("hQ24meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25meL1R  = new TH1D("hQ25meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26meL1R  = new TH1D("hQ26meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27meL1R  = new TH1D("hQ27meL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28meL1R  = new TH1D("hQ28meL1R","Q2; Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21meL2R  = new TH1D("hQ21meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ22meL2R  = new TH1D("hQ22meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ23meL2R  = new TH1D("hQ23meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ24meL2R  = new TH1D("hQ24meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ25meL2R  = new TH1D("hQ25meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ26meL2R  = new TH1D("hQ26meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ27meL2R  = new TH1D("hQ27meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ28meL2R  = new TH1D("hQ28meL2R","Q2; Q2;", 300, 0.2, 0.6);      
+
+  //t
+  TH1D *ht1meC  = new TH1D("ht1meC","t 1 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meC  = new TH1D("ht2meC","t 2 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meC  = new TH1D("ht3meC","t 3 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meC  = new TH1D("ht4meC","t 4 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meC  = new TH1D("ht5meC","t 5 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meC  = new TH1D("ht6meC","t 6 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meC  = new TH1D("ht7meC","t 7 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meC  = new TH1D("ht8meC","t 8 t C; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meR1  = new TH1D("ht1meR1","t 1 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meR1  = new TH1D("ht2meR1","t 2 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meR1  = new TH1D("ht3meR1","t 3 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meR1  = new TH1D("ht4meR1","t 4 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meR1  = new TH1D("ht5meR1","t 5 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meR1  = new TH1D("ht6meR1","t 6 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meR1  = new TH1D("ht7meR1","t 7 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meR1  = new TH1D("ht8meR1","t 8 t R1; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meR2  = new TH1D("ht1meR2","t 1 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meR2  = new TH1D("ht2meR2","t 2 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meR2  = new TH1D("ht3meR2","t 3 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meR2  = new TH1D("ht4meR2","t 4 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meR2  = new TH1D("ht5meR2","t 5 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meR2  = new TH1D("ht6meR2","t 6 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meR2  = new TH1D("ht7meR2","t 7 t R2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meR2  = new TH1D("ht8meR2","t 8 t R2; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meL1  = new TH1D("ht1meL1","t 1 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meL1  = new TH1D("ht2meL1","t 2 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meL1  = new TH1D("ht3meL1","t 3 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meL1  = new TH1D("ht4meL1","t 4 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meL1  = new TH1D("ht5meL1","t 5 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meL1  = new TH1D("ht6meL1","t 6 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meL1  = new TH1D("ht7meL1","t 7 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meL1  = new TH1D("ht8meL1","t 8 t L1; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meL2  = new TH1D("ht1meL2","t 1 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meL2  = new TH1D("ht2meL2","t 2 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meL2  = new TH1D("ht3meL2","t 3 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meL2  = new TH1D("ht4meL2","t 4 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meL2  = new TH1D("ht5meL2","t 5 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meL2  = new TH1D("ht6meL2","t 6 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meL2  = new TH1D("ht7meL2","t 7 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meL2  = new TH1D("ht8meL2","t 8 t L2; MandelT;",   300, -0.01, 0.1);      
+
+  //t Random
+  TH1D *ht1meCR  = new TH1D("ht1meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meCR  = new TH1D("ht2meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meCR  = new TH1D("ht3meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meCR  = new TH1D("ht4meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meCR  = new TH1D("ht5meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meCR  = new TH1D("ht6meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meCR  = new TH1D("ht7meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meCR  = new TH1D("ht8meCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meR1R  = new TH1D("ht1meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meR1R  = new TH1D("ht2meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meR1R  = new TH1D("ht3meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meR1R  = new TH1D("ht4meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meR1R  = new TH1D("ht5meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meR1R  = new TH1D("ht6meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meR1R  = new TH1D("ht7meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meR1R  = new TH1D("ht8meR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meR2R  = new TH1D("ht1meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meR2R  = new TH1D("ht2meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meR2R  = new TH1D("ht3meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meR2R  = new TH1D("ht4meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meR2R  = new TH1D("ht5meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meR2R  = new TH1D("ht6meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meR2R  = new TH1D("ht7meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meR2R  = new TH1D("ht8meR2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meL1R  = new TH1D("ht1meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meL1R  = new TH1D("ht2meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meL1R  = new TH1D("ht3meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meL1R  = new TH1D("ht4meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meL1R  = new TH1D("ht5meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meL1R  = new TH1D("ht6meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meL1R  = new TH1D("ht7meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meL1R  = new TH1D("ht8meL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1meL2R  = new TH1D("ht1meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2meL2R  = new TH1D("ht2meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3meL2R  = new TH1D("ht3meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4meL2R  = new TH1D("ht4meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5meL2R  = new TH1D("ht5meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6meL2R  = new TH1D("ht6meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7meL2R  = new TH1D("ht7meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8meL2R  = new TH1D("ht8meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
   TH1D *htmeR1  = new TH1D("htmeR1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeR2  = new TH1D("htmeR2","MandelT; MandelT;",   300, -0.01, 0.1);      
@@ -2596,6 +2876,232 @@ void t_plots()
 
   TH2D *hQ2WHECR  = new TH2D("hQ2WHECR","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
   TH2D *hQ2WHEC1R  = new TH2D("hQ2WHEC1R","; ; ", 300, 0.2, 0.6, 300, 2.05, 2.4);      
+
+  //W
+
+  TH1D *hW1heC   = new TH1D("hW1heC","W 1 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW2heC   = new TH1D("hW2heC","W 2 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW3heC   = new TH1D("hW3heC","W 3 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW4heC   = new TH1D("hW4heC","W 4 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW5heC   = new TH1D("hW5heC","W 5 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW6heC   = new TH1D("hW6heC","W 6 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW7heC   = new TH1D("hW7heC","W 7 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW8heC   = new TH1D("hW8heC","W 8 t C; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1heR1   = new TH1D("hW1heR1","W 1 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW2heR1   = new TH1D("hW2heR1","W 2 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW3heR1   = new TH1D("hW3heR1","W 3 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW4heR1   = new TH1D("hW4heR1","W 4 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW5heR1   = new TH1D("hW5heR1","W 5 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW6heR1   = new TH1D("hW6heR1","W 6 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW7heR1   = new TH1D("hW7heR1","W 7 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW8heR1   = new TH1D("hW8heR1","W 8 t R1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1heL1   = new TH1D("hW1heL1","W 1 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW2heL1   = new TH1D("hW2heL1","W 2 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW3heL1   = new TH1D("hW3heL1","W 3 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW4heL1   = new TH1D("hW4heL1","W 4 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW5heL1   = new TH1D("hW5heL1","W 5 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW6heL1   = new TH1D("hW6heL1","W 6 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW7heL1   = new TH1D("hW7heL1","W 7 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW8heL1   = new TH1D("hW8heL1","W 8 t L1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1heL2   = new TH1D("hW1heL2","W 1 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW2heL2   = new TH1D("hW2heL2","W 2 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW3heL2   = new TH1D("hW3heL2","W 3 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW4heL2   = new TH1D("hW4heL2","W 4 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW5heL2   = new TH1D("hW5heL2","W 5 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW6heL2   = new TH1D("hW6heL2","W 6 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW7heL2   = new TH1D("hW7heL2","W 7 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW8heL2   = new TH1D("hW8heL2","W 8 t L2; W;", 300, 2.1, 2.3);
+
+  //W Random
+
+  TH1D *hW1heCR   = new TH1D("hW1heCR","W 1 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW2heCR   = new TH1D("hW2heCR","W 2 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW3heCR   = new TH1D("hW3heCR","W 3 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW4heCR   = new TH1D("hW4heCR","W 4 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW5heCR   = new TH1D("hW5heCR","W 5 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW6heCR   = new TH1D("hW6heCR","W 6 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW7heCR   = new TH1D("hW7heCR","W 7 t C; W;", 300, 2.1, 2.3);
+  TH1D *hW8heCR   = new TH1D("hW8heCR","W 8 t C; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1heR1R   = new TH1D("hW1heR1R","W 1 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW2heR1R   = new TH1D("hW2heR1R","W 2 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW3heR1R   = new TH1D("hW3heR1R","W 3 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW4heR1R   = new TH1D("hW4heR1R","W 4 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW5heR1R   = new TH1D("hW5heR1R","W 5 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW6heR1R   = new TH1D("hW6heR1R","W 6 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW7heR1R   = new TH1D("hW7heR1R","W 7 t R1; W;", 300, 2.1, 2.3);
+  TH1D *hW8heR1R   = new TH1D("hW8heR1R","W 8 t R1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1heL1R   = new TH1D("hW1heL1R","W 1 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW2heL1R   = new TH1D("hW2heL1R","W 2 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW3heL1R   = new TH1D("hW3heL1R","W 3 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW4heL1R   = new TH1D("hW4heL1R","W 4 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW5heL1R   = new TH1D("hW5heL1R","W 5 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW6heL1R   = new TH1D("hW6heL1R","W 6 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW7heL1R   = new TH1D("hW7heL1R","W 7 t L1; W;", 300, 2.1, 2.3);
+  TH1D *hW8heL1R   = new TH1D("hW8heL1R","W 8 t L1; W;", 300, 2.1, 2.3);
+
+  TH1D *hW1heL2R   = new TH1D("hW1heL2R","W 1 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW2heL2R   = new TH1D("hW2heL2R","W 2 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW3heL2R   = new TH1D("hW3heL2R","W 3 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW4heL2R   = new TH1D("hW4heL2R","W 4 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW5heL2R   = new TH1D("hW5heL2R","W 5 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW6heL2R   = new TH1D("hW6heL2R","W 6 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW7heL2R   = new TH1D("hW7heL2R","W 7 t L2; W;", 300, 2.1, 2.3);
+  TH1D *hW8heL2R   = new TH1D("hW8heL2R","W 8 t L2; W;", 300, 2.1, 2.3);
+
+  //Q2
+
+  TH1D *hQ21heC   = new TH1D("hQ21heC","Q2 1 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22heC   = new TH1D("hQ22heC","Q2 2 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23heC   = new TH1D("hQ23heC","Q2 3 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24heC   = new TH1D("hQ24heC","Q2 4 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25heC   = new TH1D("hQ25heC","Q2 5 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26heC   = new TH1D("hQ26heC","Q2 6 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27heC   = new TH1D("hQ27heC","Q2 7 t C; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28heC   = new TH1D("hQ28heC","Q2 8 t C; Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21heR1  = new TH1D("hQ21heR1","Q2 1 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22heR1  = new TH1D("hQ22heR1","Q2 2 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23heR1  = new TH1D("hQ23heR1","Q2 3 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24heR1  = new TH1D("hQ24heR1","Q2 4 t R1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25heR1  = new TH1D("hQ25heR1","Q2 5 t R1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26heR1  = new TH1D("hQ26heR1","Q2 6 t R1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27heR1  = new TH1D("hQ27heR1","Q2 7 t R1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28heR1  = new TH1D("hQ28heR1","Q2 8 t R1 Q2;", 300, 0.2, 0.6);
+
+  TH1D *hQ21heL1  = new TH1D("hQ21heL1","Q2 1 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22heL1  = new TH1D("hQ22heL1","Q2 2 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23heL1  = new TH1D("hQ23heL1","Q2 3 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24heL1  = new TH1D("hQ24heL1","Q2 4 t L1; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25heL1  = new TH1D("hQ25heL1","Q2 5 t L1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26heL1  = new TH1D("hQ26heL1","Q2 6 t L1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27heL1  = new TH1D("hQ27heL1","Q2 7 t L1 Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28heL1  = new TH1D("hQ28heL1","Q2 8 t L1 Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21heL2  = new TH1D("hQ21heL2","Q2 1 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ22heL2  = new TH1D("hQ22heL2","Q2 2 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ23heL2  = new TH1D("hQ23heL2","Q2 3 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ24heL2  = new TH1D("hQ24heL2","Q2 4 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ25heL2  = new TH1D("hQ25heL2","Q2 5 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ26heL2  = new TH1D("hQ26heL2","Q2 6 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ27heL2  = new TH1D("hQ27heL2","Q2 7 t L2 Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ28heL2  = new TH1D("hQ28heL2","Q2 8 t L2 Q2;", 300, 0.2, 0.6);      
+
+  //Q2 Random
+
+  TH1D *hQ21heCR   = new TH1D("hQ21heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22heCR   = new TH1D("hQ22heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23heCR   = new TH1D("hQ23heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24heCR   = new TH1D("hQ24heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25heCR   = new TH1D("hQ25heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26heCR   = new TH1D("hQ26heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27heCR   = new TH1D("hQ27heCR","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28heCR   = new TH1D("hQ28heCR","Q2; Q2;", 300, 0.2, 0.6);
+
+  TH1D *hQ21heR1R  = new TH1D("hQ21heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22heR1R  = new TH1D("hQ22heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23heR1R  = new TH1D("hQ23heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24heR1R  = new TH1D("hQ24heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25heR1R  = new TH1D("hQ25heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26heR1R  = new TH1D("hQ26heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27heR1R  = new TH1D("hQ27heR1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28heR1R  = new TH1D("hQ28heR1R","Q2; Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21heL1R  = new TH1D("hQ21heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ22heL1R  = new TH1D("hQ22heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ23heL1R  = new TH1D("hQ23heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ24heL1R  = new TH1D("hQ24heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ25heL1R  = new TH1D("hQ25heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ26heL1R  = new TH1D("hQ26heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ27heL1R  = new TH1D("hQ27heL1R","Q2; Q2;", 300, 0.2, 0.6);
+  TH1D *hQ28heL1R  = new TH1D("hQ28heL1R","Q2; Q2;", 300, 0.2, 0.6);
+      
+  TH1D *hQ21heL2R  = new TH1D("hQ21heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ22heL2R  = new TH1D("hQ22heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ23heL2R  = new TH1D("hQ23heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ24heL2R  = new TH1D("hQ24heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ25heL2R  = new TH1D("hQ25heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ26heL2R  = new TH1D("hQ26heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ27heL2R  = new TH1D("hQ27heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+  TH1D *hQ28heL2R  = new TH1D("hQ28heL2R","Q2; Q2;", 300, 0.2, 0.6);      
+
+  //t
+  TH1D *ht1heC  = new TH1D("ht1heC","t 1 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heC  = new TH1D("ht2heC","t 2 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heC  = new TH1D("ht3heC","t 3 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heC  = new TH1D("ht4heC","t 4 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heC  = new TH1D("ht5heC","t 5 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heC  = new TH1D("ht6heC","t 6 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heC  = new TH1D("ht7heC","t 7 t C; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heC  = new TH1D("ht8heC","t 8 t C; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1heR1  = new TH1D("ht1heR1","t 1 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heR1  = new TH1D("ht2heR1","t 2 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heR1  = new TH1D("ht3heR1","t 3 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heR1  = new TH1D("ht4heR1","t 4 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heR1  = new TH1D("ht5eR1","t 5 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heR1  = new TH1D("ht6heR1","t 6 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heR1  = new TH1D("ht7heR1","t 7 t R1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heR1  = new TH1D("ht8heR1","t 8 t R1; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1heL1  = new TH1D("ht1heL1","t 1 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heL1  = new TH1D("ht2heL1","t 2 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heL1  = new TH1D("ht3heL1","t 3 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heL1  = new TH1D("ht4heL1","t 4 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heL1  = new TH1D("ht5heL1","t 5 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heL1  = new TH1D("ht6heL1","t 6 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heL1  = new TH1D("ht7heL1","t 7 t L1; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heL1  = new TH1D("ht8heL1","t 8 t L1; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1heL2  = new TH1D("ht1heL2","t 1 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heL2  = new TH1D("ht2heL2","t 2 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heL2  = new TH1D("ht3heL2","t 3 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heL2  = new TH1D("ht4heL2","t 4 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heL2  = new TH1D("ht5heL2","t 5 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heL2  = new TH1D("ht6heL2","t 6 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heL2  = new TH1D("ht7heL2","t 7 t L2; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heL2  = new TH1D("ht8heL2","t 8 t L2; MandelT;",   300, -0.01, 0.1);      
+
+  //t Random
+  TH1D *ht1heCR  = new TH1D("ht1heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heCR  = new TH1D("ht2heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heCR  = new TH1D("ht3heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heCR  = new TH1D("ht4heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heCR  = new TH1D("ht5heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heCR  = new TH1D("ht6heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heCR  = new TH1D("ht7heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heCR  = new TH1D("ht8heCR","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1heR1R  = new TH1D("ht1heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heR1R  = new TH1D("ht2heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heR1R  = new TH1D("ht3heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heR1R  = new TH1D("ht4heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heR1R  = new TH1D("ht5heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heR1R  = new TH1D("ht6heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heR1R  = new TH1D("ht7heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heR1R  = new TH1D("ht8heR1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1heL1R  = new TH1D("ht1heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heL1R  = new TH1D("ht2heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heL1R  = new TH1D("ht3heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heL1R  = new TH1D("ht4heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heL1R  = new TH1D("ht5heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heL1R  = new TH1D("ht6heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heL1R  = new TH1D("ht7heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heL1R  = new TH1D("ht8heL1R","MandelT; MandelT;",   300, -0.01, 0.1);      
+
+  TH1D *ht1heL2R  = new TH1D("ht1heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht2heL2R  = new TH1D("ht2heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht3heL2R  = new TH1D("ht3heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht4heL2R  = new TH1D("ht4heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht5heL2R  = new TH1D("ht5heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht6heL2R  = new TH1D("ht6heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht7heL2R  = new TH1D("ht7heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
+  TH1D *ht8heL2R  = new TH1D("ht8heL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
   TH1D *htheR1  = new TH1D("htheR1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htheC   = new TH1D("htheC","MandelT; MandelT;",    300, -0.01, 0.1);      
