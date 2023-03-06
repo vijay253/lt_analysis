@@ -3366,9 +3366,641 @@ void t_plots()
   htmeInL1->SetLineColor(kRed);
   htmeInL1->Add(htmeInL1R, -1); 
   htmeInL1->Draw("same Weight");
-
   c9meIn->Print(outputpdf);
+
+  TCanvas *cWmeR11 = new TCanvas("cWmeR11", "cWmeR11");
+  cWmeR11->Divide(2, 2);
+  cWmeR11->cd(1);
+  hW1meR1->Add(hW1meR1R, -1);
+  hW1meR1->Draw("Weight");
+  cWmeR11->cd(2);
+  hW2meR1->Add(hW2meR1R, -1);
+  hW2meR1->Draw(" same Weight");
+  cWmeR11->cd(3);
+  hW3meR1->Add(hW3meR1R, -1);
+  hW3meR1->Draw(" same Weight");
+  cWmeR11->cd(4);
+  hW4meR1->Add(hW4meR1R, -1);
+  hW4meR1->Draw(" same Weight");
+  cWmeR11->Print(outputpdf);
   
+  TCanvas *cWmeR12 = new TCanvas("cWmeR12", "cWmeR12");
+  cWmeR12->Divide(2, 2);
+  cWmeR12->cd(1);
+  hW5meR1->Add(hW5meR1R, -1);
+  hW5meR1->Draw("Weight");
+  cWmeR12->cd(2);
+  hW6meR1->Add(hW6meR1R, -1);
+  hW6meR1->Draw(" same Weight");
+  cWmeR12->cd(3);
+  hW7meR1->Add(hW7meR1R, -1);
+  hW7meR1->Draw(" same Weight");
+  cWmeR12->cd(4);
+  hW8meR1->Add(hW8meR1R, -1);
+  hW8meR1->Draw(" same Weight");
+  cWmeR12->Print(outputpdf);
+
+  TCanvas *cWmeR21 = new TCanvas("cWmeR21", "cWmeR21");
+  cWmeR21->Divide(2, 2);
+  cWmeR21->cd(1);
+  hW1meR2->Add(hW1meR2R, -1);
+  hW1meR2->Draw("Weight");
+  cWmeR21->cd(2);
+  hW2meR2->Add(hW2meR2R, -1);
+  hW2meR2->Draw(" same Weight");
+  cWmeR21->cd(3);
+  hW3meR2->Add(hW3meR2R, -1);
+  hW3meR2->Draw(" same Weight");
+  cWmeR21->cd(4);
+  hW4meR2->Add(hW4meR2R, -1);
+  hW4meR2->Draw(" same Weight");
+  cWmeR21->Print(outputpdf);
+  
+  TCanvas *cWmeR22 = new TCanvas("cWmeR22", "cWmeR22");
+  cWmeR22->Divide(2, 2);
+  cWmeR22->cd(1);
+  hW5meR2->Add(hW5meR2R, -1);
+  hW5meR2->Draw("Weight");
+  cWmeR22->cd(2);
+  hW6meR2->Add(hW6meR2R, -1);
+  hW6meR2->Draw(" same Weight");
+  cWmeR22->cd(3);
+  hW7meR2->Add(hW7meR2R, -1);
+  hW7meR2->Draw(" same Weight");
+  cWmeR22->cd(4);
+  hW8meR2->Add(hW8meR2R, -1);
+  hW8meR2->Draw(" same Weight");
+  cWmeR22->Print(outputpdf);
+
+  TCanvas *cWmeC1 = new TCanvas("cWmeC1", "cWmeC1");
+  cWmeC1->Divide(2, 2);
+  cWmeC1->cd(1);
+  hW1meC->Add(hW1meCR, -1);
+  hW1meC->Draw("Weight");
+  cWmeC1->cd(2);
+  hW2meC->Add(hW2meCR, -1);
+  hW2meC->Draw(" same Weight");
+  cWmeC1->cd(3);
+  hW3meC->Add(hW3meCR, -1);
+  hW3meC->Draw(" same Weight");
+  cWmeC1->cd(4);
+  hW4meC->Add(hW4meCR, -1);
+  hW4meC->Draw(" same Weight");
+  cWmeC1->Print(outputpdf);
+  
+  TCanvas *cWmeC2 = new TCanvas("cWmeC2", "cWmeC2");
+  cWmeC2->Divide(2, 2);
+  cWmeC2->cd(1);
+  hW5meC->Add(hW5meCR, -1);
+  hW5meC->Draw("Weight");
+  cWmeC2->cd(2);
+  hW6meC->Add(hW6meCR, -1);
+  hW6meC->Draw(" same Weight");
+  cWmeC2->cd(3);
+  hW7meC->Add(hW7meCR, -1);
+  hW7meC->Draw(" same Weight");
+  cWmeC2->cd(4);
+  hW8meC->Add(hW8meCR, -1);
+  hW8meC->Draw(" same Weight");
+  cWmeC2->Print(outputpdf);
+
+  TCanvas *cWmeL11 = new TCanvas("cWmeL11", "cWmeL11");
+  cWmeL11->Divide(2, 2);
+  cWmeL11->cd(1);
+  hW1meL1->Add(hW1meL1R, -1);
+  hW1meL1->Draw("Weight");
+  cWmeL11->cd(2);
+  hW2meL1->Add(hW2meL1R, -1);
+  hW2meL1->Draw(" same Weight");
+  cWmeL11->cd(3);
+  hW3meL1->Add(hW3meL1R, -1);
+  hW3meL1->Draw(" same Weight");
+  cWmeL11->cd(4);
+  hW4meL1->Add(hW4meL1R, -1);
+  hW4meL1->Draw(" same Weight");
+  cWmeL11->Print(outputpdf);
+  
+  TCanvas *cWmeL12 = new TCanvas("cWmeL12", "cWmeL12");
+  cWmeL12->Divide(2, 2);
+  cWmeL12->cd(1);
+  hW5meL1->Add(hW5meL1R, -1);
+  hW5meL1->Draw("Weight");
+  cWmeL12->cd(2);
+  hW6meL1->Add(hW6meL1R, -1);
+  hW6meL1->Draw(" same Weight");
+  cWmeL12->cd(3);
+  hW7meL1->Add(hW7meL1R, -1);
+  hW7meL1->Draw(" same Weight");
+  cWmeL12->cd(4);
+  hW8meL1->Add(hW8meL1R, -1);
+  hW8meL1->Draw(" same Weight");
+  cWmeL12->Print(outputpdf);
+
+  TCanvas *cWmeL21 = new TCanvas("cWmeL21", "cWmeL21");
+  cWmeL21->Divide(2, 2);
+  cWmeL21->cd(1);
+  hW1meL2->Add(hW1meL2R, -1);
+  hW1meL2->Draw("Weight");
+  cWmeL21->cd(2);
+  hW2meL2->Add(hW2meL2R, -1);
+  hW2meL2->Draw(" same Weight");
+  cWmeL21->cd(3);
+  hW3meL2->Add(hW3meL2R, -1);
+  hW3meL2->Draw(" same Weight");
+  cWmeL21->cd(4);
+  hW4meL2->Add(hW4meL2R, -1);
+  hW4meL2->Draw(" same Weight");
+  cWmeL21->Print(outputpdf);
+  
+  TCanvas *cWmeL22 = new TCanvas("cWmeL22", "cWmeL22");
+  cWmeL22->Divide(2, 2);
+  cWmeL22->cd(1);
+  hW5meL2->Add(hW5meL2R, -1);
+  hW5meL2->Draw("Weight");
+  cWmeL22->cd(2);
+  hW6meL2->Add(hW6meL2R, -1);
+  hW6meL2->Draw(" same Weight");
+  cWmeL22->cd(3);
+  hW7meL2->Add(hW7meL2R, -1);
+  hW7meL2->Draw(" same Weight");
+  cWmeL22->cd(4);
+  hW8meL2->Add(hW8meL2R, -1);
+  hW8meL2->Draw(" same Weight");
+  cWmeL22->Print(outputpdf);
+
+  TCanvas *cQ2meR11 = new TCanvas("cQ2meR11", "cQ2meR11");
+
+  cQ2meR11->Divide(2, 2);
+  cQ2meR11->cd(1);
+  hQ21meR1->Add(hQ21meR1R, -1); 
+  hQ21meR1->Draw(" Weight");
+  cQ2meR11->cd(2);
+  hQ22meR1->Add(hQ22meR1R, -1); 
+  hQ22meR1->Draw("same Weight");
+  cQ2meR11->cd(3);
+  hQ23meR1->Add(hQ23meR1R, -1); 
+  hQ23meR1->Draw("same Weight");
+  cQ2meR11->cd(4);
+  hQ24meR1->Add(hQ24meR1R, -1); 
+  hQ24meR1->Draw("same Weight");
+  cQ2meR11->Print(outputpdf);
+
+  TCanvas *cQ2meR12 = new TCanvas("cQ2meR12", "cQ2meR12");
+
+  cQ2meR12->Divide(2, 2);
+  cQ2meR12->cd(1);
+  hQ25meR1->Add(hQ25meR1R, -1); 
+  hQ25meR1->Draw(" Weight");
+  cQ2meR12->cd(2);
+  hQ26meR1->Add(hQ26meR1R, -1); 
+  hQ26meR1->Draw("same Weight");
+  cQ2meR12->cd(3);
+  hQ27meR1->Add(hQ27meR1R, -1); 
+  hQ27meR1->Draw("same Weight");
+  cQ2meR12->cd(4);
+  hQ28meR1->Add(hQ28meR1R, -1); 
+  hQ28meR1->Draw("same Weight");
+  cQ2meR12->Print(outputpdf);
+
+  TCanvas *cQ2meR21 = new TCanvas("cQ2meR21", "cQ2meR21");
+
+  cQ2meR21->Divide(2, 2);
+  cQ2meR21->cd(1);
+  hQ21meR2->Add(hQ21meR2R, -1); 
+  hQ21meR2->Draw(" Weight");
+  cQ2meR21->cd(2);
+  hQ22meR2->Add(hQ22meR2R, -1); 
+  hQ22meR2->Draw("same Weight");
+  cQ2meR21->cd(3);
+  hQ23meR2->Add(hQ23meR2R, -1); 
+  hQ23meR2->Draw("same Weight");
+  cQ2meR21->cd(4);
+  hQ24meR2->Add(hQ24meR2R, -1); 
+  hQ24meR2->Draw("same Weight");
+  cQ2meR21->Print(outputpdf);
+
+  TCanvas *cQ2meR22 = new TCanvas("cQ2meR22", "cQ2meR22");
+
+  cQ2meR22->Divide(2, 2);
+  cQ2meR22->cd(1);
+  hQ25meR2->Add(hQ25meR2R, -1); 
+  hQ25meR2->Draw(" Weight");
+  cQ2meR22->cd(2);
+  hQ26meR2->Add(hQ26meR2R, -1); 
+  hQ26meR2->Draw("same Weight");
+  cQ2meR22->cd(3);
+  hQ27meR2->Add(hQ27meR2R, -1); 
+  hQ27meR2->Draw("same Weight");
+  cQ2meR22->cd(4);
+  hQ28meR2->Add(hQ28meR2R, -1); 
+  hQ28meR2->Draw("same Weight");
+  cQ2meR22->Print(outputpdf);
+
+  TCanvas *cQ2meC1 = new TCanvas("cQ2meC1", "cQ2meC1");
+
+  cQ2meC1->Divide(2, 2);
+  cQ2meC1->cd(1);
+  hQ21meC->Add(hQ21meCR, -1); 
+  hQ21meC->Draw(" Weight");
+  cQ2meC1->cd(2);
+  hQ22meC->Add(hQ22meCR, -1); 
+  hQ22meC->Draw("same Weight");
+  cQ2meC1->cd(3);
+  hQ23meC->Add(hQ23meCR, -1); 
+  hQ23meC->Draw("same Weight");
+  cQ2meC1->cd(4);
+  hQ24meC->Add(hQ24meCR, -1); 
+  hQ24meC->Draw("same Weight");
+  cQ2meC1->Print(outputpdf);
+
+  TCanvas *cQ2meC2 = new TCanvas("cQ2meC2", "cQ2meC2");
+
+  cQ2meC2->Divide(2, 2);
+  cQ2meC2->cd(1);
+  hQ25meC->Add(hQ25meCR, -1); 
+  hQ25meC->Draw(" Weight");
+  cQ2meC2->cd(2);
+  hQ26meC->Add(hQ26meCR, -1); 
+  hQ26meC->Draw("same Weight");
+  cQ2meC2->cd(3);
+  hQ27meC->Add(hQ27meCR, -1); 
+  hQ27meC->Draw("same Weight");
+  cQ2meC2->cd(4);
+  hQ28meC->Add(hQ28meCR, -1); 
+  hQ28meC->Draw("same Weight");
+  cQ2meC2->Print(outputpdf);
+
+  TCanvas *cQ2meL11 = new TCanvas("cQ2meL11", "cQ2meL11");
+
+  cQ2meL11->Divide(2, 2);
+  cQ2meL11->cd(1);
+  hQ21meL1->Add(hQ21meL1R, -1); 
+  hQ21meL1->Draw(" Weight");
+  cQ2meL11->cd(2);
+  hQ22meL1->Add(hQ22meL1R, -1); 
+  hQ22meL1->Draw("same Weight");
+  cQ2meL11->cd(3);
+  hQ23meL1->Add(hQ23meL1R, -1); 
+  hQ23meL1->Draw("same Weight");
+  cQ2meL11->cd(4);
+  hQ24meL1->Add(hQ24meL1R, -1); 
+  hQ24meL1->Draw("same Weight");
+  cQ2meL11->Print(outputpdf);
+
+  TCanvas *cQ2meL12 = new TCanvas("cQ2meL12", "cQ2meL12");
+
+  cQ2meL12->Divide(2, 2);
+  cQ2meL12->cd(1);
+  hQ25meL1->Add(hQ25meL1R, -1); 
+  hQ25meL1->Draw(" Weight");
+  cQ2meL12->cd(2);
+  hQ26meL1->Add(hQ26meL1R, -1); 
+  hQ26meL1->Draw("same Weight");
+  cQ2meL12->cd(3);
+  hQ27meL1->Add(hQ27meL1R, -1); 
+  hQ27meL1->Draw("same Weight");
+  cQ2meL12->cd(4);
+  hQ28meL1->Add(hQ28meL1R, -1); 
+  hQ28meL1->Draw("same Weight");
+  cQ2meL12->Print(outputpdf);
+
+  TCanvas *cQ2meL21 = new TCanvas("cQ2meL21", "cQ2meL21");
+
+  cQ2meL21->Divide(2, 2);
+  cQ2meL21->cd(1);
+  hQ21meL2->Add(hQ21meL2R, -1); 
+  hQ21meL2->Draw(" Weight");
+  cQ2meL21->cd(2);
+  hQ22meL2->Add(hQ22meL2R, -1); 
+  hQ22meL2->Draw("same Weight");
+  cQ2meL21->cd(3);
+  hQ23meL2->Add(hQ23meL2R, -1); 
+  hQ23meL2->Draw("same Weight");
+  cQ2meL21->cd(4);
+  hQ24meL2->Add(hQ24meL2R, -1); 
+  hQ24meL2->Draw("same Weight");
+  cQ2meL21->Print(outputpdf);
+
+  TCanvas *cQ2meL22 = new TCanvas("cQ2meL22", "cQ2meL22");
+
+  cQ2meL22->Divide(2, 2);
+  cQ2meL22->cd(1);
+  hQ25meL2->Add(hQ25meL2R, -1); 
+  hQ25meL2->Draw(" Weight");
+  cQ2meL22->cd(2);
+  hQ26meL2->Add(hQ26meL2R, -1); 
+  hQ26meL2->Draw("same Weight");
+  cQ2meL22->cd(3);
+  hQ27meL2->Add(hQ27meL2R, -1); 
+  hQ27meL2->Draw("same Weight");
+  cQ2meL22->cd(4);
+  hQ28meL2->Add(hQ28meL2R, -1); 
+  hQ28meL2->Draw("same Weight");
+  cQ2meL22->Print(outputpdf);
+
+  TCanvas *ctmeR11 = new TCanvas("ctmeR11", "ctmeR11");
+  ctmeR11->Divide(2, 2);
+  ctmeR11->cd(1);
+  ht1meR1->Add(ht1meR1R, -1);
+  ht1meR1->Draw("Weight");
+  ctmeR11->cd(2);
+  ht2meR1->Add(ht2meR1R, -1);
+  ht2meR1->Draw("same Weight");
+  ctmeR11->cd(3);
+  ht3meR1->Add(ht3meR1R, -1);
+  ht3meR1->Draw("same Weight");
+  ctmeR11->cd(4);
+  ht4meR1->Add(ht4meR1R, -1);
+  ht4meR1->Draw("same Weight");
+  ctmeR11->Print(outputpdf);
+
+  TCanvas *ctmeR12 = new TCanvas("ctmeR12", "ctmeR12");
+  ctmeR12->Divide(2, 2);
+  ctmeR12->cd(1);
+  ht5meR1->Add(ht5meR1R, -1);
+  ht5meR1->Draw("Weight");
+  ctmeR12->cd(2);
+  ht6meR1->Add(ht6meR1R, -1);
+  ht6meR1->Draw("same Weight");
+  ctmeR12->cd(3);
+  ht7meR1->Add(ht7meR1R, -1);
+  ht7meR1->Draw("same Weight");
+  ctmeR12->cd(4);
+  ht8meR1->Add(ht8meR1R, -1);
+  ht8meR1->Draw("same Weight");
+  ctmeR12->Print(outputpdf);
+
+  TCanvas *ctmeR21 = new TCanvas("ctmeR21", "ctmeR21");
+  ctmeR21->Divide(2, 2);
+  ctmeR21->cd(1);
+  ht1meR2->Add(ht1meR2R, -1);
+  ht1meR2->Draw("Weight");
+  ctmeR21->cd(2);
+  ht2meR2->Add(ht2meR2R, -1);
+  ht2meR2->Draw("same Weight");
+  ctmeR21->cd(3);
+  ht3meR2->Add(ht3meR2R, -1);
+  ht3meR2->Draw("same Weight");
+  ctmeR21->cd(4);
+  ht4meR2->Add(ht4meR2R, -1);
+  ht4meR2->Draw("same Weight");
+  ctmeR21->Print(outputpdf);
+
+  TCanvas *ctmeR22 = new TCanvas("ctmeR22", "ctmeR22");
+  ctmeR22->Divide(2, 2);
+  ctmeR22->cd(1);
+  ht5meR2->Add(ht5meR2R, -1);
+  ht5meR2->Draw("Weight");
+  ctmeR22->cd(2);
+  ht6meR2->Add(ht6meR2R, -1);
+  ht6meR2->Draw("same Weight");
+  ctmeR22->cd(3);
+  ht7meR2->Add(ht7meR2R, -1);
+  ht7meR2->Draw("same Weight");
+  ctmeR22->cd(4);
+  ht8meR2->Add(ht8meR2R, -1);
+  ht8meR2->Draw("same Weight");
+  ctmeR22->Print(outputpdf);
+
+  TCanvas *ctmeC1 = new TCanvas("ctmeC1", "ctmeC1");
+  ctmeC1->Divide(2, 2);
+  ctmeC1->cd(1);
+  ht1meC->Add(ht1meCR, -1);
+  ht1meC->Draw("Weight");
+  ctmeC1->cd(2);
+  ht2meC->Add(ht2meCR, -1);
+  ht2meC->Draw("same Weight");
+  ctmeC1->cd(3);
+  ht3meC->Add(ht3meCR, -1);
+  ht3meC->Draw("same Weight");
+  ctmeC1->cd(4);
+  ht4meC->Add(ht4meCR, -1);
+  ht4meC->Draw("same Weight");
+  ctmeC1->Print(outputpdf);
+
+  TCanvas *ctmeC2 = new TCanvas("ctmeC2", "ctmeC2");
+  ctmeC2->Divide(2, 2);
+  ctmeC2->cd(1);
+  ht5meC->Add(ht5meCR, -1);
+  ht5meC->Draw("Weight");
+  ctmeC2->cd(2);
+  ht6meC->Add(ht6meCR, -1);
+  ht6meC->Draw("same Weight");
+  ctmeC2->cd(3);
+  ht7meC->Add(ht7meCR, -1);
+  ht7meC->Draw("same Weight");
+  ctmeC2->cd(4);
+  ht8meC->Add(ht8meCR, -1);
+  ht8meC->Draw("same Weight");
+  ctmeC2->Print(outputpdf);
+
+  TCanvas *ctmeL11 = new TCanvas("ctmeL11", "ctmeL11");
+  ctmeL11->Divide(2, 2);
+  ctmeL11->cd(1);
+  ht1meL1->Add(ht1meL1R, -1);
+  ht1meL1->Draw("Weight");
+  ctmeL11->cd(2);
+  ht2meL1->Add(ht2meL1R, -1);
+  ht2meL1->Draw("same Weight");
+  ctmeL11->cd(3);
+  ht3meL1->Add(ht3meL1R, -1);
+  ht3meL1->Draw("same Weight");
+  ctmeL11->cd(4);
+  ht4meL1->Add(ht4meL1R, -1);
+  ht4meL1->Draw("same Weight");
+  ctmeL11->Print(outputpdf);
+
+  TCanvas *ctmeL12 = new TCanvas("ctmeL12", "ctmeL12");
+  ctmeL12->Divide(2, 2);
+  ctmeL12->cd(1);
+  ht5meL1->Add(ht5meL1R, -1);
+  ht5meL1->Draw("Weight");
+  ctmeL12->cd(2);
+  ht6meL1->Add(ht6meL1R, -1);
+  ht6meL1->Draw("same Weight");
+  ctmeL12->cd(3);
+  ht7meL1->Add(ht7meL1R, -1);
+  ht7meL1->Draw("same Weight");
+  ctmeL12->cd(4);
+  ht8meL1->Add(ht8meL1R, -1);
+  ht8meL1->Draw("same Weight");
+  ctmeL12->Print(outputpdf);
+
+  TCanvas *ctmeL21 = new TCanvas("ctmeL21", "ctmeL21");
+  ctmeL21->Divide(2, 2);
+  ctmeL21->cd(1);
+  ht1meL2->Add(ht1meL2R, -1);
+  ht1meL2->Draw("Weight");
+  ctmeL21->cd(2);
+  ht2meL2->Add(ht2meL2R, -1);
+  ht2meL2->Draw("same Weight");
+  ctmeL21->cd(3);
+  ht3meL2->Add(ht3meL2R, -1);
+  ht3meL2->Draw("same Weight");
+  ctmeL21->cd(4);
+  ht4meL2->Add(ht4meL2R, -1);
+  ht4meL2->Draw("same Weight");
+  ctmeL21->Print(outputpdf);
+
+  TCanvas *ctmeL22 = new TCanvas("ctmeL22", "ctmeL22");
+  ctmeL22->Divide(2, 2);
+  ctmeL22->cd(1);
+  ht5meL2->Add(ht5meL2R, -1);
+  ht5meL2->Draw("Weight");
+  ctmeL22->cd(2);
+  ht6meL2->Add(ht6meL2R, -1);
+  ht6meL2->Draw("same Weight");
+  ctmeL22->cd(3);
+  ht7meL2->Add(ht7meL2R, -1);
+  ht7meL2->Draw("same Weight");
+  ctmeL22->cd(4);
+  ht8meL2->Add(ht8meL2R, -1);
+  ht8meL2->Draw("same Weight");
+  ctmeL22->Print(outputpdf);
+
+  /**
+  ofstream outmeC("kindata/kindata.pl_375_629_+0000.dat");
+  ofstream outmeL1("kindata/kindata.pl_375_629_-2000.dat");
+  ofstream outmeL2("kindata/kindata.pl_375_629_-4000.dat");
+  ofstream outmeR1("kindata/kindata.pl_375_629_+2000.dat");
+  ofstream outmeR2("kindata/kindata.pl_375_629_+3120.dat");
+
+  ofstream outheC("kindata/kindata.pl_375_781_+0000.dat");
+  ofstream outheL1("kindata/kindata.pl_375_781_-2015.dat");
+  ofstream outheL2("kindata/kindata.pl_375_781_-4000.dat");
+  ofstream outheR1("kindata/kindata.pl_375_781_+2680.dat");
+  **/
+
+  ofstream outmeR1("kindata/kindata.pl_375_629_+2000.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outmeR1<<1.000<<endl;
+      if(i==1)
+	outmeR1<<hW1meR1->GetMean()<<"\t"<<hW1meR1->GetMeanError()<<"\t"<<hQ21meR1->GetMean()<<"\t"<<hQ21meR1->GetMeanError()<<"\t"<<ht1meR1->GetMean()<<"\t"<<ht1meR1->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outmeR1<<hW2meR1->GetMean()<<"\t"<<hW2meR1->GetMeanError()<<"\t"<<hQ22meR1->GetMean()<<"\t"<< hQ22meR1->GetMeanError()<<"\t"<<ht2meR1->GetMean()<<"\t"<<ht2meR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outmeR1<<hW3meR1->GetMean()<<"\t"<<hW3meR1->GetMeanError()<<"\t"<<hQ23meR1->GetMean()<<"\t"<< hQ23meR1->GetMeanError()<<"\t"<<ht3meR1->GetMean()<<"\t"<<ht3meR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outmeR1<<hW4meR1->GetMean()<<"\t"<<hW4meR1->GetMeanError()<<"\t"<<hQ24meR1->GetMean()<<"\t"<< hQ24meR1->GetMeanError()<<"\t"<<ht4meR1->GetMean()<<"\t"<<ht4meR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outmeR1<<hW5meR1->GetMean()<<"\t"<<hW5meR1->GetMeanError()<<"\t"<<hQ25meR1->GetMean()<<"\t"<< hQ25meR1->GetMeanError()<<"\t"<<ht5meR1->GetMean()<<"\t"<<ht5meR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outmeR1<<hW6meR1->GetMean()<<"\t"<<hW6meR1->GetMeanError()<<"\t"<<hQ26meR1->GetMean()<<"\t"<< hQ26meR1->GetMeanError()<<"\t"<<ht6meR1->GetMean()<<"\t"<<ht6meR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outmeR1<<hW7meR1->GetMean()<<"\t"<<hW7meR1->GetMeanError()<<"\t"<<hQ27meR1->GetMean()<<"\t"<< hQ27meR1->GetMeanError()<<"\t"<<ht7meR1->GetMean()<<"\t"<<ht7meR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outmeR1<<hW8meR1->GetMean()<<"\t"<<hW8meR1->GetMeanError()<<"\t"<<hQ28meR1->GetMean()<<"\t"<< hQ28meR1->GetMeanError()<<"\t"<<ht8meR1->GetMean()<<"\t"<<ht8meR1->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outmeR1<<1.000000<<endl;
+    } 
+  outmeR1.close();
+
+  ofstream outmeR2("kindata/kindata.pl_375_629_+3120.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outmeR2<<1.000<<endl;
+      if(i==1)
+	outmeR2<<hW1meR2->GetMean()<<"\t"<<hW1meR2->GetMeanError()<<"\t"<<hQ21meR2->GetMean()<<"\t"<<hQ21meR2->GetMeanError()<<"\t"<<ht1meR2->GetMean()<<"\t"<<ht1meR2->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outmeR2<<hW2meR2->GetMean()<<"\t"<<hW2meR2->GetMeanError()<<"\t"<<hQ22meR2->GetMean()<<"\t"<< hQ22meR2->GetMeanError()<<"\t"<<ht2meR2->GetMean()<<"\t"<<ht2meR2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outmeR2<<hW3meR2->GetMean()<<"\t"<<hW3meR2->GetMeanError()<<"\t"<<hQ23meR2->GetMean()<<"\t"<< hQ23meR2->GetMeanError()<<"\t"<<ht3meR2->GetMean()<<"\t"<<ht3meR2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outmeR2<<hW4meR2->GetMean()<<"\t"<<hW4meR2->GetMeanError()<<"\t"<<hQ24meR2->GetMean()<<"\t"<< hQ24meR2->GetMeanError()<<"\t"<<ht4meR2->GetMean()<<"\t"<<ht4meR2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outmeR2<<hW5meR2->GetMean()<<"\t"<<hW5meR2->GetMeanError()<<"\t"<<hQ25meR2->GetMean()<<"\t"<< hQ25meR2->GetMeanError()<<"\t"<<ht5meR2->GetMean()<<"\t"<<ht5meR2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outmeR2<<hW6meR2->GetMean()<<"\t"<<hW6meR2->GetMeanError()<<"\t"<<hQ26meR2->GetMean()<<"\t"<< hQ26meR2->GetMeanError()<<"\t"<<ht6meR2->GetMean()<<"\t"<<ht6meR2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outmeR2<<hW7meR2->GetMean()<<"\t"<<hW7meR2->GetMeanError()<<"\t"<<hQ27meR2->GetMean()<<"\t"<< hQ27meR2->GetMeanError()<<"\t"<<ht7meR2->GetMean()<<"\t"<<ht7meR2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outmeR2<<hW8meR2->GetMean()<<"\t"<<hW8meR2->GetMeanError()<<"\t"<<hQ28meR2->GetMean()<<"\t"<< hQ28meR2->GetMeanError()<<"\t"<<ht8meR2->GetMean()<<"\t"<<ht8meR2->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outmeR2<<1.000000<<endl;
+    } 
+  outmeR2.close();
+
+  ofstream outmeC("kindata/kindata.pl_375_629_+0000.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outmeC<<1.000<<endl;
+      if(i==1)
+	outmeC<<hW1meC->GetMean()<<"\t"<<hW1meC->GetMeanError()<<"\t"<<hQ21meC->GetMean()<<"\t"<<hQ21meC->GetMeanError()<<"\t"<<ht1meC->GetMean()<<"\t"<<ht1meC->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outmeC<<hW2meC->GetMean()<<"\t"<<hW2meC->GetMeanError()<<"\t"<<hQ22meC->GetMean()<<"\t"<< hQ22meC->GetMeanError()<<"\t"<<ht2meC->GetMean()<<"\t"<<ht2meC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outmeC<<hW3meC->GetMean()<<"\t"<<hW3meC->GetMeanError()<<"\t"<<hQ23meC->GetMean()<<"\t"<< hQ23meC->GetMeanError()<<"\t"<<ht3meC->GetMean()<<"\t"<<ht3meC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outmeC<<hW4meC->GetMean()<<"\t"<<hW4meC->GetMeanError()<<"\t"<<hQ24meC->GetMean()<<"\t"<< hQ24meC->GetMeanError()<<"\t"<<ht4meC->GetMean()<<"\t"<<ht4meC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outmeC<<hW5meC->GetMean()<<"\t"<<hW5meC->GetMeanError()<<"\t"<<hQ25meC->GetMean()<<"\t"<< hQ25meC->GetMeanError()<<"\t"<<ht5meC->GetMean()<<"\t"<<ht5meC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outmeC<<hW6meC->GetMean()<<"\t"<<hW6meC->GetMeanError()<<"\t"<<hQ26meC->GetMean()<<"\t"<< hQ26meC->GetMeanError()<<"\t"<<ht6meC->GetMean()<<"\t"<<ht6meC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outmeC<<hW7meC->GetMean()<<"\t"<<hW7meC->GetMeanError()<<"\t"<<hQ27meC->GetMean()<<"\t"<< hQ27meC->GetMeanError()<<"\t"<<ht7meC->GetMean()<<"\t"<<ht7meC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outmeC<<hW8meC->GetMean()<<"\t"<<hW8meC->GetMeanError()<<"\t"<<hQ28meC->GetMean()<<"\t"<< hQ28meC->GetMeanError()<<"\t"<<ht8meC->GetMean()<<"\t"<<ht8meC->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outmeC<<1.000000<<endl;
+    } 
+  outmeC.close();
+
+  ofstream outmeL1("kindata/kindata.pl_375_629_-2000.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outmeL1<<1.000<<endl;
+      if(i==1)
+	outmeL1<<hW1meL1->GetMean()<<"\t"<<hW1meL1->GetMeanError()<<"\t"<<hQ21meL1->GetMean()<<"\t"<<hQ21meL1->GetMeanError()<<"\t"<<ht1meL1->GetMean()<<"\t"<<ht1meL1->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outmeL1<<hW2meL1->GetMean()<<"\t"<<hW2meL1->GetMeanError()<<"\t"<<hQ22meL1->GetMean()<<"\t"<< hQ22meL1->GetMeanError()<<"\t"<<ht2meL1->GetMean()<<"\t"<<ht2meL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outmeL1<<hW3meL1->GetMean()<<"\t"<<hW3meL1->GetMeanError()<<"\t"<<hQ23meL1->GetMean()<<"\t"<< hQ23meL1->GetMeanError()<<"\t"<<ht3meL1->GetMean()<<"\t"<<ht3meL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outmeL1<<hW4meL1->GetMean()<<"\t"<<hW4meL1->GetMeanError()<<"\t"<<hQ24meL1->GetMean()<<"\t"<< hQ24meL1->GetMeanError()<<"\t"<<ht4meL1->GetMean()<<"\t"<<ht4meL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outmeL1<<hW5meL1->GetMean()<<"\t"<<hW5meL1->GetMeanError()<<"\t"<<hQ25meL1->GetMean()<<"\t"<< hQ25meL1->GetMeanError()<<"\t"<<ht5meL1->GetMean()<<"\t"<<ht5meL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outmeL1<<hW6meL1->GetMean()<<"\t"<<hW6meL1->GetMeanError()<<"\t"<<hQ26meL1->GetMean()<<"\t"<< hQ26meL1->GetMeanError()<<"\t"<<ht6meL1->GetMean()<<"\t"<<ht6meL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outmeL1<<hW7meL1->GetMean()<<"\t"<<hW7meL1->GetMeanError()<<"\t"<<hQ27meL1->GetMean()<<"\t"<< hQ27meL1->GetMeanError()<<"\t"<<ht7meL1->GetMean()<<"\t"<<ht7meL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outmeL1<<hW8meL1->GetMean()<<"\t"<<hW8meL1->GetMeanError()<<"\t"<<hQ28meL1->GetMean()<<"\t"<< hQ28meL1->GetMeanError()<<"\t"<<ht8meL1->GetMean()<<"\t"<<ht8meL1->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outmeL1<<1.000000<<endl;
+    } 
+  outmeL1.close();
+
+  ofstream outmeL2("kindata/kindata.pl_375_629_-4000.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outmeL2<<1.000<<endl;
+      if(i==1)
+	outmeL2<<hW1meL2->GetMean()<<"\t"<<hW1meL2->GetMeanError()<<"\t"<<hQ21meL2->GetMean()<<"\t"<<hQ21meL2->GetMeanError()<<"\t"<<ht1meL2->GetMean()<<"\t"<<ht1meL2->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outmeL2<<hW2meL2->GetMean()<<"\t"<<hW2meL2->GetMeanError()<<"\t"<<hQ22meL2->GetMean()<<"\t"<< hQ22meL2->GetMeanError()<<"\t"<<ht2meL2->GetMean()<<"\t"<<ht2meL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outmeL2<<hW3meL2->GetMean()<<"\t"<<hW3meL2->GetMeanError()<<"\t"<<hQ23meL2->GetMean()<<"\t"<< hQ23meL2->GetMeanError()<<"\t"<<ht3meL2->GetMean()<<"\t"<<ht3meL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outmeL2<<hW4meL2->GetMean()<<"\t"<<hW4meL2->GetMeanError()<<"\t"<<hQ24meL2->GetMean()<<"\t"<< hQ24meL2->GetMeanError()<<"\t"<<ht4meL2->GetMean()<<"\t"<<ht4meL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outmeL2<<hW5meL2->GetMean()<<"\t"<<hW5meL2->GetMeanError()<<"\t"<<hQ25meL2->GetMean()<<"\t"<< hQ25meL2->GetMeanError()<<"\t"<<ht5meL2->GetMean()<<"\t"<<ht5meL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outmeL2<<hW6meL2->GetMean()<<"\t"<<hW6meL2->GetMeanError()<<"\t"<<hQ26meL2->GetMean()<<"\t"<< hQ26meL2->GetMeanError()<<"\t"<<ht6meL2->GetMean()<<"\t"<<ht6meL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outmeL2<<hW7meL2->GetMean()<<"\t"<<hW7meL2->GetMeanError()<<"\t"<<hQ27meL2->GetMean()<<"\t"<< hQ27meL2->GetMeanError()<<"\t"<<ht7meL2->GetMean()<<"\t"<<ht7meL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outmeL2<<hW8meL2->GetMean()<<"\t"<<hW8meL2->GetMeanError()<<"\t"<<hQ28meL2->GetMean()<<"\t"<< hQ28meL2->GetMeanError()<<"\t"<<ht8meL2->GetMean()<<"\t"<<ht8meL2->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outmeL2<<1.000000<<endl;
+    } 
+  outmeL2.close();
+
   TCanvas *c10me = new TCanvas("c10me", " c10me"); 
   hph_qmeR2->SetStats(0);
   hph_qmeR2->SetLineColor(kYellow);
@@ -4739,6 +5371,509 @@ void t_plots()
   htheInL2->Draw("same Weight");
   c9In->Print(outputpdf);
   
+  TCanvas *cWheR11 = new TCanvas("cWheR11", "cWheR11");
+  cWheR11->Divide(2, 2);
+  cWheR11->cd(1);
+  hW1heR1->Add(hW1heR1R, -1);
+  hW1heR1->Draw("Weight");
+  cWheR11->cd(2);
+  hW2heR1->Add(hW2heR1R, -1);
+  hW2heR1->Draw(" same Weight");
+  cWheR11->cd(3);
+  hW3heR1->Add(hW3heR1R, -1);
+  hW3heR1->Draw(" same Weight");
+  cWheR11->cd(4);
+  hW4heR1->Add(hW4heR1R, -1);
+  hW4heR1->Draw(" same Weight");
+  cWheR11->Print(outputpdf);
+  
+  TCanvas *cWheR12 = new TCanvas("cWheR12", "cWheR12");
+  cWheR12->Divide(2, 2);
+  cWheR12->cd(1);
+  hW5heR1->Add(hW5heR1R, -1);
+  hW5heR1->Draw("Weight");
+  cWheR12->cd(2);
+  hW6heR1->Add(hW6heR1R, -1);
+  hW6heR1->Draw(" same Weight");
+  cWheR12->cd(3);
+  hW7heR1->Add(hW7heR1R, -1);
+  hW7heR1->Draw(" same Weight");
+  cWheR12->cd(4);
+  hW8heR1->Add(hW8heR1R, -1);
+  hW8heR1->Draw(" same Weight");
+  cWheR12->Print(outputpdf);
+
+  TCanvas *cWheC1 = new TCanvas("cWheC1", "cWheC1");
+  cWheC1->Divide(2, 2);
+  cWheC1->cd(1);
+  hW1heC->Add(hW1heCR, -1);
+  hW1heC->Draw("Weight");
+  cWheC1->cd(2);
+  hW2heC->Add(hW2heCR, -1);
+  hW2heC->Draw(" same Weight");
+  cWheC1->cd(3);
+  hW3heC->Add(hW3heCR, -1);
+  hW3heC->Draw(" same Weight");
+  cWheC1->cd(4);
+  hW4heC->Add(hW4heCR, -1);
+  hW4heC->Draw(" same Weight");
+  cWheC1->Print(outputpdf);
+  
+  TCanvas *cWheC2 = new TCanvas("cWheC2", "cWheC2");
+  cWheC2->Divide(2, 2);
+  cWheC2->cd(1);
+  hW5heC->Add(hW5heCR, -1);
+  hW5heC->Draw("Weight");
+  cWheC2->cd(2);
+  hW6heC->Add(hW6heCR, -1);
+  hW6heC->Draw(" same Weight");
+  cWheC2->cd(3);
+  hW7heC->Add(hW7heCR, -1);
+  hW7heC->Draw(" same Weight");
+  cWheC2->cd(4);
+  hW8heC->Add(hW8heCR, -1);
+  hW8heC->Draw(" same Weight");
+  cWheC2->Print(outputpdf);
+
+  TCanvas *cWheL11 = new TCanvas("cWheL11", "cWheL11");
+  cWheL11->Divide(2, 2);
+  cWheL11->cd(1);
+  hW1heL1->Add(hW1heL1R, -1);
+  hW1heL1->Draw("Weight");
+  cWheL11->cd(2);
+  hW2heL1->Add(hW2heL1R, -1);
+  hW2heL1->Draw(" same Weight");
+  cWheL11->cd(3);
+  hW3heL1->Add(hW3heL1R, -1);
+  hW3heL1->Draw(" same Weight");
+  cWheL11->cd(4);
+  hW4heL1->Add(hW4heL1R, -1);
+  hW4heL1->Draw(" same Weight");
+  cWheL11->Print(outputpdf);
+  
+  TCanvas *cWheL12 = new TCanvas("cWheL12", "cWheL12");
+  cWheL12->Divide(2, 2);
+  cWheL12->cd(1);
+  hW5heL1->Add(hW5heL1R, -1);
+  hW5heL1->Draw("Weight");
+  cWheL12->cd(2);
+  hW6heL1->Add(hW6heL1R, -1);
+  hW6heL1->Draw(" same Weight");
+  cWheL12->cd(3);
+  hW7heL1->Add(hW7heL1R, -1);
+  hW7heL1->Draw(" same Weight");
+  cWheL12->cd(4);
+  hW8heL1->Add(hW8heL1R, -1);
+  hW8heL1->Draw(" same Weight");
+  cWheL12->Print(outputpdf);
+
+  TCanvas *cWheL21 = new TCanvas("cWheL21", "cWheL21");
+  cWheL21->Divide(2, 2);
+  cWheL21->cd(1);
+  hW1heL2->Add(hW1heL2R, -1);
+  hW1heL2->Draw("Weight");
+  cWheL21->cd(2);
+  hW2heL2->Add(hW2heL2R, -1);
+  hW2heL2->Draw(" same Weight");
+  cWheL21->cd(3);
+  hW3heL2->Add(hW3heL2R, -1);
+  hW3heL2->Draw(" same Weight");
+  cWheL21->cd(4);
+  hW4heL2->Add(hW4heL2R, -1);
+  hW4heL2->Draw(" same Weight");
+  cWheL21->Print(outputpdf);
+  
+  TCanvas *cWheL22 = new TCanvas("cWheL22", "cWheL22");
+  cWheL22->Divide(2, 2);
+  cWheL22->cd(1);
+  hW5heL2->Add(hW5heL2R, -1);
+  hW5heL2->Draw("Weight");
+  cWheL22->cd(2);
+  hW6heL2->Add(hW6heL2R, -1);
+  hW6heL2->Draw(" same Weight");
+  cWheL22->cd(3);
+  hW7heL2->Add(hW7heL2R, -1);
+  hW7heL2->Draw(" same Weight");
+  cWheL22->cd(4);
+  hW8heL2->Add(hW8heL2R, -1);
+  hW8heL2->Draw(" same Weight");
+  cWheL22->Print(outputpdf);
+
+  TCanvas *cQ2heR11 = new TCanvas("cQ2heR11", "cQ2heR11");
+
+  cQ2heR11->Divide(2, 2);
+  cQ2heR11->cd(1);
+  hQ21heR1->Add(hQ21heR1R, -1); 
+  hQ21heR1->Draw(" Weight");
+  cQ2heR11->cd(2);
+  hQ22heR1->Add(hQ22heR1R, -1); 
+  hQ22heR1->Draw("same Weight");
+  cQ2heR11->cd(3);
+  hQ23heR1->Add(hQ23heR1R, -1); 
+  hQ23heR1->Draw("same Weight");
+  cQ2heR11->cd(4);
+  hQ24heR1->Add(hQ24heR1R, -1); 
+  hQ24heR1->Draw("same Weight");
+  cQ2heR11->Print(outputpdf);
+
+  TCanvas *cQ2heR12 = new TCanvas("cQ2heR12", "cQ2heR12");
+
+  cQ2heR12->Divide(2, 2);
+  cQ2heR12->cd(1);
+  hQ25heR1->Add(hQ25heR1R, -1); 
+  hQ25heR1->Draw(" Weight");
+  cQ2heR12->cd(2);
+  hQ26heR1->Add(hQ26heR1R, -1); 
+  hQ26heR1->Draw("same Weight");
+  cQ2heR12->cd(3);
+  hQ27heR1->Add(hQ27heR1R, -1); 
+  hQ27heR1->Draw("same Weight");
+  cQ2heR12->cd(4);
+  hQ28heR1->Add(hQ28heR1R, -1); 
+  hQ28heR1->Draw("same Weight");
+  cQ2heR12->Print(outputpdf);
+
+  TCanvas *cQ2heC1 = new TCanvas("cQ2heC1", "cQ2heC1");
+
+  cQ2heC1->Divide(2, 2);
+  cQ2heC1->cd(1);
+  hQ21heC->Add(hQ21heCR, -1); 
+  hQ21heC->Draw(" Weight");
+  cQ2heC1->cd(2);
+  hQ22heC->Add(hQ22heCR, -1); 
+  hQ22heC->Draw("same Weight");
+  cQ2heC1->cd(3);
+  hQ23heC->Add(hQ23heCR, -1); 
+  hQ23heC->Draw("same Weight");
+  cQ2heC1->cd(4);
+  hQ24heC->Add(hQ24heCR, -1); 
+  hQ24heC->Draw("same Weight");
+  cQ2heC1->Print(outputpdf);
+
+  TCanvas *cQ2heC2 = new TCanvas("cQ2heC2", "cQ2heC2");
+
+  cQ2heC2->Divide(2, 2);
+  cQ2heC2->cd(1);
+  hQ25heC->Add(hQ25heCR, -1); 
+  hQ25heC->Draw(" Weight");
+  cQ2heC2->cd(2);
+  hQ26heC->Add(hQ26heCR, -1); 
+  hQ26heC->Draw("same Weight");
+  cQ2heC2->cd(3);
+  hQ27heC->Add(hQ27heCR, -1); 
+  hQ27heC->Draw("same Weight");
+  cQ2heC2->cd(4);
+  hQ28heC->Add(hQ28heCR, -1); 
+  hQ28heC->Draw("same Weight");
+  cQ2heC2->Print(outputpdf);
+
+  TCanvas *cQ2heL11 = new TCanvas("cQ2heL11", "cQ2heL11");
+
+  cQ2heL11->Divide(2, 2);
+  cQ2heL11->cd(1);
+  hQ21heL1->Add(hQ21heL1R, -1); 
+  hQ21heL1->Draw(" Weight");
+  cQ2heL11->cd(2);
+  hQ22heL1->Add(hQ22heL1R, -1); 
+  hQ22heL1->Draw("same Weight");
+  cQ2heL11->cd(3);
+  hQ23heL1->Add(hQ23heL1R, -1); 
+  hQ23heL1->Draw("same Weight");
+  cQ2heL11->cd(4);
+  hQ24heL1->Add(hQ24heL1R, -1); 
+  hQ24heL1->Draw("same Weight");
+  cQ2heL11->Print(outputpdf);
+
+  TCanvas *cQ2heL12 = new TCanvas("cQ2heL12", "cQ2heL12");
+
+  cQ2heL12->Divide(2, 2);
+  cQ2heL12->cd(1);
+  hQ25heL1->Add(hQ25heL1R, -1); 
+  hQ25heL1->Draw(" Weight");
+  cQ2heL12->cd(2);
+  hQ26heL1->Add(hQ26heL1R, -1); 
+  hQ26heL1->Draw("same Weight");
+  cQ2heL12->cd(3);
+  hQ27heL1->Add(hQ27heL1R, -1); 
+  hQ27heL1->Draw("same Weight");
+  cQ2heL12->cd(4);
+  hQ28heL1->Add(hQ28heL1R, -1); 
+  hQ28heL1->Draw("same Weight");
+  cQ2heL12->Print(outputpdf);
+
+  TCanvas *cQ2heL21 = new TCanvas("cQ2heL21", "cQ2heL21");
+
+  cQ2heL21->Divide(2, 2);
+  cQ2heL21->cd(1);
+  hQ21heL2->Add(hQ21heL2R, -1); 
+  hQ21heL2->Draw(" Weight");
+  cQ2heL21->cd(2);
+  hQ22heL2->Add(hQ22heL2R, -1); 
+  hQ22heL2->Draw("same Weight");
+  cQ2heL21->cd(3);
+  hQ23heL2->Add(hQ23heL2R, -1); 
+  hQ23heL2->Draw("same Weight");
+  cQ2heL21->cd(4);
+  hQ24heL2->Add(hQ24heL2R, -1); 
+  hQ24heL2->Draw("same Weight");
+  cQ2heL21->Print(outputpdf);
+
+  TCanvas *cQ2heL22 = new TCanvas("cQ2heL22", "cQ2heL22");
+
+  cQ2heL22->Divide(2, 2);
+  cQ2heL22->cd(1);
+  hQ25heL2->Add(hQ25heL2R, -1); 
+  hQ25heL2->Draw(" Weight");
+  cQ2heL22->cd(2);
+  hQ26heL2->Add(hQ26heL2R, -1); 
+  hQ26heL2->Draw("same Weight");
+  cQ2heL22->cd(3);
+  hQ27heL2->Add(hQ27heL2R, -1); 
+  hQ27heL2->Draw("same Weight");
+  cQ2heL22->cd(4);
+  hQ28heL2->Add(hQ28heL2R, -1); 
+  hQ28heL2->Draw("same Weight");
+  cQ2heL22->Print(outputpdf);
+
+  TCanvas *ctheR11 = new TCanvas("ctheR11", "ctheR11");
+  ctheR11->Divide(2, 2);
+  ctheR11->cd(1);
+  ht1heR1->Add(ht1heR1R, -1);
+  ht1heR1->Draw("Weight");
+  ctheR11->cd(2);
+  ht2heR1->Add(ht2heR1R, -1);
+  ht2heR1->Draw("same Weight");
+  ctheR11->cd(3);
+  ht3heR1->Add(ht3heR1R, -1);
+  ht3heR1->Draw("same Weight");
+  ctheR11->cd(4);
+  ht4heR1->Add(ht4heR1R, -1);
+  ht4heR1->Draw("same Weight");
+  ctheR11->Print(outputpdf);
+
+  TCanvas *ctheR12 = new TCanvas("ctheR12", "ctheR12");
+  ctheR12->Divide(2, 2);
+  ctheR12->cd(1);
+  ht5heR1->Add(ht5heR1R, -1);
+  ht5heR1->Draw("Weight");
+  ctheR12->cd(2);
+  ht6heR1->Add(ht6heR1R, -1);
+  ht6heR1->Draw("same Weight");
+  ctheR12->cd(3);
+  ht7heR1->Add(ht7heR1R, -1);
+  ht7heR1->Draw("same Weight");
+  ctheR12->cd(4);
+  ht8heR1->Add(ht8heR1R, -1);
+  ht8heR1->Draw("same Weight");
+  ctheR12->Print(outputpdf);
+
+  TCanvas *ctheC1 = new TCanvas("ctheC1", "ctheC1");
+  ctheC1->Divide(2, 2);
+  ctheC1->cd(1);
+  ht1heC->Add(ht1heCR, -1);
+  ht1heC->Draw("Weight");
+  ctheC1->cd(2);
+  ht2heC->Add(ht2heCR, -1);
+  ht2heC->Draw("same Weight");
+  ctheC1->cd(3);
+  ht3heC->Add(ht3heCR, -1);
+  ht3heC->Draw("same Weight");
+  ctheC1->cd(4);
+  ht4heC->Add(ht4heCR, -1);
+  ht4heC->Draw("same Weight");
+  ctheC1->Print(outputpdf);
+
+  TCanvas *ctheC2 = new TCanvas("ctheC2", "ctheC2");
+  ctheC2->Divide(2, 2);
+  ctheC2->cd(1);
+  ht5heC->Add(ht5heCR, -1);
+  ht5heC->Draw("Weight");
+  ctheC2->cd(2);
+  ht6heC->Add(ht6heCR, -1);
+  ht6heC->Draw("same Weight");
+  ctheC2->cd(3);
+  ht7heC->Add(ht7heCR, -1);
+  ht7heC->Draw("same Weight");
+  ctheC2->cd(4);
+  ht8heC->Add(ht8heCR, -1);
+  ht8heC->Draw("same Weight");
+  ctheC2->Print(outputpdf);
+
+  TCanvas *ctheL11 = new TCanvas("ctheL11", "ctheL11");
+  ctheL11->Divide(2, 2);
+  ctheL11->cd(1);
+  ht1heL1->Add(ht1heL1R, -1);
+  ht1heL1->Draw("Weight");
+  ctheL11->cd(2);
+  ht2heL1->Add(ht2heL1R, -1);
+  ht2heL1->Draw("same Weight");
+  ctheL11->cd(3);
+  ht3heL1->Add(ht3heL1R, -1);
+  ht3heL1->Draw("same Weight");
+  ctheL11->cd(4);
+  ht4heL1->Add(ht4heL1R, -1);
+  ht4heL1->Draw("same Weight");
+  ctheL11->Print(outputpdf);
+
+  TCanvas *ctheL12 = new TCanvas("ctheL12", "ctheL12");
+  ctheL12->Divide(2, 2);
+  ctheL12->cd(1);
+  ht5heL1->Add(ht5heL1R, -1);
+  ht5heL1->Draw("Weight");
+  ctheL12->cd(2);
+  ht6heL1->Add(ht6heL1R, -1);
+  ht6heL1->Draw("same Weight");
+  ctheL12->cd(3);
+  ht7heL1->Add(ht7heL1R, -1);
+  ht7heL1->Draw("same Weight");
+  ctheL12->cd(4);
+  ht8heL1->Add(ht8heL1R, -1);
+  ht8heL1->Draw("same Weight");
+  ctheL12->Print(outputpdf);
+
+  TCanvas *ctheL21 = new TCanvas("ctheL21", "ctheL21");
+  ctheL21->Divide(2, 2);
+  ctheL21->cd(1);
+  ht1heL2->Add(ht1heL2R, -1);
+  ht1heL2->Draw("Weight");
+  ctheL21->cd(2);
+  ht2heL2->Add(ht2heL2R, -1);
+  ht2heL2->Draw("same Weight");
+  ctheL21->cd(3);
+  ht3heL2->Add(ht3heL2R, -1);
+  ht3heL2->Draw("same Weight");
+  ctheL21->cd(4);
+  ht4heL2->Add(ht4heL2R, -1);
+  ht4heL2->Draw("same Weight");
+  ctheL21->Print(outputpdf);
+
+  TCanvas *ctheL22 = new TCanvas("ctheL22", "ctheL22");
+  ctheL22->Divide(2, 2);
+  ctheL22->cd(1);
+  ht5heL2->Add(ht5heL2R, -1);
+  ht5heL2->Draw("Weight");
+  ctheL22->cd(2);
+  ht6heL2->Add(ht6heL2R, -1);
+  ht6heL2->Draw("same Weight");
+  ctheL22->cd(3);
+  ht7heL2->Add(ht7heL2R, -1);
+  ht7heL2->Draw("same Weight");
+  ctheL22->cd(4);
+  ht8heL2->Add(ht8heL2R, -1);
+  ht8heL2->Draw("same Weight");
+  ctheL22->Print(outputpdf);
+
+  /**
+  ofstream outheC("kindata/kindata.pl_375_781_+0000.dat");
+  ofstream outheL1("kindata/kindata.pl_375_781_-2015.dat");
+  ofstream outheL2("kindata/kindata.pl_375_781_-4000.dat");
+  ofstream outheR1("kindata/kindata.pl_375_781_+2680.dat");
+  **/
+
+  ofstream outheR1("kindata/kindata.pl_375_781_+2680.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outheR1<<1.000<<endl;
+      if(i==1)
+	outheR1<<hW1meR1->GetMean()<<"\t"<<hW1heR1->GetMeanError()<<"\t"<<hQ21heR1->GetMean()<<"\t"<<hQ21heR1->GetMeanError()<<"\t"<<ht1heR1->GetMean()<<"\t"<<ht1heR1->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outheR1<<hW2meR1->GetMean()<<"\t"<<hW2heR1->GetMeanError()<<"\t"<<hQ22heR1->GetMean()<<"\t"<< hQ22heR1->GetMeanError()<<"\t"<<ht2heR1->GetMean()<<"\t"<<ht2heR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outheR1<<hW3meR1->GetMean()<<"\t"<<hW3heR1->GetMeanError()<<"\t"<<hQ23heR1->GetMean()<<"\t"<< hQ23heR1->GetMeanError()<<"\t"<<ht3heR1->GetMean()<<"\t"<<ht3heR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outheR1<<hW4meR1->GetMean()<<"\t"<<hW4heR1->GetMeanError()<<"\t"<<hQ24heR1->GetMean()<<"\t"<< hQ24heR1->GetMeanError()<<"\t"<<ht4heR1->GetMean()<<"\t"<<ht4heR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outheR1<<hW5meR1->GetMean()<<"\t"<<hW5heR1->GetMeanError()<<"\t"<<hQ25heR1->GetMean()<<"\t"<< hQ25heR1->GetMeanError()<<"\t"<<ht5heR1->GetMean()<<"\t"<<ht5heR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outheR1<<hW6meR1->GetMean()<<"\t"<<hW6heR1->GetMeanError()<<"\t"<<hQ26heR1->GetMean()<<"\t"<< hQ26heR1->GetMeanError()<<"\t"<<ht6heR1->GetMean()<<"\t"<<ht6heR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outheR1<<hW7meR1->GetMean()<<"\t"<<hW7heR1->GetMeanError()<<"\t"<<hQ27heR1->GetMean()<<"\t"<< hQ27heR1->GetMeanError()<<"\t"<<ht7heR1->GetMean()<<"\t"<<ht7heR1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outheR1<<hW8meR1->GetMean()<<"\t"<<hW8heR1->GetMeanError()<<"\t"<<hQ28heR1->GetMean()<<"\t"<< hQ28heR1->GetMeanError()<<"\t"<<ht8heR1->GetMean()<<"\t"<<ht8heR1->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outheR1<<1.000000<<endl;
+    } 
+  outheR1.close();
+
+  ofstream outheC("kindata/kindata.pl_375_781_+0000.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outheC<<1.000<<endl;
+      if(i==1)
+	outheC<<hW1meC->GetMean()<<"\t"<<hW1heC->GetMeanError()<<"\t"<<hQ21heC->GetMean()<<"\t"<<hQ21heC->GetMeanError()<<"\t"<<ht1heC->GetMean()<<"\t"<<ht1heC->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outheC<<hW2meC->GetMean()<<"\t"<<hW2heC->GetMeanError()<<"\t"<<hQ22heC->GetMean()<<"\t"<< hQ22heC->GetMeanError()<<"\t"<<ht2heC->GetMean()<<"\t"<<ht2heC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outheC<<hW3meC->GetMean()<<"\t"<<hW3heC->GetMeanError()<<"\t"<<hQ23heC->GetMean()<<"\t"<< hQ23heC->GetMeanError()<<"\t"<<ht3heC->GetMean()<<"\t"<<ht3heC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outheC<<hW4meC->GetMean()<<"\t"<<hW4heC->GetMeanError()<<"\t"<<hQ24heC->GetMean()<<"\t"<< hQ24heC->GetMeanError()<<"\t"<<ht4heC->GetMean()<<"\t"<<ht4heC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outheC<<hW5meC->GetMean()<<"\t"<<hW5heC->GetMeanError()<<"\t"<<hQ25heC->GetMean()<<"\t"<< hQ25heC->GetMeanError()<<"\t"<<ht5heC->GetMean()<<"\t"<<ht5heC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outheC<<hW6meC->GetMean()<<"\t"<<hW6heC->GetMeanError()<<"\t"<<hQ26heC->GetMean()<<"\t"<< hQ26heC->GetMeanError()<<"\t"<<ht6heC->GetMean()<<"\t"<<ht6heC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outheC<<hW7meC->GetMean()<<"\t"<<hW7heC->GetMeanError()<<"\t"<<hQ27heC->GetMean()<<"\t"<< hQ27heC->GetMeanError()<<"\t"<<ht7heC->GetMean()<<"\t"<<ht7heC->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outheC<<hW8meC->GetMean()<<"\t"<<hW8heC->GetMeanError()<<"\t"<<hQ28heC->GetMean()<<"\t"<< hQ28heC->GetMeanError()<<"\t"<<ht8heC->GetMean()<<"\t"<<ht8heC->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outheC<<1.000000<<endl;
+    } 
+  outheC.close();
+
+  ofstream outheL1("kindata/kindata.pl_375_781_-2015.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outheL1<<1.000<<endl;
+      if(i==1)
+	outheL1<<hW1meL1->GetMean()<<"\t"<<hW1heL1->GetMeanError()<<"\t"<<hQ21heL1->GetMean()<<"\t"<<hQ21heL1->GetMeanError()<<"\t"<<ht1heL1->GetMean()<<"\t"<<ht1heL1->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outheL1<<hW2meL1->GetMean()<<"\t"<<hW2heL1->GetMeanError()<<"\t"<<hQ22heL1->GetMean()<<"\t"<< hQ22heL1->GetMeanError()<<"\t"<<ht2heL1->GetMean()<<"\t"<<ht2heL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outheL1<<hW3meL1->GetMean()<<"\t"<<hW3heL1->GetMeanError()<<"\t"<<hQ23heL1->GetMean()<<"\t"<< hQ23heL1->GetMeanError()<<"\t"<<ht3heL1->GetMean()<<"\t"<<ht3heL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outheL1<<hW4meL1->GetMean()<<"\t"<<hW4heL1->GetMeanError()<<"\t"<<hQ24heL1->GetMean()<<"\t"<< hQ24heL1->GetMeanError()<<"\t"<<ht4heL1->GetMean()<<"\t"<<ht4heL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outheL1<<hW5meL1->GetMean()<<"\t"<<hW5heL1->GetMeanError()<<"\t"<<hQ25heL1->GetMean()<<"\t"<< hQ25heL1->GetMeanError()<<"\t"<<ht5heL1->GetMean()<<"\t"<<ht5heL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outheL1<<hW6meL1->GetMean()<<"\t"<<hW6heL1->GetMeanError()<<"\t"<<hQ26heL1->GetMean()<<"\t"<< hQ26heL1->GetMeanError()<<"\t"<<ht6heL1->GetMean()<<"\t"<<ht6heL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outheL1<<hW7meL1->GetMean()<<"\t"<<hW7heL1->GetMeanError()<<"\t"<<hQ27heL1->GetMean()<<"\t"<< hQ27heL1->GetMeanError()<<"\t"<<ht7heL1->GetMean()<<"\t"<<ht7heL1->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outheL1<<hW8meL1->GetMean()<<"\t"<<hW8heL1->GetMeanError()<<"\t"<<hQ28heL1->GetMean()<<"\t"<< hQ28heL1->GetMeanError()<<"\t"<<ht8heL1->GetMean()<<"\t"<<ht8heL1->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outheL1<<1.000000<<endl;
+    } 
+  outheL1.close();
+
+  ofstream outheL2("kindata/kindata.pl_375_781_-4000.dat");
+  for(int i=0 ; i <=9 ; ++i) 
+    {
+      if(i==0)
+	outheL2<<1.000<<endl;
+      if(i==1)
+	outheL2<<hW1meL2->GetMean()<<"\t"<<hW1heL2->GetMeanError()<<"\t"<<hQ21heL2->GetMean()<<"\t"<<hQ21heL2->GetMeanError()<<"\t"<<ht1heL2->GetMean()<<"\t"<<ht1heL2->GetMeanError()<<"\t"<<i<<endl;
+      if(i==2)
+	outheL2<<hW2meL2->GetMean()<<"\t"<<hW2heL2->GetMeanError()<<"\t"<<hQ22heL2->GetMean()<<"\t"<< hQ22heL2->GetMeanError()<<"\t"<<ht2heL2->GetMean()<<"\t"<<ht2heL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==3)
+	outheL2<<hW3meL2->GetMean()<<"\t"<<hW3heL2->GetMeanError()<<"\t"<<hQ23heL2->GetMean()<<"\t"<< hQ23heL2->GetMeanError()<<"\t"<<ht3heL2->GetMean()<<"\t"<<ht3heL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==4)
+	outheL2<<hW4meL2->GetMean()<<"\t"<<hW4heL2->GetMeanError()<<"\t"<<hQ24heL2->GetMean()<<"\t"<< hQ24heL2->GetMeanError()<<"\t"<<ht4heL2->GetMean()<<"\t"<<ht4heL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==5)
+	outheL2<<hW5meL2->GetMean()<<"\t"<<hW5heL2->GetMeanError()<<"\t"<<hQ25heL2->GetMean()<<"\t"<< hQ25heL2->GetMeanError()<<"\t"<<ht5heL2->GetMean()<<"\t"<<ht5heL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==6)
+	outheL2<<hW6meL2->GetMean()<<"\t"<<hW6heL2->GetMeanError()<<"\t"<<hQ26heL2->GetMean()<<"\t"<< hQ26heL2->GetMeanError()<<"\t"<<ht6heL2->GetMean()<<"\t"<<ht6heL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==7)
+	outheL2<<hW7meL2->GetMean()<<"\t"<<hW7heL2->GetMeanError()<<"\t"<<hQ27heL2->GetMean()<<"\t"<< hQ27heL2->GetMeanError()<<"\t"<<ht7heL2->GetMean()<<"\t"<<ht7heL2->GetMeanError()<<"\t"<< i <<endl;
+      if(i==8)
+	outheL2<<hW8meL2->GetMean()<<"\t"<<hW8heL2->GetMeanError()<<"\t"<<hQ28heL2->GetMean()<<"\t"<< hQ28heL2->GetMeanError()<<"\t"<<ht8heL2->GetMean()<<"\t"<<ht8heL2->GetMeanError()<<"\t"<< i <<endl;      
+      if(i==9)
+	outheL2<<1.000000<<endl;
+    } 
+  outheL2.close();
+
   TCanvas *c10 = new TCanvas("c10", " c10"); 
   
   hph_qheC->SetStats(0);
