@@ -25,7 +25,7 @@ c     settings, then over neg. and pos. settings,
 c     and save result in averages/aver.* .
 
 c      parameter (nu=3)
-      parameter (nu=5)
+      parameter (nu=8)
 
       real aveW(nu),errW(nu),aveQ2(nu),errQ2(nu)
       real avW(nu,2),erW(nu,2),avQ2(nu,2),erQ2(nu,2)
@@ -73,7 +73,7 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
          avett(it)=0.
          errtt(it)=0.
 
-         do ip=1,1
+         do ip=1,2
 
             avW(it,ip)=0.
             erW(it,ip)=0.
@@ -200,7 +200,7 @@ c      stop u_bin+1
 
 c     Get low, high eps. and neg., pos. polarity data.
 
-      do ip=1,1
+      do ip=1,2
 
 c         do lh=1,2
          do lmh=1,3
@@ -245,29 +245,28 @@ c                  print*, "bbbbbbbbbbbbbbbbbbbb ", one
 
                   do it=1,nbt
                      read(66,*) W,dW,Q2,dQ2,tt,dtt
-                    print*,W,dW,Q2,dQ2,it
+                    print*,W,dW,Q2,dQ2,tt,dtt,it
                      if(dW.gt.0.) then
                         aW(it,lmh,ip)=aW(it,lmh,ip)+W/dW**2
                         eW(it,lmh,ip)=eW(it,lmh,ip)+1./dW**2
                      end if
+
                      if(dQ2.gt.0.) then
-                        aQ2(it,lmh,ip)=aQ2(it,lmh,ip)+Q2/dQ2**2
-                        eQ2(it,lh,ip)=eQ2(it,lmh,ip)+1./dQ2**2
+                     aQ2(it,lmh,ip)=aQ2(it,lmh,ip)+Q2/dQ2**2
+                     eQ2(it,lmh,ip)=eQ2(it,lmh,ip)+1./dQ2**2
                      end if
+
                      if(dtt.gt.0.) then
                         att(it,lmh,ip)=att(it,lmh,ip)+tt/dtt**2
                         ett(it,lmh,ip)=ett(it,lmh,ip)+1./dtt**2
                      end if
-
-
-
+      
                   end do
                   close(66)
 
                   tmin=tmn
                   tmax=tmx
                   ntbins=nbt
-
                   nset=nset+1
 
                end if           !ipol=pol_set & q2=q2_set & eps=eps_set
@@ -282,8 +281,6 @@ c                  print*, "bbbbbbbbbbbbbbbbbbbb ", one
          end do                 !lh=1,2
 
       end do                    !ip=1,2
-
-
 
 
 c      pause
@@ -366,39 +363,26 @@ cc      stop
 c
 c      close(22)
 c
+       
+       ntbins = u_bin
 
-
-
-
-
-
-
-
-
-
-
-c      print*, u_bin, phi_bin
-c      stop
-      
-      ntbins = u_bin
-
-      do ip=1,1
-         do lh=1,3
+      do ip=1,2
+         do lmh=1,3
             do it=1,ntbins
-               if (eW(it,lh,ip).gt.0.) then
-                  aW(it,lh,ip)=aW(it,lh,ip)/eW(it,lh,ip)
-                  eW(it,lh,ip)=1./sqrt(eW(it,lh,ip))
+               if (eW(it,lmh,ip).gt.0.) then
+                  aW(it,lmh,ip)=aW(it,lmh,ip)/eW(it,lmh,ip)
+                  eW(it,lmh,ip)=1./sqrt(eW(it,lmh,ip))
 *****                  eW(it,lh,ip)=0.001
                end if
-               if(eQ2(it,lh,ip).gt.0.) then
-                  aQ2(it,lh,ip)=aQ2(it,lh,ip)/eQ2(it,lh,ip)
-                  eQ2(it,lh,ip)=1./sqrt(eQ2(it,lh,ip))
+               if(eQ2(it,lmh,ip).gt.0.) then
+               aQ2(it,lmh,ip)=aQ2(it,lmh,ip)/eQ2(it,lmh,ip)
+               eQ2(it,lmh,ip)=1./sqrt(eQ2(it,lmh,ip))
 *****                  eQ2(it,lh,ip)=0.001
                end if
 
-               if(ett(it,lh,ip).gt.0.) then
-                  att(it,lh,ip)=att(it,lh,ip)/ett(it,lh,ip)
-                  ett(it,lh,ip)=1./sqrt(ett(it,lh,ip))
+               if(ett(it,lmh,ip).gt.0.) then
+                  att(it,lmh,ip)=att(it,lmh,ip)/ett(it,lmh,ip)
+                  ett(it,lmh,ip)=1./sqrt(ett(it,lmh,ip))
 *****                  eQ2(it,lh,ip)=0.001
                end if
 
@@ -414,7 +398,7 @@ c      pause
 
 c     Average over low and high epsilon.
 
-      do ip=1,1
+      do ip=1,2
          do it=1,ntbins
             do lh=1,3
                if(eW(it,lh,ip).gt.0.) then
@@ -426,17 +410,16 @@ c     Average over low and high epsilon.
                   erQ2(it,ip)=erQ2(it,ip)+1./eQ2(it,lh,ip)**2
                end if
 
-
                if(ett(it,lh,ip).gt.0.) then
                   avtt(it,ip)=avtt(it,ip)+att(it,lh,ip)/ett(it,lh,ip)**2
                   ertt(it,ip)=ertt(it,ip)+1./ett(it,lh,ip)**2
                end if
-
             end do
+
          end do
       end do
 
-      do ip=1,1
+      do ip=1,2
          do it=1,ntbins
             if(erW(it,ip).gt.0.) then
                avW(it,ip)=avW(it,ip)/erW(it,ip)
@@ -451,14 +434,14 @@ c     Average over low and high epsilon.
                avtt(it,ip)=avtt(it,ip)/ertt(it,ip)
                ertt(it,ip)=1./sqrt(ertt(it,ip))
             end if
-
+ 
 
          end do
       end do
 
 c     Average over neg. and pos. settings.
       do it=1,ntbins
-         do ip=1,1
+         do ip=1,2
             if(erW(it,ip).gt.0.) then
                aveW(it)=aveW(it)+avW(it,ip)/erW(it,ip)**2
                errW(it)=errW(it)+1./erW(it,ip)**2
@@ -489,6 +472,7 @@ c     Average over neg. and pos. settings.
 
       end do
 
+
 c     Thetacm for neg. and pos. settings. It's turned out the same for
 c     low and high epsilons, but different for negatives and positives.
 c     So calculate for high eps., neg.-s and pos.-s.
@@ -510,10 +494,6 @@ c      open(55,file='Eb_fpi2.dat')
       Eb=Eb/1000.               !Mev -> Gev units.
       print*,'xsect: Eb=',Eb,'   at Q2=',q2,'  eps=',eps,'  pol=',pol
 
-
-
-
-
 c      do it=1,ntbins
 c         tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
 c         call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,th_mod,eps_mod)
@@ -526,16 +506,12 @@ c      end do
          tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
          um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
-
          print*, tmin, tmax, ntbins
-         print*, tm, um
-
-
+         print*, tm, um, aveQ2(it)
 
          call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,um,th_mod,eps_mod)
 
          print*, th_mod
-
 
 c         stop
 
@@ -545,21 +521,12 @@ c         thetacm_neg(it)=th_mod*180./3.14159
 c         call eps_n_theta(+1,Eb,aveW(it),aveQ2(it),avett(it),th_mod, 
 c     *  eps_mod)
 
-
-
-
-
-
-
          thetacm_only(it)=th_mod*180./3.14159
 
       end do
 
 
 c      stop
-
-
-
 
 c     Save data.
 
