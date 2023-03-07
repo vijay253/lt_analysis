@@ -6,7 +6,8 @@ c
 c     Input:  kindata/kindata.*.dat
 c     Output: averages/averages.*.dat
 
-      call average_k(1.60,.32,.59)
+c      call average_k(1.60,.32,.59)
+      call average_k(0.375,.286,.629,.781)
 
       print*,  "-------------------------------------------------"
 
@@ -17,29 +18,30 @@ c      call average_k(2.45,.27,.55)
 
 *-----------------------------------------------------------------------
 
-      subroutine average_k(q2_set,eps_lo_set,eps_hi_set)
+      subroutine average_k(q2_set,eps_lo_set,eps_mi_set,eps_hi_set)
 
 c     Average W and Q2 over theta_pq settings, then over low and high epsilon
 c     settings, then over neg. and pos. settings,
 c     and save result in averages/aver.* .
 
-      parameter (nu=3)
+c      parameter (nu=3)
+      parameter (nu=5)
 
       real aveW(nu),errW(nu),aveQ2(nu),errQ2(nu)
       real avW(nu,2),erW(nu,2),avQ2(nu,2),erQ2(nu,2)
-      real aW(nu,2,2),eW(nu,2,2),aQ2(nu,2,2),eQ2(nu,2,2)
+      real aW(nu,3,2),eW(nu,3,2),aQ2(nu,3,2),eQ2(nu,3,2)
 
       real avett(nu),    errtt(nu)    
       real avtt(nu,2),   ertt(nu,2)    
-      real att(nu,2,2),  ett(nu,2,2)    
+      real att(nu,3,2),  ett(nu,3,2)    
 
 
 c      real thetacm_neg(nu),thetacm_pos(nu)
       real thetacm_only(nu)
 
-      real eps_lo(nu),eps_hi(nu),um
+      real eps_lo(nu),eps_mi(nu),eps_hi(nu),um
 
-      real eps_set(2)
+      real eps_set(3)
 
       integer pol_set(2), j
 
@@ -47,7 +49,7 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
 
       integer u_bin, phi_bin 
 
-      real, Dimension(4) :: u_bin_boundary
+      real, Dimension(9) :: t_bin_boundary
 
       character*80:: line
 
@@ -55,7 +57,8 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
       character*2 pol
 
       eps_set(1)=eps_lo_set
-      eps_set(2)=eps_hi_set
+      eps_set(2)=eps_mi_set
+      eps_set(3)=eps_hi_set
 
       pol_set(1)=+1
       pol_set(2)=-1
@@ -80,14 +83,15 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
             avtt(it,ip)=0.
             ertt(it,ip)=0.
 
-            do lh=1,2
-               aW(it,lh,ip)=0.
-               eW(it,lh,ip)=0.
-               aQ2(it,lh,ip)=0.
-               eQ2(it,lh,ip)=0.
+c            do lmh=1,2
+            do lmh=1,3
+               aW(it,lmh,ip)=0.
+               eW(it,lmh,ip)=0.
+               aQ2(it,lmh,ip)=0.
+               eQ2(it,lmh,ip)=0.
 
-               att(it,lh,ip)=0.
-               ett(it,lh,ip)=0.
+               att(it,lmh,ip)=0.
+               ett(it,lmh,ip)=0.
 
             end do
 
@@ -101,9 +105,10 @@ c c   /*--------------------------------------------------*/
 c c   Read the u and phi bins 
 c 
 
-      print*, "BBBBBBBBB", q2_bin       
+c      print*, "BBBBBBBBB", q2_bin       
 
-      open (unit = 22, file = "../u_bin_interval", action='read')
+c      open (unit = 22, file = "../u_bin_interval", action='read')
+      open (unit = 22, file = "t_bin_interval", action='read')
       read (22,*) q2_bin, u_bin, phi_bin
 
 
@@ -142,13 +147,13 @@ c      end do
 
       print*, q2_set
 
-      if(q2_set.eq.1.6) then
+      if(q2_set.eq.0.375) then
 
          read (22, '(A)') line  
 
          print*, line
 
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+         read(line, *) (t_bin_boundary(j), j = 1, u_bin+1)
 
 c        u_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
 c        u_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
@@ -161,7 +166,7 @@ c        u_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
          read (22,*) 
          read (22,*) 
          read (22, '(A)') line  
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin+1)
+         read(line, *) (t_bin_boundary(j), j = 1, u_bin+1)
 
       endif
 
@@ -197,17 +202,19 @@ c     Get low, high eps. and neg., pos. polarity data.
 
       do ip=1,1
 
-         do lh=1,2
+c         do lh=1,2
+         do lmh=1,3
 
             nset=0
-            open(55,file='list.settings.omega')
+c            open(55,file='list.settings.omega')
+            open(55,file='list.settings.pion19')
             do while(.true.)
 
 c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
                read(55,*,end=9) ipol,q2,eps,th_pq
 
                if(ipol.eq.pol_set(ip).and.q2.eq.q2_set.and.
-     &              eps.eq.eps_set(lh)) then
+     &              eps.eq.eps_set(lmh)) then
 
                   if(ipol.eq.-1) then
                      pol='mn'
@@ -218,13 +225,13 @@ c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
                   endif
 
 
-                  
+c                  print*, eps_set(lmh)
 
-                  write(fn,'(''kindata/kindata.'',a2,''_'',i3.3,''_'',i2.2,
+                  write(fn,'(''kindata/kindata.'',a2,''_'',i3.3,''_'',i3.3,
      *                 ''_'',SP,i5.4,S,''.dat'')')
-     *                 pol,nint(q2_set*100.),nint(eps_set(lh)*100.),
+     *                 pol,nint(q2_set*1000.),nint(eps_set(lmh)*1000),
      *                 nint(th_pq*1000.)
-                  print*,'fn=',fn
+                  print*,'fn=',fn 
 c                 pause
 
 
@@ -240,16 +247,16 @@ c                  print*, "bbbbbbbbbbbbbbbbbbbb ", one
                      read(66,*) W,dW,Q2,dQ2,tt,dtt
                     print*,W,dW,Q2,dQ2,it
                      if(dW.gt.0.) then
-                        aW(it,lh,ip)=aW(it,lh,ip)+W/dW**2
-                        eW(it,lh,ip)=eW(it,lh,ip)+1./dW**2
+                        aW(it,lmh,ip)=aW(it,lmh,ip)+W/dW**2
+                        eW(it,lmh,ip)=eW(it,lmh,ip)+1./dW**2
                      end if
                      if(dQ2.gt.0.) then
-                        aQ2(it,lh,ip)=aQ2(it,lh,ip)+Q2/dQ2**2
-                        eQ2(it,lh,ip)=eQ2(it,lh,ip)+1./dQ2**2
+                        aQ2(it,lmh,ip)=aQ2(it,lmh,ip)+Q2/dQ2**2
+                        eQ2(it,lh,ip)=eQ2(it,lmh,ip)+1./dQ2**2
                      end if
                      if(dtt.gt.0.) then
-                        att(it,lh,ip)=att(it,lh,ip)+tt/dtt**2
-                        ett(it,lh,ip)=ett(it,lh,ip)+1./dtt**2
+                        att(it,lmh,ip)=att(it,lmh,ip)+tt/dtt**2
+                        ett(it,lmh,ip)=ett(it,lmh,ip)+1./dtt**2
                      end if
 
 
@@ -290,7 +297,8 @@ cc c   /*--------------------------------------------------*/
 cc c   Read the u and phi bins 
 cc 
 c
-       open (unit = 22, file = "../u_bin_interval", action='read')
+c       open (unit = 22, file = "../u_bin_interval", action='read')
+       open (unit = 22, file = "t_bin_interval", action='read')
 c      read (22,*) q2_bin, u_bin, phi_bin
 c
 c        
@@ -375,7 +383,7 @@ c      stop
       ntbins = u_bin
 
       do ip=1,1
-         do lh=1,2
+         do lh=1,3
             do it=1,ntbins
                if (eW(it,lh,ip).gt.0.) then
                   aW(it,lh,ip)=aW(it,lh,ip)/eW(it,lh,ip)
@@ -408,7 +416,7 @@ c     Average over low and high epsilon.
 
       do ip=1,1
          do it=1,ntbins
-            do lh=1,2
+            do lh=1,3
                if(eW(it,lh,ip).gt.0.) then
                   avW(it,ip)=avW(it,ip)+aW(it,lh,ip)/eW(it,lh,ip)**2
                   erW(it,ip)=erW(it,ip)+1./eW(it,lh,ip)**2
@@ -491,7 +499,8 @@ c      open(55,file='Beam/Eb_fpi2.dat')
 
 
 
-      open(55,file='Eb_fpi2.dat')
+c      open(55,file='Eb_fpi2.dat')
+      open(55,file='Eb_pion19.dat')
       do while(.true.)
          read(55,*) Eb,q2,eps
          write(*,*) Eb,q2,eps
@@ -515,7 +524,7 @@ c      end do
 
       do it=1,ntbins
          tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
-         um = (u_bin_boundary(it) + u_bin_boundary(it+1)) / 2
+         um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
 
          print*, tmin, tmax, ntbins
@@ -555,7 +564,7 @@ c      stop
 c     Save data.
 
       write(fn,'(''averages/avek.'',i3.3,''.dat'')')
-     *     nint(q2_set*100.)
+     *     nint(q2_set*1000.)
       print*,'fn=',fn
       print*
 
