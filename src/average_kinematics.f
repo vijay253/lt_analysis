@@ -111,7 +111,6 @@ c      open (unit = 22, file = "../u_bin_interval", action='read')
       open (unit = 22, file = "t_bin_interval", action='read')
       read (22,*) q2_bin, u_bin, phi_bin
 
-
       print*, "BBBBBBBBB", q2_bin       
 
 
@@ -141,9 +140,6 @@ c       print*,  u_bin, phi_bin
 c      do j = 1, 3
 c         print*, u_bin_boundary(j)
 c      end do
-
-
-
 
       print*, q2_set
 
@@ -178,25 +174,7 @@ c      stop u_bin+1
 
       close(22)
 
-
-
-
-
-
       nbt = u_bin 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 c     Get low, high eps. and neg., pos. polarity data.
 
@@ -211,7 +189,7 @@ c            open(55,file='list.settings.omega')
             do while(.true.)
 
 c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
-               read(55,*,end=9) ipol,q2,eps,th_pq
+               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx
 
                if(ipol.eq.pol_set(ip).and.q2.eq.q2_set.and.
      &              eps.eq.eps_set(lmh)) then
@@ -387,8 +365,6 @@ c
                end if
 
 
-
-
 c               write(*,'(4f8.5,2i3)') aW(it,lh,ip),eW(it,lh,ip),
 cx               aQ2(it,lh,ip),eQ2(it,lh,ip),it,lh
             end do
@@ -466,12 +442,10 @@ c     Average over neg. and pos. settings.
          errW(it)=1./sqrt(errW(it))
          aveQ2(it)=aveQ2(it)/errQ2(it)
          errQ2(it)=1./sqrt(errQ2(it))
-
          avett(it)=avett(it)/errtt(it)
          errtt(it)=1./sqrt(errtt(it))
 
       end do
-
 
 c     Thetacm for neg. and pos. settings. It's turned out the same for
 c     low and high epsilons, but different for negatives and positives.
@@ -507,7 +481,7 @@ c      end do
          um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
          print*, tmin, tmax, ntbins
-         print*, tm, um, aveQ2(it)
+         print*, tm, um
 
          call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,um,th_mod,eps_mod)
 
