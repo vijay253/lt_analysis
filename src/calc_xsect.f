@@ -28,11 +28,8 @@ c     Calculate unseparated cross-sections. Now settings are for the piplus data
 
 c      stop
 
-      call xsect(+1,1.60,0.32)
-      call xsect(+1,1.60,0.59)
-
-c      call xsect(+1,2.45,0.27)
-c      call xsect(+1,2.45,0.55)
+      call xsect(+1,0.375,0.286)
+c      call xsect(+1,1.60,0.59)
 
       stop
       end
@@ -71,7 +68,7 @@ c      parameter (nt=2,nphi=10)
 
       real phi
 
-      real, Dimension(4) :: u_bin_boundary
+      real, Dimension(9) :: t_bin_boundary
 
       real q2_bin
 
@@ -85,28 +82,15 @@ c      common  u_bin, phi_bin
 
       parameter (pi=3.14159265) 
 
-
-
       include './kin_xyz.inc'
-
-
-
-
-
-
-
 
 c   /*--------------------------------------------------*/
 c   Read the u and phi bins 
 
-      open (unit = 22, file = "../u_bin_interval", action='read')
+      open (unit = 22, file = "t_bin_interval", action='read')
       read (22,*) q2_bin, u_bin, phi_bin
-
       nt = u_bin
       nphi = phi_bin 
-
-
-
 
 c      read (22, '(A)') line  
 c      read (22, '(A)') line  
@@ -133,10 +117,10 @@ c         print*, u_bin_boundary(j)
 c      end do
 
 
-      if(q2_set.eq.1.6) then
+      if(q2_set.eq.0.375) then
 
          read (22, '(A)') line  
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin + 1)
+         read(line, *) (t_bin_boundary(j), j = 1, u_bin + 1)
 
 c        u_bin_boundary = (/ 0.0, 0.12,  0.20, 0.40/)
 c        u_bin_boundary = (/0.0, 0.10, 0.17, 0.32/)
@@ -149,13 +133,9 @@ c        u_bin_boundary = (/0.0, 0.19, 0.30, 0.50/)
          read (22,*) 
          read (22,*) 
          read (22, '(A)') line  
-         read(line, *) (u_bin_boundary(j), j = 1, u_bin + 1)
+         read(line, *) (t_bin_boundary(j), j = 1, u_bin + 1)
 
       endif
-
-      
-      
-
 
 c      stop
 
@@ -167,7 +147,8 @@ c      stop
       tmn=0.
       tmx=0.
       kset=0
-      open(55,file='./list.settings.omega')
+c      open(55,file='./list.settings.omega')
+      open(55,file='./list.settings.pion19')
       do while(ipol.ne.npol_set.or.q2.ne.q2_set.or.eps.ne.eps_set)
          read(55,*) ipol,q2,eps,th_pq,tmn,tmx,nbin,kset
 c         write(6,2)ipol,q2,eps,th_pq,tmn,tmx,nbin,kset
@@ -193,23 +174,23 @@ c 2       format(i5,5f10.5,2i5)
 
 c     construct ratio data file name.
 
-      write(r_fn,10) pol,nint(q2*100),nint(eps*100)
- 10   format('averages/aver.',a2,'_',i3.3,'_',i2,'.dat')
-      print*,'xsect: r_fn=',r_fn
+c      write(r_fn,10) pol,nint(q2*1000),nint(eps*1000)
+c 10   format('averages/aver.',a2,'_',i3.3,'_',i3.3,'.dat')
+c      print*,'xsect: r_fn=',r_fn
 
-      open(51,file=r_fn)
+c      open(51,file=r_fn)
 
 c     construct kinematics data file name.
 
-      write(kin_fn,20) nint(q2*100)
+      write(kin_fn,20) nint(q2*1000)
  20   format('averages/avek.',i3.3,'.dat')
       print*,'xsect: kin_fn=',kin_fn
 
       open(52,file=kin_fn)
 
 *     construct output file name.
-      write(xunsep_fn,30) pol,nint(q2_set*100),nint(eps_set*100)
- 30   format('xsects/x_unsep.',a2,'_',i3.3,'_',i2)
+      write(xunsep_fn,30) pol,nint(q2_set*1000),nint(eps_set*1000)
+ 30   format('xsects/x_unsep.',a2,'_',i3.3,'_',i3.3)
       print*,'xsect: xunsep_fn=',xunsep_fn
 c      pause
 
@@ -229,9 +210,9 @@ c      pause
 c         tm=tmn+(it-0.5)*(tmx-tmn)/nbin
 
 
-         um = (u_bin_boundary(it) + u_bin_boundary(it+1)) / 2
+         tm = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
-         print *, "11112222  " , nbin, u_bin_boundary(1), u_bin_boundary(2), u_bin_boundary(3), um 
+         print *, "11112222  " , nbin, tm 
 
 c         print *, nbin, u_bin_boundary(it+2), u_bin_boundary(nbin+1),  
 
@@ -246,7 +227,7 @@ c         stop
          th_cm=th_pos
 
 
-         tm = tt
+c         tm = tt
 
 
 c         print *,  w,dw,q2,dq2,tt,dtt,th_pos
@@ -266,9 +247,9 @@ c        stop
             phi=(ip-0.5)*2.*3.14159/nphi
   
 c            phi=(ip-1)*2.*3.14159/nphi
-            read(51,*) r,dr
+c            read(51,*) r,dr
 
-            print *, "ratio checkaaaaaaa: ", r, dr
+c            print *, "ratio checkaaaaaaa: ", r, dr
 
 
 c            stop
@@ -286,11 +267,11 @@ c            print*, q2_set, um
 c            stop
 
 
-c            call xmodel_ghm(npol_set,Eb,q2_set,w,q2,um,tm,phi,
-c     *           eps_mod,th_mod,x_mod)
-
-            call xmodel_ghm_two_model(npol_set,Eb,q2_set,w,q2,um,tm,phi,
+            call xmodel(npol_set,Eb,q2_set,w,q2,tm,phi,
      *           eps_mod,th_mod,x_mod)
+
+c            call xmodel_ghm_two_model(npol_set,Eb,q2_set,w,q2,tm,phi,
+c     *           eps_mod,th_mod,x_mod)
 
 
 c           stop
@@ -349,8 +330,10 @@ c /*--------------------------------------------------*/
 
 c ratio is data/simc - see GH logbook, p.55
 
-             x_real=x_mod*r
-             dx_real=x_mod*dr/r
+c             x_real=x_mod*r
+             x_real=x_mod
+c             dx_real=x_mod*dr/r
+             dx_real=x_mod
 
              if (x_real.eq.0.0) then
                 dx_real = -1000
@@ -391,7 +374,7 @@ c   This is where data output to file happens
             print*, "kkkkkk  ", x_mod, eps_mod, th_mod 
 
             write(61,40) x_real,dx_real,x_mod,eps_mod,
-     *           th_mod*180./pi,phi*180./pi,tm,um,w,q2
+     *           th_mod*180./pi,phi*180./pi,tm,w,q2
  40         format(3G15.5,f8.5,2f7.2,4f8.5)
 
          end do                 !phi
@@ -737,14 +720,14 @@ c     endif
 c /*--------------------------------------------------*/
 c /*--------------------------------------------------*/
 
-      subroutine xmodel_ghm_two_model(npol_set,Eb,q2_set,w_gev,q2_gev,u_gev,tm,phicm,
+      subroutine xmodel_ghm_two_model(npol_set,Eb,q2_set,w_gev,q2_gev,t_gev,phicm,
      *     eps,th_mod,x_mod)
 
 c      implicit none
 
       integer npol_set
       real Eb, q2_set, w, q2, phi, th_mod
-      real thetacm, x_mod, u_gev, Mp, m_p
+      real thetacm, x_mod, t_gev, Mp, m_p
       real q2_gev,w_gev,eps, tm, phicm
 
       real*8 sig
@@ -762,9 +745,9 @@ c      real*8 q2_gev,w_gev,eps,tp
       parameter (m_p=Mp/1000)  ! Proton Mass in GeV
       parameter (pi = 3.1415926)
       
-      up = abs(u_gev)      ! just to make sure it's positive
+      up = abs(t_gev)      ! just to make sure it's positive
 
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm,eps)
+      call eps_n_theta(npol_set, Eb, w_gev, q2_gev,tm, thetacm,eps)
 
 
       print*,"w_gev   =   ",  w_gev 
@@ -777,9 +760,9 @@ c      real*8 q2_gev,w_gev,eps,tp
 cc/*--------------------------------------------------*/
 cc/*--------------------------------------------------*/
 
-      if (q2_set.eq.1.6) then
+      if (q2_set.eq.0.375) then
 
-c        print*, "Q2=1.60 parameterization is used" 
+        print*, "Q2=0.375 parameterization is used" 
         t0  =    -14.33725            
         t1  =      -0.1419             
         t2  =       0.2082             
@@ -796,9 +779,7 @@ c        print*, "Q2=1.60 parameterization is used"
         tt1 =      -1.7213                    
         tt2 =       0.0000                    
         tt3 =       0.0000                    
-              
-              
-              
+                            
 
       else if (q2_set.eq.2.45) then
 
@@ -852,7 +833,7 @@ c      sigt = t0 + t1 * up + t2 * log(q2_gev) + t3 * up * log(q2_gev)
 c      sigt = t0 
 
 
-      if (q2_set.eq.1.6) then
+      if (q2_set.eq.0.375) then
 
           sigt = t0 * (up + t1)*(up + t1) + t2 ;
 
@@ -864,13 +845,6 @@ c      sigt = t0
           print*, "No parameterization is aviliable for Q2=", q2_set
           stop
       endif
-
-
-
-
-
-
-
 
        
 c     /*--------------------------------------------------*/
@@ -977,7 +951,7 @@ c      real*8 q2_gev,w_gev,eps,tp
       
       up = abs(u_gev)      ! just to make sure it's positive
 
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm,eps)
+      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, thetacm,eps)
 
 
 c      a =  0.18881E+00
@@ -1145,7 +1119,7 @@ c      real*8 q2_gev,w_gev,eps,tp
       
       up = abs(u_gev)      ! just to make sure it's positive
 
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, up, thetacm,eps)
+      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, thetacm,eps)
 
 c      a =  0.82472E-01
 c      b =  0.71359E+01
