@@ -23,13 +23,11 @@ c      call getarg(1,prv_it)
 
 c     Calculate unseparated cross-sections. Now settings are for the piplus data (+)
 
-
-
-
 c      stop
 
       call xsect(+1,0.375,0.286)
-c      call xsect(+1,1.60,0.59)
+      call xsect(+1,0.375,0.629)
+      call xsect(+1,0.375,0.781)
 
       stop
       end
