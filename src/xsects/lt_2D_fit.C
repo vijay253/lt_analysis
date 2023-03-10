@@ -384,9 +384,6 @@ void single_setting(TString q2_set){
 	   	TGraphErrors* g2 = (TGraphErrors*) g2_tmp->Clone("g2");
 	  
 
-
-
-
 //   		ROOT::Math::WrappedMultiTF1 wfB1(*f1,1);
 //   		ROOT::Math::WrappedMultiTF1 wfB2(*f2,1);
 // 
@@ -462,7 +459,6 @@ void single_setting(TString q2_set){
 // 		f2->Draw("same");	
 // 
 
-
 		cout << "I'm here'" << g1->GetN() << endl;
 
 
@@ -503,8 +499,7 @@ void single_setting(TString q2_set){
 		g_plot_err->SetMarkerColor(kRed);
 		g_plot_err->SetLineColor(kBlue-3);
 		g_plot_err->SetLineWidth(2);
-
-
+		
 
 // 
 // //		g_plot_err->SetDrawOption("perr");
@@ -543,9 +538,7 @@ void single_setting(TString q2_set){
  //		TF2 *fff2 = new TF2("fff2","[0] + y*[1]", 0, 360, 0, 0.6);
  
  
- 
- 
- 		///*--------------------------------------------------*/
+  		///*--------------------------------------------------*/
  		// Standard LT seperation equation 
  		// Parameter assignment
  		// par 0: for sigT
@@ -553,12 +546,9 @@ void single_setting(TString q2_set){
  		// par 2: for sigLT
  		// par 3: for sigTT
  
- 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
+		// 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
+ 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.3, 0.8);        // VK
  	
- 
- 
- 
- 
  		TGraphErrors * sigL_change = new TGraphErrors(); 
  		TGraphErrors * sigT_change = new TGraphErrors(); 
  		TGraphErrors * sigLT_change = new TGraphErrors(); 
@@ -746,7 +736,7 @@ void single_setting(TString q2_set){
  
  		/// Fix parameter 0 and 1
  
- 
+
  		fff2->ReleaseParameter(0);
  		fff2->ReleaseParameter(1);
  		fff2->ReleaseParameter(2);
@@ -787,10 +777,8 @@ void single_setting(TString q2_set){
  		sigL_change->SetPoint(sigL_change->GetN(), sigL_change->GetN()+1, fff2->GetParameter(1));
  		sigL_change->SetPointError(sigL_change->GetN()-1, 0, fff2->GetParError(1));
     
-         sigT_change->SetPoint(sigT_change->GetN(), sigT_change->GetN()+1, fff2->GetParameter(0));
-         sigT_change->SetPointError(sigT_change->GetN()-1, 0, fff2->GetParError(0));
- 
- 
+		sigT_change->SetPoint(sigT_change->GetN(), sigT_change->GetN()+1, fff2->GetParameter(0));
+		sigT_change->SetPointError(sigT_change->GetN()-1, 0, fff2->GetParError(0));
  
  		c2->Update();
  
@@ -806,14 +794,15 @@ void single_setting(TString q2_set){
  // //  		f2->SetParameters(0.2582E-07, -0.1265E-08, 0.0, 0.0);
  // //
  // 
+		//  		g1->SetMarkerColor(4);
   		g2->SetMarkerColor(2);
   		g2->SetLineColor(2);
   		g2->SetMarkerStyle(4);
  // 	 	g2->Draw("*");
  
     		TMultiGraph *g = new TMultiGraph();
-    	g->Add(g1);
-    	g->Add(g2);
+		g->Add(g1);
+		g->Add(g2);
  
  		g->Draw("AP");
 // 		g->GetHistogram()->SetMinimum(0.0);
