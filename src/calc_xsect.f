@@ -158,17 +158,26 @@ c 2       format(i5,5f10.5,2i5)
       if(tmn.eq.0..or.tmx.eq.0.) 
      *     stop '*** setting is not found in list.settings.fpi2'
 
-      Eb=Ebeam(kset)
+      open(57,file='./Eb_pion19.dat')
+      do while(.true.)
+         read(57,*) Eb,q2,eps
+         write(*,*) Eb,q2,eps
+         if(q2.eq.q2_set.and.eps.eq.eps_set) go to 5
+      end do
+ 5    close(57)
+      Eb=Eb/1000.
+
+c      Eb=Ebeam(kset)
 
       if(npol_set.lt.0) then
          pol='mn'
       else
          pol='pl'
       end if
-
-      write(6,4)Eb,q2,eps,pol
- 4    format(' xsect: Eb=',f8.5,'   at Q2=',f7.4,
-     *     '  eps=',f6.4,'  pol=',a2)
+c
+c      write(6,4)Eb,q2,eps,pol
+c 4    format(' xsect: Eb=',f8.5,'   at Q2=',f7.4,
+c     *     '  eps=',f6.4,'  pol=',a2)
 
 c     construct ratio data file name.
 
@@ -239,10 +248,11 @@ c        stop
          print*, " ", th_cm
          print*, " "
 
-
          do ip=1,nphi
 
             phi=(ip-0.5)*2.*3.14159/nphi
+c            phi=(ip)*22.5*pi/180
+            print*, "DDDDDDDDDD ", phi
   
 c            phi=(ip-1)*2.*3.14159/nphi
 c            read(51,*) r,dr
@@ -264,13 +274,13 @@ c            print*, q2_set, um
 
 c            stop
 
-
+ 
             call xmodel(npol_set,Eb,q2_set,w,q2,tm,phi,
      *           eps_mod,th_mod,x_mod)
 
 c            call xmodel_ghm_two_model(npol_set,Eb,q2_set,w,q2,tm,phi,
 c     *           eps_mod,th_mod,x_mod)
-
+            
 
 c           stop
 
@@ -385,9 +395,8 @@ c         print*, x_real,dx_real,x_mod,eps_mod, 80./3.14159,phi*180./3.14159,tm,
 c         stop
 
 c        Write out kinematics for Henk.
-         if(npol_set.gt.0) write(99,'(5f8.3,2x,2f6.2)')
-     *   w,q2,eps_mod,th_mod*180./3.14159,tm,eps_set,q2_set
-
+c         if(npol_set.gt.0) write(99,'(5f8.3,2x,2f6.2)')
+c     *   w,q2,eps_mod,th_mod*180./3.14159,tm,eps_set,q2_set
       end do                    !t
 
       close(51)
@@ -404,14 +413,14 @@ c        Write out kinematics for Henk.
 
 
       integer npol_set
-      real Eb,q2_set,w,q2,tm,phi,eps_mod,th_mod, thetacm, x_mod
+      real Eb,q2_set,w,q2,tm,eps_mod,th_mod, thetacm, x_mod
 
       real*8 sig
       real*8 t_gev,tprime_gev,q2_gev,w_gev,eps,tp
       real*8 lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0
       real*8 a,b,c,d,e,f,fpi,fpi235
       real*8 m_pi0sq
-      real*8 phicm, pi
+      real*8 phicm, phi pi
 
       pi = 3.1415926
 
@@ -427,8 +436,6 @@ c      print*,"*****", npol_set, Eb, w, q2, tm, thetacm, eps_mod
       phicm = phi
 
       tprime_gev = tm
-
-c      print*, "aaaaaaaaaaaaaaaaaaaaaaaa    " , tprime_gev
 
       tp = abs(tprime_gev)      ! just to make sure it's positive
 
@@ -459,7 +466,8 @@ c      endif
 * Use these instead of the usual Q^2 scaling of the response functions.
       alphapi_0=0.7*(0.-m_pi0sq) 
       lambdapi_sq=lambda0_sq*((1.+alphapi_t)/(1.+alphapi_0))**2
-      fpi    = 1./(1.+q2_gev/lambdapi_sq)
+c      fpi    = 1./(1.+q2_gev/lambdapi_sq)
+      fpi    = 1./(1.+q2/lambdapi_sq)
       fpi235 = 1./(1.+2.35/lambdapi_sq)
       
 * Fit parameters to t-dependence of Laget's p(e,e'p)omega response
@@ -473,13 +481,44 @@ c      endif
       e = -9.6199
       f = 5.8319
       sigL = a*exp(-b*tp)+c*exp(-d*(tp**0.5))+e*exp(-f*(tp**0.25))
+c...this is a new model
+c......................
+      t0  =    -14.33725
+      t1  =      -0.1419
+      t2  =       0.2082
+      t3  =       0.0000
+      l0  =      11.5206
+      l1  =      -0.1996
+      l2  =       0.0749
+      l3  =       0.0000
+      lt0 =      -0.0209
+      lt1 =       0.3192
+      lt2 =       0.0000
+      lt3 =       0.0000
+      tt0 =       0.0864
+      tt1 =      -1.7213
+      tt2 =       0.0000
+      tt3 =       0.0000
+      
+      sigl = l0 * (tp + l1)*(tp + l1) + l2
+      sigt = t0 * (tp + t1)*(tp + t1) + t2 
+      siglt= (lt0+lt1*tp+lt2*log(q2)+lt3*tp*log(q2))*sin(thetacm)
+      sigtt=(tt0+tt1*tp+tt2*log(q2)+tt3*tp*log(q2))*sin(thetacm)**2
+      wfactor=((2.47**2-m_p**2)**2)/((w**2-m_p**2)**2)
+      sigl = sigl*wfactor
+      sigt = sigt*wfactor
+      siglt= siglt*wfactor
+      sigtt= sigtt*wfactor
+c      sig = sigt + eps_mod*sigl +eps_mod*cos(2.*phicm)*sigtt
+c     *     + sqrt(2.*eps_mod*(1.+eps_mod))*cos(phicm)*siglt
 
+c.........................................................
 c      print*, fpi, fpi235
 
-      sigL = sigL *(fpi/fpi235)**2
+c      sigL = sigL *(fpi/fpi235)**2
+      sigL = sigL
 
 c      print*,"asdasd", sigL
-
 
       a = -0.12286
       b = 0.56383
@@ -488,14 +527,16 @@ c      print*,"asdasd", sigL
       e = 0.65170
       f = 18.501
       sigT = a*exp(-b*tp)+c*exp(-d*(tp**0.5))+e*exp(-f*(tp**2))
-      sigT = sigT *(fpi/fpi235)**2
+c      sigT = sigT *(fpi/fpi235)**2
+      sigT = sigT
 
       a = 0.46397
       b = 4.9179 
       c = 3.3023
       d = 3.1741
       sigLT = a*exp(-b*tp)+c*exp(-d*(tp**0.5))
-      sigLT = sigLT*(fpi/fpi235)**2*sin(thetacm)
+c      sigLT = sigLT*(fpi/fpi235)**2*sin(thetacm)
+      sigLT = sigLT*sin(thetacm)
 * Laget uses -sqrt(e(1+e)) instead of +sqrt(2e(1+e))
       sigLT = -sigLT/sqrt(2.)
 
@@ -504,797 +545,34 @@ c      print*,"asdasd", sigL
       c = 2.8034
       d = 3.8586
       sigTT = a*exp(-b*tp)+c*exp(-d*(tp**0.5))
-      sigTT= sigTT*(fpi/fpi235)**2*(sin(thetacm))**2
+c      sigTT= sigTT*(fpi/fpi235)**2*(sin(thetacm))**2
+      sigTT= sigTT*(sin(thetacm))**2
 
 * Since I have nothing better to go on, for now I assume W scales as
 * 1/(W^2-mp^2)^2.
       wfactor=(2.47**2-mp**2)**2/(w**2-mp**2)**2
-
-       
-c      print*, ":::::::::: ", wfactor  
-
+c      wfactor=1./(w**2-mp**2)**2
 
       sigL = sigL*wfactor
       sigT = sigT*wfactor
       sigLT= sigLT*wfactor
       sigTT= sigTT*wfactor
 
-      sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt
-     *     +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt
- 
-
-c      print*, 88888888, pi, sig
-
+      sig = sigT + eps_mod*sigL + eps_mod*cos(2.*phicm)*sigTT
+     *     +sqrt(2.*eps_mod*(1.+eps_mod))*cos(phicm)*sigLT
      
-
       sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
 c      sig = sig/2./pi      !dsig/dtdphicm in microbarns/GeV^2/rad
 
-
       x_mod = sig     
-
-
-
       th_mod=thetacm
 
 c      if (phi.lt.0.3) then
-         write(6,102) eps_mod,tm,sigL,sigT,sigTT,sigLT, sig
- 102     format( ('xmodel: eps=',f5.3,' t=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
-     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6) )
+c         write(6,102) eps_mod,tm,sigL,sigT,sigTT,sigLT, x_mod
+c 102     format( ('xmodel: eps=',f5.3,' t=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
+c     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6) )
 c     endif
-
       end
-
-c /*--------------------------------------------------*/
-
-
-      subroutine xmodel_ghm(npol_set,Eb,q2_set,w_gev,q2_gev,u_gev,tm,phicm,
-     *     eps,th_mod,x_mod)
-
-      integer npol_set
-      real Eb, q2_set, w, q2, phi, th_mod
-      real thetacm, x_mod, u_gev
-      real q2_gev,w_gev,eps, tm, phicm
-
-      real*8 sig
-c      real*8 q2_gev,w_gev,eps,tp
-      real*8 a,b,c,d,e,f,fpi,fpi235
-      real*8 m_pi0sq
-      real*8 pi
-
-      pi = 3.1415926
-
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, thetacm, eps)
-      
-c       print*, "check   ", thetacm
-c 
-c       stop
-
-c      print*,"*****", npol_set, Eb, w, q2, tm, thetacm, eps_mod
-
-
-c      eps = eps_mod
-c      phicm = phi
-c      q2_gev = q2
-c      w_gev = w
-
-
-
-c     /*--------------------------------------------------*/
-
-c      up = abs(u_gev)      ! just to make sure it's positive
-
-c       a = -0.00025
-c       b =  0.051536
-c       c =  1.0
-c *      d =  0.138
-c       d =  14.4
-c 
-c       sigl = a + b*log(q2_gev) * exp( c + d*log(q2_gev)* up)
-c 
-c       a = 0.0027333
-c       b = 0.051536
-c       c = 1.0
-c *      d = 0.1863
-c       d = 11.54
-c 
-c       sigt = a + b*log(q2_gev) * exp( c + d*log(q2_gev)* up)
-c     
-c       print*, q2_set, q2_gev, up
-c       print*, c + d*log(q2_gev)* up
-c       print*, log(q2_gev), sigt
-c *      stop
-c 
-c 
-c 
-c       a = 0.00158
-c       b = 0.00424 
-c       c = 1.04
-c 
-c       siglt = a + b * exp( c * up)
-c 
-c       a = 0.00024 
-c       b = 0.001 
-c       c = 1.1789
-c 
-c       sigtt = a + b * exp( c * up)
-
-      up = abs(u_gev)      ! just to make sure it's positive
-
-
-c      a = 0.0495
-c      b = 7
-c      c = 0.0
-c
-c      sigl = a * exp( -b * up) + c
-c
-c      a = 0.088
-c      b = 5 
-c      c = 0.00022
-c
-c      sigt = a * exp( -b * up) + c
-c
-c      a = 0.0015;
-c      b = 1.04;
-c      c = 0.000158;
-c
-c      siglt = a * exp( -b * up) + c
-c
-c      a = 0.001;
-c      b = 1.1789;
-c      c = 0.00024;
-c
-c      sigtt = a * exp( -b * up) + c
-c
-
-
-c /*--------------------------------------------------
-c // Sigma T
-      a = 0.088
-      b = 5
-      c = 0.00022
-
-
-      sigt = a * exp( -b * up) + c
-
-
-c /*--------------------------------------------------
-c // Sigma L  
-      a = 0.0495
-      b = 7
-      c = 0.0
-
-      sigl = a * exp( -b * up) + c
-
-
-c /*--------------------------------------------------
-c // Sigma TT  
-
-      a = 0.0;
-
-      sigtt = a * sin(thetacm) *sin(thetacm)
-
-c /*--------------------------------------------------
-c // Sigma LT  
-
-      a = 0.0;
-
-      siglt = a * sin(thetacm)
-
-* Since I have nothing better to go on, for now I assume W scales as
-* 1/(W^2-mp^2)^2.
-      wfactor=(2.47**2-mp**2)**2/(w_gev**2-mp**2)**2
-
-      sigl = sigl*wfactor
-      sigt = sigt*wfactor
-      siglt= siglt*wfactor
-      sigtt= sigtt*wfactor
-
-
-c      print*, eps, phicm
-c     stop
-
-
-      sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt
-     *     +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt
-
-c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
-
-      x_mod = sig     
-
-      th_mod=thetacm
-
-c      if (phi.lt.0.3) then
-         write(6,102) eps,up,sigL,sigT,sigTT,sigLT, sig
- 102     format( ('xmodel: eps=',f5.3,' u=',f5.3,' sigL=',f7.2,' sigT=',f6.2,
-     1        ' sigTT=',f5.2,' sigLT=',f5.2,' x_mod=',f10.6) )
-c     endif
-
-      end
-
-
-
-c /*--------------------------------------------------*/
-c /*--------------------------------------------------*/
-
-      subroutine xmodel_ghm_two_model(npol_set,Eb,q2_set,w_gev,q2_gev,t_gev,phicm,
-     *     eps,th_mod,x_mod)
-
-c      implicit none
-
-      integer npol_set
-      real Eb, q2_set, w, q2, phi, th_mod
-      real thetacm, x_mod, t_gev, Mp, m_p
-      real q2_gev,w_gev,eps, tm, phicm
-
-      real*8 sig
-c      real*8 q2_gev,w_gev,eps,tp
-      real*8 a,b,c,d,e,f,g,h,fpi,fpi235
-      real*8 m_pi0sq
-      real*8 pi
-      real*8 t0, t1, t2, t3
-      real*8 l0, l1, l2, l3
-      real*8 lt0,lt1,lt2,lt3
-      real*8 tt0,tt1,tt2,tt3
-      real*8 sigt,sigl,siglt,sigtt,wfactor,up
-
-      parameter (Mp=938.27231) ! Proton Mass in MeV
-      parameter (m_p=Mp/1000)  ! Proton Mass in GeV
-      parameter (pi = 3.1415926)
-      
-      up = abs(t_gev)      ! just to make sure it's positive
-
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev,tm, thetacm,eps)
-
-
-      print*,"w_gev   =   ",  w_gev 
-      print*,"q2_gev  =   ",  q2_gev
-      print*,"up      =   ",  up
-      print*,"phicm   =   ",  phicm
-      print*,"thetacm =   ",  thetacm
-      print*,"eps     =   ",  eps
-
-cc/*--------------------------------------------------*/
-cc/*--------------------------------------------------*/
-
-      if (q2_set.eq.0.375) then
-
-        print*, "Q2=0.375 parameterization is used" 
-        t0  =    -14.33725            
-        t1  =      -0.1419             
-        t2  =       0.2082             
-        t3  =       0.0000             
-        l0  =      11.5206             
-        l1  =      -0.1996             
-        l2  =       0.0749             
-        l3  =       0.0000                   
-        lt0 =      -0.0209                    
-        lt1 =       0.3192                    
-        lt2 =       0.0000                    
-        lt3 =       0.0000                    
-        tt0 =       0.0864                    
-        tt1 =      -1.7213                    
-        tt2 =       0.0000                    
-        tt3 =       0.0000                    
-                            
-
-      else if (q2_set.eq.2.45) then
-
-c        print*, "Q2=2.45 parameterization is used" 
-
-        t0  =      0.49938 
-        t1  =      -7.1474 
-        t2  =       0.0185 
-        t3  =       0.0000 
-        l0  =      -3.4009 
-        l1  =      -0.2585 
-        l2  =       0.0909 
-        l3  =       0.0000 
-        lt0 =      -0.0511 
-        lt1 =       0.3161 
-        lt2 =       0.0000 
-        lt3 =       0.0000 
-        tt0 =      -0.0803 
-        tt1 =       0.8514 
-        tt2 =       0.0000 
-        tt3 =       0.0000 
-
-      else
-          print*, "No parameterization is aviliable for Q2=", q2_set
-          stop
-      endif
-
-
-c        t0  =  0.05 ;
-c        t1  =  0.2  ;
-c        t2  =  0.25 ;
-c        t3  =  -0.9 ;
-c        l0  =  0.7  ;
-c        l1  =  -2.7 ;
-c        l2  =  -0.5 ;
-c        l3  =  2.5  ;
-c        lt0 =  0.05 ;
-c        lt1 =  -0.3 ;
-c        lt2 =  -0.15;
-c        lt3 =  0.7  ;
-c        tt0 =  0.1  ;
-c        tt1 =  -1.8 ;
-c        tt2 =  -0.3 ;
-c        tt3 =   3   ;
-
-c     /*--------------------------------------------------*/
-c     // Sigma T
-c      sigt = t1 * exp( -t2 * up) + t3;
-
-c      sigt = t0 + t1 * up + t2 * log(q2_gev) + t3 * up * log(q2_gev)
-c      sigt = t0 
-
-
-      if (q2_set.eq.0.375) then
-
-          sigt = t0 * (up + t1)*(up + t1) + t2 ;
-
-      else if (q2_set.eq.2.45) then
-
-          sigt = t0 * exp( t1 * up ) + t2;
-
-      else
-          print*, "No parameterization is aviliable for Q2=", q2_set
-          stop
-      endif
-
-       
-c     /*--------------------------------------------------*/
-c     // Sigma L
-c      sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
-c      sigl = l1 + l2*up;
-c      sigl= l1 * exp( l2 * up ) + l3 / up
-c      sigl = l1 * (up-l2)**2 + l3
-
-c      sigl = l0 + l1 * up + l2 * log(q2_gev) + l3 * up * log(q2_gev)
-
-      sigl = l0 * (up + l1)*(up + l1) + l2 
-
-
-c     /*--------------------------------------------------*/
-c     // Sigma LT  
-      siglt=(lt0+lt1*up+lt2*log(q2_gev)+lt3*up*log(q2_gev))*sin(thetacm)
-
-c     /*--------------------------------------------------*/
-c     // Sigma TT  
-      sigtt=(tt0+tt1*up+tt2*log(q2_gev)+tt3*up*log(q2_gev))*sin(thetacm)*sin(thetacm)
-
-c      sigtt = (tt1 * exp( tt2 * up ) + tt3 / up) * sin(thetacm)  * sin(thetacm)
-
-c      print*, "theta check ", thetacm, sin(thetacm)
-c      stop
-
-* Since I have nothing better to go on, for now I assume W scales as
-* 1/(W^2-mp^2)^2.
-      wfactor=((2.47**2-m_p**2)**2)/((w_gev**2-m_p**2)**2)
-
-      sigl = sigl*wfactor
-      sigt = sigt*wfactor
-      siglt= siglt*wfactor
-      sigtt= sigtt*wfactor
-
-c      print*, eps, phicm
-c     stop
-
-      sig = sigt + eps*sigl +eps*cos(2.*phicm)*sigtt
-     *     + sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt
-
-c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
-
-
-
-      x_mod = sig     !2pi * dsig/dtdphicm in microbarns/GeV^2
-
-      th_mod = thetacm
-
-c      if (phi.lt.0.3) then
-        
-
-c      write(6,102) eps,up,sigT,sigL,sigLT,sigTT,sig,wfactor,m_p,w_gev
-c 102     format('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.5,' sigL=',f7.5,
-c     1        ' sigLT=',f10.8,' sigTT=',f10.8,' x_mod=',f15.14,
-c     1   ' wfactor=', f10.6, ' mp=',f5.4, ' w_gev=',f6.4)
-c
-
-
-      write(6,102) eps,up,sigT,sigL,sigLT,sigTT,sig
- 102     format( ('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.5,' sigL=',f7.5,
-     1        ' sigLT=',f10.8,' sigTT=',f10.8,' x_mod=',f15.14) )
-
-
-
-
-      end
-
-
-
-
-
-
-
-
-
-
-c /*--------------------------------------------------*/
-c /*--------------------------------------------------*/
-c /*--------------------------------------------------*/
-
-
-      subroutine xmodel_ghm_160(npol_set,Eb,q2_set,w_gev,q2_gev,u_gev,tm,phicm,
-     *     eps,th_mod,x_mod)
-
-      integer npol_set
-      real Eb, q2_set, w, q2, phi, th_mod
-      real thetacm, x_mod, u_gev, mp
-      real q2_gev,w_gev,eps, tm, phicm
-
-      real*8 sig
-c      real*8 q2_gev,w_gev,eps,tp
-      real*8 a,b,c,d,e,f,g,h,fpi,fpi235
-      real*8 m_pi0sq
-      real*8 pi
-      real*8 l1,l2,l3
-      real*8 t1,t2,t3
-      real*8 lt1,lt2,lt3
-      real*8 tt1,tt2,tt3
-
-      pi = 3.1415926
-      mp = .93827231
-      
-      up = abs(u_gev)      ! just to make sure it's positive
-
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, thetacm,eps)
-
-
-c      a =  0.18881E+00
-c      b =  0.14443E+02
-c      c =  0.90201E-02
-c      d = -0.75302E-01
-c      e = -0.10392E+01 
-c      f =  0.11590E+00
-c      g = 0.0;
-c      h = 0.0;    
-
-c      a =  0.20217E+00;
-c      b =  0.17986E+02;
-c      c =  0.60942E-02;
-c      d =  0.0;
-c      e =  0.0;
-c      f =  0.11590E+00;
-c      g =  0.21197E+00;
-c      h = -0.24716E-01;
-c
-cc /*--------------------------------------------------
-cc // Sigma T
-c      sigt = a * exp( -b * up) + c
-c
-cc /*--------------------------------------------------
-cc // Sigma L
-c      sigl = d * exp( -e * up) + f
-c
-cc /*--------------------------------------------------
-cc // Sigma TT  
-c      sigtt = g * sin(thetacm) *sin(thetacm)
-c
-cc /*--------------------------------------------------
-cc // Sigma LT  
-c      siglt = h * sin(thetacm)
-c
-
-
-c       /*--------------------------------------------------*/
-       t1  =    0.1     
-       t2  =   -5.0       
-       t3  =    0.0002  
-       l1  =    0.05    
-       l2  =    0.6     
-       l3  =    0.02    
-       lt1 =    0.000000      
-       lt2 =    0.000000      
-       lt3 =    0.000000      
-       tt1 =    0.000000      
-       tt2 =    0.000000      
-       tt3 =    0.000000      
-
-
-cc /*--------------------------------------------------
-cc // Sigma T
-c      sigt = t1 * exp( -t2 * up) + t3
-c
-cc /*--------------------------------------------------
-cc // Sigma L
-c      sigl = l1 * exp( l2 * up) + l3 
-c
-cc /*--------------------------------------------------
-cc // Sigma TT  
-c      sigtt = tt1 * exp( -tt2 * up) * sin(thetacm) * sin(thetacm)
-c
-cc /*--------------------------------------------------
-cc // Sigma LT  
-c      siglt = lt1 * exp( -lt2 * up) * sin(thetacm)
-
-
-
-c     /*--------------------------------------------------*/
-c     // Sigma T
-c      sigt = t1 * exp( -t2 * up) + t3;
-      sigt = t1 * exp(t2 * up) + t3
-       
-c     /*--------------------------------------------------*/
-c     // Sigma L
-c      sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
- 
-c      sigl = l1 + l2*up;
-
-c      sigl= l1 * exp( l2 * up ) + l3 / up
-
-      sigl = l1 * (up-l2)**2 + l3
-
-
-
-
-c     /*--------------------------------------------------*/
-c     // Sigma LT  
-      siglt = (lt1 * exp( lt2 * up ) + lt3 / up) * sin(thetacm);
-c      siglt = 0
-
-
-c     /*--------------------------------------------------*/
-c     // Sigma TT  
-      sigtt = tt1 * sin(thetacm) * sin(thetacm);
-      
-c      sigtt = 0 
-
-c      print*, "theta check ", thetacm, sin(thetacm)
-
-c      stop
-
-
-
-* Since I have nothing better to go on, for now I assume W scales as
-* 1/(W^2-mp^2)^2.
-      wfactor=(2.47**2-mp**2)**2/(w_gev**2-mp**2)**2
-
-      sigl = sigl*wfactor
-      sigt = sigt*wfactor
-      siglt= siglt*wfactor
-      sigtt= sigtt*wfactor
-
-
-c      print*, eps, phicm
-c     stop
-
-
-      sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt
-     *     +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt
-
-c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
-
-      x_mod = sig     
-
-      th_mod=thetacm
-
-c      if (phi.lt.0.3) then
-         write(6,102) eps,up,sigT,sigL,sigLT,sigTT, sig
- 102     format( ('xmodel: eps=',f5.3,' u=',f5.3,' sigT=',f7.2,' sigL=',f6.2,
-     1        ' sigLT=',f5.2,' sigTT=',f5.2,' x_mod=',f10.6) )
-c     endif
-
-      end
-
-
-
-
-
-
-c /*--------------------------------------------------*/
-
-      subroutine xmodel_ghm_245(npol_set,Eb,q2_set,w_gev,q2_gev,u_gev,tm,phicm,
-     *     eps,th_mod,x_mod)
-
-      integer npol_set
-      real Eb, q2_set, w, q2, phi, th_mod
-      real thetacm, x_mod, u_gev
-      real q2_gev,w_gev,eps, tm, phicm
-
-      real*8 sig
-c      real*8 q2_gev,w_gev,eps,tp
-      real*8 a,b,c,d,e,f,g,h,fpi,fpi235
-      real*8 l1,l2,l3
-      real*8 t1,t2,t3
-      real*8 lt1,lt2,lt3
-      real*8 tt1,tt2,tt3
-      real*8 m_pi0sq
-      real*8 pi
-
-      parameter (pi=3.14159265) 
-      
-      up = abs(u_gev)      ! just to make sure it's positive
-
-      call eps_n_theta(npol_set, Eb, w_gev, q2_gev, tm, thetacm,eps)
-
-c      a =  0.82472E-01
-c      b =  0.71359E+01
-c      c =  0.13529E-02
-c      d =  0.15738E+00
-c      e =  0.69794E+01 
-c      f =  0.23247E-02
-c      g =  0.0
-c      h =  0.0
-
-c       /*--------------------------------------------------*/
-c       a =  0.93161E-01;
-c       b =  0.78498E+01;
-c       c =  0.15340E-02;
-c       d =  0.0;
-c       e =  0.0; 
-c       f =  0.0;
-c       g =  0.0;
-c       h =  0.0;
-c
-c
-c
-cc /*--------------------------------------------------
-cc // Sigma T
-c      sigt = a * exp( -b * up) + c
-c
-cc /*--------------------------------------------------
-cc // Sigma L
-c      sigl = d * exp( -e * up) + f
-c
-cc /*--------------------------------------------------
-cc // Sigma TT  
-c      sigtt = g * sin(thetacm) *sin(thetacm)
-c
-cc /*--------------------------------------------------
-cc // Sigma LT  
-c      siglt = h * sin(thetacm)
-
-
-
-c       /*--------------------------------------------------*/
-c       t1  =   0.27099E+00
-c       t2  =   0.86639E+01
-c       t3  =   0.00000E+00
-c       l1  =   0.0           
-c       l2  =   0.0           
-c       l3  =   0.0           
-c       tt1 =   0.0           
-c       tt2 =   0.0           
-c       lt1 =   0.0           
-c       lt2 =   0.0           
-
-
-
-       t1  =    0.1     
-       t2  =   -5.0     
-       t3  =    0.0002  
-       l1  =    0.05    
-       l2  =    0.6     
-       l3  =    0.02    
-       lt1 =    0.000000
-       lt2 =    0.000000
-       lt3 =    0.000000
-       tt1 =    0.000000
-       tt2 =    0.000000
-       tt3 =    0.000000
-                                  
-                                  
-                           
-cc /*-----------------------------------------------------------
-cc // Sigma T            gma T
-c      sigt = t1 * exp( -= t1 * ext2 * up) + t3
-c                                 
-cc /*-----------------------------------------------------------
-cc // Sigma L            gma L
-c      sigl = l1 * exp( l= l1 * ex2 * up) + l3 
-c                                 
-cc /*-----------------------------------------------------------
-cc // Sigma TT           gma TT  
-c      sigtt = tt1 * exp( -tt2 * up) * sin(thetacm) * sin(thetacm)
-c
-cc /*--------------------------------------------------
-cc // Sigma LT  
-c      siglt = lt1 * exp( -lt2 * up) * sin(thetacm)
-c
-
-c
-cc     /*--------------------------------------------------*/
-cc     // Sigma T
-c      sigt = t1 * exp( -t2 * up) + t3;
-c       
-cc     /*--------------------------------------------------*/
-cc     // Sigma L
-c      sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
-c 
-c
-cc     /*--------------------------------------------------*/
-cc     // Sigma LT  
-c      siglt = (lt1 * up + lt2) * sin(thetacm);
-c      
-cc     /*--------------------------------------------------*/
-cc     // Sigma TT  
-c      sigtt = tt1 * sin(thetacm) * sin(thetacm);
-
-
-
-c     /*--------------------------------------------------*/
-c     // Sigma T
-c      sigt = t1 * exp( -t2 * up) + t3;
-
-      sigt = t1 * exp(t2 * up) + t3
-       
-c     /*--------------------------------------------------*/
-c     // Sigma L
-c      sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
-c      sigl = l1 + l2*up;
-c      sigl= l1 * exp( l2 * up ) + l3 / up
-
-      sigl = l1 * (up-l2)**2 + l3
-
-c     /*--------------------------------------------------*/
-c     // Sigma LT  
-      siglt = (lt1 * exp( lt2 * up ) + lt3 / up) * sin(thetacm);
-c      siglt = 0
-
-
-c     /*--------------------------------------------------*/
-c     // Sigma TT  
-      sigtt = tt1 * sin(thetacm) * sin(thetacm);
-
-
-
-
-      print*, "aaa " , siglt 
-
-c      stop
-
-* Since I have nothing better to go on, for now I assume W scales as
-* 1/(W^2-mp^2)^2.
-      wfactor=(2.47**2-mp**2)**2/(w_gev**2-mp**2)**2
-
-      sigl = sigl*wfactor
-      sigt = sigt*wfactor
-      siglt= siglt*wfactor
-      sigtt= sigtt*wfactor
-
-
-c      print*, eps, phicm
-c     stop
-
-
-      sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt
-     *     +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt
-
-c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
-
-      x_mod = sig     
-
-      th_mod=thetacm
-
-c      if (phi.lt.0.3) then
-         write(6,102) eps,up,sigT,sigL,sigLT,sigTT, sig
- 102     format( ('xmodel: eps=',f5.4,' u=',f5.4,' sigT=',f9.6,' sigL=',f9.6,
-     1        ' sigLT=',f9.6,' sigTT=',f9.6,' x_mod=',f9.6) )
-c     endif
-
-        
-c      stop
-
-      end
-
-
-
-
-
-
-*=======================================================================
-
       include 'eps_n_theta.f'
 
