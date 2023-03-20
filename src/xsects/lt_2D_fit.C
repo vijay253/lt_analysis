@@ -137,9 +137,10 @@ Double_t fun_exp(Double_t *x, Double_t *par);
 
 Double_t LT_sep_x_lo_fun(Double_t *x, Double_t *par);
 Double_t LT_sep_x_hi_fun(Double_t *x, Double_t *par);
+Double_t LT_sep_x_mi_fun(Double_t *x, Double_t *par);
 
 
-Float_t hi_eps, lo_eps;
+Float_t hi_eps, mi_eps, lo_eps;
 
 
 void lt_2D_fit() {
@@ -189,8 +190,6 @@ void lt_2D_fit() {
 	c4->Print("lt_sep_plots/sig_TT_total.png");
 
 
-
-
 //	g_sig_t_total->Fit("f1", "R");
 
 
@@ -203,9 +202,10 @@ void lt_2D_fit() {
 
 void single_setting(TString q2_set){
 
-	Float_t eps_lo_setting, eps_hi_setting;
+  Float_t eps_lo_setting, eps_mi_setting, eps_hi_setting;
 
 	TString eps_lo;
+	TString eps_mi;
 	TString eps_hi;
 
 	Float_t eps_diff;
@@ -218,14 +218,15 @@ void single_setting(TString q2_set){
 	if (q2_set == "375" ) {
 
 		eps_lo = "286";
-		//		eps_hi = "629";
+		eps_mi = "629";
 		eps_hi = "781";
 
 		eps_lo_setting = 0.286;
-		//		eps_hi_setting = 0.629;
+		eps_mi_setting = 0.629;
 		eps_hi_setting = 0.781;
 
 		lo_eps = eps_lo_setting;
+		mi_eps = eps_mi_setting;
 		hi_eps = eps_hi_setting;
 		
 		eps_diff = eps_hi_setting - eps_lo_setting;
@@ -249,6 +250,7 @@ void single_setting(TString q2_set){
 
 
 	TGraphErrors* sig_u_lo = new TGraphErrors();
+	TGraphErrors* sig_u_mi = new TGraphErrors();
 	TGraphErrors* sig_u_hi = new TGraphErrors();
 	TGraphErrors* sig_u_diff = new TGraphErrors();
 
@@ -258,12 +260,17 @@ void single_setting(TString q2_set){
  	TString file_name_2;
  	file_name_2 = "x_unsep.pl_" + q2_set + "_" + eps_hi;
 
+ 	TString file_name_3;
+ 	file_name_3 = "x_unsep.pl_" + q2_set + "_" + eps_mi;
+
 	TNtuple* n1 = new TNtuple("n1", "n1", "x/F:dx:x_mod:eps:theta:phi:t:w:Q2");
 	n1->ReadFile(file_name_1);
  
  	TNtuple* n2 = new TNtuple("n2", "n2", "x/F:dx:x_mod:eps:theta:phi:t:w:Q2");
  	n2->ReadFile(file_name_2);
 
+ 	TNtuple* n3 = new TNtuple("n3", "n3", "x/F:dx:x_mod:eps:theta:phi:t:w:Q2");
+ 	n3->ReadFile(file_name_3);
 
 	ofstream file_out;
 	file_out.open("x_sep.pl_" + q2_set, ofstream::out);
@@ -352,17 +359,18 @@ void single_setting(TString q2_set){
 		cout << i+1 << endl;
 
 		n1->Draw("x:phi:dx", upp, "goff");
-		//		n1->Draw("x:phi:dx", "", "goff");
 		TGraphErrors* g1_tmp = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+		//		TGraphErrors* g1_tmp = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, 0);
 
 //		TF1* f1 = new TF1("lo_eps_fit", LT_sep_x_lo_fun, 0, 360, 4); 
 //		TF1* f2 = new TF1("hi_eps_fit", LT_sep_x_hi_fun, 0, 360, 4); 
 
 		TF1* f1 = new TF1("lo_eps_fit", LT_sep_x_lo_fun, 0, 360, 4); 
 		TF1* f2 = new TF1("hi_eps_fit", LT_sep_x_hi_fun, 0, 360, 4); 
+		TF1* f3 = new TF1("mi_eps_fit", LT_sep_x_mi_fun, 0, 360, 4); 
 
 	  	TGraphErrors* g1 = (TGraphErrors*) g1_tmp->Clone("g1");
-
+		
 		Float_t ave_sig_lo = g1->GetMean(2);
 		Float_t err_sig_lo = g1->GetRMS(2);
 
@@ -380,6 +388,7 @@ void single_setting(TString q2_set){
 //		n2->Draw("x:phi:dx", "", "goff");
 
    		TGraphErrors* g2_tmp = new TGraphErrors(n2->GetSelectedRows(), n2->GetV2(), n2->GetV1(), 0, n2->GetV3());
+//   		TGraphErrors* g2_tmp = new TGraphErrors(n2->GetSelectedRows(), n2->GetV2(), n2->GetV1(), 0, 0);
 
 	   	TGraphErrors* g2 = (TGraphErrors*) g2_tmp->Clone("g2");
 	  
@@ -437,6 +446,19 @@ void single_setting(TString q2_set){
 		sig_u_hi->SetPoint(sig_u_hi->GetN(), u_list[i], ave_sig_hi);
 		sig_u_hi->SetPointError(sig_u_hi->GetN()-1, 0, err_sig_hi);
 
+		n3->Draw("x:phi:dx", upp, "goff");
+
+   		TGraphErrors* g3_tmp = new TGraphErrors(n3->GetSelectedRows(), n3->GetV2(), n3->GetV1(), 0, n3->GetV3());
+
+	   	TGraphErrors* g3 = (TGraphErrors*) g3_tmp->Clone("g3");
+
+		Float_t ave_sig_mi = g3->GetMean(2);
+		Float_t err_sig_mi = g3->GetRMS(2);
+
+		sig_u_mi->SetPoint(sig_u_mi->GetN(), u_list[i], ave_sig_mi);
+		sig_u_mi->SetPointError(sig_u_mi->GetN()-1, 0, err_sig_mi);
+
+
 // 	
 // 		g1->Draw("A*");
 // 
@@ -493,9 +515,22 @@ void single_setting(TString q2_set){
 
 		}
 
+		for(Int_t ii = 0; ii < g3->GetN(); ii++) {
+
+			g3->GetPoint(ii, g_xx, g_yy);
+			g_yy_err = g3->GetErrorY(ii);
+
+			cout << ii << "  " << g_plot_err->GetN() << "  "<< g_xx << "  " << eps_mi_setting 
+				 << "  " << g_yy <<  "  " << g_yy_err << endl;
+
+			g_plot_err->SetPoint(g_plot_err->GetN(), g_xx, eps_mi_setting, g_yy);
+			g_plot_err->SetPointError(g_plot_err->GetN()-1, 0.0,  0.0, g_yy_err);
+		}
+
 		g_plot_err->SetFillColor(29);
 		g_plot_err->SetMarkerSize(0.8);
 		g_plot_err->SetMarkerStyle(20);
+
 		g_plot_err->SetMarkerColor(kRed);
 		g_plot_err->SetLineColor(kBlue-3);
 		g_plot_err->SetLineWidth(2);
@@ -568,17 +603,19 @@ void single_setting(TString q2_set){
  
  		/// Set parameter 0 and 1
  
- 		fff2->SetParameter(0, 1);
+		 
+		fff2->SetParameter(0, 1);
   		fff2->SetParLimits(0, 0, 5);
- 
- 		fff2->SetParameter(1, 0.1);
+		
+ 		fff2->SetParameter(1, 0.1);	       
   		fff2->SetParLimits(1, 0, 3);
- 
+		
  		/// Fix parameter 2 and 3
  //		fff2->FixParameter(1, 0.0);
+		
  		fff2->FixParameter(2, 0.0);
  		fff2->FixParameter(3, 0.0);
- 
+		
  		g_plot_err->Fit("fff2", "MR");
  
  
@@ -742,12 +779,13 @@ void single_setting(TString q2_set){
  		fff2->ReleaseParameter(2);
  		fff2->ReleaseParameter(3);
   
-  		fff2->SetParLimits(0, 0, 1);
-  		fff2->SetParLimits(1, 0, 1);
-
-   		fff2->SetParLimits(2, -1, 1);
-  		fff2->SetParLimits(3, -1, 1);
-
+	       
+		//				fff2->SetParLimits(0, 0, 1);
+		//		  		fff2->SetParLimits(1, 0, 1);
+		
+		//		   		fff2->SetParLimits(2, -1, 1);
+		//		  		fff2->SetParLimits(3, -1, 1);
+		
 
 //   		fff2->FixParameter(2, 0.0);
 //  		fff2->FixParameter(3, 0.0);
@@ -798,11 +836,14 @@ void single_setting(TString q2_set){
   		g2->SetMarkerColor(2);
   		g2->SetLineColor(2);
   		g2->SetMarkerStyle(4);
- // 	 	g2->Draw("*");
+
+  		g3->SetLineColor(3);
+  		g3->SetMarkerStyle(29);
  
     		TMultiGraph *g = new TMultiGraph();
 		g->Add(g1);
 		g->Add(g2);
+		g->Add(g3);
  
  		g->Draw("AP");
 // 		g->GetHistogram()->SetMinimum(0.0);
@@ -833,8 +874,14 @@ void single_setting(TString q2_set){
  //		f2->FixParameter(2, 0.0);
  //		f2->FixParameter(3, 0.0);
  
+		f3->FixParameter(0, fff2->GetParameter(0));
+ 		f3->FixParameter(1, fff2->GetParameter(1));
+ 		f3->FixParameter(2, fff2->GetParameter(2));
+ 		f3->FixParameter(3, fff2->GetParameter(3));
+ 
   		f1->SetLineColor(1);
   		f2->SetLineColor(2);	 		
+  		f3->SetLineColor(3);	 		
   
  //		TF1* ftest = new TF1("ftest", "sin(3.14*90/180)", 0, 1);
  
@@ -855,8 +902,9 @@ void single_setting(TString q2_set){
  // 		f2->FixParameter(0, test_l);
  // 		f2->FixParameter(1, test_t);
  
- 		f1->Draw("same");	
-  		f2->Draw("same");	
+		f1->Draw("same");	
+		f2->Draw("same");	
+		f3->Draw("same");	
  
  
  //		cout << f1->GetParameter(0) << endl;
@@ -1108,7 +1156,24 @@ Double_t LT_sep_x_hi_fun(Double_t *x, Double_t *par){
 
 	return xs;
 }
+/*--------------------------------------------------*/
+/// Mid epsilon drawing function
 
+Double_t LT_sep_x_mi_fun(Double_t *x, Double_t *par){
+
+
+	Float_t eps = mi_eps;
+
+    Float_t xx =x[0];
+
+//    Double_t f = par[0]*sin(xx);
+	Double_t xs;
+
+	xs = par[0] +  eps*par[1]  + sqrt(2*eps*(1+eps))*par[2]*cos(xx*pi/180) + eps*par[3]*cos(2*xx*pi/180);
+//	xs = par[0] +  eps*par[1];
+
+	return xs;
+}
 
 
 
