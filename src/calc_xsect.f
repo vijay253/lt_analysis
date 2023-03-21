@@ -649,23 +649,25 @@ c      a = (0.25961E+02)*(2.45**6/0.38**6)
       sigL = (a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2))
       print*,"sigL", sigL
 
-      a = (0.46859E+02)*45
+      a = (0.46859E+02)*35
 c      a = (0.46859E+2)*(2.45**8/0.38**8)
       b = -0.30000E+02 
       c = -0.33572E+01
       d = 0.00000E+00
 
-      sigT = ((a+b*log(q2)+(c+d*log(q2))))
-      a = 0.10000E+04
+      sigT = (a+b*log(q2)+(c+d*log(q2))*(tp-(0.0735+0.028*log(q2))*q2)
+     *     /(0.0735+0.028*log(q2))*q2)
+      
+      a = 0.10000E+02
       b = -0.28000E+02
       c = 0.35000E+01
       print*,"sigT", sigT
    
-      sigLT = ((a*exp(b*(-tp))+c/(-tp))*sin(thetacm))
+      sigLT = -((a*exp(b*(-tp))+c/(-tp))*sin(thetacm))
       print*,"sigLT", sigLT
 
       a = -0.67276E+02
-      sigTT = -((a/(q2))*exp(-q2)*sin(thetacm)**2)
+      sigTT = -((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
       print*,"sigTT", sigTT
 
 
