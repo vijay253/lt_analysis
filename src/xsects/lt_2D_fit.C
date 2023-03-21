@@ -581,7 +581,7 @@ void single_setting(TString q2_set){
  		// par 3: for sigTT
  
 		// 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
- 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.3, 0.8);        // VK
+ 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.2, 0.9);        // VK
  	
  		TGraphErrors * sigL_change = new TGraphErrors(); 
  		TGraphErrors * sigT_change = new TGraphErrors(); 
@@ -602,13 +602,13 @@ void single_setting(TString q2_set){
  
  		/// Set parameter 0 and 1
  
-		 
+		/**		 
 		fff2->SetParameter(0, 1);
   		fff2->SetParLimits(0, 0, 5);
 		
  		fff2->SetParameter(1, 0.1);	       
   		fff2->SetParLimits(1, 0, 3);
-		
+		**/
  		/// Fix parameter 2 and 3
  //		fff2->FixParameter(1, 0.0);
 		
@@ -631,13 +631,13 @@ void single_setting(TString q2_set){
  		/*--------------------------------------------------*/
  		/// Fit 2
  		///
- 
+		 
  		cout  << endl << "/*--------------------------------------------------*/" << endl;
  		cout << " Fitting Step 2" << endl;
  		cout << " Fit LT, while Fix L, T and TT" << endl;
  
  		/// Fix parameter 0 and 1 and 3
- 
+		
   		fff2->FixParameter(0, fff2->GetParameter(0));
   		fff2->FixParameter(1, fff2->GetParameter(1));
   		fff2->FixParameter(3, fff2->GetParameter(3));
@@ -649,18 +649,20 @@ void single_setting(TString q2_set){
  //		fff2->ReleaseParameter(2);
  
  		fff2->SetParameter(2, 0.0);
- 		fff2->SetParLimits(2, -0.1, 0.1);
- 
+		/** 	
+			fff2->SetParLimits(2, -0.1, 0.1);
+		**/
    		g_plot_err->Fit("fff2", "MR");
  
- 
+		
  		/*--------------------------------------------------*/
  		/// Fit 3
  		///
+		
  		cout  << endl << "/*--------------------------------------------------*/" << endl;
  		cout << " Fitting Step 3" << endl;
  		cout << " Fit L and T, while Fix LT and TT" << endl;
- 
+		
  		/// Set parameter 0 and 1
  
  		fff2->ReleaseParameter(0);
@@ -682,7 +684,7 @@ void single_setting(TString q2_set){
          sigT_change->SetPoint(sigT_change->GetN(), sigT_change->GetN()+1, fff2->GetParameter(0));
          sigT_change->SetPointError(sigT_change->GetN()-1, 0, fff2->GetParError(0));
  
- 
+		
  
  
  
@@ -693,8 +695,8 @@ void single_setting(TString q2_set){
  		cout << " Fitting Step 4" << endl;
  		cout << " Fit TT, while Fix T, L and LT" << endl;
  
- 		/// Fix parameter 0 and 1
- 
+ 		// Fix parameter 0 and 1
+		
   		fff2->FixParameter(0, fff2->GetParameter(0));
   		fff2->FixParameter(1, fff2->GetParameter(1));
   		fff2->FixParameter(2, fff2->GetParameter(2));
@@ -706,18 +708,19 @@ void single_setting(TString q2_set){
  		fff2->ReleaseParameter(3);
  
   		fff2->SetParameter(3, 0.0);
- 		fff2->SetParLimits(3, -0.1, 0.1);
- 
+		/** 
+		fff2->SetParLimits(3, -0.1, 0.1);
+		**/
    		g_plot_err->Fit("fff2", "MR");
  
- 
+		
  		/*--------------------------------------------------*/
  		/// Fit 5
  		///
  		cout  << endl << "/*--------------------------------------------------*/" << endl;
  		cout << " Fitting Step 5" << endl;
  		cout << " Fit T and L, while Fix LT and TT" << endl;
- 
+		 
  		/// Fix parameter 0 and 1
  
  		fff2->ReleaseParameter(0);
@@ -732,7 +735,7 @@ void single_setting(TString q2_set){
   		fff2->FixParameter(3, fff2->GetParameter(3));
  
    		g_plot_err->Fit("fff2", "MR");
- 
+		
  
  
  // 		/*--------------------------------------------------*/
@@ -777,18 +780,19 @@ void single_setting(TString q2_set){
  		fff2->ReleaseParameter(1);
  		fff2->ReleaseParameter(2);
  		fff2->ReleaseParameter(3);
-  
-	       
+ 	       
 		//				fff2->SetParLimits(0, 0, 1);
 		//		  		fff2->SetParLimits(1, 0, 1);
 		
 		//		   		fff2->SetParLimits(2, -1, 1);
 		//		  		fff2->SetParLimits(3, -1, 1);
 		
-
-//   		fff2->FixParameter(2, 0.0);
-//  		fff2->FixParameter(3, 0.0);
- 
+		/**
+   		fff2->FixParameter(0, fff2->GetParameter(0));
+   		fff2->FixParameter(1, fff2->GetParameter(1));
+   		fff2->FixParameter(2, fff2->GetParameter(2));
+   		fff2->FixParameter(3, fff2->GetParameter(3));
+		**/
  
  
  //  		fff2->SetParLimits(0, 0, 0.3);
@@ -914,7 +918,7 @@ void single_setting(TString q2_set){
  		fit_status->DrawTextNDC(0.15, 0.85, "Q2 = " + q2_set);
 		fit_status->DrawTextNDC(0.15, 0.80, "Fit Status: " + gMinuit->fCstatu);
  
- 	
+		/**
  		if(TMath::MaxElement(g2->GetN(),g2->GetY()) > TMath::MaxElement(g1->GetN(),g1->GetY())) {
  
  			cout  << "!!!!!!!!!!!!!!!  " << endl;
@@ -927,7 +931,7 @@ void single_setting(TString q2_set){
  			cout  << "!!!!!!!!!!!!!!!  " << endl;
  			g1->SetMinimum(TMath::MinElement(g2->GetN(),g2->GetY())*0.9);
  
- 		}
+			}**/
 // 
 // 
 // 		Float_t sig_l = (ave_sig_hi-ave_sig_lo)/eps_diff;
