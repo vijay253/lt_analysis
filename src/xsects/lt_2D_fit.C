@@ -55,7 +55,6 @@ using namespace std;
 
 Float_t pi = 3.1415926;
 
-//Int_t t_bin_num = 3;
 Int_t u_bin_num;
 
 
