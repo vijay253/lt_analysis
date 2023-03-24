@@ -67,8 +67,12 @@ void t_plots()
   //SIMC
 
   TString TInSIMCFilenameC = "Pion_2p7_Q1_center.root";
+  TString TInSIMCFilenameL1 = "Pion_2p7_Q1_left1.root";
+  TString TInSIMCFilenameL2 = "Pion_2p7_Q1_left2.root";
 
-  TString rootFile_SIMCC  = ROOTfilePath+"/"+TInSIMCFilenameC;
+  TString rootFile_SIMCC   = ROOTfilePath+"/"+TInSIMCFilenameC;
+  TString rootFile_SIMCL1  = ROOTfilePath+"/"+TInSIMCFilenameL1;
+  TString rootFile_SIMCL2  = ROOTfilePath+"/"+TInSIMCFilenameL2;
 
 
   if (gSystem->AccessPathName(rootFile_DATAC) == kTRUE){
@@ -97,6 +101,8 @@ void t_plots()
   //SIMC
 
   TFile *InFile_SIMCC = new TFile(rootFile_SIMCC, "READ");
+  TFile *InFile_SIMCL1 = new TFile(rootFile_SIMCL1, "READ");
+  TFile *InFile_SIMCL2 = new TFile(rootFile_SIMCL2, "READ");
 
   //Output file names 
   TString foutname   = OutPath+"/" + "Analysed_Qp375W2p2" + ".root";
@@ -109,6 +115,8 @@ void t_plots()
   TTree* TBRANCHL2 = (TTree*)InFile_DATAL2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHL2  = (Long64_t)TBRANCHL2->GetEntries();  
   //SIMC  
   TTree* TSIMCC  = (TTree*)InFile_SIMCC->Get("h10");Long64_t nEntries_TSIMCC  = (Long64_t)TSIMCC->GetEntries();  
+  TTree* TSIMCL1  = (TTree*)InFile_SIMCL1->Get("h10");Long64_t nEntries_TSIMCL1  = (Long64_t)TSIMCL1->GetEntries();  
+  TTree* TSIMCL2  = (TTree*)InFile_SIMCL2->Get("h10");Long64_t nEntries_TSIMCL2  = (Long64_t)TSIMCL2->GetEntries();  
 
   //DATA VARIABLES
 
@@ -139,6 +147,7 @@ void t_plots()
 
   //SIMC VARIABLES
 
+  //CENTER
   //SHMS SIMC variables                                                                                                                                                                                
   Float_t ssdelta;TSIMCC->SetBranchAddress("ssdelta", &ssdelta);
   Float_t ssxptar;TSIMCC->SetBranchAddress("ssxptar", &ssxptar);
@@ -168,6 +177,68 @@ void t_plots()
   Float_t Pm;TSIMCC->SetBranchAddress("Pm", &Pm);
   Float_t Weight;TSIMCC->SetBranchAddress("Weight", &Weight);
   Float_t phipq;TSIMCC->SetBranchAddress("phipq", &phipq);
+
+  //LEFT1
+  //SHMS SIMC variables                                                                                                                                                                                
+  Float_t ssdeltaL1;TSIMCL1->SetBranchAddress("ssdelta", &ssdeltaL1);
+  Float_t ssxptarL1;TSIMCL1->SetBranchAddress("ssxptar", &ssxptarL1);
+  Float_t ssyptarL1;TSIMCL1->SetBranchAddress("ssyptar", &ssyptarL1);
+  Float_t ssxfpL1;TSIMCL1->SetBranchAddress("ssxfp", &ssxfpL1);
+  Float_t ssyfpL1;TSIMCL1->SetBranchAddress("ssyfp", &ssyfpL1);
+  Float_t ssxpfpL1;TSIMCL1->SetBranchAddress("ssxpfp", &ssxpfpL1);
+  Float_t ssypfpL1;TSIMCL1->SetBranchAddress("ssypfp", &ssypfpL1);
+
+  //HMS SIMC variables                                                                                                                                                                                
+  Float_t hsdeltaL1;TSIMCL1->SetBranchAddress("hsdelta", &hsdeltaL1);
+  Float_t hsxptarL1;TSIMCL1->SetBranchAddress("hsxptar", &hsxptarL1);
+  Float_t hsyptarL1;TSIMCL1->SetBranchAddress("hsyptar", &hsyptarL1);
+  Float_t hsxfpL1;TSIMCL1->SetBranchAddress("hsxfp", &hsxfpL1);
+  Float_t hsyfpL1;TSIMCL1->SetBranchAddress("hsyfp", &hsyfpL1);
+  Float_t hsxpfpL1;TSIMCL1->SetBranchAddress("hsxpfp", &hsxpfpL1);
+  Float_t hsypfpL1;TSIMCL1->SetBranchAddress("hsypfp", &hsypfpL1);
+
+  Float_t qL1;TSIMCL1->SetBranchAddress("q", &qL1);
+  Float_t Q2_simcL1;TSIMCL1->SetBranchAddress("Q2", &Q2_simcL1);
+  Float_t W_simcL1;TSIMCL1->SetBranchAddress("W", &W_simcL1);
+  Float_t t_simcL1;TSIMCL1->SetBranchAddress("t", &t_simcL1);
+  Float_t ti_simcL1;TSIMCL1->SetBranchAddress("ti", &ti_simcL1);
+  Float_t epsilon_simcL1;TSIMCL1->SetBranchAddress("epsilon", &epsilon_simcL1);
+  Float_t missmassL1;TSIMCL1->SetBranchAddress("missmass", &missmassL1);
+  Float_t EmL1;TSIMCL1->SetBranchAddress("Em", &EmL1);
+  Float_t PmL1;TSIMCL1->SetBranchAddress("Pm", &PmL1);
+  Float_t WeightL1;TSIMCL1->SetBranchAddress("Weight", &WeightL1);
+  Float_t phipqL1;TSIMCL1->SetBranchAddress("phipq", &phipqL1);
+
+ //LEFT2
+  //SHMS SIMC variables                                                                                                                                                                                
+  Float_t ssdeltaL2;TSIMCL2->SetBranchAddress("ssdelta", &ssdeltaL2);
+  Float_t ssxptarL2;TSIMCL2->SetBranchAddress("ssxptar", &ssxptarL2);
+  Float_t ssyptarL2;TSIMCL2->SetBranchAddress("ssyptar", &ssyptarL2);
+  Float_t ssxfpL2;TSIMCL2->SetBranchAddress("ssxfp", &ssxfpL2);
+  Float_t ssyfpL2;TSIMCL2->SetBranchAddress("ssyfp", &ssyfpL2);
+  Float_t ssxpfpL2;TSIMCL2->SetBranchAddress("ssxpfp", &ssxpfpL2);
+  Float_t ssypfpL2;TSIMCL2->SetBranchAddress("ssypfp", &ssypfpL2);
+
+  //HMS SIMC variables                                                                                                                                                                                
+  Float_t hsdeltaL2;TSIMCL2->SetBranchAddress("hsdelta", &hsdeltaL2);
+  Float_t hsxptarL2;TSIMCL2->SetBranchAddress("hsxptar", &hsxptarL2);
+  Float_t hsyptarL2;TSIMCL2->SetBranchAddress("hsyptar", &hsyptarL2);
+  Float_t hsxfpL2;TSIMCL2->SetBranchAddress("hsxfp", &hsxfpL2);
+  Float_t hsyfpL2;TSIMCL2->SetBranchAddress("hsyfp", &hsyfpL2);
+  Float_t hsxpfpL2;TSIMCL2->SetBranchAddress("hsxpfp", &hsxpfpL2);
+  Float_t hsypfpL2;TSIMCL2->SetBranchAddress("hsypfp", &hsypfpL2);
+
+  Float_t qL2;TSIMCL2->SetBranchAddress("q", &qL2);
+  Float_t Q2_simcL2;TSIMCL2->SetBranchAddress("Q2", &Q2_simcL2);
+  Float_t W_simcL2;TSIMCL2->SetBranchAddress("W", &W_simcL2);
+  Float_t t_simcL2;TSIMCL2->SetBranchAddress("t", &t_simcL2);
+  Float_t ti_simcL2;TSIMCL2->SetBranchAddress("ti", &ti_simcL2);
+  Float_t epsilon_simcL2;TSIMCL2->SetBranchAddress("epsilon", &epsilon_simcL2);
+  Float_t missmassL2;TSIMCL2->SetBranchAddress("missmass", &missmassL2);
+  Float_t EmL2;TSIMCL2->SetBranchAddress("Em", &EmL2);
+  Float_t PmL2;TSIMCL2->SetBranchAddress("Pm", &PmL2);
+  Float_t WeightL2;TSIMCL2->SetBranchAddress("Weight", &WeightL2);
+  Float_t phipqL2;TSIMCL2->SetBranchAddress("phipq", &phipqL2);
 
   //DATA HISTOGRAMS
 
@@ -397,7 +468,57 @@ void t_plots()
   TH2D *hYL2R  = new TH2D("hYL2R"," Yield L2; t-Bin; Phi-Bin", 10, bins, 18, -22.5, 382.5);      
 
 
-  //SIMC HISTOGRAMS
+  //SIMC and Data HISTOGRAMS
+  //CENTER
+  TH1D *H_ssdelta_SC  = new TH1D("H_ssdelta_SC","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_SC  = new TH1D("H_ssxptar_SC","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_SC  = new TH1D("H_ssyptar_SC","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DC  = new TH1D("H_ssdelta_DC","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_DC  = new TH1D("H_ssxptar_DC","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_DC  = new TH1D("H_ssyptar_DC","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SC  = new TH1D("H_hsdelta_SC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_SC  = new TH1D("H_hsxptar_SC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_SC  = new TH1D("H_hsyptar_SC","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DC  = new TH1D("H_hsdelta_DC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_DC  = new TH1D("H_hsxptar_DC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_DC  = new TH1D("H_hsyptar_DC","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+
+  //LEFT1
+  TH1D *H_ssdelta_SL1  = new TH1D("H_ssdelta_SL1","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_SL1  = new TH1D("H_ssxptar_SL1","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_SL1  = new TH1D("H_ssyptar_SL1","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DL1  = new TH1D("H_ssdelta_DL1","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_DL1  = new TH1D("H_ssxptar_DL1","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_DL1  = new TH1D("H_ssyptar_DL1","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SL1  = new TH1D("H_hsdelta_SL1","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_SL1  = new TH1D("H_hsxptar_SL1","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_SL1  = new TH1D("H_hsyptar_SL1","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DL1  = new TH1D("H_hsdelta_DL1","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_DL1  = new TH1D("H_hsxptar_DL1","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_DL1  = new TH1D("H_hsyptar_DL1","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+
+  //LEFT2
+  TH1D *H_ssdelta_SL2  = new TH1D("H_ssdelta_SL2","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_SL2  = new TH1D("H_ssxptar_SL2","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_SL2  = new TH1D("H_ssyptar_SL2","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DL2  = new TH1D("H_ssdelta_DL2","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_DL2  = new TH1D("H_ssxptar_DL2","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_DL2  = new TH1D("H_ssyptar_DL2","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SL2  = new TH1D("H_hsdelta_SL2","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_SL2  = new TH1D("H_hsxptar_SL2","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_SL2  = new TH1D("H_hsyptar_SL2","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DL2  = new TH1D("H_hsdelta_DL2","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_DL2  = new TH1D("H_hsxptar_DL2","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_DL2  = new TH1D("H_hsyptar_DL2","HMS yptar; hsyptar;", 300, -0.05, 0.05);
 
   TH1D *H_t_S  = new TH1D("H_t_S","t; t;", 300, -0.01, 0.1); 
   TH1D *H_ti_S  = new TH1D("H_ti_S","ti; ti;", 300, -0.01, 0.1); 
@@ -428,11 +549,11 @@ void t_plots()
   //  std::vector<Double_t> Q2C1(nEntries_TBRANCHC);
   // std::vector<Double_t> WC1(nEntries_TBRANCHC);
 
-  Double_t Q2C1[nEntries_TBRANCHC];
-  Double_t WC1[nEntries_TBRANCHC]; 
+  //  Double_t Q2C1[nEntries_TBRANCHC];
+  //  Double_t WC1[nEntries_TBRANCHC]; 
   
-  Double_t qL1[nEntries_TBRANCHL1];
-  Double_t wL1[nEntries_TBRANCHL1]; 
+  //  Double_t qL1[nEntries_TBRANCHL1];
+  // Double_t wL1[nEntries_TBRANCHL1]; 
   
 
   //DATA CENTER
@@ -599,11 +720,23 @@ void t_plots()
 
     {
       TSIMCC->GetEntry(i);
-      Double_t fact = 10921600.0/200000.0;
 
-      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.98)
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
+
+      Double_t fact = 10938400.0/400000.0;
+
+
+      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxptar <=0.08 && hsyptar >=-0.045 && hsyptar <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxptar >=-0.06 && ssxptar <=0.06 && ssyptar >=-0.04 && hsyptar <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
 	
 	{
+	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
+	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
+	  H_ssyptar_SC->Fill(hsyptar, fact*Weight);
+
+	  H_hsdelta_SC->Fill(hsdelta, fact*Weight);
+	  H_hsxptar_SC->Fill(hsxptar, fact*Weight);
+	  H_hsyptar_SC->Fill(hsyptar, fact*Weight);
+
 	  H_t_RE->Fill((t_simc-ti_simc), fact*Weight);
 	  H_t_RE_t->Fill((t_simc-ti_simc), t_simc, fact*Weight);
 	}    
@@ -1580,6 +1713,30 @@ void t_plots()
   Dcut->Draw("same");
   //c6->SetLeftMargin(0.15);   
   c6->Print(outputpdf);
+
+  TCanvas *cdeltaS = new TCanvas("cdeltaS", " cdeltaS");
+  H_ssdelta_SC->Draw("Weight");
+  cdeltaS->Print(outputpdf);
+
+  TCanvas *cdeltaH = new TCanvas("cdeltaH", " cdeltaH");
+  H_hsdelta_SC->Draw("Weight");
+  cdeltaH->Print(outputpdf);
+
+  TCanvas *cxptarS = new TCanvas("cxptarS", " cxptarS");
+  H_ssxptar_SC->Draw("Weight");
+  cxptarS->Print(outputpdf);
+
+  TCanvas *cxptarH = new TCanvas("cxptarH", " cxptarH");
+  H_hsxptar_SC->Draw("Weight");
+  cxptarH->Print(outputpdf);
+
+  TCanvas *cyptarS = new TCanvas("cyptarS", " cyptarS");
+  H_ssyptar_SC->Draw("Weight");
+  cyptarS->Print(outputpdf);
+
+  TCanvas *cyptarH = new TCanvas("cyptarH", " cyptarH");
+  H_hsyptar_SC->Draw("Weight");
+  cyptarH->Print(outputpdf);
 
   TCanvas *cY = new TCanvas("cY", " cY");
   hYC->Add(hYCR, -1);  
