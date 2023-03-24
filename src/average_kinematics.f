@@ -477,13 +477,13 @@ c         thetacm_pos(it)=th_mod*180./3.14159
 c      end do
 
       do it=1,ntbins
-         tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
-         um = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
+c         tm=tmin+(it-0.5)*(tmax-tmin)/ntbins
+         tm = (t_bin_boundary(it) + t_bin_boundary(it+1)) / 2
 
          print*, tmin, tmax, ntbins
-         print*, tm, um
+         print*, tm
 
-         call eps_n_theta(-1,Eb,aveW(it),aveQ2(it),tm,um,th_mod,eps_mod)
+         call eps_n_theta(+1,Eb,aveW(it),aveQ2(it),tm,th_mod,eps_mod)
 
          print*, th_mod
 
@@ -534,16 +534,6 @@ c         write(*,'(4f8.5,i3)') aveW(it),errW(it),aveQ2(it),errQ2(it),it
       close(77)
 
       end
-
-
-
-
-
-
-
-
-
-
 c*-----------------------------------------------------------------------
 c
 c      subroutine eps_n_theta(npol,Eb,w,q2,tm,thetacm,eps)
@@ -620,20 +610,6 @@ cc     *     'eps_n_theta: ',w,q2,t,tmin,thetacm,eps,omega
 c
 c      end
 c
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 cc*-----------------------------------------------------------------------
 c
 c      subroutine eps_n_theta(npol,Eb,w,q2,tm,thetacm,eps)
