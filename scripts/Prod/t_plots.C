@@ -599,7 +599,7 @@ void t_plots()
 
     {
       TSIMCC->GetEntry(i);
-      Double_t fact = 10136000.0/20000.0;
+      Double_t fact = 10921600.0/200000.0;
 
       if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxpfp <=0.08 && hsyptar >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && hsdelta <=20.0 && ssxptar >=-0.06 && hsxpfp <=0.06 && hsyptar >=-0.04 && hsypfp <=0.04 && missmass >= 0.92 && missmass <= 0.98)
 	
