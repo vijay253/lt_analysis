@@ -120,6 +120,14 @@ void t_plots()
 
   //DATA VARIABLES
 
+  Double_t  P_gtr_dp;TBRANCHC->SetBranchAddress("ssdelta", &P_gtr_dp);
+  Double_t  P_gtr_xptar;TBRANCHC->SetBranchAddress("ssxptar", &P_gtr_xptar);
+  Double_t  P_gtr_yptar;TBRANCHC->SetBranchAddress("ssyptar", &P_gtr_yptar);
+
+  Double_t  H_gtr_dp;TBRANCHC->SetBranchAddress("hsdelta", &H_gtr_dp);
+  Double_t  H_gtr_xptar;TBRANCHC->SetBranchAddress("hsxptar", &H_gtr_xptar);
+  Double_t  H_gtr_yptar;TBRANCHC->SetBranchAddress("hsyptar", &H_gtr_yptar);
+
   Double_t WC;TBRANCHC->SetBranchAddress("W", &WC);
   Double_t Q2C;TBRANCHC->SetBranchAddress("Q2", &Q2C);
  
@@ -478,6 +486,10 @@ void t_plots()
   TH1D *H_ssxptar_DC  = new TH1D("H_ssxptar_DC","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
   TH1D *H_ssyptar_DC  = new TH1D("H_ssyptar_DC","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
 
+  TH1D *H_ssdelta_DCR  = new TH1D("H_ssdelta_DCR","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssxptar_DCR  = new TH1D("H_ssxptar_DCR","SHMS xptar; ssxptar;", 300, -0.06, 0.06);
+  TH1D *H_ssyptar_DCR  = new TH1D("H_ssyptar_DCR","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
   TH1D *H_hsdelta_SC  = new TH1D("H_hsdelta_SC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
   TH1D *H_hsxptar_SC  = new TH1D("H_hsxptar_SC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
   TH1D *H_hsyptar_SC  = new TH1D("H_hsyptar_SC","HMS yptar; hsyptar;", 300, -0.05, 0.05);
@@ -485,6 +497,10 @@ void t_plots()
   TH1D *H_hsdelta_DC  = new TH1D("H_hsdelta_DC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
   TH1D *H_hsxptar_DC  = new TH1D("H_hsxptar_DC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
   TH1D *H_hsyptar_DC  = new TH1D("H_hsyptar_DC","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DCR  = new TH1D("H_hsdelta_DCR","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsxptar_DCR  = new TH1D("H_hsxptar_DCR","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_DCR  = new TH1D("H_hsyptar_DCR","HMS yptar; hsyptar;", 300, -0.05, 0.05);
 
   //LEFT1
   TH1D *H_ssdelta_SL1  = new TH1D("H_ssdelta_SL1","SHMS delta; ssdelta;", 300, -20.0, 20.0);
@@ -580,6 +596,14 @@ void t_plots()
       
       if(tcoinC>=-1.0 && tcoinC <= 1.0 && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
 	{
+	  H_ssdelta_DC->Fill(P_gtr_dp);
+	  H_ssxptar_DC->Fill(P_gtr_xptar);
+	  H_ssyptar_DC->Fill(P_gtr_yptar);
+
+	  H_hsdelta_DC->Fill(H_gtr_dp);
+	  H_hsxptar_DC->Fill(H_gtr_xptar);
+	  H_hsyptar_DC->Fill(H_gtr_yptar);
+
 	  hQ2WC1->Fill(Q2C, WC);	      	  
   	  htC->Fill(-tC);
 	  htInC->Fill(-tC);	
@@ -589,6 +613,14 @@ void t_plots()
        
       if(((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)) && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
 	{
+	  H_ssdelta_DCR->Fill(P_gtr_dp);
+	  H_ssxptar_DCR->Fill(P_gtr_xptar);
+	  H_ssyptar_DCR->Fill(P_gtr_yptar);
+
+	  H_hsdelta_DCR->Fill(H_gtr_dp);
+	  H_hsxptar_DCR->Fill(H_gtr_xptar);
+	  H_hsyptar_DCR->Fill(H_gtr_yptar);
+
 	  htCR->Fill(-tC);
 	  htInCR->Fill(-tC);	
 	  hph_qCR->Fill(ph_qC*57.2958 + 180);
@@ -1081,6 +1113,16 @@ void t_plots()
 	}
     }
 
+  Double_t RTSCALE = 1.0/6.0;   
+  
+  H_ssdelta_DCR->Scale(RTSCALE);
+  H_ssxptar_DCR->Scale(RTSCALE);
+  H_ssyptar_DCR->Scale(RTSCALE);
+  
+  H_hsdelta_DCR->Scale(RTSCALE);
+  H_hsxptar_DCR->Scale(RTSCALE);
+  H_hsyptar_DCR->Scale(RTSCALE);
+  
   hW1CR->Scale(1.0/6.0);  
   hW2CR->Scale(1.0/6.0);  
   hW3CR->Scale(1.0/6.0);  
@@ -1716,26 +1758,50 @@ void t_plots()
 
   TCanvas *cdeltaS = new TCanvas("cdeltaS", " cdeltaS");
   H_ssdelta_SC->Draw("Weight");
+  H_ssdelta_DC->Add(H_ssdelta_DCR, -1);
+  H_ssdelta_DC->Scale(scaleFC);
+  H_ssdelta_DC->SetLineColor(kGreen);
+  H_ssdelta_DC->Draw("same Weight"); 
   cdeltaS->Print(outputpdf);
 
   TCanvas *cdeltaH = new TCanvas("cdeltaH", " cdeltaH");
   H_hsdelta_SC->Draw("Weight");
+  H_hsdelta_DC->Add(H_hsdelta_DCR, -1);
+  H_hsdelta_DC->Scale(scaleFC);
+  H_hsdelta_DC->SetLineColor(kGreen);
+  H_hsdelta_DC->Draw("same Weight"); 
   cdeltaH->Print(outputpdf);
 
   TCanvas *cxptarS = new TCanvas("cxptarS", " cxptarS");
   H_ssxptar_SC->Draw("Weight");
+  H_ssxptar_DC->Add(H_ssxptar_DCR, -1);
+  H_ssxptar_DC->Scale(scaleFC);
+  H_ssxptar_DC->SetLineColor(kGreen);
+  H_ssxptar_DC->Draw("same Weight");
   cxptarS->Print(outputpdf);
 
   TCanvas *cxptarH = new TCanvas("cxptarH", " cxptarH");
   H_hsxptar_SC->Draw("Weight");
+  H_hsxptar_DC->Add( H_hsxptar_DCR, -1);
+  H_hsxptar_DC->Scale(scaleFC);
+  H_hsxptar_DC->SetLineColor(kGreen);
+  H_hsxptar_DC->Draw("same Weight");
   cxptarH->Print(outputpdf);
 
   TCanvas *cyptarS = new TCanvas("cyptarS", " cyptarS");
   H_ssyptar_SC->Draw("Weight");
+  H_ssyptar_DC->Add( H_ssyptar_DCR, -1);
+  H_ssyptar_DC->Scale(scaleFC);
+  H_ssyptar_DC->SetLineColor(kGreen);
+  H_ssyptar_DC->Draw("same Weight");
   cyptarS->Print(outputpdf);
 
   TCanvas *cyptarH = new TCanvas("cyptarH", " cyptarH");
   H_hsyptar_SC->Draw("Weight");
+  H_hsyptar_DC->Add( H_hsyptar_DCR, -1);
+  H_hsyptar_DC->Scale(scaleFC);
+  H_hsyptar_DC->SetLineColor(kGreen);
+  H_hsyptar_DC->Draw("same Weight");
   cyptarH->Print(outputpdf);
 
   TCanvas *cY = new TCanvas("cY", " cY");
