@@ -787,7 +787,7 @@ void t_plots()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
 
-      Double_t fact = 9410970.0/400000.0;
+      Double_t fact = 9391240.0/400000.0;
 
       if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxptar <=0.08 && hsyptar >=-0.045 && hsyptar <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxptar >=-0.06 && ssxptar <=0.06 && ssyptar >=-0.04 && ssyptar <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
 	
@@ -1020,7 +1020,7 @@ void t_plots()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));  
       
-      Double_t factL1 = 10347300.0/400000.0;
+      Double_t factL1 = 10313900.0/400000.0;
       
       if(hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxptarL1 >=-0.08 && hsxptarL1 <=0.08 && hsyptarL1 >=-0.045 && hsyptarL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxptarL1 >=-0.06 && ssxptarL1 <=0.06 && ssyptarL1 >=-0.04 && ssyptarL1 <=0.04 && missmassL1 >= 0.92 && missmassL1 <= 0.98 && Diamond_cut)
 	
@@ -1209,7 +1209,7 @@ void t_plots()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));  
       
-      Double_t factL2 = 10456500.0/400000.0;
+      Double_t factL2 = 10427700.0/400000.0;
       
       if(hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxptarL2 >=-0.08 && hsxptarL2 <=0.08 && hsyptarL2 >=-0.045 && hsyptarL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxptarL2 >=-0.06 && ssxptarL2 <=0.06 && ssyptarL2 >=-0.04 && ssyptarL2 <=0.04 && missmassL2 >= 0.92 && missmassL2 <= 0.98 && Diamond_cut)
 	
@@ -4656,16 +4656,47 @@ void t_plots()
   TTree* TSIMCHIGHEL2  = (TTree*)InFile_SIMCHIGHEL2->Get("h10");Long64_t nEntries_TSIMCHIGHEL2  = (Long64_t)TSIMCHIGHEL2->GetEntries();
 
   //VARIABLES
+  Double_t  P_gtr_dpheR1;TBRANCHHIGHER1->SetBranchAddress("ssdelta", &P_gtr_dpheR1);
+  Double_t  P_gtr_xptarheR1;TBRANCHHIGHER1->SetBranchAddress("ssxptar", &P_gtr_xptarheR1);
+  Double_t  P_gtr_yptarheR1;TBRANCHHIGHER1->SetBranchAddress("ssyptar", &P_gtr_yptarheR1);
+
+  Double_t  H_gtr_dpheR1;TBRANCHHIGHER1->SetBranchAddress("hsdelta", &H_gtr_dpheR1);
+  Double_t  H_gtr_xptarheR1;TBRANCHHIGHER1->SetBranchAddress("hsxptar", &H_gtr_xptarheR1);
+  Double_t  H_gtr_yptarheR1;TBRANCHHIGHER1->SetBranchAddress("hsyptar", &H_gtr_yptarheR1);
 
   Double_t WHER1;TBRANCHHIGHER1->SetBranchAddress("W", &WHER1);
   Double_t Q2HER1;TBRANCHHIGHER1->SetBranchAddress("Q2", &Q2HER1);
 
+  Double_t  P_gtr_dpheC;TBRANCHHIGHEC->SetBranchAddress("ssdelta", &P_gtr_dpheC);
+  Double_t  P_gtr_xptarheC;TBRANCHHIGHEC->SetBranchAddress("ssxptar", &P_gtr_xptarheC);
+  Double_t  P_gtr_yptarheC;TBRANCHHIGHEC->SetBranchAddress("ssyptar", &P_gtr_yptarheC);
+
+  Double_t  H_gtr_dpheC;TBRANCHHIGHEC->SetBranchAddress("hsdelta", &H_gtr_dpheC);
+  Double_t  H_gtr_xptarheC;TBRANCHHIGHEC->SetBranchAddress("hsxptar", &H_gtr_xptarheC);
+  Double_t  H_gtr_yptarheC;TBRANCHHIGHEC->SetBranchAddress("hsyptar", &H_gtr_yptarheC);
+
   Double_t WHEC;TBRANCHHIGHEC->SetBranchAddress("W", &WHEC);
   Double_t Q2HEC;TBRANCHHIGHEC->SetBranchAddress("Q2", &Q2HEC);
  
+  Double_t  P_gtr_dpheL1;TBRANCHHIGHEL1->SetBranchAddress("ssdelta", &P_gtr_dpheL1);
+  Double_t  P_gtr_xptarheL1;TBRANCHHIGHEL1->SetBranchAddress("ssxptar", &P_gtr_xptarheL1);
+  Double_t  P_gtr_yptarheL1;TBRANCHHIGHEL1->SetBranchAddress("ssyptar", &P_gtr_yptarheL1);
+
+  Double_t  H_gtr_dpheL1;TBRANCHHIGHEL1->SetBranchAddress("hsdelta", &H_gtr_dpheL1);
+  Double_t  H_gtr_xptarheL1;TBRANCHHIGHEL1->SetBranchAddress("hsxptar", &H_gtr_xptarheL1);
+  Double_t  H_gtr_yptarheL1;TBRANCHHIGHEL1->SetBranchAddress("hsyptar", &H_gtr_yptarheL1);
+
   Double_t WHEL1;TBRANCHHIGHEL1->SetBranchAddress("W", &WHEL1);
   Double_t Q2HEL1;TBRANCHHIGHEL1->SetBranchAddress("Q2", &Q2HEL1);
  
+  Double_t  P_gtr_dpheL2;TBRANCHHIGHEL2->SetBranchAddress("ssdelta", &P_gtr_dpheL2);
+  Double_t  P_gtr_xptarheL2;TBRANCHHIGHEL2->SetBranchAddress("ssxptar", &P_gtr_xptarheL2);
+  Double_t  P_gtr_yptarheL2;TBRANCHHIGHEL2->SetBranchAddress("ssyptar", &P_gtr_yptarheL2);
+
+  Double_t  H_gtr_dpheL2;TBRANCHHIGHEL2->SetBranchAddress("hsdelta", &H_gtr_dpheL2);
+  Double_t  H_gtr_xptarheL2;TBRANCHHIGHEL2->SetBranchAddress("hsxptar", &H_gtr_xptarheL2);
+  Double_t  H_gtr_yptarheL2;TBRANCHHIGHEL2->SetBranchAddress("hsyptar", &H_gtr_yptarheL2);
+
   Double_t WHEL2;TBRANCHHIGHEL2->SetBranchAddress("W", &WHEL2);
   Double_t Q2HEL2;TBRANCHHIGHEL2->SetBranchAddress("Q2", &Q2HEL2);
   
@@ -5092,7 +5123,6 @@ void t_plots()
   TH2D *hYheL1R   = new TH2D("hYheL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYheL2R   = new TH2D("hYheL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
 
-
   TH1D *hmmheR1  = new TH1D("hmmheR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmheC   = new TH1D("hmmheC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmheL1  = new TH1D("hmmheL1","MM; MM;", 300, 0.8, 1.2);      
@@ -5226,6 +5256,14 @@ void t_plots()
       
       if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0 && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DheR1->Fill(P_gtr_dpheR1);
+          H_ssxptar_DheR1->Fill(P_gtr_xptarheR1);
+          H_ssyptar_DheR1->Fill(P_gtr_yptarheR1);
+
+          H_hsdelta_DheR1->Fill(H_gtr_dpheR1);
+          H_hsxptar_DheR1->Fill(H_gtr_xptarheR1);
+          H_hsyptar_DheR1->Fill(H_gtr_yptarheR1);
+
 	  htheR1->Fill(-theR1);
 	  htheInR1->Fill(-theR1);
 	  hph_qheR1->Fill(ph_qheR1*57.2958 + 180);
@@ -5234,6 +5272,14 @@ void t_plots()
       
       if(((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)) && mmheR1>= 0.92 && mmheR1 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DheR1R->Fill(P_gtr_dpheR1);
+          H_ssxptar_DheR1R->Fill(P_gtr_xptarheR1);
+          H_ssyptar_DheR1R->Fill(P_gtr_yptarheR1);
+
+          H_hsdelta_DheR1R->Fill(H_gtr_dpheR1);
+          H_hsxptar_DheR1R->Fill(H_gtr_xptarheR1);
+          H_hsyptar_DheR1R->Fill(H_gtr_yptarheR1);
+
 	  htheR1R->Fill(-theR1);
 	  htheInR1R->Fill(-theR1);
 	  hph_qheR1R->Fill(ph_qheR1*57.2958 + 180);
@@ -5362,8 +5408,33 @@ void t_plots()
 	}	
     }  
 
-  for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEC; i++)
+  //SIMC RIGHT1                                                                                                                                                                                      
 
+  for(Long64_t i = 0; i < nEntries_TSIMCHIGHER1; i++)
+
+    {
+      TSIMCHIGHER1->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheR1, W_simcheR1));
+
+      Double_t NFR1 = 34898700.0/400000.0;
+
+      if(hsdeltaheR1 >=-8.0 && hsdeltaheR1 <=8.0 && hsxptarheR1 >=-0.08 && hsxptarheR1 <=0.08 && hsyptarheR1 >=-0.045 && hsyptarheR1 <=0.045 && ssdeltaheR1 >=-10.0 && ssdeltaheR1 <=20.0 && ssxptarheR1 >=-0.06 && ssxptarheR1 <=0.06 && ssyptarheR1 >=-0.04 && ssyptarheR1 <=0.04 && missmassheR1 >= 0.92 && missmassheR1 <= 0.98 && Diamond_cut)
+	
+        {
+          H_ssdelta_SheR1->Fill(ssdeltaheR1, NFR1*WeightheR1);
+          H_ssxptar_SheR1->Fill(ssxptarheR1, NFR1*WeightheR1);
+          H_ssyptar_SheR1->Fill(hsyptarheR1, NFR1*WeightheR1);
+	  
+          H_hsdelta_SheR1->Fill(hsdeltaheR1, NFR1*WeightheR1);
+          H_hsxptar_SheR1->Fill(hsxptarheR1, NFR1*WeightheR1);
+          H_hsyptar_SheR1->Fill(hsyptarheR1, NFR1*WeightheR1);
+	  
+        }
+    }
+  
+  for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEC; i++)
+    
     {
       TBRANCHHIGHEC->GetEntry(i);
       
@@ -5385,6 +5456,14 @@ void t_plots()
       
       if(tcoinheC>=-1.0 && tcoinheC <= 1.0 && mmheC>= 0.92 && mmheC <=0.98 && Diamond_cut)
 	{
+	  H_ssdelta_DheC->Fill(P_gtr_dpheC);
+          H_ssxptar_DheC->Fill(P_gtr_xptarheC);
+          H_ssyptar_DheC->Fill(P_gtr_yptarheC);
+
+          H_hsdelta_DheC->Fill(H_gtr_dpheC);
+          H_hsxptar_DheC->Fill(H_gtr_xptarheC);
+          H_hsyptar_DheC->Fill(H_gtr_yptarheC);
+
 	  hQ2WHEC1->Fill(Q2HEC, WHEC);	      	  
 	  htheC->Fill(-theC);
 	  htheInC->Fill(-theC);
@@ -5395,6 +5474,14 @@ void t_plots()
            
       if(((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0)) && mmheC>= 0.92 && mmheC <=0.98 && Diamond_cut)
   	{
+	  H_ssdelta_DheCR->Fill(P_gtr_dpheC);
+          H_ssxptar_DheCR->Fill(P_gtr_xptarheC);
+          H_ssyptar_DheCR->Fill(P_gtr_yptarheC);
+
+          H_hsdelta_DheCR->Fill(H_gtr_dpheC);
+          H_hsxptar_DheCR->Fill(H_gtr_xptarheC);
+          H_hsyptar_DheCR->Fill(H_gtr_yptarheC);
+
 	  htheCR->Fill(-theC);
 	  htheInCR->Fill(-theC);
 	  hph_qheCR->Fill(ph_qheC*57.2958 + 180);
@@ -5525,7 +5612,31 @@ void t_plots()
 	}	
     }  
 
+  //SIMC CENTER                                                                                                                                                                                      
 
+  for(Long64_t i = 0; i < nEntries_TSIMCHIGHEC; i++)
+
+    {
+      TSIMCHIGHEC->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheC, W_simcheC));
+
+      Double_t NFC = 35354400.0/400000.0;
+
+      if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxptarheC >=-0.08 && hsxptarheC <=0.08 && hsyptarheC >=-0.045 && hsyptarheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxptarheC >=-0.06 && ssxptarheC <=0.06 && ssyptarheC >=-0.04 && ssyptarheC <=0.04 && missmassheC >= 0.92 && missmassheC <= 0.98 && Diamond_cut)
+	
+        {
+          H_ssdelta_SheC->Fill(ssdeltaheC, NFC*WeightheC);
+          H_ssxptar_SheC->Fill(ssxptarheC, NFC*WeightheC);
+          H_ssyptar_SheC->Fill(hsyptarheC, NFC*WeightheC);
+	  
+          H_hsdelta_SheC->Fill(hsdeltaheC, NFC*WeightheC);
+          H_hsxptar_SheC->Fill(hsxptarheC, NFC*WeightheC);
+          H_hsyptar_SheC->Fill(hsyptarheC, NFC*WeightheC);
+	  
+        }
+    }
+  
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEL1; i++)
   
     {
@@ -5545,6 +5656,14 @@ void t_plots()
 
       if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0 && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
 	{
+	  H_ssdelta_DheL1->Fill(P_gtr_dpheL1);
+          H_ssxptar_DheL1->Fill(P_gtr_xptarheL1);
+          H_ssyptar_DheL1->Fill(P_gtr_yptarheL1);
+
+          H_hsdelta_DheL1->Fill(H_gtr_dpheL1);
+          H_hsxptar_DheL1->Fill(H_gtr_xptarheL1);
+          H_hsyptar_DheL1->Fill(H_gtr_yptarheL1);
+
 	  htheL1->Fill(-theL1);
 	  htheInL1->Fill(-theL1);
 	  hph_qheL1->Fill(ph_qheL1*57.2958 + 180);	  
@@ -5554,6 +5673,14 @@ void t_plots()
       if(((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0)) && mmheL1>= 0.92 && mmheL1 <=0.98 && Diamond_cut)
  	
 	{
+	  H_ssdelta_DheL1R->Fill(P_gtr_dpheL1);
+          H_ssxptar_DheL1R->Fill(P_gtr_xptarheL1);
+          H_ssyptar_DheL1R->Fill(P_gtr_yptarheL1);
+
+          H_hsdelta_DheL1R->Fill(H_gtr_dpheL1);
+          H_hsxptar_DheL1R->Fill(H_gtr_xptarheL1);
+          H_hsyptar_DheL1R->Fill(H_gtr_yptarheL1);
+
 	  htheL1R->Fill(-theL1);
 	  htheInL1R->Fill(-theL1);
 	  hph_qheL1R->Fill(ph_qheL1*57.2958 + 180);	  
@@ -5685,6 +5812,31 @@ void t_plots()
 	}     
     }
 
+  //SIMC LEFT1                                                                                                                                                                                      
+
+  for(Long64_t i = 0; i < nEntries_TSIMCHIGHEL1; i++)
+
+    {
+      TSIMCHIGHEL1->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheL1, W_simcheL1));
+
+      Double_t NFL1 = 35422100.0/400000.0;
+
+      if(hsdeltaheL1 >=-8.0 && hsdeltaheL1 <=8.0 && hsxptarheL1 >=-0.08 && hsxptarheL1 <=0.08 && hsyptarheL1 >=-0.045 && hsyptarheL1 <=0.045 && ssdeltaheL1 >=-10.0 && ssdeltaheL1 <=20.0 && ssxptarheL1 >=-0.06 && ssxptarheL1 <=0.06 && ssyptarheL1 >=-0.04 && ssyptarheL1 <=0.04 && missmassheL1 >= 0.92 && missmassheL1 <= 0.98 && Diamond_cut)
+	
+        {
+          H_ssdelta_SheL1->Fill(ssdeltaheL1, NFL1*WeightheL1);
+          H_ssxptar_SheL1->Fill(ssxptarheL1, NFL1*WeightheL1);
+          H_ssyptar_SheL1->Fill(hsyptarheL1, NFL1*WeightheL1);
+	  
+          H_hsdelta_SheL1->Fill(hsdeltaheL1, NFL1*WeightheL1);
+          H_hsxptar_SheL1->Fill(hsxptarheL1, NFL1*WeightheL1);
+          H_hsyptar_SheL1->Fill(hsyptarheL1, NFL1*WeightheL1);
+	  
+        }
+    }
+
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEL2; i++)
     {
       TBRANCHHIGHEL2->GetEntry(i);
@@ -5704,6 +5856,14 @@ void t_plots()
       if(tcoinheL2>=-1.0 && tcoinheL2 <= 1.0 && mmheL2>= 0.92 && mmheL2 <=0.98 && Diamond_cut)
   
 	{
+	  H_ssdelta_DheL2->Fill(P_gtr_dpheL2);
+          H_ssxptar_DheL2->Fill(P_gtr_xptarheL2);
+          H_ssyptar_DheL2->Fill(P_gtr_yptarheL2);
+
+          H_hsdelta_DheL2->Fill(H_gtr_dpheL2);
+          H_hsxptar_DheL2->Fill(H_gtr_xptarheL2);
+          H_hsyptar_DheL2->Fill(H_gtr_yptarheL2);
+
 	  htheL2->Fill(-theL2);
 	  htheInL2->Fill(-theL2);
 	  hph_qheL2->Fill(ph_qheL2*57.2958 + 180);
@@ -5712,6 +5872,14 @@ void t_plots()
 
       if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)) && mmheL2>= 0.92 && mmheL2 <=0.98 && Diamond_cut)
 	{
+	  H_ssdelta_DheL2R->Fill(P_gtr_dpheL2);
+          H_ssxptar_DheL2R->Fill(P_gtr_xptarheL2);
+          H_ssyptar_DheL2R->Fill(P_gtr_yptarheL2);
+
+          H_hsdelta_DheL2R->Fill(H_gtr_dpheL2);
+          H_hsxptar_DheL2R->Fill(H_gtr_xptarheL2);
+          H_hsyptar_DheL2R->Fill(H_gtr_yptarheL2);
+
 	  htheL2R->Fill(-theL2);
 	  htheInL2R->Fill(-theL2);
 	  hph_qheL2R->Fill(ph_qheL2*57.2958 + 180);
@@ -5836,6 +6004,67 @@ void t_plots()
 	  hmmheL2R->Fill(mmheL2);
 	}
     }
+
+  //SIMC LEFT2                                                                                                                                                                                      
+
+  for(Long64_t i = 0; i < nEntries_TSIMCHIGHEL2; i++)
+
+    {
+      TSIMCHIGHEL2->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheL2, W_simcheL2));
+
+      Double_t NFL2 = 35322100.0/400000.0;
+
+      if(hsdeltaheL2 >=-8.0 && hsdeltaheL2 <=8.0 && hsxptarheL2 >=-0.08 && hsxptarheL2 <=0.08 && hsyptarheL2 >=-0.045 && hsyptarheL2 <=0.045 && ssdeltaheL2 >=-10.0 && ssdeltaheL2 <=20.0 && ssxptarheL2 >=-0.06 && ssxptarheL2 <=0.06 && ssyptarheL2 >=-0.04 && ssyptarheL2 <=0.04 && missmassheL2 >= 0.92 && missmassheL2 <= 0.98 && Diamond_cut)
+	
+        {
+          H_ssdelta_SheL2->Fill(ssdeltaheL2, NFL2*WeightheL2);
+          H_ssxptar_SheL2->Fill(ssxptarheL2, NFL2*WeightheL2);
+          H_ssyptar_SheL2->Fill(hsyptarheL2, NFL2*WeightheL2);
+	  
+          H_hsdelta_SheL2->Fill(hsdeltaheL2, NFL2*WeightheL2);
+          H_hsxptar_SheL2->Fill(hsxptarheL2, NFL2*WeightheL2);
+          H_hsyptar_SheL2->Fill(hsyptarheL2, NFL2*WeightheL2);
+	  
+        }
+    }
+
+  //SHMS
+  
+  H_ssdelta_DheR1R->Scale(RTSCALE);
+  H_ssxptar_DheR1R->Scale(RTSCALE);
+  H_ssyptar_DheR1R->Scale(RTSCALE);
+  
+  H_ssdelta_DheCR->Scale(RTSCALE);
+  H_ssxptar_DheCR->Scale(RTSCALE);
+  H_ssyptar_DheCR->Scale(RTSCALE);
+
+  H_ssdelta_DheL1R->Scale(RTSCALE);
+  H_ssxptar_DheL1R->Scale(RTSCALE);
+  H_ssyptar_DheL1R->Scale(RTSCALE);
+
+  H_ssdelta_DheL2R->Scale(RTSCALE);
+  H_ssxptar_DheL2R->Scale(RTSCALE);
+  H_ssyptar_DheL2R->Scale(RTSCALE);
+
+  //HMS
+
+  H_hsdelta_DheR1R->Scale(RTSCALE);
+  H_hsxptar_DheR1R->Scale(RTSCALE);
+  H_hsyptar_DheR1R->Scale(RTSCALE);
+
+  H_hsdelta_DheCR->Scale(RTSCALE);
+  H_hsxptar_DheCR->Scale(RTSCALE);
+  H_hsyptar_DheCR->Scale(RTSCALE);
+
+  H_hsdelta_DheL1R->Scale(RTSCALE);
+  H_hsxptar_DheL1R->Scale(RTSCALE);
+  H_hsyptar_DheL1R->Scale(RTSCALE);
+
+  H_hsdelta_DheL2R->Scale(RTSCALE);
+  H_hsxptar_DheL2R->Scale(RTSCALE);
+  H_hsyptar_DheL2R->Scale(RTSCALE);
   
   hQ2WHECR->Scale(1.0/6.0);
 
@@ -5973,10 +6202,10 @@ void t_plots()
   hYheL1R->Scale(1.0/6.0);
   hYheL2R->Scale(1.0/6.0);
 
-  Double_t SFHER1  = 1.0/132.549;
-  Double_t SFHEC   = 1.0/380.856;
-  Double_t SFHEL1  = 1.0/183.703;
-  Double_t SFHEL2  = 1.0/196.02;
+  Double_t SFHER1  = 2.0/132.549;
+  Double_t SFHEC   = 2.0/380.856;
+  Double_t SFHEL1  = 2.0/183.703;
+  Double_t SFHEL2  = 2.0/196.02;
   
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
@@ -6637,8 +6866,199 @@ void t_plots()
   hQ2WHEC1->Draw("COL");
   Dcut->SetLineColor(kRed);
   Dcut->Draw("same");
-
   c12->Print(outputpdf);
+
+  TCanvas *cdeltaSheR1 = new TCanvas("cdeltaSheR1", " cdeltaSheR1");
+  H_ssdelta_SheR1->Draw("");
+  H_ssdelta_DheR1->Add(H_ssdelta_DheR1R, -1);
+  H_ssdelta_DheR1->Scale(SFHER1);
+  H_ssdelta_DheR1->SetLineColor(kGreen);
+  H_ssdelta_DheR1->Draw("same"); 
+  cdeltaSheR1->Print(outputpdf);
+
+  TCanvas *cdeltaSheC = new TCanvas("cdeltaSheC", " cdeltaSheC");
+  H_ssdelta_SheC->Draw("");
+  H_ssdelta_DheC->Add(H_ssdelta_DheCR, -1);
+  H_ssdelta_DheC->Scale(SFHEC);
+  H_ssdelta_DheC->SetLineColor(kGreen);
+  H_ssdelta_DheC->Draw("same"); 
+  cdeltaSheC->Print(outputpdf);
+
+  TCanvas *cdeltaSheL1 = new TCanvas("cdeltaSheL1", " cdeltaSheL1");
+  H_ssdelta_SheL1->Draw("");
+  H_ssdelta_DheL1->Add(H_ssdelta_DheL1R, -1);
+  H_ssdelta_DheL1->Scale(SFHEL1);
+  H_ssdelta_DheL1->SetLineColor(kGreen);
+  H_ssdelta_DheL1->Draw("same"); 
+  cdeltaSheL1->Print(outputpdf);
+
+  TCanvas *cdeltaSheL2 = new TCanvas("cdeltaSheL2", " cdeltaSheL2");
+  H_ssdelta_SheL2->Draw("");
+  H_ssdelta_DheL2->Add(H_ssdelta_DheL2R, -1);
+  H_ssdelta_DheL2->Scale(SFHEL2);
+  H_ssdelta_DheL2->SetLineColor(kGreen);
+  H_ssdelta_DheL2->Draw("same"); 
+  cdeltaSheL2->Print(outputpdf);
+
+  TCanvas *cdeltaHheR1 = new TCanvas("cdeltaHheR1", " cdeltaHheR1");
+  H_hsdelta_SheR1->Draw("");
+  H_hsdelta_DheR1->Add(H_hsdelta_DheR1R, -1);
+  H_hsdelta_DheR1->Scale(SFHER1);
+  H_hsdelta_DheR1->SetLineColor(kGreen);
+  H_hsdelta_DheR1->Draw("same"); 
+  cdeltaHheR1->Print(outputpdf);
+
+  TCanvas *cdeltaHheC = new TCanvas("cdeltaHheC", " cdeltaHheC");
+  H_hsdelta_SheC->Draw("");
+  H_hsdelta_DheC->Add(H_hsdelta_DheCR, -1);
+  H_hsdelta_DheC->Scale(SFHEC);
+  H_hsdelta_DheC->SetLineColor(kGreen);
+  H_hsdelta_DheC->Draw("same"); 
+  cdeltaHheC->Print(outputpdf);
+
+  TCanvas *cdeltaHheL1 = new TCanvas("cdeltaHheL1", " cdeltaHheL1");
+  H_hsdelta_SheL1->Draw("");
+  H_hsdelta_DheL1->Add(H_hsdelta_DheL1R, -1);
+  H_hsdelta_DheL1->Scale(SFHEL1);
+  H_hsdelta_DheL1->SetLineColor(kGreen);
+  H_hsdelta_DheL1->Draw("same"); 
+  cdeltaHheL1->Print(outputpdf);
+
+  TCanvas *cdeltaHheL2 = new TCanvas("cdeltaHheL2", " cdeltaHheL2");
+  H_hsdelta_SheL2->Draw("");
+  H_hsdelta_DheL2->Add(H_hsdelta_DheL2R, -1);
+  H_hsdelta_DheL2->Scale(SFHEL2);
+  H_hsdelta_DheL2->SetLineColor(kGreen);
+  H_hsdelta_DheL2->Draw("same"); 
+  cdeltaHheL2->Print(outputpdf);
+
+  TCanvas *cxptarSheR1 = new TCanvas("cxptarSheR1", " cxptarSheR1");
+  H_ssxptar_SheR1->Draw("");
+  H_ssxptar_DheR1->Add(H_ssxptar_DheR1R, -1);
+  H_ssxptar_DheR1->Scale(SFHER1);
+  H_ssxptar_DheR1->SetLineColor(kGreen);
+  H_ssxptar_DheR1->Draw("same");
+  cxptarSheR1->Print(outputpdf);
+
+  TCanvas *cxptarSheC = new TCanvas("cxptarSheC", " cxptarSheC");
+  H_ssxptar_SheC->Draw("");
+  H_ssxptar_DheC->Add(H_ssxptar_DheCR, -1);
+  H_ssxptar_DheC->Scale(SFHEC);
+  H_ssxptar_DheC->SetLineColor(kGreen);
+  H_ssxptar_DheC->Draw("same");
+  cxptarSheC->Print(outputpdf);
+
+  TCanvas *cxptarSheL1 = new TCanvas("cxptarSheL1", " cxptarSheL1");
+  H_ssxptar_SheL1->Draw("");
+  H_ssxptar_DheL1->Add(H_ssxptar_DheL1R, -1);
+  H_ssxptar_DheL1->Scale(SFHEL1);
+  H_ssxptar_DheL1->SetLineColor(kGreen);
+  H_ssxptar_DheL1->Draw("same");
+  cxptarSheL1->Print(outputpdf);
+
+  TCanvas *cxptarSheL2 = new TCanvas("cxptarSheL2", " cxptarSheL2");
+  H_ssxptar_SheL2->Draw("");
+  H_ssxptar_DheL2->Add(H_ssxptar_DheL2R, -1);
+  H_ssxptar_DheL2->Scale(SFHEL2);
+  H_ssxptar_DheL2->SetLineColor(kGreen);
+  H_ssxptar_DheL2->Draw("same");
+  cxptarSheL2->Print(outputpdf);
+
+  TCanvas *cyptarSheR1 = new TCanvas("cyptarSheR1", " cyptarSheR1");
+  H_ssyptar_SheR1->Draw("");
+  H_ssyptar_DheR1->Add(H_ssyptar_DheR1R, -1);
+  H_ssyptar_DheR1->Scale(SFHER1);
+  H_ssyptar_DheR1->SetLineColor(kGreen);
+  H_ssyptar_DheR1->Draw("same");
+  cyptarSheR1->Print(outputpdf);
+
+  TCanvas *cyptarSheC = new TCanvas("cyptarSheC", " cyptarSheC");
+  H_ssyptar_SheC->Draw("");
+  H_ssyptar_DheC->Add(H_ssyptar_DheCR, -1);
+  H_ssyptar_DheC->Scale(SFHEC);
+  H_ssyptar_DheC->SetLineColor(kGreen);
+  H_ssyptar_DheC->Draw("same");
+  cyptarSheC->Print(outputpdf);
+
+  TCanvas *cyptarSheL1 = new TCanvas("cyptarSheL1", " cyptarSheL1");
+  H_ssyptar_SheL1->Draw("");
+  H_ssyptar_DheL1->Add(H_ssyptar_DheL1R, -1);
+  H_ssyptar_DheL1->Scale(SFHEL1);
+  H_ssyptar_DheL1->SetLineColor(kGreen);
+  H_ssyptar_DheL1->Draw("same");
+  cyptarSheL1->Print(outputpdf);
+
+  TCanvas *cyptarSheL2 = new TCanvas("cyptarSheL2", " cyptarSheL2");
+  H_ssyptar_SheL2->Draw("");
+  H_ssyptar_DheL2->Add(H_ssyptar_DheL2R, -1);
+  H_ssyptar_DheL2->Scale(SFHEL2);
+  H_ssyptar_DheL2->SetLineColor(kGreen);
+  H_ssyptar_DheL2->Draw("same");
+  cyptarSheL2->Print(outputpdf);
+
+  TCanvas *cxptarHheR1 = new TCanvas("cxptarHheR1", " cxptarHheR1");
+  H_hsxptar_SheR1->Draw("");
+  H_hsxptar_DheR1->Add(H_hsxptar_DheR1R, -1);
+  H_hsxptar_DheR1->Scale(SFHER1);
+  H_hsxptar_DheR1->SetLineColor(kGreen);
+  H_hsxptar_DheR1->Draw("same");
+  cxptarHheR1->Print(outputpdf);
+
+  TCanvas *cxptarHheC = new TCanvas("cxptarHheC", " cxptarHheC");
+  H_hsxptar_SheC->Draw("");
+  H_hsxptar_DheC->Add(H_hsxptar_DheCR, -1);
+  H_hsxptar_DheC->Scale(SFHEC);
+  H_hsxptar_DheC->SetLineColor(kGreen);
+  H_hsxptar_DheC->Draw("same");
+  cxptarHheC->Print(outputpdf);
+
+  TCanvas *cxptarHheL1 = new TCanvas("cxptarHheL1", " cxptarHheL1");
+  H_hsxptar_SheL1->Draw("");
+  H_hsxptar_DheL1->Add(H_hsxptar_DheL1R, -1);
+  H_hsxptar_DheL1->Scale(SFHEL1);
+  H_hsxptar_DheL1->SetLineColor(kGreen);
+  H_hsxptar_DheL1->Draw("same");
+  cxptarHheL1->Print(outputpdf);
+
+  TCanvas *cxptarHheL2 = new TCanvas("cxptarHheL2", " cxptarHheL2");
+  H_hsxptar_SheL2->Draw("");
+  H_hsxptar_DheL2->Add(H_hsxptar_DheL2R, -1);
+  H_hsxptar_DheL2->Scale(SFHEL2);
+  H_hsxptar_DheL2->SetLineColor(kGreen);
+  H_hsxptar_DheL2->Draw("same");
+  cxptarHheL2->Print(outputpdf);
+
+  TCanvas *cyptarHheR1 = new TCanvas("cyptarHheR1", " cyptarHheR1");
+  H_hsyptar_SheR1->Draw("");
+  H_hsyptar_DheR1->Add(H_hsyptar_DheR1R, -1);
+  H_hsyptar_DheR1->Scale(SFHER1);
+  H_hsyptar_DheR1->SetLineColor(kGreen);
+  H_hsyptar_DheR1->Draw("same");
+  cyptarHheR1->Print(outputpdf);
+
+  TCanvas *cyptarHheC = new TCanvas("cyptarHheC", " cyptarHheC");
+  H_hsyptar_SheC->Draw("");
+  H_hsyptar_DheC->Add(H_hsyptar_DheCR, -1);
+  H_hsyptar_DheC->Scale(SFHEC);
+  H_hsyptar_DheC->SetLineColor(kGreen);
+  H_hsyptar_DheC->Draw("same");
+  cyptarHheC->Print(outputpdf);
+
+  TCanvas *cyptarHheL1 = new TCanvas("cyptarHheL1", " cyptarHheL1");
+  H_hsyptar_SheL1->Draw("");
+  H_hsyptar_DheL1->Add(H_hsyptar_DheL1R, -1);
+  H_hsyptar_DheL1->Scale(SFHEL1);
+  H_hsyptar_DheL1->SetLineColor(kGreen);
+  H_hsyptar_DheL1->Draw("same");
+  cyptarHheL1->Print(outputpdf);
+
+  TCanvas *cyptarHheL2 = new TCanvas("cyptarHheL2", " cyptarHheL2");
+  H_hsyptar_SheL2->Draw("");
+  H_hsyptar_DheL2->Add(H_hsyptar_DheL2R, -1);
+  H_hsyptar_DheL2->Scale(SFHEL2);
+  H_hsyptar_DheL2->SetLineColor(kGreen);
+  H_hsyptar_DheL2->Draw("same");
+  cyptarHheL2->Print(outputpdf);
 
   TCanvas *cYheR1 = new TCanvas("cYheR1", " cYheR1");
   hYheR1->Add(hYheR1R, -1);  
