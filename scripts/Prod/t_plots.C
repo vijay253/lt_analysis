@@ -66,7 +66,7 @@ void t_plots()
   TString rootFile_DATAL2 = ROOTfilePath+"/"+TInDATAFilenameL2;
   //SIMC
 
-  TString TInSIMCFilenameC = "Pion_2p7_Q1_center.root";
+  TString TInSIMCFilenameC  = "Pion_2p7_Q1_center.root";
   TString TInSIMCFilenameL1 = "Pion_2p7_Q1_left1.root";
   TString TInSIMCFilenameL2 = "Pion_2p7_Q1_left2.root";
 
@@ -787,14 +787,14 @@ void t_plots()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
 
-      Double_t fact = 9391240.0/400000.0;
-
-      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxptar >=-0.08 && hsxptar <=0.08 && hsyptar >=-0.045 && hsyptar <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxptar >=-0.06 && ssxptar <=0.06 && ssyptar >=-0.04 && ssyptar <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
+      Double_t fact = 9410970.0/400000.0;
+ 
+     if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxpfp >=-0.08 && hsxpfp <=0.08 && hsypfp >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxpfp >=-0.06 && ssxpfp <=0.06 && ssypfp >=-0.04 && ssypfp <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
 	
 	{
 	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
 	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
-	  H_ssyptar_SC->Fill(hsyptar, fact*Weight);
+	  H_ssyptar_SC->Fill(ssyptar, fact*Weight);
 
 	  H_hsdelta_SC->Fill(hsdelta, fact*Weight);
 	  H_hsxptar_SC->Fill(hsxptar, fact*Weight);
@@ -1020,14 +1020,14 @@ void t_plots()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));  
       
-      Double_t factL1 = 10313900.0/400000.0;
+      Double_t factL1 = 10347300.0/400000.0;
       
-      if(hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxptarL1 >=-0.08 && hsxptarL1 <=0.08 && hsyptarL1 >=-0.045 && hsyptarL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxptarL1 >=-0.06 && ssxptarL1 <=0.06 && ssyptarL1 >=-0.04 && ssyptarL1 <=0.04 && missmassL1 >= 0.92 && missmassL1 <= 0.98 && Diamond_cut)
+     if(hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxpfpL1 >=-0.08 && hsxpfpL1 <=0.08 && hsypfpL1 >=-0.045 && hsypfpL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxpfpL1 >=-0.06 && ssxpfpL1 <=0.06 && ssypfpL1 >=-0.04 && ssypfpL1 <=0.04 && missmassL1 >= 0.92 && missmassL1 <= 0.98 && Diamond_cut)
 	
 	{
 	  H_ssdelta_SL1->Fill(ssdeltaL1, factL1*WeightL1);
 	  H_ssxptar_SL1->Fill(ssxptarL1, factL1*WeightL1);
-	  H_ssyptar_SL1->Fill(hsyptarL1, factL1*WeightL1);
+	  H_ssyptar_SL1->Fill(ssyptarL1, factL1*WeightL1);
 	  
 	  H_hsdelta_SL1->Fill(hsdeltaL1, factL1*WeightL1);
 	  H_hsxptar_SL1->Fill(hsxptarL1, factL1*WeightL1);
@@ -1209,14 +1209,14 @@ void t_plots()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));  
       
-      Double_t factL2 = 10427700.0/400000.0;
+      Double_t factL2 = 10456500.0/400000.0;
       
-      if(hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxptarL2 >=-0.08 && hsxptarL2 <=0.08 && hsyptarL2 >=-0.045 && hsyptarL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxptarL2 >=-0.06 && ssxptarL2 <=0.06 && ssyptarL2 >=-0.04 && ssyptarL2 <=0.04 && missmassL2 >= 0.92 && missmassL2 <= 0.98 && Diamond_cut)
+     if(hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxpfpL2 >=-0.08 && hsxpfpL2 <=0.08 && hsypfpL2 >=-0.045 && hsypfpL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxpfpL2 >=-0.06 && ssxpfpL2 <=0.06 && ssypfpL2 >=-0.04 && ssypfpL2 <=0.04 && missmassL2 >= 0.92 && missmassL2 <= 0.98 && Diamond_cut)
 	
 	{
 	  H_ssdelta_SL2->Fill(ssdeltaL2, factL2*WeightL2);
 	  H_ssxptar_SL2->Fill(ssxptarL2, factL2*WeightL2);
-	  H_ssyptar_SL2->Fill(hsyptarL2, factL2*WeightL2);
+	  H_ssyptar_SL2->Fill(ssyptarL2, factL2*WeightL2);
 	  
 	  H_hsdelta_SL2->Fill(hsdeltaL2, factL2*WeightL2);
 	  H_hsxptar_SL2->Fill(hsxptarL2, factL2*WeightL2);
@@ -1352,9 +1352,9 @@ void t_plots()
   hph_qL1R->Scale(1.0/6.0);
   hph_qL2R->Scale(1.0/6.0);
 
-  Double_t scaleFC  = 1.0/513.911;
-  Double_t scaleFL1 = 1.0/695.738;
-  Double_t scaleFL2 = 1.0/825.881;
+  Double_t scaleFC  = 2.0/513.911;
+  Double_t scaleFL1 = 2.0/695.738;
+  Double_t scaleFL2 = 2.0/825.881;
   
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
@@ -1886,7 +1886,7 @@ void t_plots()
   TCanvas *cdeltaS = new TCanvas("cdeltaS", " cdeltaS");
   H_ssdelta_SC->Draw("Weight");
   H_ssdelta_DC->Add(H_ssdelta_DCR, -1);
-  H_ssdelta_DC->Scale(2*scaleFC);
+  H_ssdelta_DC->Scale(scaleFC);
   H_ssdelta_DC->SetLineColor(kGreen);
   H_ssdelta_DC->Draw("same Weight"); 
   cdeltaS->Print(outputpdf);
@@ -1894,7 +1894,7 @@ void t_plots()
   TCanvas *cdeltaSL1 = new TCanvas("cdeltaSL1", " cdeltaSL1");
   H_ssdelta_SL1->Draw("Weight");
   H_ssdelta_DL1->Add(H_ssdelta_DL1R, -1);
-  H_ssdelta_DL1->Scale(1.5*scaleFL1);
+  H_ssdelta_DL1->Scale(scaleFL1);
   H_ssdelta_DL1->SetLineColor(kGreen);
   H_ssdelta_DL1->Draw("same Weight"); 
   cdeltaSL1->Print(outputpdf);
@@ -1902,7 +1902,7 @@ void t_plots()
   TCanvas *cdeltaSL2 = new TCanvas("cdeltaSL2", " cdeltaSL2");
   H_ssdelta_SL2->Draw("Weight");
   H_ssdelta_DL2->Add(H_ssdelta_DL2R, -1);
-  H_ssdelta_DL2->Scale(1.5*scaleFL2);
+  H_ssdelta_DL2->Scale(scaleFL2);
   H_ssdelta_DL2->SetLineColor(kGreen);
   H_ssdelta_DL2->Draw("same Weight"); 
   cdeltaSL2->Print(outputpdf);
@@ -1910,7 +1910,7 @@ void t_plots()
   TCanvas *cdeltaH = new TCanvas("cdeltaH", " cdeltaH");
   H_hsdelta_SC->Draw("Weight");
   H_hsdelta_DC->Add(H_hsdelta_DCR, -1);
-  H_hsdelta_DC->Scale(2*scaleFC);
+  H_hsdelta_DC->Scale(scaleFC);
   H_hsdelta_DC->SetLineColor(kGreen);
   H_hsdelta_DC->Draw("same Weight"); 
   cdeltaH->Print(outputpdf);
@@ -1918,7 +1918,7 @@ void t_plots()
   TCanvas *cdeltaHL1 = new TCanvas("cdeltaHL1", " cdeltaHL1");
   H_hsdelta_SL1->Draw("Weight");
   H_hsdelta_DL1->Add(H_hsdelta_DL1R, -1);
-  H_hsdelta_DL1->Scale(1.5*scaleFL1);
+  H_hsdelta_DL1->Scale(scaleFL1);
   H_hsdelta_DL1->SetLineColor(kGreen);
   H_hsdelta_DL1->Draw("same Weight"); 
   cdeltaHL1->Print(outputpdf);
@@ -1926,7 +1926,7 @@ void t_plots()
   TCanvas *cdeltaHL2 = new TCanvas("cdeltaHL2", " cdeltaHL2");
   H_hsdelta_SL2->Draw("Weight");
   H_hsdelta_DL2->Add(H_hsdelta_DL2R, -1);
-  H_hsdelta_DL2->Scale(1.5*scaleFL2);
+  H_hsdelta_DL2->Scale(scaleFL2);
   H_hsdelta_DL2->SetLineColor(kGreen);
   H_hsdelta_DL2->Draw("same Weight"); 
   cdeltaHL2->Print(outputpdf);
@@ -1934,7 +1934,7 @@ void t_plots()
   TCanvas *cxptarS = new TCanvas("cxptarS", " cxptarS");
   H_ssxptar_SC->Draw("Weight");
   H_ssxptar_DC->Add(H_ssxptar_DCR, -1);
-  H_ssxptar_DC->Scale(2*scaleFC);
+  H_ssxptar_DC->Scale(scaleFC);
   H_ssxptar_DC->SetLineColor(kGreen);
   H_ssxptar_DC->Draw("same Weight");
   cxptarS->Print(outputpdf);
@@ -1942,7 +1942,7 @@ void t_plots()
   TCanvas *cxptarSL1 = new TCanvas("cxptarSL1", " cxptarSL1");
   H_ssxptar_SL1->Draw("Weight");
   H_ssxptar_DL1->Add(H_ssxptar_DL1R, -1);
-  H_ssxptar_DL1->Scale(1.5*scaleFL1);
+  H_ssxptar_DL1->Scale(scaleFL1);
   H_ssxptar_DL1->SetLineColor(kGreen);
   H_ssxptar_DL1->Draw("same Weight");
   cxptarSL1->Print(outputpdf);
@@ -1950,7 +1950,7 @@ void t_plots()
   TCanvas *cxptarSL2 = new TCanvas("cxptarSL2", " cxptarSL2");
   H_ssxptar_SL2->Draw("Weight");
   H_ssxptar_DL2->Add(H_ssxptar_DL2R, -1);
-  H_ssxptar_DL2->Scale(1.5*scaleFL2);
+  H_ssxptar_DL2->Scale(scaleFL2);
   H_ssxptar_DL2->SetLineColor(kGreen);
   H_ssxptar_DL2->Draw("same Weight");
   cxptarSL2->Print(outputpdf);
@@ -1958,7 +1958,7 @@ void t_plots()
   TCanvas *cyptarS = new TCanvas("cyptarS", " cyptarS");
   H_ssyptar_SC->Draw("Weight");
   H_ssyptar_DC->Add( H_ssyptar_DCR, -1);
-  H_ssyptar_DC->Scale(2*scaleFC);
+  H_ssyptar_DC->Scale(scaleFC);
   H_ssyptar_DC->SetLineColor(kGreen);
   H_ssyptar_DC->Draw("same Weight");
   cyptarS->Print(outputpdf);
@@ -1966,7 +1966,7 @@ void t_plots()
   TCanvas *cyptarSL1 = new TCanvas("cyptarSL1", " cyptarSL1");
   H_ssyptar_SL1->Draw("Weight");
   H_ssyptar_DL1->Add( H_ssyptar_DL1R, -1);
-  H_ssyptar_DL1->Scale(1.5*scaleFL1);
+  H_ssyptar_DL1->Scale(scaleFL1);
   H_ssyptar_DL1->SetLineColor(kGreen);
   H_ssyptar_DL1->Draw("same Weight");
   cyptarSL1->Print(outputpdf);
@@ -1974,7 +1974,7 @@ void t_plots()
   TCanvas *cyptarSL2 = new TCanvas("cyptarSL2", " cyptarSL2");
   H_ssyptar_SL2->Draw("Weight");
   H_ssyptar_DL2->Add(H_ssyptar_DL2R, -1);
-  H_ssyptar_DL2->Scale(1.5*scaleFL2);
+  H_ssyptar_DL2->Scale(scaleFL2);
   H_ssyptar_DL2->SetLineColor(kGreen);
   H_ssyptar_DL2->Draw("same Weight");
   cyptarSL2->Print(outputpdf);
@@ -1982,7 +1982,7 @@ void t_plots()
   TCanvas *cxptarH = new TCanvas("cxptarH", " cxptarH");
   H_hsxptar_SC->Draw("Weight");
   H_hsxptar_DC->Add( H_hsxptar_DCR, -1);
-  H_hsxptar_DC->Scale(2*scaleFC);
+  H_hsxptar_DC->Scale(scaleFC);
   H_hsxptar_DC->SetLineColor(kGreen);
   H_hsxptar_DC->Draw("same Weight");
   cxptarH->Print(outputpdf);
@@ -1990,7 +1990,7 @@ void t_plots()
   TCanvas *cxptarHL1 = new TCanvas("cxptarHL1", " cxptarHL1");
   H_hsxptar_SL1->Draw("Weight");
   H_hsxptar_DL1->Add( H_hsxptar_DL1R, -1);
-  H_hsxptar_DL1->Scale(1.5*scaleFL1);
+  H_hsxptar_DL1->Scale(scaleFL1);
   H_hsxptar_DL1->SetLineColor(kGreen);
   H_hsxptar_DL1->Draw("same Weight");
   cxptarHL1->Print(outputpdf);
@@ -1998,7 +1998,7 @@ void t_plots()
   TCanvas *cxptarHL2 = new TCanvas("cxptarHL2", " cxptarHL2");
   H_hsxptar_SL2->Draw("Weight");
   H_hsxptar_DL2->Add( H_hsxptar_DL2R, -1);
-  H_hsxptar_DL2->Scale(1.5*scaleFL2);
+  H_hsxptar_DL2->Scale(scaleFL2);
   H_hsxptar_DL2->SetLineColor(kGreen);
   H_hsxptar_DL2->Draw("same Weight");
   cxptarHL2->Print(outputpdf);
@@ -2006,7 +2006,7 @@ void t_plots()
   TCanvas *cyptarH = new TCanvas("cyptarH", " cyptarH");
   H_hsyptar_SC->Draw("Weight");
   H_hsyptar_DC->Add( H_hsyptar_DCR, -1);
-  H_hsyptar_DC->Scale(2*scaleFC);
+  H_hsyptar_DC->Scale(scaleFC);
   H_hsyptar_DC->SetLineColor(kGreen);
   H_hsyptar_DC->Draw("same Weight");
   cyptarH->Print(outputpdf);
@@ -2014,7 +2014,7 @@ void t_plots()
   TCanvas *cyptarHL1 = new TCanvas("cyptarHL1", " cyptarHL1");
   H_hsyptar_SL1->Draw("Weight");
   H_hsyptar_DL1->Add( H_hsyptar_DL1R, -1);
-  H_hsyptar_DL1->Scale(1.5*scaleFL1);
+  H_hsyptar_DL1->Scale(scaleFL1);
   H_hsyptar_DL1->SetLineColor(kGreen);
   H_hsyptar_DL1->Draw("same Weight");
   cyptarHL1->Print(outputpdf);
@@ -2022,7 +2022,7 @@ void t_plots()
   TCanvas *cyptarHL2 = new TCanvas("cyptarHL2", " cyptarHL22");
   H_hsyptar_SL2->Draw("Weight");
   H_hsyptar_DL2->Add(H_hsyptar_DL2R, -1);
-  H_hsyptar_DL2->Scale(1.5*scaleFL2);
+  H_hsyptar_DL2->Scale(scaleFL2);
   H_hsyptar_DL2->SetLineColor(kGreen);
   H_hsyptar_DL2->Draw("same Weight");
   cyptarHL2->Print(outputpdf);
@@ -5419,12 +5419,12 @@ void t_plots()
 
       Double_t NFR1 = 34898700.0/400000.0;
 
-      if(hsdeltaheR1 >=-8.0 && hsdeltaheR1 <=8.0 && hsxptarheR1 >=-0.08 && hsxptarheR1 <=0.08 && hsyptarheR1 >=-0.045 && hsyptarheR1 <=0.045 && ssdeltaheR1 >=-10.0 && ssdeltaheR1 <=20.0 && ssxptarheR1 >=-0.06 && ssxptarheR1 <=0.06 && ssyptarheR1 >=-0.04 && ssyptarheR1 <=0.04 && missmassheR1 >= 0.92 && missmassheR1 <= 0.98 && Diamond_cut)
+      if(hsdeltaheR1 >=-8.0 && hsdeltaheR1 <=8.0 && hsxpfpheR1 >=-0.08 && hsxpfpheR1 <=0.08 && hsypfpheR1 >=-0.045 && hsypfpheR1 <=0.045 && ssdeltaheR1 >=-10.0 && ssdeltaheR1 <=20.0 && ssxpfpheR1 >=-0.06 && ssxpfpheR1 <=0.06 && ssypfpheR1 >=-0.04 && ssypfpheR1 <=0.04 && missmassheR1 >= 0.92 && missmassheR1 <= 0.98 && Diamond_cut)
 	
         {
           H_ssdelta_SheR1->Fill(ssdeltaheR1, NFR1*WeightheR1);
           H_ssxptar_SheR1->Fill(ssxptarheR1, NFR1*WeightheR1);
-          H_ssyptar_SheR1->Fill(hsyptarheR1, NFR1*WeightheR1);
+          H_ssyptar_SheR1->Fill(ssyptarheR1, NFR1*WeightheR1);
 	  
           H_hsdelta_SheR1->Fill(hsdeltaheR1, NFR1*WeightheR1);
           H_hsxptar_SheR1->Fill(hsxptarheR1, NFR1*WeightheR1);
@@ -5623,12 +5623,12 @@ void t_plots()
 
       Double_t NFC = 35354400.0/400000.0;
 
-      if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxptarheC >=-0.08 && hsxptarheC <=0.08 && hsyptarheC >=-0.045 && hsyptarheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxptarheC >=-0.06 && ssxptarheC <=0.06 && ssyptarheC >=-0.04 && ssyptarheC <=0.04 && missmassheC >= 0.92 && missmassheC <= 0.98 && Diamond_cut)
+      if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxpfpheC >=-0.08 && hsxpfpheC <=0.08 && hsypfpheC >=-0.045 && hsypfpheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxpfpheC >=-0.06 && ssxpfpheC <=0.06 && ssypfpheC >=-0.04 && ssypfpheC <=0.04 && missmassheC >= 0.92 && missmassheC <= 0.98 && Diamond_cut)
 	
         {
           H_ssdelta_SheC->Fill(ssdeltaheC, NFC*WeightheC);
           H_ssxptar_SheC->Fill(ssxptarheC, NFC*WeightheC);
-          H_ssyptar_SheC->Fill(hsyptarheC, NFC*WeightheC);
+          H_ssyptar_SheC->Fill(ssyptarheC, NFC*WeightheC);
 	  
           H_hsdelta_SheC->Fill(hsdeltaheC, NFC*WeightheC);
           H_hsxptar_SheC->Fill(hsxptarheC, NFC*WeightheC);
@@ -5823,12 +5823,12 @@ void t_plots()
 
       Double_t NFL1 = 35422100.0/400000.0;
 
-      if(hsdeltaheL1 >=-8.0 && hsdeltaheL1 <=8.0 && hsxptarheL1 >=-0.08 && hsxptarheL1 <=0.08 && hsyptarheL1 >=-0.045 && hsyptarheL1 <=0.045 && ssdeltaheL1 >=-10.0 && ssdeltaheL1 <=20.0 && ssxptarheL1 >=-0.06 && ssxptarheL1 <=0.06 && ssyptarheL1 >=-0.04 && ssyptarheL1 <=0.04 && missmassheL1 >= 0.92 && missmassheL1 <= 0.98 && Diamond_cut)
+      if(hsdeltaheL1 >=-8.0 && hsdeltaheL1 <=8.0 && hsxpfpheL1 >=-0.08 && hsxpfpheL1 <=0.08 && hsypfpheL1 >=-0.045 && hsypfpheL1 <=0.045 && ssdeltaheL1 >=-10.0 && ssdeltaheL1 <=20.0 && ssxpfpheL1 >=-0.06 && ssxpfpheL1 <=0.06 && ssypfpheL1 >=-0.04 && ssypfpheL1 <=0.04 && missmassheL1 >= 0.92 && missmassheL1 <= 0.98 && Diamond_cut)
 	
         {
           H_ssdelta_SheL1->Fill(ssdeltaheL1, NFL1*WeightheL1);
           H_ssxptar_SheL1->Fill(ssxptarheL1, NFL1*WeightheL1);
-          H_ssyptar_SheL1->Fill(hsyptarheL1, NFL1*WeightheL1);
+          H_ssyptar_SheL1->Fill(ssyptarheL1, NFL1*WeightheL1);
 	  
           H_hsdelta_SheL1->Fill(hsdeltaheL1, NFL1*WeightheL1);
           H_hsxptar_SheL1->Fill(hsxptarheL1, NFL1*WeightheL1);
@@ -6016,12 +6016,12 @@ void t_plots()
 
       Double_t NFL2 = 35322100.0/400000.0;
 
-      if(hsdeltaheL2 >=-8.0 && hsdeltaheL2 <=8.0 && hsxptarheL2 >=-0.08 && hsxptarheL2 <=0.08 && hsyptarheL2 >=-0.045 && hsyptarheL2 <=0.045 && ssdeltaheL2 >=-10.0 && ssdeltaheL2 <=20.0 && ssxptarheL2 >=-0.06 && ssxptarheL2 <=0.06 && ssyptarheL2 >=-0.04 && ssyptarheL2 <=0.04 && missmassheL2 >= 0.92 && missmassheL2 <= 0.98 && Diamond_cut)
+      if(hsdeltaheL2 >=-8.0 && hsdeltaheL2 <=8.0 && hsxpfpheL2 >=-0.08 && hsxpfpheL2 <=0.08 && hsypfpheL2 >=-0.045 && hsypfpheL2 <=0.045 && ssdeltaheL2 >=-10.0 && ssdeltaheL2 <=20.0 && ssxpfpheL2 >=-0.06 && ssxpfpheL2 <=0.06 && ssypfpheL2 >=-0.04 && ssypfpheL2 <=0.04 && missmassheL2 >= 0.92 && missmassheL2 <= 0.98 && Diamond_cut)
 	
         {
           H_ssdelta_SheL2->Fill(ssdeltaheL2, NFL2*WeightheL2);
           H_ssxptar_SheL2->Fill(ssxptarheL2, NFL2*WeightheL2);
-          H_ssyptar_SheL2->Fill(hsyptarheL2, NFL2*WeightheL2);
+          H_ssyptar_SheL2->Fill(ssyptarheL2, NFL2*WeightheL2);
 	  
           H_hsdelta_SheL2->Fill(hsdeltaheL2, NFL2*WeightheL2);
           H_hsxptar_SheL2->Fill(hsxptarheL2, NFL2*WeightheL2);
@@ -6202,7 +6202,7 @@ void t_plots()
   hYheL1R->Scale(1.0/6.0);
   hYheL2R->Scale(1.0/6.0);
 
-  Double_t SFHER1  = 2.0/132.549;
+  Double_t SFHER1  = 1.8/132.549;
   Double_t SFHEC   = 2.0/380.856;
   Double_t SFHEL1  = 2.0/183.703;
   Double_t SFHEL2  = 2.0/196.02;
@@ -6869,6 +6869,8 @@ void t_plots()
   c12->Print(outputpdf);
 
   TCanvas *cdeltaSheR1 = new TCanvas("cdeltaSheR1", " cdeltaSheR1");
+  H_ssdelta_SheR1->SetStats(0);
+  H_ssdelta_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssdelta_SheR1->Draw("");
   H_ssdelta_DheR1->Add(H_ssdelta_DheR1R, -1);
   H_ssdelta_DheR1->Scale(SFHER1);
@@ -6877,6 +6879,8 @@ void t_plots()
   cdeltaSheR1->Print(outputpdf);
 
   TCanvas *cdeltaSheC = new TCanvas("cdeltaSheC", " cdeltaSheC");
+  H_ssdelta_SheC->SetStats(0);
+  H_ssdelta_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssdelta_SheC->Draw("");
   H_ssdelta_DheC->Add(H_ssdelta_DheCR, -1);
   H_ssdelta_DheC->Scale(SFHEC);
@@ -6885,6 +6889,8 @@ void t_plots()
   cdeltaSheC->Print(outputpdf);
 
   TCanvas *cdeltaSheL1 = new TCanvas("cdeltaSheL1", " cdeltaSheL1");
+  H_ssdelta_SheL1->SetStats(0);
+  H_ssdelta_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssdelta_SheL1->Draw("");
   H_ssdelta_DheL1->Add(H_ssdelta_DheL1R, -1);
   H_ssdelta_DheL1->Scale(SFHEL1);
@@ -6893,6 +6899,8 @@ void t_plots()
   cdeltaSheL1->Print(outputpdf);
 
   TCanvas *cdeltaSheL2 = new TCanvas("cdeltaSheL2", " cdeltaSheL2");
+  H_ssdelta_SheL2->SetStats(0);
+  H_ssdelta_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssdelta_SheL2->Draw("");
   H_ssdelta_DheL2->Add(H_ssdelta_DheL2R, -1);
   H_ssdelta_DheL2->Scale(SFHEL2);
@@ -6901,6 +6909,8 @@ void t_plots()
   cdeltaSheL2->Print(outputpdf);
 
   TCanvas *cdeltaHheR1 = new TCanvas("cdeltaHheR1", " cdeltaHheR1");
+  H_hsdelta_SheR1->SetStats(0);
+  H_hsdelta_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsdelta_SheR1->Draw("");
   H_hsdelta_DheR1->Add(H_hsdelta_DheR1R, -1);
   H_hsdelta_DheR1->Scale(SFHER1);
@@ -6909,6 +6919,8 @@ void t_plots()
   cdeltaHheR1->Print(outputpdf);
 
   TCanvas *cdeltaHheC = new TCanvas("cdeltaHheC", " cdeltaHheC");
+  H_hsdelta_SheC->SetStats(0);
+  H_hsdelta_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsdelta_SheC->Draw("");
   H_hsdelta_DheC->Add(H_hsdelta_DheCR, -1);
   H_hsdelta_DheC->Scale(SFHEC);
@@ -6917,6 +6929,8 @@ void t_plots()
   cdeltaHheC->Print(outputpdf);
 
   TCanvas *cdeltaHheL1 = new TCanvas("cdeltaHheL1", " cdeltaHheL1");
+  H_hsdelta_SheL1->SetStats(0);
+  H_hsdelta_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsdelta_SheL1->Draw("");
   H_hsdelta_DheL1->Add(H_hsdelta_DheL1R, -1);
   H_hsdelta_DheL1->Scale(SFHEL1);
@@ -6925,6 +6939,8 @@ void t_plots()
   cdeltaHheL1->Print(outputpdf);
 
   TCanvas *cdeltaHheL2 = new TCanvas("cdeltaHheL2", " cdeltaHheL2");
+  H_hsdelta_SheL2->SetStats(0);
+  H_hsdelta_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsdelta_SheL2->Draw("");
   H_hsdelta_DheL2->Add(H_hsdelta_DheL2R, -1);
   H_hsdelta_DheL2->Scale(SFHEL2);
@@ -6933,6 +6949,8 @@ void t_plots()
   cdeltaHheL2->Print(outputpdf);
 
   TCanvas *cxptarSheR1 = new TCanvas("cxptarSheR1", " cxptarSheR1");
+  H_ssxptar_SheR1->SetStats(0);
+  H_ssxptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssxptar_SheR1->Draw("");
   H_ssxptar_DheR1->Add(H_ssxptar_DheR1R, -1);
   H_ssxptar_DheR1->Scale(SFHER1);
@@ -6941,6 +6959,8 @@ void t_plots()
   cxptarSheR1->Print(outputpdf);
 
   TCanvas *cxptarSheC = new TCanvas("cxptarSheC", " cxptarSheC");
+  H_ssxptar_SheC->SetStats(0);
+  H_ssxptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssxptar_SheC->Draw("");
   H_ssxptar_DheC->Add(H_ssxptar_DheCR, -1);
   H_ssxptar_DheC->Scale(SFHEC);
@@ -6949,6 +6969,8 @@ void t_plots()
   cxptarSheC->Print(outputpdf);
 
   TCanvas *cxptarSheL1 = new TCanvas("cxptarSheL1", " cxptarSheL1");
+  H_ssxptar_SheL1->SetStats(0);
+  H_ssxptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssxptar_SheL1->Draw("");
   H_ssxptar_DheL1->Add(H_ssxptar_DheL1R, -1);
   H_ssxptar_DheL1->Scale(SFHEL1);
@@ -6957,6 +6979,8 @@ void t_plots()
   cxptarSheL1->Print(outputpdf);
 
   TCanvas *cxptarSheL2 = new TCanvas("cxptarSheL2", " cxptarSheL2");
+  H_ssxptar_SheL2->SetStats(0);
+  H_ssxptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssxptar_SheL2->Draw("");
   H_ssxptar_DheL2->Add(H_ssxptar_DheL2R, -1);
   H_ssxptar_DheL2->Scale(SFHEL2);
@@ -6965,6 +6989,8 @@ void t_plots()
   cxptarSheL2->Print(outputpdf);
 
   TCanvas *cyptarSheR1 = new TCanvas("cyptarSheR1", " cyptarSheR1");
+  H_ssyptar_SheR1->SetStats(0);
+  H_ssyptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssyptar_SheR1->Draw("");
   H_ssyptar_DheR1->Add(H_ssyptar_DheR1R, -1);
   H_ssyptar_DheR1->Scale(SFHER1);
@@ -6973,6 +6999,8 @@ void t_plots()
   cyptarSheR1->Print(outputpdf);
 
   TCanvas *cyptarSheC = new TCanvas("cyptarSheC", " cyptarSheC");
+  H_ssyptar_SheC->SetStats(0);
+  H_ssyptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssyptar_SheC->Draw("");
   H_ssyptar_DheC->Add(H_ssyptar_DheCR, -1);
   H_ssyptar_DheC->Scale(SFHEC);
@@ -6981,6 +7009,8 @@ void t_plots()
   cyptarSheC->Print(outputpdf);
 
   TCanvas *cyptarSheL1 = new TCanvas("cyptarSheL1", " cyptarSheL1");
+  H_ssyptar_SheL1->SetStats(0);
+  H_ssyptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssyptar_SheL1->Draw("");
   H_ssyptar_DheL1->Add(H_ssyptar_DheL1R, -1);
   H_ssyptar_DheL1->Scale(SFHEL1);
@@ -6989,6 +7019,8 @@ void t_plots()
   cyptarSheL1->Print(outputpdf);
 
   TCanvas *cyptarSheL2 = new TCanvas("cyptarSheL2", " cyptarSheL2");
+  H_ssyptar_SheL2->SetStats(0);
+  H_ssyptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssyptar_SheL2->Draw("");
   H_ssyptar_DheL2->Add(H_ssyptar_DheL2R, -1);
   H_ssyptar_DheL2->Scale(SFHEL2);
@@ -6997,6 +7029,8 @@ void t_plots()
   cyptarSheL2->Print(outputpdf);
 
   TCanvas *cxptarHheR1 = new TCanvas("cxptarHheR1", " cxptarHheR1");
+  H_hsxptar_SheR1->SetStats(0);
+  H_hsxptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsxptar_SheR1->Draw("");
   H_hsxptar_DheR1->Add(H_hsxptar_DheR1R, -1);
   H_hsxptar_DheR1->Scale(SFHER1);
@@ -7005,6 +7039,8 @@ void t_plots()
   cxptarHheR1->Print(outputpdf);
 
   TCanvas *cxptarHheC = new TCanvas("cxptarHheC", " cxptarHheC");
+  H_hsxptar_SheC->SetStats(0);
+  H_hsxptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsxptar_SheC->Draw("");
   H_hsxptar_DheC->Add(H_hsxptar_DheCR, -1);
   H_hsxptar_DheC->Scale(SFHEC);
@@ -7013,6 +7049,8 @@ void t_plots()
   cxptarHheC->Print(outputpdf);
 
   TCanvas *cxptarHheL1 = new TCanvas("cxptarHheL1", " cxptarHheL1");
+  H_hsxptar_SheL1->SetStats(0);
+  H_hsxptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsxptar_SheL1->Draw("");
   H_hsxptar_DheL1->Add(H_hsxptar_DheL1R, -1);
   H_hsxptar_DheL1->Scale(SFHEL1);
@@ -7021,6 +7059,8 @@ void t_plots()
   cxptarHheL1->Print(outputpdf);
 
   TCanvas *cxptarHheL2 = new TCanvas("cxptarHheL2", " cxptarHheL2");
+  H_hsxptar_SheL2->SetStats(0);
+  H_hsxptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsxptar_SheL2->Draw("");
   H_hsxptar_DheL2->Add(H_hsxptar_DheL2R, -1);
   H_hsxptar_DheL2->Scale(SFHEL2);
@@ -7029,6 +7069,8 @@ void t_plots()
   cxptarHheL2->Print(outputpdf);
 
   TCanvas *cyptarHheR1 = new TCanvas("cyptarHheR1", " cyptarHheR1");
+  H_hsyptar_SheR1->SetStats(0);
+  H_hsyptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsyptar_SheR1->Draw("");
   H_hsyptar_DheR1->Add(H_hsyptar_DheR1R, -1);
   H_hsyptar_DheR1->Scale(SFHER1);
@@ -7037,6 +7079,8 @@ void t_plots()
   cyptarHheR1->Print(outputpdf);
 
   TCanvas *cyptarHheC = new TCanvas("cyptarHheC", " cyptarHheC");
+  H_hsyptar_SheC->SetStats(0);
+  H_hsyptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsyptar_SheC->Draw("");
   H_hsyptar_DheC->Add(H_hsyptar_DheCR, -1);
   H_hsyptar_DheC->Scale(SFHEC);
@@ -7045,6 +7089,8 @@ void t_plots()
   cyptarHheC->Print(outputpdf);
 
   TCanvas *cyptarHheL1 = new TCanvas("cyptarHheL1", " cyptarHheL1");
+  H_hsyptar_SheL1->SetStats(0);
+  H_hsyptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsyptar_SheL1->Draw("");
   H_hsyptar_DheL1->Add(H_hsyptar_DheL1R, -1);
   H_hsyptar_DheL1->Scale(SFHEL1);
@@ -7053,6 +7099,8 @@ void t_plots()
   cyptarHheL1->Print(outputpdf);
 
   TCanvas *cyptarHheL2 = new TCanvas("cyptarHheL2", " cyptarHheL2");
+  H_hsyptar_SheL2->SetStats(0);
+  H_hsyptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsyptar_SheL2->Draw("");
   H_hsyptar_DheL2->Add(H_hsyptar_DheL2R, -1);
   H_hsyptar_DheL2->Scale(SFHEL2);
