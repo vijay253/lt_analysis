@@ -799,7 +799,7 @@ void t_plots()
 	  hYSC->Fill(t_simc, phipq*57.2958, fact*Weight);
 	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
 	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
-	  H_ssyptar_SC->Fill(ssyptar, fact*Weight);
+	  H_ssyptar_SC->Fill(-1*ssyptar, fact*Weight);
 
 	  H_hsdelta_SC->Fill(hsdelta, fact*Weight);
 	  H_hsxptar_SC->Fill(hsxptar, fact*Weight);
@@ -1033,7 +1033,7 @@ void t_plots()
 	  hYSL1->Fill(t_simcL1, phipqL1*57.2958, factL1*WeightL1);
 	  H_ssdelta_SL1->Fill(ssdeltaL1, factL1*WeightL1);
 	  H_ssxptar_SL1->Fill(ssxptarL1, factL1*WeightL1);
-	  H_ssyptar_SL1->Fill(ssyptarL1, factL1*WeightL1);
+	  H_ssyptar_SL1->Fill(-1*ssyptarL1, factL1*WeightL1);
 	  
 	  H_hsdelta_SL1->Fill(hsdeltaL1, factL1*WeightL1);
 	  H_hsxptar_SL1->Fill(hsxptarL1, factL1*WeightL1);
@@ -1223,7 +1223,7 @@ void t_plots()
 	  hYSL2->Fill(t_simcL2, phipqL2*57.2958, factL2*WeightL2);
 	  H_ssdelta_SL2->Fill(ssdeltaL2, factL2*WeightL2);
 	  H_ssxptar_SL2->Fill(ssxptarL2, factL2*WeightL2);
-	  H_ssyptar_SL2->Fill(ssyptarL2, factL2*WeightL2);
+	  H_ssyptar_SL2->Fill(-1*ssyptarL2, factL2*WeightL2);
 	  
 	  H_hsdelta_SL2->Fill(hsdeltaL2, factL2*WeightL2);
 	  H_hsxptar_SL2->Fill(hsxptarL2, factL2*WeightL2);
@@ -2425,6 +2425,20 @@ void t_plots()
   TString rootFile_DATAMIDEL1 = ROOTfilePath+"/"+TInDATAFilenameMideL1;
   TString rootFile_DATAMIDEL2 = ROOTfilePath+"/"+TInDATAFilenameMideL2;
 
+  //SIMC                                                  
+  TString TInSIMCFilenameMideR1 = "Pion_3p6_Q1_right1.root";
+  TString TInSIMCFilenameMideR2 = "Pion_3p6_Q1_right2.root";
+  TString TInSIMCFilenameMideC  = "Pion_3p6_Q1_center.root";
+  TString TInSIMCFilenameMideL1 = "Pion_3p6_Q1_left1.root";
+  TString TInSIMCFilenameMideL2 = "Pion_3p6_Q1_left2.root";
+
+  TString rootFile_SIMCMIDER1  = ROOTfilePath+"/"+TInSIMCFilenameMideR1;
+  TString rootFile_SIMCMIDER2  = ROOTfilePath+"/"+TInSIMCFilenameMideR2;
+  TString rootFile_SIMCMIDEC   = ROOTfilePath+"/"+TInSIMCFilenameMideC;
+  TString rootFile_SIMCMIDEL1  = ROOTfilePath+"/"+TInSIMCFilenameMideL1;
+  TString rootFile_SIMCMIDEL2  = ROOTfilePath+"/"+TInSIMCFilenameMideL2;
+
+
   if (gSystem->AccessPathName(rootFile_DATAMIDER1) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_DATAMIDER1 <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     exit;
@@ -2453,6 +2467,13 @@ void t_plots()
   TFile *InFile_DATAMIDEL1 = new TFile(rootFile_DATAMIDEL1, "READ");
   TFile *InFile_DATAMIDEL2 = new TFile(rootFile_DATAMIDEL2, "READ");
 
+  //SIMC 
+  TFile *InFile_SIMCMIDER1 = new TFile(rootFile_SIMCMIDER1, "READ");
+  TFile *InFile_SIMCMIDER2 = new TFile(rootFile_SIMCMIDER2, "READ");
+  TFile *InFile_SIMCMIDEC  = new TFile(rootFile_SIMCMIDEC,  "READ");
+  TFile *InFile_SIMCMIDEL1 = new TFile(rootFile_SIMCMIDEL1, "READ");
+  TFile *InFile_SIMCMIDEL2 = new TFile(rootFile_SIMCMIDEL2, "READ");
+
   // TREES
  
   TTree* TBRANCHMIDER1  = (TTree*)InFile_DATAMIDER1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDER1  = (Long64_t)TBRANCHMIDER1->GetEntries();  
@@ -2461,19 +2482,65 @@ void t_plots()
   TTree* TBRANCHMIDEL1  = (TTree*)InFile_DATAMIDEL1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEL1  = (Long64_t)TBRANCHMIDEL1->GetEntries();  
   TTree* TBRANCHMIDEL2  = (TTree*)InFile_DATAMIDEL2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEL2  = (Long64_t)TBRANCHMIDEL2->GetEntries();  
   
+  //SIMC 
+  TTree* TSIMCMIDER1  = (TTree*)InFile_SIMCMIDER1->Get("h10");Long64_t nEntries_TSIMCMIDER1  = (Long64_t)TSIMCMIDER1->GetEntries();
+  TTree* TSIMCMIDER2  = (TTree*)InFile_SIMCMIDER2->Get("h10");Long64_t nEntries_TSIMCMIDER2  = (Long64_t)TSIMCMIDER2->GetEntries();
+  TTree* TSIMCMIDEC   = (TTree*)InFile_SIMCMIDEC->Get("h10");Long64_t nEntries_TSIMCMIDEC    = (Long64_t)TSIMCMIDEC->GetEntries();
+  TTree* TSIMCMIDEL1  = (TTree*)InFile_SIMCMIDEL1->Get("h10");Long64_t nEntries_TSIMCMIDEL1  = (Long64_t)TSIMCMIDEL1->GetEntries();
+  TTree* TSIMCMIDEL2  = (TTree*)InFile_SIMCMIDEL2->Get("h10");Long64_t nEntries_TSIMCMIDEL2  = (Long64_t)TSIMCMIDEL2->GetEntries();
+  
   //VARIABLES
+  Double_t  P_gtr_dpmeR1;TBRANCHMIDER1->SetBranchAddress("ssdelta", &P_gtr_dpmeR1);
+  Double_t  P_gtr_xptarmeR1;TBRANCHMIDER1->SetBranchAddress("ssxptar", &P_gtr_xptarmeR1);
+  Double_t  P_gtr_yptarmeR1;TBRANCHMIDER1->SetBranchAddress("ssyptar", &P_gtr_yptarmeR1);
+
+  Double_t  H_gtr_dpmeR1;TBRANCHMIDER1->SetBranchAddress("hsdelta", &H_gtr_dpmeR1);
+  Double_t  H_gtr_xptarmeR1;TBRANCHMIDER1->SetBranchAddress("hsxptar", &H_gtr_xptarmeR1);
+  Double_t  H_gtr_yptarmeR1;TBRANCHMIDER1->SetBranchAddress("hsyptar", &H_gtr_yptarmeR1);
 
   Double_t WMER1;TBRANCHMIDER1->SetBranchAddress("W", &WMER1);
   Double_t Q2MER1;TBRANCHMIDER1->SetBranchAddress("Q2", &Q2MER1);
 
+  Double_t  P_gtr_dpmeR2;TBRANCHMIDER2->SetBranchAddress("ssdelta", &P_gtr_dpmeR2);
+  Double_t  P_gtr_xptarmeR2;TBRANCHMIDER2->SetBranchAddress("ssxptar", &P_gtr_xptarmeR2);
+  Double_t  P_gtr_yptarmeR2;TBRANCHMIDER2->SetBranchAddress("ssyptar", &P_gtr_yptarmeR2);
+
+  Double_t  H_gtr_dpmeR2;TBRANCHMIDER2->SetBranchAddress("hsdelta", &H_gtr_dpmeR2);
+  Double_t  H_gtr_xptarmeR2;TBRANCHMIDER2->SetBranchAddress("hsxptar", &H_gtr_xptarmeR2);
+  Double_t  H_gtr_yptarmeR2;TBRANCHMIDER2->SetBranchAddress("hsyptar", &H_gtr_yptarmeR2);
+
   Double_t WMER2;TBRANCHMIDER2->SetBranchAddress("W", &WMER2);
   Double_t Q2MER2;TBRANCHMIDER2->SetBranchAddress("Q2", &Q2MER2);
+
+  Double_t  P_gtr_dpmeC;TBRANCHMIDEC->SetBranchAddress("ssdelta", &P_gtr_dpmeC);
+  Double_t  P_gtr_xptarmeC;TBRANCHMIDEC->SetBranchAddress("ssxptar", &P_gtr_xptarmeC);
+  Double_t  P_gtr_yptarmeC;TBRANCHMIDEC->SetBranchAddress("ssyptar", &P_gtr_yptarmeC);
+
+  Double_t  H_gtr_dpmeC;TBRANCHMIDEC->SetBranchAddress("hsdelta", &H_gtr_dpmeC);
+  Double_t  H_gtr_xptarmeC;TBRANCHMIDEC->SetBranchAddress("hsxptar", &H_gtr_xptarmeC);
+  Double_t  H_gtr_yptarmeC;TBRANCHMIDEC->SetBranchAddress("hsyptar", &H_gtr_yptarmeC);
 
   Double_t WMEC;TBRANCHMIDEC->SetBranchAddress("W", &WMEC);
   Double_t Q2MEC;TBRANCHMIDEC->SetBranchAddress("Q2", &Q2MEC);
 
+  Double_t  P_gtr_dpmeL1;TBRANCHMIDEL1->SetBranchAddress("ssdelta", &P_gtr_dpmeL1);
+  Double_t  P_gtr_xptarmeL1;TBRANCHMIDEL1->SetBranchAddress("ssxptar", &P_gtr_xptarmeL1);
+  Double_t  P_gtr_yptarmeL1;TBRANCHMIDEL1->SetBranchAddress("ssyptar", &P_gtr_yptarmeL1);
+
+  Double_t  H_gtr_dpmeL1;TBRANCHMIDEL1->SetBranchAddress("hsdelta", &H_gtr_dpmeL1);
+  Double_t  H_gtr_xptarmeL1;TBRANCHMIDEL1->SetBranchAddress("hsxptar", &H_gtr_xptarmeL1);
+  Double_t  H_gtr_yptarmeL1;TBRANCHMIDEL1->SetBranchAddress("hsyptar", &H_gtr_yptarmeL1);
+
   Double_t WMEL1;TBRANCHMIDEL1->SetBranchAddress("W", &WMEL1);
   Double_t Q2MEL1;TBRANCHMIDEL1->SetBranchAddress("Q2", &Q2MEL1);
+
+  Double_t  P_gtr_dpmeL2;TBRANCHMIDEL2->SetBranchAddress("ssdelta", &P_gtr_dpmeL2);
+  Double_t  P_gtr_xptarmeL2;TBRANCHMIDEL2->SetBranchAddress("ssxptar", &P_gtr_xptarmeL2);
+  Double_t  P_gtr_yptarmeL2;TBRANCHMIDEL2->SetBranchAddress("ssyptar", &P_gtr_yptarmeL2);
+
+  Double_t  H_gtr_dpmeL2;TBRANCHMIDEL2->SetBranchAddress("hsdelta", &H_gtr_dpmeL2);
+  Double_t  H_gtr_xptarmeL2;TBRANCHMIDEL2->SetBranchAddress("hsxptar", &H_gtr_xptarmeL2);
+  Double_t  H_gtr_yptarmeL2;TBRANCHMIDEL2->SetBranchAddress("hsyptar", &H_gtr_yptarmeL2);
 
   Double_t WMEL2;TBRANCHMIDEL2->SetBranchAddress("W", &WMEL2);
   Double_t Q2MEL2;TBRANCHMIDEL2->SetBranchAddress("Q2", &Q2MEL2);
@@ -2501,6 +2568,162 @@ void t_plots()
   Double_t tcoinmeC;TBRANCHMIDEC->SetBranchAddress("CTime_ROC1", &tcoinmeC);
   Double_t tcoinmeL1;TBRANCHMIDEL1->SetBranchAddress("CTime_ROC1", &tcoinmeL1);
   Double_t tcoinmeL2;TBRANCHMIDEL2->SetBranchAddress("CTime_ROC1", &tcoinmeL2);
+
+  //SIMC VARIABLES
+  //Right1
+  //SHMS SIMC variables                                               
+  Float_t ssdeltameR1;TSIMCMIDER1->SetBranchAddress("ssdelta", &ssdeltameR1);
+  Float_t ssxptarmeR1;TSIMCMIDER1->SetBranchAddress("ssxptar", &ssxptarmeR1);
+  Float_t ssyptarmeR1;TSIMCMIDER1->SetBranchAddress("ssyptar", &ssyptarmeR1);
+  Float_t ssxfpmeR1;TSIMCMIDER1->SetBranchAddress("ssxfp", &ssxfpmeR1);
+  Float_t ssyfpmeR1;TSIMCMIDER1->SetBranchAddress("ssyfp", &ssyfpmeR1);
+  Float_t ssxpfpmeR1;TSIMCMIDER1->SetBranchAddress("ssxpfp", &ssxpfpmeR1);
+  Float_t ssypfpmeR1;TSIMCMIDER1->SetBranchAddress("ssypfp", &ssypfpmeR1);
+
+  //HMS SIMC variables 
+  Float_t hsdeltameR1;TSIMCMIDER1->SetBranchAddress("hsdelta", &hsdeltameR1);
+  Float_t hsxptarmeR1;TSIMCMIDER1->SetBranchAddress("hsxptar", &hsxptarmeR1);
+  Float_t hsyptarmeR1;TSIMCMIDER1->SetBranchAddress("hsyptar", &hsyptarmeR1);
+  Float_t hsxfpmeR1;TSIMCMIDER1->SetBranchAddress("hsxfp", &hsxfpmeR1);
+  Float_t hsyfpmeR1;TSIMCMIDER1->SetBranchAddress("hsyfp", &hsyfpmeR1);
+  Float_t hsxpfpmeR1;TSIMCMIDER1->SetBranchAddress("hsxpfp", &hsxpfpmeR1);
+  Float_t hsypfpmeR1;TSIMCMIDER1->SetBranchAddress("hsypfp", &hsypfpmeR1); 
+
+  Float_t qmeR1;TSIMCMIDER1->SetBranchAddress("q", &qmeR1);
+  Float_t Q2_simcmeR1;TSIMCMIDER1->SetBranchAddress("Q2", &Q2_simcmeR1);
+  Float_t W_simcmeR1;TSIMCMIDER1->SetBranchAddress("W", &W_simcmeR1);
+  Float_t t_simcmeR1;TSIMCMIDER1->SetBranchAddress("t", &t_simcmeR1);
+  Float_t ti_simcmeR1;TSIMCMIDER1->SetBranchAddress("ti", &ti_simcmeR1);
+  Float_t epsilon_simcmeR1;TSIMCMIDER1->SetBranchAddress("epsilon", &epsilon_simcmeR1);
+  Float_t missmassmeR1;TSIMCMIDER1->SetBranchAddress("missmass", &missmassmeR1);
+  Float_t EmmeR1;TSIMCMIDER1->SetBranchAddress("Em", &EmmeR1);
+  Float_t PmmeR1;TSIMCMIDER1->SetBranchAddress("Pm", &PmmeR1);
+  Float_t WeightmeR1;TSIMCMIDER1->SetBranchAddress("Weight", &WeightmeR1);
+  Float_t phipqmeR1;TSIMCMIDER1->SetBranchAddress("phipq", &phipqmeR1);
+
+  //Right2
+  //SHMS SIMC variables                                               
+  Float_t ssdeltameR2;TSIMCMIDER2->SetBranchAddress("ssdelta", &ssdeltameR2);
+  Float_t ssxptarmeR2;TSIMCMIDER2->SetBranchAddress("ssxptar", &ssxptarmeR2);
+  Float_t ssyptarmeR2;TSIMCMIDER2->SetBranchAddress("ssyptar", &ssyptarmeR2);
+  Float_t ssxfpmeR2;TSIMCMIDER2->SetBranchAddress("ssxfp", &ssxfpmeR2);
+  Float_t ssyfpmeR2;TSIMCMIDER2->SetBranchAddress("ssyfp", &ssyfpmeR2);
+  Float_t ssxpfpmeR2;TSIMCMIDER2->SetBranchAddress("ssxpfp", &ssxpfpmeR2);
+  Float_t ssypfpmeR2;TSIMCMIDER2->SetBranchAddress("ssypfp", &ssypfpmeR2);
+
+  //HMS SIMC variables 
+  Float_t hsdeltameR2;TSIMCMIDER2->SetBranchAddress("hsdelta", &hsdeltameR2);
+  Float_t hsxptarmeR2;TSIMCMIDER2->SetBranchAddress("hsxptar", &hsxptarmeR2);
+  Float_t hsyptarmeR2;TSIMCMIDER2->SetBranchAddress("hsyptar", &hsyptarmeR2);
+  Float_t hsxfpmeR2;TSIMCMIDER2->SetBranchAddress("hsxfp", &hsxfpmeR2);
+  Float_t hsyfpmeR2;TSIMCMIDER2->SetBranchAddress("hsyfp", &hsyfpmeR2);
+  Float_t hsxpfpmeR2;TSIMCMIDER2->SetBranchAddress("hsxpfp", &hsxpfpmeR2);
+  Float_t hsypfpmeR2;TSIMCMIDER2->SetBranchAddress("hsypfp", &hsypfpmeR2); 
+
+  Float_t qmeR2;TSIMCMIDER2->SetBranchAddress("q", &qmeR2);
+  Float_t Q2_simcmeR2;TSIMCMIDER2->SetBranchAddress("Q2", &Q2_simcmeR2);
+  Float_t W_simcmeR2;TSIMCMIDER2->SetBranchAddress("W", &W_simcmeR2);
+  Float_t t_simcmeR2;TSIMCMIDER2->SetBranchAddress("t", &t_simcmeR2);
+  Float_t ti_simcmeR2;TSIMCMIDER2->SetBranchAddress("ti", &ti_simcmeR2);
+  Float_t epsilon_simcmeR2;TSIMCMIDER2->SetBranchAddress("epsilon", &epsilon_simcmeR2);
+  Float_t missmassmeR2;TSIMCMIDER2->SetBranchAddress("missmass", &missmassmeR2);
+  Float_t EmmeR2;TSIMCMIDER2->SetBranchAddress("Em", &EmmeR2);
+  Float_t PmmeR2;TSIMCMIDER2->SetBranchAddress("Pm", &PmmeR2);
+  Float_t WeightmeR2;TSIMCMIDER2->SetBranchAddress("Weight", &WeightmeR2);
+  Float_t phipqmeR2;TSIMCMIDER2->SetBranchAddress("phipq", &phipqmeR2);
+
+  //CENTER
+  //SHMS SIMC variables                                               
+  Float_t ssdeltameC;TSIMCMIDEC->SetBranchAddress("ssdelta", &ssdeltameC);
+  Float_t ssxptarmeC;TSIMCMIDEC->SetBranchAddress("ssxptar", &ssxptarmeC);
+  Float_t ssyptarmeC;TSIMCMIDEC->SetBranchAddress("ssyptar", &ssyptarmeC);
+  Float_t ssxfpmeC;TSIMCMIDEC->SetBranchAddress("ssxfp", &ssxfpmeC);
+  Float_t ssyfpmeC;TSIMCMIDEC->SetBranchAddress("ssyfp", &ssyfpmeC);
+  Float_t ssxpfpmeC;TSIMCMIDEC->SetBranchAddress("ssxpfp", &ssxpfpmeC);
+  Float_t ssypfpmeC;TSIMCMIDEC->SetBranchAddress("ssypfp", &ssypfpmeC);
+
+  //HMS SIMC variables 
+  Float_t hsdeltameC;TSIMCMIDEC->SetBranchAddress("hsdelta", &hsdeltameC);
+  Float_t hsxptarmeC;TSIMCMIDEC->SetBranchAddress("hsxptar", &hsxptarmeC);
+  Float_t hsyptarmeC;TSIMCMIDEC->SetBranchAddress("hsyptar", &hsyptarmeC);
+  Float_t hsxfpmeC;TSIMCMIDEC->SetBranchAddress("hsxfp", &hsxfpmeC);
+  Float_t hsyfpmeC;TSIMCMIDEC->SetBranchAddress("hsyfp", &hsyfpmeC);
+  Float_t hsxpfpmeC;TSIMCMIDEC->SetBranchAddress("hsxpfp", &hsxpfpmeC);
+  Float_t hsypfpmeC;TSIMCMIDEC->SetBranchAddress("hsypfp", &hsypfpmeC); 
+
+  Float_t qmeC;TSIMCMIDEC->SetBranchAddress("q", &qmeC);
+  Float_t Q2_simcmeC;TSIMCMIDEC->SetBranchAddress("Q2", &Q2_simcmeC);
+  Float_t W_simcmeC;TSIMCMIDEC->SetBranchAddress("W", &W_simcmeC);
+  Float_t t_simcmeC;TSIMCMIDEC->SetBranchAddress("t", &t_simcmeC);
+  Float_t ti_simcmeC;TSIMCMIDEC->SetBranchAddress("ti", &ti_simcmeC);
+  Float_t epsilon_simcmeC;TSIMCMIDEC->SetBranchAddress("epsilon", &epsilon_simcmeC);
+  Float_t missmassmeC;TSIMCMIDEC->SetBranchAddress("missmass", &missmassmeC);
+  Float_t EmmeC;TSIMCMIDEC->SetBranchAddress("Em", &EmmeC);
+  Float_t PmmeC;TSIMCMIDEC->SetBranchAddress("Pm", &PmmeC);
+  Float_t WeightmeC;TSIMCMIDEC->SetBranchAddress("Weight", &WeightmeC);
+  Float_t phipqmeC;TSIMCMIDEC->SetBranchAddress("phipq", &phipqmeC);
+
+  //LEFT1
+  //SHMS SIMC variables                                               
+  Float_t ssdeltameL1;TSIMCMIDEL1->SetBranchAddress("ssdelta", &ssdeltameL1);
+  Float_t ssxptarmeL1;TSIMCMIDEL1->SetBranchAddress("ssxptar", &ssxptarmeL1);
+  Float_t ssyptarmeL1;TSIMCMIDEL1->SetBranchAddress("ssyptar", &ssyptarmeL1);
+  Float_t ssxfpmeL1;TSIMCMIDEL1->SetBranchAddress("ssxfp", &ssxfpmeL1);
+  Float_t ssyfpmeL1;TSIMCMIDEL1->SetBranchAddress("ssyfp", &ssyfpmeL1);
+  Float_t ssxpfpmeL1;TSIMCMIDEL1->SetBranchAddress("ssxpfp", &ssxpfpmeL1);
+  Float_t ssypfpmeL1;TSIMCMIDEL1->SetBranchAddress("ssypfp", &ssypfpmeL1);
+
+  //HMS SIMC variables 
+  Float_t hsdeltameL1;TSIMCMIDEL1->SetBranchAddress("hsdelta", &hsdeltameL1);
+  Float_t hsxptarmeL1;TSIMCMIDEL1->SetBranchAddress("hsxptar", &hsxptarmeL1);
+  Float_t hsyptarmeL1;TSIMCMIDEL1->SetBranchAddress("hsyptar", &hsyptarmeL1);
+  Float_t hsxfpmeL1;TSIMCMIDEL1->SetBranchAddress("hsxfp", &hsxfpmeL1);
+  Float_t hsyfpmeL1;TSIMCMIDEL1->SetBranchAddress("hsyfp", &hsyfpmeL1);
+  Float_t hsxpfpmeL1;TSIMCMIDEL1->SetBranchAddress("hsxpfp", &hsxpfpmeL1);
+  Float_t hsypfpmeL1;TSIMCMIDEL1->SetBranchAddress("hsypfp", &hsypfpmeL1); 
+
+  Float_t qmeL1;TSIMCMIDEL1->SetBranchAddress("q", &qmeL1);
+  Float_t Q2_simcmeL1;TSIMCMIDEL1->SetBranchAddress("Q2", &Q2_simcmeL1);
+  Float_t W_simcmeL1;TSIMCMIDEL1->SetBranchAddress("W", &W_simcmeL1);
+  Float_t t_simcmeL1;TSIMCMIDEL1->SetBranchAddress("t", &t_simcmeL1);
+  Float_t ti_simcmeL1;TSIMCMIDEL1->SetBranchAddress("ti", &ti_simcmeL1);
+  Float_t epsilon_simcmeL1;TSIMCMIDEL1->SetBranchAddress("epsilon", &epsilon_simcmeL1);
+  Float_t missmassmeL1;TSIMCMIDEL1->SetBranchAddress("missmass", &missmassmeL1);
+  Float_t EmmeL1;TSIMCMIDEL1->SetBranchAddress("Em", &EmmeL1);
+  Float_t PmmeL1;TSIMCMIDEL1->SetBranchAddress("Pm", &PmmeL1);
+  Float_t WeightmeL1;TSIMCMIDEL1->SetBranchAddress("Weight", &WeightmeL1);
+  Float_t phipqmeL1;TSIMCMIDEL1->SetBranchAddress("phipq", &phipqmeL1);
+
+  //LEFT2
+  //SHMS SIMC variables                                               
+  Float_t ssdeltameL2;TSIMCMIDEL2->SetBranchAddress("ssdelta", &ssdeltameL2);
+  Float_t ssxptarmeL2;TSIMCMIDEL2->SetBranchAddress("ssxptar", &ssxptarmeL2);
+  Float_t ssyptarmeL2;TSIMCMIDEL2->SetBranchAddress("ssyptar", &ssyptarmeL2);
+  Float_t ssxfpmeL2;TSIMCMIDEL2->SetBranchAddress("ssxfp", &ssxfpmeL2);
+  Float_t ssyfpmeL2;TSIMCMIDEL2->SetBranchAddress("ssyfp", &ssyfpmeL2);
+  Float_t ssxpfpmeL2;TSIMCMIDEL2->SetBranchAddress("ssxpfp", &ssxpfpmeL2);
+  Float_t ssypfpmeL2;TSIMCMIDEL2->SetBranchAddress("ssypfp", &ssypfpmeL2);
+
+  //HMS SIMC variables 
+  Float_t hsdeltameL2;TSIMCMIDEL2->SetBranchAddress("hsdelta", &hsdeltameL2);
+  Float_t hsxptarmeL2;TSIMCMIDEL2->SetBranchAddress("hsxptar", &hsxptarmeL2);
+  Float_t hsyptarmeL2;TSIMCMIDEL2->SetBranchAddress("hsyptar", &hsyptarmeL2);
+  Float_t hsxfpmeL2;TSIMCMIDEL2->SetBranchAddress("hsxfp", &hsxfpmeL2);
+  Float_t hsyfpmeL2;TSIMCMIDEL2->SetBranchAddress("hsyfp", &hsyfpmeL2);
+  Float_t hsxpfpmeL2;TSIMCMIDEL2->SetBranchAddress("hsxpfp", &hsxpfpmeL2);
+  Float_t hsypfpmeL2;TSIMCMIDEL2->SetBranchAddress("hsypfp", &hsypfpmeL2); 
+
+  Float_t qmeL2;TSIMCMIDEL2->SetBranchAddress("q", &qmeL2);
+  Float_t Q2_simcmeL2;TSIMCMIDEL2->SetBranchAddress("Q2", &Q2_simcmeL2);
+  Float_t W_simcmeL2;TSIMCMIDEL2->SetBranchAddress("W", &W_simcmeL2);
+  Float_t t_simcmeL2;TSIMCMIDEL2->SetBranchAddress("t", &t_simcmeL2);
+  Float_t ti_simcmeL2;TSIMCMIDEL2->SetBranchAddress("ti", &ti_simcmeL2);
+  Float_t epsilon_simcmeL2;TSIMCMIDEL2->SetBranchAddress("epsilon", &epsilon_simcmeL2);
+  Float_t missmassmeL2;TSIMCMIDEL2->SetBranchAddress("missmass", &missmassmeL2);
+  Float_t EmmeL2;TSIMCMIDEL2->SetBranchAddress("Em", &EmmeL2);
+  Float_t PmmeL2;TSIMCMIDEL2->SetBranchAddress("Pm", &PmmeL2);
+  Float_t WeightmeL2;TSIMCMIDEL2->SetBranchAddress("Weight", &WeightmeL2);
+  Float_t phipqmeL2;TSIMCMIDEL2->SetBranchAddress("phipq", &phipqmeL2);
 
   // HISTOGRAMS
 
@@ -2856,6 +3079,137 @@ void t_plots()
   TH1D *htcoinmeL1   = new TH1D("htcoinmeL1","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
   TH1D *htcoinmeL2   = new TH1D("htcoinmeL2","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
   
+  //SIMC and Data HISTOGRAMS  
+  //RIGHT1  
+  TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH1D *H_ssdelta_SmeR1  = new TH1D("H_ssdelta_SmeR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_SmeR1  = new TH1D("H_ssxptar_SmeR1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_SmeR1  = new TH1D("H_ssyptar_SmeR1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeR1  = new TH1D("H_ssdelta_DmeR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeR1  = new TH1D("H_ssxptar_DmeR1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeR1  = new TH1D("H_ssyptar_DmeR1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeR1R  = new TH1D("H_ssdelta_DmeR1R","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeR1R  = new TH1D("H_ssxptar_DmeR1R","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeR1R  = new TH1D("H_ssyptar_DmeR1R","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SmeR1  = new TH1D("H_hsdelta_SmeR1","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_SmeR1  = new TH1D("H_hsxptar_SmeR1","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_SmeR1  = new TH1D("H_hsyptar_SmeR1","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeR1  = new TH1D("H_hsdelta_DmeR1","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeR1  = new TH1D("H_hsxptar_DmeR1","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeR1  = new TH1D("H_hsyptar_DmeR1","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeR1R  = new TH1D("H_hsdelta_DmeR1R","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeR1R  = new TH1D("H_hsxptar_DmeR1R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeR1R  = new TH1D("H_hsyptar_DmeR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  //RIGHT2  
+  TH2D *hYSmeR2   = new TH2D("hYSmeR2"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH1D *H_ssdelta_SmeR2  = new TH1D("H_ssdelta_SmeR2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_SmeR2  = new TH1D("H_ssxptar_SmeR2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_SmeR2  = new TH1D("H_ssyptar_SmeR2","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeR2  = new TH1D("H_ssdelta_DmeR2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeR2  = new TH1D("H_ssxptar_DmeR2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeR2  = new TH1D("H_ssyptar_DmeR2","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeR2R  = new TH1D("H_ssdelta_DmeR2R","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeR2R  = new TH1D("H_ssxptar_DmeR2R","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeR2R  = new TH1D("H_ssyptar_DmeR2R","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SmeR2  = new TH1D("H_hsdelta_SmeR2","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_SmeR2  = new TH1D("H_hsxptar_SmeR2","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_SmeR2  = new TH1D("H_hsyptar_SmeR2","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeR2  = new TH1D("H_hsdelta_DmeR2","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeR2  = new TH1D("H_hsxptar_DmeR2","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeR2  = new TH1D("H_hsyptar_DmeR2","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeR2R  = new TH1D("H_hsdelta_DmeR2R","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeR2R  = new TH1D("H_hsxptar_DmeR2R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeR2R  = new TH1D("H_hsyptar_DmeR2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  //CENTER  
+  TH2D *hYSmeC   = new TH2D("hYSmeC"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH1D *H_ssdelta_SmeC  = new TH1D("H_ssdelta_SmeC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_SmeC  = new TH1D("H_ssxptar_SmeC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_SmeC  = new TH1D("H_ssyptar_SmeC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeC  = new TH1D("H_ssdelta_DmeC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeC  = new TH1D("H_ssxptar_DmeC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeC  = new TH1D("H_ssyptar_DmeC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeCR  = new TH1D("H_ssdelta_DmeCR","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeCR  = new TH1D("H_ssxptar_DmeCR","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeCR  = new TH1D("H_ssyptar_DmeCR","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SmeC  = new TH1D("H_hsdelta_SmeC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_SmeC  = new TH1D("H_hsxptar_SmeC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_SmeC  = new TH1D("H_hsyptar_SmeC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeC  = new TH1D("H_hsdelta_DmeC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeC  = new TH1D("H_hsxptar_DmeC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeC  = new TH1D("H_hsyptar_DmeC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeCR  = new TH1D("H_hsdelta_DmeCR","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeCR  = new TH1D("H_hsxptar_DmeCR","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeCR  = new TH1D("H_hsyptar_DmeCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  //LEFT1  
+  TH2D *hYSmeL1   = new TH2D("hYSmeL1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH1D *H_ssdelta_SmeL1  = new TH1D("H_ssdelta_SmeL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_SmeL1  = new TH1D("H_ssxptar_SmeL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_SmeL1  = new TH1D("H_ssyptar_SmeL1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeL1  = new TH1D("H_ssdelta_DmeL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeL1  = new TH1D("H_ssxptar_DmeL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeL1  = new TH1D("H_ssyptar_DmeL1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeL1R  = new TH1D("H_ssdelta_DmeL1R","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeL1R  = new TH1D("H_ssxptar_DmeL1R","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeL1R  = new TH1D("H_ssyptar_DmeL1R","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SmeL1  = new TH1D("H_hsdelta_SmeL1","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_SmeL1  = new TH1D("H_hsxptar_SmeL1","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_SmeL1  = new TH1D("H_hsyptar_SmeL1","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeL1  = new TH1D("H_hsdelta_DmeL1","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeL1  = new TH1D("H_hsxptar_DmeL1","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeL1  = new TH1D("H_hsyptar_DmeL1","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeL1R  = new TH1D("H_hsdelta_DmeL1R","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeL1R  = new TH1D("H_hsxptar_DmeL1R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeL1R  = new TH1D("H_hsyptar_DmeL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  //LEFT2 
+  TH2D *hYSmeL2   = new TH2D("hYSmeL2"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH1D *H_ssdelta_SmeL2  = new TH1D("H_ssdelta_SmeL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_SmeL2  = new TH1D("H_ssxptar_SmeL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_SmeL2  = new TH1D("H_ssyptar_SmeL2","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeL2  = new TH1D("H_ssdelta_DmeL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeL2  = new TH1D("H_ssxptar_DmeL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeL2  = new TH1D("H_ssyptar_DmeL2","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_ssdelta_DmeL2R  = new TH1D("H_ssdelta_DmeL2R","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmeL2R  = new TH1D("H_ssxptar_DmeL2R","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmeL2R  = new TH1D("H_ssyptar_DmeL2R","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+
+  TH1D *H_hsdelta_SmeL2  = new TH1D("H_hsdelta_SmeL2","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_SmeL2  = new TH1D("H_hsxptar_SmeL2","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_SmeL2  = new TH1D("H_hsyptar_SmeL2","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeL2  = new TH1D("H_hsdelta_DmeL2","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeL2  = new TH1D("H_hsxptar_DmeL2","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeL2  = new TH1D("H_hsyptar_DmeL2","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
+  TH1D *H_hsdelta_DmeL2R  = new TH1D("H_hsdelta_DmeL2R","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsxptar_DmeL2R  = new TH1D("H_hsxptar_DmeL2R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmeL2R  = new TH1D("H_hsyptar_DmeL2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER1; i++)
 
     {
@@ -2874,6 +3228,14 @@ void t_plots()
       
       if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0 && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeR1->Fill(P_gtr_dpmeR1);
+          H_ssxptar_DmeR1->Fill(P_gtr_xptarmeR1);
+          H_ssyptar_DmeR1->Fill(P_gtr_yptarmeR1);
+
+          H_hsdelta_DmeR1->Fill(H_gtr_dpmeR1);
+          H_hsxptar_DmeR1->Fill(H_gtr_xptarmeR1);
+          H_hsyptar_DmeR1->Fill(H_gtr_yptarmeR1);
+
 	  htmeR1->Fill(-tmeR1);
 	  htmeInR1->Fill(-tmeR1);
 	  hph_qmeR1->Fill(ph_qmeR1*57.2958 + 180);
@@ -2882,6 +3244,14 @@ void t_plots()
 
       if(((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)) && mmmeR1>= 0.92 && mmmeR1 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeR1R->Fill(P_gtr_dpmeR1);
+          H_ssxptar_DmeR1R->Fill(P_gtr_xptarmeR1);
+          H_ssyptar_DmeR1R->Fill(P_gtr_yptarmeR1);
+
+          H_hsdelta_DmeR1R->Fill(H_gtr_dpmeR1);
+          H_hsxptar_DmeR1R->Fill(H_gtr_xptarmeR1);
+          H_hsyptar_DmeR1R->Fill(H_gtr_yptarmeR1);
+
 	  htmeR1R->Fill(-tmeR1);
 	  htmeInR1R->Fill(-tmeR1);
 	  hph_qmeR1R->Fill(ph_qmeR1*57.2958 + 180);
@@ -3012,6 +3382,31 @@ void t_plots()
 	}	
     }  
 
+  //SIMC RIGHT1                                                                                                                                                                                      
+  for(Long64_t i = 0; i < nEntries_TSIMCMIDER1; i++)
+
+    {
+      TSIMCMIDER1->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeR1, W_simcmeR1));
+
+      Double_t NFMR1 = 22341200.0/400000.0;
+
+      if(hsdeltameR1 >=-8.0 && hsdeltameR1 <=8.0 && hsxpfpmeR1 >=-0.08 && hsxpfpmeR1 <=0.08 && hsypfpmeR1 >=-0.045 && hsypfpmeR1 <=0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxpfpmeR1 >=-0.06 && ssxpfpmeR1 <=0.06 && ssypfpmeR1 >=-0.04 && ssypfpmeR1 <=0.04 && missmassmeR1 >= 0.92 && missmassmeR1 <= 0.98 && Diamond_cut)
+	
+        {
+	  hYSmeR1->Fill(t_simcmeR1,phipqmeR1*57.2958, NFMR1*WeightmeR1);
+          H_ssdelta_SmeR1->Fill(ssdeltameR1, NFMR1*WeightmeR1);
+          H_ssxptar_SmeR1->Fill(ssxptarmeR1, NFMR1*WeightmeR1);
+          H_ssyptar_SmeR1->Fill(-1*ssyptarmeR1, NFMR1*WeightmeR1);
+	  
+          H_hsdelta_SmeR1->Fill(hsdeltameR1, NFMR1*WeightmeR1);
+          H_hsxptar_SmeR1->Fill(-1*hsxptarmeR1, NFMR1*WeightmeR1);
+          H_hsyptar_SmeR1->Fill(hsyptarmeR1, NFMR1*WeightmeR1);
+	  
+        }
+    }
+
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER2; i++)
 
     {
@@ -3030,6 +3425,14 @@ void t_plots()
      
       if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0 && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeR2->Fill(P_gtr_dpmeR2);
+          H_ssxptar_DmeR2->Fill(P_gtr_xptarmeR2);
+          H_ssyptar_DmeR2->Fill(P_gtr_yptarmeR2);
+
+          H_hsdelta_DmeR2->Fill(H_gtr_dpmeR2);
+          H_hsxptar_DmeR2->Fill(H_gtr_xptarmeR2);
+          H_hsyptar_DmeR2->Fill(H_gtr_yptarmeR2);
+
 	  htmeR2->Fill(-tmeR2);
 	  htmeInR2->Fill(-tmeR2);
 	  hph_qmeR2->Fill(ph_qmeR2*57.2958 + 180);
@@ -3038,6 +3441,14 @@ void t_plots()
 
       if(((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)) && mmmeR2>= 0.92 && mmmeR2 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeR2R->Fill(P_gtr_dpmeR2);
+          H_ssxptar_DmeR2R->Fill(P_gtr_xptarmeR2);
+          H_ssyptar_DmeR2R->Fill(P_gtr_yptarmeR2);
+
+          H_hsdelta_DmeR2R->Fill(H_gtr_dpmeR2);
+          H_hsxptar_DmeR2R->Fill(H_gtr_xptarmeR2);
+          H_hsyptar_DmeR2R->Fill(H_gtr_yptarmeR2);
+
 	  htmeR2R->Fill(-tmeR2);
 	  htmeInR2R->Fill(-tmeR2);
 	  hph_qmeR2R->Fill(ph_qmeR2*57.2958 + 180);
@@ -3175,6 +3586,31 @@ void t_plots()
 	}	
     }  
 
+  //SIMC RIGHT2                                                                                                                                                                                      
+  for(Long64_t i = 0; i < nEntries_TSIMCMIDER2; i++)
+
+    {
+      TSIMCMIDER2->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeR2, W_simcmeR2));
+
+      Double_t NFMR2 = 22267500.0/400000.0;
+
+      if(hsdeltameR2 >=-8.0 && hsdeltameR2 <=8.0 && hsxpfpmeR2 >=-0.08 && hsxpfpmeR2 <=0.08 && hsypfpmeR2 >=-0.045 && hsypfpmeR2 <=0.045 && ssdeltameR2 >=-10.0 && ssdeltameR2 <=20.0 && ssxpfpmeR2 >=-0.06 && ssxpfpmeR2 <=0.06 && ssypfpmeR2 >=-0.04 && ssypfpmeR2 <=0.04 && missmassmeR2 >= 0.92 && missmassmeR2 <= 0.98 && Diamond_cut)
+	
+        {
+	  hYSmeR2->Fill(t_simcmeR2,phipqmeR2*57.2958, NFMR2*WeightmeR2);
+          H_ssdelta_SmeR2->Fill(ssdeltameR2, NFMR2*WeightmeR2);
+          H_ssxptar_SmeR2->Fill(ssxptarmeR2, NFMR2*WeightmeR2);
+          H_ssyptar_SmeR2->Fill(-1*ssyptarmeR2, NFMR2*WeightmeR2);
+	  
+          H_hsdelta_SmeR2->Fill(hsdeltameR2, NFMR2*WeightmeR2);
+          H_hsxptar_SmeR2->Fill(-1*hsxptarmeR2, NFMR2*WeightmeR2);
+          H_hsyptar_SmeR2->Fill(hsyptarmeR2, NFMR2*WeightmeR2);
+	  
+        }
+    }
+
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDEC; i++)
 
     {
@@ -3198,6 +3634,14 @@ void t_plots()
       
       if(tcoinmeC>=-1.0 && tcoinmeC <= 1.0 && mmmeC>= 0.92 && mmmeC <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeC->Fill(P_gtr_dpmeC);
+          H_ssxptar_DmeC->Fill(P_gtr_xptarmeC);
+          H_ssyptar_DmeC->Fill(P_gtr_yptarmeC);
+
+          H_hsdelta_DmeC->Fill(H_gtr_dpmeC);
+          H_hsxptar_DmeC->Fill(H_gtr_xptarmeC);
+          H_hsyptar_DmeC->Fill(H_gtr_yptarmeC);
+
 	  hQ2WMEC1->Fill(Q2MEC, WMEC);	      	  
 	  htmeC->Fill(-tmeC);
 	  htmeInC->Fill(-tmeC);
@@ -3209,6 +3653,14 @@ void t_plots()
            
       if(((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC <=13.0)) && mmmeC>= 0.92 && mmmeC <=0.98 && Diamond_cut)
   	{
+          H_ssdelta_DmeCR->Fill(P_gtr_dpmeC);
+          H_ssxptar_DmeCR->Fill(P_gtr_xptarmeC);
+          H_ssyptar_DmeCR->Fill(P_gtr_yptarmeC);
+
+          H_hsdelta_DmeCR->Fill(H_gtr_dpmeC);
+          H_hsxptar_DmeCR->Fill(H_gtr_xptarmeC);
+          H_hsyptar_DmeCR->Fill(H_gtr_yptarmeC);
+
 	  htmeCR->Fill(-tmeC);
 	  htmeInCR->Fill(-tmeC);
 	  hph_qmeCR->Fill(ph_qmeC*57.2958 + 180);
@@ -3337,6 +3789,30 @@ void t_plots()
 	}	
     }  
 
+  //SIMC CENTER                                                                                                                                                                                      
+  for(Long64_t i = 0; i < nEntries_TSIMCMIDEC; i++)
+
+    {
+      TSIMCMIDEC->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeC, W_simcmeC));
+
+      Double_t NFMC = 22501800.0/400000.0;
+
+      if(hsdeltameC >=-8.0 && hsdeltameC <=8.0 && hsxpfpmeC >=-0.08 && hsxpfpmeC <=0.08 && hsypfpmeC >=-0.045 && hsypfpmeC <=0.045 && ssdeltameC >=-10.0 && ssdeltameC <=20.0 && ssxpfpmeC >=-0.06 && ssxpfpmeC <=0.06 && ssypfpmeC >=-0.04 && ssypfpmeC <=0.04 && missmassmeC >= 0.92 && missmassmeC <= 0.98 && Diamond_cut)
+	
+        {
+	  hYSmeC->Fill(t_simcmeC,phipqmeC*57.2958, NFMC*WeightmeC);
+          H_ssdelta_SmeC->Fill(ssdeltameC, NFMC*WeightmeC);
+          H_ssxptar_SmeC->Fill(ssxptarmeC, NFMC*WeightmeC);
+          H_ssyptar_SmeC->Fill(-1*ssyptarmeC, NFMC*WeightmeC);
+	  
+          H_hsdelta_SmeC->Fill(hsdeltameC, NFMC*WeightmeC);
+          H_hsxptar_SmeC->Fill(-1*hsxptarmeC, NFMC*WeightmeC);
+          H_hsyptar_SmeC->Fill(hsyptarmeC, NFMC*WeightmeC);
+	  
+        }
+    }
 
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDEL1; i++)
   
@@ -3356,6 +3832,14 @@ void t_plots()
 
       if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0 && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeL1->Fill(P_gtr_dpmeL1);
+          H_ssxptar_DmeL1->Fill(P_gtr_xptarmeL1);
+          H_ssyptar_DmeL1->Fill(P_gtr_yptarmeL1);
+
+          H_hsdelta_DmeL1->Fill(H_gtr_dpmeL1);
+          H_hsxptar_DmeL1->Fill(H_gtr_xptarmeL1);
+          H_hsyptar_DmeL1->Fill(H_gtr_yptarmeL1);
+
 	  htmeL1->Fill(-tmeL1);
 	  htmeInL1->Fill(-tmeL1);
 	  hph_qmeL1->Fill(ph_qmeL1*57.2958 + 180);	  
@@ -3366,6 +3850,14 @@ void t_plots()
       if(((tcoinmeL1>=-15.0 && tcoinmeL1 <= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1 <=13.0)) && mmmeL1>= 0.92 && mmmeL1 <=0.98 && Diamond_cut)
  	
 	{
+          H_ssdelta_DmeL1R->Fill(P_gtr_dpmeL1);
+          H_ssxptar_DmeL1R->Fill(P_gtr_xptarmeL1);
+          H_ssyptar_DmeL1R->Fill(P_gtr_yptarmeL1);
+
+          H_hsdelta_DmeL1R->Fill(H_gtr_dpmeL1);
+          H_hsxptar_DmeL1R->Fill(H_gtr_xptarmeL1);
+          H_hsyptar_DmeL1R->Fill(H_gtr_yptarmeL1);
+
 	  htmeL1R->Fill(-tmeL1);
 	  htmeInL1R->Fill(-tmeL1);
 	  hph_qmeL1R->Fill(ph_qmeL1*57.2958 + 180);	  
@@ -3492,6 +3984,31 @@ void t_plots()
 	}     
     }
 
+  //SIMC LEFT1                                                 
+  for(Long64_t i = 0; i < nEntries_TSIMCMIDEL1; i++)
+
+    {
+      TSIMCMIDEL1->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL1, W_simcmeL1));
+
+      Double_t NFML1 = 22563800.0/400000.0;
+
+      if(hsdeltameL1 >=-8.0 && hsdeltameL1 <=8.0 && hsxpfpmeL1 >=-0.08 && hsxpfpmeL1 <=0.08 && hsypfpmeL1 >=-0.045 && hsypfpmeL1 <=0.045 && ssdeltameL1 >=-10.0 && ssdeltameL1 <=20.0 && ssxpfpmeL1 >=-0.06 && ssxpfpmeL1 <=0.06 && ssypfpmeL1 >=-0.04 && ssypfpmeL1 <=0.04 && missmassmeL1 >= 0.92 && missmassmeL1 <= 0.98 && Diamond_cut)
+	
+        {
+	  hYSmeL1->Fill(t_simcmeL1,phipqmeL1*57.2958, NFML1*WeightmeL1);
+          H_ssdelta_SmeL1->Fill(ssdeltameL1, NFML1*WeightmeL1);
+          H_ssxptar_SmeL1->Fill(ssxptarmeL1, NFML1*WeightmeL1);
+          H_ssyptar_SmeL1->Fill(-1*ssyptarmeL1, NFML1*WeightmeL1);
+	  
+          H_hsdelta_SmeL1->Fill(hsdeltameL1, NFML1*WeightmeL1);
+          H_hsxptar_SmeL1->Fill(-1*hsxptarmeL1, NFML1*WeightmeL1);
+          H_hsyptar_SmeL1->Fill(hsyptarmeL1, NFML1*WeightmeL1);
+	  
+        }
+    }
+
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDEL2; i++)
     {
       TBRANCHMIDEL2->GetEntry(i);
@@ -3511,6 +4028,14 @@ void t_plots()
       if(tcoinmeL2>=-1.0 && tcoinmeL2 <= 1.0 && mmmeL2>= 0.92 && mmmeL2 <=0.98 && Diamond_cut)
 	
 	{
+          H_ssdelta_DmeL2->Fill(P_gtr_dpmeL2);
+          H_ssxptar_DmeL2->Fill(P_gtr_xptarmeL2);
+          H_ssyptar_DmeL2->Fill(P_gtr_yptarmeL2);
+
+          H_hsdelta_DmeL2->Fill(H_gtr_dpmeL2);
+          H_hsxptar_DmeL2->Fill(H_gtr_xptarmeL2);
+          H_hsyptar_DmeL2->Fill(H_gtr_yptarmeL2);
+
 	  htmeL2->Fill(-tmeL2);
 	  htmeInL2->Fill(-tmeL2);
 	  hph_qmeL2->Fill(ph_qmeL2*57.2958 + 180);
@@ -3519,6 +4044,14 @@ void t_plots()
 
       if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)) && mmmeL2>= 0.92 && mmmeL2 <=0.98 && Diamond_cut)
 	{
+          H_ssdelta_DmeL2R->Fill(P_gtr_dpmeL2);
+          H_ssxptar_DmeL2R->Fill(P_gtr_xptarmeL2);
+          H_ssyptar_DmeL2R->Fill(P_gtr_yptarmeL2);
+
+          H_hsdelta_DmeL2R->Fill(H_gtr_dpmeL2);
+          H_hsxptar_DmeL2R->Fill(H_gtr_xptarmeL2);
+          H_hsyptar_DmeL2R->Fill(H_gtr_yptarmeL2);
+
 	  htmeL2R->Fill(-tmeL2);
 	  htmeInL2R->Fill(-tmeL2);
 	  hph_qmeL2R->Fill(ph_qmeL2*57.2958 + 180);
@@ -3647,6 +4180,72 @@ void t_plots()
 	  hmmmeL2R->Fill(mmmeL2);
 	}
     }
+  //SIMC LEFT2                                                 
+  for(Long64_t i = 0; i < nEntries_TSIMCMIDEL2; i++)
+
+    {
+      TSIMCMIDEL2->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL2, W_simcmeL2));
+
+      Double_t NFML2 = 22563800.0/400000.0;
+
+      if(hsdeltameL2 >=-8.0 && hsdeltameL2 <=8.0 && hsxpfpmeL2 >=-0.08 && hsxpfpmeL2 <=0.08 && hsypfpmeL2 >=-0.045 && hsypfpmeL2 <=0.045 && ssdeltameL2 >=-10.0 && ssdeltameL2 <=20.0 && ssxpfpmeL2 >=-0.06 && ssxpfpmeL2 <=0.06 && ssypfpmeL2 >=-0.04 && ssypfpmeL2 <=0.04 && missmassmeL2 >= 0.92 && missmassmeL2 <= 0.98 && Diamond_cut)
+	
+        {
+	  hYSmeL2->Fill(t_simcmeL2,phipqmeL2*57.2958, NFML2*WeightmeL2);
+          H_ssdelta_SmeL2->Fill(ssdeltameL2, NFML2*WeightmeL2);
+          H_ssxptar_SmeL2->Fill(ssxptarmeL2, NFML2*WeightmeL2);
+          H_ssyptar_SmeL2->Fill(-1*ssyptarmeL2, NFML2*WeightmeL2);
+	  
+          H_hsdelta_SmeL2->Fill(hsdeltameL2, NFML2*WeightmeL2);
+          H_hsxptar_SmeL2->Fill(-1*hsxptarmeL2, NFML2*WeightmeL2);
+          H_hsyptar_SmeL2->Fill(hsyptarmeL2, NFML2*WeightmeL2);
+	  
+        }
+    }
+
+  H_ssdelta_DmeR1R->Scale(RTSCALE);
+  H_ssxptar_DmeR1R->Scale(RTSCALE);
+  H_ssyptar_DmeR1R->Scale(RTSCALE);
+
+  H_ssdelta_DmeR2R->Scale(RTSCALE);
+  H_ssxptar_DmeR2R->Scale(RTSCALE);
+  H_ssyptar_DmeR2R->Scale(RTSCALE);
+  
+  H_ssdelta_DmeCR->Scale(RTSCALE);
+  H_ssxptar_DmeCR->Scale(RTSCALE);
+  H_ssyptar_DmeCR->Scale(RTSCALE);
+
+  H_ssdelta_DmeL1R->Scale(RTSCALE);
+  H_ssxptar_DmeL1R->Scale(RTSCALE);
+  H_ssyptar_DmeL1R->Scale(RTSCALE);
+
+  H_ssdelta_DmeL2R->Scale(RTSCALE);
+  H_ssxptar_DmeL2R->Scale(RTSCALE);
+  H_ssyptar_DmeL2R->Scale(RTSCALE);
+
+  //HMS
+
+  H_hsdelta_DmeR1R->Scale(RTSCALE);
+  H_hsxptar_DmeR1R->Scale(RTSCALE);
+  H_hsyptar_DmeR1R->Scale(RTSCALE);
+
+  H_hsdelta_DmeR2R->Scale(RTSCALE);
+  H_hsxptar_DmeR2R->Scale(RTSCALE);
+  H_hsyptar_DmeR2R->Scale(RTSCALE);
+
+  H_hsdelta_DmeCR->Scale(RTSCALE);
+  H_hsxptar_DmeCR->Scale(RTSCALE);
+  H_hsyptar_DmeCR->Scale(RTSCALE);
+
+  H_hsdelta_DmeL1R->Scale(RTSCALE);
+  H_hsxptar_DmeL1R->Scale(RTSCALE);
+  H_hsyptar_DmeL1R->Scale(RTSCALE);
+
+  H_hsdelta_DmeL2R->Scale(RTSCALE);
+  H_hsxptar_DmeL2R->Scale(RTSCALE);
+  H_hsyptar_DmeL2R->Scale(RTSCALE);
 
   hQ2WMECR->Scale(1.0/6.0);
 
@@ -4635,8 +5234,307 @@ void t_plots()
   hQ2WMEC1->Draw("COL");
   Dcut->SetLineColor(kRed);
   Dcut->Draw("same");
-
   c12me->Print(outputpdf);
+
+  TCanvas *cdeltaSmeR1 = new TCanvas("cdeltaSmeR1", " cdeltaSmeR1");
+  H_ssdelta_SmeR1->SetStats(0);
+  H_ssdelta_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeR1->Draw("");
+  H_ssdelta_DmeR1->Add(H_ssdelta_DmeR1R, -1);
+  H_ssdelta_DmeR1->Scale(SFMER1);
+  H_ssdelta_DmeR1->SetLineColor(kGreen);
+  H_ssdelta_DmeR1->Draw("same"); 
+  cdeltaSmeR1->Print(outputpdf);
+
+  TCanvas *cdeltaSmeR2 = new TCanvas("cdeltaSmeR2", " cdeltaSmeR2");
+  H_ssdelta_SmeR2->SetStats(0);
+  H_ssdelta_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeR2->Draw("");
+  H_ssdelta_DmeR2->Add(H_ssdelta_DmeR2R, -1);
+  H_ssdelta_DmeR2->Scale(SFMER2);
+  H_ssdelta_DmeR2->SetLineColor(kGreen);
+  H_ssdelta_DmeR2->Draw("same"); 
+  cdeltaSmeR2->Print(outputpdf);
+
+  TCanvas *cdeltaSmeC = new TCanvas("cdeltaSmeC", " cdeltaSmeC");
+  H_ssdelta_SmeC->SetStats(0);
+  H_ssdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeC->Draw("");
+  H_ssdelta_DmeC->Add(H_ssdelta_DmeCR, -1);
+  H_ssdelta_DmeC->Scale(SFMEC);
+  H_ssdelta_DmeC->SetLineColor(kGreen);
+  H_ssdelta_DmeC->Draw("same"); 
+  cdeltaSmeC->Print(outputpdf);
+
+  TCanvas *cdeltaSmeL1 = new TCanvas("cdeltaSmeL1", " cdeltaSmeL1");
+  H_ssdelta_SmeL1->SetStats(0);
+  H_ssdelta_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeL1->Draw("");
+  H_ssdelta_DmeL1->Add(H_ssdelta_DmeL1R, -1);
+  H_ssdelta_DmeL1->Scale(SFMEL1);
+  H_ssdelta_DmeL1->SetLineColor(kGreen);
+  H_ssdelta_DmeL1->Draw("same"); 
+  cdeltaSmeL1->Print(outputpdf);
+
+  TCanvas *cdeltaSmeL2 = new TCanvas("cdeltaSmeL2", " cdeltaSmeL2");
+  H_ssdelta_SmeL2->SetStats(0);
+  H_ssdelta_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeL2->Draw("");
+  H_ssdelta_DmeL2->Add(H_ssdelta_DmeL2R, -1);
+  H_ssdelta_DmeL2->Scale(SFMEL2);
+  H_ssdelta_DmeL2->SetLineColor(kGreen);
+  H_ssdelta_DmeL2->Draw("same"); 
+  cdeltaSmeL2->Print(outputpdf);
+
+  TCanvas *cdeltaHmeR1 = new TCanvas("cdeltaHmeR1", " cdeltaHmeR1");
+  H_hsdelta_SmeR1->SetStats(0);
+  H_hsdelta_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeR1->Draw("");
+  H_hsdelta_DmeR1->Add(H_hsdelta_DmeR1R, -1);
+  H_hsdelta_DmeR1->Scale(SFMER1);
+  H_hsdelta_DmeR1->SetLineColor(kGreen);
+  H_hsdelta_DmeR1->Draw("same"); 
+  cdeltaHmeR1->Print(outputpdf);
+
+  TCanvas *cdeltaHmeR2 = new TCanvas("cdeltaHmeR2", " cdeltaHmeR2");
+  H_hsdelta_SmeR2->SetStats(0);
+  H_hsdelta_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeR2->Draw("");
+  H_hsdelta_DmeR2->Add(H_hsdelta_DmeR2R, -1);
+  H_hsdelta_DmeR2->Scale(SFMER2);
+  H_hsdelta_DmeR2->SetLineColor(kGreen);
+  H_hsdelta_DmeR2->Draw("same"); 
+  cdeltaHmeR2->Print(outputpdf);
+
+  TCanvas *cdeltaHmeC = new TCanvas("cdeltaHmeC", " cdeltaHmeC");
+  H_hsdelta_SmeC->SetStats(0);
+  H_hsdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeC->Draw("");
+  H_hsdelta_DmeC->Add(H_hsdelta_DmeCR, -1);
+  H_hsdelta_DmeC->Scale(SFMEC);
+  H_hsdelta_DmeC->SetLineColor(kGreen);
+  H_hsdelta_DmeC->Draw("same"); 
+  cdeltaHmeC->Print(outputpdf);
+
+  TCanvas *cdeltaHmeL1 = new TCanvas("cdeltaHmeL1", " cdeltaHmeL1");
+  H_hsdelta_SmeL1->SetStats(0);
+  H_hsdelta_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeL1->Draw("");
+  H_hsdelta_DmeL1->Add(H_hsdelta_DmeL1R, -1);
+  H_hsdelta_DmeL1->Scale(SFMEL1);
+  H_hsdelta_DmeL1->SetLineColor(kGreen);
+  H_hsdelta_DmeL1->Draw("same"); 
+  cdeltaHmeL1->Print(outputpdf);
+
+  TCanvas *cdeltaHmeL2 = new TCanvas("cdeltaHmeL2", " cdeltaHmeL2");
+  H_hsdelta_SmeL2->SetStats(0);
+  H_hsdelta_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeL2->Draw("");
+  H_hsdelta_DmeL2->Add(H_hsdelta_DmeL2R, -1);
+  H_hsdelta_DmeL2->Scale(SFMEL2);
+  H_hsdelta_DmeL2->SetLineColor(kGreen);
+  H_hsdelta_DmeL2->Draw("same"); 
+  cdeltaHmeL2->Print(outputpdf);
+
+  TCanvas *cxptarSmeR1 = new TCanvas("cxptarSmeR1", " cxptarSmeR1");
+  H_ssxptar_SmeR1->SetStats(0);
+  H_ssxptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeR1->Draw("");
+  H_ssxptar_DmeR1->Add(H_ssxptar_DmeR1R, -1);
+  H_ssxptar_DmeR1->Scale(SFMER1);
+  H_ssxptar_DmeR1->SetLineColor(kGreen);
+  H_ssxptar_DmeR1->Draw("same");
+  cxptarSmeR1->Print(outputpdf);
+
+  TCanvas *cxptarSmeR2 = new TCanvas("cxptarSmeR2", " cxptarSmeR2");
+  H_ssxptar_SmeR2->SetStats(0);
+  H_ssxptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeR2->Draw("");
+  H_ssxptar_DmeR2->Add(H_ssxptar_DmeR2R, -1);
+  H_ssxptar_DmeR2->Scale(SFMER2);
+  H_ssxptar_DmeR2->SetLineColor(kGreen);
+  H_ssxptar_DmeR2->Draw("same");
+  cxptarSmeR2->Print(outputpdf);
+
+  TCanvas *cxptarSmeC = new TCanvas("cxptarSmeC", " cxptarSmeC");
+  H_ssxptar_SmeC->SetStats(0);
+  H_ssxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeC->Draw("");
+  H_ssxptar_DmeC->Add(H_ssxptar_DmeCR, -1);
+  H_ssxptar_DmeC->Scale(SFMEC);
+  H_ssxptar_DmeC->SetLineColor(kGreen);
+  H_ssxptar_DmeC->Draw("same");
+  cxptarSmeC->Print(outputpdf);
+
+  TCanvas *cxptarSmeL1 = new TCanvas("cxptarSmeL1", " cxptarSmeL1");
+  H_ssxptar_SmeL1->SetStats(0);
+  H_ssxptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeL1->Draw("");
+  H_ssxptar_DmeL1->Add(H_ssxptar_DmeL1R, -1);
+  H_ssxptar_DmeL1->Scale(SFMEL1);
+  H_ssxptar_DmeL1->SetLineColor(kGreen);
+  H_ssxptar_DmeL1->Draw("same");
+  cxptarSmeL1->Print(outputpdf);
+
+  TCanvas *cxptarSmeL2 = new TCanvas("cxptarSmeL2", " cxptarSmeL2");
+  H_ssxptar_SmeL2->SetStats(0);
+  H_ssxptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeL2->Draw("");
+  H_ssxptar_DmeL2->Add(H_ssxptar_DmeL2R, -1);
+  H_ssxptar_DmeL2->Scale(SFMEL2);
+  H_ssxptar_DmeL2->SetLineColor(kGreen);
+  H_ssxptar_DmeL2->Draw("same");
+  cxptarSmeL2->Print(outputpdf);
+
+  TCanvas *cyptarSmeR1 = new TCanvas("cyptarSmeR1", " cyptarSmeR1");
+  H_ssyptar_SmeR1->SetStats(0);
+  H_ssyptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeR1->Draw("");
+  H_ssyptar_DmeR1->Add(H_ssyptar_DmeR1R, -1);
+  H_ssyptar_DmeR1->Scale(SFMER1);
+  H_ssyptar_DmeR1->SetLineColor(kGreen);
+  H_ssyptar_DmeR1->Draw("same");
+  cyptarSmeR1->Print(outputpdf);
+
+  TCanvas *cyptarSmeR2 = new TCanvas("cyptarSmeR2", " cyptarSmeR2");
+  H_ssyptar_SmeR2->SetStats(0);
+  H_ssyptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeR2->Draw("");
+  H_ssyptar_DmeR2->Add(H_ssyptar_DmeR2R, -1);
+  H_ssyptar_DmeR2->Scale(SFMER2);
+  H_ssyptar_DmeR2->SetLineColor(kGreen);
+  H_ssyptar_DmeR2->Draw("same");
+  cyptarSmeR2->Print(outputpdf);
+
+  TCanvas *cyptarSmeC = new TCanvas("cyptarSmeC", " cyptarSmeC");
+  H_ssyptar_SmeC->SetStats(0);
+  H_ssyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeC->Draw("");
+  H_ssyptar_DmeC->Add(H_ssyptar_DmeCR, -1);
+  H_ssyptar_DmeC->Scale(SFMEC);
+  H_ssyptar_DmeC->SetLineColor(kGreen);
+  H_ssyptar_DmeC->Draw("same");
+  cyptarSmeC->Print(outputpdf);
+
+  TCanvas *cyptarSmeL1 = new TCanvas("cyptarSmeL1", " cyptarSmeL1");
+  H_ssyptar_SmeL1->SetStats(0);
+  H_ssyptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeL1->Draw("");
+  H_ssyptar_DmeL1->Add(H_ssyptar_DmeL1R, -1);
+  H_ssyptar_DmeL1->Scale(SFMEL1);
+  H_ssyptar_DmeL1->SetLineColor(kGreen);
+  H_ssyptar_DmeL1->Draw("same");
+  cyptarSmeL1->Print(outputpdf);
+
+  TCanvas *cyptarSmeL2 = new TCanvas("cyptarSmeL2", " cyptarSmeL2");
+  H_ssyptar_SmeL2->SetStats(0);
+  H_ssyptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeL2->Draw("");
+  H_ssyptar_DmeL2->Add(H_ssyptar_DmeL2R, -1);
+  H_ssyptar_DmeL2->Scale(SFMEL2);
+  H_ssyptar_DmeL2->SetLineColor(kGreen);
+  H_ssyptar_DmeL2->Draw("same");
+  cyptarSmeL2->Print(outputpdf);
+
+  TCanvas *cxptarHmeR1 = new TCanvas("cxptarHmeR1", " cxptarHmeR1");
+  H_hsxptar_SmeR1->SetStats(0);
+  H_hsxptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeR1->Draw("");
+  H_hsxptar_DmeR1->Add(H_hsxptar_DmeR1R, -1);
+  H_hsxptar_DmeR1->Scale(SFMER1);
+  H_hsxptar_DmeR1->SetLineColor(kGreen);
+  H_hsxptar_DmeR1->Draw("same");
+  cxptarHmeR1->Print(outputpdf);
+
+  TCanvas *cxptarHmeR2 = new TCanvas("cxptarHmeR2", " cxptarHmeR2");
+  H_hsxptar_SmeR2->SetStats(0);
+  H_hsxptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeR2->Draw("");
+  H_hsxptar_DmeR2->Add(H_hsxptar_DmeR2R, -1);
+  H_hsxptar_DmeR2->Scale(SFMER2);
+  H_hsxptar_DmeR2->SetLineColor(kGreen);
+  H_hsxptar_DmeR2->Draw("same");
+  cxptarHmeR2->Print(outputpdf);
+
+  TCanvas *cxptarHmeC = new TCanvas("cxptarHmeC", " cxptarHmeC");
+  H_hsxptar_SmeC->SetStats(0);
+  H_hsxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeC->Draw("");
+  H_hsxptar_DmeC->Add(H_hsxptar_DmeCR, -1);
+  H_hsxptar_DmeC->Scale(SFMEC);
+  H_hsxptar_DmeC->SetLineColor(kGreen);
+  H_hsxptar_DmeC->Draw("same");
+  cxptarHmeC->Print(outputpdf);
+
+  TCanvas *cxptarHmeL1 = new TCanvas("cxptarHmeL1", " cxptarHmeL1");
+  H_hsxptar_SmeL1->SetStats(0);
+  H_hsxptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeL1->Draw("");
+  H_hsxptar_DmeL1->Add(H_hsxptar_DmeL1R, -1);
+  H_hsxptar_DmeL1->Scale(SFMEL1);
+  H_hsxptar_DmeL1->SetLineColor(kGreen);
+  H_hsxptar_DmeL1->Draw("same");
+  cxptarHmeL1->Print(outputpdf);
+
+  TCanvas *cxptarHmeL2 = new TCanvas("cxptarHmeL2", " cxptarHmeL2");
+  H_hsxptar_SmeL2->SetStats(0);
+  H_hsxptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeL2->Draw("");
+  H_hsxptar_DmeL2->Add(H_hsxptar_DmeL2R, -1);
+  H_hsxptar_DmeL2->Scale(SFMEL2);
+  H_hsxptar_DmeL2->SetLineColor(kGreen);
+  H_hsxptar_DmeL2->Draw("same");
+  cxptarHmeL2->Print(outputpdf);
+
+  TCanvas *cyptarHmeR1 = new TCanvas("cyptarHmeR1", " cyptarHmeR1");
+  H_hsyptar_SmeR1->SetStats(0);
+  H_hsyptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeR1->Draw("");
+  H_hsyptar_DmeR1->Add(H_hsyptar_DmeR1R, -1);
+  H_hsyptar_DmeR1->Scale(SFMER1);
+  H_hsyptar_DmeR1->SetLineColor(kGreen);
+  H_hsyptar_DmeR1->Draw("same");
+  cyptarHmeR1->Print(outputpdf);
+
+  TCanvas *cyptarHmeR2 = new TCanvas("cyptarHmeR2", " cyptarHmeR2");
+  H_hsyptar_SmeR2->SetStats(0);
+  H_hsyptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeR2->Draw("");
+  H_hsyptar_DmeR2->Add(H_hsyptar_DmeR2R, -1);
+  H_hsyptar_DmeR2->Scale(SFMER2);
+  H_hsyptar_DmeR2->SetLineColor(kGreen);
+  H_hsyptar_DmeR2->Draw("same");
+  cyptarHmeR2->Print(outputpdf);
+
+  TCanvas *cyptarHmeC = new TCanvas("cyptarHmeC", " cyptarHmeC");
+  H_hsyptar_SmeC->SetStats(0);
+  H_hsyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeC->Draw("");
+  H_hsyptar_DmeC->Add(H_hsyptar_DmeCR, -1);
+  H_hsyptar_DmeC->Scale(SFMEC);
+  H_hsyptar_DmeC->SetLineColor(kGreen);
+  H_hsyptar_DmeC->Draw("same");
+  cyptarHmeC->Print(outputpdf);
+
+  TCanvas *cyptarHmeL1 = new TCanvas("cyptarHmeL1", " cyptarHmeL1");
+  H_hsyptar_SmeL1->SetStats(0);
+  H_hsyptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeL1->Draw("");
+  H_hsyptar_DmeL1->Add(H_hsyptar_DmeL1R, -1);
+  H_hsyptar_DmeL1->Scale(SFMEL1);
+  H_hsyptar_DmeL1->SetLineColor(kGreen);
+  H_hsyptar_DmeL1->Draw("same");
+  cyptarHmeL1->Print(outputpdf);
+
+  TCanvas *cyptarHmeL2 = new TCanvas("cyptarHmeL2", " cyptarHmeL2");
+  H_hsyptar_SmeL2->SetStats(0);
+  H_hsyptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeL2->Draw("");
+  H_hsyptar_DmeL2->Add(H_hsyptar_DmeL2R, -1);
+  H_hsyptar_DmeL2->Scale(SFMEL2);
+  H_hsyptar_DmeL2->SetLineColor(kGreen);
+  H_hsyptar_DmeL2->Draw("same");
+  cyptarHmeL2->Print(outputpdf);
 
   TCanvas *cYmeR1 = new TCanvas("cYmeR1", " cYmeR1");
   hYmeR1->Add(hYmeR1R, -1);  
@@ -4773,7 +5671,7 @@ void t_plots()
   TString rootFile_DATAHIGHEL1 = ROOTfilePath+"/"+TInDATAFilenameHigheL1;
   TString rootFile_DATAHIGHEL2 = ROOTfilePath+"/"+TInDATAFilenameHigheL2;
 
-  //SIMC                                                                                                                                                                                              
+  //SIMC                                                  
   TString TInSIMCFilenameHigheR1 = "Pion_4p5_Q1_right1.root";
   TString TInSIMCFilenameHigheC  = "Pion_4p5_Q1_center.root";
   TString TInSIMCFilenameHigheL1 = "Pion_4p5_Q1_left1.root";
@@ -4891,10 +5789,9 @@ void t_plots()
   Double_t tcoinheL1;TBRANCHHIGHEL1->SetBranchAddress("CTime_ROC1", &tcoinheL1);
   Double_t tcoinheL2;TBRANCHHIGHEL2->SetBranchAddress("CTime_ROC1", &tcoinheL2);
 
-  //SIMC VARIABLES                                                                                                                                                                                   
-  //Right1                                                                                                                                                                                          
-  //SHMS SIMC variables                                                                                                                                                                              
-                                                                                                                                                                                                   
+  //SIMC VARIABLES
+  //Right1
+  //SHMS SIMC variables                                               
   Float_t ssdeltaheR1;TSIMCHIGHER1->SetBranchAddress("ssdelta", &ssdeltaheR1);
   Float_t ssxptarheR1;TSIMCHIGHER1->SetBranchAddress("ssxptar", &ssxptarheR1);
   Float_t ssyptarheR1;TSIMCHIGHER1->SetBranchAddress("ssyptar", &ssyptarheR1);
@@ -4924,9 +5821,8 @@ void t_plots()
   Float_t WeightheR1;TSIMCHIGHER1->SetBranchAddress("Weight", &WeightheR1);
   Float_t phipqheR1;TSIMCHIGHER1->SetBranchAddress("phipq", &phipqheR1);
 
-  //CENTER                                                                                                                                                                                          
-  //SHMS SIMC variables                                                                                                                                                                              
-                                                                                                                                                                                                   
+  //CENTER
+  //SHMS SIMC variables
   Float_t ssdeltaheC;TSIMCHIGHEC->SetBranchAddress("ssdelta", &ssdeltaheC);
   Float_t ssxptarheC;TSIMCHIGHEC->SetBranchAddress("ssxptar", &ssxptarheC);
   Float_t ssyptarheC;TSIMCHIGHEC->SetBranchAddress("ssyptar", &ssyptarheC);
@@ -5584,7 +6480,6 @@ void t_plots()
     }  
 
   //SIMC RIGHT1                                                                                                                                                                                      
-
   for(Long64_t i = 0; i < nEntries_TSIMCHIGHER1; i++)
 
     {
@@ -5600,10 +6495,10 @@ void t_plots()
 	  hYSheR1->Fill(t_simcheR1,phipqheR1*57.2958, NFR1*WeightheR1);
           H_ssdelta_SheR1->Fill(ssdeltaheR1, NFR1*WeightheR1);
           H_ssxptar_SheR1->Fill(ssxptarheR1, NFR1*WeightheR1);
-          H_ssyptar_SheR1->Fill(ssyptarheR1, NFR1*WeightheR1);
+          H_ssyptar_SheR1->Fill(-1*ssyptarheR1, NFR1*WeightheR1);
 	  
           H_hsdelta_SheR1->Fill(hsdeltaheR1, NFR1*WeightheR1);
-          H_hsxptar_SheR1->Fill(hsxptarheR1, NFR1*WeightheR1);
+          H_hsxptar_SheR1->Fill(-1*hsxptarheR1, NFR1*WeightheR1);
           H_hsyptar_SheR1->Fill(hsyptarheR1, NFR1*WeightheR1);
 	  
         }
@@ -5805,10 +6700,10 @@ void t_plots()
 	  hYSheC->Fill(t_simcheC,phipqheC*57.2958, NFC*WeightheC);
           H_ssdelta_SheC->Fill(ssdeltaheC, NFC*WeightheC);
           H_ssxptar_SheC->Fill(ssxptarheC, NFC*WeightheC);
-          H_ssyptar_SheC->Fill(ssyptarheC, NFC*WeightheC);
+          H_ssyptar_SheC->Fill(-1*ssyptarheC, NFC*WeightheC);
 	  
           H_hsdelta_SheC->Fill(hsdeltaheC, NFC*WeightheC);
-          H_hsxptar_SheC->Fill(hsxptarheC, NFC*WeightheC);
+          H_hsxptar_SheC->Fill(-1*hsxptarheC, NFC*WeightheC);
           H_hsyptar_SheC->Fill(hsyptarheC, NFC*WeightheC);
 	  
         }
@@ -6006,10 +6901,10 @@ void t_plots()
 	  hYSheL1->Fill(t_simcheL1,phipqheL1*57.2958, NFL1*WeightheL1);
           H_ssdelta_SheL1->Fill(ssdeltaheL1, NFL1*WeightheL1);
           H_ssxptar_SheL1->Fill(ssxptarheL1, NFL1*WeightheL1);
-          H_ssyptar_SheL1->Fill(ssyptarheL1, NFL1*WeightheL1);
+          H_ssyptar_SheL1->Fill(-1*ssyptarheL1, NFL1*WeightheL1);
 	  
           H_hsdelta_SheL1->Fill(hsdeltaheL1, NFL1*WeightheL1);
-          H_hsxptar_SheL1->Fill(hsxptarheL1, NFL1*WeightheL1);
+          H_hsxptar_SheL1->Fill(-1*hsxptarheL1, NFL1*WeightheL1);
           H_hsyptar_SheL1->Fill(hsyptarheL1, NFL1*WeightheL1);
 	  
         }
@@ -6200,10 +7095,10 @@ void t_plots()
 	  hYSheL2->Fill(t_simcheL2,phipqheL2*57.2958, NFL2*WeightheL2);
           H_ssdelta_SheL2->Fill(ssdeltaheL2, NFL2*WeightheL2);
           H_ssxptar_SheL2->Fill(ssxptarheL2, NFL2*WeightheL2);
-          H_ssyptar_SheL2->Fill(ssyptarheL2, NFL2*WeightheL2);
+          H_ssyptar_SheL2->Fill(-1*ssyptarheL2, NFL2*WeightheL2);
 	  
           H_hsdelta_SheL2->Fill(hsdeltaheL2, NFL2*WeightheL2);
-          H_hsxptar_SheL2->Fill(hsxptarheL2, NFL2*WeightheL2);
+          H_hsxptar_SheL2->Fill(-1*hsxptarheL2, NFL2*WeightheL2);
           H_hsyptar_SheL2->Fill(hsyptarheL2, NFL2*WeightheL2);
 	  
         }
@@ -6382,9 +7277,9 @@ void t_plots()
   hYheL2R->Scale(1.0/6.0);
 
   Double_t SFHER1  = 1.8/132.549;
-  Double_t SFHEC   = 2.0/380.856;
-  Double_t SFHEL1  = 2.0/183.703;
-  Double_t SFHEL2  = 2.0/196.02;
+  Double_t SFHEC   = 2.5/380.856;
+  Double_t SFHEL1  = 2.5/183.703;
+  Double_t SFHEL2  = 2.5/196.02;
   
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
@@ -7312,6 +8207,27 @@ void t_plots()
 	}
     } 
   YheR1.close();
+  ofstream YdheR1("yield/yields.pl_375_781_+2680.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YheR1<<hYheR1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdheR1<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YdheR1.close();
+  ofstream YSheR1("yield/yields.pl_375_781_+2680.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSheR1<<hYSheR1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YSheR1.close();
 
   TCanvas *cYheC = new TCanvas("cYheC", " cYheC");
   hYheC->Add(hYheCR, -1);  
@@ -7337,6 +8253,27 @@ void t_plots()
 	}
     } 
   YheC.close();
+  ofstream YdheC("yield/yields.pl_375_781_+0000.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YheC<<hYheC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdheC<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YdheC.close();
+  ofstream YSheC("yield/yields.pl_375_781_+0000.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSheC<<hYSheC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YSheC.close();
 
   TCanvas *cYheL1 = new TCanvas("cYheL1", " cYheL1");
   hYheL1->Add(hYheL1R, -1);  
@@ -7362,6 +8299,27 @@ void t_plots()
 	}
     } 
   YheL1.close();
+  ofstream YdheL1("yield/yields.pl_375_781_-2015.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YdheL1<<hYheL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdheL1<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YdheL1.close();
+  ofstream YSheL1("yield/yields.pl_375_781_-2015.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSheL1<<hYSheL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YSheL1.close();
 
   TCanvas *cYheL2 = new TCanvas("cYheL2", " cYheL2");
   hYheL2->Add(hYheL2R, -1);  
@@ -7387,6 +8345,27 @@ void t_plots()
 	}
     } 
   YheL2.close();
+  ofstream YdheL2("yield/yields.pl_375_781_-4000.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YdheL2<<hYheL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdheL2<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YdheL2.close();
+  ofstream YSheL2("yield/yields.pl_375_781_-4000.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSheL2<<hYSheL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YSheL2.close();
 
   TH2D *Clonehe = (TH2D*)hYheR1->Clone("Clonehe");
   Clonehe->Add(hYheC,+1);
