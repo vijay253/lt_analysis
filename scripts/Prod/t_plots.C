@@ -491,6 +491,10 @@ void t_plots()
   TH2D *hYL2   = new TH2D("hYL2"," Yield L2;t-Bin; Phi-Bin ", 10, bins, 18, -22.5, 382.5);      
   TH2D *hYL2R  = new TH2D("hYL2R"," Yield L2; t-Bin; Phi-Bin", 10, bins, 18, -22.5, 382.5);      
 
+  //SIMC Yield His
+  TH2D *hYSC   = new TH2D("hYSC"," Yield SIMC C;t-Bin; Phi-Bin ", 10, bins, 18, -22.5, 382.5);      
+  TH2D *hYSL1   = new TH2D("hYSL1"," Yield SIMC L1;t-Bin; Phi-Bin ", 10 , bins, 18, -22.5, 382.5);      
+  TH2D *hYSL2   = new TH2D("hYSL2"," Yield SIMC L2;t-Bin; Phi-Bin ", 10, bins, 18, -22.5, 382.5);      
 
   //SIMC and Data HISTOGRAMS
   //CENTER
@@ -792,6 +796,7 @@ void t_plots()
      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxpfp >=-0.08 && hsxpfp <=0.08 && hsypfp >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxpfp >=-0.06 && ssxpfp <=0.06 && ssypfp >=-0.04 && ssypfp <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
 	
 	{
+	  hYSC->Fill(t_simc, phipq*57.2958, fact*Weight);
 	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
 	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
 	  H_ssyptar_SC->Fill(ssyptar, fact*Weight);
@@ -1020,11 +1025,12 @@ void t_plots()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));  
       
-      Double_t factL1 = 10347300.0/400000.0;
+      Double_t factL1 = 9898300.0/400000.0;
       
      if(hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxpfpL1 >=-0.08 && hsxpfpL1 <=0.08 && hsypfpL1 >=-0.045 && hsypfpL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxpfpL1 >=-0.06 && ssxpfpL1 <=0.06 && ssypfpL1 >=-0.04 && ssypfpL1 <=0.04 && missmassL1 >= 0.92 && missmassL1 <= 0.98 && Diamond_cut)
 	
 	{
+	  hYSL1->Fill(t_simcL1, phipqL1*57.2958, factL1*WeightL1);
 	  H_ssdelta_SL1->Fill(ssdeltaL1, factL1*WeightL1);
 	  H_ssxptar_SL1->Fill(ssxptarL1, factL1*WeightL1);
 	  H_ssyptar_SL1->Fill(ssyptarL1, factL1*WeightL1);
@@ -1209,11 +1215,12 @@ void t_plots()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));  
       
-      Double_t factL2 = 10456500.0/400000.0;
+      Double_t factL2 = 9581580.0/400000.0;
       
      if(hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxpfpL2 >=-0.08 && hsxpfpL2 <=0.08 && hsypfpL2 >=-0.045 && hsypfpL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxpfpL2 >=-0.06 && ssxpfpL2 <=0.06 && ssypfpL2 >=-0.04 && ssypfpL2 <=0.04 && missmassL2 >= 0.92 && missmassL2 <= 0.98 && Diamond_cut)
 	
 	{
+	  hYSL2->Fill(t_simcL2, phipqL2*57.2958, factL2*WeightL2);
 	  H_ssdelta_SL2->Fill(ssdeltaL2, factL2*WeightL2);
 	  H_ssxptar_SL2->Fill(ssxptarL2, factL2*WeightL2);
 	  H_ssyptar_SL2->Fill(ssyptarL2, factL2*WeightL2);
@@ -2034,16 +2041,53 @@ void t_plots()
   hYC->Draw("COLZ");
   cY->Print(outputpdf);
 
+  TCanvas *cYSC = new TCanvas("cYSC", " cYSC");
+  hYSC->SetStats(0);
+  hYSC->Draw("COLZ");
+  cYSC->Print(outputpdf);
+
   cout<< "Center Setting Yield"<<endl;
   cout<< "  "<<endl;
-
+  
+  ofstream YleC("yield/yields.pl_375_286_+0000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YleC<<hYC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  }
+    } 
+  YleC.close();
+  ofstream YdleC("yield/yields.pl_375_286_+0000.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YdleC<<hYC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdleC<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  }
+    } 
+  YdleC.close();
+  ofstream YSleC("yield/yields.pl_375_286_+0000.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSleC<<hYSC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  }
+    } 
+  YSleC.close();
+  
   for(Double_t j = 2; j <= 9; j++)
     {
       for(Long64_t i = 2; i <= 17; i++)       
 	{
 	  Double_t err;
 	  Double_t Yield = hYC->IntegralAndError(j, j, i, i, err, "");;
-	  cout<<Yield <<" +- "<<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	  //	  cout<<Yield <<" +- "<<err << "  "<< j-1 << "  "<< i-1 << endl;   
 	}
     }
 
@@ -2054,20 +2098,55 @@ void t_plots()
   hYL1->Draw("COLZ");
   cYL1->Print(outputpdf);
 
-  cout<< "Left 1 Setting Yield"<<endl;
+  TCanvas *cYSL1 = new TCanvas("cYSL1", " cYSL1");
+  hYSL1->SetStats(0);
+  hYSL1->Draw("COLZ");
+  cYSL1->Print(outputpdf);
 
+  cout<< "Left 1 Setting Yield"<<endl;
   cout<< "  "<<endl;
 
+ ofstream YleL1("yield/yields.pl_375_286_-1995.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YleL1<<hYL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YleL1.close();
+  ofstream YdleL1("yield/yields.pl_375_286_-1995.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YdleC<<hYC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdleL1<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  }
+    } 
+  YdleL1.close();
+ ofstream YSleL1("yield/yields.pl_375_286_-1995.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSleL1<<hYSL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YSleL1.close();
+ 
   for(Double_t j = 2; j <= 9; j++)
     {
       for(Long64_t i = 2; i <= 17; i++)       
 	{
 	  Double_t err;
 	  Double_t Yield = hYL1->IntegralAndError(j, j, i, i, err, "");;
-	  cout<<Yield <<" +- "<<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	  //	  cout<<Yield <<" +- "<<err << "  "<< j-1 << "  "<< i-1 << endl;   
 	}
     }
-
 
   TCanvas *cYL2 = new TCanvas("cYL2", " cYL2");
   hYL2->Add(hYL2R, -1);  
@@ -2076,9 +2155,45 @@ void t_plots()
   hYL2->Draw("COLZ");
   cYL2->Print(outputpdf);
 
-  cout<< "Left 2 Setting Yield"<<endl;
+  TCanvas *cYSL2 = new TCanvas("cYSL2", " cYSL2");
+  hYSL2->SetStats(0);
+  hYSL2->Draw("COLZ");
+  cYSL2->Print(outputpdf);
 
+  cout<< "Left 2 Setting Yield"<<endl;
   cout<< "  "<<endl;
+
+ ofstream YleL2("yield/yields.pl_375_286_-4005.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YleL2<<hYL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YleL2.close();
+  ofstream YdleL2("yield/yields.pl_375_286_-4005.dummy");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  //	  YdleL2<<hYC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdleL2<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  }
+    } 
+  YdleL2.close();
+ ofstream YSleL2("yield/yields.pl_375_286_-4005.simc");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YSleL2<<hYSL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YSleL2.close();
 
   for(Double_t j = 2; j <= 9; j++)
     {
@@ -2086,7 +2201,7 @@ void t_plots()
 	{
 	  Double_t err;
 	  Double_t Yield = hYL2->IntegralAndError(j, j, i, i, err, "");;
-	  cout<<Yield <<" +-" <<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	  //	  cout<<Yield <<" +-" <<err << "  "<< j-1 << "  "<< i-1 << endl;   
 	}
     }
 
@@ -2106,7 +2221,7 @@ void t_plots()
 	{
 	  Double_t err;
 	  Double_t Yield = Clone->IntegralAndError(j, j, i, i, err, "");;
-	  cout<<Yield <<" +-" <<err << "  "<< j-1 << "  "<< i-1 << endl;   
+	  //	  cout<<Yield <<" +-" <<err << "  "<< j-1 << "  "<< i-1 << endl;   
 	}
     }
 
@@ -4532,6 +4647,17 @@ void t_plots()
 
   cout<< "R1 Setting Yield"<<endl;
   cout<<"..."<<endl;
+  ofstream YmeR1("yield/yields.pl_375_629_+2000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YmeR1<<hYmeR1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YmeR1.close();
+
 
   TCanvas *cYmeR2 = new TCanvas("cYmeR2", " cYmeR2");
   hYmeR2->Add(hYmeR2R, -1);  
@@ -4543,6 +4669,17 @@ void t_plots()
   cout<< "R2 Setting Yield"<<endl;
   cout<<"..."<<endl;
 
+  ofstream YmeR2("yield/yields.pl_375_629_+3120.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YmeR2<<hYmeR2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YmeR2.close();
+
   TCanvas *cYmeC = new TCanvas("cYmeC", " cYmeC");
   hYmeC->Add(hYmeCR, -1);  
   hYmeC->Scale(SFMEC);  
@@ -4552,6 +4689,17 @@ void t_plots()
 
   cout<< "C Setting Yield"<<endl;
   cout<<"..."<<endl;
+
+  ofstream YmeC("yield/yields.pl_375_629_+0000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YmeC<<hYmeC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YmeC.close();
 
   TCanvas *cYmeL1 = new TCanvas("cYmeL1", " cYmeL1");
   hYmeL1->Add(hYmeL1R, -1);  
@@ -4563,6 +4711,17 @@ void t_plots()
   cout<< "L1 Setting Yield"<<endl;
   cout<<"..."<<endl;
 
+  ofstream YmeL1("yield/yields.pl_375_629_-2000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YmeL1<<hYmeL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YmeL1.close();
+
   TCanvas *cYmeL2 = new TCanvas("cYmeL2", " cYmeL2");
   hYmeL2->Add(hYmeL2R, -1);  
   hYmeL2->Scale(SFMEL2);  
@@ -4572,6 +4731,17 @@ void t_plots()
 
   cout<< "L2 Setting Yield"<<endl;
   cout<<"..."<<endl;
+
+  ofstream YmeL2("yield/yields.pl_375_629_-4000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YmeL2<<hYmeL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YmeL2.close();
 
   TH2D *Cloneme = (TH2D*)hYmeR1->Clone("Cloneme");
   Cloneme->Add(hYmeR2,+1);
@@ -4585,6 +4755,7 @@ void t_plots()
 
   cout<< "Total Yield for mid epsilon"<<endl;
   cout<<"..."<<endl;
+
 
   cout<<"End of the mid e Yield calculations "<<endl;
 
@@ -4785,9 +4956,9 @@ void t_plots()
   Float_t WeightheC;TSIMCHIGHEC->SetBranchAddress("Weight", &WeightheC);
   Float_t phipqheC;TSIMCHIGHEC->SetBranchAddress("phipq", &phipqheC);
 
-  //LEFT1                                                                                                                                                                                          
-  //SHMS SIMC variables                                                                                                                                                                              
-                                                                                                                                                                                                   
+  //LEFT1
+  //SHMS SIMC variables
+  
   Float_t ssdeltaheL1;TSIMCHIGHEL1->SetBranchAddress("ssdelta", &ssdeltaheL1);
   Float_t ssxptarheL1;TSIMCHIGHEL1->SetBranchAddress("ssxptar", &ssxptarheL1);
   Float_t ssyptarheL1;TSIMCHIGHEL1->SetBranchAddress("ssyptar", &ssyptarheL1);
@@ -4817,9 +4988,9 @@ void t_plots()
   Float_t WeightheL1;TSIMCHIGHEL1->SetBranchAddress("Weight", &WeightheL1);
   Float_t phipqheL1;TSIMCHIGHEL1->SetBranchAddress("phipq", &phipqheL1);
 
-  //LEFT2                                                                                                                                                                                          
-  //SHMS SIMC variables                                                                                                                                                                              
-                                                                                                                                                                                                   
+  //LEFT2
+  //SHMS SIMC variables 
+  
   Float_t ssdeltaheL2;TSIMCHIGHEL2->SetBranchAddress("ssdelta", &ssdeltaheL2);
   Float_t ssxptarheL2;TSIMCHIGHEL2->SetBranchAddress("ssxptar", &ssxptarheL2);
   Float_t ssyptarheL2;TSIMCHIGHEL2->SetBranchAddress("ssyptar", &ssyptarheL2);
@@ -5140,6 +5311,7 @@ void t_plots()
 
   //SIMC and Data HISTOGRAMS  
   //RIGHT1  
+  TH2D *hYSheR1   = new TH2D("hYSheR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheR1  = new TH1D("H_ssdelta_SheR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheR1  = new TH1D("H_ssxptar_SheR1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SheR1  = new TH1D("H_ssyptar_SheR1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -5165,6 +5337,7 @@ void t_plots()
   TH1D *H_hsyptar_DheR1R  = new TH1D("H_hsyptar_DheR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //CENTER  
+  TH2D *hYSheC   = new TH2D("hYSheC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheC  = new TH1D("H_ssdelta_SheC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheC  = new TH1D("H_ssxptar_SheC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SheC  = new TH1D("H_ssyptar_SheC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -5190,6 +5363,7 @@ void t_plots()
   TH1D *H_hsyptar_DheCR  = new TH1D("H_hsyptar_DheCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1  
+  TH2D *hYSheL1   = new TH2D("hYSheL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheL1  = new TH1D("H_ssdelta_SheL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheL1  = new TH1D("H_ssxptar_SheL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SheL1  = new TH1D("H_ssyptar_SheL1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -5215,6 +5389,7 @@ void t_plots()
   TH1D *H_hsyptar_DheL1R  = new TH1D("H_hsyptar_DheL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2  
+  TH2D *hYSheL2   = new TH2D("hYSheL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheL2  = new TH1D("H_ssdelta_SheL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheL2  = new TH1D("H_ssxptar_SheL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SheL2  = new TH1D("H_ssyptar_SheL2","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -5417,11 +5592,12 @@ void t_plots()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheR1, W_simcheR1));
 
-      Double_t NFR1 = 34898700.0/400000.0;
+      Double_t NFR1 = 35406000.0/400000.0;
 
       if(hsdeltaheR1 >=-8.0 && hsdeltaheR1 <=8.0 && hsxpfpheR1 >=-0.08 && hsxpfpheR1 <=0.08 && hsypfpheR1 >=-0.045 && hsypfpheR1 <=0.045 && ssdeltaheR1 >=-10.0 && ssdeltaheR1 <=20.0 && ssxpfpheR1 >=-0.06 && ssxpfpheR1 <=0.06 && ssypfpheR1 >=-0.04 && ssypfpheR1 <=0.04 && missmassheR1 >= 0.92 && missmassheR1 <= 0.98 && Diamond_cut)
 	
         {
+	  hYSheR1->Fill(t_simcheR1,phipqheR1*57.2958, NFR1*WeightheR1);
           H_ssdelta_SheR1->Fill(ssdeltaheR1, NFR1*WeightheR1);
           H_ssxptar_SheR1->Fill(ssxptarheR1, NFR1*WeightheR1);
           H_ssyptar_SheR1->Fill(ssyptarheR1, NFR1*WeightheR1);
@@ -5626,6 +5802,7 @@ void t_plots()
       if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxpfpheC >=-0.08 && hsxpfpheC <=0.08 && hsypfpheC >=-0.045 && hsypfpheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxpfpheC >=-0.06 && ssxpfpheC <=0.06 && ssypfpheC >=-0.04 && ssypfpheC <=0.04 && missmassheC >= 0.92 && missmassheC <= 0.98 && Diamond_cut)
 	
         {
+	  hYSheC->Fill(t_simcheC,phipqheC*57.2958, NFC*WeightheC);
           H_ssdelta_SheC->Fill(ssdeltaheC, NFC*WeightheC);
           H_ssxptar_SheC->Fill(ssxptarheC, NFC*WeightheC);
           H_ssyptar_SheC->Fill(ssyptarheC, NFC*WeightheC);
@@ -5821,11 +5998,12 @@ void t_plots()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheL1, W_simcheL1));
 
-      Double_t NFL1 = 35422100.0/400000.0;
+      Double_t NFL1 = 35026200.0/400000.0;
 
       if(hsdeltaheL1 >=-8.0 && hsdeltaheL1 <=8.0 && hsxpfpheL1 >=-0.08 && hsxpfpheL1 <=0.08 && hsypfpheL1 >=-0.045 && hsypfpheL1 <=0.045 && ssdeltaheL1 >=-10.0 && ssdeltaheL1 <=20.0 && ssxpfpheL1 >=-0.06 && ssxpfpheL1 <=0.06 && ssypfpheL1 >=-0.04 && ssypfpheL1 <=0.04 && missmassheL1 >= 0.92 && missmassheL1 <= 0.98 && Diamond_cut)
 	
         {
+	  hYSheL1->Fill(t_simcheL1,phipqheL1*57.2958, NFL1*WeightheL1);
           H_ssdelta_SheL1->Fill(ssdeltaheL1, NFL1*WeightheL1);
           H_ssxptar_SheL1->Fill(ssxptarheL1, NFL1*WeightheL1);
           H_ssyptar_SheL1->Fill(ssyptarheL1, NFL1*WeightheL1);
@@ -6014,11 +6192,12 @@ void t_plots()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheL2, W_simcheL2));
 
-      Double_t NFL2 = 35322100.0/400000.0;
+      Double_t NFL2 = 34657200.0/400000.0;
 
       if(hsdeltaheL2 >=-8.0 && hsdeltaheL2 <=8.0 && hsxpfpheL2 >=-0.08 && hsxpfpheL2 <=0.08 && hsypfpheL2 >=-0.045 && hsypfpheL2 <=0.045 && ssdeltaheL2 >=-10.0 && ssdeltaheL2 <=20.0 && ssxpfpheL2 >=-0.06 && ssxpfpheL2 <=0.06 && ssypfpheL2 >=-0.04 && ssypfpheL2 <=0.04 && missmassheL2 >= 0.92 && missmassheL2 <= 0.98 && Diamond_cut)
 	
         {
+	  hYSheL2->Fill(t_simcheL2,phipqheL2*57.2958, NFL2*WeightheL2);
           H_ssdelta_SheL2->Fill(ssdeltaheL2, NFL2*WeightheL2);
           H_ssxptar_SheL2->Fill(ssxptarheL2, NFL2*WeightheL2);
           H_ssyptar_SheL2->Fill(ssyptarheL2, NFL2*WeightheL2);
@@ -7115,8 +7294,24 @@ void t_plots()
   hYheR1->Draw("COLZ");
   cYheR1->Print(outputpdf);
 
+  TCanvas *cYSheR1 = new TCanvas("cYSheR1", " cYSheR1");
+  hYSheR1->SetStats(0);
+  hYSheR1->Draw("COLZ");
+  cYSheR1->Print(outputpdf);
+
   cout<< "R1 Setting Yield"<<endl;
   cout<<"..."<<endl;
+
+  ofstream YheR1("yield/yields.pl_375_781_+2680.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YheR1<<hYheR1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YheR1.close();
 
   TCanvas *cYheC = new TCanvas("cYheC", " cYheC");
   hYheC->Add(hYheCR, -1);  
@@ -7125,8 +7320,23 @@ void t_plots()
   hYheC->Draw("COLZ");
   cYheC->Print(outputpdf);
 
+  TCanvas *cYSheC = new TCanvas("cYSheC", " cYSheC");
+  hYSheC->SetStats(0);
+  hYSheC->Draw("COLZ");
+  cYSheC->Print(outputpdf);
+
   cout<< "C Setting Yield"<<endl;
   cout<<"..."<<endl;
+  ofstream YheC("yield/yields.pl_375_781_+0000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YheC<<hYheC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YheC.close();
 
   TCanvas *cYheL1 = new TCanvas("cYheL1", " cYheL1");
   hYheL1->Add(hYheL1R, -1);  
@@ -7135,8 +7345,23 @@ void t_plots()
   hYheL1->Draw("COLZ");
   cYheL1->Print(outputpdf);
 
+  TCanvas *cYSheL1 = new TCanvas("cYSheL1", " cYSheL1");
+  hYSheL1->SetStats(0);
+  hYSheL1->Draw("COLZ");
+  cYSheL1->Print(outputpdf);
+
   cout<< "L1 Setting Yield"<<endl;
   cout<<"..."<<endl;
+  ofstream YheL1("yield/yields.pl_375_781_-2015.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YheL1<<hYheL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YheL1.close();
 
   TCanvas *cYheL2 = new TCanvas("cYheL2", " cYheL2");
   hYheL2->Add(hYheL2R, -1);  
@@ -7145,8 +7370,23 @@ void t_plots()
   hYheL2->Draw("COLZ");
   cYheL2->Print(outputpdf);
 
+  TCanvas *cYSheL2 = new TCanvas("cYSheL2", " cYSheL2");
+  hYSheL2->SetStats(0);
+  hYSheL2->Draw("COLZ");
+  cYSheL2->Print(outputpdf);
+
   cout<< "L2 Setting Yield"<<endl;
   cout<<"..."<<endl;
+  ofstream YheL2("yield/yields.pl_375_781_-4000.target");
+  for(int j=2 ; j <=9 ; ++j) 
+    {
+      for(Long64_t i = 2; i <= 17; i++) 
+	{
+	  Double_t err;
+	  YheL2<<hYheL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	}
+    } 
+  YheL2.close();
 
   TH2D *Clonehe = (TH2D*)hYheR1->Clone("Clonehe");
   Clonehe->Add(hYheC,+1);
