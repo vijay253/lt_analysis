@@ -7,23 +7,9 @@ c
 c     Input: yields/yields.*.dat
 c     Output: averages/aver.*.dat
 
-      call average_r(+1,1.60,0.32)
-c      call average_r(+1,1.60,0.59)
-
-c      call average_r(+1,0.60,0.37)
-c      call average_r(+1,0.60,0.74)
-
-c      call average_r(+1,0.65,0.37)
-c      call average_r(+1,0.65,0.74)
-
-c      call average_r(+1,0.75,0.43)
-c      call average_r(+1,0.75,0.70)
-
-c      call average_r(+1,1.00,0.33)
-c      call average_r(+1,1.00,0.65)
-
-c      call average_r(+1,1.60,0.27)
-c      call average_r(+1,1.60,0.63)
+      call average_r(+1,0.375,0.286)
+      call average_r(+1,0.375,0.629)
+      call average_r(+1,0.375,0.781)
 
       stop
       end
@@ -47,7 +33,7 @@ c     in averages/aver.* .
       real one
       real yd
 
-      parameter (nt=6,nphi=16)
+      parameter (nt=8,nphi=16)
 
       real yrd(nphi,nt),drd(nphi,nt)
       real ydm(nphi,nt),ddm(nphi,nt)
@@ -68,8 +54,7 @@ c     in averages/aver.* .
       end do
 
       nset=0
-c      open(55,file='./list.settings.omega')
-      open(55,file='./list.settings2b')
+      open(55,file='./list.settings.pion19')
       do while(.true.)
 
          read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbin
@@ -88,17 +73,17 @@ c      open(55,file='./list.settings.omega')
 
 c     Read real data.
             write(fn,'(''yields/yields.'',
-     *      a2,''_'',i3.3,''_'',i2.2,''_'',SP,i5.4,S,''.target'')')
-     *      pol,nint(q2_set*100.),nint(eps_set*100.),nint(th_pq*1000.)
+     *      a2,''_'',i3.3,''_'',i3.3,''_'',SP,i5.4,S,''.target'')')
+     *      pol,nint(q2_set*1000.),nint(eps_set*1000.),nint(th_pq*1000.)
             print*,'fn=',fn
 c            pause
-
+               
             open(66,file=fn)
             read(66,*) one
-            do it=1,nbin
+            do it=1,nt
                do ip=1,nphi
                   read(66,*) yd,er
-*                  print*,yd,er
+                  print*,yd,er
                   yrd(ip,it)=yrd(ip,it)+yd
                   drd(ip,it)=drd(ip,it)+er**2
                end do
@@ -107,17 +92,17 @@ c            pause
 
 c     Read dummy data.
             write(fn,'(''yields/yields.'',
-     *      a2,''_'',i3.3,''_'',i2.2,''_'',SP,i5.4,S,''.dummy'')')
-     *      pol,nint(q2_set*100.),nint(eps_set*100.),nint(th_pq*1000.)
+     *      a2,''_'',i3.3,''_'',i3.3,''_'',SP,i5.4,S,''.dummy'')')
+     *      pol,nint(q2_set*1000.),nint(eps_set*1000.),nint(th_pq*1000.)
             print*,'fn=',fn
 c            pause
 
             open(66,file=fn)
             read(66,*) one
-            do it=1,nbin
+            do it=1,nt
                do ip=1,nphi
                   read(66,*) yd,er
-*                  print*,yd,er
+                  print*,yd,er
                   ydm(ip,it)=ydm(ip,it)+yd
                   ddm(ip,it)=ddm(ip,it)+er**2
                end do
@@ -125,18 +110,18 @@ c            pause
             close(66)
 
 c     Read simc data.
-            write(fn,'(''yields/yields.'',a2,''_'',i3.3,''_'',i2.2,
+            write(fn,'(''yields/yields.'',a2,''_'',i3.3,''_'',i3.3,
      *      ''_'',SP,i5.4,S,''.simc'')')
-     *      pol,nint(q2_set*100.),nint(eps_set*100.),nint(th_pq*1000.)
+     *      pol,nint(q2_set*1000.),nint(eps_set*1000.),nint(th_pq*1000.)
             print*,'fn=',fn
 c            pause
 
             open(66,file=fn)
             read(66,*) one
-            do it=1,nbin
+            do it=1,nt
                do ip=1,nphi
                   read(66,*) yd,er
-*                  print*,yd,er
+                  print*,yd,er
                   ymc(ip,it)=ymc(ip,it)+yd
                   dmc(ip,it)=dmc(ip,it)+er**2
                end do
@@ -165,13 +150,13 @@ c            enddo
 
 c      pause
 
-      write(fn,'(''averages/aver.'',a2,''_'',i3.3,''_'',i2.2,''.dat'')'
-     *     )pol,nint(q2_set*100.),nint(eps_set*100.)
+      write(fn,'(''averages/aver.'',a2,''_'',i3.3,''_'',i3.3,''.dat'')'
+     *     )pol,nint(q2_set*1000.),nint(eps_set*1000.)
       print*,'fn=',fn
       print*
 
       open(77,file=fn,status='replace')
-      do it=1,nbin
+      do it=1,nt
          do ip=1,nphi
             r=0.
             e=0.
