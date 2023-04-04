@@ -112,8 +112,8 @@ def find_tbins():
     H_t_Left = []
     H_t_Center = []
 
-    for val in ['Right', 'Left', 'Center']:
-    #for val in settingList:
+#    for val in ['Right', 'Left', 'Center']:
+    for val in settingList:
         rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
             continue

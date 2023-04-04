@@ -178,8 +178,8 @@ NumPhiBins=16
 
 # Define global variables for lt_analysis scripts
 POL="+1" # All KaonLT is positive polarity
-TMIN=0.010
-TMAX=0.990
+TMIN=0.20
+TMAX=1.70
 KSet=1 # Arbitrary value
 
 # Efficiency csv file
@@ -556,7 +556,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
-	    root -b -q  "PlotScript.C(\"$i\")"
+#	    root -b -q  "PlotScript.C(\"$i\")"
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
 	    echo "Combining run $i with ${OutDATAFilename}_Right2.root..."  
@@ -580,7 +580,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
-	    root -b -q  "PlotScript.C(\"$i\")"
+#	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -608,7 +608,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
-	    root -b -q  "PlotScript.C(\"$i\")"
+#	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -634,7 +634,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
-	    root -b -q  "PlotScript.C(\"$i\")"
+#	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
@@ -660,7 +660,7 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    cd "${LTANAPATH}/scripts/Prod"
 	    cd "/u/group/c-kaonlt/USERS/vijay/lt_analysis/scripts/Prod"
 	    python3 Analysed_Prod_v1.py "$i" | tee ../../log/Analysed_Prod_v1_$i.log
-	    root -b -q  "PlotScript.C(\"$i\")"
+#	    root -b -q  "PlotScript.C(\"$i\")"
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"

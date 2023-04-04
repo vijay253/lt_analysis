@@ -154,11 +154,11 @@ def find_tbins():
     ################################################################################################################################################
     # Define root file trees of interest
     
-    H_t_Right = []
-    H_t_Left = []
+    H_t_Left1 = []
+    H_t_Left2 = []
     H_t_Center = []
 
-    for val in ['Center' , 'Lef1', 'Left2']:
+    for val in ['Lef1', 'Left2', 'Center']:
     #for val in settingList:
         rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
@@ -174,15 +174,14 @@ def find_tbins():
                 TBRANCH_LEFT1_DATA   = InFile_LEFT1_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_RF")
-                print("Creating right t-bin histogram...")
+                print("Creating Left1 t-bin histogram...")
                 # Grab t bin range
                 for i,evt in enumerate(TBRANCH_LEFT1_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_LEFT1_DATA.GetEntries())
                     if (tmin <= -evt.MandelT <= tmax):
-                        H_t_Right.append(-evt.MandelT)   
+                        H_t_Left1.append(-evt.MandelT)   
                 #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
-                
                 InFile_LEFT1_DATA.Close()            
                 
             if val == 'Left2':
@@ -195,13 +194,13 @@ def find_tbins():
                 TBRANCH_LEFT2_DATA   = InFile_LEFT2_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_RF")
-                print("\nCreating left t-bin histogram...")
+                print("\nCreating Left2 t-bin histogram...")
                 # Grab t bin range
                 for i,evt in enumerate(TBRANCH_LEFT2_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_LEFT2_DATA.GetEntries())
                     if (tmin <= -evt.MandelT <= tmax):
-                        H_t_Left.append(-evt.MandelT)
+                        H_t_Left2.append(-evt.MandelT)
                 #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
                 InFile_LEFT2_DATA.Close()
                 
@@ -229,24 +228,24 @@ def find_tbins():
 
     def histedges_equalN(x, nbin):
         npt = len(x)
-        return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
+        return np.interp(np.linspace(0, npt, nbin + 0.5),np.arange(npt),np.sort(x))
 
     H_t_BinTest = []
     for val in settingList:
         if val == "Left1":
-            for r in H_t_Right:
-                H_t_BinTest.append(r)
+            for l1 in H_t_Left1:
+                H_t_BinTest.append(l1)
         if val == "Left2":
-            for l in H_t_Left:
-                H_t_BinTest.append(l)
+            for l2 in H_t_Left2:
+                H_t_BinTest.append(l2)
         if val == "Center":
             for c in H_t_Center:
                 H_t_BinTest.append(c)
 
     n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, NumtBins))
 
-    rn, rbins = np.histogram(H_t_Right, bins=bins)
-    ln, lbins = np.histogram(H_t_Left, bins=bins)
+    l1n, l1bins = np.histogram(H_t_Left1, bins=bins)
+    l2n, l2bins = np.histogram(H_t_Left2, bins=bins)
     cn, cbins = np.histogram(H_t_Center, bins=bins)
 
     # Write t_bin_interval for lt_analysis scripts
@@ -426,7 +425,7 @@ def defineHists(phi_setting):
     H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 200, 0.0, 10.0)
     H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 200, 0.0, 10.0)
     H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W ", 200, 0.0, 10.0)
-    H_t_SIMC       = ROOT.TH1D("H_t_SIMC","-t", 200, -1.0, 1.5)  
+    H_t_SIMC       = ROOT.TH1D("H_t_SIMC","-t", 200, 0.0, 1.8)  
     H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 200, 0., 1.0)
     H_MM_SIMC  = ROOT.TH1D("H_MM_SIMC","MM_{K}", 200, 0.0, 2.0)
     H_th_SIMC  = ROOT.TH1D("H_th_SIMC","X' tar", 200, -0.1, 0.1)
@@ -458,7 +457,7 @@ def defineHists(phi_setting):
     H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 200, 0.0, 10.0)
     H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)
     H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
-    H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, -1.0, 1.5)  
+    H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, 0.0, 1.8)  
     H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0., 1.0)
     H_MM_DATA  = ROOT.TH1D("H_MM_DATA","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
@@ -496,7 +495,7 @@ def defineHists(phi_setting):
     H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 200, 0.0, 10.0)
     H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)
     H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.0, 10.0)
-    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, -1.0, 1.5)
+    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, 0.0, 1.8)
     H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0., 1.0)
     H_MM_DATA_rand  = ROOT.TH1D("H_MM_DATA_rand","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)

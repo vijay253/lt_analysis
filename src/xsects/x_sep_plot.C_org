@@ -1,0 +1,221 @@
+#include <vector>
+
+void x_sep_plot() {
+
+	single_setting("160");
+//	single_setting("245");
+
+// 	TCanvas* c2 = new TCanvas();
+// 
+// 	c2->Update();
+// 	
+// 	g_sig_l->Draw("A*");
+// 
+// 	gStyle->SetOptFit(1);
+// 
+// 	TF1* f1 = new TF1("f1", fun_exp, 0, 0.5, 3);
+// 
+// //	f1->SetParameter();
+// 
+// 	g_sig_l->Fit("f1", "R");
+// 
+// 	c2->Print("sig_L.png");
+// 
+// 	c2->Clear();
+// 	
+// 	g_sig_t->Draw("A*");
+// 	g_sig_t->Fit("f1", "R");
+// 
+//	c2->Print("sig_T.png");
+
+
+
+}
+
+
+///*--------------------------------------------------*/
+
+void single_setting(TString q2_set){
+
+
+	TCanvas* c1 =  new TCanvas("c1", "c1", 1200, 400); 
+
+	c1->Divide(3, 1);
+
+// 	TString eps_lo;
+// 	TString eps_hi;
+// 
+// 	TGraphErrors* sig_u_lo = new TGraphErrors();
+// 	TGraphErrors* sig_u_hi = new TGraphErrors();
+// 	TGraphErrors* sig_u_diff = new TGraphErrors();
+// 
+
+
+	TString file_name_1;
+	file_name_1 = "x_sep.pl_" + q2_set;
+
+ 	TString file_name_2;
+ 	file_name_2 = "x_sep.pl_" + q2_set;
+
+	TNtuple* n1 = new TNtuple("n1", "n1", "sigl/F:dsigl:sigt:dsigt:siglt:dsiglt:sigtt:dsigtt:chi2:u:w:Q2");
+	n1->ReadFile(file_name_1);
+ 
+ 	TNtuple* n2 = new TNtuple("n2", "n2", "sigl/F:dsigl:sigt:dsigt:siglt:dsiglt:sigtt:dsigtt:chi2:u:w:Q2");
+ 	n2->ReadFile(file_name_2);
+
+
+//	n1->Draw("t");
+
+	Float_t uu;
+
+
+	n1->SetBranchAddress("u", &uu);
+
+	Int_t N = n1->GetEntries();
+	
+	vector<Float_t> t_list;
+
+
+
+	for (Int_t i = 0; i < N; ++i) {
+
+    	n1->GetEntry(i);
+		
+  		if(!binary_search(t_list.begin(), t_list.end(), uu)) {
+
+			cout << uu << endl << endl;
+
+			t_list.push_back(uu);
+
+
+
+		}
+
+	}
+
+	
+	for (Int_t i = 0; i < t_list.size(); i++) {
+
+  	 	c1->cd(i+1);
+
+        n1->Draw("sigl:u:dsigl", "", "goff");
+    	TGraphErrors* g1_tmp = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+ 	  	TGraphErrors* g1 = (TGraphErrors*) g1_tmp->Clone("g1");
+
+		g1->Draw("A*");
+
+ 	}
+
+	c1->Print("Sigma_L.png");
+
+
+	for (Int_t i = 0; i < t_list.size(); i++) {
+
+  	 	c1->cd(i+1);
+
+        n1->Draw("sigt:u:dsigt", "", "goff");
+    	TGraphErrors* g1_tmp = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+ 	  	TGraphErrors* g1 = (TGraphErrors*) g1_tmp->Clone("g1");
+
+		g1->Draw("A*");
+
+ 	}
+
+	c1->Print("Sigma_T.png");
+
+	for (Int_t i = 0; i < t_list.size(); i++) {
+
+  	 	c1->cd(i+1);
+
+        n1->Draw("siglt:u:dsiglt", "", "goff");
+    	TGraphErrors* g1_tmp = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+ 	  	TGraphErrors* g1 = (TGraphErrors*) g1_tmp->Clone("g1");
+
+		g1->Draw("A*");
+
+ 	}
+
+	c1->Print("Sigma_LT.png");
+
+	for (Int_t i = 0; i < t_list.size(); i++) {
+
+  	 	c1->cd(i+1);
+
+        n1->Draw("sigtt:u:dsigtt", "", "goff");
+    	TGraphErrors* g1_tmp = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+ 	  	TGraphErrors* g1 = (TGraphErrors*) g1_tmp->Clone("g1");
+
+		g1->Draw("A*");
+
+ 	}
+
+	c1->Print("Sigma_TT.png");
+
+
+
+
+
+}
+
+
+
+// 
+// 
+// /*--------------------------------------------------*/
+// 
+// Double_t fun_exp(Double_t *x, Double_t *par){
+// 
+//     Float_t xx =x[0];
+// 
+// //    Double_t f = par[0]*sin(xx);
+// 
+//     Double_t sig =  par[0]*exp(par[1]*xx)+ par[2];
+// 
+// 
+// 	return sig;
+// }
+// 
+// 
+// 
+// 
+// 
+// /*--------------------------------------------------*/
+// 
+// Double_t LT_sep_x_lo_fun(Double_t *x, Double_t *par){
+// 
+// 
+// 	Float_t eps = 0.27;
+// 
+//     Float_t xx =x[0];
+// 
+// //    Double_t f = par[0]*sin(xx);
+// 	Double_t xs;
+// 
+// //	xs = par[0] +  eps*par[1] + sqrt(2*eps*(1+eps))*par[2]*cos(2*xx) + par[3]*cos(xx);
+// 	xs = par[0] +  eps*par[1] + sqrt(2*eps*(1+eps))*par[2]*cos(xx) + eps*par[3]*cos(2*xx);
+// 
+// 	return xs;
+// }
+// 
+// 
+// 
+// /*--------------------------------------------------*/
+// 
+// Double_t LT_sep_x_hi_fun(Double_t *x, Double_t *par){
+// 
+// 
+// 	Float_t eps = 0.55;
+// 
+//     Float_t xx =x[0];
+// 
+// //    Double_t f = par[0]*sin(xx);
+// 	Double_t xs;
+// 
+// 	xs = par[0] +  eps*par[1] + sqrt(2*eps*(1+eps))*par[2]*cos(xx) + eps*par[3]*cos(2*xx);
+// 
+// 	return xs;
+// }
+// 
+// 
+// 
+// 
