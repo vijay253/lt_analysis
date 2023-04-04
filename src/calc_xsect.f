@@ -181,11 +181,11 @@ c     *     '  eps=',f6.4,'  pol=',a2)
 
 c     construct ratio data file name.
 
-c      write(r_fn,10) pol,nint(q2*1000),nint(eps*1000)
-c 10   format('averages/aver.',a2,'_',i3.3,'_',i3.3,'.dat')
-c      print*,'xsect: r_fn=',r_fn
+      write(r_fn,10) pol,nint(q2*1000),nint(eps*1000)
+ 10   format('averages/aver.',a2,'_',i3.3,'_',i3.3,'.dat')
+      print*,'xsect: r_fn=',r_fn
 
-c      open(51,file=r_fn)
+      open(51,file=r_fn)
 
 c     construct kinematics data file name.
 
@@ -253,7 +253,7 @@ c        stop
             phi=(ip-0.5)*2.*3.14159/nphi
   
 c            phi=(ip-1)*2.*3.14159/nphi
-c            read(51,*) r,dr
+            read(51,*) r,dr
 
 c            print *, "ratio checkaaaaaaa: ", r, dr
 
@@ -336,10 +336,10 @@ c /*--------------------------------------------------*/
 
 c ratio is data/simc - see GH logbook, p.55
 
-c             x_real=x_mod*r
-             x_real=x_mod
-c             dx_real=x_mod*dr/r
-             dx_real=x_mod*2/100
+             x_real=x_mod*r
+c             x_real=x_mod
+             dx_real=x_mod*dr/r
+c             dx_real=x_mod*2/100
 c             dx_real=2.823
 
              if (x_real.eq.0.0) then
