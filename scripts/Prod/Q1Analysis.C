@@ -466,6 +466,7 @@ void Q1Analysis()
   TH1D *htInL1R  = new TH1D("htInL1R","MandelT; MandelT;", 10, bins);      
   TH1D *htInL2R  = new TH1D("htInL2R","MandelT; MandelT;", 10, bins);      
 
+  //DATA
   TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qL1  = new TH1D("hph_qL1","ph_q; ph_q;", 18, -22.5, 382.5);      
   TH1D *hph_qL2  = new TH1D("hph_qL2","ph_q; ph_q;", 18, -22.5, 382.5);      
@@ -473,6 +474,16 @@ void Q1Analysis()
   TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",  18, -22.5, 382.5);      
   TH1D *hph_qL1R  = new TH1D("hph_qL1R","ph_q; ph_q;",18, -22.5, 382.5);      
   TH1D *hph_qL2R  = new TH1D("hph_qL2R","ph_q; ph_q;",18, -22.5, 382.5);      
+
+  //SIMC
+  TH1D *hph_qSC  = new TH1D("hph_qSC","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qSL1  = new TH1D("hph_qSL1","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hph_qSL2  = new TH1D("hph_qSL2","ph_q; ph_q;", 18, -22.5, 382.5);      
+
+  //Ratio
+  TH1D *hph_qRC  = new TH1D("hph_qRC","ph_q; ph_q;",   18, -22.5, 382.5);      
+  TH1D *hph_qRL1  = new TH1D("hph_qRL1","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hph_qRL2  = new TH1D("hph_qRL2","ph_q; ph_q;", 18, -22.5, 382.5);      
 
   TH1D *hmmC  = new TH1D("hmmC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmL1  = new TH1D("hmmL1","MM; MM;", 300, 0.8, 1.2);      
@@ -502,6 +513,10 @@ void Q1Analysis()
 
   //SIMC and Data HISTOGRAMS
   //CENTER
+  TH1D *hphC  = new TH1D("hphC","ph_q; ph_q;",50, -22.5, 382.5);      
+  TH1D *hphCR  = new TH1D("hphCR","ph_q; ph_q;",  50, -22.5, 382.5);      
+  TH1D *hphSC  = new TH1D("hphSC","ph_q; ph_q;",50, -22.5, 382.5);      
+
   TH1D *H_ssdelta_SC  = new TH1D("H_ssdelta_SC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SC  = new TH1D("H_ssxptar_SC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SC  = new TH1D("H_ssyptar_SC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -527,6 +542,10 @@ void Q1Analysis()
   TH1D *H_hsyptar_DCR  = new TH1D("H_hsyptar_DCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1
+  TH1D *hphL1  = new TH1D("hphL1","ph_q; ph_q;",50, -22.5, 382.5);      
+  TH1D *hphL1R  = new TH1D("hphL1R","ph_q; ph_q;",  50, -22.5, 382.5);      
+  TH1D *hphSL1  = new TH1D("hphSL1","ph_q; ph_q;",50, -22.5, 382.5);      
+
   TH1D *H_ssdelta_SL1  = new TH1D("H_ssdelta_SL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SL1  = new TH1D("H_ssxptar_SL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SL1  = new TH1D("H_ssyptar_SL1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -552,6 +571,10 @@ void Q1Analysis()
   TH1D *H_hsyptar_DL1R  = new TH1D("H_hsyptar_DL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2
+  TH1D *hphL2  = new TH1D("hphL2","ph_q; ph_q;",50, -22.5, 382.5);      
+  TH1D *hphL2R  = new TH1D("hphL2R","ph_q; ph_q;",  50, -22.5, 382.5);      
+  TH1D *hphSL2  = new TH1D("hphSL2","ph_q; ph_q;",50, -22.5, 382.5);      
+
   TH1D *H_ssdelta_SL2  = new TH1D("H_ssdelta_SL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SL2  = new TH1D("H_ssxptar_SL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SL2  = new TH1D("H_ssyptar_SL2","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -648,6 +671,7 @@ void Q1Analysis()
   	  htC->Fill(-tC);
 	  htInC->Fill(-tC);	
 	  hph_qC->Fill(ph_qC*57.2958 + 180);
+	  hphC->Fill(ph_qC*57.2958 + 180);
 	  hYC->Fill(-tC, ph_qC*57.2958 + 180);
 	}	
        
@@ -664,6 +688,7 @@ void Q1Analysis()
 	  htCR->Fill(-tC);
 	  htInCR->Fill(-tC);	
 	  hph_qCR->Fill(ph_qC*57.2958 + 180);
+	  hphCR->Fill(ph_qC*57.2958 + 180);
 	  hQ2WCR->Fill(Q2C, WC);
 	  hYCR->Fill(-tC, ph_qC*57.2958 + 180);
 	}
@@ -800,6 +825,8 @@ void Q1Analysis()
      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxpfp >=-0.08 && hsxpfp <=0.08 && hsypfp >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxpfp >=-0.06 && ssxpfp <=0.06 && ssypfp >=-0.04 && ssypfp <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
 	
 	{
+	  hph_qSC->Fill(phipq*57.2958, fact*Weight);
+	  hphSC->Fill(phipq*57.2958, fact*Weight);
 	  hYSC->Fill(t_simc, phipq*57.2958, fact*Weight);
 	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
 	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
@@ -882,6 +909,7 @@ void Q1Analysis()
 	  htL1->Fill(-tL1);
  	  htInL1->Fill(-tL1);
 	  hph_qL1->Fill(ph_qL1*57.2958 + 180);	  
+	  hphL1->Fill(ph_qL1*57.2958 + 180);	  
 	  hYL1->Fill(-tL1, ph_qL1*57.2958 + 180);
 	}      
       
@@ -899,6 +927,7 @@ void Q1Analysis()
 	  htL1R->Fill(-tL1);
  	  htInL1R->Fill(-tL1);
 	  hph_qL1R->Fill(ph_qL1*57.2958 + 180);	  
+	  hphL1R->Fill(ph_qL1*57.2958 + 180);	  
 	  hYL1R->Fill(-tL1, ph_qL1*57.2958 + 180);
 	}
       
@@ -1034,6 +1063,8 @@ void Q1Analysis()
      if(hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxpfpL1 >=-0.08 && hsxpfpL1 <=0.08 && hsypfpL1 >=-0.045 && hsypfpL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxpfpL1 >=-0.06 && ssxpfpL1 <=0.06 && ssypfpL1 >=-0.04 && ssypfpL1 <=0.04 && missmassL1 >= 0.92 && missmassL1 <= 0.98 && Diamond_cut)
 	
 	{
+	  hph_qSL1->Fill(phipqL1*57.2958, factL1*WeightL1);
+	  hphSL1->Fill(phipqL1*57.2958, factL1*WeightL1);
 	  hYSL1->Fill(t_simcL1, phipqL1*57.2958, factL1*WeightL1);
 	  H_ssdelta_SL1->Fill(ssdeltaL1, factL1*WeightL1);
 	  H_ssxptar_SL1->Fill(ssxptarL1, factL1*WeightL1);
@@ -1075,6 +1106,7 @@ void Q1Analysis()
 	  htL2->Fill(-tL2);
  	  htInL2->Fill(-tL2);
 	  hph_qL2->Fill(ph_qL2*57.2958 + 180);
+	  hphL2->Fill(ph_qL2*57.2958 + 180);
 	  hYL2->Fill(-tL2, ph_qL2*57.2958 + 180);
 	}
 
@@ -1091,6 +1123,7 @@ void Q1Analysis()
 	  htL2R->Fill(-tL2);
  	  htInL2R->Fill(-tL2);
 	  hph_qL2R->Fill(ph_qL2*57.2958 + 180);
+	  hphL2R->Fill(ph_qL2*57.2958 + 180);
 	  hYL2R->Fill(-tL2, ph_qL2*57.2958 + 180);
 	}
 
@@ -1224,6 +1257,8 @@ void Q1Analysis()
      if(hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxpfpL2 >=-0.08 && hsxpfpL2 <=0.08 && hsypfpL2 >=-0.045 && hsypfpL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxpfpL2 >=-0.06 && ssxpfpL2 <=0.06 && ssypfpL2 >=-0.04 && ssypfpL2 <=0.04 && missmassL2 >= 0.92 && missmassL2 <= 0.98 && Diamond_cut)
 	
 	{
+	  hphSL2->Fill(phipqL2*57.2958, factL2*WeightL2);
+	  hph_qSL2->Fill(phipqL2*57.2958, factL2*WeightL2);
 	  hYSL2->Fill(t_simcL2, phipqL2*57.2958, factL2*WeightL2);
 	  H_ssdelta_SL2->Fill(ssdeltaL2, factL2*WeightL2);
 	  H_ssxptar_SL2->Fill(ssxptarL2, factL2*WeightL2);
@@ -1261,6 +1296,10 @@ void Q1Analysis()
   H_hsxptar_DL2R->Scale(RTSCALE);
   H_hsyptar_DL2R->Scale(RTSCALE);
   
+  hphCR->Scale(RTSCALE);
+  hphL1R->Scale(RTSCALE);
+  hphL2R->Scale(RTSCALE);
+
   hW1CR->Scale(1.0/6.0);  
   hW2CR->Scale(1.0/6.0);  
   hW3CR->Scale(1.0/6.0);  
@@ -1363,9 +1402,9 @@ void Q1Analysis()
   hph_qL1R->Scale(1.0/6.0);
   hph_qL2R->Scale(1.0/6.0);
 
-  Double_t scaleFC  = 2.0/513.911;
-  Double_t scaleFL1 = 2.0/695.738;
-  Double_t scaleFL2 = 2.0/825.881;
+  Double_t scaleFC  = 1.5/513.911;
+  Double_t scaleFL1 = 1.5/695.738;
+  Double_t scaleFL2 = 1.5/825.881;
   
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
@@ -1838,20 +1877,82 @@ void Q1Analysis()
   hph_qL2->SetStats(0);
   hph_qL2->SetLineColor(kBlack);
   hph_qL2->Add(hph_qL2R, -1);
+  hph_qL2->Scale(scaleFL2);
   hph_qL2->Draw(" Weight");
+  hph_qSL2->SetStats(0);
+  //  hph_qSL2->Draw("same Weight");
 
   hph_qL1->SetStats(0);
   hph_qL1->SetLineColor(kRed);
   hph_qL1->Add(hph_qL1R, -1);
+  hph_qL1->Scale(scaleFL1);
   hph_qL1->Draw("same Weight");
+  hph_qSL1->SetStats(0);
+  //  hph_qSL1->Draw("same Weight");
 
   hph_qC->SetStats(0);
   hph_qC->SetLineColor(kGreen);
   hph_qC->Add(hph_qCR, -1);
+  hph_qC->Scale(scaleFC);
   hph_qC->Draw("same Weight");
-
+  hph_qSC->SetStats(0);
+  //  hph_qSC->Draw("same Weight");
   c4->Print(outputpdf);
 
+  TCanvas *phL2 = new TCanvas("phL2", "phL2"); 
+  hphL2->SetStats(0);
+  hphL2->SetLineColor(kGreen);
+  hphL2->Add(hphL2R, -1);
+  hphL2->Scale(scaleFL2);
+  hphL2->Draw("");
+  hphSL2->SetStats(0);
+  hphSL2->Draw("same");
+  phL2->Print(outputpdf);
+
+  TCanvas *phL1 = new TCanvas("phL1", "phL1"); 
+  hphL1->SetStats(0);
+  hphL1->SetLineColor(kGreen);
+  hphL1->Add(hphL1R, -1);
+  hphL1->Scale(scaleFL1);
+  hphL1->Draw("");
+  hphSL1->SetStats(0);
+  hphSL1->Draw("same");
+  phL1->Print(outputpdf);
+
+  TCanvas *phC = new TCanvas("phC", "phC"); 
+  hphC->SetStats(0);
+  hphC->SetLineColor(kGreen);
+  hphC->Add(hphCR, -1);
+  hphC->Scale(scaleFC);
+  hphC->Draw("");
+  hphSC->SetStats(0);
+  hphSC->Draw("same");
+  phC->Print(outputpdf);
+
+  TCanvas *phRL2 = new TCanvas("phRL2", " phRL2"); 
+  //  hph_qRL2 = (TH1D*)hph_qL2->Clone("hph_qRL2");   
+  // hph_qRL2->Divide(hph_qSL2);
+  //hph_qRL2->Draw();
+  hphL2->Divide(hphSL2);
+  hphL2->Draw();
+  phRL2->Print(outputpdf);
+
+  TCanvas *phRL1 = new TCanvas("phRL1", " phRL1"); 
+  //  hph_qRL1 = (TH1D*)hph_qL1->Clone("hph_qRL1");   
+  // hph_qRL1->Divide(hph_qSL1);
+  //  hph_qRL1->Draw();
+  hphL1->Divide(hphSL1);
+  hphL1->Draw();
+  phRL1->Print(outputpdf);
+
+  TCanvas *phRC = new TCanvas("phRC", " phRC"); 
+  // hph_qRC = (TH1D*)hph_qC->Clone("hph_qRC");   
+  // hph_qRC->Divide(hph_qSC);
+  // hph_qRC->Draw();
+  hphC->Divide(hphSC);
+  hphC->Draw();
+  phRC->Print(outputpdf);
+ 
   TCanvas *c5 = new TCanvas("c5", " c5"); 
   hmmL2->SetStats(0);
   hmmL2->SetLineColor(kBlack);

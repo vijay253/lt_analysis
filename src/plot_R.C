@@ -1,5 +1,7 @@
+#include "get_t_phi_bin.C" 
 TGraphErrors* q2_g;
 TGraphErrors* q2_ratio_lo;
+TGraphErrors* q2_ratio_mi;
 TGraphErrors* q2_ratio_hi;
 
 
@@ -15,17 +17,19 @@ Int_t t_bin_num;
 Double_t* t_lower_limit;
 Double_t* t_upper_limit;
 
-TString outplot_dir;
-outplot_dir = "ratio_check/";
+TString outplot_dir = "ratio_check/";
 
-TString ave_dir;
-ave_dir = "averages/";
+TString ave_dir = "averages/";
 
 Int_t iii = 0;
+void Single_Setting(Int_t q2_set, Int_t eps_set);
+Int_t Get_t_bin();
+Int_t Get_phi_bin();
+Double_t Get_t_bin_q2(Int_t q2_set, Int_t t_bin_num);
 
 void plot_R() {
 
-	gROOT->ProcessLine(".L get_t_phi_bin.C");
+  //	gROOT->ProcessLine(".L get_t_phi_bin.C");
 
 	t_bin_num = Get_t_bin();
 
@@ -53,6 +57,7 @@ void plot_R() {
 
  	q2_g   = new TGraphErrors();
  	q2_ratio_lo   = new TGraphErrors();
+ 	q2_ratio_mi   = new TGraphErrors();
  	q2_ratio_hi   = new TGraphErrors();
 
  	TF1* q2_fit = new TF1("q2_fit", "pol1", 150, 260);
@@ -72,9 +77,10 @@ void plot_R() {
 // 
 // 	}
 
-	Single_Setting(55,18);
-	Single_Setting(55,52);
-	Single_Setting(44,48);
+	Single_Setting(375,286);
+	Single_Setting(375,629);
+	Single_Setting(375,781);
+		/*Single_Setting(44,48);
 	Single_Setting(44,71);
 	Single_Setting(33,39);
 	Single_Setting(33,66);
@@ -84,7 +90,7 @@ void plot_R() {
 	Single_Setting(21,78);
 	Single_Setting(05,45);
 	Single_Setting(05,69);
-
+	*/
 
 	TCanvas* c2 = new TCanvas();
 
@@ -125,11 +131,8 @@ void plot_R() {
 
 	c2->Print(outplot_dir+"q2_vs_u.png");
 
-
-
 	c2->Clear();
 	c2->cd();
-
 
 	q2_ratio_hi->SetMarkerColor(2);
 	q2_ratio_hi->Draw("A*");
@@ -144,12 +147,13 @@ void plot_R() {
     q2_ratio_hi->GetYaxis()->CenterTitle();		
 
 
+    /*
 	if(TMath::MaxElement(q2_ratio_lo->GetN(),q2_ratio_lo->GetY()) > TMath::MaxElement(q2_ratio_hi->GetN(),q2_ratio_hi->GetY())) {
 
 		q2_ratio_hi->SetMaximum(TMath::MaxElement(q2_ratio_lo->GetN(),q2_ratio_lo->GetY())*1.1);
 
 	}
-
+    */
 	q2_ratio_lo->Draw("*");
 
 	c2->Print(outplot_dir + "q2_ratio.png");
@@ -161,11 +165,11 @@ void plot_R() {
 
 
 
-	TF1* t_fit_total = new TF1("t_total", "pol1", 0.04, 0.6); 
+	TF1* t_fit_total = new TF1("t_total", "pol1", 0.0, 0.6); 
 
 
 
-	mg->SetTitle("Average Yield Ratio (Yexp/Ysim) vs -u");
+	mg->SetTitle("Average Yield Ratio (Yexp/Ysim) vs -t");
 	
 	mg->Draw("a");
 
@@ -212,19 +216,19 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	const Int_t t_bin_num_const = t_bin_num;
 
-	ifstream t_bin_file("../t_bin_interval", std::fstream::in); 
+	ifstream t_bin_file("t_bin_interval", std::fstream::in); 
 
 	if (!t_bin_file.is_open()) {
 
 		cout << "u file doesn't exits! " << endl; 
-		exit(0)
+		exit(0);
 	}
 
 	string dummy_str;
 
 	getline(t_bin_file, dummy_str);
 
- 	if( q2_set == 160) {
+ 	if( q2_set == 375) {
  
  	/// t from 0.01 to 0.45
  
@@ -306,27 +310,24 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 //	exit(0);
 
 
-	TString file_name_str;
-	
+	TString file_name_str;	
 	file_name_str.Form("pl_%i_%i", q2_set, eps_set);
-
+	TString file_name;
 	file_name =  ave_dir + "aver." + file_name_str + ".dat";
 
- 	TNtuple* n1 = new TNtuple("n1", "n1", "ratio:r_err:phi_bin:t_bin:y_exp:y_sim");
- 
+	//	TNtuple* n1 = new TNtuple("n1", "n1", "ratio:r_err:phi_bin:t_bin:y_exp:y_sim");
+	TNtuple* n1 = new TNtuple("n1", "n1", "ratio:r_err:phi_bin:t_bin");
  	n1->ReadFile(file_name);
  
-    TGraphErrors* t_g = new TGraphErrors();
+	TGraphErrors* t_g = new TGraphErrors();
 
 	TF1* t_fit = new TF1("t1", "pol1", 0, 4); 
 
 	TCanvas *c1 = new TCanvas("n1", "n1", 1200, 400);
 	
-	c1->Divide(3,1);
+	c1->Divide(8,1);
 
 	Float_t q2_sum;
-
-
 
 
 	for (Int_t i = 0; i < t_bin_num; i++) {
@@ -343,12 +344,10 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 		// n1->Draw("ratio:phi_bin", t_bin_limit, "*");
 		n1->Draw("ratio:phi_bin:r_err", t_bin_limit, "off");
 
-    	TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
-
-
+		TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+		//	TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0,0);
 		
-
-		g->SetTitle("Omega Yield Ratio: Yexp/Ysim");
+	g->SetTitle("Yield Ratio: Yexp/Ysim");
 	
         g->GetXaxis()->SetTitle("#phi angle");		
         g->GetXaxis()->CenterTitle();		
@@ -368,13 +367,13 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 		Double_t weighted_ave_bot = 0;
 
 
-
+		
 		for( Int_t ii = 0; ii < g->GetN(); ii++) {
 
 			g->GetPoint(ii, xx, yy);		
 
-			if(yy==0.0) {
-				g->RemovePoint(ii);
+			if(yy==0.0 && yy >= 3.0 ) {
+			  g->RemovePoint(ii);
 			}
 		}
 		
@@ -387,13 +386,16 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 			cout << ii  << "    " << xx << "    " << yy << "     " << g->GetErrorY(ii) << endl;
 
 			sum_r =  sum_r + yy;
-			sum_w =  sum_w + 1/(g->GetErrorY(ii)**2);
+			//			sum_w =  sum_w + 1/(g->GetErrorY(ii)**2);
+			sum_w =  sum_w + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
 
-			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)**2) * yy;
-			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)**2);
+			//			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)**2) * yy;
+			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)*g->GetErrorY(ii))*yy;
+			//			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)**2);
+			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
 
 		}
-
+		g->SetMarkerStyle(29);
  		g->Draw("AP");
 
 
@@ -503,13 +505,10 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".root");
 
 	c1->Clear();
-
-
-
 	c1->cd();
 	
 
-    t_g->SetTitle("u Dependence Plot");
+    t_g->SetTitle("t Dependence Plot");
      
     t_g->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
     t_g->GetXaxis()->CenterTitle();		
@@ -527,7 +526,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	t_g_1->SetMarkerColor(iii);
 	t_g_1->SetLineColor(iii);
 
-    mg->Add(t_g_1, "*");
+	mg->Add(t_g_1, "*");
 
 
 
@@ -600,13 +599,9 @@ Double_t Get_t_bin_q2(Int_t q2_set, Int_t t_bin_num) {
 	avek_ntp->GetEntry(t_bin_num);
 
 	cout << q2_ave << endl;
-
-
 	delete avek_ntp;
 
 	return q2_ave; 
-
-
 }
 
 
