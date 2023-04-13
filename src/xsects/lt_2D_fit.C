@@ -882,9 +882,9 @@ void single_setting(TString q2_set){
  		f3->FixParameter(2, fff2->GetParameter(2));
  		f3->FixParameter(3, fff2->GetParameter(3));
  
-  		f1->SetLineColor(1);
-  		f2->SetLineColor(2);	 		
-  		f3->SetLineColor(3);	 		
+		f1->SetLineColor(1);
+		f2->SetLineColor(2);	 		
+		f3->SetLineColor(3);	 		
   
  //		TF1* ftest = new TF1("ftest", "sin(3.14*90/180)", 0, 1);
  

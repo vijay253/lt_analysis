@@ -1,5 +1,7 @@
 // .... Created Date: Feb 01, 2023 ....
 // .... Author: VK ....
+// .... This script was prepared to analyse the summer 2019 data....
+// .... I really like to have everything in a single script rather than spreading things all over place....
 //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #define EFFICIENCY_cxx
@@ -24,7 +26,6 @@
 #include <TTreeReaderArray.h>
 #include <TVectorD.h>
 #include <TGraph.h>
-
 
 void Q1Analysis()
 {
@@ -55,11 +56,9 @@ void Q1Analysis()
   }
 
   // Low epsilon analysis
-
   cout<<" "<<endl;
   cout<<" Analysing low epsilon data..." <<endl;
   cout<<" "<<endl;
-
   //Data  
   TString TInDATAFilenameC = "Analysed_Data_Q0p375W2p2_lowe_Center.root";
   TString TInDATAFilenameL1 = "Analysed_Data_Q0p375W2p2_lowe_Left1.root";
@@ -96,7 +95,6 @@ void Q1Analysis()
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_SIMCC <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     exit;
   }
-
 
   //Data
   TFile *InFile_DATAC = new TFile(rootFile_DATAC, "READ");
@@ -165,6 +163,10 @@ void Q1Analysis()
   Double_t ph_qL1;TBRANCHL1->SetBranchAddress("ph_q", &ph_qL1);
   Double_t ph_qL2;TBRANCHL2->SetBranchAddress("ph_q", &ph_qL2);
 
+  Double_t th_qC;TBRANCHC->SetBranchAddress("th_q", &th_qC);
+  Double_t th_qL1;TBRANCHL1->SetBranchAddress("th_q", &th_qL1);
+  Double_t th_qL2;TBRANCHL2->SetBranchAddress("th_q", &th_qL2);
+
   Double_t mmC;TBRANCHC->SetBranchAddress("MM", &mmC);
   Double_t mmL1;TBRANCHL1->SetBranchAddress("MM", &mmL1);
   Double_t mmL2;TBRANCHL2->SetBranchAddress("MM", &mmL2);
@@ -205,6 +207,7 @@ void Q1Analysis()
   Float_t Pm;TSIMCC->SetBranchAddress("Pm", &Pm);
   Float_t Weight;TSIMCC->SetBranchAddress("Weight", &Weight);
   Float_t phipq;TSIMCC->SetBranchAddress("phipq", &phipq);
+  Float_t thetapq;TSIMCC->SetBranchAddress("thetapq", &thetapq);
 
   //LEFT1
   //SHMS SIMC variables                                                                                                                                                                                
@@ -236,6 +239,7 @@ void Q1Analysis()
   Float_t PmL1;TSIMCL1->SetBranchAddress("Pm", &PmL1);
   Float_t WeightL1;TSIMCL1->SetBranchAddress("Weight", &WeightL1);
   Float_t phipqL1;TSIMCL1->SetBranchAddress("phipq", &phipqL1);
+  Float_t thetapqL1;TSIMCL1->SetBranchAddress("thetapq", &thetapqL1);
 
  //LEFT2
   //SHMS SIMC variables                                                                                                                                                                                
@@ -267,6 +271,7 @@ void Q1Analysis()
   Float_t PmL2;TSIMCL2->SetBranchAddress("Pm", &PmL2);
   Float_t WeightL2;TSIMCL2->SetBranchAddress("Weight", &WeightL2);
   Float_t phipqL2;TSIMCL2->SetBranchAddress("phipq", &phipqL2);
+  Float_t thetapqL2;TSIMCL2->SetBranchAddress("thetapq", &thetapqL2);
 
   //DATA HISTOGRAMS
 
@@ -512,6 +517,10 @@ void Q1Analysis()
   TH1D *hphCR  = new TH1D("hphCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphSC  = new TH1D("hphSC","ph_q; ph_q;",50, -10, 370);      
 
+  TH1D *hthC  = new TH1D("hthC","th_q; th_q;",   50, -0.01, 5.0);      
+  TH1D *hthCR  = new TH1D("hthCR","th_q; th_q;",  50, -0.01, 5.0);      
+  TH1D *hthSC  = new TH1D("hth_qC","th_q; th_q;",   50, -0.01, 5.0);      
+
   TH1D *H_ssdelta_SC  = new TH1D("H_ssdelta_SC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SC  = new TH1D("H_ssxptar_SC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SC  = new TH1D("H_ssyptar_SC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -541,6 +550,10 @@ void Q1Analysis()
   TH1D *hphL1R  = new TH1D("hphL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphSL1  = new TH1D("hphSL1","ph_q; ph_q;",50, -10,370);      
 
+  TH1D *hthL1  = new TH1D("hthL1","th_q; th_q;",   50, -0.1, 0.1);      
+  TH1D *hthL1R  = new TH1D("hthL1R","th_q; th_q;",  50, -0.1, 0.1);      
+  TH1D *hthSL1  = new TH1D("hth_qL1","th_q; th_q;",   50, -0.1, 0.1);      
+
   TH1D *H_ssdelta_SL1  = new TH1D("H_ssdelta_SL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SL1  = new TH1D("H_ssxptar_SL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_SL1  = new TH1D("H_ssyptar_SL1","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
@@ -569,6 +582,10 @@ void Q1Analysis()
   TH1D *hphL2  = new TH1D("hphL2","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphL2R  = new TH1D("hphL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphSL2  = new TH1D("hphSL2","ph_q; ph_q;",50, -10, 370);      
+
+  TH1D *hthL2  = new TH1D("hthL2","th_q; th_q;",   50, -0.1, 0.1);      
+  TH1D *hthL2R  = new TH1D("hthL2R","th_q; th_q;",  50, -0.1, 0.1);      
+  TH1D *hthSL2  = new TH1D("hth_qL2","th_q; th_q;",   50, -0.1, 0.1);      
 
   TH1D *H_ssdelta_SL2  = new TH1D("H_ssdelta_SL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SL2  = new TH1D("H_ssxptar_SL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -668,6 +685,7 @@ void Q1Analysis()
 	  hph_qC->Fill(ph_qC*57.2958 + 180);
 	  hphC->Fill(ph_qC*57.2958 + 180);
 	  hYC->Fill(-tC, ph_qC*57.2958 + 180);
+	  hthC->Fill(th_qC*57.2958);
 	}	
        
       if(((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)) && mmC>= 0.92 && mmC <=0.98 && Diamond_cut)
@@ -686,6 +704,7 @@ void Q1Analysis()
 	  hphCR->Fill(ph_qC*57.2958 + 180);
 	  hQ2WCR->Fill(Q2C, WC);
 	  hYCR->Fill(-tC, ph_qC*57.2958 + 180);
+	  hthCR->Fill(th_qC*57.2958);
 	}
       
      //For kin_aver, Q2, W & p_theta 
@@ -815,11 +834,13 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
 
-      Double_t fact = 9410970.0/400000.0;
+      //      Double_t fact = 9410970.0/400000.0;
+      Double_t fact = 9435820.0/400000.0;
  
      if(hsdelta >=-8.0 && hsdelta <=8.0 && hsxpfp >=-0.08 && hsxpfp <=0.08 && hsypfp >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxpfp >=-0.06 && ssxpfp <=0.06 && ssypfp >=-0.04 && ssypfp <=0.04 && missmass >= 0.92 && missmass <= 0.98 && Diamond_cut)
 	
 	{
+	  hthSC->Fill(thetapq*57.2958, fact*Weight);
 	  hph_qSC->Fill(phipq*57.2958, fact*Weight);
 	  hphSC->Fill(phipq*57.2958, fact*Weight);
 	  hYSC->Fill(t_simc, phipq*57.2958, fact*Weight);
@@ -1053,7 +1074,8 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));  
       
-      Double_t factL1 = 9898300.0/400000.0;
+      Double_t factL1 =  9950550.0/400000.0;
+      //      Double_t factL1 = 10030400.0/10000.0;
       
      if(hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxpfpL1 >=-0.08 && hsxpfpL1 <=0.08 && hsypfpL1 >=-0.045 && hsypfpL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxpfpL1 >=-0.06 && ssxpfpL1 <=0.06 && ssypfpL1 >=-0.04 && ssypfpL1 <=0.04 && missmassL1 >= 0.92 && missmassL1 <= 0.98 && Diamond_cut)
 	
@@ -1247,7 +1269,8 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));  
       
-      Double_t factL2 = 9581580.0/400000.0;
+      Double_t factL2 = 9637460.0/400000.0;
+      // Double_t factL2 = 9585160.0/10000.0;
       
      if(hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxpfpL2 >=-0.08 && hsxpfpL2 <=0.08 && hsypfpL2 >=-0.045 && hsypfpL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxpfpL2 >=-0.06 && ssxpfpL2 <=0.06 && ssypfpL2 >=-0.04 && ssypfpL2 <=0.04 && missmassL2 >= 0.92 && missmassL2 <= 0.98 && Diamond_cut)
 	
@@ -1294,6 +1317,7 @@ void Q1Analysis()
   hphCR->Scale(RTSCALE);
   hphL1R->Scale(RTSCALE);
   hphL2R->Scale(RTSCALE);
+  hthCR->Scale(RTSCALE);
 
   hW1CR->Scale(1.0/6.0);  
   hW2CR->Scale(1.0/6.0);  
@@ -1397,7 +1421,7 @@ void Q1Analysis()
   hph_qL1R->Scale(1.0/6.0);
   hph_qL2R->Scale(1.0/6.0);
 
-  Double_t scaleFC  = 1.8/513.911;
+  Double_t scaleFC  = 1.9/513.911;
   Double_t scaleFL1 = 1.8/695.738;
   Double_t scaleFL2 = 1.8/825.881;
   
@@ -1938,6 +1962,16 @@ void Q1Analysis()
   hphC->Divide(hphSC);
   hphC->Draw();
   phRC->Print(outputpdf);
+
+  TCanvas *thC = new TCanvas("thC", "thC"); 
+  hthSC->SetStats(0);
+  hthSC->Draw("");
+  hthC->SetStats(0);
+  hthC->SetLineColor(kGreen);
+  hthC->Add(hthCR, -1);
+  hthC->Scale(scaleFC);
+  hthC->Draw("same");
+  thC->Print(outputpdf);
  
   TCanvas *c5 = new TCanvas("c5", " c5"); 
   hmmL2->SetStats(0);
@@ -3577,7 +3611,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeR1, W_simcmeR1));
 
-      Double_t NFMR1 = 22563800.0/400000.0;
+      Double_t NFMR1 = 22585500.0/400000.0;
+      //      Double_t NFMR1 = 22562000.0/10000.0;
 
       if(hsdeltameR1 >=-8.0 && hsdeltameR1 <=8.0 && hsxpfpmeR1 >=-0.08 && hsxpfpmeR1 <=0.08 && hsypfpmeR1 >=-0.045 && hsypfpmeR1 <=0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxpfpmeR1 >=-0.06 && ssxpfpmeR1 <=0.06 && ssypfpmeR1 >=-0.04 && ssypfpmeR1 <=0.04 && missmassmeR1 >= 0.92 && missmassmeR1 <= 0.98 && Diamond_cut)
 	
@@ -3784,7 +3819,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeR2, W_simcmeR2));
 
-      Double_t NFMR2 = 22581600.0/400000.0;
+      Double_t NFMR2 = 22561100.0/400000.0;
+      // Double_t NFMR2 = 22585600.0/10000.0;
 
       if(hsdeltameR2 >=-8.0 && hsdeltameR2 <=8.0 && hsxpfpmeR2 >=-0.08 && hsxpfpmeR2 <=0.08 && hsypfpmeR2 >=-0.045 && hsypfpmeR2 <=0.045 && ssdeltameR2 >=-10.0 && ssdeltameR2 <=20.0 && ssxpfpmeR2 >=-0.06 && ssxpfpmeR2 <=0.06 && ssypfpmeR2 >=-0.04 && ssypfpmeR2 <=0.04 && missmassmeR2 >= 0.92 && missmassmeR2 <= 0.98 && Diamond_cut)
 	
@@ -3990,7 +4026,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeC, W_simcmeC));
 
-      Double_t NFMC = 22501800.0/400000.0;
+      Double_t NFMC = 22498100.0/400000.0;
+      //      Double_t NFMC = 22729600.0/10000.0;
 
       if(hsdeltameC >=-8.0 && hsdeltameC <=8.0 && hsxpfpmeC >=-0.08 && hsxpfpmeC <=0.08 && hsypfpmeC >=-0.045 && hsypfpmeC <=0.045 && ssdeltameC >=-10.0 && ssdeltameC <=20.0 && ssxpfpmeC >=-0.06 && ssxpfpmeC <=0.06 && ssypfpmeC >=-0.04 && ssypfpmeC <=0.04 && missmassmeC >= 0.92 && missmassmeC <= 0.98 && Diamond_cut)
 	
@@ -4188,7 +4225,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL1, W_simcmeL1));
 
-      Double_t NFML1 = 22341200.0/400000.0;
+      Double_t NFML1 = 22410500.0/400000.0;
+      //      Double_t NFML1 = 22542800.0/10000.0;
 
       if(hsdeltameL1 >=-8.0 && hsdeltameL1 <=8.0 && hsxpfpmeL1 >=-0.08 && hsxpfpmeL1 <=0.08 && hsypfpmeL1 >=-0.045 && hsypfpmeL1 <=0.045 && ssdeltameL1 >=-10.0 && ssdeltameL1 <=20.0 && ssxpfpmeL1 >=-0.06 && ssxpfpmeL1 <=0.06 && ssypfpmeL1 >=-0.04 && ssypfpmeL1 <=0.04 && missmassmeL1 >= 0.92 && missmassmeL1 <= 0.98 && Diamond_cut)
 	
@@ -4387,7 +4425,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL2, W_simcmeL2));
 
-      Double_t NFML2 = 22204500.0/400000.0;
+      Double_t NFML2 = 22281000.0/400000.0;
+      // Double_t NFML2 = 22504000.0/10000.0;
 
       if(hsdeltameL2 >=-8.0 && hsdeltameL2 <=8.0 && hsxpfpmeL2 >=-0.08 && hsxpfpmeL2 <=0.08 && hsypfpmeL2 >=-0.045 && hsypfpmeL2 <=0.045 && ssdeltameL2 >=-10.0 && ssdeltameL2 <=20.0 && ssxpfpmeL2 >=-0.06 && ssxpfpmeL2 <=0.06 && ssypfpmeL2 >=-0.04 && ssypfpmeL2 <=0.04 && missmassmeL2 >= 0.92 && missmassmeL2 <= 0.98 && Diamond_cut)
 	
@@ -4620,11 +4659,11 @@ void Q1Analysis()
   hYmeL1R->Scale(1.0/6.0);
   hYmeL2R->Scale(1.0/6.0);
 
-  Double_t SFMER1  = 1.5/213.121;
-  Double_t SFMER2  = 1.5/326.60;
+  Double_t SFMER1  = 1.1/213.121;
+  Double_t SFMER2  = 1.2/326.60;
   Double_t SFMEC   = 1.5/260.320;
-  Double_t SFMEL1  = 1.5/348.721;
-  Double_t SFMEL2  = 1.5/417.783;
+  Double_t SFMEL1  = 2.1/348.721;
+  Double_t SFMEL2  = 2.4/417.783;
 
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
@@ -7250,7 +7289,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheC, W_simcheC));
 
-      Double_t NFC = 35354400.0/400000.0;
+      Double_t NFC =  35356600.0/400000.0;
+      //     Double_t NFC = 35706100.0/10000.0;
 
       if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxpfpheC >=-0.08 && hsxpfpheC <=0.08 && hsypfpheC >=-0.045 && hsypfpheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxpfpheC >=-0.06 && ssxpfpheC <=0.06 && ssypfpheC >=-0.04 && ssypfpheC <=0.04 && missmassheC >= 0.92 && missmassheC <= 0.98 && Diamond_cut)
 	

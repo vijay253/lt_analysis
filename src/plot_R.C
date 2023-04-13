@@ -18,6 +18,7 @@ Double_t* t_lower_limit;
 Double_t* t_upper_limit;
 
 TString outplot_dir = "ratio_check/";
+TString outphiyield_dir = "ratio_check/phiyield/";
 
 TString ave_dir = "averages/";
 
@@ -323,189 +324,190 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	TF1* t_fit = new TF1("t1", "pol1", 0, 4); 
 
-	TCanvas *c1 = new TCanvas("n1", "n1", 1200, 400);
+	//	TCanvas *c1 = new TCanvas("n1", "n1", 1200, 400);
 	
-	c1->Divide(8,1);
+	//	c1->Divide(8,1);
 
 	Float_t q2_sum;
 
 
 	for (Int_t i = 0; i < t_bin_num; i++) {
+	  
+	  TCanvas *ci = new TCanvas("ci", "ci", 1200, 400);
+	  
+	  Int_t in = i + 1;	
 
-		Int_t in = i + 1;	
+	  //		cout << in << endl;
 
-//		cout << in << endl;
+	  //	  c1->cd(in);
 
-		c1->cd(in);
+	  TString t_bin_limit;
+	  t_bin_limit.Form( "t_bin == %i && ratio != 0", in);	
 
-		TString t_bin_limit;
-		t_bin_limit.Form( "t_bin == %i && ratio != 0", in);	
+	  // n1->Draw("ratio:phi_bin", t_bin_limit, "*");
+	  n1->Draw("ratio:phi_bin:r_err", t_bin_limit, "off");
 
-		// n1->Draw("ratio:phi_bin", t_bin_limit, "*");
-		n1->Draw("ratio:phi_bin:r_err", t_bin_limit, "off");
-
-		TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
-		//	TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0,0);
+	  TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
+	  //	TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0,0);
 		
-	g->SetTitle("Yield Ratio: Yexp/Ysim");
+	  g->SetTitle("Yield Ratio: Yexp/Ysim");
 	
-        g->GetXaxis()->SetTitle("#phi angle");		
-        g->GetXaxis()->CenterTitle();		
+	  g->GetXaxis()->SetTitle("#phi angle");		
+	  g->GetXaxis()->CenterTitle();		
 	
-        g->GetYaxis()->SetTitle("Yield Ratio");		
-        g->GetYaxis()->SetTitleOffset(1.8);		
-        g->GetYaxis()->CenterTitle();		
+	  g->GetYaxis()->SetTitle("Yield Ratio");		
+	  g->GetYaxis()->SetTitleOffset(1.8);		
+	  g->GetYaxis()->CenterTitle();		
 
 
-		Double_t xx;
-		Double_t yy;
+	  Double_t xx;
+	  Double_t yy;
 
-		Double_t sum_r = 0;
-		Double_t sum_w = 0;
+	  Double_t sum_r = 0;
+	  Double_t sum_w = 0;
 
-		Double_t weighted_ave_top = 0;
-		Double_t weighted_ave_bot = 0;
+	  Double_t weighted_ave_top = 0;
+	  Double_t weighted_ave_bot = 0;
 
 
 		
-		for( Int_t ii = 0; ii < g->GetN(); ii++) {
+	  for( Int_t ii = 0; ii < g->GetN(); ii++) {
 
-			g->GetPoint(ii, xx, yy);		
+	    g->GetPoint(ii, xx, yy);		
 
-			if(yy==0.0 && yy >= 3.0 ) {
-			  g->RemovePoint(ii);
-			}
-		}
+	    if(yy==0.0 && yy >= 3.0 ) {
+	      g->RemovePoint(ii);
+	    }
+	  }
 		
 
 
-		for( Int_t ii = 0; ii < g->GetN(); ii++) {
+	  for( Int_t ii = 0; ii < g->GetN(); ii++) {
 			
-			g->GetPoint(ii, xx, yy);		
+	    g->GetPoint(ii, xx, yy);		
 	
-			cout << ii  << "    " << xx << "    " << yy << "     " << g->GetErrorY(ii) << endl;
+	    cout << ii  << "    " << xx << "    " << yy << "     " << g->GetErrorY(ii) << endl;
 
-			sum_r =  sum_r + yy;
-			//			sum_w =  sum_w + 1/(g->GetErrorY(ii)**2);
-			sum_w =  sum_w + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
+	    sum_r =  sum_r + yy;
+	    //			sum_w =  sum_w + 1/(g->GetErrorY(ii)**2);
+	    sum_w =  sum_w + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
 
-			//			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)**2) * yy;
-			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)*g->GetErrorY(ii))*yy;
-			//			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)**2);
-			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
+	    //			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)**2) * yy;
+	    weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)*g->GetErrorY(ii))*yy;
+	    //			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)**2);
+	    weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
 
-		}
-		g->SetMarkerStyle(29);
- 		g->Draw("AP");
-
-
-		Int_t graph_it = t_g->GetN(); 
-
-		t_set = (t_lower_limit[i] + t_upper_limit[i])/2;
-
-//		t_g->SetPoint(graph_it, i+1, sum_r/4);
-
-//		t_g->SetPoint(graph_it, t_set, sum_r/graph_it);
-//		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/graph_it);
+	  }
+	  g->SetMarkerStyle(29);
+	  g->Draw("AP");
 
 
-		cout << "ppppppppppppppppp   "<< g->GetN() << endl;
+	  Int_t graph_it = t_g->GetN(); 
 
-//		exit(0);
+	  t_set = (t_lower_limit[i] + t_upper_limit[i])/2;
+
+	  //		t_g->SetPoint(graph_it, i+1, sum_r/4);
+
+	  //		t_g->SetPoint(graph_it, t_set, sum_r/graph_it);
+	  //		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/graph_it);
+
+
+	  cout << "ppppppppppppppppp   "<< g->GetN() << endl;
+
+	  //		exit(0);
 			
 
-//		t_g->SetPoint(graph_it, t_set, sum_r/g->GetN());
-//		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/g->GetN());
+	  //		t_g->SetPoint(graph_it, t_set, sum_r/g->GetN());
+	  //		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/g->GetN());
 
-		t_g->SetPoint(graph_it, t_set, weighted_ave_top/weighted_ave_bot);
-		t_g->SetPointError(graph_it, 0, 1/sqrt(sum_w));
-
-
-		Float_t q2_set_tmp;
-
-//		q2_set_tmp = Get_t_bin_q2(q2_set, i);
-
-		q2_set_tmp = Get_t_bin_q2(q2_set, i);
+	  t_g->SetPoint(graph_it, t_set, weighted_ave_top/weighted_ave_bot);
+	  t_g->SetPointError(graph_it, 0, 1/sqrt(sum_w));
 
 
-		q2_t_set->SetPoint(q2_t_set->GetN(), t_set, q2_set_tmp);
+	  Float_t q2_set_tmp;
+
+	  //		q2_set_tmp = Get_t_bin_q2(q2_set, i);
+
+	  q2_set_tmp = Get_t_bin_q2(q2_set, i);
+
+
+	  q2_t_set->SetPoint(q2_t_set->GetN(), t_set, q2_set_tmp);
 
 		
-		cout << t_set << "   " << q2_set_tmp << endl;
-//		exit(0);
+	  cout << t_set << "   " << q2_set_tmp << endl;
+	  //		exit(0);
 
 
-// 		if (q2_set == 160) {		
-// 
-// 			if (i == 0) { 
-// 	
-// 				q2_set_tmp = 150.458;
-// 			
-// 			} else if (i == 1) { 
-// 	
-// 				q2_set_tmp = 162.791;
-// 	
-// 			} else {
-// 	
-// 				q2_set_tmp = 170.599;
-// 	
-// 			}
-// 
-// 		} else{
-// 
-// 			if (i == 0) { 
-// 	
-// 				q2_set_tmp = 225.943;
-// 			
-// 			} else if (i == 1) {
-// 	
-// 				q2_set_tmp = 243.919;
-// 	
-// 			} else {
-// 	
-// 				q2_set_tmp = 261.004;
-// 	
-// 			}
-// 
-// 		}
+	  // 		if (q2_set == 160) {		
+	  // 
+	  // 			if (i == 0) { 
+	  // 	
+	  // 				q2_set_tmp = 150.458;
+	  // 			
+	  // 			} else if (i == 1) { 
+	  // 	
+	  // 				q2_set_tmp = 162.791;
+	  // 	
+	  // 			} else {
+	  // 	
+	  // 				q2_set_tmp = 170.599;
+	  // 	
+	  // 			}
+	  // 
+	  // 		} else{
+	  // 
+	  // 			if (i == 0) { 
+	  // 	
+	  // 				q2_set_tmp = 225.943;
+	  // 			
+	  // 			} else if (i == 1) {
+	  // 	
+	  // 				q2_set_tmp = 243.919;
+	  // 	
+	  // 			} else {
+	  // 	
+	  // 				q2_set_tmp = 261.004;
+	  // 	
+	  // 			}
+	  // 
+	  // 		}
 
 
 
 
 
-		if (eps_set < 40) { 
+	  if (eps_set < 40) { 
 
-			Int_t graph_it = q2_ratio_lo->GetN(); 
-//			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, sum_r/graph_it);
-//			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, sum_r/g->GetN());
+	    Int_t graph_it = q2_ratio_lo->GetN(); 
+	    //			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, sum_r/graph_it);
+	    //			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, sum_r/g->GetN());
 
-			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, weighted_ave_top/weighted_ave_bot);
+	    q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, weighted_ave_top/weighted_ave_bot);
 
-		} else { 
+	  } else { 
 
-			Int_t graph_it = q2_ratio_hi->GetN(); 
-//			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, sum_r/graph_it);
-//			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, sum_r/g->GetN());
+	    Int_t graph_it = q2_ratio_hi->GetN(); 
+	    //			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, sum_r/graph_it);
+	    //			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, sum_r/g->GetN());
 
-			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, weighted_ave_top/weighted_ave_bot);
+	    q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, weighted_ave_top/weighted_ave_bot);
 
-		}
+	  }
 
-		q2_sum =  q2_sum + q2_set_tmp;
+	  q2_sum =  q2_sum + q2_set_tmp;
 
+	ci->Print(outphiyield_dir + i + file_name_str + ".png");
 
 	}
 
 
-//	exit(0);
+	//	exit(0);
 
+	//	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".png");
+	//	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".root");
 
-
-	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".png");
-	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".root");
-
-	c1->Clear();
-	c1->cd();
+	//	c1->Clear();
+	//	c1->cd();
 	
 
     t_g->SetTitle("t Dependence Plot");
@@ -537,7 +539,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 
 
-	c1->Print(outplot_dir + "average_ratio" + file_name_str + ".png");
+	//	c1->Print(outplot_dir + "average_ratio" + file_name_str + ".png");
 
 
 	Int_t graph_it = q2_g->GetN();
@@ -554,7 +556,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 //	exit(0);
 
-	delete c1;
+//	delete c1;
 
 }
 
