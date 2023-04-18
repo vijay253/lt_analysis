@@ -2763,7 +2763,7 @@ void Q1Analysis()
   cout<<" "<<endl;
   cout<<" Analysing mid epsilon data..." <<endl;
   cout<<" "<<endl;
-
+  //Data
   TString TInDATAFilenameMideR1 = "Analysed_Data_Q0p375W2p2_mide_Right1.root";
   TString TInDATAFilenameMideR2 = "Analysed_Data_Q0p375W2p2_mide_Right2.root";
   TString TInDATAFilenameMideC  = "Analysed_Data_Q0p375W2p2_mide_Center.root";
@@ -2775,6 +2775,18 @@ void Q1Analysis()
   TString rootFile_DATAMIDEC  = ROOTfilePath+"/"+TInDATAFilenameMideC;
   TString rootFile_DATAMIDEL1 = ROOTfilePath+"/"+TInDATAFilenameMideL1;
   TString rootFile_DATAMIDEL2 = ROOTfilePath+"/"+TInDATAFilenameMideL2;
+  //Dummy
+  TString TInDATAFilenameMidedR1 = "Analysed_Data_Q0p375W2p2_mide_dummy_Right1.root";
+  TString TInDATAFilenameMidedR2 = "Analysed_Data_Q0p375W2p2_mide_dummy_Right2.root";
+  TString TInDATAFilenameMidedC = "Analysed_Data_Q0p375W2p2_mide_dummy_Center.root";
+  TString TInDATAFilenameMidedL1 = "Analysed_Data_Q0p375W2p2_mide_dummy_Left1.root";
+  TString TInDATAFilenameMidedL2 = "Analysed_Data_Q0p375W2p2_mide_dummy_Left2.root";
+
+  TString rootFile_DATAMIDEDR1  = ROOTfilePath+"/"+TInDATAFilenameMidedR1;
+  TString rootFile_DATAMIDEDR2  = ROOTfilePath+"/"+TInDATAFilenameMidedR2;
+  TString rootFile_DATAMIDEDC   = ROOTfilePath+"/"+TInDATAFilenameMidedC;
+  TString rootFile_DATAMIDEDL1  = ROOTfilePath+"/"+TInDATAFilenameMidedL1;
+  TString rootFile_DATAMIDEDL2  = ROOTfilePath+"/"+TInDATAFilenameMidedL2;
 
   //SIMC                                                  
   TString TInSIMCFilenameMideR1 = "Pion_3p6_Q1_right1.root";
@@ -2811,12 +2823,20 @@ void Q1Analysis()
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_DATAMIDEL2 <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     exit;
   }
-  
+
+  //Data  
   TFile *InFile_DATAMIDER1 = new TFile(rootFile_DATAMIDER1, "READ");
   TFile *InFile_DATAMIDER2 = new TFile(rootFile_DATAMIDER2, "READ");
   TFile *InFile_DATAMIDEC = new TFile(rootFile_DATAMIDEC, "READ");
   TFile *InFile_DATAMIDEL1 = new TFile(rootFile_DATAMIDEL1, "READ");
   TFile *InFile_DATAMIDEL2 = new TFile(rootFile_DATAMIDEL2, "READ");
+
+  //Dummy  
+  TFile *InFile_DATAMIDEDR1 = new TFile(rootFile_DATAMIDEDR1, "READ");
+  TFile *InFile_DATAMIDEDR2 = new TFile(rootFile_DATAMIDEDR2, "READ");
+  TFile *InFile_DATAMIDEDC = new TFile(rootFile_DATAMIDEDC, "READ");
+  TFile *InFile_DATAMIDEDL1 = new TFile(rootFile_DATAMIDEDL1, "READ");
+  TFile *InFile_DATAMIDEDL2 = new TFile(rootFile_DATAMIDEDL2, "READ");
 
   //SIMC 
   TFile *InFile_SIMCMIDER1 = new TFile(rootFile_SIMCMIDER1, "READ");
@@ -2826,12 +2846,18 @@ void Q1Analysis()
   TFile *InFile_SIMCMIDEL2 = new TFile(rootFile_SIMCMIDEL2, "READ");
 
   // TREES
- 
+  //Data
   TTree* TBRANCHMIDER1  = (TTree*)InFile_DATAMIDER1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDER1  = (Long64_t)TBRANCHMIDER1->GetEntries();  
   TTree* TBRANCHMIDER2  = (TTree*)InFile_DATAMIDER2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDER2  = (Long64_t)TBRANCHMIDER2->GetEntries();  
   TTree* TBRANCHMIDEC   = (TTree*)InFile_DATAMIDEC->Get("Cut_Kaon_Events_prompt_noRF"); Long64_t nEntries_TBRANCHMIDEC   = (Long64_t)TBRANCHMIDEC->GetEntries();  
   TTree* TBRANCHMIDEL1  = (TTree*)InFile_DATAMIDEL1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEL1  = (Long64_t)TBRANCHMIDEL1->GetEntries();  
   TTree* TBRANCHMIDEL2  = (TTree*)InFile_DATAMIDEL2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEL2  = (Long64_t)TBRANCHMIDEL2->GetEntries();  
+  //Dummy
+  TTree* TBRANCHMIDEDR1  = (TTree*)InFile_DATAMIDEDR1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEDR1  = (Long64_t)TBRANCHMIDEDR1->GetEntries();  
+  TTree* TBRANCHMIDEDR2  = (TTree*)InFile_DATAMIDEDR2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEDR2  = (Long64_t)TBRANCHMIDEDR2->GetEntries();  
+  TTree* TBRANCHMIDEDC   = (TTree*)InFile_DATAMIDEDC->Get("Cut_Kaon_Events_prompt_noRF"); Long64_t nEntries_TBRANCHMIDEDC   = (Long64_t)TBRANCHMIDEDC->GetEntries();  
+  TTree* TBRANCHMIDEDL1  = (TTree*)InFile_DATAMIDEDL1->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEDL1  = (Long64_t)TBRANCHMIDEDL1->GetEntries();  
+  TTree* TBRANCHMIDEDL2  = (TTree*)InFile_DATAMIDEDL2->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHMIDEDL2  = (Long64_t)TBRANCHMIDEDL2->GetEntries();  
   
   //SIMC 
   TTree* TSIMCMIDER1  = (TTree*)InFile_SIMCMIDER1->Get("h10");Long64_t nEntries_TSIMCMIDER1  = (Long64_t)TSIMCMIDER1->GetEntries();
@@ -2851,6 +2877,9 @@ void Q1Analysis()
 
   Double_t WMER1;TBRANCHMIDER1->SetBranchAddress("W", &WMER1);
   Double_t Q2MER1;TBRANCHMIDER1->SetBranchAddress("Q2", &Q2MER1);
+  //Dummy
+  Double_t WMEDR1;TBRANCHMIDEDR1->SetBranchAddress("W", &WMEDR1);
+  Double_t Q2MEDR1;TBRANCHMIDEDR1->SetBranchAddress("Q2", &Q2MEDR1);
 
   Double_t  P_gtr_dpmeR2;TBRANCHMIDER2->SetBranchAddress("ssdelta", &P_gtr_dpmeR2);
   Double_t  P_gtr_xptarmeR2;TBRANCHMIDER2->SetBranchAddress("ssxptar", &P_gtr_xptarmeR2);
@@ -2862,6 +2891,9 @@ void Q1Analysis()
 
   Double_t WMER2;TBRANCHMIDER2->SetBranchAddress("W", &WMER2);
   Double_t Q2MER2;TBRANCHMIDER2->SetBranchAddress("Q2", &Q2MER2);
+  //Dummy
+  Double_t WMEDR2;TBRANCHMIDEDR2->SetBranchAddress("W", &WMEDR2);
+  Double_t Q2MEDR2;TBRANCHMIDEDR2->SetBranchAddress("Q2", &Q2MEDR2);
 
   Double_t  P_gtr_dpmeC;TBRANCHMIDEC->SetBranchAddress("ssdelta", &P_gtr_dpmeC);
   Double_t  P_gtr_xptarmeC;TBRANCHMIDEC->SetBranchAddress("ssxptar", &P_gtr_xptarmeC);
@@ -2873,6 +2905,9 @@ void Q1Analysis()
 
   Double_t WMEC;TBRANCHMIDEC->SetBranchAddress("W", &WMEC);
   Double_t Q2MEC;TBRANCHMIDEC->SetBranchAddress("Q2", &Q2MEC);
+  //Dummy
+  Double_t WMEDC;TBRANCHMIDEDC->SetBranchAddress("W", &WMEDC);
+  Double_t Q2MEDC;TBRANCHMIDEDC->SetBranchAddress("Q2", &Q2MEDC);
 
   Double_t  P_gtr_dpmeL1;TBRANCHMIDEL1->SetBranchAddress("ssdelta", &P_gtr_dpmeL1);
   Double_t  P_gtr_xptarmeL1;TBRANCHMIDEL1->SetBranchAddress("ssxptar", &P_gtr_xptarmeL1);
@@ -2884,6 +2919,9 @@ void Q1Analysis()
 
   Double_t WMEL1;TBRANCHMIDEL1->SetBranchAddress("W", &WMEL1);
   Double_t Q2MEL1;TBRANCHMIDEL1->SetBranchAddress("Q2", &Q2MEL1);
+  //Dummy
+  Double_t WMEDL1;TBRANCHMIDEDL1->SetBranchAddress("W", &WMEDL1);
+  Double_t Q2MEDL1;TBRANCHMIDEDL1->SetBranchAddress("Q2", &Q2MEDL1);
 
   Double_t  P_gtr_dpmeL2;TBRANCHMIDEL2->SetBranchAddress("ssdelta", &P_gtr_dpmeL2);
   Double_t  P_gtr_xptarmeL2;TBRANCHMIDEL2->SetBranchAddress("ssxptar", &P_gtr_xptarmeL2);
@@ -2895,30 +2933,57 @@ void Q1Analysis()
 
   Double_t WMEL2;TBRANCHMIDEL2->SetBranchAddress("W", &WMEL2);
   Double_t Q2MEL2;TBRANCHMIDEL2->SetBranchAddress("Q2", &Q2MEL2);
+  //Dummy
+  Double_t WMEDL2;TBRANCHMIDEDL2->SetBranchAddress("W", &WMEDL2);
+  Double_t Q2MEDL2;TBRANCHMIDEDL2->SetBranchAddress("Q2", &Q2MEDL2);
 
   Double_t tmeR1;TBRANCHMIDER1->SetBranchAddress("MandelT", &tmeR1);
   Double_t tmeR2;TBRANCHMIDER2->SetBranchAddress("MandelT", &tmeR2);
   Double_t tmeC;TBRANCHMIDEC->SetBranchAddress("MandelT", &tmeC);
   Double_t tmeL1;TBRANCHMIDEL1->SetBranchAddress("MandelT", &tmeL1);
   Double_t tmeL2;TBRANCHMIDEL2->SetBranchAddress("MandelT", &tmeL2);
- 
+  //Dummy
+  Double_t tmedR1;TBRANCHMIDEDR1->SetBranchAddress("MandelT", &tmedR1);
+  Double_t tmedR2;TBRANCHMIDEDR2->SetBranchAddress("MandelT", &tmedR2);
+  Double_t tmedC;TBRANCHMIDEDC->SetBranchAddress("MandelT", &tmedC);
+  Double_t tmedL1;TBRANCHMIDEDL1->SetBranchAddress("MandelT", &tmedL1);
+  Double_t tmedL2;TBRANCHMIDEDL2->SetBranchAddress("MandelT", &tmedL2);
+
   Double_t ph_qmeR1;TBRANCHMIDER1->SetBranchAddress("ph_q", &ph_qmeR1);
   Double_t ph_qmeR2;TBRANCHMIDER2->SetBranchAddress("ph_q", &ph_qmeR2);
   Double_t ph_qmeC;TBRANCHMIDEC->SetBranchAddress("ph_q", &ph_qmeC);
   Double_t ph_qmeL1;TBRANCHMIDEL1->SetBranchAddress("ph_q", &ph_qmeL1);
   Double_t ph_qmeL2;TBRANCHMIDEL2->SetBranchAddress("ph_q", &ph_qmeL2);
+  //Dummy
+  Double_t ph_qmedR1;TBRANCHMIDEDR1->SetBranchAddress("ph_q", &ph_qmedR1);
+  Double_t ph_qmedR2;TBRANCHMIDEDR2->SetBranchAddress("ph_q", &ph_qmedR2);
+  Double_t ph_qmedC;TBRANCHMIDEDC->SetBranchAddress("ph_q", &ph_qmedC);
+  Double_t ph_qmedL1;TBRANCHMIDEDL1->SetBranchAddress("ph_q", &ph_qmedL1);
+  Double_t ph_qmedL2;TBRANCHMIDEDL2->SetBranchAddress("ph_q", &ph_qmedL2);
 
   Double_t mmmeR1;TBRANCHMIDER1->SetBranchAddress("MM", &mmmeR1);
   Double_t mmmeR2;TBRANCHMIDER2->SetBranchAddress("MM", &mmmeR2);
   Double_t mmmeC;TBRANCHMIDEC->SetBranchAddress("MM", &mmmeC);
   Double_t mmmeL1;TBRANCHMIDEL1->SetBranchAddress("MM", &mmmeL1);
   Double_t mmmeL2;TBRANCHMIDEL2->SetBranchAddress("MM", &mmmeL2);
+  //Dummy
+  Double_t mmmedR1;TBRANCHMIDEDR1->SetBranchAddress("MM", &mmmedR1);
+  Double_t mmmedR2;TBRANCHMIDEDR2->SetBranchAddress("MM", &mmmedR2);
+  Double_t mmmedC;TBRANCHMIDEDC->SetBranchAddress("MM", &mmmedC);
+  Double_t mmmedL1;TBRANCHMIDEDL1->SetBranchAddress("MM", &mmmedL1);
+  Double_t mmmedL2;TBRANCHMIDEDL2->SetBranchAddress("MM", &mmmedL2);
 
   Double_t tcoinmeR1;TBRANCHMIDER1->SetBranchAddress("CTime_ROC1", &tcoinmeR1);
   Double_t tcoinmeR2;TBRANCHMIDER2->SetBranchAddress("CTime_ROC1", &tcoinmeR2);
   Double_t tcoinmeC;TBRANCHMIDEC->SetBranchAddress("CTime_ROC1", &tcoinmeC);
   Double_t tcoinmeL1;TBRANCHMIDEL1->SetBranchAddress("CTime_ROC1", &tcoinmeL1);
   Double_t tcoinmeL2;TBRANCHMIDEL2->SetBranchAddress("CTime_ROC1", &tcoinmeL2);
+  //Dummy
+  Double_t tcoinmedR1;TBRANCHMIDEDR1->SetBranchAddress("CTime_ROC1", &tcoinmedR1);
+  Double_t tcoinmedR2;TBRANCHMIDEDR2->SetBranchAddress("CTime_ROC1", &tcoinmedR2);
+  Double_t tcoinmedC;TBRANCHMIDEDC->SetBranchAddress("CTime_ROC1", &tcoinmedC);
+  Double_t tcoinmedL1;TBRANCHMIDEDL1->SetBranchAddress("CTime_ROC1", &tcoinmedL1);
+  Double_t tcoinmedL2;TBRANCHMIDEDL2->SetBranchAddress("CTime_ROC1", &tcoinmedL2);
 
   //SIMC VARIABLES
   //Right1
@@ -3412,6 +3477,19 @@ void Q1Analysis()
   TH2D *hYmeL1R   = new TH2D("hYmeL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmeL2R   = new TH2D("hYmeL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
 
+  //Dummy
+  TH2D *hYmedR1   = new TH2D("hYmedR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedR2   = new TH2D("hYmedR2"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedC    = new TH2D("hYmedC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedL1   = new TH2D("hYmedL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedL2   = new TH2D("hYmedL2"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+
+  TH2D *hYmedR1R   = new TH2D("hYmedR1R"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedR2R   = new TH2D("hYmedR2R"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedCR    = new TH2D("hYmedCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedL1R   = new TH2D("hYmedL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedL2R   = new TH2D("hYmedL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
+
   TH1D *hmmmeR1  = new TH1D("hmmmeR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeR2  = new TH1D("hmmmeR2","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeC   = new TH1D("hmmmeC","MM; MM;", 300, 0.8, 1.2);      
@@ -3432,14 +3510,10 @@ void Q1Analysis()
   
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
-  /*
+  
   TH1D *hphmeR1  = new TH1D("hphmeR1","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",50, -10, 370);      
-  */
-  TH1D *hphmeR1  = new TH1D("hphmeR1","ph_q; ph_q;",16, 0, 360);      
-  TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",  16, 0, 360);      
-  TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",16, 0, 360);      
   
   TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeR1  = new TH1D("H_ssdelta_SmeR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3467,15 +3541,11 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeR1R  = new TH1D("H_hsyptar_DmeR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //RIGHT2  
-  /*
+  
   TH1D *hphmeR2  = new TH1D("hphmeR2","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",50, -10, 370);      
-  */
-  TH1D *hphmeR2  = new TH1D("hphmeR2","ph_q; ph_q;",16, 0, 360);      
-  TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",  16, 0, 360);      
-  TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",16, 0, 360);      
-
+  
   TH2D *hYSmeR2   = new TH2D("hYSmeR2"," Yield SIMC R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeR2  = new TH1D("H_ssdelta_SmeR2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeR2  = new TH1D("H_ssxptar_SmeR2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3502,16 +3572,11 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeR2R  = new TH1D("H_hsyptar_DmeR2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //CENTER 
-  /*
+  
   TH1D *hphmeC  = new TH1D("hphmeC","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",50, -10, 370);      
-  */
-  TH1D *hphmeC  = new TH1D("hphmeC","ph_q; ph_q;",16, 0, 360);      
-  TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  16, 0, 360);      
-  TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",16, 0, 360);      
-
- 
+  
   TH2D *hYSmeC   = new TH2D("hYSmeC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeC  = new TH1D("H_ssdelta_SmeC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeC  = new TH1D("H_ssxptar_SmeC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3538,15 +3603,10 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeCR  = new TH1D("H_hsyptar_DmeCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1
-  /*
+  
   TH1D *hphmeL1  = new TH1D("hphmeL1","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",50, -10, 370);      
-  */
-  TH1D *hphmeL1  = new TH1D("hphmeL1","ph_q; ph_q;",16, 0, 360);      
-  TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",  16, 0, 360);      
-  TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",16, 0, 360);      
-
   
   TH2D *hYSmeL1   = new TH2D("hYSmeL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeL1  = new TH1D("H_ssdelta_SmeL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3574,14 +3634,10 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeL1R  = new TH1D("H_hsyptar_DmeL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2 
-  /*
+  
   TH1D *hphmeL2  = new TH1D("hphmeL2","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",50, -10, 370);      
-  */
-  TH1D *hphmeL2  = new TH1D("hphmeL2","ph_q; ph_q;",16, 0, 360);      
-  TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",  16, 0, 360);      
-  TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",16, 0, 360);      
 
   TH2D *hYSmeL2   = new TH2D("hYSmeL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeL2  = new TH1D("H_ssdelta_SmeL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3608,6 +3664,7 @@ void Q1Analysis()
   TH1D *H_hsxptar_DmeL2R  = new TH1D("H_hsxptar_DmeL2R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeL2R  = new TH1D("H_hsyptar_DmeL2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
+  //Data R1
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER1; i++)
 
     {
@@ -3781,6 +3838,26 @@ void Q1Analysis()
 	  hmmmeR1R->Fill(mmmeR1);
 	}	
     }  
+
+  //Dummy R1
+  for(Long64_t i = 0; i < nEntries_TBRANCHMIDEDR1; i++)
+    {
+      TBRANCHMIDEDR1->GetEntry(i);
+      Double_t DimonddR1 = (Dcut->IsInside(Q2MEDR1, WMEDR1));  
+      Double_t MMpidR1 = mmmedR1>= 0.92 && mmmedR1 <=0.98;
+      Double_t CoinPiondR1 = tcoinmedR1>=-1.0 && tcoinmedR1 <= 1.0;      
+      Double_t CoinPiondR1R = ((tcoinmedR1>=-15.0 && tcoinmedR1 <= -9.0) || (tcoinmedR1>=7.0 && tcoinmedR1 <=13.0));      
+      
+      if(CoinPiondR1 && MMpidR1 && DimonddR1)
+	{
+	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	}
+      
+      if(CoinPiondR1R && MMpidR1 && DimonddR1)
+	{
+	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	}      
+    }    
 
   //SIMC RIGHT1                                                                                                                                                                                      
   for(Long64_t i = 0; i < nEntries_TSIMCMIDER1; i++)
@@ -3989,6 +4066,25 @@ void Q1Analysis()
 	  hmmmeR2R->Fill(mmmeR2);
 	}	
     }  
+  //Dummy R2
+  for(Long64_t i = 0; i < nEntries_TBRANCHMIDEDR2; i++)
+    {
+      TBRANCHMIDEDR2->GetEntry(i);
+      Double_t DimonddR2 = (Dcut->IsInside(Q2MEDR2, WMEDR2));  
+      Double_t MMpidR2 = mmmedR2>= 0.92 && mmmedR2 <=0.98;
+      Double_t CoinPiondR2 = tcoinmedR2>=-1.0 && tcoinmedR2 <= 1.0;      
+      Double_t CoinPiondR2R = ((tcoinmedR2>=-15.0 && tcoinmedR2 <= -9.0) || (tcoinmedR2>=7.0 && tcoinmedR2<=13.0));      
+      
+      if(CoinPiondR2 && MMpidR2 && DimonddR2)
+	{
+	  hYmedR2->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
+	}
+      
+      if(CoinPiondR2R && MMpidR2 && DimonddR2)
+	{
+	  hYmedR2R->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
+	}      
+    }    
 
   //SIMC RIGHT2                                                                                                                                                                                      
   for(Long64_t i = 0; i < nEntries_TSIMCMIDER2; i++)
@@ -4195,8 +4291,27 @@ void Q1Analysis()
 	{
 	  hmmmeCR->Fill(mmmeC);
 	}	
-    }  
-
+    }
+  
+  //Dummy Center
+  for(Long64_t i = 0; i < nEntries_TBRANCHMIDEDC; i++)
+    {
+      TBRANCHMIDEDC->GetEntry(i);
+      Double_t DimonddC = (Dcut->IsInside(Q2MEDC, WMEDC));  
+      Double_t MMpidC = mmmedC>= 0.92 && mmmedC <=0.98;
+      Double_t CoinPiondC = tcoinmedC>=-1.0 && tcoinmedC <= 1.0;      
+      Double_t CoinPiondCR = ((tcoinmedC>=-15.0 && tcoinmedC<= -9.0) || (tcoinmedC>=7.0 && tcoinmedC<=13.0));      
+      
+      if(CoinPiondC && MMpidC && DimonddC)
+	{
+	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	}
+      
+      if(CoinPiondCR && MMpidC && DimonddC)
+	{
+	  hYmedCR->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	}      
+    }    
   //SIMC CENTER                                                                                                                                                                                      
   for(Long64_t i = 0; i < nEntries_TSIMCMIDEC; i++)
 
@@ -4395,7 +4510,25 @@ void Q1Analysis()
 	  hmmmeL1R->Fill(mmmeL1);
 	}     
     }
-
+  //Dummy Left1
+  for(Long64_t i = 0; i < nEntries_TBRANCHMIDEDL1; i++)
+    {
+      TBRANCHMIDEDL1->GetEntry(i);
+      Double_t DimonddL1 = (Dcut->IsInside(Q2MEDL1, WMEDL1));  
+      Double_t MMpidL1 = mmmedL1>= 0.92 && mmmedL1 <=0.98;
+      Double_t CoinPiondL1 = tcoinmedL1>=-1.0 && tcoinmedL1 <= 1.0;      
+      Double_t CoinPiondL1R = ((tcoinmedL1>=-15.0 && tcoinmedL1<= -9.0) || (tcoinmedL1>=7.0 && tcoinmedL1<=13.0));      
+      
+      if(CoinPiondL1 && MMpidL1 && DimonddL1)
+	{
+	  hYmedL1->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	}
+      
+      if(CoinPiondL1R && MMpidL1 && DimonddL1)
+	{
+	  hYmedL1R->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	}      
+    }    
   //SIMC LEFT1                                                 
   for(Long64_t i = 0; i < nEntries_TSIMCMIDEL1; i++)
 
@@ -4596,6 +4729,25 @@ void Q1Analysis()
 	  hmmmeL2R->Fill(mmmeL2);
 	}
     }
+  //Dummy Left2
+  for(Long64_t i = 0; i < nEntries_TBRANCHMIDEDL2; i++)
+    {
+      TBRANCHMIDEDL2->GetEntry(i);
+      Double_t DimonddL2 = (Dcut->IsInside(Q2MEDL2, WMEDL2));  
+      Double_t MMpidL2 = mmmedL2>= 0.92 && mmmedL2 <=0.98;
+      Double_t CoinPiondL2 = tcoinmedL2>=-1.0 && tcoinmedL2<= 1.0;      
+      Double_t CoinPiondL2R = ((tcoinmedL2>=-15.0 && tcoinmedL2<= -9.0) || (tcoinmedL2>=7.0 && tcoinmedL2<=13.0));      
+      
+      if(CoinPiondL2 && MMpidL2 && DimonddL2)
+	{
+	  hYmedL2->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	}
+      
+      if(CoinPiondL2R && MMpidL2 && DimonddL2)
+	{
+	  hYmedL2R->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	}      
+    }    
   //SIMC LEFT2                                                 
   for(Long64_t i = 0; i < nEntries_TSIMCMIDEL2; i++)
 
@@ -4623,6 +4775,13 @@ void Q1Analysis()
         }
     }
  	
+  //Dummy
+  hYmedR1R->Scale(RTSCALE);
+  hYmedR2R->Scale(RTSCALE);
+  hYmedCR->Scale(RTSCALE);
+  hYmedL1R->Scale(RTSCALE);
+  hYmedL2R->Scale(RTSCALE);
+
   hphmeR1R->Scale(RTSCALE);
   hphmeR2R->Scale(RTSCALE);
   hphmeCR->Scale(RTSCALE);
@@ -4843,7 +5002,12 @@ void Q1Analysis()
   Double_t SFMEC   = 1.5/260.320;
   Double_t SFMEL1  = 2.1/348.721;
   Double_t SFMEL2  = 2.4/417.783;
-
+  //Dummy
+  Double_t SFMEDR1  = 1.1/42.339;
+  Double_t SFMEDR2  = 1.2/55.477;
+  Double_t SFMEDC   = 1.5/35.819;
+  Double_t SFMEDL1  = 2.1/26.884;
+  Double_t SFMEDL2  = 2.4/55.634;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
 
@@ -6040,6 +6204,9 @@ void Q1Analysis()
   hYmeR1->SetStats(0);
   hYmeR1->Draw("COLZ");
   cYmeR1->Print(outputpdf);
+  //Dummy
+  hYmedR1->Add(hYmedR1R, -1);  
+  hYmedR1->Scale(SFMEDR1);  
 
   TCanvas *cYSmeR1 = new TCanvas("cYSmeR1", " cYSmeR1");
   hYSmeR1->SetStats(0);
@@ -6082,8 +6249,7 @@ void Q1Analysis()
       for(Long64_t i = 2; i <= 17; i++) 
 	{
 	  Double_t err;
-	  //	  YmeR1<<hYmeR1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
-	  YdmeR1<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdmeR1<<hYmedR1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
 	}
     } 
   YdmeR1.close();
@@ -6114,6 +6280,9 @@ void Q1Analysis()
   hYmeR2->SetStats(0);
   hYmeR2->Draw("COLZ");
   cYmeR2->Print(outputpdf);
+  //Dummy
+  hYmedR2->Add(hYmedR2R, -1);  
+  hYmedR2->Scale(SFMEDR2);  
 
   TCanvas *cYSmeR2 = new TCanvas("cYSmeR2", " cYSmeR2");
   hYSmeR2->SetStats(0);
@@ -6155,8 +6324,7 @@ void Q1Analysis()
       for(Long64_t i = 2; i <= 17; i++) 
 	{
 	  Double_t err;
-	  //	  YmeR2<<hYmeR2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
-	  YdmeR2<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdmeR2<<hYmedR2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
 	}
     } 
   YdmeR2.close();
@@ -6187,6 +6355,10 @@ void Q1Analysis()
   hYmeC->SetStats(0);
   hYmeC->Draw("COLZ");
   cYmeC->Print(outputpdf);
+
+  //Dummy
+  hYmedC->Add(hYmedCR, -1);  
+  hYmedC->Scale(SFMEDC);  
 
   TCanvas *cYSmeC = new TCanvas("cYSmeC", " cYSmeC");
   hYSmeC->SetStats(0);
@@ -6228,8 +6400,7 @@ void Q1Analysis()
       for(Long64_t i = 2; i <= 17; i++) 
 	{
 	  Double_t err;
-	  //	  YmeC<<hYmeC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
-	  YdmeC<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdmeC<<hYmedC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
 	}
     } 
   YdmeC.close();
@@ -6260,6 +6431,9 @@ void Q1Analysis()
   hYmeL1->SetStats(0);
   hYmeL1->Draw("COLZ");
   cYmeL1->Print(outputpdf);
+  //Dummy
+  hYmedL1->Add(hYmedL1R, -1);  
+  hYmedL1->Scale(SFMEDL1);  
 
   TCanvas *cYSmeL1 = new TCanvas("cYSmeL1", " cYSmeL1");
   hYSmeL1->SetStats(0);
@@ -6301,8 +6475,7 @@ void Q1Analysis()
       for(Long64_t i = 2; i <= 17; i++) 
 	{
 	  Double_t err;
-	  //	  YmeL1<<hYmeL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
-	  YdmeL1<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdmeL1<<hYmedL1->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
 	}
     } 
   YdmeL1.close();
@@ -6333,6 +6506,10 @@ void Q1Analysis()
   hYmeL2->SetStats(0);
   hYmeL2->Draw("COLZ");
   cYmeL2->Print(outputpdf);
+
+  //Dummy
+  hYmedL2->Add(hYmedL2R, -1);  
+  hYmedL2->Scale(SFMEDL2);  
 
   TCanvas *cYSmeL2 = new TCanvas("cYSmeL2", " cYSmeL2");
   hYSmeL2->SetStats(0);
@@ -6374,8 +6551,7 @@ void Q1Analysis()
       for(Long64_t i = 2; i <= 17; i++) 
 	{
 	  Double_t err;
-	  //	  YdmeL2<<hYmeL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
-	  YdmeL2<<0.0<<"\t"<<0.01<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
+	  YdmeL2<<hYmedL2->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
 	}
     } 
   YdmeL2.close();

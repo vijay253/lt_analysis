@@ -223,12 +223,12 @@ do
     if [[ $Q2 = "0p375" && $W = "2p2" && $EPSILON = "high" ]]; then
 	if [[ $i = "RIGHT1" ]]; then
 	    if [[ $TargetType = "dummy" ]]; then
-		file_right1="Q0p375W2p2right_${EPSILON}e_dummy"
+		file_right1="Q0p375W2p2right1_${EPSILON}e_dummy"
 	   
 	    elif [[ $TargetType = "simc" ]]; then
-		file_right1="Q0p375W2p2right_${EPSILON}e_simc"		
+		file_right1="Q0p375W2p2right1_${EPSILON}e_simc"		
 	    else
-		file_right1="Q0p375W2p2right_${EPSILON}e"
+		file_right1="Q0p375W2p2right1_${EPSILON}e"
 	    fi
 	    if [[ $TargetType = "simc" ]]; then
 		echo "Reading in run numbers for right file ${file_right1}..."
