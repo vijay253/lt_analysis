@@ -55,6 +55,9 @@ void Q1Analysis()
     OutPath = "/home/vijay/work/HeepCoinStudy/";
   }
 
+  //Dummy extra thickness correction factor.
+  Double_t THCF = 1.0/4.8579;
+
   // Low epsilon analysis
   cout<<" "<<endl;
   cout<<" Analysing low epsilon data..." <<endl;
@@ -1615,16 +1618,16 @@ void Q1Analysis()
   hph_qL2R->Scale(1.0/6.0);
 
   //Effective charge 
-  Double_t ECLEC   = 1.0/513.911;
-  Double_t ECLEDC  = 1.0/38.108;
+  Double_t ECLEC   = 1.0/513.483;
+  Double_t ECLEDC  = 1.0/43.926;
 
-  Double_t ECLEL1  = 1.0/695.738;
-  Double_t ECLEDL1 = 1.0/30.987;
+  Double_t ECLEL1  = 1.0/695.990;
+  Double_t ECLEDL1 = 1.0/35.961;
 
-  Double_t ECLEL2  = 1.0/825.881;
-  Double_t ECLEDL2 = 1.0/33.909;
+  Double_t ECLEL2  = 1.0/826.567;
+  Double_t ECLEDL2 = 1.0/38.644;
   //SIMC SCAL
-  Double_t SCFLE = 0.60;
+  Double_t SCFLE = 0.50;
  
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
@@ -2121,6 +2124,7 @@ void Q1Analysis()
 
   TCanvas *phL2 = new TCanvas("phL2", "phL2"); 
   hphSL2->SetStats(0);
+  hphSL2->Scale(SCFLE);
   hphSL2->Draw("");
   hphL2->SetStats(0);
   hphL2->SetLineColor(kGreen);
@@ -2136,6 +2140,7 @@ void Q1Analysis()
 
   TCanvas *phL1 = new TCanvas("phL1", "phL1"); 
   hphSL1->SetStats(0);
+  hphSL1->Scale(SCFLE);
   hphSL1->Draw("");
   hphL1->SetStats(0);
   hphL1->SetLineColor(kGreen);
@@ -2151,6 +2156,7 @@ void Q1Analysis()
 
   TCanvas *phC = new TCanvas("phC", "phC"); 
   hphSC->SetStats(0);
+  hphSC->Scale(SCFLE);
   hphSC->Draw("");
   hphC->SetStats(0);
   hphC->SetLineColor(kGreen);
@@ -2392,7 +2398,8 @@ void Q1Analysis()
     } 
   YleC.close();
   hYdC->Add(hYdCR, -1);  
-  hYdC->Scale(ECLEDC);  
+  hYdC->Scale(ECLEDC);   // Yield
+  hYdC->Scale(THCF);    // Thickness corrected Yield
   ofstream YdleC("yield/yields.pl_375_286_+0000.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -2477,7 +2484,8 @@ void Q1Analysis()
     } 
   YleL1.close();
   hYdL1->Add(hYdL1R, -1);  
-  hYdL1->Scale(ECLEDL1);  
+  hYdL1->Scale(ECLEDL1);   // Yield  
+  hYdL1->Scale(THCF);     // Thickness corrected Yield
   ofstream YdleL1("yield/yields.pl_375_286_-1995.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -2562,7 +2570,8 @@ void Q1Analysis()
     } 
   YleL2.close();
   hYdL2->Add(hYdL2R, -1);  
-  hYdL2->Scale(ECLEDL2);  
+  hYdL2->Scale(ECLEDL2);     //Yield  
+  hYdL2->Scale(THCF);       // Thickness corrected Yield    
   ofstream YdleL2("yield/yields.pl_375_286_-4005.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -5163,21 +5172,21 @@ void Q1Analysis()
 
   //Effective Charge 
   Double_t ECMER1   = 1.0/213.121;
-  Double_t ECMEDR1  = 1.0/42.339;
+  Double_t ECMEDR1  = 1.0/42.178;
 
   Double_t ECMER2   = 1.0/326.60;
-  Double_t ECMEDR2  = 1.0/55.477;
+  Double_t ECMEDR2  = 1.0/55.429;
 
   Double_t ECMEC    = 1.0/260.320;
-  Double_t ECMEDC   = 1.0/35.819;
+  Double_t ECMEDC   = 1.0/35.726;
 
   Double_t ECMEL1   = 1.0/348.721;
-  Double_t ECMEDL1  = 1.0/26.884;
+  Double_t ECMEDL1  = 1.0/26.851;
   
   Double_t ECMEL2   = 1.0/417.783;
-  Double_t ECMEDL2  = 1.0/55.634;
+  Double_t ECMEDL2  = 1.0/55.624;
   //SIMC SCAL
-  Double_t SCFME = 1.0;
+  Double_t SCFME = 0.5;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
   htcoinmeL1->SetStats(0);
@@ -6384,9 +6393,6 @@ void Q1Analysis()
   hYmeR1->SetStats(0);
   hYmeR1->Draw("COLZ");
   cYmeR1->Print(outputpdf);
-  //Dummy
-  hYmedR1->Add(hYmedR1R, -1);  
-  hYmedR1->Scale(ECMEDR1);  
 
   TCanvas *cYSmeR1 = new TCanvas("cYSmeR1", " cYSmeR1");
   hYSmeR1->SetStats(0);
@@ -6412,7 +6418,10 @@ void Q1Analysis()
 	}
     } 
   YmeR1.close();
-
+  //Dummy
+  hYmedR1->Add(hYmedR1R, -1);  
+  hYmedR1->Scale(ECMEDR1);   // Yield   
+  hYmedR1->Scale(THCF);     // Thickness corrected Yield 
   ofstream YdmeR1("yield/yields.pl_375_629_+2000.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -6460,9 +6469,6 @@ void Q1Analysis()
   hYmeR2->SetStats(0);
   hYmeR2->Draw("COLZ");
   cYmeR2->Print(outputpdf);
-  //Dummy
-  hYmedR2->Add(hYmedR2R, -1);  
-  hYmedR2->Scale(ECMEDR2);  
 
   TCanvas *cYSmeR2 = new TCanvas("cYSmeR2", " cYSmeR2");
   hYSmeR2->SetStats(0);
@@ -6488,6 +6494,10 @@ void Q1Analysis()
 	}
     } 
   YmeR2.close();
+  //Dummy
+  hYmedR2->Add(hYmedR2R, -1);  
+  hYmedR2->Scale(ECMEDR2);    //Yield 
+  hYmedR2->Scale(THCF);      // Thickness corrected Yield
   ofstream YdmeR2("yield/yields.pl_375_629_+3120.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -6536,10 +6546,6 @@ void Q1Analysis()
   hYmeC->Draw("COLZ");
   cYmeC->Print(outputpdf);
 
-  //Dummy
-  hYmedC->Add(hYmedCR, -1);  
-  hYmedC->Scale(ECMEDC);  
-
   TCanvas *cYSmeC = new TCanvas("cYSmeC", " cYSmeC");
   hYSmeC->SetStats(0);
   hYSmeC->Draw("COLZ");
@@ -6564,6 +6570,11 @@ void Q1Analysis()
 	}
     } 
   YmeC.close();
+  //Dummy
+  hYmedC->Add(hYmedCR, -1);  
+  hYmedC->Scale(ECMEDC);    //Yield  
+  hYmedC->Scale(THCF);     // Thickness corrected Yield
+
   ofstream YdmeC("yield/yields.pl_375_629_+0000.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -6611,9 +6622,6 @@ void Q1Analysis()
   hYmeL1->SetStats(0);
   hYmeL1->Draw("COLZ");
   cYmeL1->Print(outputpdf);
-  //Dummy
-  hYmedL1->Add(hYmedL1R, -1);  
-  hYmedL1->Scale(ECMEDL1);  
 
   TCanvas *cYSmeL1 = new TCanvas("cYSmeL1", " cYSmeL1");
   hYSmeL1->SetStats(0);
@@ -6639,6 +6647,11 @@ void Q1Analysis()
 	}
     } 
   YmeL1.close();
+  //Dummy
+  hYmedL1->Add(hYmedL1R, -1);  
+  hYmedL1->Scale(ECMEDL1);     // Yield  
+  hYmedL1->Scale(THCF);       // Thickness corrected Yield
+
   ofstream YdmeL1("yield/yields.pl_375_629_-2000.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -6687,10 +6700,6 @@ void Q1Analysis()
   hYmeL2->Draw("COLZ");
   cYmeL2->Print(outputpdf);
 
-  //Dummy
-  hYmedL2->Add(hYmedL2R, -1);  
-  hYmedL2->Scale(ECMEDL2);  
-
   TCanvas *cYSmeL2 = new TCanvas("cYSmeL2", " cYSmeL2");
   hYSmeL2->SetStats(0);
   hYSmeL2->Draw("COLZ");
@@ -6715,6 +6724,11 @@ void Q1Analysis()
 	}
     } 
   YmeL2.close();
+  //Dummy
+  hYmedL2->Add(hYmedL2R, -1);  
+  hYmedL2->Scale(ECMEDL2);    // Yield  
+  hYmedL2->Scale(THCF);      // Thickness corrected Yield
+
   ofstream YdmeL2("yield/yields.pl_375_629_-4000.dummy");
   for(int j=1 ; j <=10; ++j) 
     {
@@ -8645,18 +8659,18 @@ void Q1Analysis()
 
   //Effective charge
   Double_t ECHER1   = 1.0/132.549;
-  Double_t ECHEDR1  = 1.0/51.281;
+  Double_t ECHEDR1  = 1.0/51.186;
 
   Double_t ECHEC    = 1.0/380.856;
-  Double_t ECHEDC   = 1.0/65.481;
+  Double_t ECHEDC   = 1.0/65.383;
 
   Double_t ECHEL1   = 1.0/183.703;
-  Double_t ECHEDL1  = 1.0/27.261;
+  Double_t ECHEDL1  = 1.0/27.220;
 
   Double_t ECHEL2   = 1.0/196.02;
-  Double_t ECHEDL2  = 1.0/73.603;
+  Double_t ECHEDL2  = 1.0/73.453;
   //SIMC SCAL
-  Double_t SCFHE = 0.60;
+  Double_t SCFHE = 0.50;
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
  
@@ -9278,6 +9292,7 @@ void Q1Analysis()
 
   TCanvas *phheR1 = new TCanvas("phheR1", "phheR1"); 
   hphheSR1->SetStats(0);
+  hphheSR1->Scale(SCFHE);
   hphheSR1->Draw("");
   hphheR1->SetStats(0);
   hphheR1->SetLineColor(kGreen);
@@ -9293,6 +9308,7 @@ void Q1Analysis()
 
   TCanvas *phheC = new TCanvas("phheC", "phheC"); 
   hphheSC->SetStats(0);
+  hphheSC->Scale(SCFHE);
   hphheSC->Draw("");
   hphheC->SetStats(0);
   hphheC->SetLineColor(kGreen);
@@ -9308,6 +9324,7 @@ void Q1Analysis()
 
   TCanvas *phheL1 = new TCanvas("phheL1", "phheL1"); 
   hphheSL1->SetStats(0);
+  hphheSL1->Scale(SCFHE);
   hphheSL1->Draw("");
   hphheL1->SetStats(0);
   hphheL1->SetLineColor(kGreen);
@@ -9323,6 +9340,7 @@ void Q1Analysis()
 
   TCanvas *phheL2 = new TCanvas("phheL2", "phheL2"); 
   hphheSL2->SetStats(0);
+  hphheSL2->Scale(SCFHE);
   hphheSL2->Draw("");
   hphheL2->SetStats(0);
   hphheL2->SetLineColor(kGreen);
@@ -9651,7 +9669,9 @@ void Q1Analysis()
   YheR1.close();
   //Dummy
   hYhedR1->Add(hYhedR1R, -1);  
-  hYhedR1->Scale(ECHEDR1);  
+  hYhedR1->Scale(ECHEDR1);     // Yield  
+  hYhedR1->Scale(THCF);       // Thickness corrected Yield
+
   ofstream YdheR1("yield/yields.pl_375_781_+2680.dummy");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -9726,7 +9746,8 @@ void Q1Analysis()
   YheC.close();
   //Dummy
   hYhedC->Add(hYhedCR, -1);  
-  hYhedC->Scale(ECHEDC);  
+  hYhedC->Scale(ECHEDC);     // Yield  
+  hYhedC->Scale(THCF);      // Thickness corrected Yield
 
   ofstream YdheC("yield/yields.pl_375_781_+0000.dummy");
   for(int j=1 ; j <=10 ; ++j) 
@@ -9802,7 +9823,8 @@ void Q1Analysis()
   YheL1.close();
   //Dummy
   hYhedL1->Add(hYhedL1R, -1);  
-  hYhedL1->Scale(ECHEDL1);  
+  hYhedL1->Scale(ECHEDL1);    //Yield  
+  hYhedL1->Scale(THCF);      // Thickness corrected Yield
 
   ofstream YdheL1("yield/yields.pl_375_781_-2015.dummy");
   for(int j=1 ; j <=10 ; ++j) 
@@ -9878,7 +9900,8 @@ void Q1Analysis()
   YheL2.close();
   //Dummy
   hYhedL2->Add(hYhedL2R, -1);  
-  hYhedL2->Scale(ECHEDL2);  
+  hYhedL2->Scale(ECHEDL2);    // Yield  
+  hYhedL2->Scale(THCF);      // Thickness corrected Yield
 
   ofstream YdheL2("yield/yields.pl_375_781_-4000.dummy");
   for(int j=1 ; j <=10 ; ++j) 

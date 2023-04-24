@@ -56,7 +56,9 @@ with open(report) as f:
         if 'Total_Events' in data[0]:
             numevts = int(re.sub("\D","","%s" % data[1]))
 
-effective_charge = float(charge/1000)*float(tot_efficiency)
+##effective_charge = float(charge/1000)*float(tot_efficiency)
+## For now total charge. changed on Apr 24, 2023 by V.K. 
+effective_charge = float(charge/1000)
 
 # Need to convert to int value for bash to interpret correctly
 print(int(1000*effective_charge))
