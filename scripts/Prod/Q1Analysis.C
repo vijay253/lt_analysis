@@ -5210,7 +5210,11 @@ void Q1Analysis()
   Double_t ECMEL2   = 1.0/417.516;
   Double_t ECMEDL2  = 1.0/55.624;
   //SIMC SCAL
-  Double_t SCFME = 0.5;
+  Double_t SCFMER1 = 0.50;
+  Double_t SCFMER2 = 0.45;
+  Double_t SCFMEC  = 0.50;
+  Double_t SCFMEL1 = 0.45;
+  Double_t SCFMEL2 = 0.45;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
   htcoinmeL1->SetStats(0);
@@ -5979,7 +5983,7 @@ void Q1Analysis()
 
   TCanvas *phmeR2 = new TCanvas("phmeR2", "phmeR2"); 
   //  hphmeSR2->SetStats(0);
-  hphmeSR2->Scale(SCFME);
+  hphmeSR2->Scale(SCFMER2);
   hphmeSR2->Draw("");
   hphmeR2->SetStats(0);
   hphmeR2->SetLineColor(kGreen);
@@ -5995,7 +5999,7 @@ void Q1Analysis()
 
   TCanvas *phmeR1 = new TCanvas("phmeR1", "phmeR1"); 
   //  hphmeSR1->SetStats(0);
-  hphmeSR1->Scale(SCFME);
+  hphmeSR1->Scale(SCFMER1);
   hphmeSR1->Draw("");
   hphmeR1->SetStats(0);
   hphmeR1->SetLineColor(kGreen);
@@ -6011,7 +6015,7 @@ void Q1Analysis()
 
   TCanvas *phmeC = new TCanvas("phmeC", "phmeC"); 
   //  hphmeSC->SetStats(0);
-  hphmeSC->Scale(SCFME);
+  hphmeSC->Scale(SCFMEC);
   TF1 *gSmeC = new TF1("gSmeC","gaus(0)",0.936,0.942);    
   gSmeC->SetLineColor(kRed);
   //  hphmeSC->Fit("gSmeC", "R");
@@ -6033,7 +6037,7 @@ void Q1Analysis()
 
   TCanvas *phmeL1 = new TCanvas("phmeL1", "phmeL1"); 
   //  hphmeSL1->SetStats(0);
-  hphmeSL1->Scale(SCFME);
+  hphmeSL1->Scale(SCFMEL1);
   hphmeSL1->Draw("");
   hphmeL1->SetStats(0);
   hphmeL1->SetLineColor(kGreen);
@@ -6049,7 +6053,7 @@ void Q1Analysis()
 
   TCanvas *phmeL2 = new TCanvas("phmeL2", "phmeL2"); 
   //  hphmeSL2->SetStats(0);
-  hphmeSL2->Scale(SCFME);
+  hphmeSL2->Scale(SCFMEL2);
   hphmeSL2->Draw("");
   hphmeL2->SetStats(0);
   hphmeL2->SetLineColor(kGreen);
@@ -6420,6 +6424,7 @@ void Q1Analysis()
 
   TCanvas *cYSmeR1 = new TCanvas("cYSmeR1", " cYSmeR1");
   hYSmeR1->SetStats(0);
+  hYSmeR1->Scale(SCFMER1);
   hYSmeR1->Draw("COLZ");
   cYSmeR1->Print(outputpdf);
   ofstream YmeR1("yield/yields.pl_375_629_+2000.target");
@@ -6496,6 +6501,7 @@ void Q1Analysis()
 
   TCanvas *cYSmeR2 = new TCanvas("cYSmeR2", " cYSmeR2");
   hYSmeR2->SetStats(0);
+  hYSmeR2->Scale(SCFMER2);
   hYSmeR2->Draw("COLZ");
   cYSmeR2->Print(outputpdf);
   ofstream YmeR2("yield/yields.pl_375_629_+3120.target");
@@ -6572,6 +6578,7 @@ void Q1Analysis()
 
   TCanvas *cYSmeC = new TCanvas("cYSmeC", " cYSmeC");
   hYSmeC->SetStats(0);
+  hYSmeC->Scale(SCFMEC);
   hYSmeC->Draw("COLZ");
   cYSmeC->Print(outputpdf);
   ofstream YmeC("yield/yields.pl_375_629_+0000.target");
@@ -6649,6 +6656,7 @@ void Q1Analysis()
 
   TCanvas *cYSmeL1 = new TCanvas("cYSmeL1", " cYSmeL1");
   hYSmeL1->SetStats(0);
+  hYSmeL1->Scale(SCFMEL1);
   hYSmeL1->Draw("COLZ");
   cYSmeL1->Print(outputpdf);
   ofstream YmeL1("yield/yields.pl_375_629_-2000.target");
@@ -6726,6 +6734,7 @@ void Q1Analysis()
 
   TCanvas *cYSmeL2 = new TCanvas("cYSmeL2", " cYSmeL2");
   hYSmeL2->SetStats(0);
+  hYSmeL2->Scale(SCFMEL2);
   hYSmeL2->Draw("COLZ");
   cYSmeL2->Print(outputpdf);
   ofstream YmeL2("yield/yields.pl_375_629_-4000.target");
@@ -8706,7 +8715,10 @@ void Q1Analysis()
   Double_t ECHEL2   = 1.0/195.603;
   Double_t ECHEDL2  = 1.0/73.453;
   //SIMC SCAL
-  Double_t SCFHE = 0.50;
+  Double_t SCFHER1 = 0.50;
+  Double_t SCFHEC = 0.40;
+  Double_t SCFHEL1 = 0.40;
+  Double_t SCFHEL2 = 0.35;
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
  
@@ -9327,8 +9339,8 @@ void Q1Analysis()
   c10->Print(outputpdf);
 
   TCanvas *phheR1 = new TCanvas("phheR1", "phheR1"); 
-  hphheSR1->SetStats(0);
-  hphheSR1->Scale(SCFHE);
+  //  hphheSR1->SetStats(0);
+  hphheSR1->Scale(SCFHER1);
   hphheSR1->Draw("");
   hphheR1->SetStats(0);
   hphheR1->SetLineColor(kGreen);
@@ -9343,8 +9355,8 @@ void Q1Analysis()
   phheRR1->Print(outputpdf);
 
   TCanvas *phheC = new TCanvas("phheC", "phheC"); 
-  hphheSC->SetStats(0);
-  hphheSC->Scale(SCFHE);
+  //  hphheSC->SetStats(0);
+  hphheSC->Scale(SCFHEC);
   hphheSC->Draw("");
   hphheC->SetStats(0);
   hphheC->SetLineColor(kGreen);
@@ -9359,8 +9371,8 @@ void Q1Analysis()
   phheRC->Print(outputpdf);
 
   TCanvas *phheL1 = new TCanvas("phheL1", "phheL1"); 
-  hphheSL1->SetStats(0);
-  hphheSL1->Scale(SCFHE);
+  //  hphheSL1->SetStats(0);
+  hphheSL1->Scale(SCFHEL1);
   hphheSL1->Draw("");
   hphheL1->SetStats(0);
   hphheL1->SetLineColor(kGreen);
@@ -9375,8 +9387,8 @@ void Q1Analysis()
   phheRL1->Print(outputpdf);
 
   TCanvas *phheL2 = new TCanvas("phheL2", "phheL2"); 
-  hphheSL2->SetStats(0);
-  hphheSL2->Scale(SCFHE);
+  //  hphheSL2->SetStats(0);
+  hphheSL2->Scale(SCFHEL2);
   hphheSL2->Draw("");
   hphheL2->SetStats(0);
   hphheL2->SetLineColor(kGreen);
@@ -9681,6 +9693,7 @@ void Q1Analysis()
 
   TCanvas *cYSheR1 = new TCanvas("cYSheR1", " cYSheR1");
   hYSheR1->SetStats(0);
+  hYSheR1->Scale(SCFHER1);
   hYSheR1->Draw("COLZ");
   cYSheR1->Print(outputpdf);
   ofstream YheR1("yield/yields.pl_375_781_+2680.target");
@@ -9758,6 +9771,7 @@ void Q1Analysis()
 
   TCanvas *cYSheC = new TCanvas("cYSheC", " cYSheC");
   hYSheC->SetStats(0);
+  hYSheC->Scale(SCFHEC);
   hYSheC->Draw("COLZ");
   cYSheC->Print(outputpdf);
   ofstream YheC("yield/yields.pl_375_781_+0000.target");
@@ -9835,6 +9849,7 @@ void Q1Analysis()
 
   TCanvas *cYSheL1 = new TCanvas("cYSheL1", " cYSheL1");
   hYSheL1->SetStats(0);
+  hYSheL1->Scale(SCFHEL1);
   hYSheL1->Draw("COLZ");
   cYSheL1->Print(outputpdf);
   ofstream YheL1("yield/yields.pl_375_781_-2015.target");
@@ -9912,6 +9927,7 @@ void Q1Analysis()
 
   TCanvas *cYSheL2 = new TCanvas("cYSheL2", " cYSheL2");
   hYSheL2->SetStats(0);
+  hYSheL2->Scale(SCFHEL2);
   hYSheL2->Draw("COLZ");
   cYSheL2->Print(outputpdf);
   ofstream YheL2("yield/yields.pl_375_781_-4000.target");

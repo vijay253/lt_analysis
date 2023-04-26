@@ -325,21 +325,23 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	TF1* t_fit = new TF1("t1", "pol1", 0, 4); 
 
 	//	TCanvas *c1 = new TCanvas("n1", "n1", 1200, 400);
+	TCanvas *c1 = new TCanvas("n1", "n1");
 	
 	//	c1->Divide(8,1);
+	c1->Divide(4,2);
 
 	Float_t q2_sum;
 
 
 	for (Int_t i = 0; i < t_bin_num; i++) {
 	  
-	  TCanvas *ci = new TCanvas("ci", "ci", 1200, 400);
+	  //	  TCanvas *ci = new TCanvas("ci", "ci", 1200, 400);
 	  
 	  Int_t in = i + 1;	
 
 	  //		cout << in << endl;
 
-	  //	  c1->cd(in);
+	  c1->cd(in);
 
 	  TString t_bin_limit;
 	  t_bin_limit.Form( "t_bin == %i && ratio != 0", in);	
@@ -399,8 +401,11 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	  }
 	  g->SetMarkerStyle(29);
+	  g->GetYaxis()->SetRangeUser(0.0, 6.0);
 	  g->Draw("AP");
-
+	  TLine *L = new TLine(0.0, 1.0, 17.0, 1.0);
+	  L->SetLineColor(kRed);
+	  L->Draw("same");
 
 	  Int_t graph_it = t_g->GetN(); 
 
@@ -496,18 +501,18 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	  q2_sum =  q2_sum + q2_set_tmp;
 
-	ci->Print(outphiyield_dir + i + file_name_str + ".png");
+	  //	ci->Print(outphiyield_dir + i + file_name_str + ".png");
 
 	}
 
 
 	//	exit(0);
 
-	//	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".png");
+	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".png");
 	//	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".root");
 
-	//	c1->Clear();
-	//	c1->cd();
+	c1->Clear();
+	c1->cd();
 	
 
     t_g->SetTitle("t Dependence Plot");
