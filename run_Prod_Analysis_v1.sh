@@ -323,6 +323,7 @@ do
 done
 
 declare -a PHI0P375ME=("RIGHT2" "RIGHT1" "CENTER" "LEFT1" "LEFT2")         # Q1 & mid epsilon setting
+#declare -a PHI0P375ME=("LEFT1" "LEFT2")         # Q1 & mid epsilon setting
 for i in "${PHI0P375ME[@]}"
 do
     if [[ $Q2 = "0p375" && $W = "2p2"  && $EPSILON = "mid" ]]; then
