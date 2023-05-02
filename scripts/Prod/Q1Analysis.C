@@ -954,8 +954,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
       
-      Double_t fact = 9435820.0/400000.0;
-      // Double_t fact = 10136000.0/200000.0;
+      Double_t fact = 9428650.0/400000.0;
+      // Double_t fact = 7772090.0/10000.0;
       Double_t Sw1t = t_simc >= bins[1] && t_simc <= bins[2];
       Double_t Sw2t = t_simc >= bins[2] && t_simc <= bins[3];
       Double_t Sw3t = t_simc >= bins[3] && t_simc <= bins[4];
@@ -1632,9 +1632,9 @@ void Q1Analysis()
   Double_t ECLEL2  = 1.0/826.567;
   Double_t ECLEDL2 = 1.0/38.644;
   //SIMC SCAL
-  Double_t SCFLEC  = 0.50;  //0.30
-  Double_t SCFLEL1 = 0.50;  //0.35
-  Double_t SCFLEL2 = 0.50;  //0.40
+  Double_t SCFLEC  = 0.58;  //0.30
+  Double_t SCFLEL1 = 0.58;  //0.35
+  Double_t SCFLEL2 = 0.58;  //0.40
  
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
@@ -5210,11 +5210,11 @@ void Q1Analysis()
   Double_t ECMEL2   = 1.0/417.516;
   Double_t ECMEDL2  = 1.0/55.624;
   //SIMC SCAL
-  Double_t SCFMER1 = 0.90;
-  Double_t SCFMER2 = 0.90;
-  Double_t SCFMEC  = 0.90;
-  Double_t SCFMEL1 = 0.75;
-  Double_t SCFMEL2 = 0.75;
+  Double_t SCFMER1 = 1.0;  //0.90;
+  Double_t SCFMER2 = 1.0; //0.90;
+  Double_t SCFMEC  = 1.0; // 0.90;
+  Double_t SCFMEL1 = 0.60; //0.75;
+  Double_t SCFMEL2 = 0.60; //0.75;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
   htcoinmeL1->SetStats(0);
@@ -8715,10 +8715,10 @@ void Q1Analysis()
   Double_t ECHEL2   = 1.0/195.603;
   Double_t ECHEDL2  = 1.0/73.453;
   //SIMC SCAL
-  Double_t SCFHER1 = 0.65;
-  Double_t SCFHEC = 0.65;
-  Double_t SCFHEL1 = 0.65;
-  Double_t SCFHEL2 = 0.65;
+  Double_t SCFHER1 = 0.90; // 0.65;
+  Double_t SCFHEC =  0.50; //0.65;
+  Double_t SCFHEL1 = 0.50; //0.65;
+  Double_t SCFHEL2 = 0.50; //0.65;
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
  

@@ -641,33 +641,31 @@ c      d = 1.11672e-01
 c===========================
 c hh
 c===========================
-      a = (0.25961E+02)
-c      a = (0.25961E+02)*(2.45**6/0.38**6) 
+      a =  0.25961E+02
       b = -0.10000E+02  
       c = -0.15838E+02
-      d = 0.00000E+00
+      d =  0.00000E+00
       sigL = (a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2))
       print*,"sigL", sigL
 
-      a = (0.46859E+02)
-c      a = (0.46859E+2)*(2.45**8/0.38**8)
+      a =  0.46859E+02
       b = -0.30000E+02 
       c = -0.33572E+01
-      d = 0.00000E+00
+      d =  0.00000E+00
 
       sigT = (a+b*log(q2)+(c+d*log(q2))*(tp-(0.0735+0.028*log(q2))*q2)
      *     /(0.0735+0.028*log(q2))*q2)
       
-      a = 0.10000E+02
+      a =  0.10000E+00
       b = -0.28000E+02
-      c = 0.35000E+01
+      c =  0.35000E+01
       print*,"sigT", sigT
    
-      sigLT = -((a*exp(b*(-tp))+c/(-tp))*sin(thetacm))
+      sigLT = ((a*exp(b*(tp))+c/(tp))*sin(thetacm))
       print*,"sigLT", sigLT
 
       a = -0.67276E+02
-      sigTT = -((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
+      sigTT = ((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
       print*,"sigTT", sigTT
 
 
@@ -677,17 +675,18 @@ c===========================
 * 1/(W^2-mp^2)^2.
       wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
 
-      sigL = sigL*wfactor
-      sigT = sigT*wfactor
-      sigLT= sigLT*wfactor
-      sigTT= sigTT*wfactor
+c      sigL = sigL*wfactor
+c      sigT = sigT*wfactor
+c      sigLT= sigLT*wfactor
+c      sigTT= sigTT*wfactor
 
       sig = sigT + eps_mod*sigL+(eps_mod*cos(2.*phicm)*sigTT)
      *     +sqrt(2.*eps_mod*(1.+eps_mod))*(cos(phicm))*sigLT
      
 c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
-      sig = sig/2./pi           !dsig/dtdphicm in microbarns/GeV^2/rad
+      sig = sig*wfactor
+      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
 
       x_mod = sig     
       th_mod=thetacm

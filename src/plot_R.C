@@ -401,7 +401,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
 	  }
 	  g->SetMarkerStyle(29);
-	  g->GetYaxis()->SetRangeUser(0.0, 6.0);
+	  g->GetYaxis()->SetRangeUser(0.0, 2.0);
 	  g->Draw("AP");
 	  TLine *L = new TLine(0.0, 1.0, 17.0, 1.0);
 	  L->SetLineColor(kRed);
