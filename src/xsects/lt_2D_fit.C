@@ -707,7 +707,7 @@ void single_setting(TString q2_set){
  		// fff2->ReleaseParameter(2);
  		fff2->ReleaseParameter(3);
  
-  		fff2->SetParameter(3, 0.0);
+  		fff2->SetParameter(3, fff2->GetParameter(3));       //Updated on May 2
 		/** 
 		fff2->SetParLimits(3, -0.1, 0.1);
 		**/

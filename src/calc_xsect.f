@@ -673,7 +673,8 @@ c===========================
 
 * Since I have nothing better to go on, for now I assume W scales as
 * 1/(W^2-mp^2)^2.
-      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
+c      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
+      wfactor= 1.0/(w**2-mp**2)**2
 
 c      sigL = sigL*wfactor
 c      sigT = sigT*wfactor

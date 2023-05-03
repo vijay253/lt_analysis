@@ -595,9 +595,9 @@ void Q1Analysis()
   TH1D *hphCR  = new TH1D("hphCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphSC  = new TH1D("hphSC","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphC  = new TH1D("hphC","ph_q; ph_q;",150, 0.91625, 0.98375);      
-  TH1D *hphCR  = new TH1D("hphCR","ph_q; ph_q;",150, 0.91625, 0.98375);      
-  TH1D *hphSC  = new TH1D("hphSC","ph_q; ph_q;",150, 0.91625, 0.98375);      
+  TH1D *hphC  = new TH1D("hphC","ph_q; ph_q;",150,  PhiBinLow, PhiBinHigh); //0.91625, 0.98375     
+  TH1D *hphCR  = new TH1D("hphCR","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphSC  = new TH1D("hphSC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   TH1D *hthC  = new TH1D("hthC","th_q; th_q;",   50, -0.01, 5.0);      
   TH1D *hthCR  = new TH1D("hthCR","th_q; th_q;",  50, -0.01, 5.0);      
@@ -632,9 +632,9 @@ void Q1Analysis()
   TH1D *hphL1R  = new TH1D("hphL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphSL1  = new TH1D("hphSL1","ph_q; ph_q;",50, -10,370);      
   */
-  TH1D *hphL1  = new TH1D("hphL1","ph_q; ph_q;",150, 0.91625, 0.98375);      
-  TH1D *hphL1R  = new TH1D("hphL1R","ph_q; ph_q;",150, 0.91625, 0.98375);      
-  TH1D *hphSL1  = new TH1D("hphSL1","ph_q; ph_q;",150, 0.91625, 0.98375);      
+  TH1D *hphL1  = new TH1D("hphL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphL1R  = new TH1D("hphL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphSL1  = new TH1D("hphSL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   TH1D *hthL1  = new TH1D("hthL1","th_q; th_q;",   50, -0.1, 0.1);      
   TH1D *hthL1R  = new TH1D("hthL1R","th_q; th_q;",  50, -0.1, 0.1);      
@@ -669,9 +669,9 @@ void Q1Analysis()
   TH1D *hphL2R  = new TH1D("hphL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphSL2  = new TH1D("hphSL2","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphL2  = new TH1D("hphL2","ph_q; ph_q;",150, 0.91625, 0.98375);      
-  TH1D *hphL2R  = new TH1D("hphL2R","ph_q; ph_q;",150, 0.91625, 0.98375);      
-  TH1D *hphSL2  = new TH1D("hphSL2","ph_q; ph_q;",150, 0.91625, 0.98375);      
+  TH1D *hphL2  = new TH1D("hphL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphL2R  = new TH1D("hphL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphSL2  = new TH1D("hphSL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   TH1D *hthL2  = new TH1D("hthL2","th_q; th_q;",   50, -0.1, 0.1);      
   TH1D *hthL2R  = new TH1D("hthL2R","th_q; th_q;",  50, -0.1, 0.1);      
@@ -736,7 +736,9 @@ void Q1Analysis()
   //  Double_t qL1[nEntries_TBRANCHL1];
   // Double_t wL1[nEntries_TBRANCHL1]; 
   
-  Double_t MMpiOffset = 0.003492;
+  Double_t MMpiOffsetL2 = 0.003097;
+  Double_t MMpiOffsetL1 = 0.003584;
+  Double_t MMpiOffsetC  = 0.003396;
 
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
@@ -758,7 +760,7 @@ void Q1Analysis()
       }
       
       Double_t DiamondC = (Dcut->IsInside(Q2C, WC));  
-      Double_t MMpiC = mmC>= 0.932-MMpiOffset && mmC <=0.98-MMpiOffset;
+      Double_t MMpiC = mmC>= 0.932-MMpiOffsetC && mmC <=0.98-MMpiOffsetC;
       Double_t CoinPionC = tcoinC>=-1.0 && tcoinC <= 1.0;      
       Double_t CoinPionCR = ((tcoinC>=-15.0 && tcoinC<= -9.0) || (tcoinC>=7.0 && tcoinC<=13.0));      
       
@@ -777,9 +779,9 @@ void Q1Analysis()
 	  htInC->Fill(-tC);	
 	  hph_qC->Fill(ph_qC*57.2958 + 180);
 	  //	  hphC->Fill(ph_qC*57.2958 + 180);
-	  hphC->Fill(mmC+MMpiOffset);
+	  hphC->Fill(mmC+MMpiOffsetC);
 	  //	  hYC->Fill(-tC, ph_qC*57.2958 + 180);
-	  hYC->Fill(-tC, mmC+MMpiOffset);   //0.003492
+	  hYC->Fill(-tC, mmC+MMpiOffsetC);   //0.003492
 	  hthC->Fill(th_qC*57.2958);
 	}	
       //Random    
@@ -797,10 +799,10 @@ void Q1Analysis()
 	  htInCR->Fill(-tC);	
 	  hph_qCR->Fill(ph_qC*57.2958 + 180);
 	  //	  hphCR->Fill(ph_qC*57.2958 + 180);
-	  hphCR->Fill(mmC+MMpiOffset);
+	  hphCR->Fill(mmC+MMpiOffsetC);
 	  hQ2WCR->Fill(Q2C, WC);
 	  //	  hYCR->Fill(-tC, ph_qC*57.2958 + 180);
-	  hYCR->Fill(-tC, mmC+MMpiOffset);
+	  hYCR->Fill(-tC, mmC+MMpiOffsetC);
 	  hthCR->Fill(th_qC*57.2958);
 	}
       
@@ -927,14 +929,14 @@ void Q1Analysis()
       TBRANCHDC->GetEntry(i);
             
       Double_t DiamonddC = (Dcut->IsInside(Q2dC, WdC));  
-      Double_t MMpidC = mmdC>= 0.932-MMpiOffset && mmdC <=0.98-MMpiOffset;
+      Double_t MMpidC = mmdC>= 0.932-MMpiOffsetC && mmdC <=0.98-MMpiOffsetC;
       Double_t CoinPiondC = tcoindC>=-1.0 && tcoindC <= 1.0;      
       Double_t CoinPiondCR = ((tcoindC>=-15.0 && tcoindC<= -9.0) || (tcoindC>=7.0 && tcoindC<=13.0));      
       
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
 	  //	  hYdC->Fill(-tdC, ph_qdC*57.2958 + 180);
-	  hYdC->Fill(-tdC, mmdC+MMpiOffset);
+	  hYdC->Fill(-tdC, mmdC+MMpiOffsetC);
 	}	
 
       Double_t CUTCCR = ((tcoindC>=-15.0 && tcoindC <= -9.0) || (tcoindC>=7.0 && tcoindC <=13.0));      
@@ -942,7 +944,7 @@ void Q1Analysis()
       if(CoinPiondCR && MMpidC && DiamonddC)
 	{
 	  //	  hYdCR->Fill(-tdC, ph_qdC*57.2958 + 180);
-	  hYdCR->Fill(-tdC, mmdC+MMpiOffset);
+	  hYdCR->Fill(-tdC, mmdC+MMpiOffsetC);
 	}
     }  
 
@@ -979,7 +981,7 @@ void Q1Analysis()
 	  hYSC->Fill(t_simc, missmass, fact*Weight);
 	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
 	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
-	  H_ssyptar_SC->Fill(-1*ssyptar, fact*Weight);
+	  H_ssyptar_SC->Fill(ssyptar, fact*Weight);
 	 
 	  H_hsdelta_SC->Fill(hsdelta, fact*Weight);
 	  H_hsxptar_SC->Fill(hsxptar, fact*Weight);
@@ -1045,7 +1047,7 @@ void Q1Analysis()
       }
      
       Double_t DiamondL1 = (Dcut->IsInside(Q2L1, WL1));  
-      Double_t MMpiL1 = mmL1>= 0.932-MMpiOffset && mmL1 <=0.98-MMpiOffset;
+      Double_t MMpiL1 = mmL1>= 0.932-MMpiOffsetL1 && mmL1 <=0.98-MMpiOffsetL1;
       Double_t CoinPionL1 = tcoinL1>=-1.0 && tcoinL1 <= 1.0;      
       Double_t CoinPionL1R = ((tcoinL1>=-15.0 && tcoinL1<= -9.0) || (tcoinL1>=7.0 && tcoinL1<=13.0));      
 
@@ -1063,9 +1065,9 @@ void Q1Analysis()
  	  htInL1->Fill(-tL1);
 	  hph_qL1->Fill(ph_qL1*57.2958 + 180);	  
 	  //	  hphL1->Fill(ph_qL1*57.2958 + 180);	  
-	  hphL1->Fill(mmL1+MMpiOffset);	  
+	  hphL1->Fill(mmL1+MMpiOffsetL1);	  
 	  //	  hYL1->Fill(-tL1, ph_qL1*57.2958 + 180);
-	  hYL1->Fill(-tL1, mmL1+MMpiOffset);
+	  hYL1->Fill(-tL1, mmL1+MMpiOffsetL1);
 	}     
  
       //Random            
@@ -1083,9 +1085,9 @@ void Q1Analysis()
  	  htInL1R->Fill(-tL1);
 	  hph_qL1R->Fill(ph_qL1*57.2958 + 180);	  
 	  //	  hphL1R->Fill(ph_qL1*57.2958 + 180);	  
-	  hphL1R->Fill(mmL1+MMpiOffset);	  
+	  hphL1R->Fill(mmL1+MMpiOffsetL1);	  
 	  // hYL1R->Fill(-tL1, ph_qL1*57.2958 + 180);
-	  hYL1R->Fill(-tL1, mmL1+MMpiOffset);
+	  hYL1R->Fill(-tL1, mmL1+MMpiOffsetL1);
 	}
       
       //For kin_aver, Q2, W & p_theta 
@@ -1210,20 +1212,20 @@ void Q1Analysis()
       TBRANCHDL1->GetEntry(i);
 
       Double_t DiamonddL1 = (Dcut->IsInside(Q2dL1, WdL1));  
-      Double_t MMpidL1 = mmdL1>= 0.932-MMpiOffset && mmdL1 <=0.98-MMpiOffset;
+      Double_t MMpidL1 = mmdL1>= 0.932-MMpiOffsetL1 && mmdL1 <=0.98-MMpiOffsetL1;
       Double_t CoinPiondL1 = tcoindL1>=-1.0 && tcoindL1 <= 1.0;      
       Double_t CoinPiondL1R = ((tcoindL1>=-15.0 && tcoindL1<= -9.0) || (tcoindL1>=7.0 && tcoindL1<=13.0));      
       
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
 	  //	  hYdL1->Fill(-tdL1, ph_qdL1*57.2958 + 180);
-	  hYdL1->Fill(-tdL1,mmdL1+MMpiOffset);
+	  hYdL1->Fill(-tdL1,mmdL1+MMpiOffsetL1);
 	}	
       
       if(CoinPiondL1R && MMpidL1 && DiamonddL1)
 	{
 	  //	  hYdL1R->Fill(-tdL1, ph_qdL1*57.2958 + 180);
-	  hYdL1R->Fill(-tdL1,mmdL1+MMpiOffset);
+	  hYdL1R->Fill(-tdL1,mmdL1+MMpiOffsetL1);
 	}
     }    
   
@@ -1250,7 +1252,7 @@ void Q1Analysis()
 	  hYSL1->Fill(t_simcL1,  missmassL1, factL1*WeightL1);
 	  H_ssdelta_SL1->Fill(ssdeltaL1, factL1*WeightL1);
 	  H_ssxptar_SL1->Fill(ssxptarL1, factL1*WeightL1);
-	  H_ssyptar_SL1->Fill(-1*ssyptarL1, factL1*WeightL1);
+	  H_ssyptar_SL1->Fill(ssyptarL1, factL1*WeightL1);
 	  
 	  H_hsdelta_SL1->Fill(hsdeltaL1, factL1*WeightL1);
 	  H_hsxptar_SL1->Fill(hsxptarL1, factL1*WeightL1);
@@ -1273,7 +1275,7 @@ void Q1Analysis()
 	htcoinL2->Fill(tcoinL2);
       }
       Double_t DiamondL2 = (Dcut->IsInside(Q2L2, WL2));  
-      Double_t MMpiL2 = mmL2>= 0.932-MMpiOffset && mmL2 <=0.98-MMpiOffset;
+      Double_t MMpiL2 = mmL2>= 0.932-MMpiOffsetL2 && mmL2 <=0.98-MMpiOffsetL2;
       Double_t CoinPionL2 = tcoinL2>=-1.0 && tcoinL2 <= 1.0;      
       Double_t CoinPionL2R = ((tcoinL2>=-15.0 && tcoinL2<= -9.0) || (tcoinL2>=7.0 && tcoinL2<=13.0));      
       
@@ -1291,9 +1293,9 @@ void Q1Analysis()
  	  htInL2->Fill(-tL2);
 	  hph_qL2->Fill(ph_qL2*57.2958 + 180);
 	  //	  hphL2->Fill(ph_qL2*57.2958 + 180);
-	  hphL2->Fill(mmL2+MMpiOffset);
+	  hphL2->Fill(mmL2+MMpiOffsetL2);
 	  //	  hYL2->Fill(-tL2, ph_qL2*57.2958 + 180);
-	  hYL2->Fill(-tL2, mmL2+MMpiOffset);
+	  hYL2->Fill(-tL2, mmL2+MMpiOffsetL2);
 	}
 
       if(CoinPionL2R && MMpiL2 && DiamondL2)
@@ -1310,9 +1312,9 @@ void Q1Analysis()
  	  htInL2R->Fill(-tL2);
 	  hph_qL2R->Fill(ph_qL2*57.2958 + 180);
 	  //	  hphL2R->Fill(ph_qL2*57.2958 + 180);
-	  hphL2R->Fill(mmL2+MMpiOffset);
+	  hphL2R->Fill(mmL2+MMpiOffsetL2);
 	  //	  hYL2R->Fill(-tL2, ph_qL2*57.2958 + 180);
-	  hYL2R->Fill(-tL2, mmL2+MMpiOffset);
+	  hYL2R->Fill(-tL2, mmL2+MMpiOffsetL2);
 	}
 
       //For kin_aver, Q2, W & p_theta 
@@ -1436,14 +1438,14 @@ void Q1Analysis()
       TBRANCHDL2->GetEntry(i);
 
       Double_t DiamonddL2 = (Dcut->IsInside(Q2dL2, WdL2));  
-      Double_t MMpidL2 = mmdL2>= 0.932-MMpiOffset && mmdL2 <=0.98-MMpiOffset;
+      Double_t MMpidL2 = mmdL2>= 0.932-MMpiOffsetL2 && mmdL2 <=0.98-MMpiOffsetL2;
       Double_t CoinPiondL2 = tcoindL2>=-1.0 && tcoindL2 <= 1.0;      
       Double_t CoinPiondL2R = ((tcoindL2>=-15.0 && tcoindL2<= -9.0) || (tcoindL2>=7.0 && tcoindL2<=13.0));      
 
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
 	  //	  hYdL2->Fill(-tdL2, ph_qdL2*57.2958 + 180);
-	  hYdL2->Fill(-tdL2, mmdL2+MMpiOffset);
+	  hYdL2->Fill(-tdL2, mmdL2+MMpiOffsetL2);
 	}	
 
       Double_t CUTCL2R = ((tcoindL2>=-15.0 && tcoindL2 <= -9.0) || (tcoindL2>=7.0 && tcoindL2<=13.0));      
@@ -1451,7 +1453,7 @@ void Q1Analysis()
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
 	  //	  hYdL2R->Fill(-tdL2, ph_qdL2*57.2958 + 180);
-	  hYdL2R->Fill(-tdL2, mmdL2+MMpiOffset);
+	  hYdL2R->Fill(-tdL2, mmdL2+MMpiOffsetL2);
 	}
     }    
   //SIMC LEFT2
@@ -1478,7 +1480,7 @@ void Q1Analysis()
 	  hYSL2->Fill(t_simcL2, missmassL2, factL2*WeightL2);
 	  H_ssdelta_SL2->Fill(ssdeltaL2, factL2*WeightL2);
 	  H_ssxptar_SL2->Fill(ssxptarL2, factL2*WeightL2);
-	  H_ssyptar_SL2->Fill(-1*ssyptarL2, factL2*WeightL2);
+	  H_ssyptar_SL2->Fill(ssyptarL2, factL2*WeightL2);
 	  
 	  H_hsdelta_SL2->Fill(hsdeltaL2, factL2*WeightL2);
 	  H_hsxptar_SL2->Fill(hsxptarL2, factL2*WeightL2);
@@ -2133,7 +2135,7 @@ void Q1Analysis()
   // hphSL2->SetStats(0);
   hphSL2->Scale(SCFLEL2);
   hphSL2->Draw("");
-  hphL2->SetStats(0);
+  //  hphL2->SetStats(0);
   hphL2->SetLineColor(kGreen);
   hphL2->Add(hphL2R, -1);
   hphL2->Scale(ECLEL2);
@@ -2149,7 +2151,7 @@ void Q1Analysis()
   //  hphSL1->SetStats(0);
   hphSL1->Scale(SCFLEL1);
   hphSL1->Draw("");
-  hphL1->SetStats(0);
+  //  hphL1->SetStats(0);
   hphL1->SetLineColor(kGreen);
   hphL1->Add(hphL1R, -1);
   hphL1->Scale(ECLEL1);
@@ -2165,7 +2167,7 @@ void Q1Analysis()
   // hphSC->SetStats(0);
   hphSC->Scale(SCFLEC);
   hphSC->Draw("");
-  hphC->SetStats(0);
+  // hphC->SetStats(0);
   hphC->SetLineColor(kGreen);
   hphC->Add(hphCR, -1);
   hphC->Scale(ECLEC);
@@ -2230,147 +2232,183 @@ void Q1Analysis()
   c6->Print(outputpdf);
 
   TCanvas *cdeltaS = new TCanvas("cdeltaS", " cdeltaS");
-  H_ssdelta_SC->Draw("Weight");
+  H_ssdelta_SC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SC->Scale(SCFLEC);
+  H_ssdelta_SC->Draw("");
   H_ssdelta_DC->Add(H_ssdelta_DCR, -1);
   H_ssdelta_DC->Scale(ECLEC);
   H_ssdelta_DC->SetLineColor(kGreen);
-  H_ssdelta_DC->Draw("same Weight"); 
+  H_ssdelta_DC->Draw("same"); 
   cdeltaS->Print(outputpdf);
 
   TCanvas *cdeltaSL1 = new TCanvas("cdeltaSL1", " cdeltaSL1");
-  H_ssdelta_SL1->Draw("Weight");
+  H_ssdelta_SL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SL1->Scale(SCFLEL1);
+  H_ssdelta_SL1->Draw("");
   H_ssdelta_DL1->Add(H_ssdelta_DL1R, -1);
   H_ssdelta_DL1->Scale(ECLEL1);
   H_ssdelta_DL1->SetLineColor(kGreen);
-  H_ssdelta_DL1->Draw("same Weight"); 
+  H_ssdelta_DL1->Draw("same"); 
   cdeltaSL1->Print(outputpdf);
 
   TCanvas *cdeltaSL2 = new TCanvas("cdeltaSL2", " cdeltaSL2");
-  H_ssdelta_SL2->Draw("Weight");
+  H_ssdelta_SL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SL2->Scale(SCFLEL2);
+  H_ssdelta_SL2->Draw("");
   H_ssdelta_DL2->Add(H_ssdelta_DL2R, -1);
   H_ssdelta_DL2->Scale(ECLEL2);
   H_ssdelta_DL2->SetLineColor(kGreen);
-  H_ssdelta_DL2->Draw("same Weight"); 
+  H_ssdelta_DL2->Draw("same"); 
   cdeltaSL2->Print(outputpdf);
 
   TCanvas *cdeltaH = new TCanvas("cdeltaH", " cdeltaH");
-  H_hsdelta_SC->Draw("Weight");
+  H_hsdelta_SC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SC->Scale(SCFLEC);
+  H_hsdelta_SC->Draw("");
   H_hsdelta_DC->Add(H_hsdelta_DCR, -1);
   H_hsdelta_DC->Scale(ECLEC);
   H_hsdelta_DC->SetLineColor(kGreen);
-  H_hsdelta_DC->Draw("same Weight"); 
+  H_hsdelta_DC->Draw("same "); 
   cdeltaH->Print(outputpdf);
 
   TCanvas *cdeltaHL1 = new TCanvas("cdeltaHL1", " cdeltaHL1");
-  H_hsdelta_SL1->Draw("Weight");
+  H_hsdelta_SL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SL1->Scale(SCFLEL1);
+  H_hsdelta_SL1->Draw("");
   H_hsdelta_DL1->Add(H_hsdelta_DL1R, -1);
   H_hsdelta_DL1->Scale(ECLEL1);
   H_hsdelta_DL1->SetLineColor(kGreen);
-  H_hsdelta_DL1->Draw("same Weight"); 
+  H_hsdelta_DL1->Draw("same"); 
   cdeltaHL1->Print(outputpdf);
 
   TCanvas *cdeltaHL2 = new TCanvas("cdeltaHL2", " cdeltaHL2");
-  H_hsdelta_SL2->Draw("Weight");
+  H_hsdelta_SL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SL2->Scale(SCFLEL2);
+  H_hsdelta_SL2->Draw("");
   H_hsdelta_DL2->Add(H_hsdelta_DL2R, -1);
   H_hsdelta_DL2->Scale(ECLEL2);
   H_hsdelta_DL2->SetLineColor(kGreen);
-  H_hsdelta_DL2->Draw("same Weight"); 
+  H_hsdelta_DL2->Draw("same"); 
   cdeltaHL2->Print(outputpdf);
 
   TCanvas *cxptarS = new TCanvas("cxptarS", " cxptarS");
-  H_ssxptar_SC->Draw("Weight");
+  H_ssxptar_SC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SC->Scale(SCFLEC);
+  H_ssxptar_SC->Draw("");
   H_ssxptar_DC->Add(H_ssxptar_DCR, -1);
   H_ssxptar_DC->Scale(ECLEC);
   H_ssxptar_DC->SetLineColor(kGreen);
-  H_ssxptar_DC->Draw("same Weight");
+  H_ssxptar_DC->Draw("same");
   cxptarS->Print(outputpdf);
 
   TCanvas *cxptarSL1 = new TCanvas("cxptarSL1", " cxptarSL1");
-  H_ssxptar_SL1->Draw("Weight");
+  H_ssxptar_SL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SL1->Scale(SCFLEL1);
+  H_ssxptar_SL1->Draw("");
   H_ssxptar_DL1->Add(H_ssxptar_DL1R, -1);
   H_ssxptar_DL1->Scale(ECLEL1);
   H_ssxptar_DL1->SetLineColor(kGreen);
-  H_ssxptar_DL1->Draw("same Weight");
+  H_ssxptar_DL1->Draw("same ");
   cxptarSL1->Print(outputpdf);
 
   TCanvas *cxptarSL2 = new TCanvas("cxptarSL2", " cxptarSL2");
-  H_ssxptar_SL2->Draw("Weight");
+  H_ssxptar_SL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SL2->Scale(SCFLEL2);
+  H_ssxptar_SL2->Draw("");
   H_ssxptar_DL2->Add(H_ssxptar_DL2R, -1);
   H_ssxptar_DL2->Scale(ECLEL2);
   H_ssxptar_DL2->SetLineColor(kGreen);
-  H_ssxptar_DL2->Draw("same Weight");
+  H_ssxptar_DL2->Draw("same");
   cxptarSL2->Print(outputpdf);
 
   TCanvas *cyptarS = new TCanvas("cyptarS", " cyptarS");
-  H_ssyptar_SC->Draw("Weight");
+  H_ssyptar_SC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SC->Scale(SCFLEC);
+  H_ssyptar_SC->Draw("");
   H_ssyptar_DC->Add( H_ssyptar_DCR, -1);
   H_ssyptar_DC->Scale(ECLEC);
   H_ssyptar_DC->SetLineColor(kGreen);
-  H_ssyptar_DC->Draw("same Weight");
+  H_ssyptar_DC->Draw("same");
   cyptarS->Print(outputpdf);
 
   TCanvas *cyptarSL1 = new TCanvas("cyptarSL1", " cyptarSL1");
-  H_ssyptar_SL1->Draw("Weight");
+  H_ssyptar_SL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SL1->Scale(SCFLEL1);
+  H_ssyptar_SL1->Draw("");
   H_ssyptar_DL1->Add( H_ssyptar_DL1R, -1);
   H_ssyptar_DL1->Scale(ECLEL1);
   H_ssyptar_DL1->SetLineColor(kGreen);
-  H_ssyptar_DL1->Draw("same Weight");
+  H_ssyptar_DL1->Draw("same ");
   cyptarSL1->Print(outputpdf);
 
   TCanvas *cyptarSL2 = new TCanvas("cyptarSL2", " cyptarSL2");
-  H_ssyptar_SL2->Draw("Weight");
+  H_ssyptar_SL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SL2->Scale(SCFLEL2);
+  H_ssyptar_SL2->Draw("");
   H_ssyptar_DL2->Add(H_ssyptar_DL2R, -1);
   H_ssyptar_DL2->Scale(ECLEL2);
   H_ssyptar_DL2->SetLineColor(kGreen);
-  H_ssyptar_DL2->Draw("same Weight");
+  H_ssyptar_DL2->Draw("same");
   cyptarSL2->Print(outputpdf);
 
   TCanvas *cxptarH = new TCanvas("cxptarH", " cxptarH");
-  H_hsxptar_SC->Draw("Weight");
+  H_hsxptar_SC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SC->Scale(SCFLEC);
+  H_hsxptar_SC->Draw("");
   H_hsxptar_DC->Add( H_hsxptar_DCR, -1);
   H_hsxptar_DC->Scale(ECLEC);
   H_hsxptar_DC->SetLineColor(kGreen);
-  H_hsxptar_DC->Draw("same Weight");
+  H_hsxptar_DC->Draw("same ");
   cxptarH->Print(outputpdf);
 
   TCanvas *cxptarHL1 = new TCanvas("cxptarHL1", " cxptarHL1");
-  H_hsxptar_SL1->Draw("Weight");
+  H_hsxptar_SL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SL1->Scale(SCFLEL1);
+  H_hsxptar_SL1->Draw("");
   H_hsxptar_DL1->Add( H_hsxptar_DL1R, -1);
   H_hsxptar_DL1->Scale(ECLEL1);
   H_hsxptar_DL1->SetLineColor(kGreen);
-  H_hsxptar_DL1->Draw("same Weight");
+  H_hsxptar_DL1->Draw("same ");
   cxptarHL1->Print(outputpdf);
 
   TCanvas *cxptarHL2 = new TCanvas("cxptarHL2", " cxptarHL2");
-  H_hsxptar_SL2->Draw("Weight");
+  H_hsxptar_SL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SL2->Scale(SCFLEL2);
+  H_hsxptar_SL2->Draw("");
   H_hsxptar_DL2->Add( H_hsxptar_DL2R, -1);
   H_hsxptar_DL2->Scale(ECLEL2);
   H_hsxptar_DL2->SetLineColor(kGreen);
-  H_hsxptar_DL2->Draw("same Weight");
+  H_hsxptar_DL2->Draw("same");
   cxptarHL2->Print(outputpdf);
 
   TCanvas *cyptarH = new TCanvas("cyptarH", " cyptarH");
-  H_hsyptar_SC->Draw("Weight");
+  H_hsyptar_SC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SC->Scale(SCFLEC);
+  H_hsyptar_SC->Draw("");
   H_hsyptar_DC->Add( H_hsyptar_DCR, -1);
   H_hsyptar_DC->Scale(ECLEC);
   H_hsyptar_DC->SetLineColor(kGreen);
-  H_hsyptar_DC->Draw("same Weight");
+  H_hsyptar_DC->Draw("same");
   cyptarH->Print(outputpdf);
 
   TCanvas *cyptarHL1 = new TCanvas("cyptarHL1", " cyptarHL1");
-  H_hsyptar_SL1->Draw("Weight");
+  H_hsyptar_SL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SL1->Scale(SCFLEL1);
+  H_hsyptar_SL1->Draw("");
   H_hsyptar_DL1->Add( H_hsyptar_DL1R, -1);
   H_hsyptar_DL1->Scale(ECLEL1);
   H_hsyptar_DL1->SetLineColor(kGreen);
-  H_hsyptar_DL1->Draw("same Weight");
+  H_hsyptar_DL1->Draw("same ");
   cyptarHL1->Print(outputpdf);
 
   TCanvas *cyptarHL2 = new TCanvas("cyptarHL2", " cyptarHL22");
-  H_hsyptar_SL2->Draw("Weight");
+  H_hsyptar_SL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SL2->Scale(SCFLEL2);
+  H_hsyptar_SL2->Draw("");
   H_hsyptar_DL2->Add(H_hsyptar_DL2R, -1);
   H_hsyptar_DL2->Scale(ECLEL2);
   H_hsyptar_DL2->SetLineColor(kGreen);
-  H_hsyptar_DL2->Draw("same Weight");
+  H_hsyptar_DL2->Draw("same");
   cyptarHL2->Print(outputpdf);
 
   TCanvas *cY = new TCanvas("cY", " cY");
@@ -2819,20 +2857,6 @@ void Q1Analysis()
      c7->Print(outputpdf);
   **/
 
-  TFile *OutHisto_file = new TFile(foutname,"RECREATE");
-  TDirectory *Lowe = OutHisto_file->mkdir("Lowe");
-  Lowe->cd();  
-  htcoinC->Write();
-  htcoinL1->Write();
-  htcoinL2->Write();
-  htC->Write();  
-  htL1->Write();  
-  htL2->Write();
-  hQ2WC->GetListOfFunctions()->Add(Dcut,"L");  
-  hQ2WC->Write();
-  hQ2WC->GetListOfFunctions()->Clear("L");  
-  OutHisto_file->Close();
- 
   //Mid epsilon analysis
   cout<<" "<<endl;
   cout<<" Analysing mid epsilon data..." <<endl;
@@ -3626,9 +3650,9 @@ void Q1Analysis()
   TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphmeR1  = new TH1D("hphmeR1","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphmeR1  = new TH1D("hphmeR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   
   //  TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeR1  = new TH1D("H_ssdelta_SmeR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3661,9 +3685,9 @@ void Q1Analysis()
   TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphmeR2  = new TH1D("hphmeR2","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphmeR2  = new TH1D("hphmeR2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   
   // TH2D *hYSmeR2   = new TH2D("hYSmeR2"," Yield SIMC R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeR2  = new TH1D("H_ssdelta_SmeR2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3696,9 +3720,9 @@ void Q1Analysis()
   TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphmeC  = new TH1D("hphmeC","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  150, 0.92, 0.98);      
-  TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphmeC  = new TH1D("hphmeC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   
   //  TH2D *hYSmeC   = new TH2D("hYSmeC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeC  = new TH1D("H_ssdelta_SmeC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3731,9 +3755,9 @@ void Q1Analysis()
   TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphmeL1  = new TH1D("hphmeL1","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphmeL1  = new TH1D("hphmeL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   
   // TH2D *hYSmeL1   = new TH2D("hYSmeL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeL1  = new TH1D("H_ssdelta_SmeL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3766,9 +3790,9 @@ void Q1Analysis()
   TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphmeL2  = new TH1D("hphmeL2","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphmeL2  = new TH1D("hphmeL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   // TH2D *hYSmeL2   = new TH2D("hYSmeL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeL2  = new TH1D("H_ssdelta_SmeL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -3795,7 +3819,12 @@ void Q1Analysis()
   TH1D *H_hsxptar_DmeL2R  = new TH1D("H_hsxptar_DmeL2R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeL2R  = new TH1D("H_hsyptar_DmeL2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
-  Double_t MMpiOffsetme = -1*0.001746;
+  Double_t MMpiOffsetmeR1 = -0.0019952;
+  Double_t MMpiOffsetmeR2 = -0.001492;
+  Double_t MMpiOffsetmeC  = -0.001783;
+  Double_t MMpiOffsetmeL1 = -0.00164;
+  Double_t MMpiOffsetmeL2 = -0.003525;
+
   //Data R1
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER1; i++)
 
@@ -3811,7 +3840,7 @@ void Q1Analysis()
 	htcoinmeR1->Fill(tcoinmeR1);
       }
       Double_t DiamondR1 = (Dcut->IsInside(Q2MER1, WMER1));  
-      Double_t MMpiR1 = mmmeR1>= 0.932-MMpiOffsetme && mmmeR1 <=0.98-MMpiOffsetme;
+      Double_t MMpiR1 = mmmeR1>= 0.932-MMpiOffsetmeR1 && mmmeR1 <=0.98-MMpiOffsetmeR1;
       Double_t CoinPionR1 = tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0;      
       Double_t CoinPionR1R = ((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0));      
       
@@ -3829,9 +3858,9 @@ void Q1Analysis()
 	  htmeInR1->Fill(-tmeR1);
 	  hph_qmeR1->Fill(ph_qmeR1*57.2958 + 180);
 	  //	  hphmeR1->Fill(ph_qmeR1*57.2958 + 180);
- 	  hphmeR1->Fill(mmmeR1+MMpiOffsetme);
+ 	  hphmeR1->Fill(mmmeR1+MMpiOffsetmeR1);
 	  //	  hYmeR1->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
-	  hYmeR1->Fill(-tmeR1, mmmeR1+MMpiOffsetme);
+	  hYmeR1->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
       //Random
       if(CoinPionR1R && MMpiR1 && DiamondR1)
@@ -3848,9 +3877,9 @@ void Q1Analysis()
 	  htmeInR1R->Fill(-tmeR1);
 	  hph_qmeR1R->Fill(ph_qmeR1*57.2958 + 180);
 	  //	  hphmeR1R->Fill(ph_qmeR1*57.2958 + 180);
- 	  hphmeR1R->Fill(mmmeR1+MMpiOffsetme);
+ 	  hphmeR1R->Fill(mmmeR1+MMpiOffsetmeR1);
 	  //	  hYmeR1R->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
-	  hYmeR1R->Fill(-tmeR1, mmmeR1+MMpiOffsetme);
+	  hYmeR1R->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
 
       Double_t w1t = -tmeR1 >= bins[1] && -tmeR1 <= bins[2];
@@ -3982,20 +4011,20 @@ void Q1Analysis()
     {
       TBRANCHMIDEDR1->GetEntry(i);
       Double_t DimonddR1 = (Dcut->IsInside(Q2MEDR1, WMEDR1));  
-      Double_t MMpidR1 = mmmedR1>= 0.932-MMpiOffsetme && mmmedR1 <=0.98-MMpiOffsetme;
+      Double_t MMpidR1 = mmmedR1>= 0.932-MMpiOffsetmeR1 && mmmedR1 <=0.98-MMpiOffsetmeR1;
       Double_t CoinPiondR1 = tcoinmedR1>=-1.0 && tcoinmedR1 <= 1.0;      
       Double_t CoinPiondR1R = ((tcoinmedR1>=-15.0 && tcoinmedR1 <= -9.0) || (tcoinmedR1>=7.0 && tcoinmedR1 <=13.0));      
       
       if(CoinPiondR1 && MMpidR1 && DimonddR1)
 	{
 	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYmedR1->Fill(-tmedR1, mmmedR1+MMpiOffsetme);
+	  hYmedR1->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
 	}
       
       if(CoinPiondR1R && MMpidR1 && DimonddR1)
 	{
 	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYmedR1R->Fill(-tmedR1, mmmedR1+MMpiOffsetme);
+	  hYmedR1R->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
 	}      
     }    
 
@@ -4022,10 +4051,10 @@ void Q1Analysis()
 	  hYSmeR1->Fill(t_simcmeR1,missmassmeR1, NFMR1*WeightmeR1);
           H_ssdelta_SmeR1->Fill(ssdeltameR1, NFMR1*WeightmeR1);
           H_ssxptar_SmeR1->Fill(ssxptarmeR1, NFMR1*WeightmeR1);
-          H_ssyptar_SmeR1->Fill(-1*ssyptarmeR1, NFMR1*WeightmeR1);
+          H_ssyptar_SmeR1->Fill(ssyptarmeR1, NFMR1*WeightmeR1);
 	  
           H_hsdelta_SmeR1->Fill(hsdeltameR1, NFMR1*WeightmeR1);
-          H_hsxptar_SmeR1->Fill(-1*hsxptarmeR1, NFMR1*WeightmeR1);
+          H_hsxptar_SmeR1->Fill(hsxptarmeR1, NFMR1*WeightmeR1);
           H_hsyptar_SmeR1->Fill(hsyptarmeR1, NFMR1*WeightmeR1);
 	}
     }
@@ -4045,7 +4074,7 @@ void Q1Analysis()
 	htcoinmeR2->Fill(tcoinmeR2);
       }
       Double_t DiamondR2 = (Dcut->IsInside(Q2MER2, WMER2));  
-      Double_t MMpiR2 = mmmeR2>= 0.932-1.5*MMpiOffsetme && mmmeR2 <=0.98-1.5*MMpiOffsetme;
+      Double_t MMpiR2 = mmmeR2>= 0.932-MMpiOffsetmeR2 && mmmeR2 <=0.98-MMpiOffsetmeR2;
       Double_t CoinPionR2 = tcoinmeR2>=-1.0 && tcoinmeR2 <=1.0;      
       Double_t CoinPionR2R = ((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2<=13.0));      
 
@@ -4064,9 +4093,9 @@ void Q1Analysis()
 	  htmeInR2->Fill(-tmeR2);
 	  hph_qmeR2->Fill(ph_qmeR2*57.2958 + 180);
 	  // 	  hphmeR2->Fill(ph_qmeR2*57.2958 + 180);
- 	  hphmeR2->Fill(mmmeR2+1.5*MMpiOffsetme);
+ 	  hphmeR2->Fill(mmmeR2+MMpiOffsetmeR2);
 	  //	  hYmeR2->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
-	  hYmeR2->Fill(-tmeR2, mmmeR2+1.5*MMpiOffsetme);
+	  hYmeR2->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       //Random
       if(CoinPionR2R && MMpiR2 && DiamondR2)
@@ -4083,9 +4112,9 @@ void Q1Analysis()
 	  htmeInR2R->Fill(-tmeR2);
 	  hph_qmeR2R->Fill(ph_qmeR2*57.2958 + 180);
 	  // 	  hphmeR2R->Fill(ph_qmeR2*57.2958 + 180);
- 	  hphmeR2R->Fill(mmmeR2+1.5*MMpiOffsetme);
+ 	  hphmeR2R->Fill(mmmeR2+MMpiOffsetmeR2);
 	  //	  hYmeR2R->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
-	  hYmeR2R->Fill(-tmeR2, mmmeR2+1.5*MMpiOffsetme);
+	  hYmeR2R->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       
       Double_t w1t = -tmeR2 >= bins[1] && -tmeR2 <= bins[2];
@@ -4221,20 +4250,20 @@ void Q1Analysis()
     {
       TBRANCHMIDEDR2->GetEntry(i);
       Double_t DimonddR2 = (Dcut->IsInside(Q2MEDR2, WMEDR2));  
-      Double_t MMpidR2 = mmmedR2>= 0.932-1.5*MMpiOffsetme && mmmedR2 <=0.98-1.5*MMpiOffsetme;
+      Double_t MMpidR2 = mmmedR2>= 0.932-MMpiOffsetmeR2 && mmmedR2 <=0.98-MMpiOffsetmeR2;
       Double_t CoinPiondR2 = tcoinmedR2>=-1.0 && tcoinmedR2 <= 1.0;      
       Double_t CoinPiondR2R = ((tcoinmedR2>=-15.0 && tcoinmedR2 <= -9.0) || (tcoinmedR2>=7.0 && tcoinmedR2<=13.0));      
       
       if(CoinPiondR2 && MMpidR2 && DimonddR2)
 	{
 	  //	  hYmedR2->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
-	  hYmedR2->Fill(-tmedR2, mmmedR2+1.5*MMpiOffsetme);
+	  hYmedR2->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
 	}
       
       if(CoinPiondR2R && MMpidR2 && DimonddR2)
 	{
 	  //	  hYmedR2R->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
-	  hYmedR2R->Fill(-tmedR2, mmmedR2+1.5*MMpiOffsetme);
+	  hYmedR2R->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
 	}      
     }    
 
@@ -4261,10 +4290,10 @@ void Q1Analysis()
 	  hYSmeR2->Fill(t_simcmeR2,missmassmeR2, NFMR2*WeightmeR2);
           H_ssdelta_SmeR2->Fill(ssdeltameR2, NFMR2*WeightmeR2);
           H_ssxptar_SmeR2->Fill(ssxptarmeR2, NFMR2*WeightmeR2);
-          H_ssyptar_SmeR2->Fill(-1*ssyptarmeR2, NFMR2*WeightmeR2);
+          H_ssyptar_SmeR2->Fill(ssyptarmeR2, NFMR2*WeightmeR2);
 	  
           H_hsdelta_SmeR2->Fill(hsdeltameR2, NFMR2*WeightmeR2);
-          H_hsxptar_SmeR2->Fill(-1*hsxptarmeR2, NFMR2*WeightmeR2);
+          H_hsxptar_SmeR2->Fill(hsxptarmeR2, NFMR2*WeightmeR2);
           H_hsyptar_SmeR2->Fill(hsyptarmeR2, NFMR2*WeightmeR2);
 	  
         }
@@ -4289,7 +4318,7 @@ void Q1Analysis()
 	htcoinmeC->Fill(tcoinmeC);
       }
       Double_t DiamondC = (Dcut->IsInside(Q2MEC, WMEC));  
-      Double_t MMpiC = mmmeC>= 0.932-MMpiOffsetme && mmmeC <=0.98-MMpiOffsetme;
+      Double_t MMpiC = mmmeC>= 0.932-MMpiOffsetmeC && mmmeC <=0.98-MMpiOffsetmeC;
       Double_t CoinPionC = tcoinmeC>=-1.0 && tcoinmeC <=1.0;      
       Double_t CoinPionCR = ((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC<=13.0));      
       
@@ -4308,9 +4337,9 @@ void Q1Analysis()
 	  htmeInC->Fill(-tmeC);
 	  hph_qmeC->Fill(ph_qmeC*57.2958 + 180);
 	  //  hphmeC->Fill(ph_qmeC*57.2958 + 180);
- 	  hphmeC->Fill(mmmeC+MMpiOffsetme);
+ 	  hphmeC->Fill(mmmeC+MMpiOffsetmeC);
 	  //	  hYmeC->Fill(-tmeC, ph_qmeC*57.2958 + 180);
-	  hYmeC->Fill(-tmeC, mmmeC-MMpiOffsetme);
+	  hYmeC->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
 
 	}	      
 
@@ -4328,10 +4357,10 @@ void Q1Analysis()
 	  htmeCR->Fill(-tmeC);
 	  htmeInCR->Fill(-tmeC);
 	  hph_qmeCR->Fill(ph_qmeC*57.2958 + 180);
-	  hYmeCR->Fill(-tmeC, mmmeC+MMpiOffsetme);
+	  hYmeCR->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
 	  // hYmeCR->Fill(-tmeC, ph_qmeC*57.2958 + 180);
 	  // 	  hphmeCR->Fill(ph_qmeC*57.2958 + 180);
- 	  hphmeCR->Fill(mmmeC+MMpiOffsetme);
+ 	  hphmeCR->Fill(mmmeC+MMpiOffsetmeC);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
 	}
       Double_t w1t = -tmeC >= bins[1] && -tmeC <= bins[2];
@@ -4461,20 +4490,20 @@ void Q1Analysis()
     {
       TBRANCHMIDEDC->GetEntry(i);
       Double_t DimonddC = (Dcut->IsInside(Q2MEDC, WMEDC));  
-      Double_t MMpidC = mmmedC>= 0.932-MMpiOffsetme && mmmedC <=0.98-MMpiOffsetme;
+      Double_t MMpidC = mmmedC>= 0.932-MMpiOffsetmeC && mmmedC <=0.98-MMpiOffsetmeC;
       Double_t CoinPiondC = tcoinmedC>=-1.0 && tcoinmedC <= 1.0;      
       Double_t CoinPiondCR = ((tcoinmedC>=-15.0 && tcoinmedC<= -9.0) || (tcoinmedC>=7.0 && tcoinmedC<=13.0));      
       
       if(CoinPiondC && MMpidC && DimonddC)
 	{
 	  //	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
-	  hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetme);
+	  hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}
       
       if(CoinPiondCR && MMpidC && DimonddC)
 	{
 	  //	  hYmedCR->Fill(-tmedC, ph_qmedC*57.2958 + 180);
-	  hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetme);
+	  hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}      
     }    
   //SIMC CENTER                                                                                                                                                                                      
@@ -4500,10 +4529,10 @@ void Q1Analysis()
 	  hYSmeC->Fill(t_simcmeC,missmassmeC, NFMC*WeightmeC);
           H_ssdelta_SmeC->Fill(ssdeltameC, NFMC*WeightmeC);
           H_ssxptar_SmeC->Fill(ssxptarmeC, NFMC*WeightmeC);
-          H_ssyptar_SmeC->Fill(-1*ssyptarmeC, NFMC*WeightmeC);
+          H_ssyptar_SmeC->Fill(ssyptarmeC, NFMC*WeightmeC);
 	  
           H_hsdelta_SmeC->Fill(hsdeltameC, NFMC*WeightmeC);
-          H_hsxptar_SmeC->Fill(-1*hsxptarmeC, NFMC*WeightmeC);
+          H_hsxptar_SmeC->Fill(hsxptarmeC, NFMC*WeightmeC);
           H_hsyptar_SmeC->Fill(hsyptarmeC, NFMC*WeightmeC);
 	  
         }
@@ -4523,7 +4552,7 @@ void Q1Analysis()
 	htcoinmeL1->Fill(tcoinmeL1);
       }
       Double_t DiamondL1 = (Dcut->IsInside(Q2MEL1, WMEL1));  
-      Double_t MMpiL1 = mmmeL1>= 0.932-MMpiOffsetme && mmmeL1 <=0.98-MMpiOffsetme;
+      Double_t MMpiL1 = mmmeL1>= 0.932-MMpiOffsetmeL1 && mmmeL1 <=0.98-MMpiOffsetmeL1;
       Double_t CoinPionL1 = tcoinmeL1>=-1.0 && tcoinmeL1<=1.0;      
       Double_t CoinPionL1R = ((tcoinmeL1>=-15.0 && tcoinmeL1<= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1<=13.0));      
 
@@ -4541,9 +4570,9 @@ void Q1Analysis()
 	  htmeInL1->Fill(-tmeL1);
 	  hph_qmeL1->Fill(ph_qmeL1*57.2958 + 180);	  
 	  // 	  hphmeL1->Fill(ph_qmeL1*57.2958 + 180);
- 	  hphmeL1->Fill(mmmeL1+MMpiOffsetme);
+ 	  hphmeL1->Fill(mmmeL1+MMpiOffsetmeL1);
 	  //	  hYmeL1->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
-	  hYmeL1->Fill(-tmeL1, mmmeL1+MMpiOffsetme);
+	  hYmeL1->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 
 	}
       //Random
@@ -4561,9 +4590,9 @@ void Q1Analysis()
 	  htmeInL1R->Fill(-tmeL1);
 	  hph_qmeL1R->Fill(ph_qmeL1*57.2958 + 180);	  
 	  // 	  hphmeL1R->Fill(ph_qmeL1*57.2958 + 180);
- 	  hphmeL1R->Fill(mmmeL1+MMpiOffsetme);
+ 	  hphmeL1R->Fill(mmmeL1+MMpiOffsetmeL1);
 	  //	  hYmeL1R->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
-	  hYmeL1R->Fill(-tmeL1, mmmeL1+MMpiOffsetme);
+	  hYmeL1R->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 	}
       Double_t w1t = -tmeL1 >= bins[1] && -tmeL1 <= bins[2];
       Double_t w2t = -tmeL1 >= bins[2] && -tmeL1 <= bins[3];
@@ -4691,20 +4720,20 @@ void Q1Analysis()
     {
       TBRANCHMIDEDL1->GetEntry(i);
       Double_t DimonddL1 = (Dcut->IsInside(Q2MEDL1, WMEDL1));  
-      Double_t MMpidL1 = mmmedL1>= 0.932-MMpiOffsetme && mmmedL1 <=0.98-MMpiOffsetme;
+      Double_t MMpidL1 = mmmedL1>= 0.932-MMpiOffsetmeL1 && mmmedL1 <=0.98-MMpiOffsetmeL1;
       Double_t CoinPiondL1 = tcoinmedL1>=-1.0 && tcoinmedL1 <= 1.0;      
       Double_t CoinPiondL1R = ((tcoinmedL1>=-15.0 && tcoinmedL1<= -9.0) || (tcoinmedL1>=7.0 && tcoinmedL1<=13.0));      
       
       if(CoinPiondL1 && MMpidL1 && DimonddL1)
 	{
 	  //	  hYmedL1->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
-	  hYmedL1->Fill(-tmedL1, mmmedL1+MMpiOffsetme);
+	  hYmedL1->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
 	}
       
       if(CoinPiondL1R && MMpidL1 && DimonddL1)
 	{
 	  //	  hYmedL1R->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
-	  hYmedL1R->Fill(-tmedL1, mmmedL1+MMpiOffsetme);
+	  hYmedL1R->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
 	}      
     }    
   //SIMC LEFT1                                                 
@@ -4730,10 +4759,10 @@ void Q1Analysis()
 	  hYSmeL1->Fill(t_simcmeL1,missmassmeL1, NFML1*WeightmeL1);
 	  H_ssdelta_SmeL1->Fill(ssdeltameL1, NFML1*WeightmeL1);
 	  H_ssxptar_SmeL1->Fill(ssxptarmeL1, NFML1*WeightmeL1);
-	  H_ssyptar_SmeL1->Fill(-1*ssyptarmeL1, NFML1*WeightmeL1);
+	  H_ssyptar_SmeL1->Fill(ssyptarmeL1, NFML1*WeightmeL1);
       
 	  H_hsdelta_SmeL1->Fill(hsdeltameL1, NFML1*WeightmeL1);
-	  H_hsxptar_SmeL1->Fill(-1*hsxptarmeL1, NFML1*WeightmeL1);
+	  H_hsxptar_SmeL1->Fill(hsxptarmeL1, NFML1*WeightmeL1);
 	  H_hsyptar_SmeL1->Fill(hsyptarmeL1, NFML1*WeightmeL1);
 	  
 	}
@@ -4754,7 +4783,7 @@ void Q1Analysis()
       }
       
       Double_t DiamondL2 = (Dcut->IsInside(Q2MEL2, WMEL2));  
-      Double_t MMpiL2 = mmmeL2>= 0.932-2*MMpiOffsetme && mmmeL2 <=0.98-2*MMpiOffsetme;
+      Double_t MMpiL2 = mmmeL2>= 0.932-MMpiOffsetmeL2 && mmmeL2 <=0.98-MMpiOffsetmeL2;
       Double_t CoinPionL2 = tcoinmeL2>=-1.0 && tcoinmeL2<=1.0;      
       Double_t CoinPionL2R = ((tcoinmeL2>=-15.0 && tcoinmeL2<= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2<=13.0));      
       
@@ -4774,9 +4803,9 @@ void Q1Analysis()
 	  htmeInL2->Fill(-tmeL2);
 	  hph_qmeL2->Fill(ph_qmeL2*57.2958 + 180);
 	  // 	  hphmeL2->Fill(ph_qmeL2*57.2958 + 180);
- 	  hphmeL2->Fill(mmmeL2+2*MMpiOffsetme);  //+MMpiOffsetme
+ 	  hphmeL2->Fill(mmmeL2+MMpiOffsetmeL2);  //+MMpiOffsetme
 	  //	  hYmeL2->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
-	  hYmeL2->Fill(-tmeL2, mmmeL2+2*MMpiOffsetme);
+	  hYmeL2->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
       //Random
       if(CoinPionL2R && MMpiL2 && DiamondL2)
@@ -4793,9 +4822,9 @@ void Q1Analysis()
 	  htmeInL2R->Fill(-tmeL2);
 	  hph_qmeL2R->Fill(ph_qmeL2*57.2958 + 180);
 	  // 	  hphmeL2R->Fill(ph_qmeL2*57.2958 + 180);
- 	  hphmeL2R->Fill(mmmeL2+2*MMpiOffsetme);
+ 	  hphmeL2R->Fill(mmmeL2+MMpiOffsetmeL2);
 	  //	  hYmeL2R->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
-	  hYmeL2R->Fill(-tmeL2, mmmeL2+2*MMpiOffsetme);
+	  hYmeL2R->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
       Double_t w1t = -tmeL2 >= bins[1] && -tmeL2 <= bins[2];
       Double_t w2t = -tmeL2 >= bins[2] && -tmeL2 <= bins[3];
@@ -4924,20 +4953,20 @@ void Q1Analysis()
     {
       TBRANCHMIDEDL2->GetEntry(i);
       Double_t DimonddL2 = (Dcut->IsInside(Q2MEDL2, WMEDL2));  
-      Double_t MMpidL2 = mmmedL2>= 0.932-MMpiOffsetme && mmmedL2 <=0.98-MMpiOffsetme;
+      Double_t MMpidL2 = mmmedL2>= 0.932-MMpiOffsetmeL2 && mmmedL2 <=0.98-MMpiOffsetmeL2;
       Double_t CoinPiondL2 = tcoinmedL2>=-1.0 && tcoinmedL2<= 1.0;      
       Double_t CoinPiondL2R = ((tcoinmedL2>=-15.0 && tcoinmedL2<= -9.0) || (tcoinmedL2>=7.0 && tcoinmedL2<=13.0));      
       
       if(CoinPiondL2 && MMpidL2 && DimonddL2)
 	{
 	  //	  hYmedL2->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
-	  hYmedL2->Fill(-tmedL2, mmmedL2+MMpiOffsetme);
+	  hYmedL2->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
 	}
       
       if(CoinPiondL2R && MMpidL2 && DimonddL2)
 	{
 	  //	  hYmedL2R->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
-	  hYmedL2R->Fill(-tmedL2, mmmedL2+MMpiOffsetme);
+	  hYmedL2R->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
 	}      
     }    
   //SIMC LEFT2                                                 
@@ -4963,10 +4992,10 @@ void Q1Analysis()
 	  hYSmeL2->Fill(t_simcmeL2,missmassmeL2, NFML2*WeightmeL2);
           H_ssdelta_SmeL2->Fill(ssdeltameL2, NFML2*WeightmeL2);
           H_ssxptar_SmeL2->Fill(ssxptarmeL2, NFML2*WeightmeL2);
-          H_ssyptar_SmeL2->Fill(-1*ssyptarmeL2, NFML2*WeightmeL2);
+          H_ssyptar_SmeL2->Fill(ssyptarmeL2, NFML2*WeightmeL2);
 	  
           H_hsdelta_SmeL2->Fill(hsdeltameL2, NFML2*WeightmeL2);
-          H_hsxptar_SmeL2->Fill(-1*hsxptarmeL2, NFML2*WeightmeL2);
+          H_hsxptar_SmeL2->Fill(hsxptarmeL2, NFML2*WeightmeL2);
           H_hsyptar_SmeL2->Fill(hsyptarmeL2, NFML2*WeightmeL2);
 	  
         }
@@ -5212,9 +5241,9 @@ void Q1Analysis()
   //SIMC SCAL
   Double_t SCFMER1 = 1.0;  //0.90;
   Double_t SCFMER2 = 1.0; //0.90;
-  Double_t SCFMEC  = 1.0; // 0.90;
-  Double_t SCFMEL1 = 0.60; //0.75;
-  Double_t SCFMEL2 = 0.60; //0.75;
+  Double_t SCFMEC  = 0.9; // 0.90;
+  Double_t SCFMEL1 = 0.65; //0.75;
+  Double_t SCFMEL2 = 0.65; //0.75;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
   htcoinmeL1->SetStats(0);
@@ -5985,7 +6014,7 @@ void Q1Analysis()
   //  hphmeSR2->SetStats(0);
   hphmeSR2->Scale(SCFMER2);
   hphmeSR2->Draw("");
-  hphmeR2->SetStats(0);
+  //  hphmeR2->SetStats(0);
   hphmeR2->SetLineColor(kGreen);
   hphmeR2->Add(hphmeR2R, -1);
   hphmeR2->Scale(ECMER2);
@@ -6001,7 +6030,7 @@ void Q1Analysis()
   //  hphmeSR1->SetStats(0);
   hphmeSR1->Scale(SCFMER1);
   hphmeSR1->Draw("");
-  hphmeR1->SetStats(0);
+  // hphmeR1->SetStats(0);
   hphmeR1->SetLineColor(kGreen);
   hphmeR1->Add(hphmeR1R, -1);
   hphmeR1->Scale(ECMER1);
@@ -6020,7 +6049,7 @@ void Q1Analysis()
   gSmeC->SetLineColor(kRed);
   //  hphmeSC->Fit("gSmeC", "R");
   hphmeSC->Draw("");
-  hphmeC->SetStats(0);
+  // hphmeC->SetStats(0);
   hphmeC->SetLineColor(kGreen);
   hphmeC->Add(hphmeCR, -1);
   hphmeC->Scale(ECMEC);
@@ -6039,7 +6068,7 @@ void Q1Analysis()
   //  hphmeSL1->SetStats(0);
   hphmeSL1->Scale(SCFMEL1);
   hphmeSL1->Draw("");
-  hphmeL1->SetStats(0);
+  // hphmeL1->SetStats(0);
   hphmeL1->SetLineColor(kGreen);
   hphmeL1->Add(hphmeL1R, -1);
   hphmeL1->Scale(ECMEL1);
@@ -6055,7 +6084,7 @@ void Q1Analysis()
   //  hphmeSL2->SetStats(0);
   hphmeSL2->Scale(SCFMEL2);
   hphmeSL2->Draw("");
-  hphmeL2->SetStats(0);
+  // hphmeL2->SetStats(0);
   hphmeL2->SetLineColor(kGreen);
   hphmeL2->Add(hphmeL2R, -1);
   hphmeL2->Scale(ECMEL2);
@@ -6116,8 +6145,9 @@ void Q1Analysis()
   c12me->Print(outputpdf);
 
   TCanvas *cdeltaSmeR1 = new TCanvas("cdeltaSmeR1", " cdeltaSmeR1");
-  H_ssdelta_SmeR1->SetStats(0);
+  //  H_ssdelta_SmeR1->SetStats(0);
   H_ssdelta_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeR1->Scale(SCFMER1);
   H_ssdelta_SmeR1->Draw("");
   H_ssdelta_DmeR1->Add(H_ssdelta_DmeR1R, -1);
   H_ssdelta_DmeR1->Scale(ECMER1);
@@ -6126,8 +6156,9 @@ void Q1Analysis()
   cdeltaSmeR1->Print(outputpdf);
 
   TCanvas *cdeltaSmeR2 = new TCanvas("cdeltaSmeR2", " cdeltaSmeR2");
-  H_ssdelta_SmeR2->SetStats(0);
+  // H_ssdelta_SmeR2->SetStats(0);
   H_ssdelta_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeR2->Scale(SCFMER2);
   H_ssdelta_SmeR2->Draw("");
   H_ssdelta_DmeR2->Add(H_ssdelta_DmeR2R, -1);
   H_ssdelta_DmeR2->Scale(ECMER2);
@@ -6136,8 +6167,9 @@ void Q1Analysis()
   cdeltaSmeR2->Print(outputpdf);
 
   TCanvas *cdeltaSmeC = new TCanvas("cdeltaSmeC", " cdeltaSmeC");
-  H_ssdelta_SmeC->SetStats(0);
+  // H_ssdelta_SmeC->SetStats(0);
   H_ssdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeC->Scale(SCFMEC);
   H_ssdelta_SmeC->Draw("");
   H_ssdelta_DmeC->Add(H_ssdelta_DmeCR, -1);
   H_ssdelta_DmeC->Scale(ECMEC);
@@ -6146,8 +6178,9 @@ void Q1Analysis()
   cdeltaSmeC->Print(outputpdf);
 
   TCanvas *cdeltaSmeL1 = new TCanvas("cdeltaSmeL1", " cdeltaSmeL1");
-  H_ssdelta_SmeL1->SetStats(0);
+  // H_ssdelta_SmeL1->SetStats(0);
   H_ssdelta_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeL1->Scale(SCFMEL1);
   H_ssdelta_SmeL1->Draw("");
   H_ssdelta_DmeL1->Add(H_ssdelta_DmeL1R, -1);
   H_ssdelta_DmeL1->Scale(ECMEL1);
@@ -6156,8 +6189,9 @@ void Q1Analysis()
   cdeltaSmeL1->Print(outputpdf);
 
   TCanvas *cdeltaSmeL2 = new TCanvas("cdeltaSmeL2", " cdeltaSmeL2");
-  H_ssdelta_SmeL2->SetStats(0);
+  //  H_ssdelta_SmeL2->SetStats(0);
   H_ssdelta_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeL2->Scale(SCFMEL2);
   H_ssdelta_SmeL2->Draw("");
   H_ssdelta_DmeL2->Add(H_ssdelta_DmeL2R, -1);
   H_ssdelta_DmeL2->Scale(ECMEL2);
@@ -6166,8 +6200,9 @@ void Q1Analysis()
   cdeltaSmeL2->Print(outputpdf);
 
   TCanvas *cdeltaHmeR1 = new TCanvas("cdeltaHmeR1", " cdeltaHmeR1");
-  H_hsdelta_SmeR1->SetStats(0);
+  // H_hsdelta_SmeR1->SetStats(0);
   H_hsdelta_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeR1->Scale(SCFMER1);
   H_hsdelta_SmeR1->Draw("");
   H_hsdelta_DmeR1->Add(H_hsdelta_DmeR1R, -1);
   H_hsdelta_DmeR1->Scale(ECMER1);
@@ -6176,8 +6211,9 @@ void Q1Analysis()
   cdeltaHmeR1->Print(outputpdf);
 
   TCanvas *cdeltaHmeR2 = new TCanvas("cdeltaHmeR2", " cdeltaHmeR2");
-  H_hsdelta_SmeR2->SetStats(0);
+  // H_hsdelta_SmeR2->SetStats(0);
   H_hsdelta_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeR2->Scale(SCFMER2);
   H_hsdelta_SmeR2->Draw("");
   H_hsdelta_DmeR2->Add(H_hsdelta_DmeR2R, -1);
   H_hsdelta_DmeR2->Scale(ECMER2);
@@ -6186,8 +6222,9 @@ void Q1Analysis()
   cdeltaHmeR2->Print(outputpdf);
 
   TCanvas *cdeltaHmeC = new TCanvas("cdeltaHmeC", " cdeltaHmeC");
-  H_hsdelta_SmeC->SetStats(0);
+  // H_hsdelta_SmeC->SetStats(0);
   H_hsdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeC->Scale(SCFMEC);
   H_hsdelta_SmeC->Draw("");
   H_hsdelta_DmeC->Add(H_hsdelta_DmeCR, -1);
   H_hsdelta_DmeC->Scale(ECMEC);
@@ -6196,8 +6233,9 @@ void Q1Analysis()
   cdeltaHmeC->Print(outputpdf);
 
   TCanvas *cdeltaHmeL1 = new TCanvas("cdeltaHmeL1", " cdeltaHmeL1");
-  H_hsdelta_SmeL1->SetStats(0);
+  // H_hsdelta_SmeL1->SetStats(0);
   H_hsdelta_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeL1->Scale(SCFMEL1);
   H_hsdelta_SmeL1->Draw("");
   H_hsdelta_DmeL1->Add(H_hsdelta_DmeL1R, -1);
   H_hsdelta_DmeL1->Scale(ECMEL1);
@@ -6206,8 +6244,9 @@ void Q1Analysis()
   cdeltaHmeL1->Print(outputpdf);
 
   TCanvas *cdeltaHmeL2 = new TCanvas("cdeltaHmeL2", " cdeltaHmeL2");
-  H_hsdelta_SmeL2->SetStats(0);
+  // H_hsdelta_SmeL2->SetStats(0);
   H_hsdelta_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeL2->Scale(SCFMEL2);
   H_hsdelta_SmeL2->Draw("");
   H_hsdelta_DmeL2->Add(H_hsdelta_DmeL2R, -1);
   H_hsdelta_DmeL2->Scale(ECMEL2);
@@ -6216,8 +6255,9 @@ void Q1Analysis()
   cdeltaHmeL2->Print(outputpdf);
 
   TCanvas *cxptarSmeR1 = new TCanvas("cxptarSmeR1", " cxptarSmeR1");
-  H_ssxptar_SmeR1->SetStats(0);
+  // H_ssxptar_SmeR1->SetStats(0);
   H_ssxptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeR1->Scale(SCFMER1);
   H_ssxptar_SmeR1->Draw("");
   H_ssxptar_DmeR1->Add(H_ssxptar_DmeR1R, -1);
   H_ssxptar_DmeR1->Scale(ECMER1);
@@ -6226,8 +6266,9 @@ void Q1Analysis()
   cxptarSmeR1->Print(outputpdf);
 
   TCanvas *cxptarSmeR2 = new TCanvas("cxptarSmeR2", " cxptarSmeR2");
-  H_ssxptar_SmeR2->SetStats(0);
+  // H_ssxptar_SmeR2->SetStats(0);
   H_ssxptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeR2->Scale(SCFMER2);
   H_ssxptar_SmeR2->Draw("");
   H_ssxptar_DmeR2->Add(H_ssxptar_DmeR2R, -1);
   H_ssxptar_DmeR2->Scale(ECMER2);
@@ -6236,8 +6277,9 @@ void Q1Analysis()
   cxptarSmeR2->Print(outputpdf);
 
   TCanvas *cxptarSmeC = new TCanvas("cxptarSmeC", " cxptarSmeC");
-  H_ssxptar_SmeC->SetStats(0);
+  //  H_ssxptar_SmeC->SetStats(0);
   H_ssxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeC->Scale(SCFMEC);
   H_ssxptar_SmeC->Draw("");
   H_ssxptar_DmeC->Add(H_ssxptar_DmeCR, -1);
   H_ssxptar_DmeC->Scale(ECMEC);
@@ -6246,8 +6288,9 @@ void Q1Analysis()
   cxptarSmeC->Print(outputpdf);
 
   TCanvas *cxptarSmeL1 = new TCanvas("cxptarSmeL1", " cxptarSmeL1");
-  H_ssxptar_SmeL1->SetStats(0);
+  // H_ssxptar_SmeL1->SetStats(0);
   H_ssxptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeL1->Scale(SCFMEL1);
   H_ssxptar_SmeL1->Draw("");
   H_ssxptar_DmeL1->Add(H_ssxptar_DmeL1R, -1);
   H_ssxptar_DmeL1->Scale(ECMEL1);
@@ -6256,8 +6299,9 @@ void Q1Analysis()
   cxptarSmeL1->Print(outputpdf);
 
   TCanvas *cxptarSmeL2 = new TCanvas("cxptarSmeL2", " cxptarSmeL2");
-  H_ssxptar_SmeL2->SetStats(0);
+  // H_ssxptar_SmeL2->SetStats(0);
   H_ssxptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeL2->Scale(SCFMEL2);
   H_ssxptar_SmeL2->Draw("");
   H_ssxptar_DmeL2->Add(H_ssxptar_DmeL2R, -1);
   H_ssxptar_DmeL2->Scale(ECMEL2);
@@ -6266,8 +6310,9 @@ void Q1Analysis()
   cxptarSmeL2->Print(outputpdf);
 
   TCanvas *cyptarSmeR1 = new TCanvas("cyptarSmeR1", " cyptarSmeR1");
-  H_ssyptar_SmeR1->SetStats(0);
+  // H_ssyptar_SmeR1->SetStats(0);
   H_ssyptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeR1->Scale(SCFMER1);
   H_ssyptar_SmeR1->Draw("");
   H_ssyptar_DmeR1->Add(H_ssyptar_DmeR1R, -1);
   H_ssyptar_DmeR1->Scale(ECMER1);
@@ -6276,8 +6321,9 @@ void Q1Analysis()
   cyptarSmeR1->Print(outputpdf);
 
   TCanvas *cyptarSmeR2 = new TCanvas("cyptarSmeR2", " cyptarSmeR2");
-  H_ssyptar_SmeR2->SetStats(0);
+  // H_ssyptar_SmeR2->SetStats(0);
   H_ssyptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeR2->Scale(SCFMER2);
   H_ssyptar_SmeR2->Draw("");
   H_ssyptar_DmeR2->Add(H_ssyptar_DmeR2R, -1);
   H_ssyptar_DmeR2->Scale(ECMER2);
@@ -6286,8 +6332,9 @@ void Q1Analysis()
   cyptarSmeR2->Print(outputpdf);
 
   TCanvas *cyptarSmeC = new TCanvas("cyptarSmeC", " cyptarSmeC");
-  H_ssyptar_SmeC->SetStats(0);
+  // H_ssyptar_SmeC->SetStats(0);
   H_ssyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeC->Scale(SCFMEC);
   H_ssyptar_SmeC->Draw("");
   H_ssyptar_DmeC->Add(H_ssyptar_DmeCR, -1);
   H_ssyptar_DmeC->Scale(ECMEC);
@@ -6296,8 +6343,9 @@ void Q1Analysis()
   cyptarSmeC->Print(outputpdf);
 
   TCanvas *cyptarSmeL1 = new TCanvas("cyptarSmeL1", " cyptarSmeL1");
-  H_ssyptar_SmeL1->SetStats(0);
+  // H_ssyptar_SmeL1->SetStats(0);
   H_ssyptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeL1->Scale(SCFMEL1);
   H_ssyptar_SmeL1->Draw("");
   H_ssyptar_DmeL1->Add(H_ssyptar_DmeL1R, -1);
   H_ssyptar_DmeL1->Scale(ECMEL1);
@@ -6306,8 +6354,9 @@ void Q1Analysis()
   cyptarSmeL1->Print(outputpdf);
 
   TCanvas *cyptarSmeL2 = new TCanvas("cyptarSmeL2", " cyptarSmeL2");
-  H_ssyptar_SmeL2->SetStats(0);
+  //  H_ssyptar_SmeL2->SetStats(0);
   H_ssyptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeL2->Scale(SCFMEL2);
   H_ssyptar_SmeL2->Draw("");
   H_ssyptar_DmeL2->Add(H_ssyptar_DmeL2R, -1);
   H_ssyptar_DmeL2->Scale(ECMEL2);
@@ -6316,8 +6365,9 @@ void Q1Analysis()
   cyptarSmeL2->Print(outputpdf);
 
   TCanvas *cxptarHmeR1 = new TCanvas("cxptarHmeR1", " cxptarHmeR1");
-  H_hsxptar_SmeR1->SetStats(0);
+  // H_hsxptar_SmeR1->SetStats(0);
   H_hsxptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeR1->Scale(SCFMER1);
   H_hsxptar_SmeR1->Draw("");
   H_hsxptar_DmeR1->Add(H_hsxptar_DmeR1R, -1);
   H_hsxptar_DmeR1->Scale(ECMER1);
@@ -6326,8 +6376,9 @@ void Q1Analysis()
   cxptarHmeR1->Print(outputpdf);
 
   TCanvas *cxptarHmeR2 = new TCanvas("cxptarHmeR2", " cxptarHmeR2");
-  H_hsxptar_SmeR2->SetStats(0);
+  // H_hsxptar_SmeR2->SetStats(0);
   H_hsxptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeR2->Scale(SCFMER2);
   H_hsxptar_SmeR2->Draw("");
   H_hsxptar_DmeR2->Add(H_hsxptar_DmeR2R, -1);
   H_hsxptar_DmeR2->Scale(ECMER2);
@@ -6336,8 +6387,9 @@ void Q1Analysis()
   cxptarHmeR2->Print(outputpdf);
 
   TCanvas *cxptarHmeC = new TCanvas("cxptarHmeC", " cxptarHmeC");
-  H_hsxptar_SmeC->SetStats(0);
+  // H_hsxptar_SmeC->SetStats(0);
   H_hsxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeC->Scale(SCFMEC);
   H_hsxptar_SmeC->Draw("");
   H_hsxptar_DmeC->Add(H_hsxptar_DmeCR, -1);
   H_hsxptar_DmeC->Scale(ECMEC);
@@ -6346,8 +6398,9 @@ void Q1Analysis()
   cxptarHmeC->Print(outputpdf);
 
   TCanvas *cxptarHmeL1 = new TCanvas("cxptarHmeL1", " cxptarHmeL1");
-  H_hsxptar_SmeL1->SetStats(0);
+  // H_hsxptar_SmeL1->SetStats(0);
   H_hsxptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeL1->Scale(SCFMEL1);
   H_hsxptar_SmeL1->Draw("");
   H_hsxptar_DmeL1->Add(H_hsxptar_DmeL1R, -1);
   H_hsxptar_DmeL1->Scale(ECMEL1);
@@ -6356,8 +6409,9 @@ void Q1Analysis()
   cxptarHmeL1->Print(outputpdf);
 
   TCanvas *cxptarHmeL2 = new TCanvas("cxptarHmeL2", " cxptarHmeL2");
-  H_hsxptar_SmeL2->SetStats(0);
+  // H_hsxptar_SmeL2->SetStats(0);
   H_hsxptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeL2->Scale(SCFMEL2);
   H_hsxptar_SmeL2->Draw("");
   H_hsxptar_DmeL2->Add(H_hsxptar_DmeL2R, -1);
   H_hsxptar_DmeL2->Scale(ECMEL2);
@@ -6366,8 +6420,9 @@ void Q1Analysis()
   cxptarHmeL2->Print(outputpdf);
 
   TCanvas *cyptarHmeR1 = new TCanvas("cyptarHmeR1", " cyptarHmeR1");
-  H_hsyptar_SmeR1->SetStats(0);
+  // H_hsyptar_SmeR1->SetStats(0);
   H_hsyptar_SmeR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeR1->Scale(SCFMER1);
   H_hsyptar_SmeR1->Draw("");
   H_hsyptar_DmeR1->Add(H_hsyptar_DmeR1R, -1);
   H_hsyptar_DmeR1->Scale(ECMER1);
@@ -6376,8 +6431,9 @@ void Q1Analysis()
   cyptarHmeR1->Print(outputpdf);
 
   TCanvas *cyptarHmeR2 = new TCanvas("cyptarHmeR2", " cyptarHmeR2");
-  H_hsyptar_SmeR2->SetStats(0);
+  // H_hsyptar_SmeR2->SetStats(0);
   H_hsyptar_SmeR2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeR2->Scale(SCFMER2);
   H_hsyptar_SmeR2->Draw("");
   H_hsyptar_DmeR2->Add(H_hsyptar_DmeR2R, -1);
   H_hsyptar_DmeR2->Scale(ECMER2);
@@ -6386,8 +6442,9 @@ void Q1Analysis()
   cyptarHmeR2->Print(outputpdf);
 
   TCanvas *cyptarHmeC = new TCanvas("cyptarHmeC", " cyptarHmeC");
-  H_hsyptar_SmeC->SetStats(0);
+  //  H_hsyptar_SmeC->SetStats(0);
   H_hsyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeC->Scale(SCFMEC);
   H_hsyptar_SmeC->Draw("");
   H_hsyptar_DmeC->Add(H_hsyptar_DmeCR, -1);
   H_hsyptar_DmeC->Scale(ECMEC);
@@ -6396,8 +6453,9 @@ void Q1Analysis()
   cyptarHmeC->Print(outputpdf);
 
   TCanvas *cyptarHmeL1 = new TCanvas("cyptarHmeL1", " cyptarHmeL1");
-  H_hsyptar_SmeL1->SetStats(0);
+  // H_hsyptar_SmeL1->SetStats(0);
   H_hsyptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeL1->Scale(SCFMEL1);
   H_hsyptar_SmeL1->Draw("");
   H_hsyptar_DmeL1->Add(H_hsyptar_DmeL1R, -1);
   H_hsyptar_DmeL1->Scale(ECMEL1);
@@ -6406,8 +6464,9 @@ void Q1Analysis()
   cyptarHmeL1->Print(outputpdf);
 
   TCanvas *cyptarHmeL2 = new TCanvas("cyptarHmeL2", " cyptarHmeL2");
-  H_hsyptar_SmeL2->SetStats(0);
+  // H_hsyptar_SmeL2->SetStats(0);
   H_hsyptar_SmeL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeL2->Scale(SCFMEL2);
   H_hsyptar_SmeL2->Draw("");
   H_hsyptar_DmeL2->Add(H_hsyptar_DmeL2R, -1);
   H_hsyptar_DmeL2->Scale(ECMEL2);
@@ -7441,9 +7500,9 @@ void Q1Analysis()
   TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   
   //  TH2D *hYSheR1   = new TH2D("hYSheR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheR1  = new TH1D("H_ssdelta_SheR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -7475,9 +7534,9 @@ void Q1Analysis()
   TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   //  TH2D *hYSheC   = new TH2D("hYSheC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheC  = new TH1D("H_ssdelta_SheC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -7509,9 +7568,9 @@ void Q1Analysis()
   TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   //  TH2D *hYSheL1   = new TH2D("hYSheL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheL1  = new TH1D("H_ssdelta_SheL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -7543,9 +7602,9 @@ void Q1Analysis()
   TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",50, -10, 370);      
   */
-  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",150, 0.92, 0.98);      
-  TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",150, 0.92, 0.98);      
+  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
+  TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
 
   //  TH2D *hYSheL2   = new TH2D("hYSheL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheL2  = new TH1D("H_ssdelta_SheL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
@@ -7573,7 +7632,12 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheL2R  = new TH1D("H_hsyptar_DheL2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
   
 
-  Double_t MMpiOffsethe = -1*0.000873;
+  Double_t MMpiOffsetheR1 = -0.000966;
+  Double_t MMpiOffsetheC  = -0.000321;
+  Double_t MMpiOffsetheL1 = -0.000304;
+  Double_t MMpiOffsetheL2 = -0.000371;
+
+  //Data R1
 
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHER1; i++)
 
@@ -7590,7 +7654,7 @@ void Q1Analysis()
       }
 
       Double_t DiamondR1 = (Dcut->IsInside(Q2HER1, WHER1));  
-      Double_t MMpiR1 = mmheR1>= 0.932-MMpiOffsethe && mmheR1 <=0.98-MMpiOffsethe;
+      Double_t MMpiR1 = mmheR1>= 0.932-MMpiOffsetheR1 && mmheR1 <=0.98-MMpiOffsetheR1;
       Double_t CoinPionR1 = tcoinheR1>=-1.0 && tcoinheR1 <= 1.0;      
       Double_t CoinPionR1R = ((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0));      
       
@@ -7608,9 +7672,9 @@ void Q1Analysis()
 	  htheInR1->Fill(-theR1);
 	  hph_qheR1->Fill(ph_qheR1*57.2958 + 180);
 	  //	  hphheR1->Fill(ph_qheR1*57.2958 + 180);
-	  hphheR1->Fill(mmheR1+MMpiOffsethe);
+	  hphheR1->Fill(mmheR1+MMpiOffsetheR1);
 	  //	  hYheR1->Fill(-theR1, ph_qheR1*57.2958 + 180);
-	  hYheR1->Fill(-theR1, mmheR1+MMpiOffsethe);
+	  hYheR1->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
       //Random
       if(CoinPionR1R && MMpiR1 && DiamondR1)
@@ -7627,9 +7691,9 @@ void Q1Analysis()
 	  htheInR1R->Fill(-theR1);
 	  hph_qheR1R->Fill(ph_qheR1*57.2958 + 180);
 	  //	  hphheR1R->Fill(ph_qheR1*57.2958 + 180);
-	  hphheR1R->Fill(mmheR1+MMpiOffsethe);
+	  hphheR1R->Fill(mmheR1+MMpiOffsetheR1);
 	  //	  hYheR1R->Fill(-theR1, ph_qheR1*57.2958 + 180);
-	  hYheR1R->Fill(-theR1, mmheR1+MMpiOffsethe);
+	  hYheR1R->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
       Double_t w1t = -theR1 >= bins[1] && -theR1 <= bins[2];
       Double_t w2t = -theR1 >= bins[2] && -theR1 <= bins[3];
@@ -7759,20 +7823,20 @@ void Q1Analysis()
       TBRANCHHIGHEDR1->GetEntry(i);
 
       Double_t DiamonddR1 = (Dcut->IsInside(Q2HEDR1, WHEDR1));  
-      Double_t MMpidR1 = mmhedR1>= 0.932-MMpiOffsethe && mmhedR1 <=0.98-MMpiOffsethe;
+      Double_t MMpidR1 = mmhedR1>= 0.932-MMpiOffsetheR1 && mmhedR1 <=0.98-MMpiOffsetheR1;
       Double_t CoinPiondR1 = tcoinhedR1>=-1.0 && tcoinhedR1 <= 1.0;      
       Double_t CoinPiondR1R = ((tcoinhedR1>=-15.0 && tcoinhedR1 <= -9.0) || (tcoinhedR1>=7.0 && tcoinhedR1 <=13.0));      
 
       if(CoinPiondR1 && MMpidR1 && DiamonddR1)
 	{
 	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedR1->Fill(-thedR1, mmhedR1+MMpiOffsetme);
+	  hYhedR1->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	}
       
       if(CoinPiondR1R && MMpidR1 && DiamonddR1)
 	{
 	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedR1R->Fill(-thedR1, mmhedR1+MMpiOffsetme);
+	  hYhedR1R->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	}      
     }    
 
@@ -7799,15 +7863,16 @@ void Q1Analysis()
 	  hYSheR1->Fill(t_simcheR1,missmassheR1, NFR1*WeightheR1);
           H_ssdelta_SheR1->Fill(ssdeltaheR1, NFR1*WeightheR1);
           H_ssxptar_SheR1->Fill(ssxptarheR1, NFR1*WeightheR1);
-          H_ssyptar_SheR1->Fill(-1*ssyptarheR1, NFR1*WeightheR1);
+          H_ssyptar_SheR1->Fill(ssyptarheR1, NFR1*WeightheR1);
 	  
           H_hsdelta_SheR1->Fill(hsdeltaheR1, NFR1*WeightheR1);
-          H_hsxptar_SheR1->Fill(-1*hsxptarheR1, NFR1*WeightheR1);
+          H_hsxptar_SheR1->Fill(hsxptarheR1, NFR1*WeightheR1);
           H_hsyptar_SheR1->Fill(hsyptarheR1, NFR1*WeightheR1);
 	  
         }
     }
-  
+  //Data C  
+
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEC; i++)
     
     {
@@ -7828,7 +7893,7 @@ void Q1Analysis()
       }
       
       Double_t DiamondC = (Dcut->IsInside(Q2HEC, WHEC));  
-      Double_t MMpiC = mmheC>= 0.932-MMpiOffsethe && mmheC <=0.98-MMpiOffsethe;
+      Double_t MMpiC = mmheC>= 0.932-MMpiOffsetheC && mmheC <=0.98-MMpiOffsetheC;
       Double_t CoinPionC = tcoinheC>=-1.0 && tcoinheC <= 1.0;      
       Double_t CoinPionCR = ((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0));      
 
@@ -7847,9 +7912,9 @@ void Q1Analysis()
 	  htheInC->Fill(-theC);
 	  hph_qheC->Fill(ph_qheC*57.2958 + 180);
 	  //	  hphheC->Fill(ph_qheC*57.2958 + 180);
-	  hphheC->Fill(mmheC+MMpiOffsethe);
+	  hphheC->Fill(mmheC+MMpiOffsetheC);
 	  //	  hYheC->Fill(-theC, ph_qheC*57.2958 + 180);
-	  hYheC->Fill(-theC, mmheC+MMpiOffsethe);
+	  hYheC->Fill(-theC, mmheC+MMpiOffsetheC);
 	}	      
 
            
@@ -7868,9 +7933,9 @@ void Q1Analysis()
 	  hph_qheCR->Fill(ph_qheC*57.2958 + 180);
 	  hQ2WHECR->Fill(Q2HEC, WHEC);
 	  //	  hphheCR->Fill(ph_qheC*57.2958 + 180);
-	  hphheCR->Fill(mmheC+MMpiOffsethe);
+	  hphheCR->Fill(mmheC+MMpiOffsetheC);
 	  //	  hYheCR->Fill(-theC, ph_qheC*57.2958 + 180);
-	  hYheCR->Fill(-theC, mmheC+MMpiOffsethe);
+	  hYheCR->Fill(-theC, mmheC+MMpiOffsetheC);
 	}
       
       Double_t w1t = -theC >= bins[1] && -theC <= bins[2];
@@ -8001,20 +8066,20 @@ void Q1Analysis()
       TBRANCHHIGHEDC->GetEntry(i);
 
       Double_t DiamonddC = (Dcut->IsInside(Q2HEDC, WHEDC));  
-      Double_t MMpidC = mmhedC>= 0.932-MMpiOffsethe && mmhedC <=0.98-MMpiOffsethe;
+      Double_t MMpidC = mmhedC>= 0.932-MMpiOffsetheC && mmhedC <=0.98-MMpiOffsetheC;
       Double_t CoinPiondC = tcoinhedC>=-1.0 && tcoinhedC <= 1.0;      
       Double_t CoinPiondCR = ((tcoinhedC>=-15.0 && tcoinhedC <= -9.0) || (tcoinhedC>=7.0 && tcoinhedC<=13.0));      
 
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
 	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedC->Fill(-thedC, mmhedC+MMpiOffsetme);
+	  hYhedC->Fill(-thedC, mmhedC+MMpiOffsetheC);
 	}
       
       if(CoinPiondCR && MMpidC && DiamonddC)
 	{
 	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedCR->Fill(-thedC, mmhedC+MMpiOffsetme);
+	  hYhedCR->Fill(-thedC, mmhedC+MMpiOffsetheC);
 	}      
     }    
 
@@ -8041,15 +8106,17 @@ void Q1Analysis()
 	  hYSheC->Fill(t_simcheC,missmassheC, NFC*WeightheC);
           H_ssdelta_SheC->Fill(ssdeltaheC, NFC*WeightheC);
           H_ssxptar_SheC->Fill(ssxptarheC, NFC*WeightheC);
-          H_ssyptar_SheC->Fill(-1*ssyptarheC, NFC*WeightheC);
+          H_ssyptar_SheC->Fill(ssyptarheC, NFC*WeightheC);
 	  
           H_hsdelta_SheC->Fill(hsdeltaheC, NFC*WeightheC);
-          H_hsxptar_SheC->Fill(-1*hsxptarheC, NFC*WeightheC);
+          H_hsxptar_SheC->Fill(hsxptarheC, NFC*WeightheC);
           H_hsyptar_SheC->Fill(hsyptarheC, NFC*WeightheC);
 	  
         }
     }
-  
+
+  //Data L1  
+
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEL1; i++)
   
     {
@@ -8066,7 +8133,7 @@ void Q1Analysis()
       }
 
       Double_t DiamondL1 = (Dcut->IsInside(Q2HEL1, WHEL1));  
-      Double_t MMpiL1 = mmheL1>= 0.932-MMpiOffsethe && mmheL1 <=0.98-MMpiOffsethe;
+      Double_t MMpiL1 = mmheL1>= 0.932-MMpiOffsetheL1 && mmheL1 <=0.98-MMpiOffsetheL1;
       Double_t CoinPionL1 = tcoinheL1>=-1.0 && tcoinheL1 <= 1.0;      
       Double_t CoinPionL1R = ((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0));      
 
@@ -8084,9 +8151,9 @@ void Q1Analysis()
 	  htheInL1->Fill(-theL1);
 	  hph_qheL1->Fill(ph_qheL1*57.2958 + 180);	  
 	  //	  hphheL1->Fill(ph_qheL1*57.2958 + 180);
-	  hphheL1->Fill(mmheL1+MMpiOffsethe);
+	  hphheL1->Fill(mmheL1+MMpiOffsetheL1);
 	  //	  hYheL1->Fill(-theL1, ph_qheL1*57.2958 + 180);
-	  hYheL1->Fill(-theL1, mmheL1+MMpiOffsethe);
+	  hYheL1->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}      
       //Random
       if(CoinPionL1R && MMpiL1 && DiamondL1)
@@ -8104,9 +8171,9 @@ void Q1Analysis()
 	  htheInL1R->Fill(-theL1);
 	  hph_qheL1R->Fill(ph_qheL1*57.2958 + 180);	  
 	  //	  hphheL1R->Fill(ph_qheL1*57.2958 + 180);
-	  hphheL1R->Fill(mmheL1+MMpiOffsethe);
+	  hphheL1R->Fill(mmheL1+MMpiOffsetheL1);
 	  //	  hYheL1R->Fill(-theL1, ph_qheL1*57.2958 + 180);
-	  hYheL1R->Fill(-theL1, mmheL1+MMpiOffsethe);
+	  hYheL1R->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}
       Double_t w1t = -theL1 >= bins[1] && -theL1 <= bins[2];
       Double_t w2t = -theL1 >= bins[2] && -theL1 <= bins[3];
@@ -8240,20 +8307,20 @@ void Q1Analysis()
       TBRANCHHIGHEDL1->GetEntry(i);
 
       Double_t DiamonddL1 = (Dcut->IsInside(Q2HEDL1, WHEDL1));  
-      Double_t MMpidL1 = mmhedL1>= 0.932-MMpiOffsethe && mmhedL1 <=0.98-MMpiOffsethe;
+      Double_t MMpidL1 = mmhedL1>= 0.932-MMpiOffsetheL1 && mmhedL1 <=0.98-MMpiOffsetheL1;
       Double_t CoinPiondL1 = tcoinhedL1>=-1.0 && tcoinhedL1 <= 1.0;      
       Double_t CoinPiondL1R = ((tcoinhedL1>=-15.0 && tcoinhedL1 <= -9.0) || (tcoinhedL1>=7.0 && tcoinhedL1<=13.0));      
 
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
 	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL1->Fill(-thedL1, mmhedL1+MMpiOffsetme);
+	  hYhedL1->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
 	}
       
       if(CoinPiondL1R && MMpidL1 && DiamonddL1)
 	{
 	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL1R->Fill(-thedL1, mmhedL1+MMpiOffsetme);
+	  hYhedL1R->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
 	}      
     }    
 
@@ -8280,15 +8347,15 @@ void Q1Analysis()
 	  hYSheL1->Fill(t_simcheL1,missmassheL1, NFL1*WeightheL1);
           H_ssdelta_SheL1->Fill(ssdeltaheL1, NFL1*WeightheL1);
           H_ssxptar_SheL1->Fill(ssxptarheL1, NFL1*WeightheL1);
-          H_ssyptar_SheL1->Fill(-1*ssyptarheL1, NFL1*WeightheL1);
+          H_ssyptar_SheL1->Fill(ssyptarheL1, NFL1*WeightheL1);
 	  
           H_hsdelta_SheL1->Fill(hsdeltaheL1, NFL1*WeightheL1);
-          H_hsxptar_SheL1->Fill(-1*hsxptarheL1, NFL1*WeightheL1);
+          H_hsxptar_SheL1->Fill(hsxptarheL1, NFL1*WeightheL1);
           H_hsyptar_SheL1->Fill(hsyptarheL1, NFL1*WeightheL1);
 	  
         }
     }
-
+  //Data L2
   for(Long64_t i = 0; i < nEntries_TBRANCHHIGHEL2; i++)
     {
       TBRANCHHIGHEL2->GetEntry(i);
@@ -8304,7 +8371,7 @@ void Q1Analysis()
       }
 
       Double_t DiamondL2 = (Dcut->IsInside(Q2HEL2, WHEL2));  
-      Double_t MMpiL2 = mmheL2>= 0.932-MMpiOffsethe && mmheL2 <=0.98-MMpiOffsethe;
+      Double_t MMpiL2 = mmheL2>= 0.932-MMpiOffsetheL2 && mmheL2 <=0.98-MMpiOffsetheL2;
       Double_t CoinPionL2 = tcoinheL2>=-1.0 && tcoinheL2 <= 1.0;      
       Double_t CoinPionL2R = ((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0));      
 
@@ -8323,9 +8390,9 @@ void Q1Analysis()
 	  htheInL2->Fill(-theL2);
 	  hph_qheL2->Fill(ph_qheL2*57.2958 + 180);
 	  //	  hphheL2->Fill(ph_qheL2*57.2958 + 180);
-	  hphheL2->Fill(mmheL2+MMpiOffsethe);
+	  hphheL2->Fill(mmheL2+MMpiOffsetheL2);
 	  //	  hYheL2->Fill(-theL2, ph_qheL2*57.2958 + 180);
-	  hYheL2->Fill(-theL2,mmheL2+MMpiOffsethe);
+	  hYheL2->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
 
       //Random
@@ -8343,9 +8410,9 @@ void Q1Analysis()
 	  htheInL2R->Fill(-theL2);
 	  hph_qheL2R->Fill(ph_qheL2*57.2958 + 180);
 	  //	  hphheL2R->Fill(ph_qheL2*57.2958 + 180);
-	  hphheL2R->Fill(mmheL2+MMpiOffsethe);
+	  hphheL2R->Fill(mmheL2+MMpiOffsetheL2);
 	  //	  hYheL2R->Fill(-theL2, ph_qheL2*57.2958 + 180);
-	  hYheL2R->Fill(-theL2,mmheL2+MMpiOffsethe);
+	  hYheL2R->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
       Double_t w1t = -theL2 >= bins[1] && -theL2 <= bins[2];
       Double_t w2t = -theL2 >= bins[2] && -theL2 <= bins[3];
@@ -8473,20 +8540,20 @@ void Q1Analysis()
       TBRANCHHIGHEDL2->GetEntry(i);
 
       Double_t DiamonddL2 = (Dcut->IsInside(Q2HEDL2, WHEDL2));  
-      Double_t MMpidL2 = mmhedL2>= 0.932-MMpiOffsethe && mmhedL2 <=0.98-MMpiOffsethe;
+      Double_t MMpidL2 = mmhedL2>= 0.932-MMpiOffsetheL2 && mmhedL2 <=0.98-MMpiOffsetheL2;
       Double_t CoinPiondL2 = tcoinhedL2>=-1.0 && tcoinhedL2 <= 1.0;      
       Double_t CoinPiondL2R = ((tcoinhedL2>=-15.0 && tcoinhedL2 <= -9.0) || (tcoinhedL2>=7.0 && tcoinhedL2<=13.0));      
 
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
 	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL2->Fill(-thedL2, mmhedL2+MMpiOffsetme);
+	  hYhedL2->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
 	}
       
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
 	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL2R->Fill(-thedL2, mmhedL2+MMpiOffsetme);
+	  hYhedL2R->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
 	}      
     }    
 
@@ -8513,10 +8580,10 @@ void Q1Analysis()
 	  hYSheL2->Fill(t_simcheL2,missmassheL2, NFL2*WeightheL2);
 	  H_ssdelta_SheL2->Fill(ssdeltaheL2, NFL2*WeightheL2);
 	  H_ssxptar_SheL2->Fill(ssxptarheL2, NFL2*WeightheL2);
-          H_ssyptar_SheL2->Fill(-1*ssyptarheL2, NFL2*WeightheL2);
+          H_ssyptar_SheL2->Fill(ssyptarheL2, NFL2*WeightheL2);
 	  
           H_hsdelta_SheL2->Fill(hsdeltaheL2, NFL2*WeightheL2);
-          H_hsxptar_SheL2->Fill(-1*hsxptarheL2, NFL2*WeightheL2);
+          H_hsxptar_SheL2->Fill(hsxptarheL2, NFL2*WeightheL2);
           H_hsyptar_SheL2->Fill(hsyptarheL2, NFL2*WeightheL2);
 	  
         }
@@ -8715,9 +8782,9 @@ void Q1Analysis()
   Double_t ECHEL2   = 1.0/195.603;
   Double_t ECHEDL2  = 1.0/73.453;
   //SIMC SCAL
-  Double_t SCFHER1 = 0.90; // 0.65;
-  Double_t SCFHEC =  0.50; //0.65;
-  Double_t SCFHEL1 = 0.50; //0.65;
+  Double_t SCFHER1 = 0.85; // 0.65;
+  Double_t SCFHEC =  0.55; //0.65;
+  Double_t SCFHEL1 = 0.55; //0.65;
   Double_t SCFHEL2 = 0.50; //0.65;
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
@@ -9342,7 +9409,7 @@ void Q1Analysis()
   //  hphheSR1->SetStats(0);
   hphheSR1->Scale(SCFHER1);
   hphheSR1->Draw("");
-  hphheR1->SetStats(0);
+  // hphheR1->SetStats(0);
   hphheR1->SetLineColor(kGreen);
   hphheR1->Add(hphheR1R, -1);
   hphheR1->Scale(ECHER1);
@@ -9358,7 +9425,7 @@ void Q1Analysis()
   //  hphheSC->SetStats(0);
   hphheSC->Scale(SCFHEC);
   hphheSC->Draw("");
-  hphheC->SetStats(0);
+  // hphheC->SetStats(0);
   hphheC->SetLineColor(kGreen);
   hphheC->Add(hphheCR, -1);
   hphheC->Scale(ECHEC);
@@ -9374,7 +9441,7 @@ void Q1Analysis()
   //  hphheSL1->SetStats(0);
   hphheSL1->Scale(SCFHEL1);
   hphheSL1->Draw("");
-  hphheL1->SetStats(0);
+  // hphheL1->SetStats(0);
   hphheL1->SetLineColor(kGreen);
   hphheL1->Add(hphheL1R, -1);
   hphheL1->Scale(ECHEL1);
@@ -9390,7 +9457,7 @@ void Q1Analysis()
   //  hphheSL2->SetStats(0);
   hphheSL2->Scale(SCFHEL2);
   hphheSL2->Draw("");
-  hphheL2->SetStats(0);
+  // hphheL2->SetStats(0);
   hphheL2->SetLineColor(kGreen);
   hphheL2->Add(hphheL2R, -1);
   hphheL2->Scale(ECHEL2);
@@ -9445,8 +9512,9 @@ void Q1Analysis()
   c12->Print(outputpdf);
 
   TCanvas *cdeltaSheR1 = new TCanvas("cdeltaSheR1", " cdeltaSheR1");
-  H_ssdelta_SheR1->SetStats(0);
+  //  H_ssdelta_SheR1->SetStats(0);
   H_ssdelta_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SheR1->Scale(SCFHER1);
   H_ssdelta_SheR1->Draw("");
   H_ssdelta_DheR1->Add(H_ssdelta_DheR1R, -1);
   H_ssdelta_DheR1->Scale(ECHER1);
@@ -9455,8 +9523,9 @@ void Q1Analysis()
   cdeltaSheR1->Print(outputpdf);
 
   TCanvas *cdeltaSheC = new TCanvas("cdeltaSheC", " cdeltaSheC");
-  H_ssdelta_SheC->SetStats(0);
+  // H_ssdelta_SheC->SetStats(0);
   H_ssdelta_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SheC->Scale(SCFHEC);
   H_ssdelta_SheC->Draw("");
   H_ssdelta_DheC->Add(H_ssdelta_DheCR, -1);
   H_ssdelta_DheC->Scale(ECHEC);
@@ -9465,8 +9534,9 @@ void Q1Analysis()
   cdeltaSheC->Print(outputpdf);
 
   TCanvas *cdeltaSheL1 = new TCanvas("cdeltaSheL1", " cdeltaSheL1");
-  H_ssdelta_SheL1->SetStats(0);
+  //  H_ssdelta_SheL1->SetStats(0);
   H_ssdelta_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SheL1->Scale(SCFHEL1);
   H_ssdelta_SheL1->Draw("");
   H_ssdelta_DheL1->Add(H_ssdelta_DheL1R, -1);
   H_ssdelta_DheL1->Scale(ECHEL1);
@@ -9475,8 +9545,9 @@ void Q1Analysis()
   cdeltaSheL1->Print(outputpdf);
 
   TCanvas *cdeltaSheL2 = new TCanvas("cdeltaSheL2", " cdeltaSheL2");
-  H_ssdelta_SheL2->SetStats(0);
+  // H_ssdelta_SheL2->SetStats(0);
   H_ssdelta_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SheL2->Scale(SCFHEL2);
   H_ssdelta_SheL2->Draw("");
   H_ssdelta_DheL2->Add(H_ssdelta_DheL2R, -1);
   H_ssdelta_DheL2->Scale(ECHEL2);
@@ -9485,8 +9556,9 @@ void Q1Analysis()
   cdeltaSheL2->Print(outputpdf);
 
   TCanvas *cdeltaHheR1 = new TCanvas("cdeltaHheR1", " cdeltaHheR1");
-  H_hsdelta_SheR1->SetStats(0);
+  //  H_hsdelta_SheR1->SetStats(0);
   H_hsdelta_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SheR1->Scale(SCFHER1);
   H_hsdelta_SheR1->Draw("");
   H_hsdelta_DheR1->Add(H_hsdelta_DheR1R, -1);
   H_hsdelta_DheR1->Scale(ECHER1);
@@ -9495,8 +9567,9 @@ void Q1Analysis()
   cdeltaHheR1->Print(outputpdf);
 
   TCanvas *cdeltaHheC = new TCanvas("cdeltaHheC", " cdeltaHheC");
-  H_hsdelta_SheC->SetStats(0);
+  // H_hsdelta_SheC->SetStats(0);
   H_hsdelta_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SheC->Scale(SCFHEC);
   H_hsdelta_SheC->Draw("");
   H_hsdelta_DheC->Add(H_hsdelta_DheCR, -1);
   H_hsdelta_DheC->Scale(ECHEC);
@@ -9505,8 +9578,9 @@ void Q1Analysis()
   cdeltaHheC->Print(outputpdf);
 
   TCanvas *cdeltaHheL1 = new TCanvas("cdeltaHheL1", " cdeltaHheL1");
-  H_hsdelta_SheL1->SetStats(0);
+  // H_hsdelta_SheL1->SetStats(0);
   H_hsdelta_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SheL1->Scale(SCFHEL1);
   H_hsdelta_SheL1->Draw("");
   H_hsdelta_DheL1->Add(H_hsdelta_DheL1R, -1);
   H_hsdelta_DheL1->Scale(ECHEL1);
@@ -9515,8 +9589,9 @@ void Q1Analysis()
   cdeltaHheL1->Print(outputpdf);
 
   TCanvas *cdeltaHheL2 = new TCanvas("cdeltaHheL2", " cdeltaHheL2");
-  H_hsdelta_SheL2->SetStats(0);
+  // H_hsdelta_SheL2->SetStats(0);
   H_hsdelta_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SheL2->Scale(SCFHEL2);
   H_hsdelta_SheL2->Draw("");
   H_hsdelta_DheL2->Add(H_hsdelta_DheL2R, -1);
   H_hsdelta_DheL2->Scale(ECHEL2);
@@ -9525,8 +9600,9 @@ void Q1Analysis()
   cdeltaHheL2->Print(outputpdf);
 
   TCanvas *cxptarSheR1 = new TCanvas("cxptarSheR1", " cxptarSheR1");
-  H_ssxptar_SheR1->SetStats(0);
+  // H_ssxptar_SheR1->SetStats(0);
   H_ssxptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SheR1->Scale(SCFHER1);
   H_ssxptar_SheR1->Draw("");
   H_ssxptar_DheR1->Add(H_ssxptar_DheR1R, -1);
   H_ssxptar_DheR1->Scale(ECHER1);
@@ -9535,8 +9611,9 @@ void Q1Analysis()
   cxptarSheR1->Print(outputpdf);
 
   TCanvas *cxptarSheC = new TCanvas("cxptarSheC", " cxptarSheC");
-  H_ssxptar_SheC->SetStats(0);
+  // H_ssxptar_SheC->SetStats(0);
   H_ssxptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SheC->Scale(SCFHEC);
   H_ssxptar_SheC->Draw("");
   H_ssxptar_DheC->Add(H_ssxptar_DheCR, -1);
   H_ssxptar_DheC->Scale(ECHEC);
@@ -9545,8 +9622,9 @@ void Q1Analysis()
   cxptarSheC->Print(outputpdf);
 
   TCanvas *cxptarSheL1 = new TCanvas("cxptarSheL1", " cxptarSheL1");
-  H_ssxptar_SheL1->SetStats(0);
+  // H_ssxptar_SheL1->SetStats(0);
   H_ssxptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SheL1->Scale(SCFHEL1);
   H_ssxptar_SheL1->Draw("");
   H_ssxptar_DheL1->Add(H_ssxptar_DheL1R, -1);
   H_ssxptar_DheL1->Scale(ECHEL1);
@@ -9555,8 +9633,9 @@ void Q1Analysis()
   cxptarSheL1->Print(outputpdf);
 
   TCanvas *cxptarSheL2 = new TCanvas("cxptarSheL2", " cxptarSheL2");
-  H_ssxptar_SheL2->SetStats(0);
+  // H_ssxptar_SheL2->SetStats(0);
   H_ssxptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SheL2->Scale(SCFHEL2);
   H_ssxptar_SheL2->Draw("");
   H_ssxptar_DheL2->Add(H_ssxptar_DheL2R, -1);
   H_ssxptar_DheL2->Scale(ECHEL2);
@@ -9565,8 +9644,9 @@ void Q1Analysis()
   cxptarSheL2->Print(outputpdf);
 
   TCanvas *cyptarSheR1 = new TCanvas("cyptarSheR1", " cyptarSheR1");
-  H_ssyptar_SheR1->SetStats(0);
+  // H_ssyptar_SheR1->SetStats(0);
   H_ssyptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SheR1->Scale(SCFHER1);
   H_ssyptar_SheR1->Draw("");
   H_ssyptar_DheR1->Add(H_ssyptar_DheR1R, -1);
   H_ssyptar_DheR1->Scale(ECHER1);
@@ -9575,8 +9655,9 @@ void Q1Analysis()
   cyptarSheR1->Print(outputpdf);
 
   TCanvas *cyptarSheC = new TCanvas("cyptarSheC", " cyptarSheC");
-  H_ssyptar_SheC->SetStats(0);
+  // H_ssyptar_SheC->SetStats(0);
   H_ssyptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SheC->Scale(SCFHEC);
   H_ssyptar_SheC->Draw("");
   H_ssyptar_DheC->Add(H_ssyptar_DheCR, -1);
   H_ssyptar_DheC->Scale(ECHEC);
@@ -9585,8 +9666,9 @@ void Q1Analysis()
   cyptarSheC->Print(outputpdf);
 
   TCanvas *cyptarSheL1 = new TCanvas("cyptarSheL1", " cyptarSheL1");
-  H_ssyptar_SheL1->SetStats(0);
+  // H_ssyptar_SheL1->SetStats(0);
   H_ssyptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SheL1->Scale(SCFHEL1);
   H_ssyptar_SheL1->Draw("");
   H_ssyptar_DheL1->Add(H_ssyptar_DheL1R, -1);
   H_ssyptar_DheL1->Scale(ECHEL1);
@@ -9595,8 +9677,9 @@ void Q1Analysis()
   cyptarSheL1->Print(outputpdf);
 
   TCanvas *cyptarSheL2 = new TCanvas("cyptarSheL2", " cyptarSheL2");
-  H_ssyptar_SheL2->SetStats(0);
+  // H_ssyptar_SheL2->SetStats(0);
   H_ssyptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SheL2->Scale(SCFHEL2);
   H_ssyptar_SheL2->Draw("");
   H_ssyptar_DheL2->Add(H_ssyptar_DheL2R, -1);
   H_ssyptar_DheL2->Scale(ECHEL2);
@@ -9605,8 +9688,9 @@ void Q1Analysis()
   cyptarSheL2->Print(outputpdf);
 
   TCanvas *cxptarHheR1 = new TCanvas("cxptarHheR1", " cxptarHheR1");
-  H_hsxptar_SheR1->SetStats(0);
+  // H_hsxptar_SheR1->SetStats(0);
   H_hsxptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SheR1->Scale(SCFHER1);
   H_hsxptar_SheR1->Draw("");
   H_hsxptar_DheR1->Add(H_hsxptar_DheR1R, -1);
   H_hsxptar_DheR1->Scale(ECHER1);
@@ -9615,8 +9699,9 @@ void Q1Analysis()
   cxptarHheR1->Print(outputpdf);
 
   TCanvas *cxptarHheC = new TCanvas("cxptarHheC", " cxptarHheC");
-  H_hsxptar_SheC->SetStats(0);
+  // H_hsxptar_SheC->SetStats(0);
   H_hsxptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SheC->Scale(SCFHEC);
   H_hsxptar_SheC->Draw("");
   H_hsxptar_DheC->Add(H_hsxptar_DheCR, -1);
   H_hsxptar_DheC->Scale(ECHEC);
@@ -9625,8 +9710,9 @@ void Q1Analysis()
   cxptarHheC->Print(outputpdf);
 
   TCanvas *cxptarHheL1 = new TCanvas("cxptarHheL1", " cxptarHheL1");
-  H_hsxptar_SheL1->SetStats(0);
+  // H_hsxptar_SheL1->SetStats(0);
   H_hsxptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SheL1->Scale(SCFHEL1);
   H_hsxptar_SheL1->Draw("");
   H_hsxptar_DheL1->Add(H_hsxptar_DheL1R, -1);
   H_hsxptar_DheL1->Scale(ECHEL1);
@@ -9635,8 +9721,9 @@ void Q1Analysis()
   cxptarHheL1->Print(outputpdf);
 
   TCanvas *cxptarHheL2 = new TCanvas("cxptarHheL2", " cxptarHheL2");
-  H_hsxptar_SheL2->SetStats(0);
+  // H_hsxptar_SheL2->SetStats(0);
   H_hsxptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SheL2->Scale(SCFHEL2);
   H_hsxptar_SheL2->Draw("");
   H_hsxptar_DheL2->Add(H_hsxptar_DheL2R, -1);
   H_hsxptar_DheL2->Scale(ECHEL2);
@@ -9645,8 +9732,9 @@ void Q1Analysis()
   cxptarHheL2->Print(outputpdf);
 
   TCanvas *cyptarHheR1 = new TCanvas("cyptarHheR1", " cyptarHheR1");
-  H_hsyptar_SheR1->SetStats(0);
+  // H_hsyptar_SheR1->SetStats(0);
   H_hsyptar_SheR1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SheR1->Scale(SCFHER1);
   H_hsyptar_SheR1->Draw("");
   H_hsyptar_DheR1->Add(H_hsyptar_DheR1R, -1);
   H_hsyptar_DheR1->Scale(ECHER1);
@@ -9655,8 +9743,9 @@ void Q1Analysis()
   cyptarHheR1->Print(outputpdf);
 
   TCanvas *cyptarHheC = new TCanvas("cyptarHheC", " cyptarHheC");
-  H_hsyptar_SheC->SetStats(0);
+  // H_hsyptar_SheC->SetStats(0);
   H_hsyptar_SheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SheC->Scale(SCFHEC);
   H_hsyptar_SheC->Draw("");
   H_hsyptar_DheC->Add(H_hsyptar_DheCR, -1);
   H_hsyptar_DheC->Scale(ECHEC);
@@ -9665,8 +9754,9 @@ void Q1Analysis()
   cyptarHheC->Print(outputpdf);
 
   TCanvas *cyptarHheL1 = new TCanvas("cyptarHheL1", " cyptarHheL1");
-  H_hsyptar_SheL1->SetStats(0);
+  // H_hsyptar_SheL1->SetStats(0);
   H_hsyptar_SheL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SheL1->Scale(SCFHEL1);
   H_hsyptar_SheL1->Draw("");
   H_hsyptar_DheL1->Add(H_hsyptar_DheL1R, -1);
   H_hsyptar_DheL1->Scale(ECHEL1);
@@ -9675,8 +9765,9 @@ void Q1Analysis()
   cyptarHheL1->Print(outputpdf);
 
   TCanvas *cyptarHheL2 = new TCanvas("cyptarHheL2", " cyptarHheL2");
-  H_hsyptar_SheL2->SetStats(0);
+  // H_hsyptar_SheL2->SetStats(0);
   H_hsyptar_SheL2->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SheL2->Scale(SCFHEL2);
   H_hsyptar_SheL2->Draw("");
   H_hsyptar_DheL2->Add(H_hsyptar_DheL2R, -1);
   H_hsyptar_DheL2->Scale(ECHEL2);
@@ -10004,6 +10095,51 @@ void Q1Analysis()
   TCanvas *cYthe = new TCanvas("cYthe", " cYthe");
   Clonehe->Draw("COLZ");
   cYthe->Print(outputpdf);
+
+  // Write some info in root file
+
+  TFile *OutHisto_file = new TFile(foutname,"RECREATE");
+  TDirectory *Hist = OutHisto_file->mkdir("Hist");
+  Hist->cd();
+  hphSL2->Write();
+  hphL2->Write();
+  hphSL1->Write();
+  hphL1->Write();
+  hphSC->Write();
+  hphC->Write();
+
+  hphmeSL2->Write();
+  hphmeL2->Write();
+  hphmeSL1->Write();
+  hphmeL1->Write();
+  hphmeSC->Write();
+  hphmeC->Write();
+  hphmeSR1->Write();
+  hphmeR1->Write();
+  hphmeSR2->Write();
+  hphmeR2->Write();
+
+  hphheSL2->Write();
+  hphheL2->Write();
+  hphheSL1->Write();
+  hphheL1->Write();
+  hphheSC->Write();
+  hphheC->Write();
+  hphheSR1->Write();
+  hphheR1->Write();
+ 
+  htcoinC->Write();
+  htcoinL1->Write();
+  htcoinL2->Write();
+  htC->Write();
+  htL1->Write();
+  htL2->Write();
+  hQ2WC->GetListOfFunctions()->Add(Dcut,"L");
+  hQ2WC->Write();
+  hQ2WC->GetListOfFunctions()->Clear("L");
+  OutHisto_file->Close();
+
+
   // t limit for the analysis
 
   Double_t tmn = 0.00595;
