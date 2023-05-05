@@ -138,7 +138,10 @@ void Analysed(string RunNum = "")
 
 
   //##############################################################################
-  TH1D *H_H_cal    = new TH1D("H_H_cal","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
+  TH1D *Coin    = new TH1D("Coin","CTime_ePiCoinTime_ROC1; CTime_ePiCoinTime_ROC1;", 300, -30, 30);
+  TH1D *MM    = new TH1D("MM","MMpi; MMpi;", 300, 0.8, 1.2);
+  TH1D *Cal     = new TH1D("Cal","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
+  TH1D *CalC    = new TH1D("CalC","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
 
   for(Long64_t i = 0; i < nEntries_TBRANCH; i++)
     {
@@ -156,17 +159,45 @@ void Analysed(string RunNum = "")
       SHMS_Acceptance = P_gtr_dp > -10.0 && P_gtr_dp < 20.0 && P_gtr_xptar > -0.06 && P_gtr_xptar <=0.06 && P_gtr_yptar > -0.04 && P_gtr_yptar < 0.04;       
       HMS_Acceptance = H_gtr_dp > -8.0 && H_gtr_dp < 8.0 && H_gtr_xptar > -0.08 && H_gtr_xptar < 0.08 && H_gtr_yptar > -0.045 && H_gtr_yptar < 0.045;       
       epicointime =  CTime_ePiCoinTime_ROC1 >= -1.0 && CTime_ePiCoinTime_ROC1 <= 1;
-            
+      
+      if (FixCut && SHMS_Acceptance && HMS_Acceptance)   
+	{        
+	  Coin->Fill(CTime_ePiCoinTime_ROC1);    
+	}
+ 
       if (FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
+       {
+	 Cal->Fill(H_cal_etottracknorm);
+	 MM->Fill(MMpi);
+       }     
+     
+     //With HMC CAL CUT
+      if (H_cal_etottracknorm > 0.02 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
 	{
-	  H_H_cal->Fill(H_cal_etottracknorm);
+	  CalC->Fill(H_cal_etottracknorm);
 	}     
+
     }
 
   TFile *OutHisto_file = new TFile(foutname,"RECREATE");
   TDirectory *hist = OutHisto_file->mkdir("hist");
   hist->cd();
-  H_H_cal->Write();
-
+  Coin->Write();
+  MM->Write();
+  Cal->Write();
+  CalC->Write();
   OutHisto_file->Close();
+  TAxis *xC = CalC->GetXaxis();
+  Double_t InC =  CalC->Integral(xC->FindBin(0.0), xC->FindBin(2.0));
+  TAxis *x = Cal->GetXaxis();
+  Double_t In =  Cal->Integral(x->FindBin(0.0), x->FindBin(2.0));
+  Double_t eff = InC/In;  
+  
+  cout<< " "<< endl;
+  cout<< "HMS Eff = "<< eff <<endl;
+
+  /*
+    ofstream Q0p375("OUTPUT/Q0p375.dat");
+    Q0p375.close();
+  */
 }
