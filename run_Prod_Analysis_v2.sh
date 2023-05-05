@@ -322,6 +322,135 @@ do
 
 done
 
+declare -a PHI0P425HE=("RIGHT2" "RIGHT1" "CENTER" "LEFT1" "LEFT2")         # Q2 & high epsilon setting
+for i in "${PHI0P425HE[@]}"
+do
+    if [[ $Q2 = "0p425" && $W = "2p2" && $EPSILON = "high" ]]; then
+	if [[ $i = "RIGHT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right2="Q0p425W2p2right2_${EPSILON}e_dummy"
+	   
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right2="Q0p425W2p2right2_${EPSILON}e_simc"		
+	    else
+		file_right2="Q0p425W2p2right2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right file ${file_right1}..."
+		data_right+=(0000) 
+		echo "Run Numbers: [${data_right1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right file ${file_right2}..."
+		IFS=', ' read -r -a data_right2 <<< "$( grab_runs ${file_right2} )"		
+		echo "Run Numbers: [${data_right2[@]}]"
+		echo
+	    fi
+	    
+	elif [[ $i = "RIGHT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_right1="Q0p425W2p2right1_${EPSILON}e_dummy"
+	   
+	    elif [[ $TargetType = "simc" ]]; then
+		file_right1="Q0p425W2p2right1_${EPSILON}e_simc"		
+	    else
+		file_right1="Q0p425W2p2right1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for right file ${file_right1}..."
+		data_right+=(0000) 
+		echo "Run Numbers: [${data_right1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for right file ${file_right1}..."
+		IFS=', ' read -r -a data_right1 <<< "$( grab_runs ${file_right1} )"		
+		echo "Run Numbers: [${data_right1[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "CENTER" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_center="Q0p425W2p2center_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_center="Q0p425W2p2center_${EPSILON}e_simc"		
+	    else
+		file_center="Q0p425W2p2center_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for center file ${file_center}..."
+		data_center+=(0002) # CENTER, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_center[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for center file ${file_center}..."
+		IFS=', ' read -r -a data_center <<< "$( grab_runs ${file_center} )"		
+		echo "Run Numbers: [${data_center[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT1" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left1="Q0p425W2p2left1_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left1="Q0p425W2p2left1_${EPSILON}e_simc"		
+	    else
+		file_left1="Q0p425W2p2left1_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		data_left1+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left1 file ${file_left1}..."
+		IFS=', ' read -r -a data_left1 <<< "$( grab_runs ${file_left1} )"		
+		echo "Run Numbers: [${data_left1[@]}]"
+		echo
+	    fi
+
+	elif [[ $i = "LEFT2" ]]; then
+	    if [[ $TargetType = "dummy" ]]; then
+		file_left2="Q0p425W2p2left2_${EPSILON}e_dummy"
+	    elif [[ $TargetType = "simc" ]]; then
+		file_left2="Q0p425W2p2left2_${EPSILON}e_simc"		
+	    else
+		file_left2="Q0p425W2p2left2_${EPSILON}e"
+	    fi
+	    if [[ $TargetType = "simc" ]]; then
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		data_left2+=(0001) # LEFT, Q2=0p5, W=2p40
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo	    	    	    	    
+	    else
+		echo "Reading in run numbers for left2 file ${file_left2}..."
+		IFS=', ' read -r -a data_left2 <<< "$( grab_runs ${file_left2} )"		 
+		echo "Run Numbers: [${data_left2[@]}]"
+		echo
+	    fi
+
+	fi
+
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.4515
+	elif [[ ${EPSILON} == "mid" ]]; then
+	    EPSVAL=0.523              #just test
+	else
+	    EPSVAL=0.6979
+	fi
+	if [[ $TargetType = "dummy" ]]; then
+#	    KIN="Q0p375W2p2_${EPSILON}e_dummy"
+	    KIN="Q${Q2}W2p2_${EPSILON}e_dummy"
+	elif [[ $TargetType = "simc" ]]; then
+#	    KIN="Q0p375W2p2_${EPSILON}e_simc"	    
+	    KIN="Q${Q2}W2p2_${EPSILON}e_simc"	    
+	else
+#	    KIN="Q0p375W2p2_${EPSILON}e"
+	    KIN="Q${Q2}W2p2_${EPSILON}e"
+	fi
+    fi    
+
+done
+
 declare -a PHI0P375ME=("RIGHT2" "RIGHT1" "CENTER" "LEFT1" "LEFT2")         # Q1 & mid epsilon setting
 #declare -a PHI0P375ME=("LEFT1" "LEFT2")         # Q1 & mid epsilon setting
 for i in "${PHI0P375ME[@]}"
