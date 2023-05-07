@@ -172,7 +172,7 @@ void Analysed(string RunNum = "")
        }     
      
      //With HMC CAL CUT
-      if (H_cal_etottracknorm > 0.02 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
+      if (H_cal_etottracknorm > 0.7 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
 	{
 	  CalC->Fill(H_cal_etottracknorm);
 	}     
@@ -195,9 +195,8 @@ void Analysed(string RunNum = "")
   
   cout<< " "<< endl;
   cout<< "HMS Eff = "<< eff <<endl;
-
-  /*
-    ofstream Q0p375("OUTPUT/Q0p375.dat");
-    Q0p375.close();
-  */
+  ofstream file("OUTPUT/"+RunNum+".dat");;
+  file<< RunNum <<"\t"<< eff <<endl;
+  file.close();
+  
 }

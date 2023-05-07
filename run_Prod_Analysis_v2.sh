@@ -689,12 +689,29 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 #	    root -b -q  "PlotScript.C(\"$i\")"
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
-	    echo "Combining run $i with ${OutDATAFilename}_Right2.root..."  
-	    hadd -f ${OutDATAFilename}_Right2.root ${i}_-1_Raw_Data.root
+#	    echo "Combining run $i with ${OutDATAFilename}_Right2.root..."  
+#	    hadd -f ${OutDATAFilename}_Right2.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
-	echo
+
+	for i in "${data_right2[@]}"
+	do		    
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    Right2+="${i}_-1_Proc_Data.root "
+	done
+	echo "Combining runs..."  
+	
+	if [[ -f "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/${OutDATAFilename}_Right2.root" ]]; then  # check does file exist
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    rm "${OutDATAFilename}_Right2.root"
+	    echo "An old file exist, now it has been deleted !!!"
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Right2.root ${Right2}
+	else
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Right2.root ${Right2}
+	fi  	
     fi
 
     if [ ${#data_right1[@]} -ne 0 ]; then
@@ -714,15 +731,30 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
-	    echo "Combining run $i with ${OutDATAFilename}_Right1.root..."  
-	    hadd -f ${OutDATAFilename}_Right1.root ${i}_-1_Raw_Data.root
+#	    echo "Combining run $i with ${OutDATAFilename}_Right1.root..."  
+#	    hadd -f ${OutDATAFilename}_Right1.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
-
 	done
-	echo
-    fi
 
+	for i in "${data_right1[@]}"
+	do		    
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    Right1+="${i}_-1_Proc_Data.root "
+	done
+	echo "Combining runs..."  
+	
+	if [[ -f "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/${OutDATAFilename}_Right1.root" ]]; then  # check does file exist
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    rm "${OutDATAFilename}_Right1.root"
+	    echo "An old file exist, now it has been deleted !!!"
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Right1.root ${Right1}
+	else
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Right1.root ${Right1}
+	fi  	
+    fi
 
     if [ ${#data_center[@]} -ne 0 ]; then
 	echo
@@ -742,13 +774,28 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
-	    echo "Combining run $i with ${OutDATAFilename}_Center.root..."  
-	    hadd -f ${OutDATAFilename}_Center.root ${i}_-1_Raw_Data.root
-	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
-    fi
-
+	
+	for i in "${data_center[@]}"
+	do		    
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    Center+="${i}_-1_Proc_Data.root "
+	done
+	echo "Combining runs..."  
+	
+	if [[ -f "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/${OutDATAFilename}_Center.root" ]]; then  # check does file exist
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    rm "${OutDATAFilename}_Center.root"
+	    echo "An old file exist, now it has been deleted !!!"
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Center.root ${Center}
+	else
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Center.root ${Center}
+	fi  	
+    fi      
+    
     # Checks that array isn't empty
     if [ ${#data_left1[@]} -ne 0 ]; then
 	echo
@@ -768,11 +815,30 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
-	    echo "Combining run $i with ${OutDATAFilename}_Left1.root..."  
-	    hadd -f ${OutDATAFilename}_Left1.root ${i}_-1_Raw_Data.root
+#	    echo "Combining run $i with ${OutDATAFilename}_Left1.root..."  
+#	    hadd -f ${OutDATAFilename}_Left1.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
+	
+	for i in "${data_left1[@]}"
+	do		    
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    Left1+="${i}_-1_Proc_Data.root "
+	done
+	echo "Combining runs..."  
+	
+	if [[ -f "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/${OutDATAFilename}_Left1.root" ]]; then  # check does file exist
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    rm "${OutDATAFilename}_Left1.root"
+	    echo "An old file exist, now it has been deleted !!!"
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Left1.root ${Left1}
+	else
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Left1.root ${Left1}
+	fi  	
+	
     fi
 
     # Checks that array isn't empty
@@ -794,13 +860,31 @@ if [[ $a_flag = "true" && $TargetType != "simc" ]]; then
 	    echo
 #	    cd "${LTANAPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
-	    echo "Combining run $i with ${OutDATAFilename}_Left2.root..."  
-	    hadd -f ${OutDATAFilename}_Left2.root ${i}_-1_Raw_Data.root
+	    #	    echo "Combining run $i with ${OutDATAFilename}_Left2.root..."  
+	    #	    hadd -f ${OutDATAFilename}_Left2.root ${i}_-1_Raw_Data.root
 	    echo "Renaming Raw_Data to Proc_Data..."
 	    mv ${i}_-1_Raw_Data.root ${i}_-1_Proc_Data.root
 	done
-    fi
-    
+
+	for i in "${data_left2[@]}"
+	do		    
+	    cd "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT"
+	    Left2+="${i}_-1_Proc_Data.root "
+	done
+	
+	echo "Combining runs..."  
+	
+	if [[ -f "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/${OutDATAFilename}_Left2.root" ]]; then  # check does file exist
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    rm "${OutDATAFilename}_Left2.root"
+	    echo "An old file exist, now it has been deleted !!!"
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Left2.root ${Left2}
+	else
+	    cd /u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/
+	    hadd ${OutDATAFilename}_Left2.root ${Left2}
+	fi  	
+    fi  
 fi
 
 #cd "${LTANAPATH}/scripts"
