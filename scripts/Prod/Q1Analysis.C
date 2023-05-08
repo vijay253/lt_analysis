@@ -1625,18 +1625,21 @@ void Q1Analysis()
   hph_qL2R->Scale(1.0/6.0);
 
   //Effective charge 
-  Double_t ECLEC   = 1.0/513.483;
+  //  Double_t ECLEC   = 1.0/513.483;
+  Double_t ECLEC   = 1.0/307.463;
   Double_t ECLEDC  = 1.0/43.926;
 
-  Double_t ECLEL1  = 1.0/695.990;
+  //  Double_t ECLEL1  = 1.0/695.990;
+  Double_t ECLEL1  = 1.0/464.909;
   Double_t ECLEDL1 = 1.0/35.961;
 
-  Double_t ECLEL2  = 1.0/826.567;
+  //  Double_t ECLEL2  = 1.0/826.567;
+  Double_t ECLEL2  = 1.0/550.755;
   Double_t ECLEDL2 = 1.0/38.644;
   //SIMC SCAL
-  Double_t SCFLEC  = 0.58;  //0.30
-  Double_t SCFLEL1 = 0.58;  //0.35
-  Double_t SCFLEL2 = 0.58;  //0.40
+  Double_t SCFLEC  = 1.0;  //0.95
+  Double_t SCFLEL1 = 1.0;  //0.95
+  Double_t SCFLEL2 = 1.0;  //0.95
  
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
@@ -5224,26 +5227,31 @@ void Q1Analysis()
   hYmeL2R->Scale(1.0/6.0);
 
   //Effective Charge 
-  Double_t ECMER1   = 1.0/213.133;
+  //  Double_t ECMER1   = 1.0/213.133;
+  Double_t ECMER1   = 1.0/120.641;
   Double_t ECMEDR1  = 1.0/42.178;
 
-  Double_t ECMER2   = 1.0/322.210;
+  //  Double_t ECMER2   = 1.0/322.210;
+  Double_t ECMER2   = 1.0/190.743;
   Double_t ECMEDR2  = 1.0/55.429;
 
-  Double_t ECMEC    = 1.0/259.427;
+  //  Double_t ECMEC    = 1.0/259.427;
+  Double_t ECMEC    = 1.0/147.723;
   Double_t ECMEDC   = 1.0/35.726;
 
-  Double_t ECMEL1   = 1.0/341.394;
+  //  Double_t ECMEL1   = 1.0/341.394;
+  Double_t ECMEL1   = 1.0/235.014;
   Double_t ECMEDL1  = 1.0/26.851;
   
-  Double_t ECMEL2   = 1.0/417.516;
+  //  Double_t ECMEL2   = 1.0/417.516;
+  Double_t ECMEL2   = 1.0/349.579;
   Double_t ECMEDL2  = 1.0/55.624;
   //SIMC SCAL
   Double_t SCFMER1 = 1.0;  //0.90;
   Double_t SCFMER2 = 1.0; //0.90;
-  Double_t SCFMEC  = 0.9; // 0.90;
-  Double_t SCFMEL1 = 0.65; //0.75;
-  Double_t SCFMEL2 = 0.65; //0.75;
+  Double_t SCFMEC  = 1.0; // 0.90;
+  Double_t SCFMEL1 = 1.0; //0.75;
+  Double_t SCFMEL2 = 1.0; //0.75;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
   htcoinmeL1->SetStats(0);
@@ -8770,22 +8778,26 @@ void Q1Analysis()
   hph_qheL2R->Scale(1.0/6.0);
 
   //Effective charge
-  Double_t ECHER1   = 1.0/132.298;
+  //  Double_t ECHER1   = 1.0/132.298;
+  Double_t ECHER1   = 1.0/75.239;
   Double_t ECHEDR1  = 1.0/51.186;
 
-  Double_t ECHEC    = 1.0/380.289;
+  //  Double_t ECHEC    = 1.0/380.289;
+  Double_t ECHEC    = 1.0/279.583;
   Double_t ECHEDC   = 1.0/65.383;
 
-  Double_t ECHEL1   = 1.0/183.317;
+  //  Double_t ECHEL1   = 1.0/183.317;
+  Double_t ECHEL1   = 1.0/159.142;
   Double_t ECHEDL1  = 1.0/27.220;
 
-  Double_t ECHEL2   = 1.0/195.603;
+  //  Double_t ECHEL2   = 1.0/195.603;
+  Double_t ECHEL2   = 1.0/179.291;
   Double_t ECHEDL2  = 1.0/73.453;
   //SIMC SCAL
-  Double_t SCFHER1 = 0.85; // 0.65;
-  Double_t SCFHEC =  0.55; //0.65;
-  Double_t SCFHEL1 = 0.55; //0.65;
-  Double_t SCFHEL2 = 0.50; //0.65;
+  Double_t SCFHER1 = 1.0; // 0.85;
+  Double_t SCFHEC =  1.0; //0.55;
+  Double_t SCFHEL1 = 1.0; //0.55;
+  Double_t SCFHEL2 = 1.0; //0.55;
 
   TCanvas *c8 = new TCanvas("c8", " tcoin"); 
  

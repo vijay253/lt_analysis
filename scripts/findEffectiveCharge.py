@@ -41,6 +41,10 @@ from getDataTable import calculate_efficiency
 
 tot_efficiency = calculate_efficiency(runNum,efficiency_table)
 
+file = "/u/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT/"+runNum+".dat"
+from numpy import loadtxt
+caleff = loadtxt(file, unpack=True, usecols=[1])
+
 ################################################################################################################################################
 
 # Open report file to grab prescale values and tracking efficiency
@@ -58,7 +62,7 @@ with open(report) as f:
 
 ##effective_charge = float(charge/1000)*float(tot_efficiency)
 ## For now total charge. changed on Apr 24, 2023 by V.K. 
-effective_charge = float(charge/1000)
+effective_charge = float(charge/1000)*float(caleff)
 
 # Need to convert to int value for bash to interpret correctly
 print(int(1000*effective_charge))
