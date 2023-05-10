@@ -22,6 +22,8 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include <fstream>
+#include <iostream>
 
 void Analysed(string RunNum = "")
 {
@@ -41,6 +43,7 @@ void Analysed(string RunNum = "")
     Analysispath = "/group/c-kaonlt/USERS/"+User+"/lt_analysis/LTsep/efficiency";
     // Output path for root file
     ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/Analysis/KaonLT/";
+    //    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/";
     OutPath = "/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT";
   }
   else if(Hostname.Contains("qcd")){
@@ -59,6 +62,7 @@ void Analysed(string RunNum = "")
   }  
   
   rootFile = ROOTfilePath+"/"+"Kaon_coin_replay_production_"+RunNum+"_-1.root";
+  //  rootFile = ROOTfilePath+"/"+"coin_replay_Full_"+RunNum+"_-1.root";
 
   if (gSystem->AccessPathName(rootFile) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
@@ -142,6 +146,7 @@ void Analysed(string RunNum = "")
   TH1D *MM    = new TH1D("MM","MMpi; MMpi;", 300, 0.8, 1.2);
   TH1D *Cal     = new TH1D("Cal","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
   TH1D *CalC    = new TH1D("CalC","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
+  TH1D *Cer    = new TH1D("Cer","H_cer_npeSum; H_cer_npeSum;", 300, 0.0, 4.0);
 
   for(Long64_t i = 0; i < nEntries_TBRANCH; i++)
     {
@@ -158,7 +163,8 @@ void Analysed(string RunNum = "")
       FixCut = P_hod_goodstarttime == 1 && H_hod_goodstarttime == 1; 
       SHMS_Acceptance = P_gtr_dp > -10.0 && P_gtr_dp < 20.0 && P_gtr_xptar > -0.06 && P_gtr_xptar <=0.06 && P_gtr_yptar > -0.04 && P_gtr_yptar < 0.04;       
       HMS_Acceptance = H_gtr_dp > -8.0 && H_gtr_dp < 8.0 && H_gtr_xptar > -0.08 && H_gtr_xptar < 0.08 && H_gtr_yptar > -0.045 && H_gtr_yptar < 0.045;       
-      epicointime =  CTime_ePiCoinTime_ROC1 >= -1.0 && CTime_ePiCoinTime_ROC1 <= 1;
+      //      epicointime =  CTime_ePiCoinTime_ROC1 >= -1.0 && CTime_ePiCoinTime_ROC1 <= 1 && H_cer_npeSum >= 0.6;
+      epicointime = H_cer_npeSum >= 0.65;   //0.6
       
       if (FixCut && SHMS_Acceptance && HMS_Acceptance)   
 	{        
@@ -169,6 +175,7 @@ void Analysed(string RunNum = "")
        {
 	 Cal->Fill(H_cal_etottracknorm);
 	 MM->Fill(MMpi);
+	 Cer->Fill(H_cer_npeSum);
        }     
      
      //With HMC CAL CUT
@@ -183,6 +190,7 @@ void Analysed(string RunNum = "")
   TDirectory *hist = OutHisto_file->mkdir("hist");
   hist->cd();
   Coin->Write();
+  Cer->Write();
   MM->Write();
   Cal->Write();
   CalC->Write();
@@ -192,11 +200,12 @@ void Analysed(string RunNum = "")
   TAxis *x = Cal->GetXaxis();
   Double_t In =  Cal->Integral(x->FindBin(0.0), x->FindBin(2.0));
   Double_t eff = InC/In;  
-  
+  Double_t err = (InC/In)*sqrt(pow(sqrt(InC)/InC, 2) + pow(sqrt(In)/In, 2));  
+    
   cout<< " "<< endl;
   cout<< "HMS Eff = "<< eff <<endl;
   ofstream file("OUTPUT/"+RunNum+".dat");;
-  file<< RunNum <<"\t"<< eff <<endl;
+  file<< RunNum <<"\t"<< eff <<"\t"<< err <<endl;
   file.close();
   
 }

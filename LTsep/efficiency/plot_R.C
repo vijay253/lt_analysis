@@ -35,9 +35,9 @@ void plot_R() {
     
   TString file_name;
 
-  file_name =   dir + "tmp" + ".dat";
+  file_name =   dir + "Center_highe" + ".dat";
 
-  TNtuple* n1 = new TNtuple("n1", "n1", "R:eff");
+  TNtuple* n1 = new TNtuple("n1", "n1", "R:eff:err");
   n1->ReadFile(file_name);
       
   TGraphErrors* t_g = new TGraphErrors();
@@ -48,21 +48,21 @@ void plot_R() {
   //  t_bin_limit.Form( "t_bin == %i && ratio != 0", in);	
 
   // n1->Draw("ratio:phi_bin", t_bin_limit, "*");
-  n1->Draw("eff:R");
+  n1->Draw("eff:R:err");
     
-  TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, 0);
+  TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
 		
-  g->SetTitle("Yield Ratio: Yexp/Ysim");
+  g->SetTitle("HMS Cal Eff");
 	
-  g->GetXaxis()->SetTitle("#phi angle");		
+  g->GetXaxis()->SetTitle("Run");		
   g->GetXaxis()->CenterTitle();		
 	
-  g->GetYaxis()->SetTitle("Yield Ratio");		
-  g->GetYaxis()->SetTitleOffset(1.8);		
+  g->GetYaxis()->SetTitle("Efficiency");		
+  g->GetYaxis()->SetTitleOffset(1.0);		
   g->GetYaxis()->CenterTitle();		
 	       
   g->SetMarkerStyle(29);
-  g->GetYaxis()->SetRangeUser(0.0, 1.0);
+  g->GetYaxis()->SetRangeUser(0.92, 1.0);
   g->Draw("AP");
   c1->Print(dir + "Eff.png");
 

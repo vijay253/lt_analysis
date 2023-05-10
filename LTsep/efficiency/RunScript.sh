@@ -41,6 +41,8 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     fi
     
 done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/RunListHMSCalEff"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_highe"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_highe"
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
     runNum=$line
@@ -53,6 +55,8 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
     #cd ${REPLAYPATH}/UTIL_KAONLT/scripts/HeepSingleStudy/SHMS_Heep/
 
 done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/RunListHMSCalEff"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_highe"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_highe"
 
 if [[ -f "/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT/Q375.root" ]]; then  # check does file exist
     cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT/
