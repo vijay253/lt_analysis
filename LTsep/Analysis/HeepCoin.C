@@ -1,4 +1,4 @@
-// .... Created Date: May 5, 2023 ....
+// .... Created Date: July 14, 2023 ....
 // .... Author: VK ....
 //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -25,7 +25,7 @@
 #include <fstream>
 #include <iostream>
 
-void Analysed(string RunNum = "")
+void HeepCoin(string RunNum = "")
 {
   TString Hostname = gSystem->HostName();
   TString User = (gSystem->GetUserInfo())->fUser;
@@ -177,58 +177,20 @@ void Analysed(string RunNum = "")
 	  Wryb->Fill(W,H_rb_raster_fr_yb);    
 	}
  
-      if (FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)
+      if (FixCut && SHMS_Acceptance && HMS_Acceptance)
         {
 	  Cal->Fill(H_cal_etottracknorm);
 	  MM->Fill(MMpi);
-	  //	 Cer->Fill(H_cer_npeSum);
 	}     
-
-      //Random
-      if (FixCut && SHMS_Acceptance && HMS_Acceptance && epicointimeRandom)
-        {
-	  CalR->Fill(H_cal_etottracknorm);
-	}
       
-
-      //With HMC CAL CUT
-     
-      if(RunNum >= "8497" && RunNum <= "8547") {
- 
-	if (H_cal_etottracknorm > 0.2 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)    
-	  {
-	    CalC->Fill(H_cal_etottracknorm);
-	    Cer->Fill(H_cer_npeSum);
-	  }     
-	
-	//Random
-	if (H_cal_etottracknorm > 0.2 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointimeRandom)    
-	  {
-	    CalCR->Fill(H_cal_etottracknorm);
-	  }
-      }
-      
-      else {
-	
-	if (H_cal_etottracknorm > 0.7 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)    
-	  {
-	    CalC->Fill(H_cal_etottracknorm);
-	    Cer->Fill(H_cer_npeSum);
-	  }     
-	
-	//Random
-	if (H_cal_etottracknorm > 0.7 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointimeRandom)    
-	  {
-	    CalCR->Fill(H_cal_etottracknorm);
-	  }
-	
-      }
+      if (H_cal_etottracknorm > 0.7 && FixCut && SHMS_Acceptance && HMS_Acceptance)    
+	{
+	  CalC->Fill(H_cal_etottracknorm);
+	  Cer->Fill(H_cer_npeSum);
+	}    	
       
     }
   
-  //Subtract Random
-  Cal->Add(CalR, -1);
-  CalC->Add(CalCR, -1);
   Double_t binmax = Coin->GetMaximumBin(); Double_t PPC = Coin->GetXaxis()->GetBinCenter(binmax);
   cout<<" Prompt Peak Center: "<< PPC <<endl; 
 
@@ -254,6 +216,6 @@ void Analysed(string RunNum = "")
   cout<< " "<< endl;
   cout<< "HMS Eff = "<< eff <<endl;
   ofstream file("OUTPUT/"+RunNum+".dat");
-  file<< RunNum <<"\t"<< eff <<"\t"<< err <<"\t"<< PPC <<endl;
+  file<< RunNum <<"\t"<< eff <<"\t"<< err <<endl;
   file.close();
 }
