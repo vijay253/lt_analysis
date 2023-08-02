@@ -54,6 +54,12 @@ void Efficiency(string RunNum = "", Double_t SHMStreff = 0, Double_t SHMStreffer
     OutPath = "/home/vijay/work/HeepCoinStudy/";
   }
 
+  rootFile = ROOTfilePath+"/"+"Kaon_coin_replay_production_"+RunNum+"_-1.root";
+  if (gSystem->AccessPathName(rootFile) == kTRUE){
+    cerr << "!!!!! ERROR !!!!! " << endl <<rootFile <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
+    exit;
+  }
+
   // Add more as needed for your own envrionment
   if(RunNum == "") {
     cout << "Enter RunNum: ";
@@ -64,22 +70,22 @@ void Efficiency(string RunNum = "", Double_t SHMStreff = 0, Double_t SHMStreffer
     cout << "Enter SHMStreff: ";
     cin >> SHMStreff;    
   }
-
+  /*
   if(SHMStrefferr == 0) {
     cout << "Enter SHMStrefferr: ";
     cin >> SHMStrefferr;    
   }
-
+  */
   if(HMStreff == 0) {
     cout << "Enter HMStreff: ";
     cin >> HMStreff;    
   }
-
+  /*
   if(HMStrefferr == 0) {
     cout << "Enter HMStrefferr: ";
     cin >> HMStrefferr;    
   }
-
+  */
   ofstream file("OUTPUT/"+RunNum+".dat");;
   file<< RunNum << "\t"<< SHMStreff << "\t" << SHMStrefferr << "\t" << HMStreff << "\t" << HMStrefferr << endl;
   file.close();

@@ -31,13 +31,13 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     
     while IFS= read -r line; do
 
-	if [[ $line == KLT_SHMS_Pion_COIN_TRACK_EFF* ]] ; then
+	if [[ $line == Pion_COIN_TRACK_EFF* ]] ; then
 	    printline="yes"
 	    SHMStreff=$(echo $line | awk '{print $3}')
 	    SHMStrefferr=$(echo $line | awk '{print $5}')
 	fi	    
 
-	if [[ $line == KLT_HMS_Elec_COIN_TRACK_EFF* ]] ; then
+	if [[ $line == Elec_COIN_TRACK_EFF* ]] ; then
 	    printline="yes"
 	    HMStreff=$(echo $line | awk '{print $3}')
 	    HMStrefferr=$(echo $line | awk '{print $5}')
@@ -56,8 +56,8 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Efficiency/	
 	root -b -q "Efficiency.C(\"${RUNNUMBER}\", ${SHMStreff}, ${SHMStrefferr}, ${HMStreff}, ${HMStrefferr})"
     fi
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/EffRunList"
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/EffRunList"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1Q2"
 
 echo ""
 echo "Processing is completed" 
