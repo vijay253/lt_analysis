@@ -37,10 +37,20 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	    SHMStrefferr=$(echo $line | awk '{print $5}')
 	fi	    
 
+	if [[ $line == KLT_SHMS_Hodoscope_S1X_Rate* ]] ; then
+	    printline="yes"
+	    SHMS_S1X_Rate=$(echo $line | awk '{print $3}')
+	fi	    
+
 	if [[ $line == Elec_COIN_TRACK_EFF* ]] ; then
 	    printline="yes"
 	    HMStreff=$(echo $line | awk '{print $3}')
 	    HMStrefferr=$(echo $line | awk '{print $5}')
+	fi	    
+
+	if [[ $line == KLT_HMS_Hodoscope_S1X_Rate* ]] ; then
+	    printline="yes"
+	    HMS_S1X_Rate=$(echo $line | awk '{print $3}')
 	fi	    
 
     done < "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/REPORT_OUTPUT/Production/Kaon_replay_production_${RUNNUMBER}_-1.report" 
@@ -51,10 +61,10 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	echo "An old file exist, now it has been deleted !!!"
 	
 	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Efficiency/
-	root -b -q  "Effiency.C(\"${RUNNUMBER}\", ${SHMStreff}, ${SHMStrefferr}, ${HMStreff}, ${HMStrefferr})"
+	root -b -q  "Effiency.C(\"${RUNNUMBER}\", ${SHMStreff}, ${SHMStrefferr}, ${HMStreff}, ${HMStrefferr}, ${SHMS_S1X_Rate}, ${HMS_S1X_Rate})"
     else
 	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Efficiency/	
-	root -b -q "Efficiency.C(\"${RUNNUMBER}\", ${SHMStreff}, ${SHMStrefferr}, ${HMStreff}, ${HMStrefferr})"
+	root -b -q "Efficiency.C(\"${RUNNUMBER}\", ${SHMStreff}, ${SHMStrefferr}, ${HMStreff}, ${HMStrefferr}, ${SHMS_S1X_Rate}, ${HMS_S1X_Rate})"
     fi
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/EffRunList"
 done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1Q2"

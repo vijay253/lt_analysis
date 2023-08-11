@@ -26,7 +26,7 @@
 #include <fstream>
 #include <iostream>
 
-void Efficiency(string RunNum = "", Double_t SHMStreff = 0, Double_t SHMStrefferr = 0,  Double_t HMStreff = 0, Double_t HMStrefferr = 0)
+void Efficiency(string RunNum = "", Double_t SHMStreff = 0, Double_t SHMStrefferr = 0,  Double_t HMStreff = 0, Double_t HMStrefferr = 0, Double_t SHMS_S1X_Rate =0, Double_t HMS_S1X_Rate =0)
 {
   TString Hostname = gSystem->HostName();
   TString User = (gSystem->GetUserInfo())->fUser;
@@ -87,6 +87,6 @@ void Efficiency(string RunNum = "", Double_t SHMStreff = 0, Double_t SHMStreffer
   }
   */
   ofstream file("OUTPUT/"+RunNum+".dat");;
-  file<< RunNum << "\t"<< SHMStreff << "\t" << SHMStrefferr << "\t" << HMStreff << "\t" << HMStrefferr << endl;
+  file<< RunNum << "\t"<< SHMStreff << "\t" << SHMStrefferr << "\t" << HMStreff << "\t" << HMStrefferr << "\t"<< SHMS_S1X_Rate << "\t" << HMS_S1X_Rate << endl;
   file.close();
 }
