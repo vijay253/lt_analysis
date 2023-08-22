@@ -228,34 +228,35 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
 	}
       
       //      if (FixCut && SHMS_Acceptance && HMS_Acceptance && H_cal_etottracknorm >=0.7 && H_cer_npeSum >= 10.0)    
-      if (HMS_Acceptance && H_cal_etottracknorm > 0.4 && H_cer_npeSum > 0.1)   //For Carbon Lumi    	
-	/**
+      //      if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.4 && H_cer_npeSum > 0.1)   //For Carbon Lumi    	
+	
       if(RunNum == "8479")
 	{
-	  //	  if (H_cal_etottracknorm >= 0.2 && H_bcm1Current >=4.0) 	
-	  //  if (H_cal_etottracknorm > 0.7) 	
-	    {        
-	      hcaltr->Fill(H_cal_etottracknorm);
-	    }
-	}
-
-      else if(RunNum == "8480")
-	{
-	  //	  if (H_cal_etottracknorm >= 0.2 && H_bcm1Current >=2.5) 	
-	  //  if (H_cal_etottracknorm > 0.7) 	
+	  //	  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=4.0  && H_cer_npeSum > 10) 	
+	  //	  if (H_bcm1Current >=4.0) 	
+	    //  if (H_cal_etottracknorm > 0.7) 	
 	    {        
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
 	}
       
+      else if(RunNum == "8480")
+	{
+	  //  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=2.5 && H_cer_npeSum > 10) 	
+	  // if (H_bcm1Current >=2.5) 	
+	    //  if (H_cal_etottracknorm > 0.7) 	
+	  {        
+	      hcaltr->Fill(H_cal_etottracknorm);
+	    }
+	}
+      
       else   
-	*/	
-	  //	  if (H_cal_etottracknorm > 0.0 && T_coin_hEDTM == 0.0) 	
-	  //	  if (H_cal_etottracknorm >= 0.2) 	
-	            
-      hcaltr->Fill(H_cal_etottracknorm);
-	    
-	
+	{	
+	  //  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7  && H_cer_npeSum > 10) 	
+	    {
+	      hcaltr->Fill(H_cal_etottracknorm);
+	    }
+	}	
     }
 
   TAxis *hedtmx = hEDTM->GetXaxis();

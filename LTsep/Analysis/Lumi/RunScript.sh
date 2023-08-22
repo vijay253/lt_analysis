@@ -40,9 +40,9 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	echo "Skipped Replay for ${RUNNUMBER}"
 
     fi
-    #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
 
 while IFS='' read -r Line || [[ -n "$Line" ]]; do
     RUNNUMBER=$Line
@@ -120,9 +120,10 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Lumi/	
 	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${PSV}, ${PSVh}, ${charge}, ${I}, ${hedtmsent}, ${HMStreff})"
     fi
-    #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
+
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
 
 #while IFS='' read -r line || [[ -n "$line" ]]; do
 #    runNum=$line
