@@ -25,7 +25,7 @@
 #include <fstream>
 #include <iostream>
 
-void Analysed(string RunNum = "", Double_t Coin_trig_rate = 0, Double_t EDTMLIVE = 0, Double_t EDTMLIVEERR = 0, Double_t CPULIVE = 0, Double_t CPULIVEERR = 0, Double_t I = 0)
+void Analysed(string RunNum = "", Double_t Coin_trig_rate = 0, Double_t EDTMLIVE = 0, Double_t EDTMLIVEERR = 0, Double_t CPULIVE = 0, Double_t CPULIVEERR = 0, Double_t I = 0, Double_t SHMS3Y4 = 0)
 {
   TString Hostname = gSystem->HostName();
   TString User = (gSystem->GetUserInfo())->fUser;
@@ -61,6 +61,6 @@ void Analysed(string RunNum = "", Double_t Coin_trig_rate = 0, Double_t EDTMLIVE
   }  
   
   ofstream file("OUTPUT/"+RunNum+".dat");;
-  file<< RunNum <<"\t"<< EDTMLIVE <<"\t"<< EDTMLIVEERR << "\t"<< CPULIVE << "\t" << CPULIVEERR <<"\t"<< Coin_trig_rate <<"\t"<< I <<endl;
+  file<< RunNum <<"\t"<< EDTMLIVE <<"\t"<< EDTMLIVEERR << "\t"<< CPULIVE << "\t" << CPULIVEERR <<"\t"<< Coin_trig_rate <<"\t"<< I <<"\t"<< SHMS3Y4 <<endl;
   file.close();
 }

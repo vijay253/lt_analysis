@@ -68,6 +68,12 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	    I=$(echo $line | awk '{print $3}')
 	    echo $I    
 	fi	
+
+	if [[ $line == KLT_SHMS_Hodo_3_of_4_EFF* ]] ; then
+	    printline="yes"
+	    SHMS3Y4=$(echo $line | awk '{print $3}')
+	    echo $SHMS3Y4    
+	fi	
 	
 
 
@@ -79,10 +85,10 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     	echo "An old file exist, now it has been deleted !!!"
     	
     	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/
-    	root -b -q  "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I})"
+    	root -b -q  "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4})"
     else
     	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/	
-   	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I})"
+   	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4})"
     fi
 done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1Q2"
 
