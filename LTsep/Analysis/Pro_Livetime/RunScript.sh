@@ -74,8 +74,30 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	    SHMS3Y4=$(echo $line | awk '{print $3}')
 	    echo $SHMS3Y4    
 	fi	
-	
 
+	if [[ $line == KLT_SHMS_Hodo_Plane_1* ]] ; then
+	    printline="yes"
+	    SHMSHOD1=$(echo $line | awk '{print $3}')
+	    echo $SHMSHOD1    
+	fi	
+
+	if [[ $line == KLT_SHMS_Hodo_Plane_2* ]] ; then
+	    printline="yes"
+	    SHMSHOD2=$(echo $line | awk '{print $3}')
+	    echo $SHMSHOD2    
+	fi	
+
+	if [[ $line == KLT_SHMS_Hodo_Plane_3* ]] ; then
+	    printline="yes"
+	    SHMSHOD3=$(echo $line | awk '{print $3}')
+	    echo $SHMSHOD3    
+	fi	
+
+	if [[ $line == KLT_SHMS_Hodo_Plane_4* ]] ; then
+	    printline="yes"
+	    SHMSHOD4=$(echo $line | awk '{print $3}')
+	    echo $SHMSHOD4    
+	fi		
 
     done < "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/REPORT_OUTPUT/Production/Kaon_replay_production_${RUNNUMBER}_-1.report" 
     
@@ -85,10 +107,10 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     	echo "An old file exist, now it has been deleted !!!"
     	
     	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/
-    	root -b -q  "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4})"
+    	root -b -q  "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4}, ${SHMSHOD1}, ${SHMSHOD2}, ${SHMSHOD3}, ${SHMSHOD4})"
     else
     	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/	
-   	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4})"
+   	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4}, ${SHMSHOD1}, ${SHMSHOD2}, ${SHMSHOD3}, ${SHMSHOD4})"
     fi
 done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1Q2"
 
