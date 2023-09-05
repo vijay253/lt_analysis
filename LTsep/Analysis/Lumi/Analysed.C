@@ -208,7 +208,7 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       
       //      if (FixCut && SHMS_Acceptance && HMS_Acceptance)    
 
-      if((RunNum == "8467") || (RunNum == "8469") || (RunNum == "8480"))
+      if((RunNum == "8467") || (RunNum == "8469") || (RunNum == "8479") || (RunNum == "8480"))
 	{
 	  //if(T_coin_hEDTM > 2800 && T_coin_hEDTM < 3100)
 	  if(T_coin_hEDTM > 0.0)
@@ -243,7 +243,7 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       //      if (FixCut && SHMS_Acceptance && HMS_Acceptance && H_cal_etottracknorm >=0.7 && H_cer_npeSum >= 10.0)    
       //      if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.4 && H_cer_npeSum > 0.1)   //For Carbon Lumi    	
 	
-      if(RunNum == "8479" || RunNum == "8476" || RunNum == "8477" || RunNum == "8478" || RunNum == "8481")
+      if(RunNum == "8479" || RunNum == "8475" || RunNum == "8476" || RunNum == "8477" || RunNum == "8478" || RunNum == "8481")
 	{
 	  //	  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=4.0  && H_cer_npeSum > 10) 	
 	  if (H_bcm1Current >=5.0 && HMS_Acceptance)   //HMS_Acceptance for LH2 	

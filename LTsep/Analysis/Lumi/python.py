@@ -44,7 +44,7 @@ for file_name in file_names:
 
 #LH2 track study
     list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8563239.106804244)
-    list_y_err.append(m.sqrt((Rerrtr)**2+(TLT*0.020)**2))
+    list_y_err.append(m.sqrt((Rerrtr)**2 + (TLT*0.020)**2))
 #    list_y_err.append(Rerrtr)
     
 fig, ax = plt.subplots()
@@ -75,7 +75,7 @@ print(test[0])
 print(test[1])
 
 #ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope)+', \u03B5m='+str("%.7f" %d_slope), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
-ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope)+', \u03B5m\u2080='+str("%.7f" %d_slope), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
+#ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope)+', \u03B5m\u2080='+str("%.7f" %d_slope), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
 fit_y = Line(np.array(list_x), inter, slope)
 ax.plot(list_x, fit_y, '-', label='y = c + m\u2080*x')   #"%.7f" %slope
 ax.legend()
