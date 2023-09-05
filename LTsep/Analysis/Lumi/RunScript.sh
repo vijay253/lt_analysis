@@ -40,9 +40,10 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	echo "Skipped Replay for ${RUNNUMBER}"
 
     fi
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7"
 
 while IFS='' read -r Line || [[ -n "$Line" ]]; do
     RUNNUMBER=$Line
@@ -53,7 +54,7 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     
     while IFS= read -r line; do
 
-	if [[ RUNNUMBER -eq 8480 ]] ; then
+	if [[ RUNNUMBER -eq  8469 || 8470 || 8480 ]] ; then
 
 	    if [[ $line == SW_BCM1_Charge* ]] ; then
 		printline="yes"
@@ -121,8 +122,9 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${PSV}, ${PSVh}, ${charge}, ${I}, ${hedtmsent}, ${HMStreff})"
     fi
 
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
 
 #while IFS='' read -r line || [[ -n "$line" ]]; do

@@ -3,6 +3,7 @@ import numpy as np
 import math as m
 from scipy.optimize import curve_fit
 from scipy.stats import linregress
+from sklearn.linear_model import LinearRegression
 
 def Line(x, intercept, slope):
 
@@ -37,21 +38,23 @@ for file_name in file_names:
 
 #C tracl study
 #    list_y.append(Yieldtr/(TLT*HMStreff*4066252.264851886))
+#    list_y.append(Yieldtr/(TLT*8403095.298987238))
 #    list_y_err.append(Rerrtr)
+#    list_y_err.append(m.sqrt((Rerrtr)**2+(TLT*0.02)**2))
 
 #LH2 track study
-    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(5.37821e+06/(0.9979*0.944964*20.367*4.8579*2))*I)/15852610.772117976)
-#    list_y_err.append(m.sqrt(Rerrtr*errTLT))
-    list_y_err.append(Rerrtr)
+    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8563239.106804244)
+    list_y_err.append(m.sqrt((Rerrtr)**2+(TLT*0.020)**2))
+#    list_y_err.append(Rerrtr)
     
 fig, ax = plt.subplots()
 #for i in range(len(file_names)):
 #ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='EDTM Live Time')
 #ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS Carbon-12 Non-track F.N. Yield')
-#ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='2', markersize=18, color='red',label='HMS Carbon-12 track F.N. Yield')
+#ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS Carbon-12 track F.N. Yield')
 
 #ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS LH2 Non-track F.N. Yield')
-ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='2', markersize=18, color='red',label='HMS LH2 track F.N. Yield')
+ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS LH2 track F.N. Yield')
 #ax.errorbar(list_x, list_y, fmt='s', markersize=2, color='red')
 
 test = linregress(list_x, list_y)
@@ -89,7 +92,7 @@ ax.legend()
 #ax.set_xticklabels(list_x, rotation=45)
 
 ax.set_ylim(0.90, 1.10)
-ax.set_xlabel('BCM1 Current [uA]')
+ax.set_xlabel('Avg BCM1 Current [uA]')
 ax.set_ylabel('Fractional Normalized Yield')
 '''
 ax.set_xlabel('Run Number')

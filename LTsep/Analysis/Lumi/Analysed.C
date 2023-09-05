@@ -207,12 +207,25 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       epicointime = H_cer_npeSum >= 0.002;   //0.6
       
       //      if (FixCut && SHMS_Acceptance && HMS_Acceptance)    
-      if(T_coin_hEDTM > 2800 && T_coin_hEDTM < 3200)
-	//if(T_coin_hEDTM > 0.0)
-	{        
-	  hEDTM->Fill(T_coin_hEDTM);	
-	  hbcm1C->Fill(H_bcm1Current);	
+
+      if((RunNum == "8467") || (RunNum == "8469") || (RunNum == "8480"))
+	{
+	  //if(T_coin_hEDTM > 2800 && T_coin_hEDTM < 3100)
+	  if(T_coin_hEDTM > 0.0)
+	    {        
+	      hEDTM->Fill(T_coin_hEDTM);	
+	      hbcm1C->Fill(H_bcm1Current);	
+	    }
 	}
+      else 
+	{
+	  if(T_coin_hEDTM > 2800 && T_coin_hEDTM < 3100)
+	    //	if(T_coin_hEDTM > 0.0)
+	    {        
+	      hEDTM->Fill(T_coin_hEDTM);	
+	      hbcm1C->Fill(H_bcm1Current);	
+	    }
+	}   
 
       hcal1->Fill(H_cal_etotnorm);
       hcal2->Fill(H_cal_etottracknorm);
@@ -220,7 +233,7 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       //      if (FixCut && SHMS_Acceptance && HMS_Acceptance && H_cal_etotnorm >=0.7 && H_cer_npeSum >= 10.0)    
 
       //      if (H_cal_etotnorm > 0.7 && H_cer_npeSum >= 0.3)   //For Carbon Lumi   
-      if (H_cal_etotnorm > 0.0 && T_coin_hEDTM == 0.0) //(H_cal_etotnorm >=0.2 &&   
+         if (H_cal_etotnorm > 0.0 && T_coin_hEDTM == 0.0) //(H_cal_etotnorm >=0.2 &&   
 	{        
 	  hcal->Fill(H_cal_etotnorm);
 	  hcer->Fill(H_cer_npeSum);
@@ -230,43 +243,58 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       //      if (FixCut && SHMS_Acceptance && HMS_Acceptance && H_cal_etottracknorm >=0.7 && H_cer_npeSum >= 10.0)    
       //      if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.4 && H_cer_npeSum > 0.1)   //For Carbon Lumi    	
 	
-      if(RunNum == "8479")
+      if(RunNum == "8479" || RunNum == "8476" || RunNum == "8477" || RunNum == "8478" || RunNum == "8481")
 	{
 	  //	  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=4.0  && H_cer_npeSum > 10) 	
-	  //	  if (H_bcm1Current >=4.0) 	
+	  if (H_bcm1Current >=5.0 && HMS_Acceptance)   //HMS_Acceptance for LH2 	
 	    //  if (H_cal_etottracknorm > 0.7) 	
 	    {        
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
 	}
-      
-      else if(RunNum == "8480")
+     
+      else if((RunNum == "8458") || (RunNum == "8462") || (RunNum == "8464") || (RunNum == "8465") || (RunNum == "8467"))
 	{
 	  //  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=2.5 && H_cer_npeSum > 10) 	
-	  // if (H_bcm1Current >=2.5) 	
+	  if (H_bcm1Current >= 5.0) 	
 	    //  if (H_cal_etottracknorm > 0.7) 	
-	  {        
+	    {  
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
 	}
       
       else   
 	{	
-	  //  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7  && H_cer_npeSum > 10) 	
+	  if (HMS_Acceptance) 	//HMS_Acceptance for LH2 
 	    {
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
 	}	
     }
 
-  TAxis *hedtmx = hEDTM->GetXaxis();
+   TAxis *hedtmx = hEDTM->GetXaxis();
+   Double_t errhedtm;
+   Double_t hedtmacc = hEDTM->IntegralAndError(hedtmx->FindBin(0.0), hedtmx->FindBin(7000.0), errhedtm, "");
+   Double_t edtmlivecorr = (1.0/PSV-1.0/(PSVh*PSV));
+   Double_t edtmlive = (hedtmacc/(edtmlivecorr*hedtmsent));
+   Double_t errhedtmlive = sqrt(hedtmacc*(1-hedtmacc/hedtmsent))/(edtmlivecorr*hedtmsent);
+  
+  /*  TAxis *hedtmx = hEDTM->GetXaxis();
   Double_t errhedtm;
-
-  Double_t hedtmacc = hEDTM->IntegralAndError(hedtmx->FindBin(0.0), hedtmx->FindBin(7000.0), errhedtm, "");
-  Double_t edtmlivecorr = (1.0/PSV-1.0/(PSV*PSVh));
-  Double_t edtmlive = (hedtmacc/(edtmlivecorr*hedtmsent));
-  Double_t errhedtmlive = sqrt(hedtmacc*(1-hedtmacc/hedtmsent))/(edtmlivecorr*hedtmsent);
-
+  Double_t hedtmacc = hEDTM->IntegralAndError(hedtmx->FindBin(0.0), hedtmx->FindBin(7000.0), errhedtm, "");      
+  Double_t edtmlive = (hedtmacc*PSV/(hedtmsent));
+  Double_t errhedtmlive = sqrt(hedtmacc*(1-hedtmacc/hedtmsent))/(hedtmsent);
+  */
+  /*  else 
+      {
+      TAxis *hedtmx = hEDTM->GetXaxis();
+      Double_t errhedtm;
+      Double_t hedtmacc = hEDTM->IntegralAndError(hedtmx->FindBin(0.0), hedtmx->FindBin(7000.0), errhedtm, "");      
+      Double_t edtmlivecorr = (1.0/PSV-1.0/(PSVh*PSV));
+      Double_t edtmlive = (hedtmacc/(edtmlivecorr*hedtmsent));
+      Double_t errhedtmlive = sqrt(hedtmacc*(1-hedtmacc/hedtmsent))/(edtmlivecorr*hedtmsent);
+    }
+  */
   //Uncer
   TAxis *xerr = hcal->GetXaxis();
   Double_t err1;
