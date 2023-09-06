@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from array import array
 import numpy as np
 import math as m
 from scipy.optimize import curve_fit
@@ -7,7 +8,8 @@ from sklearn.linear_model import LinearRegression
 
 def Line(x, intercept, slope):
 
-    y = intercept + slope * x
+#    y = intercept + slope * x
+    y = intercept + slope1 * x
     return y 
 
 HMScaleff     = 0.9979
@@ -40,11 +42,11 @@ for file_name in file_names:
 #    list_y.append(Yieldtr/(TLT*HMStreff*4066252.264851886))
 #    list_y.append(Yieldtr/(TLT*8403095.298987238))
 #    list_y_err.append(Rerrtr)
-#    list_y_err.append(m.sqrt((Rerrtr)**2+(TLT*0.02)**2))
+#    list_y_err.append(m.sqrt((Rerrtr)**2+(errTLT)**2))
 
 #LH2 track study
     list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8563239.106804244)
-    list_y_err.append(m.sqrt((Rerrtr)**2 + (TLT*0.020)**2))
+    list_y_err.append(m.sqrt((Rerrtr)**2 + (errTLT)**2))
 #    list_y_err.append(Rerrtr)
     
 fig, ax = plt.subplots()
@@ -57,7 +59,7 @@ fig, ax = plt.subplots()
 ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS LH2 track F.N. Yield')
 #ax.errorbar(list_x, list_y, fmt='s', markersize=2, color='red')
 
-test = linregress(list_x, list_y)
+slope1, intercept1, r, p, se = linregress(list_x, list_y)
 
 parameter, covariance = curve_fit(Line, list_x, list_y)
 parameters, covariance = curve_fit(Line, list_x, list_y, p0 =parameter, sigma=list_y_err, absolute_sigma=True)
@@ -71,11 +73,11 @@ print(d_slope)
 print(inter)
 print(d_inter)
 
-print(test[0])
-print(test[1])
+print(slope1)
+print(se)
 
-#ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope)+', \u03B5m='+str("%.7f" %d_slope), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
-#ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope)+', \u03B5m\u2080='+str("%.7f" %d_slope), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
+#ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope1)+', \u03B5m='+str("%.7f" %se), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
+ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope1)+', \u03B5m\u2080='+str("%.7f" %se), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
 fit_y = Line(np.array(list_x), inter, slope)
 ax.plot(list_x, fit_y, '-', label='y = c + m\u2080*x')   #"%.7f" %slope
 ax.legend()
