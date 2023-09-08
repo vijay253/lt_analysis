@@ -8,8 +8,8 @@ from sklearn.linear_model import LinearRegression
 
 def Line(x, intercept, slope):
 
-#    y = intercept + slope * x
-    y = intercept + slope1 * x
+    y = intercept + slope * x
+#    y = intercept + slope1 * x
     return y 
 
 HMScaleff     = 0.9979
@@ -39,15 +39,13 @@ for file_name in file_names:
 #    list_y_err.append(Rerrtr)
 
 #C tracl study
-#    list_y.append(Yieldtr/(TLT*HMStreff*4066252.264851886))
-#    list_y.append(Yieldtr/(TLT*8403095.298987238))
-#    list_y_err.append(Rerrtr)
+#    list_y.append(Yieldtr/(TLT*4641086.438038912))
 #    list_y_err.append(m.sqrt((Rerrtr)**2+(errTLT)**2))
 
 #LH2 track study
-    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8563239.106804244)
+#    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8563239.106804244)
+    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8211344.64983696)
     list_y_err.append(m.sqrt((Rerrtr)**2 + (errTLT)**2))
-#    list_y_err.append(Rerrtr)
     
 fig, ax = plt.subplots()
 #for i in range(len(file_names)):
@@ -61,8 +59,18 @@ ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',
 
 slope1, intercept1, r, p, se = linregress(list_x, list_y)
 
-parameter, covariance = curve_fit(Line, list_x, list_y)
-parameters, covariance = curve_fit(Line, list_x, list_y, p0 =parameter, sigma=list_y_err, absolute_sigma=True)
+params, covariance = curve_fit(Line, list_x, list_y, sigma=list_y_err)
+intercept_fit, slope_fit = params
+intercept_error, slope_error = np.sqrt(np.diag(covariance))
+
+print(intercept_fit)
+print(intercept_error)
+print(slope_fit)
+print(slope_error)
+
+#parameter, covariance = curve_fit(Line, list_x, list_y)
+#parameters, covariance = curve_fit(Line, list_x, list_y, p0 =params, sigma=list_y_err, absolute_sigma=True)
+'''
 inter = parameters[0]
 slope = parameters[1]
 d_inter = np.sqrt(covariance[0][0])
@@ -75,10 +83,10 @@ print(d_inter)
 
 print(slope1)
 print(se)
-
-#ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope1)+', \u03B5m='+str("%.7f" %se), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
-ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope1)+', \u03B5m\u2080='+str("%.7f" %se), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
-fit_y = Line(np.array(list_x), inter, slope)
+'''
+#ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope_fit)+', \u03B5m='+str("%.7f" %slope_error), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
+ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope_fit)+', \u03B5m\u2080='+str("%.7f" %slope_error), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
+fit_y = Line(np.array(list_x), intercept_fit, slope_fit)
 ax.plot(list_x, fit_y, '-', label='y = c + m\u2080*x')   #"%.7f" %slope
 ax.legend()
 
