@@ -28,7 +28,8 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     echo ""		
     echo ""
 
-    if [[ ! -f "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/ROOTfiles/Kaon_replay_luminosity_${RUNNUMBER}_-1.root" ]]; then  # check does file exist
+#    if [[ ! -f "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/ROOTfiles/Kaon_replay_luminosity_${RUNNUMBER}_-1.root" ]]; then  # check does file exist
+    if [[ ! -f "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/ROOTfiles/ROOTfiles_OLD/Kaon_replay_luminosity_${RUNNUMBER}_-1.root" ]]; then  # check does file exist
 	cd /group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/	
 	
 	echo "Running Replay !!!"
@@ -41,8 +42,8 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 
     fi
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot"
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7"
 
 while IFS='' read -r Line || [[ -n "$Line" ]]; do
@@ -123,9 +124,9 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     fi
 
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/tmp"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7"
-#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot"
 
 #while IFS='' read -r line || [[ -n "$line" ]]; do
 #    runNum=$line

@@ -17,9 +17,9 @@ HMScalefferr  = 4.004e-05
 
 #with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/tmp', 'r') as file:
 #with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/TLT_plot', 'r') as file:
-#with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot', 'r') as file:
+with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/Pion_Carbon_Lumi_2p7_plot', 'r') as file:
 #with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/CTLT_plot', 'r') as file:
-with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot', 'r') as file:
+#with open('/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/Pion_Lumi_2p7_plot', 'r') as file:
     file_names = file.read().splitlines()
 
 list_x      = []  
@@ -27,7 +27,7 @@ list_y      = []
 list_y_err  = []
 
 for file_name in file_names:
-    Run, TLT, errTLT, Yield, Rerr, Yieldtr, Rerrtr, HMStreff, I = np.loadtxt('/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Lumi/OUTPUT/'+file_name+'.dat', unpack=True)  
+    Run, TLT, errTLT, Yield, Rerr, Yieldtr, Rerrtr, HMStreff, I, HMStrefferr = np.loadtxt('/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Lumi/OUTPUT/'+file_name+'.dat', unpack=True)  
     '''
     list_x.append(Run)
     list_y.append(TLT)
@@ -39,22 +39,26 @@ for file_name in file_names:
 #    list_y_err.append(Rerrtr)
 
 #C tracl study
-#    list_y.append(Yieldtr/(TLT*4641086.438038912))
+#    list_y.append(Yieldtr/(TLT**HMStreff*4669632.764768297))
+    list_y.append(Yieldtr/(TLT*4669632.764768297))
 #    list_y_err.append(m.sqrt((Rerrtr)**2+(errTLT)**2))
+    list_y_err.append(m.sqrt((Rerrtr)**2+(0.02)**2+(HMStrefferr)**2+(0.01)**2))   #2% (EDTM), 1% (bcm 1 charge) fraction errors
 
 #LH2 track study
 #    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8563239.106804244)
-    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8211344.64983696)
-    list_y_err.append(m.sqrt((Rerrtr)**2 + (errTLT)**2))
+#    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*4.8579))*I)/8211344.64983696)
+#    list_y.append((Yieldtr/(TLT*HMStreff*0.9979)-(2.96471e+06/(0.9979*0.935592*20.367*5.21))*I)/8211344.64983696)
+#    list_y_err.append(m.sqrt((Rerrtr)**2 + (TLT*0.02)**2))
+#    list_y_err.append(Rerrtr*errTLT)
     
 fig, ax = plt.subplots()
 #for i in range(len(file_names)):
 #ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='EDTM Live Time')
 #ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS Carbon-12 Non-track F.N. Yield')
-#ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS Carbon-12 track F.N. Yield')
+ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS Carbon-12 track F.N. Yield')
 
 #ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS LH2 Non-track F.N. Yield')
-ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS LH2 track F.N. Yield')
+#ax.errorbar(list_x, list_y, yerr=list_y_err, fmt='s', markersize=8, color='red',label='HMS LH2 track F.N. Yield')
 #ax.errorbar(list_x, list_y, fmt='s', markersize=2, color='red')
 
 slope1, intercept1, r, p, se = linregress(list_x, list_y)
@@ -70,22 +74,9 @@ print(slope_error)
 
 #parameter, covariance = curve_fit(Line, list_x, list_y)
 #parameters, covariance = curve_fit(Line, list_x, list_y, p0 =params, sigma=list_y_err, absolute_sigma=True)
-'''
-inter = parameters[0]
-slope = parameters[1]
-d_inter = np.sqrt(covariance[0][0])
-d_slope = np.sqrt(covariance[1][1])
 
-print(slope)
-print(d_slope)
-print(inter)
-print(d_inter)
-
-print(slope1)
-print(se)
-'''
-#ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope_fit)+', \u03B5m='+str("%.7f" %slope_error), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
-ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope_fit)+', \u03B5m\u2080='+str("%.7f" %slope_error), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
+ax.text(16, 1.05, 'm\u2080 ='+str("%.7f" %slope_fit)+', \u03B5m='+str("%.7f" %slope_error), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))   # For C
+#ax.text(12, 1.05, 'm\u2080 ='+str("%.7f" %slope_fit)+', \u03B5m\u2080='+str("%.7f" %slope_error), fontsize=8, bbox=dict(facecolor='red', alpha=0.5))    # For H2
 fit_y = Line(np.array(list_x), intercept_fit, slope_fit)
 ax.plot(list_x, fit_y, '-', label='y = c + m\u2080*x')   #"%.7f" %slope
 ax.legend()
@@ -110,9 +101,9 @@ ax.set_ylabel('EDTM Live Time')
 plt.savefig('OUTPUT/CTLT.png')
 '''
 #plt.savefig('OUTPUT/Cnontrack.png')
-#plt.savefig('OUTPUT/Ctrack.png')
+plt.savefig('OUTPUT/Ctrack.png')
 
 #plt.savefig('OUTPUT/Hnontrack.png')
-plt.savefig('OUTPUT/Htrack.png')
+#plt.savefig('OUTPUT/Htrack.png')
 
 #plt.savefig('OUTPUT/tmp.png')

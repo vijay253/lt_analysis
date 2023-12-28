@@ -43,7 +43,8 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
     Analysispath = "/group/c-kaonlt/USERS/"+User+"/lt_analysis/LTsep/Analysis";
     // Output path for root file
     //    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/Analysis/KaonLT/";
-    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/";
+    //    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/";
+    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/ROOTfiles_OLD";
     OutPath = "/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Lumi/OUTPUT/";
   }
   else if(Hostname.Contains("qcd")){
@@ -246,8 +247,8 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       if(RunNum == "8479" || RunNum == "8475" || RunNum == "8476" || RunNum == "8477" || RunNum == "8478" || RunNum == "8481")
 	{
 	  //	  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=4.0  && H_cer_npeSum > 10) 	
-	  // if (H_bcm1Current >=5.0 && HMS_Acceptance)   //For C 	
-	  if (H_bcm1Current >=5.0 && HMS_Acceptance && H_hod_goodstarttime == 1)   //For LH2 	
+	  if (H_bcm1Current >=5.0 && HMS_Acceptance)   //For C 	
+	  //	  if (H_bcm1Current >=5.0 && HMS_Acceptance && H_hod_goodstarttime == 1)   //For LH2 	
 	    {        
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
@@ -256,8 +257,8 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       else if((RunNum == "8458") || (RunNum == "8462") || (RunNum == "8464") || (RunNum == "8465") || (RunNum == "8467"))
 	{
 	  //  if (HMS_Acceptance && H_hod_goodstarttime == 1 && H_cal_etottracknorm > 0.7 && H_bcm1Current >=2.5 && H_cer_npeSum > 10) 	
-	  //	  if (H_bcm1Current >= 5.0 && HMS_Acceptance)  //For C	
-	  if (H_bcm1Current >= 5.0 && HMS_Acceptance && H_hod_goodstarttime == 1) 	      //For LH2     
+	  if (H_bcm1Current >= 5.0 && HMS_Acceptance)  //For C	
+	  //if (H_bcm1Current >= 5.0 && HMS_Acceptance && H_hod_goodstarttime == 1) 	      //For LH2     
 	    {  
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
@@ -265,8 +266,8 @@ void Analysed(string RunNum = "", Double_t PSV = 0, Double_t PSVh = 0, Double_t 
       
       else   
 	{	
-	  //	  if (HMS_Acceptance) 	//For C 
-	  if (HMS_Acceptance && H_hod_goodstarttime == 1) 	//For LH2 
+	  if (HMS_Acceptance) 	//For C 
+	  // if (HMS_Acceptance && H_hod_goodstarttime == 1) 	//For LH2 
 	    {
 	      hcaltr->Fill(H_cal_etottracknorm);
 	    }
