@@ -2,6 +2,7 @@
 // .... Author: VK ....
 // .... This script was prepared to analyse the summer 2019 data....
 // .... I really like to have everything in a single script rather than spreading things all over place....
+// .... This script updated on Dec 29, 2023 for the final analysis....
 //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #define EFFICIENCY_cxx
@@ -57,6 +58,7 @@ void Q1Analysis()
 
   //Dummy extra thickness correction factor.
   Double_t THCF = 1.0/4.8579;
+  Double_t TimmingOffset = 44.1;
 
   // Low epsilon analysis
   cout<<" "<<endl;
@@ -735,34 +737,38 @@ void Q1Analysis()
   
   //  Double_t qL1[nEntries_TBRANCHL1];
   // Double_t wL1[nEntries_TBRANCHL1]; 
-  
+  /*
   Double_t MMpiOffsetL2 = 0.003097;
   Double_t MMpiOffsetL1 = 0.003584;
   Double_t MMpiOffsetC  = 0.003396;
+  */
+  Double_t MMpiOffsetL2 = 0.0;
+  Double_t MMpiOffsetL1 = 0.0;
+  Double_t MMpiOffsetC  = 0.0;
 
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
     {
       TBRANCHC->GetEntry(i);
       
-      if(tcoinC>=-1.0 && tcoinC <= 1.0 && mmC>= 0.92 && mmC <=0.98)
+      if(tcoinC -TimmingOffset >=-1.0 && tcoinC -TimmingOffset <= 1.0 && mmC>= 0.92 && mmC <=0.98)
 	{
 	  hQ2WC->Fill(Q2C, WC);
 	}
       
-      if(tcoinC>=-1.0 && tcoinC <= 1.0)    
+      if(tcoinC-TimmingOffset>=-1.0 && tcoinC-TimmingOffset <= 1.0)    
 	{
 	  hmmC->Fill(mmC);	  
 	}	      
       
       {
-	htcoinC->Fill(tcoinC);
+	htcoinC->Fill(tcoinC-TimmingOffset);
       }
       
       Double_t DiamondC = (Dcut->IsInside(Q2C, WC));  
       Double_t MMpiC = mmC>= 0.932-MMpiOffsetC && mmC <=0.98-MMpiOffsetC;
-      Double_t CoinPionC = tcoinC>=-1.0 && tcoinC <= 1.0;      
-      Double_t CoinPionCR = ((tcoinC>=-15.0 && tcoinC<= -9.0) || (tcoinC>=7.0 && tcoinC<=13.0));      
+      Double_t CoinPionC = tcoinC-TimmingOffset>=-1.0 && tcoinC-TimmingOffset <= 1.0;      
+      Double_t CoinPionCR = ((tcoinC-TimmingOffset>=-15.0 && tcoinC-TimmingOffset<= -9.0) || (tcoinC-TimmingOffset>=7.0 && tcoinC-TimmingOffset<=13.0));      
       
       if(CoinPionC && MMpiC && DiamondC)
 	{
@@ -916,7 +922,7 @@ void Q1Analysis()
 	  ht8CR->Fill(-tC); 
 	}      
       
-      if (((tcoinC>=-15.0 && tcoinC <= -9.0) || (tcoinC>=7.0 && tcoinC <=13.0)))
+      if (((tcoinC-TimmingOffset>=-15.0 && tcoinC-TimmingOffset <= -9.0) || (tcoinC-TimmingOffset>=7.0 && tcoinC-TimmingOffset<=13.0)))
 	
 	{
 	  hmmCR->Fill(mmC);
@@ -930,8 +936,8 @@ void Q1Analysis()
             
       Double_t DiamonddC = (Dcut->IsInside(Q2dC, WdC));  
       Double_t MMpidC = mmdC>= 0.932-MMpiOffsetC && mmdC <=0.98-MMpiOffsetC;
-      Double_t CoinPiondC = tcoindC>=-1.0 && tcoindC <= 1.0;      
-      Double_t CoinPiondCR = ((tcoindC>=-15.0 && tcoindC<= -9.0) || (tcoindC>=7.0 && tcoindC<=13.0));      
+      Double_t CoinPiondC = tcoindC-TimmingOffset>=-1.0 && tcoindC-TimmingOffset <= 1.0;      
+      Double_t CoinPiondCR = ((tcoindC-TimmingOffset>=-15.0 && tcoindC-TimmingOffset<= -9.0) || (tcoindC-TimmingOffset>=7.0 && tcoindC-TimmingOffset<=13.0));      
       
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
@@ -939,7 +945,7 @@ void Q1Analysis()
 	  hYdC->Fill(-tdC, mmdC+MMpiOffsetC);
 	}	
 
-      Double_t CUTCCR = ((tcoindC>=-15.0 && tcoindC <= -9.0) || (tcoindC>=7.0 && tcoindC <=13.0));      
+      Double_t CUTCCR = ((tcoindC-TimmingOffset>=-15.0 && tcoindC-TimmingOffset <= -9.0) || (tcoindC-TimmingOffset>=7.0 && tcoindC-TimmingOffset <=13.0));      
       
       if(CoinPiondCR && MMpidC && DiamonddC)
 	{
@@ -1038,18 +1044,18 @@ void Q1Analysis()
     {
       TBRANCHL1->GetEntry(i);
             
-      if(tcoinL1>=-1.0 && tcoinL1 <= 1.0)	
+      if(tcoinL1-TimmingOffset>=-1.0 && tcoinL1-TimmingOffset <= 1.0)	
 	{
 	  hmmL1->Fill(mmL1);
 	}           
       {
-	htcoinL1->Fill(tcoinL1);
+	htcoinL1->Fill(tcoinL1-TimmingOffset);
       }
      
       Double_t DiamondL1 = (Dcut->IsInside(Q2L1, WL1));  
       Double_t MMpiL1 = mmL1>= 0.932-MMpiOffsetL1 && mmL1 <=0.98-MMpiOffsetL1;
-      Double_t CoinPionL1 = tcoinL1>=-1.0 && tcoinL1 <= 1.0;      
-      Double_t CoinPionL1R = ((tcoinL1>=-15.0 && tcoinL1<= -9.0) || (tcoinL1>=7.0 && tcoinL1<=13.0));      
+      Double_t CoinPionL1 = tcoinL1-TimmingOffset>=-1.0 && tcoinL1-TimmingOffset <= 1.0;      
+      Double_t CoinPionL1R = ((tcoinL1-TimmingOffset>=-15.0 && tcoinL1-TimmingOffset<= -9.0) || (tcoinL1-TimmingOffset>=7.0 && tcoinL1-TimmingOffset<=13.0));      
 
       if(CoinPionL1 && MMpiL1 && DiamondL1)
 	{
@@ -1200,7 +1206,7 @@ void Q1Analysis()
 	  ht8L1R->Fill(-tL1); 
 	}      
 
-      if (((tcoinL1>=-15.0 && tcoinL1 <= -9.0) || (tcoinL1>=7.0 && tcoinL1 <=13.0)))
+      if (((tcoinL1-TimmingOffset>=-15.0 && tcoinL1-TimmingOffset <= -9.0) || (tcoinL1-TimmingOffset>=7.0 && tcoinL1-TimmingOffset <=13.0)))
 	
 	{	 
 	  hmmL1R->Fill(mmL1);
@@ -1213,8 +1219,8 @@ void Q1Analysis()
 
       Double_t DiamonddL1 = (Dcut->IsInside(Q2dL1, WdL1));  
       Double_t MMpidL1 = mmdL1>= 0.932-MMpiOffsetL1 && mmdL1 <=0.98-MMpiOffsetL1;
-      Double_t CoinPiondL1 = tcoindL1>=-1.0 && tcoindL1 <= 1.0;      
-      Double_t CoinPiondL1R = ((tcoindL1>=-15.0 && tcoindL1<= -9.0) || (tcoindL1>=7.0 && tcoindL1<=13.0));      
+      Double_t CoinPiondL1 = tcoindL1-TimmingOffset>=-1.0 && tcoindL1-TimmingOffset <= 1.0;      
+      Double_t CoinPiondL1R = ((tcoindL1-TimmingOffset>=-15.0 && tcoindL1-TimmingOffset<= -9.0) || (tcoindL1-TimmingOffset>=7.0 && tcoindL1-TimmingOffset<=13.0));      
       
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
@@ -1265,19 +1271,19 @@ void Q1Analysis()
     {
       TBRANCHL2->GetEntry(i);
            
-      if(tcoinL2>=-1.0 && tcoinL2 <= 1.0)
+      if(tcoinL2-TimmingOffset>=-1.0 && tcoinL2-TimmingOffset <= 1.0)
 	
 	{
 	  hmmL2->Fill(mmL2);
 	}   
       
       {
-	htcoinL2->Fill(tcoinL2);
+	htcoinL2->Fill(tcoinL2-TimmingOffset);
       }
       Double_t DiamondL2 = (Dcut->IsInside(Q2L2, WL2));  
       Double_t MMpiL2 = mmL2>= 0.932-MMpiOffsetL2 && mmL2 <=0.98-MMpiOffsetL2;
-      Double_t CoinPionL2 = tcoinL2>=-1.0 && tcoinL2 <= 1.0;      
-      Double_t CoinPionL2R = ((tcoinL2>=-15.0 && tcoinL2<= -9.0) || (tcoinL2>=7.0 && tcoinL2<=13.0));      
+      Double_t CoinPionL2 = tcoinL2-TimmingOffset>=-1.0 && tcoinL2-TimmingOffset <= 1.0;      
+      Double_t CoinPionL2R = ((tcoinL2-TimmingOffset>=-15.0 && tcoinL2-TimmingOffset<= -9.0) || (tcoinL2-TimmingOffset>=7.0 && tcoinL2-TimmingOffset<=13.0));      
       
       if(CoinPionL2 && MMpiL2 && DiamondL2)
 	{
@@ -1426,7 +1432,7 @@ void Q1Analysis()
 	  ht8L2R->Fill(-tL2); 
 	}      
 
-      if (((tcoinL2>=-15.0 && tcoinL2 <= -9.0) || (tcoinL2>=7.0 && tcoinL2 <=13.0)))
+      if (((tcoinL2-TimmingOffset>=-15.0 && tcoinL2-TimmingOffset <= -9.0) || (tcoinL2-TimmingOffset>=7.0 && tcoinL2-TimmingOffset <=13.0)))
 	{
 	  hmmL2R->Fill(mmL2);
 	}
@@ -1439,8 +1445,8 @@ void Q1Analysis()
 
       Double_t DiamonddL2 = (Dcut->IsInside(Q2dL2, WdL2));  
       Double_t MMpidL2 = mmdL2>= 0.932-MMpiOffsetL2 && mmdL2 <=0.98-MMpiOffsetL2;
-      Double_t CoinPiondL2 = tcoindL2>=-1.0 && tcoindL2 <= 1.0;      
-      Double_t CoinPiondL2R = ((tcoindL2>=-15.0 && tcoindL2<= -9.0) || (tcoindL2>=7.0 && tcoindL2<=13.0));      
+      Double_t CoinPiondL2 = tcoindL2-TimmingOffset>=-1.0 && tcoindL2-TimmingOffset <= 1.0;      
+      Double_t CoinPiondL2R = ((tcoindL2-TimmingOffset>=-15.0 && tcoindL2-TimmingOffset<= -9.0) || (tcoindL2-TimmingOffset>=7.0 && tcoindL2-TimmingOffset<=13.0));      
 
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
@@ -1625,17 +1631,26 @@ void Q1Analysis()
   hph_qL2R->Scale(1.0/6.0);
 
   //Effective charge 
-  //  Double_t ECLEC   = 1.0/513.483;
+  /*
   Double_t ECLEC   = 1.0/307.463;
   Double_t ECLEDC  = 1.0/43.926;
+  */
+  Double_t ECLEC   = 1.0/447.01427000000007;
+  Double_t ECLEDC  = 1.0/40.4086;
 
   //  Double_t ECLEL1  = 1.0/695.990;
-  Double_t ECLEL1  = 1.0/464.909;
-  Double_t ECLEDL1 = 1.0/35.961;
+  /*  Double_t ECLEL1  = 1.0/464.909;
+      Double_t ECLEDL1 = 1.0/35.961;
+  */
+  Double_t ECLEL1  = 1.0/611.269;
+  Double_t ECLEDL1 = 1.0/34.0522;
 
   //  Double_t ECLEL2  = 1.0/826.567;
-  Double_t ECLEL2  = 1.0/550.755;
-  Double_t ECLEDL2 = 1.0/38.644;
+  /*  Double_t ECLEL2  = 1.0/550.755;
+      Double_t ECLEDL2 = 1.0/38.644;
+  */
+  Double_t ECLEL2  = 1.0/749.716;
+  Double_t ECLEDL2 = 1.0/36.8931;
   //SIMC SCAL
   Double_t SCFLEC  = 1.0;  //0.95
   Double_t SCFLEL1 = 1.0;  //0.95
@@ -3822,11 +3837,18 @@ void Q1Analysis()
   TH1D *H_hsxptar_DmeL2R  = new TH1D("H_hsxptar_DmeL2R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeL2R  = new TH1D("H_hsyptar_DmeL2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
+  /*
   Double_t MMpiOffsetmeR1 = -0.0019952;
   Double_t MMpiOffsetmeR2 = -0.001492;
   Double_t MMpiOffsetmeC  = -0.001783;
   Double_t MMpiOffsetmeL1 = -0.00164;
   Double_t MMpiOffsetmeL2 = -0.003525;
+  */
+  Double_t MMpiOffsetmeR1 = 0.0;
+  Double_t MMpiOffsetmeR2 = 0.0;
+  Double_t MMpiOffsetmeC  = 0.0;
+  Double_t MMpiOffsetmeL1 = 0.0;
+  Double_t MMpiOffsetmeL2 = 0.0;
 
   //Data R1
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER1; i++)
@@ -3834,18 +3856,18 @@ void Q1Analysis()
     {
       TBRANCHMIDER1->GetEntry(i);
       
-      if(tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0)    
+      if(tcoinmeR1-TimmingOffset>=-1.0 && tcoinmeR1-TimmingOffset <= 1.0)    
 	{
 	  hmmmeR1->Fill(mmmeR1);	  
 	}	      
       
       {
-	htcoinmeR1->Fill(tcoinmeR1);
+	htcoinmeR1->Fill(tcoinmeR1-TimmingOffset);
       }
       Double_t DiamondR1 = (Dcut->IsInside(Q2MER1, WMER1));  
       Double_t MMpiR1 = mmmeR1>= 0.932-MMpiOffsetmeR1 && mmmeR1 <=0.98-MMpiOffsetmeR1;
-      Double_t CoinPionR1 = tcoinmeR1>=-1.0 && tcoinmeR1 <= 1.0;      
-      Double_t CoinPionR1R = ((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0));      
+      Double_t CoinPionR1 = tcoinmeR1-TimmingOffset>=-1.0 && tcoinmeR1-TimmingOffset <= 1.0;      
+      Double_t CoinPionR1R = ((tcoinmeR1-TimmingOffset>=-15.0 && tcoinmeR1-TimmingOffset <= -9.0) || (tcoinmeR1-TimmingOffset>=7.0 && tcoinmeR1-TimmingOffset <=13.0));      
       
       if(CoinPionR1 && MMpiR1 && DiamondR1)
 	{
@@ -4003,7 +4025,7 @@ void Q1Analysis()
 	  ht8meR1R->Fill(-tmeR1); 
 	}
       
-      if (((tcoinmeR1>=-15.0 && tcoinmeR1 <= -9.0) || (tcoinmeR1>=7.0 && tcoinmeR1 <=13.0)))
+      if (((tcoinmeR1-TimmingOffset>=-15.0 && tcoinmeR1-TimmingOffset <= -9.0) || (tcoinmeR1-TimmingOffset>=7.0 && tcoinmeR1-TimmingOffset <=13.0)))
 	
 	{
 	  hmmmeR1R->Fill(mmmeR1);
@@ -4015,8 +4037,8 @@ void Q1Analysis()
       TBRANCHMIDEDR1->GetEntry(i);
       Double_t DimonddR1 = (Dcut->IsInside(Q2MEDR1, WMEDR1));  
       Double_t MMpidR1 = mmmedR1>= 0.932-MMpiOffsetmeR1 && mmmedR1 <=0.98-MMpiOffsetmeR1;
-      Double_t CoinPiondR1 = tcoinmedR1>=-1.0 && tcoinmedR1 <= 1.0;      
-      Double_t CoinPiondR1R = ((tcoinmedR1>=-15.0 && tcoinmedR1 <= -9.0) || (tcoinmedR1>=7.0 && tcoinmedR1 <=13.0));      
+      Double_t CoinPiondR1 = tcoinmedR1-TimmingOffset>=-1.0 && tcoinmedR1-TimmingOffset <= 1.0;      
+      Double_t CoinPiondR1R = ((tcoinmedR1-TimmingOffset>=-15.0 && tcoinmedR1-TimmingOffset <= -9.0) || (tcoinmedR1-TimmingOffset>=7.0 && tcoinmedR1-TimmingOffset <=13.0));      
       
       if(CoinPiondR1 && MMpidR1 && DimonddR1)
 	{
@@ -4068,18 +4090,18 @@ void Q1Analysis()
     {
       TBRANCHMIDER2->GetEntry(i);
       
-      if(tcoinmeR2>=-1.0 && tcoinmeR2 <= 1.0)    
+      if(tcoinmeR2-TimmingOffset>=-1.0 && tcoinmeR2-TimmingOffset <= 1.0)    
 	{
 	  hmmmeR2->Fill(mmmeR2);	  
 	}	      
       
       {
-	htcoinmeR2->Fill(tcoinmeR2);
+	htcoinmeR2->Fill(tcoinmeR2-TimmingOffset);
       }
       Double_t DiamondR2 = (Dcut->IsInside(Q2MER2, WMER2));  
       Double_t MMpiR2 = mmmeR2>= 0.932-MMpiOffsetmeR2 && mmmeR2 <=0.98-MMpiOffsetmeR2;
-      Double_t CoinPionR2 = tcoinmeR2>=-1.0 && tcoinmeR2 <=1.0;      
-      Double_t CoinPionR2R = ((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2<=13.0));      
+      Double_t CoinPionR2 = tcoinmeR2-TimmingOffset>=-1.0 && tcoinmeR2-TimmingOffset <=1.0;      
+      Double_t CoinPionR2R = ((tcoinmeR2-TimmingOffset>=-15.0 && tcoinmeR2-TimmingOffset <= -9.0) || (tcoinmeR2-TimmingOffset>=7.0 && tcoinmeR2-TimmingOffset<=13.0));      
 
       if(CoinPionR2 && MMpiR2 && DiamondR2)
 	{
@@ -4242,7 +4264,7 @@ void Q1Analysis()
 	  ht8meR2R->Fill(-tmeR2); 
 	}
 
-      if (((tcoinmeR2>=-15.0 && tcoinmeR2 <= -9.0) || (tcoinmeR2>=7.0 && tcoinmeR2 <=13.0)))
+      if (((tcoinmeR2-TimmingOffset>=-15.0 && tcoinmeR2-TimmingOffset <= -9.0) || (tcoinmeR2-TimmingOffset>=7.0 && tcoinmeR2-TimmingOffset <=13.0)))
 	
 	{
 	  hmmmeR2R->Fill(mmmeR2);
@@ -4254,8 +4276,8 @@ void Q1Analysis()
       TBRANCHMIDEDR2->GetEntry(i);
       Double_t DimonddR2 = (Dcut->IsInside(Q2MEDR2, WMEDR2));  
       Double_t MMpidR2 = mmmedR2>= 0.932-MMpiOffsetmeR2 && mmmedR2 <=0.98-MMpiOffsetmeR2;
-      Double_t CoinPiondR2 = tcoinmedR2>=-1.0 && tcoinmedR2 <= 1.0;      
-      Double_t CoinPiondR2R = ((tcoinmedR2>=-15.0 && tcoinmedR2 <= -9.0) || (tcoinmedR2>=7.0 && tcoinmedR2<=13.0));      
+      Double_t CoinPiondR2 = tcoinmedR2-TimmingOffset>=-1.0 && tcoinmedR2-TimmingOffset <= 1.0;      
+      Double_t CoinPiondR2R = ((tcoinmedR2-TimmingOffset>=-15.0 && tcoinmedR2-TimmingOffset <= -9.0) || (tcoinmedR2-TimmingOffset>=7.0 && tcoinmedR2-TimmingOffset<=13.0));      
       
       if(CoinPiondR2 && MMpidR2 && DimonddR2)
 	{
@@ -4307,23 +4329,23 @@ void Q1Analysis()
     {
       TBRANCHMIDEC->GetEntry(i);
       
-      if(tcoinmeC>=-1.0 && tcoinmeC <= 1.0 && mmmeC>= 0.92 && mmmeC <=0.98)
+      if(tcoinmeC-TimmingOffset>=-1.0 && tcoinmeC-TimmingOffset <= 1.0 && mmmeC>= 0.92 && mmmeC <=0.98)
 	{
 	  hQ2WMEC->Fill(Q2MEC, WMEC);
 	}
  
-      if(tcoinmeC>=-1.0 && tcoinmeC <= 1.0)    
+      if(tcoinmeC-TimmingOffset>=-1.0 && tcoinmeC-TimmingOffset <= 1.0)    
  	{
 	  hmmmeC->Fill(mmmeC);	  
 	}	      
       
       {
-	htcoinmeC->Fill(tcoinmeC);
+	htcoinmeC->Fill(tcoinmeC-TimmingOffset);
       }
       Double_t DiamondC = (Dcut->IsInside(Q2MEC, WMEC));  
       Double_t MMpiC = mmmeC>= 0.932-MMpiOffsetmeC && mmmeC <=0.98-MMpiOffsetmeC;
-      Double_t CoinPionC = tcoinmeC>=-1.0 && tcoinmeC <=1.0;      
-      Double_t CoinPionCR = ((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC<=13.0));      
+      Double_t CoinPionC = tcoinmeC-TimmingOffset>=-1.0 && tcoinmeC-TimmingOffset <=1.0;      
+      Double_t CoinPionCR = ((tcoinmeC-TimmingOffset>=-15.0 && tcoinmeC-TimmingOffset <= -9.0) || (tcoinmeC-TimmingOffset>=7.0 && tcoinmeC-TimmingOffset<=13.0));      
       
       if(CoinPionC && MMpiC && DiamondC)
 	{
@@ -4481,7 +4503,7 @@ void Q1Analysis()
 	  ht8meCR->Fill(-tmeC); 
 	}
       
-      if(((tcoinmeC>=-15.0 && tcoinmeC <= -9.0) || (tcoinmeC>=7.0 && tcoinmeC <=13.0)))
+      if(((tcoinmeC-TimmingOffset>=-15.0 && tcoinmeC-TimmingOffset <= -9.0) || (tcoinmeC-TimmingOffset>=7.0 && tcoinmeC-TimmingOffset <=13.0)))
 	
 	{
 	  hmmmeCR->Fill(mmmeC);
@@ -4494,8 +4516,8 @@ void Q1Analysis()
       TBRANCHMIDEDC->GetEntry(i);
       Double_t DimonddC = (Dcut->IsInside(Q2MEDC, WMEDC));  
       Double_t MMpidC = mmmedC>= 0.932-MMpiOffsetmeC && mmmedC <=0.98-MMpiOffsetmeC;
-      Double_t CoinPiondC = tcoinmedC>=-1.0 && tcoinmedC <= 1.0;      
-      Double_t CoinPiondCR = ((tcoinmedC>=-15.0 && tcoinmedC<= -9.0) || (tcoinmedC>=7.0 && tcoinmedC<=13.0));      
+      Double_t CoinPiondC = tcoinmedC-TimmingOffset>=-1.0 && tcoinmedC-TimmingOffset <= 1.0;      
+      Double_t CoinPiondCR = ((tcoinmedC-TimmingOffset>=-15.0 && tcoinmedC-TimmingOffset<= -9.0) || (tcoinmedC-TimmingOffset>=7.0 && tcoinmedC-TimmingOffset<=13.0));      
       
       if(CoinPiondC && MMpidC && DimonddC)
 	{
@@ -4546,18 +4568,18 @@ void Q1Analysis()
     {
       TBRANCHMIDEL1->GetEntry(i);
             
-      if(tcoinmeL1>=-1.0 && tcoinmeL1 <= 1.0)    
+      if(tcoinmeL1-TimmingOffset>=-1.0 && tcoinmeL1-TimmingOffset <= 1.0)    
 	{
 	  hmmmeL1->Fill(mmmeL1);
 	}           
       
       {
-	htcoinmeL1->Fill(tcoinmeL1);
+	htcoinmeL1->Fill(tcoinmeL1-TimmingOffset);
       }
       Double_t DiamondL1 = (Dcut->IsInside(Q2MEL1, WMEL1));  
       Double_t MMpiL1 = mmmeL1>= 0.932-MMpiOffsetmeL1 && mmmeL1 <=0.98-MMpiOffsetmeL1;
-      Double_t CoinPionL1 = tcoinmeL1>=-1.0 && tcoinmeL1<=1.0;      
-      Double_t CoinPionL1R = ((tcoinmeL1>=-15.0 && tcoinmeL1<= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1<=13.0));      
+      Double_t CoinPionL1 = tcoinmeL1-TimmingOffset>=-1.0 && tcoinmeL1-TimmingOffset<=1.0;      
+      Double_t CoinPionL1R = ((tcoinmeL1-TimmingOffset>=-15.0 && tcoinmeL1-TimmingOffset<= -9.0) || (tcoinmeL1-TimmingOffset>=7.0 && tcoinmeL1-TimmingOffset<=13.0));      
 
       if(CoinPionL1 && MMpiL1 && DiamondL1)
 	{
@@ -4712,7 +4734,7 @@ void Q1Analysis()
 	  ht8meL1R->Fill(-tmeL1); 
 	}
       
-      if(((tcoinmeL1>=-15.0 && tcoinmeL1 <= -9.0) || (tcoinmeL1>=7.0 && tcoinmeL1 <=13.0)))
+      if(((tcoinmeL1-TimmingOffset>=-15.0 && tcoinmeL1-TimmingOffset <= -9.0) || (tcoinmeL1-TimmingOffset>=7.0 && tcoinmeL1-TimmingOffset <=13.0)))
 	
 	{	 
 	  hmmmeL1R->Fill(mmmeL1);
@@ -4724,8 +4746,8 @@ void Q1Analysis()
       TBRANCHMIDEDL1->GetEntry(i);
       Double_t DimonddL1 = (Dcut->IsInside(Q2MEDL1, WMEDL1));  
       Double_t MMpidL1 = mmmedL1>= 0.932-MMpiOffsetmeL1 && mmmedL1 <=0.98-MMpiOffsetmeL1;
-      Double_t CoinPiondL1 = tcoinmedL1>=-1.0 && tcoinmedL1 <= 1.0;      
-      Double_t CoinPiondL1R = ((tcoinmedL1>=-15.0 && tcoinmedL1<= -9.0) || (tcoinmedL1>=7.0 && tcoinmedL1<=13.0));      
+      Double_t CoinPiondL1 = tcoinmedL1-TimmingOffset>=-1.0 && tcoinmedL1-TimmingOffset <= 1.0;      
+      Double_t CoinPiondL1R = ((tcoinmedL1-TimmingOffset>=-15.0 && tcoinmedL1-TimmingOffset<= -9.0) || (tcoinmedL1-TimmingOffset>=7.0 && tcoinmedL1-TimmingOffset<=13.0));      
       
       if(CoinPiondL1 && MMpidL1 && DimonddL1)
 	{
@@ -4775,20 +4797,20 @@ void Q1Analysis()
     {
       TBRANCHMIDEL2->GetEntry(i);
             
-      if(tcoinmeL2>=-1.0 && tcoinmeL2 <= 1.0)
+      if(tcoinmeL2-TimmingOffset>=-1.0 && tcoinmeL2-TimmingOffset <= 1.0)
 	
 	{
 	  hmmmeL2->Fill(mmmeL2);
 	}   
       
       {
-	htcoinmeL2->Fill(tcoinmeL2);
+	htcoinmeL2->Fill(tcoinmeL2-TimmingOffset);
       }
       
       Double_t DiamondL2 = (Dcut->IsInside(Q2MEL2, WMEL2));  
       Double_t MMpiL2 = mmmeL2>= 0.932-MMpiOffsetmeL2 && mmmeL2 <=0.98-MMpiOffsetmeL2;
-      Double_t CoinPionL2 = tcoinmeL2>=-1.0 && tcoinmeL2<=1.0;      
-      Double_t CoinPionL2R = ((tcoinmeL2>=-15.0 && tcoinmeL2<= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2<=13.0));      
+      Double_t CoinPionL2 = tcoinmeL2-TimmingOffset>=-1.0 && tcoinmeL2-TimmingOffset<=1.0;      
+      Double_t CoinPionL2R = ((tcoinmeL2-TimmingOffset>=-15.0 && tcoinmeL2-TimmingOffset<= -9.0) || (tcoinmeL2-TimmingOffset>=7.0 && tcoinmeL2-TimmingOffset<=13.0));      
       
 
       if(CoinPionL2 && MMpiL2 && DiamondL2)
@@ -4946,7 +4968,7 @@ void Q1Analysis()
 	  ht8meL2R->Fill(-tmeL2); 
 	}
 
-      if(((tcoinmeL2>=-15.0 && tcoinmeL2 <= -9.0) || (tcoinmeL2>=7.0 && tcoinmeL2 <=13.0)))
+      if(((tcoinmeL2-TimmingOffset>=-15.0 && tcoinmeL2-TimmingOffset <= -9.0) || (tcoinmeL2-TimmingOffset>=7.0 && tcoinmeL2-TimmingOffset <=13.0)))
 	{
 	  hmmmeL2R->Fill(mmmeL2);
 	}
@@ -4957,8 +4979,8 @@ void Q1Analysis()
       TBRANCHMIDEDL2->GetEntry(i);
       Double_t DimonddL2 = (Dcut->IsInside(Q2MEDL2, WMEDL2));  
       Double_t MMpidL2 = mmmedL2>= 0.932-MMpiOffsetmeL2 && mmmedL2 <=0.98-MMpiOffsetmeL2;
-      Double_t CoinPiondL2 = tcoinmedL2>=-1.0 && tcoinmedL2<= 1.0;      
-      Double_t CoinPiondL2R = ((tcoinmedL2>=-15.0 && tcoinmedL2<= -9.0) || (tcoinmedL2>=7.0 && tcoinmedL2<=13.0));      
+      Double_t CoinPiondL2 = tcoinmedL2-TimmingOffset>=-1.0 && tcoinmedL2-TimmingOffset<= 1.0;      
+      Double_t CoinPiondL2R = ((tcoinmedL2-TimmingOffset>=-15.0 && tcoinmedL2-TimmingOffset<= -9.0) || (tcoinmedL2-TimmingOffset>=7.0 && tcoinmedL2-TimmingOffset<=13.0));      
       
       if(CoinPiondL2 && MMpidL2 && DimonddL2)
 	{
@@ -5228,24 +5250,39 @@ void Q1Analysis()
 
   //Effective Charge 
   //  Double_t ECMER1   = 1.0/213.133;
-  Double_t ECMER1   = 1.0/120.641;
-  Double_t ECMEDR1  = 1.0/42.178;
+  /*  Double_t ECMER1   = 1.0/120.641;
+      Double_t ECMEDR1  = 1.0/42.178;
+  */
+  Double_t ECMER1   = 1.0/204.9818;
+  Double_t ECMEDR1  = 1.0/40.8733;
 
   //  Double_t ECMER2   = 1.0/322.210;
-  Double_t ECMER2   = 1.0/190.743;
-  Double_t ECMEDR2  = 1.0/55.429;
+  // Double_t ECMER2   = 1.0/190.743;
+  //    Double_t ECMEDR2  = 1.0/55.429;
+  
+  Double_t ECMER2   = 1.0/312.09665;
+  Double_t ECMEDR2  = 1.0/51.3116;
 
   //  Double_t ECMEC    = 1.0/259.427;
-  Double_t ECMEC    = 1.0/147.723;
-  Double_t ECMEDC   = 1.0/35.726;
+  /*  Double_t ECMEC    = 1.0/147.723;
+      Double_t ECMEDC   = 1.0/35.726;
+  */
+  Double_t ECMEC    = 1.0/249.1794;
+  Double_t ECMEDC   = 1.0/34.8308;
 
   //  Double_t ECMEL1   = 1.0/341.394;
-  Double_t ECMEL1   = 1.0/235.014;
-  Double_t ECMEDL1  = 1.0/26.851;
+  /*  Double_t ECMEL1   = 1.0/235.014;
+      Double_t ECMEDL1  = 1.0/26.851;
+  */
+  Double_t ECMEL1   = 1.0/331.0347;
+  Double_t ECMEDL1  = 1.0/26.2649;
   
   //  Double_t ECMEL2   = 1.0/417.516;
-  Double_t ECMEL2   = 1.0/349.579;
+  /*  Double_t ECMEL2   = 1.0/349.579;
   Double_t ECMEDL2  = 1.0/55.624;
+  */
+  Double_t ECMEL2   = 1.0/405.2875;
+  Double_t ECMEDL2  = 1.0/54.3235;
   //SIMC SCAL
   Double_t SCFMER1 = 1.0;  //0.90;
   Double_t SCFMER2 = 1.0; //0.90;
@@ -7639,11 +7676,16 @@ void Q1Analysis()
   TH1D *H_hsxptar_DheL2R  = new TH1D("H_hsxptar_DheL2R","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DheL2R  = new TH1D("H_hsyptar_DheL2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
   
-
+  /*
   Double_t MMpiOffsetheR1 = -0.000966;
   Double_t MMpiOffsetheC  = -0.000321;
   Double_t MMpiOffsetheL1 = -0.000304;
   Double_t MMpiOffsetheL2 = -0.000371;
+  */
+  Double_t MMpiOffsetheR1 = 0.0;
+  Double_t MMpiOffsetheC  = 0.0;
+  Double_t MMpiOffsetheL1 = 0.0;
+  Double_t MMpiOffsetheL2 = 0.0;
 
   //Data R1
 
@@ -7652,19 +7694,19 @@ void Q1Analysis()
     {
       TBRANCHHIGHER1->GetEntry(i);
       
-      if(tcoinheR1>=-1.0 && tcoinheR1 <= 1.0)    
+      if(tcoinheR1-TimmingOffset>=-1.0 && tcoinheR1-TimmingOffset <= 1.0)    
 	{
 	  hmmheR1->Fill(mmheR1);	  
 	}	      
       
       {
-	htcoinheR1->Fill(tcoinheR1);
+	htcoinheR1->Fill(tcoinheR1-TimmingOffset);
       }
 
       Double_t DiamondR1 = (Dcut->IsInside(Q2HER1, WHER1));  
       Double_t MMpiR1 = mmheR1>= 0.932-MMpiOffsetheR1 && mmheR1 <=0.98-MMpiOffsetheR1;
-      Double_t CoinPionR1 = tcoinheR1>=-1.0 && tcoinheR1 <= 1.0;      
-      Double_t CoinPionR1R = ((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0));      
+      Double_t CoinPionR1 = tcoinheR1-TimmingOffset>=-1.0 && tcoinheR1-TimmingOffset <= 1.0;      
+      Double_t CoinPionR1R = ((tcoinheR1-TimmingOffset>=-15.0 && tcoinheR1-TimmingOffset <= -9.0) || (tcoinheR1-TimmingOffset>=7.0 && tcoinheR1-TimmingOffset <=13.0));      
       
       if(CoinPionR1 && MMpiR1 && DiamondR1)
 	{
@@ -7819,7 +7861,7 @@ void Q1Analysis()
 	  ht8heR1R->Fill(-theR1); 
 	}
 
-      if (((tcoinheR1>=-15.0 && tcoinheR1 <= -9.0) || (tcoinheR1>=7.0 && tcoinheR1 <=13.0)))
+      if (((tcoinheR1-TimmingOffset>=-15.0 && tcoinheR1-TimmingOffset <= -9.0) || (tcoinheR1-TimmingOffset>=7.0 && tcoinheR1-TimmingOffset <=13.0)))
 	
 	{
 	  hmmheR1R->Fill(mmheR1);
@@ -7832,8 +7874,8 @@ void Q1Analysis()
 
       Double_t DiamonddR1 = (Dcut->IsInside(Q2HEDR1, WHEDR1));  
       Double_t MMpidR1 = mmhedR1>= 0.932-MMpiOffsetheR1 && mmhedR1 <=0.98-MMpiOffsetheR1;
-      Double_t CoinPiondR1 = tcoinhedR1>=-1.0 && tcoinhedR1 <= 1.0;      
-      Double_t CoinPiondR1R = ((tcoinhedR1>=-15.0 && tcoinhedR1 <= -9.0) || (tcoinhedR1>=7.0 && tcoinhedR1 <=13.0));      
+      Double_t CoinPiondR1 = tcoinhedR1-TimmingOffset>=-1.0 && tcoinhedR1-TimmingOffset <= 1.0;      
+      Double_t CoinPiondR1R = ((tcoinhedR1-TimmingOffset>=-15.0 && tcoinhedR1-TimmingOffset <= -9.0) || (tcoinhedR1-TimmingOffset>=7.0 && tcoinhedR1-TimmingOffset <=13.0));      
 
       if(CoinPiondR1 && MMpidR1 && DiamonddR1)
 	{
@@ -7886,24 +7928,24 @@ void Q1Analysis()
     {
       TBRANCHHIGHEC->GetEntry(i);
       
-      if(tcoinheC>=-1.0 && tcoinheC <= 1.0 && mmheC>= 0.92 && mmheC <=0.98)
+      if(tcoinheC-TimmingOffset>=-1.0 && tcoinheC-TimmingOffset <= 1.0 && mmheC>= 0.92 && mmheC <=0.98)
 	{
 	  hQ2WHEC->Fill(Q2HEC, WHEC);
 	}
  
-      if(tcoinheC>=-1.0 && tcoinheC <= 1.0)    
+      if(tcoinheC-TimmingOffset>=-1.0 && tcoinheC-TimmingOffset <= 1.0)    
  	{
 	  hmmheC->Fill(mmheC);	  
 	}	      
       
       {
-	htcoinheC->Fill(tcoinheC);
+	htcoinheC->Fill(tcoinheC-TimmingOffset);
       }
       
       Double_t DiamondC = (Dcut->IsInside(Q2HEC, WHEC));  
       Double_t MMpiC = mmheC>= 0.932-MMpiOffsetheC && mmheC <=0.98-MMpiOffsetheC;
-      Double_t CoinPionC = tcoinheC>=-1.0 && tcoinheC <= 1.0;      
-      Double_t CoinPionCR = ((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0));      
+      Double_t CoinPionC = tcoinheC-TimmingOffset>=-1.0 && tcoinheC-TimmingOffset <= 1.0;      
+      Double_t CoinPionCR = ((tcoinheC-TimmingOffset>=-15.0 && tcoinheC-TimmingOffset <= -9.0) || (tcoinheC-TimmingOffset>=7.0 && tcoinheC-TimmingOffset <=13.0));      
 
       if(CoinPionC && MMpiC && DiamondC)
 	{
@@ -8062,7 +8104,7 @@ void Q1Analysis()
 	  ht8heCR->Fill(-theC); 
 	}
 
-      if(((tcoinheC>=-15.0 && tcoinheC <= -9.0) || (tcoinheC>=7.0 && tcoinheC <=13.0)))
+      if(((tcoinheC-TimmingOffset>=-15.0 && tcoinheC-TimmingOffset <= -9.0) || (tcoinheC-TimmingOffset>=7.0 && tcoinheC-TimmingOffset <=13.0)))
 	
 	{
 	  hmmheCR->Fill(mmheC);
@@ -8075,8 +8117,8 @@ void Q1Analysis()
 
       Double_t DiamonddC = (Dcut->IsInside(Q2HEDC, WHEDC));  
       Double_t MMpidC = mmhedC>= 0.932-MMpiOffsetheC && mmhedC <=0.98-MMpiOffsetheC;
-      Double_t CoinPiondC = tcoinhedC>=-1.0 && tcoinhedC <= 1.0;      
-      Double_t CoinPiondCR = ((tcoinhedC>=-15.0 && tcoinhedC <= -9.0) || (tcoinhedC>=7.0 && tcoinhedC<=13.0));      
+      Double_t CoinPiondC = tcoinhedC-TimmingOffset>=-1.0 && tcoinhedC-TimmingOffset <= 1.0;      
+      Double_t CoinPiondCR = ((tcoinhedC-TimmingOffset>=-15.0 && tcoinhedC-TimmingOffset <= -9.0) || (tcoinhedC-TimmingOffset>=7.0 && tcoinhedC-TimmingOffset<=13.0));      
 
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
@@ -8131,19 +8173,19 @@ void Q1Analysis()
       TBRANCHHIGHEL1->GetEntry(i);
       
       
-      if(tcoinheL1>=-1.0 && tcoinheL1 <= 1.0)    
+      if(tcoinheL1-TimmingOffset>=-1.0 && tcoinheL1-TimmingOffset <= 1.0)    
 	{
 	  hmmheL1->Fill(mmheL1);
 	}           
       
       {
-	htcoinheL1->Fill(tcoinheL1);
+	htcoinheL1->Fill(tcoinheL1-TimmingOffset);
       }
 
       Double_t DiamondL1 = (Dcut->IsInside(Q2HEL1, WHEL1));  
       Double_t MMpiL1 = mmheL1>= 0.932-MMpiOffsetheL1 && mmheL1 <=0.98-MMpiOffsetheL1;
-      Double_t CoinPionL1 = tcoinheL1>=-1.0 && tcoinheL1 <= 1.0;      
-      Double_t CoinPionL1R = ((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0));      
+      Double_t CoinPionL1 = tcoinheL1-TimmingOffset>=-1.0 && tcoinheL1-TimmingOffset <= 1.0;      
+      Double_t CoinPionL1R = ((tcoinheL1-TimmingOffset>=-15.0 && tcoinheL1-TimmingOffset <= -9.0) || (tcoinheL1-TimmingOffset>=7.0 && tcoinheL1-TimmingOffset <=13.0));      
 
       if(CoinPionL1 && MMpiL1 && DiamondL1)
 	{
@@ -8303,7 +8345,7 @@ void Q1Analysis()
 	  ht8heL1R->Fill(-theL1); 
 	}
   
-      if(((tcoinheL1>=-15.0 && tcoinheL1 <= -9.0) || (tcoinheL1>=7.0 && tcoinheL1 <=13.0)))
+      if(((tcoinheL1-TimmingOffset>=-15.0 && tcoinheL1-TimmingOffset <= -9.0) || (tcoinheL1-TimmingOffset>=7.0 && tcoinheL1-TimmingOffset <=13.0)))
 	
 	{	 
 	  hmmheL1R->Fill(mmheL1);
@@ -8316,8 +8358,8 @@ void Q1Analysis()
 
       Double_t DiamonddL1 = (Dcut->IsInside(Q2HEDL1, WHEDL1));  
       Double_t MMpidL1 = mmhedL1>= 0.932-MMpiOffsetheL1 && mmhedL1 <=0.98-MMpiOffsetheL1;
-      Double_t CoinPiondL1 = tcoinhedL1>=-1.0 && tcoinhedL1 <= 1.0;      
-      Double_t CoinPiondL1R = ((tcoinhedL1>=-15.0 && tcoinhedL1 <= -9.0) || (tcoinhedL1>=7.0 && tcoinhedL1<=13.0));      
+      Double_t CoinPiondL1 = tcoinhedL1-TimmingOffset>=-1.0 && tcoinhedL1-TimmingOffset <= 1.0;      
+      Double_t CoinPiondL1R = ((tcoinhedL1-TimmingOffset>=-15.0 && tcoinhedL1-TimmingOffset <= -9.0) || (tcoinhedL1-TimmingOffset>=7.0 && tcoinhedL1-TimmingOffset<=13.0));      
 
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
@@ -8368,20 +8410,20 @@ void Q1Analysis()
     {
       TBRANCHHIGHEL2->GetEntry(i);
             
-      if(tcoinheL2>=-1.0 && tcoinheL2 <= 1.0)
+      if(tcoinheL2-TimmingOffset>=-1.0 && tcoinheL2-TimmingOffset <= 1.0)
 	
 	{
 	  hmmheL2->Fill(mmheL2);
 	}   
       
       {
-	htcoinheL2->Fill(tcoinheL2);
+	htcoinheL2->Fill(tcoinheL2-TimmingOffset);
       }
 
       Double_t DiamondL2 = (Dcut->IsInside(Q2HEL2, WHEL2));  
       Double_t MMpiL2 = mmheL2>= 0.932-MMpiOffsetheL2 && mmheL2 <=0.98-MMpiOffsetheL2;
-      Double_t CoinPionL2 = tcoinheL2>=-1.0 && tcoinheL2 <= 1.0;      
-      Double_t CoinPionL2R = ((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0));      
+      Double_t CoinPionL2 = tcoinheL2-TimmingOffset>=-1.0 && tcoinheL2-TimmingOffset <= 1.0;      
+      Double_t CoinPionL2R = ((tcoinheL2-TimmingOffset>=-15.0 && tcoinheL2-TimmingOffset <= -9.0) || (tcoinheL2-TimmingOffset>=7.0 && tcoinheL2-TimmingOffset <=13.0));      
 
       if(CoinPionL2 && MMpiL2 && DiamondL2)
   
@@ -8537,7 +8579,7 @@ void Q1Analysis()
 	  ht8heL2R->Fill(-theL2); 
 	}
 
-      if(((tcoinheL2>=-15.0 && tcoinheL2 <= -9.0) || (tcoinheL2>=7.0 && tcoinheL2 <=13.0)))
+      if(((tcoinheL2-TimmingOffset>=-15.0 && tcoinheL2-TimmingOffset <= -9.0) || (tcoinheL2-TimmingOffset>=7.0 && tcoinheL2-TimmingOffset <=13.0)))
 	{
 	  hmmheL2R->Fill(mmheL2);
 	}
@@ -8549,8 +8591,8 @@ void Q1Analysis()
 
       Double_t DiamonddL2 = (Dcut->IsInside(Q2HEDL2, WHEDL2));  
       Double_t MMpidL2 = mmhedL2>= 0.932-MMpiOffsetheL2 && mmhedL2 <=0.98-MMpiOffsetheL2;
-      Double_t CoinPiondL2 = tcoinhedL2>=-1.0 && tcoinhedL2 <= 1.0;      
-      Double_t CoinPiondL2R = ((tcoinhedL2>=-15.0 && tcoinhedL2 <= -9.0) || (tcoinhedL2>=7.0 && tcoinhedL2<=13.0));      
+      Double_t CoinPiondL2 = tcoinhedL2-TimmingOffset>=-1.0 && tcoinhedL2-TimmingOffset <= 1.0;      
+      Double_t CoinPiondL2R = ((tcoinhedL2-TimmingOffset>=-15.0 && tcoinhedL2-TimmingOffset <= -9.0) || (tcoinhedL2-TimmingOffset>=7.0 && tcoinhedL2-TimmingOffset<=13.0));      
 
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
@@ -8779,20 +8821,20 @@ void Q1Analysis()
 
   //Effective charge
   //  Double_t ECHER1   = 1.0/132.298;
-  Double_t ECHER1   = 1.0/75.239;
-  Double_t ECHEDR1  = 1.0/51.186;
+  Double_t ECHER1   = 1.0/119.47231;
+  Double_t ECHEDR1  = 1.0/44.1619;
 
   //  Double_t ECHEC    = 1.0/380.289;
-  Double_t ECHEC    = 1.0/279.583;
-  Double_t ECHEDC   = 1.0/65.383;
+  Double_t ECHEC    = 1.0/286.61148000000003;
+  Double_t ECHEDC   = 1.0/62.482;
 
   //  Double_t ECHEL1   = 1.0/183.317;
-  Double_t ECHEL1   = 1.0/159.142;
-  Double_t ECHEDL1  = 1.0/27.220;
+  Double_t ECHEL1   = 1.0/162.69519;
+  Double_t ECHEDL1  = 1.0/25.9835;
 
   //  Double_t ECHEL2   = 1.0/195.603;
-  Double_t ECHEL2   = 1.0/179.291;
-  Double_t ECHEDL2  = 1.0/73.453;
+  Double_t ECHEL2   = 1.0/165.6892;
+  Double_t ECHEDL2  = 1.0/70.1662;
   //SIMC SCAL
   Double_t SCFHER1 = 1.0; // 0.85;
   Double_t SCFHEC =  1.0; //0.55;
