@@ -742,9 +742,9 @@ void Q1Analysis()
   Double_t MMpiOffsetL1 = 0.003584;
   Double_t MMpiOffsetC  = 0.003396;
   */
-  Double_t MMpiOffsetL2 = 0.0;
-  Double_t MMpiOffsetL1 = 0.0;
-  Double_t MMpiOffsetC  = 0.0;
+  Double_t MMpiOffsetL2 = 0.007723;
+  Double_t MMpiOffsetL1 = 0.007723;
+  Double_t MMpiOffsetC  = 0.006723;
 
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
@@ -3844,11 +3844,11 @@ void Q1Analysis()
   Double_t MMpiOffsetmeL1 = -0.00164;
   Double_t MMpiOffsetmeL2 = -0.003525;
   */
-  Double_t MMpiOffsetmeR1 = 0.0;
-  Double_t MMpiOffsetmeR2 = 0.0;
-  Double_t MMpiOffsetmeC  = 0.0;
-  Double_t MMpiOffsetmeL1 = 0.0;
-  Double_t MMpiOffsetmeL2 = 0.0;
+  Double_t MMpiOffsetmeR1 = 0.002;
+  Double_t MMpiOffsetmeR2 = 0.002;
+  Double_t MMpiOffsetmeC  = 0.003;
+  Double_t MMpiOffsetmeL1 = 0.003;
+  Double_t MMpiOffsetmeL2 = 0.003;
 
   //Data R1
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER1; i++)
@@ -7682,10 +7682,10 @@ void Q1Analysis()
   Double_t MMpiOffsetheL1 = -0.000304;
   Double_t MMpiOffsetheL2 = -0.000371;
   */
-  Double_t MMpiOffsetheR1 = 0.0;
-  Double_t MMpiOffsetheC  = 0.0;
-  Double_t MMpiOffsetheL1 = 0.0;
-  Double_t MMpiOffsetheL2 = 0.0;
+  Double_t MMpiOffsetheR1 = 0.001;
+  Double_t MMpiOffsetheC  = 0.002;
+  Double_t MMpiOffsetheL1 = 0.003;
+  Double_t MMpiOffsetheL2 = 0.004;
 
   //Data R1
 
