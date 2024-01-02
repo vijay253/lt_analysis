@@ -72,9 +72,11 @@ Double_t lo_bound = -0.4;
 
 void x_fit_in_t() {
 
+	single_setting("375");
+	/*
 	single_setting("160");
  	single_setting("245");
-
+	*/
 }
 
 
@@ -123,7 +125,7 @@ void single_setting(TString q2_set){
 	//para_file_in.open("../parameters/itt_108_start_parameter/par.pl_" + q2_set, ifstream::in);
 	//para_file_in.open("../parameters/itt_110_start_parameter/par.pl_" + q2_set, ifstream::in);
 	//para_file_in.open("../parameters/itt_110/par.pl_" + q2_set, ifstream::in);
-	para_file_in.open("../parameters/itt_111/par.pl_" + q2_set, ifstream::in);
+	para_file_in.open("../parameters/itt_0/par.pl_" + q2_set, ifstream::in);
 
 
 
@@ -231,7 +233,7 @@ void single_setting(TString q2_set){
 	TF1* f_sigT_pre;
 	TF1* f_sigT;
 
-	if (q2_set == "160") {
+	if (q2_set == "375") {
 
 		f_sigT_pre = new TF1("sig_T_pre", fun_Sig_T_160, 0, 0.5, 3);
 		f_sigT_pre->SetParameters(t0, t1, t2);
