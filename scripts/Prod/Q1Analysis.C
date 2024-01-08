@@ -2456,7 +2456,14 @@ void Q1Analysis()
 	}
       for(Long64_t i = 2; i <= 17; i++) 
 	{
+	  Double_t ECLECError = 0.0;        //fractional error in effective charge
 	  Double_t err;
+	  Double_t TotNoEvent = hYC->IntegralAndError(j, j, i, i, err, "");
+	  Double_t Yield = TotNoEvent*ECLEC;
+	  /*	 
+		 Double_t YieldError = Yield*sqrt(pow((err/TotNoEvent),2)+ pow((ECLECError),2));    //Error progration in Yield, error in Effective charge is zero for now
+		 YleC<<Yield<<"\t"<<YieldError<<"\t"<<j-1<<"\t"<<i-1 <<endl;
+	  */
 	  YleC<<hYC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;	  
 	}
     } 
