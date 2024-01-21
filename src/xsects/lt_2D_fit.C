@@ -787,12 +787,12 @@ void single_setting(TString q2_set){
 		//		   		fff2->SetParLimits(2, -1, 1);
 		//		  		fff2->SetParLimits(3, -1, 1);
 		
-		/**
+		/*
    		fff2->FixParameter(0, fff2->GetParameter(0));
    		fff2->FixParameter(1, fff2->GetParameter(1));
    		fff2->FixParameter(2, fff2->GetParameter(2));
    		fff2->FixParameter(3, fff2->GetParameter(3));
-		**/
+		*/
  
  
  //  		fff2->SetParLimits(0, 0, 0.3);
@@ -805,10 +805,10 @@ void single_setting(TString q2_set){
  //  		fff2->SetParLimits(2, fff2->GetParameter(2) - fff2->GetParError(2), fff2->GetParameter(2) + fff2->GetParError(2));
  //   		fff2->SetParLimits(3, fff2->GetParameter(3) - fff2->GetParError(3), fff2->GetParameter(3) + fff2->GetParError(3));
  
- //  		fff2->SetParameter(0, fff2->GetParameter(0));
- //  		fff2->SetParameter(1, fff2->GetParameter(1));
- //  		fff2->SetParameter(2, fff2->GetParameter(2));
- //  		fff2->SetParameter(3, fff2->GetParameter(3));
+   		fff2->SetParameter(0, fff2->GetParameter(0));
+   		fff2->SetParameter(1, fff2->GetParameter(1));
+   		fff2->SetParameter(2, fff2->GetParameter(2));
+   		fff2->SetParameter(3, fff2->GetParameter(3));
  
  		
    		g_plot_err->Fit("fff2", "MR");
