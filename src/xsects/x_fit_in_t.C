@@ -160,15 +160,15 @@ void single_setting(TString q2_set){
 	tt2 = prv_par_vec[14]; 
 	tt3 = prv_par_vec[15]; 
 	*/
-	l0  = prv_par_vec[0]; 
-	l1  = prv_par_vec[1]; 
-	l2  = prv_par_vec[2]; 
-	l3  = prv_par_vec[3]; 
+	l0  = prv_par_vec[4]; 
+	l1  = prv_par_vec[5]; 
+	l2  = prv_par_vec[6]; 
+	l3  = prv_par_vec[7]; 
 
-	t0  = prv_par_vec[4]; 
-	t1  = prv_par_vec[5]; 
-	t2  = prv_par_vec[6]; 
-	t3  = prv_par_vec[7]; 
+	t0  = prv_par_vec[0]; 
+	t1  = prv_par_vec[1]; 
+	t2  = prv_par_vec[2]; 
+	t3  = prv_par_vec[3]; 
 
 	lt0 = prv_par_vec[8]; 
 	lt1 = prv_par_vec[9]; 
@@ -264,7 +264,7 @@ void single_setting(TString q2_set){
 		f_sigT->SetParameters(t0, t1, t2, t3);
 		f_sigT->SetParLimits(0, 0, 100);
 		f_sigT->SetParLimits(1, -0, -100);
-
+		
 
 		/*		f_sigT->SetParameter(0, t0);
 		f_sigT->SetParameter(1, t1);
@@ -586,8 +586,8 @@ void single_setting(TString q2_set){
 
 	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0, 0.07, 4);
 	f_sigL->SetParameters(l0, l1, l2, l3);
-	f_sigL->SetParLimits(0, 0.0, 50);
-	f_sigL->SetParLimits(2, -20, 20);
+	//	f_sigL->SetParLimits(0,  0.0, 50);
+	//	f_sigL->SetParLimits(2, -16, -100);
 	//	f_sigL->SetParLimits(2, -10, 10);
 
 

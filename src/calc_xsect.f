@@ -333,7 +333,7 @@ c
 c
 
 c /*--------------------------------------------------*/
-
+c cross-section
 c ratio is data/simc - see GH logbook, p.55
 
              x_real=x_mod*r
@@ -639,33 +639,80 @@ c      d = 1.11672e-01
       sigTT = (a/q2**2)*(tp/(tp-0.02)**2)*sin(thetacm)**2
 
 c===========================
-c hh
+c hh Vijay
 c===========================
+c it0
       a =  0.25961E+02
       b = -0.10000E+02  
       c = -0.15838E+02
       d =  0.00000E+00
-      sigL = (a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2))
-      print*,"sigL", sigL
+c it1
+c      a =  0.0076
+c      b = -0.0000  
+c      c = -12.9151
+c      d = 0.00000E+00
+c test
+c      a =  -0.0000
+c      b = -0.0000  
+c      c = -13.5051
+c      d =  -2.3785
 
+      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
+c      sigL = (a+(b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
+      print*,"sigL", sigL
+c it0
       a =  0.46859E+02
       b = -0.30000E+02 
       c = -0.33572E+01
       d =  0.00000E+00
+cit1
+c      a = -0.00012
+c      b = -300.6991 
+c      c = 0.00000E+00
+c      d = 0.00000E+00
+
+c test
+C      a = 0.980829 
+C      b = -22.4751
+C      c = -1.6786
+C      d = -1.7114
 
       sigT = (a+b*log(q2)+(c+d*log(q2))*(tp-(0.0735+0.028*log(q2))*q2)
      *     /(0.0735+0.028*log(q2))*q2)
-      
+c      sigT = (b*log(q2)+(c+d*log(q2))*(a*tp-(0.0735+0.028*log(q2))*q2)
+c     *     /(0.0735+0.028*log(q2))*q2)
+
+c it0      
       a =  0.10000E+00
       b = -0.28000E+02
       c =  0.35000E+01
+c it1
+c      a =  0.0002
+c      b = -32.5790
+c      c =  0.0000
+
+c test
+C      a =  0.0000
+c      b = -26.4120
+c      c =  0.0000
+
+
       print*,"sigT", sigT
    
       sigLT = ((a*exp(b*(tp))+c/(tp))*sin(thetacm))
       print*,"sigLT", sigLT
 
+c it0
       a = -0.67276E+02
-      sigTT = ((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
+c it1
+c      a = 0.00000
+c test
+c      a = -0.0000
+
+
+c      sigTT = ((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
+      sigTT = (a/(q2))*exp(-q2)*sin(thetacm)**2
+      sigTT = sigTT*(tprime_gev/(tp+0.139570**2)**2)
       print*,"sigTT", sigTT
 
 

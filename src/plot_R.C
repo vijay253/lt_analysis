@@ -346,7 +346,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	  TString t_bin_limit;
 	  t_bin_limit.Form( "t_bin == %i && ratio != 0", in);	
 
-	  // n1->Draw("ratio:phi_bin", t_bin_limit, "*");
+	  //	  n1->Draw("ratio:phi_bin", t_bin_limit, "*");
 	  n1->Draw("ratio:phi_bin:r_err", t_bin_limit, "off");
 
 	  TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
@@ -371,7 +371,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	  Double_t weighted_ave_top = 0;
 	  Double_t weighted_ave_bot = 0;
 
-
+	  
 		
 	  for( Int_t ii = 0; ii < g->GetN(); ii++) {
 
@@ -381,7 +381,7 @@ void Single_Setting(Int_t q2_set, Int_t eps_set) {
 	      g->RemovePoint(ii);
 	    }
 	  }
-		
+	  	
 
 
 	  for( Int_t ii = 0; ii < g->GetN(); ii++) {
