@@ -44,8 +44,13 @@ void Q1Analysis()
   if(Hostname.Contains("farm")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
     // Output path for root file
+    /*
     ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/";
     OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/KaonLT/";
+    */
+    //Changed to cache on Feb 29, 2024
+    ROOTfilePath = "/lustre19/expphy/cache/hallc/kaonlt/vijay/Analysis/Q1";
+    OutPath =  "/lustre19/expphy/cache/hallc/kaonlt/vijay/Analysis/Q1";
   }
   else if(Hostname.Contains("qcd")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
