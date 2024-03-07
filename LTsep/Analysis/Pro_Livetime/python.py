@@ -31,8 +31,10 @@ shmshod2_list  = []
 shmshod3_list  = []
 shmshod4_list  = []
 
+shmsp_list     = []
+
 for file_name in file_names:
-    Run,TLT,errTLT,CPULIVE,CPULIVEERR,Coin_trig_rate,I,SHMS3Y4,SHMSHOD1,SHMSHOD2,SHMSHOD3,SHMSHOD4 = np.loadtxt('/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/OUTPUT/'+file_name+'.dat', unpack=True)  
+    Run,TLT,errTLT,CPULIVE,CPULIVEERR,Coin_trig_rate,I,SHMS3Y4,SHMSHOD1,SHMSHOD2,SHMSHOD3,SHMSHOD4, SHMSP = np.loadtxt('/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/OUTPUT/'+file_name+'.dat', unpack=True)  
     list_x.append(Coin_trig_rate)
 
     if TLT <= 0:    # check if EDTM was off    
@@ -46,17 +48,19 @@ for file_name in file_names:
     list_y2.append(CPULIVE)
     list_y_err2.append(CPULIVEERR)
 
-    tbc_list.append(1-0.0003382*I)
-    tbc_list_err.append(m.sqrt(I**2*(0.0000773)**2+(0.0003382)**2*(0.01*I)**2))   # 1% uncer in I
+    tbc_list.append(1-0.00021170*I)
+    tbc_list_err.append(m.sqrt(I**2*0.00015760)**2)   # 1% uncer in I
 
     shms3y4_list.append(SHMS3Y4)    
     shmshod1_list.append(SHMSHOD1)
     shmshod2_list.append(SHMSHOD2)
     shmshod3_list.append(SHMSHOD3)
     shmshod4_list.append(SHMSHOD4)
+    shmsp_list.append(SHMSP)
 
-fig, ax = plt.subplots(2,2)
-#fig, ax = plt.subplots(2)
+fig, ax = plt.subplots(2,2)   # Individual hodo eff plots
+#fig, ax = plt.subplots(2)      
+#fig, ax = plt.subplots()      # Boiling correction plto       
 #for i in range(len(file_names)):
 
 # Coin rate and Run number vs EDTM live time  plot
@@ -94,20 +98,36 @@ ax[1].set_ylabel('SHMS 3/4 Efficiency')
 '''
 # Run Number vs SHMS Individiual hodo efficiency plot
 
-ax[0,0].errorbar(Run_list, shmshod1_list, fmt='s', markersize=2, color='red',label='SHMSHOD1 Efficiency')
-ax[0,0].set_xlabel('Run Number')
+#ax[0,0].errorbar(Run_list, shmshod1_list, fmt='s', markersize=2, color='red',label='SHMSHOD1 Efficiency')
+#ax[0,0].errorbar(list_x, shmshod1_list, fmt='s', markersize=2, color='red',label='SHMSHOD1 Efficiency')
+ax[0,0].errorbar(shmsp_list, shmshod1_list, fmt='s', markersize=2, color='red',label='SHMSHOD1 Efficiency')
+#ax[0,0].set_xlabel('Run Number')
+#ax[0,0].set_xlabel('Coin Trigger Rate [kHz]')
+ax[0,0].set_xlabel('SHMS P (GeV2)')
 ax[0,0].set_ylabel('SHMS HODO 1 Eff')
 
-ax[0,1].errorbar(Run_list, shmshod2_list, fmt='s', markersize=2, color='red',label='SHMSHOD2 Efficiency')
-ax[0,1].set_xlabel('Run Number')
+#ax[0,1].errorbar(Run_list, shmshod2_list, fmt='s', markersize=2, color='red',label='SHMSHOD2 Efficiency')
+#ax[0,1].errorbar(list_x, shmshod2_list, fmt='s', markersize=2, color='red',label='SHMSHOD2 Efficiency')
+ax[0,1].errorbar(shmsp_list, shmshod2_list, fmt='s', markersize=2, color='red',label='SHMSHOD2 Efficiency')
+#ax[0,1].set_xlabel('Run Number')
+#ax[0,1].set_xlabel('Coin Trigger Rate [kHz]')
+ax[0,1].set_xlabel('SHMS P (GeV2)')
 ax[0,1].set_ylabel('SHMS HODO 2 Eff')
 
-ax[1,0].errorbar(Run_list, shmshod3_list, fmt='s', markersize=2, color='red',label='SHMSHOD3 Efficiency')
-ax[1,0].set_xlabel('Run Number')
+#ax[1,0].errorbar(Run_list, shmshod3_list, fmt='s', markersize=2, color='red',label='SHMSHOD3 Efficiency')
+#ax[1,0].errorbar(list_x, shmshod3_list, fmt='s', markersize=2, color='red',label='SHMSHOD3 Efficiency')
+ax[1,0].errorbar(shmsp_list, shmshod3_list, fmt='s', markersize=2, color='red',label='SHMSHOD3 Efficiency')
+#ax[1,0].set_xlabel('Run Number')
+#ax[1,0].set_xlabel('Coin Trigger Rate [kHz]')
+ax[1,0].set_xlabel('SHMS P (GeV2)')
 ax[1,0].set_ylabel('SHMS HODO 3 Eff')
 
-ax[1,1].errorbar(Run_list, shmshod4_list, fmt='s', markersize=2, color='red',label='SHMSHOD4 Efficiency')
-ax[1,1].set_xlabel('Run Number')
+#ax[1,1].errorbar(Run_list, shmshod4_list, fmt='s', markersize=2, color='red',label='SHMSHOD4 Efficiency')
+#ax[1,1].errorbar(list_x, shmshod4_list, fmt='s', markersize=2, color='red',label='SHMSHOD4 Efficiency')
+ax[1,1].errorbar(shmsp_list, shmshod4_list, fmt='s', markersize=2, color='red',label='SHMSHOD4 Efficiency')
+#ax[1,1].set_xlabel('Run Number')
+#ax[1,1].set_xlabel('Coin Trigger Rate [kHz]')
+ax[1,1].set_xlabel('SHMS P (GeV2)')
 ax[1,1].set_ylabel('SHMS HODO 4 Eff')
 
 #plot Run vs Coin trigger rate
@@ -121,7 +141,7 @@ fig.tight_layout()
 
 
 #ax.set_xticks()
-#ax.set_ylim(0.90, 1.04)   # For target boiling plot
+#ax.set_ylim(0.90, 1.10)   # For target boiling plot
 #ax.set_ylim(0.80, 1.10)
 #ax.set_ylim(0.85, 1.10)   
 #ax.set_xlim(0.0, 60.0)
@@ -133,6 +153,8 @@ fig.tight_layout()
 #plt.savefig('OUTPUT/predtmlive.png')
 #plt.savefig('OUTPUT/tbcf.png')
 #plt.savefig('OUTPUT/SHMS3Y4.png')
-plt.savefig('OUTPUT/SHMSHODO.png')
+#plt.savefig('OUTPUT/SHMSHODO.png')
+#plt.savefig('OUTPUT/SHMSHODO_CRATE.png')
+plt.savefig('OUTPUT/SHMSHODO_P.png')
 #plt.savefig('OUTPUT/prcpulive.png')
 #plt.savefig('OUTPUT/Run_coin_rate.png')

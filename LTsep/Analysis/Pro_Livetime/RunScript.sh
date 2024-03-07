@@ -99,6 +99,12 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	    echo $SHMSHOD4    
 	fi		
 
+	if [[ $line == KLT_SHMS_P_Central* ]] ; then
+	    printline="yes"
+	    SHMSP=$(echo $line | awk '{print $3}')
+	    echo $SHMSP    
+	fi		
+
     done < "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/REPORT_OUTPUT/Production/Kaon_replay_production_${RUNNUMBER}_-1.report" 
     
     if [[ -f "/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/OUTPUT/${RUNNUMBER}.root" ]]; then  # check does file exist
@@ -107,10 +113,10 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
     	echo "An old file exist, now it has been deleted !!!"
     	
     	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/
-    	root -b -q  "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4}, ${SHMSHOD1}, ${SHMSHOD2}, ${SHMSHOD3}, ${SHMSHOD4})"
+    	root -b -q  "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4}, ${SHMSHOD1}, ${SHMSHOD2}, ${SHMSHOD3}, ${SHMSHOD4}, ${SHMSP})"
     else
     	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Pro_Livetime/	
-   	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4}, ${SHMSHOD1}, ${SHMSHOD2}, ${SHMSHOD3}, ${SHMSHOD4})"
+   	root -b -q "Analysed.C(\"${RUNNUMBER}\", ${cointrigg_rate}, ${edtmlive}, ${edtmliveerr}, ${cpulive}, ${cpuliveerr}, ${I}, ${SHMS3Y4}, ${SHMSHOD1}, ${SHMSHOD2}, ${SHMSHOD3}, ${SHMSHOD4}, ${SHMSP})"
     fi
 done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1Q2"
 

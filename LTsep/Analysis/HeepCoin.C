@@ -177,7 +177,7 @@ void HeepCoin(string RunNum = "")
 	  Wryb->Fill(W,H_rb_raster_fr_yb);    
 	}
  
-      if (FixCut && SHMS_Acceptance && HMS_Acceptance)
+      if (FixCut && SHMS_Acceptance && HMS_Acceptance)   //so clean that does not require coin cuts
         {
 	  Cal->Fill(H_cal_etottracknorm);
 	  MM->Fill(MMpi);

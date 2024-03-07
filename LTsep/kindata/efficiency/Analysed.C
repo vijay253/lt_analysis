@@ -42,8 +42,8 @@ void Analysed(string RunNum = "")
   if(Hostname.Contains("farm")){
     Analysispath = "/group/c-kaonlt/USERS/"+User+"/lt_analysis/LTsep/efficiency";
     // Output path for root file
-    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/Analysis/KaonLT/";
-    //    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/";
+    // ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/Analysis/KaonLT/";
+    ROOTfilePath = "/group/c-kaonlt/USERS/vijay/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/";
     OutPath = "/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT";
   }
   else if(Hostname.Contains("qcd")){
@@ -61,8 +61,8 @@ void Analysed(string RunNum = "")
     cin >> RunNum;
   }  
   
-  rootFile = ROOTfilePath+"/"+"Kaon_coin_replay_production_"+RunNum+"_-1.root";
-  //  rootFile = ROOTfilePath+"/"+"coin_replay_Full_"+RunNum+"_-1.root";
+  // rootFile = ROOTfilePath+"/"+"Kaon_coin_replay_production_"+RunNum+"_-1.root";
+  rootFile = ROOTfilePath+"/"+"coin_replay_Full_"+RunNum+"_-1.root";
 
   if (gSystem->AccessPathName(rootFile) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
@@ -128,6 +128,7 @@ void Analysed(string RunNum = "")
   // Kinematic quantitites 
   Double_t  Q2;TBRANCH->SetBranchAddress("H.kin.primary.Q2", &Q2);   
   Double_t  W;TBRANCH->SetBranchAddress("H.kin.primary.W", &W);   
+  Double_t  H_rb_raster_fr_yb;TBRANCH->SetBranchAddress("H.rb.raster.fr_yb", &H_rb_raster_fr_yb);   
   Double_t  epsilon;TBRANCH->SetBranchAddress("H.kin.primary.epsilon", &epsilon);   
   Double_t  ph_q;TBRANCH->SetBranchAddress("P.kin.secondary.ph_bq", &ph_q);   
   Double_t  emiss;TBRANCH->SetBranchAddress("P.kin.secondary.emiss", &emiss);   
@@ -146,7 +147,8 @@ void Analysed(string RunNum = "")
   TH1D *MM    = new TH1D("MM","MMpi; MMpi;", 300, 0.8, 1.2);
   TH1D *Cal     = new TH1D("Cal","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
   TH1D *CalC    = new TH1D("CalC","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
-  TH1D *Cer    = new TH1D("Cer","H_cer_npeSum; H_cer_npeSum;", 300, 0.0, 4.0);
+  TH1D *Cer    = new TH1D("Cer","H_cer_npeSum; H_cer_npeSum;", 300, 0.0, 30.0);
+  TH2D *Wryb    = new TH2D("Wryb","W vs H.rb.raster.fr_yb;W;H.rb.raster.fr_yb", 300, 0.6, 1.4, 300, -0.2, 0.2);
 
   for(Long64_t i = 0; i < nEntries_TBRANCH; i++)
     {
@@ -164,11 +166,12 @@ void Analysed(string RunNum = "")
       SHMS_Acceptance = P_gtr_dp > -10.0 && P_gtr_dp < 20.0 && P_gtr_xptar > -0.06 && P_gtr_xptar <=0.06 && P_gtr_yptar > -0.04 && P_gtr_yptar < 0.04;       
       HMS_Acceptance = H_gtr_dp > -8.0 && H_gtr_dp < 8.0 && H_gtr_xptar > -0.08 && H_gtr_xptar < 0.08 && H_gtr_yptar > -0.045 && H_gtr_yptar < 0.045;       
       //      epicointime =  CTime_ePiCoinTime_ROC1 >= -1.0 && CTime_ePiCoinTime_ROC1 <= 1 && H_cer_npeSum >= 0.6;
-      epicointime = H_cer_npeSum >= 0.65;   //0.6
+      epicointime = H_cer_npeSum >= 10.0;   //0.6
       
       if (FixCut && SHMS_Acceptance && HMS_Acceptance)   
 	{        
-	  Coin->Fill(CTime_ePiCoinTime_ROC1);    
+	  Coin->Fill(CTime_ePiCoinTime_ROC1);
+	  Wryb->Fill(W,H_rb_raster_fr_yb);    
 	}
  
       if (FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
@@ -179,7 +182,8 @@ void Analysed(string RunNum = "")
        }     
      
      //With HMC CAL CUT
-      if (H_cal_etottracknorm > 0.7 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
+      //      if (H_cal_etottracknorm > 0.7 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)   
+      if (H_cal_etottracknorm > 0.2 && FixCut && SHMS_Acceptance && HMS_Acceptance && epicointime)     //this is for low e data  
 	{
 	  CalC->Fill(H_cal_etottracknorm);
 	}     
@@ -194,6 +198,7 @@ void Analysed(string RunNum = "")
   MM->Write();
   Cal->Write();
   CalC->Write();
+  Wryb->Write();
   OutHisto_file->Close();
   TAxis *xC = CalC->GetXaxis();
   Double_t InC =  CalC->Integral(xC->FindBin(0.0), xC->FindBin(2.0));

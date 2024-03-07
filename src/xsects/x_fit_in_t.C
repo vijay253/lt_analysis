@@ -107,25 +107,8 @@ void single_setting(TString q2_set){
 
 	ifstream para_file_in;
 
-	//para_file_in.open("../parameters/itt_89/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_91/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_93_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_93/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_95_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_95/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_97_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_97/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_98/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_100_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_100/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_102_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_104_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_104/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_106/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_108_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_110_start_parameter/par.pl_" + q2_set, ifstream::in);
-	//para_file_in.open("../parameters/itt_110/par.pl_" + q2_set, ifstream::in);
-	para_file_in.open("../parameters/itt_0/par.pl_" + q2_set, ifstream::in);
+	//	para_file_in.open("../parameters/itt_0/par.pl_" + q2_set, ifstream::in);
+	para_file_in.open("../parameters/it1/par.pl", ifstream::in);
 
 
 
@@ -198,8 +181,8 @@ void single_setting(TString q2_set){
   		iss >> w >> w_e >> q2 >> q2_e >> tt >>  tt_e >> thetacm >> it; 
 //       Float_t g       = (2.47**2-m_p**2)**2/(w**2-m_p**2)**2;
 
-//        	Float_t g = pow(pow(2.47,2)-pow(m_p,2),2)/pow(pow(w,2)-pow(m_p,2),2);
-        	Float_t g = 1.0/pow(pow(w,2)-pow(m_p,2),2);
+//        	Float_t g = pow(pow(0.38,2)-pow(m_p,2),2)/pow(pow(w,2)-pow(m_p,2),2);
+		Float_t g = 1.0/pow(pow(w,2)-pow(m_p,2),2);
 
 		g_vec.push_back(g);
 		w_vec.push_back(w);
@@ -260,10 +243,10 @@ void single_setting(TString q2_set){
 		f_sigT_pre = new TF1("sig_T_pre", fun_Sig_T_160, 0, 0.07, 4);
 		f_sigT_pre->SetParameters(t0, t1, t2, t3);
 
-		f_sigT = new TF1("sig_T", fun_Sig_T_160, 0, 0.07, 4); 
+		f_sigT = new TF1("sig_T", fun_Sig_T_160, 0, 0.06, 4); 
 		f_sigT->SetParameters(t0, t1, t2, t3);
-		f_sigT->SetParLimits(0, 0, 100);
-		f_sigT->SetParLimits(1, -0, -100);
+		f_sigT->SetParLimits(0, -30, 0 );
+		//		f_sigT->SetParLimits(1, -0, -100);
 		
 
 		/*		f_sigT->SetParameter(0, t0);
@@ -308,7 +291,7 @@ void single_setting(TString q2_set){
 
 		Float_t sigt_X_fit, sigt_X_fit_err;
 		sigt_X_fit     = (g_sigt->GetY()[i]);
-		sigt_X_fit_err = g_sigt->GetEY()[i];
+		sigt_X_fit_err = (g_sigt->GetEY()[i]);
 		
 		g_sigt_fit->SetPoint(i, g_sigt->GetX()[i], sigt_X_fit);
 		g_sigt_fit->SetPointError(i, 0, sigt_X_fit_err);
@@ -399,7 +382,21 @@ void single_setting(TString q2_set){
 
 	TFitResultPtr fit_t_result	= g_sigt_fit->Fit(f_sigT, "S");
 
-
+	//V.K.
+	/*
+	f_sigT->SetParameter(0, f_sigT->GetParameter(0));
+	f_sigT->SetParameter(1, f_sigT->GetParameter(1));
+	f_sigT->SetParameter(2, f_sigT->GetParameter(2));
+	f_sigT->SetParameter(3, f_sigT->GetParameter(3));
+	g_sigt_fit->Fit(f_sigT);
+	*/
+	/*	
+	f_sigT->SetParameter(0, f_sigT->GetParameter(0));
+	f_sigT->SetParameter(1, f_sigT->GetParameter(1));
+	f_sigT->SetParameter(2, f_sigT->GetParameter(2));
+	f_sigT->SetParameter(3, f_sigT->GetParameter(3));
+	g_sigt_fit->Fit(f_sigT);
+	*/
 	for(int i =0; i < w_vec.size(); i++) {
 
 		Float_t sigt_X;
@@ -480,8 +477,7 @@ void single_setting(TString q2_set){
 
 	///*--------------------------------------------------*/
 	///*--------------------------------------------------*/
-	/// SigL
-	//	
+	/// SigL	//	
 	cout << "/*--------------------------------------------------*/" << endl;
 	cout << "Fit for Sig L" << endl;
 
@@ -491,7 +487,7 @@ void single_setting(TString q2_set){
 //	TF1* f_sigL_pre = new TF1("sig_L", fun_Sig_L, 0, 0.5, 3);
 //	f_sigL_pre->SetParameters(prv_par_vec[3], prv_par_vec[4], prv_par_vec[5]);
 
-	TF1* f_sigL_pre = new TF1("sig_L", fun_Sig_L, 0, 0.07, 4);
+	TF1* f_sigL_pre = new TF1("sig_L", fun_Sig_L, 0, 0.06, 4);
 	f_sigL_pre->SetParameters(l0, l1, l2,l3);
 
 
@@ -584,9 +580,9 @@ void single_setting(TString q2_set){
 //	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0, 0.5, 1); 
 //	f_sigL->SetParameters(prv_par_vec[3], prv_par_vec[4], prv_par_vec[5]);
 
-	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0, 0.07, 4);
-	f_sigL->SetParameters(l0, l1, l2, l3);
-	//	f_sigL->SetParLimits(0,  0.0, 50);
+	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0, 0.06, 4);
+	f_sigL->SetParameters(l0, -l1, l2, l3);
+	//	f_sigL->SetParLimits(0,  0, 50);
 	//	f_sigL->SetParLimits(2, -16, -100);
 	//	f_sigL->SetParLimits(2, -10, 10);
 
@@ -605,10 +601,28 @@ void single_setting(TString q2_set){
 // 	f_sigL->SetParameter(2, 0.0);
 
 
+//	g_sigl_fit->Fit(f_sigL);
+	TFitResultPtr fit_l_result	= g_sigl_fit->Fit(f_sigL, "S");
+	
+	//V.K. 
+		
+	//        f_sigL->SetParameters(l0, l1, l2, l3);
+	/*
+		f_sigL->SetParameter(0, -1*f_sigL->GetParameter(0));
+		f_sigL->SetParameter(1, f_sigL->GetParameter(1));
+		f_sigL->SetParameter(2, f_sigL->GetParameter(2));
+		f_sigL->SetParameter(3, f_sigL->GetParameter(3));
+		//	f_sigL->SetParLimits(0,  0, 50);
 
 	g_sigl_fit->Fit(f_sigL);
- 
-
+	*/
+	/*
+	f_sigL->SetParameter(0, f_sigL->GetParameter(0));
+	f_sigL->SetParameter(1, f_sigL->GetParameter(1));
+	f_sigL->SetParameter(2, f_sigL->GetParameter(2));
+	f_sigL->SetParameter(3, f_sigL->GetParameter(3));
+	g_sigl_fit->Fit(f_sigL);
+	*/
 	for(int i =0; i < w_vec.size(); i++) {
 
 		Float_t sigl_X;
@@ -722,8 +736,13 @@ void single_setting(TString q2_set){
 		} else {
 
 //			exit(0);
-			siglt_X_fit     = g_siglt->GetY()[i] / sin(th_vec[i] * pi / 180);
-			siglt_X_fit_err = g_siglt->GetEY()[i] / sin(th_vec[i] * pi / 180);
+
+/*
+  siglt_X_fit     = g_siglt->GetY()[i] / sin(th_vec[i] * pi / 180);
+  siglt_X_fit_err = g_siglt->GetEY()[i] / sin(th_vec[i] * pi / 180);
+*/
+			siglt_X_fit     = g_siglt->GetY()[i];
+			siglt_X_fit_err = g_siglt->GetEY()[i];
 
 		}
 
@@ -783,7 +802,7 @@ void single_setting(TString q2_set){
 
 //	TF1* f_sigLT = new TF1("sig_LT", fun_Sig_LT, 0, 0.5, 3); 
 
-	TF1* f_sigLT = new TF1("sig_LT", fun_Sig_LT, 0, 0.5, 3); 
+	TF1* f_sigLT = new TF1("sig_LT", fun_Sig_LT, 0, 0.06, 3); 
 	f_sigLT->SetParameters(lt0, lt1,  lt2);
 
 	g_siglt_fit->Fit(f_sigLT);
@@ -851,7 +870,7 @@ void single_setting(TString q2_set){
 //	TF1* f_sigTT_pre = new TF1("sig_TT", fun_Sig_TT, 0, 0.5, 3);
 //	f_sigTT_pre->SetParameters(prv_par_vec[9], prv_par_vec[10], prv_par_vec[11]);
 
-	TF1* f_sigTT_pre = new TF1("sig_TT", fun_Sig_TT, 0, 0.5, 1);
+	TF1* f_sigTT_pre = new TF1("sig_TT", fun_Sig_TT, 0, 0.07, 1);
 	//	f_sigTT_pre->SetParameters(tt0);
 	f_sigTT_pre->SetParameter(0, tt0);
 
@@ -882,8 +901,11 @@ void single_setting(TString q2_set){
 
 		} else {
 
-			sigtt_X_fit     = g_sigtt->GetY()[i] / sin(th_vec[i] * pi / 180) / sin(th_vec[i] * pi / 180);
-			sigtt_X_fit_err = g_sigtt->GetEY()[i] / sin(th_vec[i] * pi / 180) / sin(th_vec[i] * pi / 180);
+		  /*			sigtt_X_fit     = g_sigtt->GetY()[i] / sin(th_vec[i] * pi / 180) / sin(th_vec[i] * pi / 180);
+					sigtt_X_fit_err = g_sigtt->GetEY()[i] / sin(th_vec[i] * pi / 180) / sin(th_vec[i] * pi / 180);
+		  */
+			sigtt_X_fit     = g_sigtt->GetY()[i];
+			sigtt_X_fit_err = g_sigtt->GetEY()[i];
 
 		}
 
@@ -944,7 +966,7 @@ void single_setting(TString q2_set){
 //	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0, 0.5, 3); 
 //	f_sigTT->SetParameters(prv_par_vec[9], prv_par_vec[10], prv_par_vec[11]);
 
-	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0, 0.5, 1); 
+	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0, 0.06, 1); 
 	//	f_sigTT->SetParameters(tt0);
 	f_sigTT->SetParameter(0, tt0);
 

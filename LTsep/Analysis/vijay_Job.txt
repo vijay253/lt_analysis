@@ -1,0 +1,8 @@
+PROJECT: c-kaonlt
+TRACK: analysis
+JOBNAME:physics
+OS: centos7
+OS: general
+CPU: 1
+COMMAND:/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/RunScript.sh
+MAIL: vijay@jlab.org

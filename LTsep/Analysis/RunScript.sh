@@ -6,6 +6,7 @@ if [[ "${HOSTNAME}" = *"ifarm"* ]]; then
     REPLAYPATH="/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt"                         
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh"    
+
 fi
 
 if [[ "${HOSTNAME}" != *"ifarm"* ]]; then
@@ -18,6 +19,7 @@ fi
 echo ""
 echo ""
 echo ""
+echo "${REPLAYPATH}"
 
 echo ""
 echo "Processing data..."
@@ -35,18 +37,21 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	
 	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/
 #	eval "root -l -q \"/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Analysed.C("${RUNNUMBER}")\""
-#	root -b -q  "Analysed.C(\"${RUNNUMBER}\")"
-	root -b -q  "HeepCoin.C(\"${RUNNUMBER}\")"
+	root -b -q  "Analysed.C(\"${RUNNUMBER}\")"
+#	root -b -q  "HeepCoin.C(\"${RUNNUMBER}\")"
     else
 	cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/
 #	eval "root -l -q \"/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/Analysis/Analysed.C("${RUNNUMBER}")\""
-#	root -b -q "Analysed.C(\"${RUNNUMBER}\")"
-	root -b -q  "HeepCoin.C(\"${RUNNUMBER}\")"
+	root -b -q "Analysed.C(\"${RUNNUMBER}\")"
+#	root -b -q  "HeepCoin.C(\"${RUNNUMBER}\")"
 
     fi
     
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1"
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/HeeP_Coin_Summer19_All"
+#done < "$REPLAYPATH/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q2"
+#done < "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q1"
+done < "/group/c-kaonlt/USERS/vijay/Analysis_Framework_Sep6_2022/hallc_replay_lt/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/PionLT_Production_Q2"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/HeeP_Coin_Summer19_All"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/tmp"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_highe"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_highe"

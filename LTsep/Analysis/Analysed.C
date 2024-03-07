@@ -146,12 +146,20 @@ void Analysed(string RunNum = "")
   //##############################################################################
   TH1D *Coin     = new TH1D("Coin","CTime_ePiCoinTime_ROC1; CTime_ePiCoinTime_ROC1;", 300, 30, 60);
   TH1D *MM       = new TH1D("MM","MMpi; MMpi;", 300, 0.8, 1.2);
+
+  //HMS
   TH1D *Cal      = new TH1D("Cal","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
   TH1D *CalR     = new TH1D("CalR","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
   TH1D *CalC     = new TH1D("CalC","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
   TH1D *CalCR    = new TH1D("CalCR","H_cal_etottracknorm; H_cal_etottracknorm;", 300, 0.0, 2.0);
   TH1D *Cer      = new TH1D("Cer","H_cer_npeSum; H_cer_npeSum;", 300, 0.0, 30.0);
   TH2D *Wryb     = new TH2D("Wryb","W vs H.rb.raster.fr_yb;W;H.rb.raster.fr_yb", 300, 0.6, 1.4, 300, -0.2, 0.2);
+
+  //SHMS
+  TH1D *PCal     = new TH1D("PCal","P_cal_etottracknorm; P_cal_etottracknorm;", 300, 0.0, 2.0);
+  TH1D *PAero    = new TH1D("PAero","P_aero_npeSum; P_aero_npeSum;", 300, 0.0, 30.0);
+  TH1D *PCer     = new TH1D("PCer","P_hgcer_npeSum; P_hgcer_npeSum;", 300, 0.0, 30.0);
+
 
   for(Long64_t i = 0; i < nEntries_TBRANCH; i++)
     {
@@ -181,7 +189,10 @@ void Analysed(string RunNum = "")
         {
 	  Cal->Fill(H_cal_etottracknorm);
 	  MM->Fill(MMpi);
-	  //	 Cer->Fill(H_cer_npeSum);
+	  //SHMS
+	  PCal->Fill(P_cal_etottracknorm);
+	  PAero->Fill(P_aero_npeSum);
+	  PCer->Fill(P_hgcer_npeSum);
 	}     
 
       //Random
@@ -190,7 +201,6 @@ void Analysed(string RunNum = "")
 	  CalR->Fill(H_cal_etottracknorm);
 	}
       
-
       //With HMC CAL CUT
      
       if(RunNum >= "8497" && RunNum <= "8547") {
@@ -236,6 +246,9 @@ void Analysed(string RunNum = "")
   TDirectory *hist = OutHisto_file->mkdir("hist");
   hist->cd();
   Coin->Write();
+  PCal->Write();
+  PAero->Write();
+  PCer->Write();
   Cer->Write();
   MM->Write();
   Cal->Write();

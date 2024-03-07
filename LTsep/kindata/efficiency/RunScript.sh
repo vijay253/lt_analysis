@@ -40,9 +40,12 @@ while IFS='' read -r Line || [[ -n "$Line" ]]; do
 	root -b -q "Analysed.C(\"${RUNNUMBER}\")"
     fi
     
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/RunListHMSCalEff"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/RunListHMSCalEff"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_highe"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_highe"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_lowe"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_lowe"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left2_lowe"
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
     runNum=$line
@@ -54,9 +57,12 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
     #  TestingVar=$((TestingVar+1))
     #cd ${REPLAYPATH}/UTIL_KAONLT/scripts/HeepSingleStudy/SHMS_Heep/
 
-done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/RunListHMSCalEff"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/RunListHMSCalEff"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_highe"
 #done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_highe"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2center_lowe"
+#done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left1_lowe"
+done < "${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/Q0p375W2p2left2_lowe"
 
 if [[ -f "/group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT/Q375.root" ]]; then  # check does file exist
     cd /group/c-kaonlt/USERS/vijay/lt_analysis/LTsep/efficiency/OUTPUT/
