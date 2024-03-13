@@ -27,6 +27,7 @@
 #include <TTreeReaderArray.h>
 #include <TVectorD.h>
 #include <TGraph.h>
+#include <TPad.h>
 
 void Q1Analysis()
 {
@@ -3601,7 +3602,7 @@ void Q1Analysis()
   TH1D *hph_qmeCR   = new TH1D("hph_qmeCR","ph_q; ph_q;",    18, -22.5, 382.5);      
   TH1D *hph_qmeL1R  = new TH1D("hph_qmeL1R","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qmeL2R  = new TH1D("hph_qmeL2R","ph_q; ph_q;",   18, -22.5, 382.5);      
-  /*
+  
   TH2D *hYmeR1   = new TH2D("hYmeR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmeR2   = new TH2D("hYmeR2"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmeC    = new TH2D("hYmeC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
@@ -3613,7 +3614,8 @@ void Q1Analysis()
   TH2D *hYmeCR    = new TH2D("hYmeCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
   TH2D *hYmeL1R   = new TH2D("hYmeL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmeL2R   = new TH2D("hYmeL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
-  */
+  
+  /*
   TH2D *hYmeR1   = new TH2D("hYmeR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmeR2   = new TH2D("hYmeR2"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmeC    = new TH2D("hYmeC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, PhiBinLow, PhiBinHigh);
@@ -3625,10 +3627,10 @@ void Q1Analysis()
   TH2D *hYmeCR    = new TH2D("hYmeCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmeL1R   = new TH2D("hYmeL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmeL2R   = new TH2D("hYmeL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);      
-
+  */
 
   //Dummy
-  /*  TH2D *hYmedR1   = new TH2D("hYmedR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYmedR1   = new TH2D("hYmedR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmedR2   = new TH2D("hYmedR2"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmedC    = new TH2D("hYmedC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
   TH2D *hYmedL1   = new TH2D("hYmedL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
@@ -3639,7 +3641,8 @@ void Q1Analysis()
   TH2D *hYmedCR    = new TH2D("hYmedCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
   TH2D *hYmedL1R   = new TH2D("hYmedL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYmedL2R   = new TH2D("hYmedL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
-  */
+  
+  /*
   TH2D *hYmedR1   = new TH2D("hYmedR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmedR2   = new TH2D("hYmedR2"," Yield R2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmedC    = new TH2D("hYmedC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, PhiBinLow, PhiBinHigh);
@@ -3651,19 +3654,22 @@ void Q1Analysis()
   TH2D *hYmedCR    = new TH2D("hYmedCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmedL1R   = new TH2D("hYmedL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYmedL2R   = new TH2D("hYmedL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);      
+  */ 
+  
   //SIMC
-  /*  TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYSmeR2   = new TH2D("hYSmeR2"," Yield SIMC R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYSmeC   = new TH2D("hYSmeC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYSmeL1   = new TH2D("hYSmeL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYSmeL2   = new TH2D("hYSmeL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
-  */
+ 
+  /*
   TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSmeR2   = new TH2D("hYSmeR2"," Yield SIMC R2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSmeC   = new TH2D("hYSmeC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSmeL1   = new TH2D("hYSmeL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSmeL2   = new TH2D("hYSmeL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
-
+  */
   TH1D *hmmmeR1  = new TH1D("hmmmeR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeR2  = new TH1D("hmmmeR2","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeC   = new TH1D("hmmmeC","MM; MM;", 300, 0.8, 1.2);      
@@ -3684,15 +3690,16 @@ void Q1Analysis()
   
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
-  /*  
+    
   TH1D *hphmeR1  = new TH1D("hphmeR1","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",50, -10, 370);      
-  */
+  
+  /*
   TH1D *hphmeR1  = new TH1D("hphmeR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeR1R  = new TH1D("hphmeR1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeSR1  = new TH1D("hphmeSR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-  
+  */
   //  TH2D *hYSmeR1   = new TH2D("hYSmeR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeR1  = new TH1D("H_ssdelta_SmeR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeR1  = new TH1D("H_ssxptar_SmeR1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3719,15 +3726,16 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeR1R  = new TH1D("H_hsyptar_DmeR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //RIGHT2  
-  /*  
+    
   TH1D *hphmeR2  = new TH1D("hphmeR2","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",50, -10, 370);      
-  */
+  
+  /*
   TH1D *hphmeR2  = new TH1D("hphmeR2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeR2R  = new TH1D("hphmeR2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeSR2  = new TH1D("hphmeSR2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-  
+  */
   // TH2D *hYSmeR2   = new TH2D("hYSmeR2"," Yield SIMC R2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeR2  = new TH1D("H_ssdelta_SmeR2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeR2  = new TH1D("H_ssxptar_SmeR2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3754,15 +3762,16 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeR2R  = new TH1D("H_hsyptar_DmeR2R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //CENTER 
-  /*  
+    
   TH1D *hphmeC  = new TH1D("hphmeC","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",50, -10, 370);      
-  */
+  
+  /*
   TH1D *hphmeC  = new TH1D("hphmeC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeCR  = new TH1D("hphmeCR","ph_q; ph_q;",  150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeSC  = new TH1D("hphmeSC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-  
+  */
   //  TH2D *hYSmeC   = new TH2D("hYSmeC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeC  = new TH1D("H_ssdelta_SmeC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeC  = new TH1D("H_ssxptar_SmeC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3789,15 +3798,16 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeCR  = new TH1D("H_hsyptar_DmeCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1
-  /*  
+    
   TH1D *hphmeL1  = new TH1D("hphmeL1","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",50, -10, 370);      
-  */
+  
+  /*
   TH1D *hphmeL1  = new TH1D("hphmeL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeL1R  = new TH1D("hphmeL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeSL1  = new TH1D("hphmeSL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-  
+  */
   // TH2D *hYSmeL1   = new TH2D("hYSmeL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeL1  = new TH1D("H_ssdelta_SmeL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeL1  = new TH1D("H_ssxptar_SmeL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3824,15 +3834,16 @@ void Q1Analysis()
   TH1D *H_hsyptar_DmeL1R  = new TH1D("H_hsyptar_DmeL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2 
-  /*  
+    
   TH1D *hphmeL2  = new TH1D("hphmeL2","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",50, -10, 370);      
-  */
+  
+  /*
   TH1D *hphmeL2  = new TH1D("hphmeL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeL2R  = new TH1D("hphmeL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphmeSL2  = new TH1D("hphmeSL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-
+  */
   // TH2D *hYSmeL2   = new TH2D("hYSmeL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SmeL2  = new TH1D("H_ssdelta_SmeL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SmeL2  = new TH1D("H_ssxptar_SmeL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -3903,10 +3914,10 @@ void Q1Analysis()
 	  htmeR1->Fill(-tmeR1);
 	  htmeInR1->Fill(-tmeR1);
 	  hph_qmeR1->Fill(ph_qmeR1*57.2958 + 180);
-	  //	  hphmeR1->Fill(ph_qmeR1*57.2958 + 180);
- 	  hphmeR1->Fill(mmmeR1+MMpiOffsetmeR1);
-	  //	  hYmeR1->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
-	  hYmeR1->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
+	  hphmeR1->Fill(ph_qmeR1*57.2958 + 180);
+ 	  //hphmeR1->Fill(mmmeR1+MMpiOffsetmeR1);
+	  hYmeR1->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
+	  //hYmeR1->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
       //Random
       if(CoinPionR1R && MMpiR1 && DiamondR1)
@@ -3922,10 +3933,10 @@ void Q1Analysis()
 	  htmeR1R->Fill(-tmeR1);
 	  htmeInR1R->Fill(-tmeR1);
 	  hph_qmeR1R->Fill(ph_qmeR1*57.2958 + 180);
-	  //	  hphmeR1R->Fill(ph_qmeR1*57.2958 + 180);
- 	  hphmeR1R->Fill(mmmeR1+MMpiOffsetmeR1);
-	  //	  hYmeR1R->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
-	  hYmeR1R->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
+	  hphmeR1R->Fill(ph_qmeR1*57.2958 + 180);
+ 	  //hphmeR1R->Fill(mmmeR1+MMpiOffsetmeR1);
+	  hYmeR1R->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
+	  // hYmeR1R->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
 
       Double_t w1t = -tmeR1 >= bins[1] && -tmeR1 <= bins[2];
@@ -4063,14 +4074,14 @@ void Q1Analysis()
       
       if(CoinPiondR1 && MMpidR1 && DimonddR1)
 	{
-	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYmedR1->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
+	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYmedR1->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
 	}
       
       if(CoinPiondR1R && MMpidR1 && DimonddR1)
 	{
-	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYmedR1R->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
+	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYmedR1R->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
 	}      
     }    
 
@@ -4091,10 +4102,10 @@ void Q1Analysis()
 
       if(CUTSIMCMER1)
 	{
-	  //	  hphmeSR1->Fill(phipqmeR1*57.2958, NFMR1*WeightmeR1);
-	  hphmeSR1->Fill(missmassmeR1, NFMR1*WeightmeR1);
-	  //	  hYSmeR1->Fill(t_simcmeR1,phipqmeR1*57.2958, NFMR1*WeightmeR1);
-	  hYSmeR1->Fill(t_simcmeR1,missmassmeR1, NFMR1*WeightmeR1);
+	  hphmeSR1->Fill(phipqmeR1*57.2958, NFMR1*WeightmeR1);
+	  //hphmeSR1->Fill(missmassmeR1, NFMR1*WeightmeR1);
+	  hYSmeR1->Fill(t_simcmeR1,phipqmeR1*57.2958, NFMR1*WeightmeR1);
+	  //hYSmeR1->Fill(t_simcmeR1,missmassmeR1, NFMR1*WeightmeR1);
           H_ssdelta_SmeR1->Fill(ssdeltameR1, NFMR1*WeightmeR1);
           H_ssxptar_SmeR1->Fill(ssxptarmeR1, NFMR1*WeightmeR1);
           H_ssyptar_SmeR1->Fill(ssyptarmeR1, NFMR1*WeightmeR1);
@@ -4138,10 +4149,10 @@ void Q1Analysis()
 	  htmeR2->Fill(-tmeR2);
 	  htmeInR2->Fill(-tmeR2);
 	  hph_qmeR2->Fill(ph_qmeR2*57.2958 + 180);
-	  // 	  hphmeR2->Fill(ph_qmeR2*57.2958 + 180);
- 	  hphmeR2->Fill(mmmeR2+MMpiOffsetmeR2);
-	  //	  hYmeR2->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
-	  hYmeR2->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
+	  hphmeR2->Fill(ph_qmeR2*57.2958 + 180);
+ 	  //hphmeR2->Fill(mmmeR2+MMpiOffsetmeR2);
+	  hYmeR2->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
+	  //hYmeR2->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       //Random
       if(CoinPionR2R && MMpiR2 && DiamondR2)
@@ -4157,10 +4168,10 @@ void Q1Analysis()
 	  htmeR2R->Fill(-tmeR2);
 	  htmeInR2R->Fill(-tmeR2);
 	  hph_qmeR2R->Fill(ph_qmeR2*57.2958 + 180);
-	  // 	  hphmeR2R->Fill(ph_qmeR2*57.2958 + 180);
- 	  hphmeR2R->Fill(mmmeR2+MMpiOffsetmeR2);
-	  //	  hYmeR2R->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
-	  hYmeR2R->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
+	  hphmeR2R->Fill(ph_qmeR2*57.2958 + 180);
+ 	  //hphmeR2R->Fill(mmmeR2+MMpiOffsetmeR2);
+	  hYmeR2R->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
+	  //hYmeR2R->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       
       Double_t w1t = -tmeR2 >= bins[1] && -tmeR2 <= bins[2];
@@ -4302,14 +4313,14 @@ void Q1Analysis()
       
       if(CoinPiondR2 && MMpidR2 && DimonddR2)
 	{
-	  //	  hYmedR2->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
-	  hYmedR2->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
+	  hYmedR2->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
+	  //hYmedR2->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
 	}
       
       if(CoinPiondR2R && MMpidR2 && DimonddR2)
 	{
-	  //	  hYmedR2R->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
-	  hYmedR2R->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
+	  hYmedR2R->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
+	  //hYmedR2R->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
 	}      
     }    
 
@@ -4330,10 +4341,10 @@ void Q1Analysis()
      
       if(CUTSIMCMER2)	
         {
-	  //	  hphmeSR2->Fill(phipqmeR2*57.2958, NFMR2*WeightmeR2);
-	  hphmeSR2->Fill(missmassmeR2, NFMR2*WeightmeR2);
-	  //	  hYSmeR2->Fill(t_simcmeR2,phipqmeR2*57.2958, NFMR2*WeightmeR2);
-	  hYSmeR2->Fill(t_simcmeR2,missmassmeR2, NFMR2*WeightmeR2);
+	  hphmeSR2->Fill(phipqmeR2*57.2958, NFMR2*WeightmeR2);
+	  //hphmeSR2->Fill(missmassmeR2, NFMR2*WeightmeR2);
+	  hYSmeR2->Fill(t_simcmeR2,phipqmeR2*57.2958, NFMR2*WeightmeR2);
+	  //hYSmeR2->Fill(t_simcmeR2,missmassmeR2, NFMR2*WeightmeR2);
           H_ssdelta_SmeR2->Fill(ssdeltameR2, NFMR2*WeightmeR2);
           H_ssxptar_SmeR2->Fill(ssxptarmeR2, NFMR2*WeightmeR2);
           H_ssyptar_SmeR2->Fill(ssyptarmeR2, NFMR2*WeightmeR2);
@@ -4382,10 +4393,10 @@ void Q1Analysis()
 	  htmeC->Fill(-tmeC);
 	  htmeInC->Fill(-tmeC);
 	  hph_qmeC->Fill(ph_qmeC*57.2958 + 180);
-	  //  hphmeC->Fill(ph_qmeC*57.2958 + 180);
- 	  hphmeC->Fill(mmmeC+MMpiOffsetmeC);
-	  //	  hYmeC->Fill(-tmeC, ph_qmeC*57.2958 + 180);
-	  hYmeC->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
+	  hphmeC->Fill(ph_qmeC*57.2958 + 180);
+ 	  //hphmeC->Fill(mmmeC+MMpiOffsetmeC);
+	  hYmeC->Fill(-tmeC, ph_qmeC*57.2958 + 180);
+	  //hYmeC->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
 
 	}	      
 
@@ -4403,10 +4414,10 @@ void Q1Analysis()
 	  htmeCR->Fill(-tmeC);
 	  htmeInCR->Fill(-tmeC);
 	  hph_qmeCR->Fill(ph_qmeC*57.2958 + 180);
-	  hYmeCR->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
-	  // hYmeCR->Fill(-tmeC, ph_qmeC*57.2958 + 180);
-	  // 	  hphmeCR->Fill(ph_qmeC*57.2958 + 180);
- 	  hphmeCR->Fill(mmmeC+MMpiOffsetmeC);
+	  //hYmeCR->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
+	  hYmeCR->Fill(-tmeC, ph_qmeC*57.2958 + 180);
+	  hphmeCR->Fill(ph_qmeC*57.2958 + 180);
+ 	  //hphmeCR->Fill(mmmeC+MMpiOffsetmeC);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
 	}
       Double_t w1t = -tmeC >= bins[1] && -tmeC <= bins[2];
@@ -4542,14 +4553,14 @@ void Q1Analysis()
       
       if(CoinPiondC && MMpidC && DimonddC)
 	{
-	  //	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
-	  hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
+	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	  //hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}
       
       if(CoinPiondCR && MMpidC && DimonddC)
 	{
-	  //	  hYmedCR->Fill(-tmedC, ph_qmedC*57.2958 + 180);
-	  hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
+	  hYmedCR->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	  //hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}      
     }    
   //SIMC CENTER                                                                                                                                                                                      
@@ -4569,10 +4580,10 @@ void Q1Analysis()
       
       if(CUTSIMCMEC)
 	{
-	  //	  hphmeSC->Fill(phipqmeC*57.2958, NFMC*WeightmeC);
-	  hphmeSC->Fill(missmassmeC, NFMC*WeightmeC);
-	  //	  hYSmeC->Fill(t_simcmeC,phipqmeC*57.2958, NFMC*WeightmeC);
-	  hYSmeC->Fill(t_simcmeC,missmassmeC, NFMC*WeightmeC);
+	  hphmeSC->Fill(phipqmeC*57.2958, NFMC*WeightmeC);
+	  //hphmeSC->Fill(missmassmeC, NFMC*WeightmeC);
+	  hYSmeC->Fill(t_simcmeC,phipqmeC*57.2958, NFMC*WeightmeC);
+	  //hYSmeC->Fill(t_simcmeC,missmassmeC, NFMC*WeightmeC);
           H_ssdelta_SmeC->Fill(ssdeltameC, NFMC*WeightmeC);
           H_ssxptar_SmeC->Fill(ssxptarmeC, NFMC*WeightmeC);
           H_ssyptar_SmeC->Fill(ssyptarmeC, NFMC*WeightmeC);
@@ -4615,10 +4626,10 @@ void Q1Analysis()
 	  htmeL1->Fill(-tmeL1);
 	  htmeInL1->Fill(-tmeL1);
 	  hph_qmeL1->Fill(ph_qmeL1*57.2958 + 180);	  
-	  // 	  hphmeL1->Fill(ph_qmeL1*57.2958 + 180);
- 	  hphmeL1->Fill(mmmeL1+MMpiOffsetmeL1);
-	  //	  hYmeL1->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
-	  hYmeL1->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
+	  hphmeL1->Fill(ph_qmeL1*57.2958 + 180);
+ 	  //hphmeL1->Fill(mmmeL1+MMpiOffsetmeL1);
+	  hYmeL1->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
+	  //hYmeL1->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 
 	}
       //Random
@@ -4635,10 +4646,10 @@ void Q1Analysis()
 	  htmeL1R->Fill(-tmeL1);
 	  htmeInL1R->Fill(-tmeL1);
 	  hph_qmeL1R->Fill(ph_qmeL1*57.2958 + 180);	  
-	  // 	  hphmeL1R->Fill(ph_qmeL1*57.2958 + 180);
- 	  hphmeL1R->Fill(mmmeL1+MMpiOffsetmeL1);
-	  //	  hYmeL1R->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
-	  hYmeL1R->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
+	  hphmeL1R->Fill(ph_qmeL1*57.2958 + 180);
+ 	  //hphmeL1R->Fill(mmmeL1+MMpiOffsetmeL1);
+	  hYmeL1R->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
+	  //hYmeL1R->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 	}
       Double_t w1t = -tmeL1 >= bins[1] && -tmeL1 <= bins[2];
       Double_t w2t = -tmeL1 >= bins[2] && -tmeL1 <= bins[3];
@@ -4772,14 +4783,14 @@ void Q1Analysis()
       
       if(CoinPiondL1 && MMpidL1 && DimonddL1)
 	{
-	  //	  hYmedL1->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
-	  hYmedL1->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
+	  hYmedL1->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	  //hYmedL1->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
 	}
       
       if(CoinPiondL1R && MMpidL1 && DimonddL1)
 	{
-	  //	  hYmedL1R->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
-	  hYmedL1R->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
+	  hYmedL1R->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	  //hYmedL1R->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
 	}      
     }    
   //SIMC LEFT1                                                 
@@ -4799,10 +4810,10 @@ void Q1Analysis()
       
       if(CUTSIMCMEL1)
 	{
-	  //	  hphmeSL1->Fill(phipqmeL1*57.2958, NFML1*WeightmeL1);	  
-	  hphmeSL1->Fill(missmassmeL1, NFML1*WeightmeL1);	  
-	  //	  hYSmeL1->Fill(t_simcmeL1,phipqmeL1*57.2958, NFML1*WeightmeL1);
-	  hYSmeL1->Fill(t_simcmeL1,missmassmeL1, NFML1*WeightmeL1);
+	  hphmeSL1->Fill(phipqmeL1*57.2958, NFML1*WeightmeL1);	  
+	  //hphmeSL1->Fill(missmassmeL1, NFML1*WeightmeL1);	  
+	  hYSmeL1->Fill(t_simcmeL1,phipqmeL1*57.2958, NFML1*WeightmeL1);
+	  //hYSmeL1->Fill(t_simcmeL1,missmassmeL1, NFML1*WeightmeL1);
 	  H_ssdelta_SmeL1->Fill(ssdeltameL1, NFML1*WeightmeL1);
 	  H_ssxptar_SmeL1->Fill(ssxptarmeL1, NFML1*WeightmeL1);
 	  H_ssyptar_SmeL1->Fill(ssyptarmeL1, NFML1*WeightmeL1);
@@ -4848,10 +4859,10 @@ void Q1Analysis()
 	  htmeL2->Fill(-tmeL2);
 	  htmeInL2->Fill(-tmeL2);
 	  hph_qmeL2->Fill(ph_qmeL2*57.2958 + 180);
-	  // 	  hphmeL2->Fill(ph_qmeL2*57.2958 + 180);
- 	  hphmeL2->Fill(mmmeL2+MMpiOffsetmeL2);  //+MMpiOffsetme
-	  //	  hYmeL2->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
-	  hYmeL2->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
+	  hphmeL2->Fill(ph_qmeL2*57.2958 + 180);
+ 	  //hphmeL2->Fill(mmmeL2+MMpiOffsetmeL2);  //+MMpiOffsetme
+	  hYmeL2->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
+	  //hYmeL2->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
       //Random
       if(CoinPionL2R && MMpiL2 && DiamondL2)
@@ -4867,10 +4878,10 @@ void Q1Analysis()
 	  htmeL2R->Fill(-tmeL2);
 	  htmeInL2R->Fill(-tmeL2);
 	  hph_qmeL2R->Fill(ph_qmeL2*57.2958 + 180);
-	  // 	  hphmeL2R->Fill(ph_qmeL2*57.2958 + 180);
- 	  hphmeL2R->Fill(mmmeL2+MMpiOffsetmeL2);
-	  //	  hYmeL2R->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
-	  hYmeL2R->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
+	  hphmeL2R->Fill(ph_qmeL2*57.2958 + 180);
+ 	  //hphmeL2R->Fill(mmmeL2+MMpiOffsetmeL2);
+	  hYmeL2R->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
+	  //hYmeL2R->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
       Double_t w1t = -tmeL2 >= bins[1] && -tmeL2 <= bins[2];
       Double_t w2t = -tmeL2 >= bins[2] && -tmeL2 <= bins[3];
@@ -5005,14 +5016,14 @@ void Q1Analysis()
       
       if(CoinPiondL2 && MMpidL2 && DimonddL2)
 	{
-	  //	  hYmedL2->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
-	  hYmedL2->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
+	  hYmedL2->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	  //hYmedL2->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
 	}
       
       if(CoinPiondL2R && MMpidL2 && DimonddL2)
 	{
-	  //	  hYmedL2R->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
-	  hYmedL2R->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
+	  hYmedL2R->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	  //hYmedL2R->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
 	}      
     }    
   //SIMC LEFT2                                                 
@@ -5032,10 +5043,10 @@ void Q1Analysis()
       
       if(CUTSIMCMEL2)	
         {
-	  //	  hphmeSL2->Fill(phipqmeL2*57.2958, NFML2*WeightmeL2);	  
-	  hphmeSL2->Fill(missmassmeL2, NFML2*WeightmeL2);	  
-	  //	  hYSmeL2->Fill(t_simcmeL2,phipqmeL2*57.2958, NFML2*WeightmeL2);
-	  hYSmeL2->Fill(t_simcmeL2,missmassmeL2, NFML2*WeightmeL2);
+	  hphmeSL2->Fill(phipqmeL2*57.2958, NFML2*WeightmeL2);	  
+	  //hphmeSL2->Fill(missmassmeL2, NFML2*WeightmeL2);	  
+	  hYSmeL2->Fill(t_simcmeL2,phipqmeL2*57.2958, NFML2*WeightmeL2);
+	  //hYSmeL2->Fill(t_simcmeL2,missmassmeL2, NFML2*WeightmeL2);
           H_ssdelta_SmeL2->Fill(ssdeltameL2, NFML2*WeightmeL2);
           H_ssxptar_SmeL2->Fill(ssxptarmeL2, NFML2*WeightmeL2);
           H_ssyptar_SmeL2->Fill(ssyptarmeL2, NFML2*WeightmeL2);
@@ -7509,7 +7520,7 @@ void Q1Analysis()
   TH1D *hph_qheL1R  = new TH1D("hph_qheL1R","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qheL2R  = new TH1D("hph_qheL2R","ph_q; ph_q;",   18, -22.5, 382.5);      
   
-  /*TH2D *hYheR1   = new TH2D("hYheR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYheR1   = new TH2D("hYheR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYheC    = new TH2D("hYheC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
   TH2D *hYheL1   = new TH2D("hYheL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYheL2   = new TH2D("hYheL2"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
@@ -7518,7 +7529,8 @@ void Q1Analysis()
   TH2D *hYheCR    = new TH2D("hYheCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
   TH2D *hYheL1R   = new TH2D("hYheL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH2D *hYheL2R   = new TH2D("hYheL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
-  */
+  
+  /*
   TH2D *hYheR1   = new TH2D("hYheR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYheC    = new TH2D("hYheC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYheL1   = new TH2D("hYheL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
@@ -7528,7 +7540,19 @@ void Q1Analysis()
   TH2D *hYheCR    = new TH2D("hYheCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYheL1R   = new TH2D("hYheL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYheL2R   = new TH2D("hYheL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);      
-  //Dummy
+  */ 
+ //Dummy
+
+  TH2D *hYhedR1   = new TH2D("hYhedR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYhedC    = new TH2D("hYhedC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, -22.5, 382.5);
+  TH2D *hYhedL1   = new TH2D("hYhedL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYhedL2   = new TH2D("hYhedL2"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+
+  TH2D *hYhedR1R   = new TH2D("hYhedR1R"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYhedCR    = new TH2D("hYhedCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, -22.5, 382.5);
+  TH2D *hYhedL1R   = new TH2D("hYhedL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYhedL2R   = new TH2D("hYhedL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);      
+  /*
   TH2D *hYhedR1   = new TH2D("hYhedR1"," Yield R1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYhedC    = new TH2D("hYhedC"," Yield C;t-Bin; Phi-Bin ",    10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYhedL1   = new TH2D("hYhedL1"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
@@ -7538,13 +7562,19 @@ void Q1Analysis()
   TH2D *hYhedCR    = new TH2D("hYhedCR","  Yield C;t-Bin; Phi-Bin ",   10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYhedL1R   = new TH2D("hYhedL1R"," Yield L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYhedL2R   = new TH2D("hYhedL2R"," Yield L2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);      
-
+  */
   //SIMC
+
+  TH2D *hYSheR1   = new TH2D("hYSheR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYSheC    = new TH2D("hYSheC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYSheL1   = new TH2D("hYSheL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  TH2D *hYSheL2   = new TH2D("hYSheL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
+  /*
   TH2D *hYSheR1   = new TH2D("hYSheR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSheC   = new TH2D("hYSheC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSheL1   = new TH2D("hYSheL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
   TH2D *hYSheL2   = new TH2D("hYSheL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, PhiBinLow, PhiBinHigh);
-
+  */
   TH1D *hmmheR1  = new TH1D("hmmheR1","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmheC   = new TH1D("hmmheC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmheL1  = new TH1D("hmmheL1","MM; MM;", 300, 0.8, 1.2);      
@@ -7562,14 +7592,15 @@ void Q1Analysis()
 
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
-  /*  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",50, -10, 370);      
-  */
+  
+  /*
   TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-  
+  */
   //  TH2D *hYSheR1   = new TH2D("hYSheR1"," Yield SIMC R1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheR1  = new TH1D("H_ssdelta_SheR1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheR1  = new TH1D("H_ssxptar_SheR1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -7596,14 +7627,14 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheR1R  = new TH1D("H_hsyptar_DheR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //CENTER  
-  /*  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",50, -10, 370);      
-  */
+  /*
   TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-
+  */
   //  TH2D *hYSheC   = new TH2D("hYSheC"," Yield SIMC C;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheC  = new TH1D("H_ssdelta_SheC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheC  = new TH1D("H_ssxptar_SheC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -7630,14 +7661,14 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheCR  = new TH1D("H_hsyptar_DheCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1  
-  /*  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",50, -10, 370);      
-  */
+  /*
   TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-
+  */
   //  TH2D *hYSheL1   = new TH2D("hYSheL1"," Yield SIMC L1;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheL1  = new TH1D("H_ssdelta_SheL1","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheL1  = new TH1D("H_ssxptar_SheL1","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -7664,14 +7695,14 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheL1R  = new TH1D("H_hsyptar_DheL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2  
-  /*  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",  50, -10, 370);      
   TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",50, -10, 370);      
-  */
+  /*
   TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
-
+  */
   //  TH2D *hYSheL2   = new TH2D("hYSheL2"," Yield SIMC L2;t-Bin; Phi-Bin ",  10, bins, 18, -22.5, 382.5);
   TH1D *H_ssdelta_SheL2  = new TH1D("H_ssdelta_SheL2","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_SheL2  = new TH1D("H_ssxptar_SheL2","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
@@ -7742,10 +7773,10 @@ void Q1Analysis()
 	  htheR1->Fill(-theR1);
 	  htheInR1->Fill(-theR1);
 	  hph_qheR1->Fill(ph_qheR1*57.2958 + 180);
-	  //	  hphheR1->Fill(ph_qheR1*57.2958 + 180);
-	  hphheR1->Fill(mmheR1+MMpiOffsetheR1);
-	  //	  hYheR1->Fill(-theR1, ph_qheR1*57.2958 + 180);
-	  hYheR1->Fill(-theR1, mmheR1+MMpiOffsetheR1);
+	  hphheR1->Fill(ph_qheR1*57.2958 + 180);
+	  //hphheR1->Fill(mmheR1+MMpiOffsetheR1);
+	  hYheR1->Fill(-theR1, ph_qheR1*57.2958 + 180);
+	  //hYheR1->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
       //Random
       if(CoinPionR1R && MMpiR1 && DiamondR1)
@@ -7761,10 +7792,10 @@ void Q1Analysis()
 	  htheR1R->Fill(-theR1);
 	  htheInR1R->Fill(-theR1);
 	  hph_qheR1R->Fill(ph_qheR1*57.2958 + 180);
-	  //	  hphheR1R->Fill(ph_qheR1*57.2958 + 180);
-	  hphheR1R->Fill(mmheR1+MMpiOffsetheR1);
-	  //	  hYheR1R->Fill(-theR1, ph_qheR1*57.2958 + 180);
-	  hYheR1R->Fill(-theR1, mmheR1+MMpiOffsetheR1);
+	  hphheR1R->Fill(ph_qheR1*57.2958 + 180);
+	  //hphheR1R->Fill(mmheR1+MMpiOffsetheR1);
+	  hYheR1R->Fill(-theR1, ph_qheR1*57.2958 + 180);
+	  //hYheR1R->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
       Double_t w1t = -theR1 >= bins[1] && -theR1 <= bins[2];
       Double_t w2t = -theR1 >= bins[2] && -theR1 <= bins[3];
@@ -7900,14 +7931,14 @@ void Q1Analysis()
 
       if(CoinPiondR1 && MMpidR1 && DiamonddR1)
 	{
-	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedR1->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
+	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedR1->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	}
       
       if(CoinPiondR1R && MMpidR1 && DiamonddR1)
 	{
-	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedR1R->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
+	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedR1R->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	}      
     }    
 
@@ -7928,10 +7959,10 @@ void Q1Analysis()
       
       if(CUTSIMCHER1)	
         {
-	  //	  hphheSR1->Fill(phipqheR1*57.2958, NFR1*WeightheR1);	
-	  hphheSR1->Fill(missmassheR1, NFR1*WeightheR1);	
-	  //	  hYSheR1->Fill(t_simcheR1,phipqheR1*57.2958, NFR1*WeightheR1);
-	  hYSheR1->Fill(t_simcheR1,missmassheR1, NFR1*WeightheR1);
+	  hphheSR1->Fill(phipqheR1*57.2958, NFR1*WeightheR1);	
+	  //hphheSR1->Fill(missmassheR1, NFR1*WeightheR1);	
+	  hYSheR1->Fill(t_simcheR1,phipqheR1*57.2958, NFR1*WeightheR1);
+	  //hYSheR1->Fill(t_simcheR1,missmassheR1, NFR1*WeightheR1);
           H_ssdelta_SheR1->Fill(ssdeltaheR1, NFR1*WeightheR1);
           H_ssxptar_SheR1->Fill(ssxptarheR1, NFR1*WeightheR1);
           H_ssyptar_SheR1->Fill(ssyptarheR1, NFR1*WeightheR1);
@@ -7982,10 +8013,10 @@ void Q1Analysis()
 	  htheC->Fill(-theC);
 	  htheInC->Fill(-theC);
 	  hph_qheC->Fill(ph_qheC*57.2958 + 180);
-	  //	  hphheC->Fill(ph_qheC*57.2958 + 180);
-	  hphheC->Fill(mmheC+MMpiOffsetheC);
-	  //	  hYheC->Fill(-theC, ph_qheC*57.2958 + 180);
-	  hYheC->Fill(-theC, mmheC+MMpiOffsetheC);
+	  hphheC->Fill(ph_qheC*57.2958 + 180);
+	  //hphheC->Fill(mmheC+MMpiOffsetheC);
+	  hYheC->Fill(-theC, ph_qheC*57.2958 + 180);
+	  //hYheC->Fill(-theC, mmheC+MMpiOffsetheC);
 	}	      
 
            
@@ -8003,10 +8034,10 @@ void Q1Analysis()
 	  htheInCR->Fill(-theC);
 	  hph_qheCR->Fill(ph_qheC*57.2958 + 180);
 	  hQ2WHECR->Fill(Q2HEC, WHEC);
-	  //	  hphheCR->Fill(ph_qheC*57.2958 + 180);
-	  hphheCR->Fill(mmheC+MMpiOffsetheC);
-	  //	  hYheCR->Fill(-theC, ph_qheC*57.2958 + 180);
-	  hYheCR->Fill(-theC, mmheC+MMpiOffsetheC);
+	  hphheCR->Fill(ph_qheC*57.2958 + 180);
+	  //hphheCR->Fill(mmheC+MMpiOffsetheC);
+	  hYheCR->Fill(-theC, ph_qheC*57.2958 + 180);
+	  //hYheCR->Fill(-theC, mmheC+MMpiOffsetheC);
 	}
       
       Double_t w1t = -theC >= bins[1] && -theC <= bins[2];
@@ -8143,14 +8174,14 @@ void Q1Analysis()
 
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
-	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedC->Fill(-thedC, mmhedC+MMpiOffsetheC);
+	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedC->Fill(-thedC, mmhedC+MMpiOffsetheC);
 	}
       
       if(CoinPiondCR && MMpidC && DiamonddC)
 	{
-	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedCR->Fill(-thedC, mmhedC+MMpiOffsetheC);
+	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedCR->Fill(-thedC, mmhedC+MMpiOffsetheC);
 	}      
     }    
 
@@ -8171,10 +8202,10 @@ void Q1Analysis()
       
       if (CUTSIMCHEC)
 	{
-	  //	  hphheSC->Fill(phipqheC*57.2958, NFC*WeightheC);	
-	  hphheSC->Fill(missmassheC, NFC*WeightheC);	
-	  //	  hYSheC->Fill(t_simcheC,phipqheC*57.2958, NFC*WeightheC);
-	  hYSheC->Fill(t_simcheC,missmassheC, NFC*WeightheC);
+	  hphheSC->Fill(phipqheC*57.2958, NFC*WeightheC);	
+	  //hphheSC->Fill(missmassheC, NFC*WeightheC);	
+	  hYSheC->Fill(t_simcheC,phipqheC*57.2958, NFC*WeightheC);
+	  //hYSheC->Fill(t_simcheC,missmassheC, NFC*WeightheC);
           H_ssdelta_SheC->Fill(ssdeltaheC, NFC*WeightheC);
           H_ssxptar_SheC->Fill(ssxptarheC, NFC*WeightheC);
           H_ssyptar_SheC->Fill(ssyptarheC, NFC*WeightheC);
@@ -8221,10 +8252,10 @@ void Q1Analysis()
 	  htheL1->Fill(-theL1);
 	  htheInL1->Fill(-theL1);
 	  hph_qheL1->Fill(ph_qheL1*57.2958 + 180);	  
-	  //	  hphheL1->Fill(ph_qheL1*57.2958 + 180);
-	  hphheL1->Fill(mmheL1+MMpiOffsetheL1);
-	  //	  hYheL1->Fill(-theL1, ph_qheL1*57.2958 + 180);
-	  hYheL1->Fill(-theL1, mmheL1+MMpiOffsetheL1);
+	  hphheL1->Fill(ph_qheL1*57.2958 + 180);
+	  //hphheL1->Fill(mmheL1+MMpiOffsetheL1);
+	  hYheL1->Fill(-theL1, ph_qheL1*57.2958 + 180);
+	  //hYheL1->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}      
       //Random
       if(CoinPionL1R && MMpiL1 && DiamondL1)
@@ -8241,10 +8272,10 @@ void Q1Analysis()
 	  htheL1R->Fill(-theL1);
 	  htheInL1R->Fill(-theL1);
 	  hph_qheL1R->Fill(ph_qheL1*57.2958 + 180);	  
-	  //	  hphheL1R->Fill(ph_qheL1*57.2958 + 180);
-	  hphheL1R->Fill(mmheL1+MMpiOffsetheL1);
-	  //	  hYheL1R->Fill(-theL1, ph_qheL1*57.2958 + 180);
-	  hYheL1R->Fill(-theL1, mmheL1+MMpiOffsetheL1);
+	  hphheL1R->Fill(ph_qheL1*57.2958 + 180);
+	  //hphheL1R->Fill(mmheL1+MMpiOffsetheL1);
+	  hYheL1R->Fill(-theL1, ph_qheL1*57.2958 + 180);
+	  //hYheL1R->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}
       Double_t w1t = -theL1 >= bins[1] && -theL1 <= bins[2];
       Double_t w2t = -theL1 >= bins[2] && -theL1 <= bins[3];
@@ -8384,14 +8415,14 @@ void Q1Analysis()
 
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
-	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL1->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
+	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedL1->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
 	}
       
       if(CoinPiondL1R && MMpidL1 && DiamonddL1)
 	{
-	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL1R->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
+	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedL1R->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
 	}      
     }    
 
@@ -8412,10 +8443,10 @@ void Q1Analysis()
       
       if(CUTSIMCHEL1)
         {
-	  //	  hphheSL1->Fill(phipqheL1*57.2958, NFL1*WeightheL1);		
-	  hphheSL1->Fill(missmassheL1, NFL1*WeightheL1);		
-	  //	  hYSheL1->Fill(t_simcheL1,phipqheL1*57.2958, NFL1*WeightheL1);
-	  hYSheL1->Fill(t_simcheL1,missmassheL1, NFL1*WeightheL1);
+	  hphheSL1->Fill(phipqheL1*57.2958, NFL1*WeightheL1);		
+	  //hphheSL1->Fill(missmassheL1, NFL1*WeightheL1);		
+	  hYSheL1->Fill(t_simcheL1,phipqheL1*57.2958, NFL1*WeightheL1);
+	  //hYSheL1->Fill(t_simcheL1,missmassheL1, NFL1*WeightheL1);
           H_ssdelta_SheL1->Fill(ssdeltaheL1, NFL1*WeightheL1);
           H_ssxptar_SheL1->Fill(ssxptarheL1, NFL1*WeightheL1);
           H_ssyptar_SheL1->Fill(ssyptarheL1, NFL1*WeightheL1);
@@ -8460,10 +8491,10 @@ void Q1Analysis()
 	  htheL2->Fill(-theL2);
 	  htheInL2->Fill(-theL2);
 	  hph_qheL2->Fill(ph_qheL2*57.2958 + 180);
-	  //	  hphheL2->Fill(ph_qheL2*57.2958 + 180);
-	  hphheL2->Fill(mmheL2+MMpiOffsetheL2);
-	  //	  hYheL2->Fill(-theL2, ph_qheL2*57.2958 + 180);
-	  hYheL2->Fill(-theL2,mmheL2+MMpiOffsetheL2);
+	  hphheL2->Fill(ph_qheL2*57.2958 + 180);
+	  //hphheL2->Fill(mmheL2+MMpiOffsetheL2);
+	  hYheL2->Fill(-theL2, ph_qheL2*57.2958 + 180);
+	  //hYheL2->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
 
       //Random
@@ -8480,10 +8511,10 @@ void Q1Analysis()
 	  htheL2R->Fill(-theL2);
 	  htheInL2R->Fill(-theL2);
 	  hph_qheL2R->Fill(ph_qheL2*57.2958 + 180);
-	  //	  hphheL2R->Fill(ph_qheL2*57.2958 + 180);
-	  hphheL2R->Fill(mmheL2+MMpiOffsetheL2);
-	  //	  hYheL2R->Fill(-theL2, ph_qheL2*57.2958 + 180);
-	  hYheL2R->Fill(-theL2,mmheL2+MMpiOffsetheL2);
+	  hphheL2R->Fill(ph_qheL2*57.2958 + 180);
+	  //hphheL2R->Fill(mmheL2+MMpiOffsetheL2);
+	  hYheL2R->Fill(-theL2, ph_qheL2*57.2958 + 180);
+	  //hYheL2R->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
       Double_t w1t = -theL2 >= bins[1] && -theL2 <= bins[2];
       Double_t w2t = -theL2 >= bins[2] && -theL2 <= bins[3];
@@ -8617,14 +8648,14 @@ void Q1Analysis()
 
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
-	  //	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL2->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
+	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedL2->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
 	}
       
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
-	  //	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
-	  hYhedL2R->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
+	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  //hYhedL2R->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
 	}      
     }    
 
@@ -8645,10 +8676,10 @@ void Q1Analysis()
       
       if(CUTSIMCHEL2)       
 	{
-	  //	  hphheSL2->Fill(phipqheL2*57.2958, NFL2*WeightheL2);			
-	  hphheSL2->Fill(missmassheL2, NFL2*WeightheL2);			
-	  //	  hYSheL2->Fill(t_simcheL2,phipqheL2*57.2958, NFL2*WeightheL2);
-	  hYSheL2->Fill(t_simcheL2,missmassheL2, NFL2*WeightheL2);
+	  hphheSL2->Fill(phipqheL2*57.2958, NFL2*WeightheL2);			
+	  //hphheSL2->Fill(missmassheL2, NFL2*WeightheL2);			
+	  hYSheL2->Fill(t_simcheL2,phipqheL2*57.2958, NFL2*WeightheL2);
+	  //hYSheL2->Fill(t_simcheL2,missmassheL2, NFL2*WeightheL2);
 	  H_ssdelta_SheL2->Fill(ssdeltaheL2, NFL2*WeightheL2);
 	  H_ssxptar_SheL2->Fill(ssxptarheL2, NFL2*WeightheL2);
           H_ssyptar_SheL2->Fill(ssyptarheL2, NFL2*WeightheL2);
@@ -10661,7 +10692,78 @@ void Q1Analysis()
      fstphi17l->SetLineColor(kBlack);
      fstphi17l->Draw("same");
   **/
+  c14->Print(outputpdf);
 
-  c14->Print(outputpdf + ')');
+  TCanvas *canvas = new TCanvas("canvas", " ", 700, 700);
+  canvas->Divide(2, 2);  
+  canvas->cd(1);
+  TPad* pad1 = (TPad*)canvas->GetPad(1);
+  pad1->SetLeftMargin(0.13);
+  pad1->SetBottomMargin(0.07);
+  pad1->SetTopMargin(0.02);
+  pad1->SetRightMargin(0.0);
+  hQ2WC->SetStats(0);
+  hQ2WC->Draw("COL");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
+
+  canvas->cd(2);
+  TPad* pad2 = (TPad*)canvas->GetPad(2);
+  pad2->SetLeftMargin(0.07);
+  pad2->SetBottomMargin(0.07);
+  pad2->SetTopMargin(0.02);
+  pad2->SetRightMargin(0.0);
+  hQ2WMEC->SetStats(0);
+  hQ2WMEC->Draw("COL");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
+
+  canvas->cd(3);
+  TPad* pad3 = (TPad*)canvas->GetPad(3);
+  pad3->SetLeftMargin(0.13);
+  pad3->SetBottomMargin(0.15);
+  pad3->SetTopMargin(0.02);
+  pad3->SetRightMargin(0.0);
+  hQ2WHEC->SetStats(0);
+  hQ2WHEC->Draw("COL");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
+
+  canvas->cd(4);
+  TPad* pad4 = (TPad*)canvas->GetPad(4);
+  pad4->SetLeftMargin(0.07);
+  pad4->SetBottomMargin(0.15);
+  pad4->SetTopMargin(0.02);
+  pad4->SetRightMargin(0.0);
+  hQ2WHEC1->SetStats(0);
+  hQ2WHEC1->Draw("COL");
+  Dcut->SetLineColor(kRed);
+  Dcut->Draw("same");
+
+  // Set common axis properties
+  canvas->cd();
+  canvas->Update();
+
+  // Add common axis labels
+  /* TPad *axisPad = new TPad("axisPad", "axisPad", 0, 0, 1, 1);
+  axisPad->Draw();
+  axisPad->cd();
+  axisPad->SetRightMargin(0.18);
+  axisPad->SetLeftMargin(0.1);
+  axisPad->SetTopMargin(0.05);
+  axisPad->SetBottomMargin(0.13);
+  axisPad->SetFillStyle(0);
+  axisPad->SetBorderSize(0);
+  axisPad->SetTickx(0);
+  axisPad->SetTicky(0);
+  */ 
+ // Add common axis title and labels
+  TLatex label;
+  label.SetTextFont(42);
+  label.SetTextSize(0.04);
+  label.DrawLatex(0.5, 0.02, "Q^{2} (GeV^{2})");
+  label.SetTextAngle(90);
+  label.DrawLatex(0.04, 0.5, "W (GeV)");
+  canvas->Print(outputpdf + ')');
  
 }
