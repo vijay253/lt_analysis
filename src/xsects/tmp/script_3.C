@@ -70,7 +70,7 @@ Float_t m_p = 938.27231/1000;
 Double_t hi_bound =  0.7;
 Double_t lo_bound = -0.4;
 
-void x_fit_in_t() {
+void script_3() {
 
 	single_setting("375");
 	/*

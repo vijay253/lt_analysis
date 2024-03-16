@@ -234,7 +234,7 @@ c         stop
          th_cm=th_pos
 
 
-c         tm = tt
+         tm = tt
 
 
 c         print *,  w,dw,q2,dq2,tt,dtt,th_pos
@@ -335,6 +335,11 @@ c
 c /*--------------------------------------------------*/
 c cross-section
 c ratio is data/simc - see GH logbook, p.55
+
+            if (r.gt.3.0) then
+               r=0.0
+               dr=0.0
+            endif
 
              x_real=x_mod*r
 c             x_real=x_mod
