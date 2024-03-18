@@ -3043,9 +3043,11 @@ void Q1Analysis()
 
   Double_t WMEC;TBRANCHMIDEC->SetBranchAddress("W", &WMEC);
   Double_t Q2MEC;TBRANCHMIDEC->SetBranchAddress("Q2", &Q2MEC);
+  Double_t epsilonMEC;TBRANCHMIDEC->SetBranchAddress("epsilon", &epsilonMEC);
   //Dummy
   Double_t WMEDC;TBRANCHMIDEDC->SetBranchAddress("W", &WMEDC);
   Double_t Q2MEDC;TBRANCHMIDEDC->SetBranchAddress("Q2", &Q2MEDC);
+  Double_t epsilonMEDC;TBRANCHMIDEDC->SetBranchAddress("epsilon", &epsilonMEDC);
 
   Double_t  P_gtr_dpmeL1;TBRANCHMIDEL1->SetBranchAddress("ssdelta", &P_gtr_dpmeL1);
   Double_t  P_gtr_xptarmeL1;TBRANCHMIDEL1->SetBranchAddress("ssxptar", &P_gtr_xptarmeL1);
@@ -3567,6 +3569,33 @@ void Q1Analysis()
   TH1D *ht7meL2R  = new TH1D("ht7meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *ht8meL2R  = new TH1D("ht8meL2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
+  //*************************
+  //Thesis Plots
+
+  TH1D *hthQ2meC  = new TH1D("hthQ2meC"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmeC   = new TH1D("hthWmeC"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmeC   = new TH1D("hthtmeC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.06);      
+  TH1D *hthepmeC   = new TH1D("hthepmeC"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
+  //Random
+  TH1D *hthQ2meCR  = new TH1D("hthQ2meCR"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmeCR   = new TH1D("hthWmeCR"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmeCR   = new TH1D("hthtmeCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.06);      
+  TH1D *hthepmeCR   = new TH1D("hthepmeCR"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
+
+  //Dummy
+  TH1D *hthQ2medC  = new TH1D("hthQ2medC"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmedC   = new TH1D("hthWmedC"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmedC   = new TH1D("hthtmedC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.06);      
+  TH1D *hthepmedC   = new TH1D("hthepmedC"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
+  //Random
+  TH1D *hthQ2medCR  = new TH1D("hthQ2medCR"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmedCR   = new TH1D("hthWmedCR"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmedCR   = new TH1D("hthtmedCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.06);      
+  TH1D *hthepmedCR   = new TH1D("hthepmedCR"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
+ 
+ //*************************
+ 
+ 
   TH1D *htmeR1  = new TH1D("htmeR1","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeR2  = new TH1D("htmeR2","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *htmeC   = new TH1D("htmeC","MandelT; MandelT;",   300, -0.01, 0.1);      
@@ -4381,6 +4410,11 @@ void Q1Analysis()
       
       if(CoinPionC && MMpiC && DiamondC)
 	{
+          hthQ2meC->Fill(Q2MEC);
+          hthWmeC->Fill(WMEC);
+          hthtmeC->Fill(-tmeC);
+          hthepmeC->Fill(epsilonMEC);
+
           H_ssdelta_DmeC->Fill(P_gtr_dpmeC);
           H_ssxptar_DmeC->Fill(P_gtr_xptarmeC);
           H_ssyptar_DmeC->Fill(P_gtr_yptarmeC);
@@ -4403,6 +4437,11 @@ void Q1Analysis()
       //Random           
       if(CoinPionCR && MMpiC && DiamondC)
   	{
+          hthQ2meCR->Fill(Q2MEC);
+          hthWmeCR->Fill(WMEC);
+          hthtmeCR->Fill(-tmeC);
+          hthepmeCR->Fill(epsilonMEC);
+
           H_ssdelta_DmeCR->Fill(P_gtr_dpmeC);
           H_ssxptar_DmeCR->Fill(P_gtr_xptarmeC);
           H_ssyptar_DmeCR->Fill(P_gtr_yptarmeC);
@@ -4553,12 +4592,20 @@ void Q1Analysis()
       
       if(CoinPiondC && MMpidC && DimonddC)
 	{
+          hthQ2medC->Fill(Q2MEDC);
+          hthWmedC->Fill(WMEDC);
+          hthtmedC->Fill(-tmedC);
+          hthepmedC->Fill(epsilonMEDC);
 	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
 	  //hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}
       
       if(CoinPiondCR && MMpidC && DimonddC)
 	{
+          hthQ2medCR->Fill(Q2MEDC);
+          hthWmedCR->Fill(WMEDC);
+          hthtmedCR->Fill(-tmedC);
+          hthepmedCR->Fill(epsilonMEDC);
 	  hYmedCR->Fill(-tmedC, ph_qmedC*57.2958 + 180);
 	  //hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}      
@@ -5059,6 +5106,11 @@ void Q1Analysis()
     }
  	
   //Dummy
+  hthQ2medCR->Scale(RTSCALE);
+  hthWmedCR->Scale(RTSCALE);
+  hthtmedCR->Scale(RTSCALE);
+  hthepmedCR->Scale(RTSCALE);
+
   hYmedR1R->Scale(RTSCALE);
   hYmedR2R->Scale(RTSCALE);
   hYmedCR->Scale(RTSCALE);
@@ -6948,6 +7000,46 @@ void Q1Analysis()
   TCanvas *cYtme = new TCanvas("cYtme", " cYtme");
   Cloneme->Draw("COLZ");
   cYtme->Print(outputpdf);
+ 
+ //thesis plots
+  TCanvas *cthesisme = new TCanvas("cthesisme", " cthesisme");
+  cthesisme->Divide(2,2);
+  cthesisme->cd(1);
+  hthQ2meC->Add(hthQ2meCR, -1);
+  hthQ2meC->Scale(ECMEC);
+  hthQ2medC->Add(hthQ2medCR, -1);
+  hthQ2medC->Scale(ECMEDC);
+  hthQ2meC->Add(hthQ2medC, -1);
+  hthQ2meC->SetStats(0);
+  hthQ2meC->Draw(); 
+
+  cthesisme->cd(2);
+  hthWmeC->Add(hthWmeCR, -1);
+  hthWmeC->Scale(ECMEC);
+  hthWmedC->Add(hthWmedCR, -1);
+  hthWmedC->Scale(ECMEDC);
+  hthWmeC->Add(hthWmedC, -1);
+  hthWmeC->SetStats(0);
+  hthWmeC->Draw();
+
+  cthesisme->cd(3);
+  hthtmeC->Add(hthtmeCR, -1);
+  hthtmeC->Scale(ECMEC);
+  hthtmedC->Add(hthtmedCR, -1);
+  hthtmedC->Scale(ECMEDC);
+  hthtmeC->Add(hthtmedC, -1);
+  hthtmeC->SetStats(0);
+  hthtmeC->Draw();
+
+  cthesisme->cd(4);
+  hthepmeC->Add(hthepmeCR, -1);
+  hthepmeC->Scale(ECMEC);
+  hthepmedC->Add(hthepmedCR, -1);
+  hthepmedC->Scale(ECMEDC);
+  hthepmeC->Add(hthepmedC, -1);
+  hthepmeC->SetStats(0);
+  hthepmeC->Draw();
+  cthesisme->Print(outputpdf);
 
   //High epsilon analysis Feb 07, 2023
 
