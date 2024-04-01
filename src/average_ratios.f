@@ -55,7 +55,7 @@ c     in averages/aver.* .
 
       nset=0
       open(55,file='./list.settings.pion19')
-c      open(55,file='./tmp.settings.pion19')
+c      open(55,file='./test.setting.pion19')
       do while(.true.)
 
          read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbin

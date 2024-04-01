@@ -84,7 +84,7 @@ void script_3() {
 
 void single_setting(TString q2_set){
 
-    vector<Float_t> prv_par_vec, g_vec, w_vec, q2_vec, th_vec, logq2_vec;
+  vector<Float_t> prv_par_vec, g_vec, w_vec, q2_vec, th_vec, logq2_vec, t_vec;
     vector<Float_t> par_vec, par_err_vec, par_chi2_vec;
 
     Float_t t0, t1, t2, t3 ;
@@ -107,8 +107,9 @@ void single_setting(TString q2_set){
 
 	ifstream para_file_in;
 
-	//	para_file_in.open("../parameters/itt_0/par.pl_" + q2_set, ifstream::in);
-	para_file_in.open("../parameters/it1/par.pl", ifstream::in);
+	para_file_in.open("../parameters/itt_0/par.pl_" + q2_set, ifstream::in);
+	//	para_file_in.open("../parameters/it1/par.pl", ifstream::in);
+	//	para_file_in.open("../parameters/it2/par.pl", ifstream::in);
 
 
 
@@ -143,15 +144,15 @@ void single_setting(TString q2_set){
 	tt2 = prv_par_vec[14]; 
 	tt3 = prv_par_vec[15]; 
 	*/
-	l0  = prv_par_vec[4]; 
-	l1  = prv_par_vec[5]; 
-	l2  = prv_par_vec[6]; 
-	l3  = prv_par_vec[7]; 
+	l0  = prv_par_vec[0]; 
+	l1  = prv_par_vec[1]; 
+	l2  = prv_par_vec[2]; 
+	l3  = prv_par_vec[3]; 
 
-	t0  = prv_par_vec[0]; 
-	t1  = prv_par_vec[1]; 
-	t2  = prv_par_vec[2]; 
-	t3  = prv_par_vec[3]; 
+	t0  = prv_par_vec[4]; 
+	t1  = prv_par_vec[5]; 
+	t2  = prv_par_vec[6]; 
+	t3  = prv_par_vec[7]; 
 
 	lt0 = prv_par_vec[8]; 
 	lt1 = prv_par_vec[9]; 
@@ -182,8 +183,8 @@ void single_setting(TString q2_set){
 //       Float_t g       = (2.47**2-m_p**2)**2/(w**2-m_p**2)**2;
 
 //        	Float_t g = pow(pow(0.38,2)-pow(m_p,2),2)/pow(pow(w,2)-pow(m_p,2),2);
-		Float_t g = 1.0/pow(pow(w,2)-pow(m_p,2),2);
-
+		Float_t g = pow(pow(w,2)-pow(m_p,2),2);
+		t_vec.push_back(tt);
 		g_vec.push_back(g);
 		w_vec.push_back(w);
 		q2_vec.push_back(q2);
@@ -244,11 +245,13 @@ void single_setting(TString q2_set){
 		f_sigT_pre->SetParameters(t0, t1, t2, t3);
 
 		f_sigT = new TF1("sig_T", fun_Sig_T_160, 0.01176, 0.05478, 4); 
-		f_sigT->SetParameters(-t0, t1, t2, t3);
-		f_sigT->SetParLimits(0, 0, 100 );
-		//		f_sigT->SetParLimits(1, -0, -100);
-		
-
+		f_sigT->SetParameters(t0, t1, t2, t3);
+		f_sigT->SetParLimits(0, -100, 100);
+		f_sigT->SetParLimits(1, -100, 100);
+		f_sigT->SetParLimits(2, -100, 100);
+		f_sigT->SetParLimits(3, -100, 100);
+					
+			
 		/*		f_sigT->SetParameter(0, t0);
 		f_sigT->SetParameter(1, t1);
 		f_sigT->SetParameter(2, t2);
@@ -283,18 +286,21 @@ void single_setting(TString q2_set){
 //		q2_term = t2 * logq2_vec[i] + t3 * g_sigt->GetX()[i] * logq2_vec[i];
 //		q2_term = t2 * q2_vec[i] + t3 * g_sigt->GetX()[i] * q2_vec[i];
 
-
 		q2_term = 0.0;
 
 		sigt_X_pre = (f_sigT_pre->Eval(g_sigt->GetX()[i]) + q2_term) * g_vec[i]; 
 		g_sigt_prv->SetPoint(i, g_sigt->GetX()[i], sigt_X_pre);
 
 		Float_t sigt_X_fit, sigt_X_fit_err;
-		sigt_X_fit     = (g_sigt->GetY()[i]);
-		sigt_X_fit_err = (g_sigt->GetEY()[i]);
+		sigt_X_fit     = (g_sigt->GetY()[i] * 2*pi*pow(10,6) * g_vec[i]);
+		sigt_X_fit_err = (g_sigt->GetEY()[i] * (2*pi*pow(10,6) * g_vec[i]));
 		
+		//	sigt_X_fit = (t0 + t1*logq2_vec[i] + (t2 + t3*logq2_vec[i])*(t_vec[i] - (0.0735 + 0.028*log(0.375))*0.375) / (0.0735 + 0.028*log(0.375))*0.375);
+
+		//	sigt_X_fit = t0*exp(t1*t_vec[i]) + t2 + t3;
 		g_sigt_fit->SetPoint(i, g_sigt->GetX()[i], sigt_X_fit);
 		g_sigt_fit->SetPointError(i, 0, sigt_X_fit_err);
+
 
 //		cout << "pre   " << f_sigT_pre->Eval(g_sigt->GetX()[i]) << "      "<< sigt_X_pre << endl;
 //		cout << "pre   " << f_sigT_pre->Eval(0.2) << "      "<< sigt_X_pre << endl;
@@ -399,7 +405,7 @@ void single_setting(TString q2_set){
 	f_sigT->SetParameter(1, f_sigT->GetParameter(1));
 	f_sigT->SetParameter(2, f_sigT->GetParameter(2));
 	f_sigT->SetParameter(3, f_sigT->GetParameter(3));
-	g_sigt_fit->Fit(f_sigT);
+	g_sigt_fit->Fit(f_sigT, "SR");
 	*/
 	/*	
 	f_sigT->SetParameter(0, f_sigT->GetParameter(0));
@@ -521,8 +527,11 @@ void single_setting(TString q2_set){
  		g_sigl_prv->SetPoint(i, g_sigl->GetX()[i], sigl_X_pre);
 
 		Float_t sigl_X_fit, sigl_X_fit_err;
-		sigl_X_fit     = g_sigl->GetY()[i];
-		sigl_X_fit_err = g_sigl->GetEY()[i];
+		sigl_X_fit     = (g_sigl->GetY()[i] * 2*pi*pow(10,6) * g_vec[i]);
+	
+		//	sigl_X_fit = ((l0 + l1*logq2_vec[i])*exp((l2+l3*logq2_vec[i])*(t_vec[i]-0.2))) * g_vec[i]; 
+
+		sigl_X_fit_err = (g_sigl->GetEY()[i] * (2*pi*pow(10,6) * g_vec[i])) ;
 
 		cout << "aa  " << sigl_X_fit  << "  " << sigl_X_fit_err << endl;
 		
@@ -603,12 +612,21 @@ void single_setting(TString q2_set){
 //	f_sigL->SetParameters(prv_par_vec[3], prv_par_vec[4], prv_par_vec[5]);
 
 	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0.01176, 0.05478, 4);
-	f_sigL->SetParameters(l0, -l1, l2, l3);
-	//	f_sigL->SetParLimits(0,  0, 50);
-	//	f_sigL->SetParLimits(2, -16, -100);
-	//	f_sigL->SetParLimits(2, -10, 10);
+	f_sigL->SetParameters(l0, l1, l2, l3);
+	//	f_sigL->SetParLimits(0, -50, 50);
+	//	f_sigL->SetParLimits(1, -50, 50);
+		//	f_sigL->SetParLimits(2, -100, 100);
+		//	f_sigL->SetParLimits(3, -100, 100);
+	f_sigL->SetParLimits(1, -70, 50);
+		//		f_sigL->SetParLimits(2, -100, 100);
+		//		f_sigL->SetParLimits(3, -100, 100);
 
-
+		/*		
+	f_sigL->SetParLimits(1, -100, 100);
+	f_sigL->SetParLimits(2, -100, 100);
+		f_sigL->SetParLimits(3, -100, 100);
+	
+	*/
 
 
 //	f_sigL->SetParameters(0, 0, 0.2);
@@ -630,13 +648,14 @@ void single_setting(TString q2_set){
 		
 	//        f_sigL->SetParameters(l0, l1, l2, l3);
 	/*
-		f_sigL->SetParameter(0, f_sigL->GetParameter(0));
-		f_sigL->SetParameter(1, f_sigL->GetParameter(1));
-		f_sigL->SetParameter(2, f_sigL->GetParameter(2));
-		f_sigL->SetParameter(3, f_sigL->GetParameter(3));
+	f_sigL->SetParameter(0, f_sigL->GetParameter(0));
+	f_sigL->SetParameter(1, f_sigL->GetParameter(1));
+	f_sigL->SetParameter(2, f_sigL->GetParameter(2));
+	f_sigL->SetParameter(3, f_sigL->GetParameter(3));
+
 		//	f_sigL->SetParLimits(0,  0, 50);
 
-	g_sigl_fit->Fit(f_sigL);
+	g_sigl_fit->Fit(f_sigL, "RS");
 	*/
 	/*
 	f_sigL->SetParameter(0, f_sigL->GetParameter(0));
@@ -759,13 +778,20 @@ void single_setting(TString q2_set){
 
 //			exit(0);
 
+
+		  siglt_X_fit     = (g_siglt->GetY()[i]  * 2*pi*pow(10,6) * g_vec[i] / sin(th_vec[i] * pi /180));
+		  siglt_X_fit_err = (g_siglt->GetEY()[i] * 2*pi*pow(10,6) * g_vec[i] / sin(th_vec[i] * pi/180));
+
 /*
-  siglt_X_fit     = g_siglt->GetY()[i] / sin(th_vec[i] * pi / 180);
-  siglt_X_fit_err = g_siglt->GetEY()[i] / sin(th_vec[i] * pi / 180);
+		  siglt_X_fit     = (g_siglt->GetY()[i] * g_vec[i] / sin(th_vec[i] * pi /180));
+		  siglt_X_fit_err = (g_siglt->GetEY()[i] * g_vec[i] / sin(th_vec[i] * pi/180));
 */
+		  //  siglt_X_fit = (lt0*exp(lt1*(t_vec[i]))+lt2/(t_vec[i])) * sin(th_vec[i] * pi/180) * g_vec[i];
+
+/*
 			siglt_X_fit     = g_siglt->GetY()[i];
 			siglt_X_fit_err = g_siglt->GetEY()[i];
-
+*/
 		}
 
 
@@ -837,8 +863,9 @@ void single_setting(TString q2_set){
 
 	TF1* f_sigLT = new TF1("sig_LT", fun_Sig_LT, 0.01176, 0.05478, 3); 
 	f_sigLT->SetParameters(lt0, lt1,  lt2);
+	//	f_sigLT->SetParLimits(0, -100,  100);
 
-	g_siglt_fit->Fit(f_sigLT);
+	g_siglt_fit->Fit(f_sigLT, "S");
 
 
 
@@ -934,12 +961,20 @@ void single_setting(TString q2_set){
 
 		} else {
 
-		  /*			sigtt_X_fit     = g_sigtt->GetY()[i] / sin(th_vec[i] * pi / 180) / sin(th_vec[i] * pi / 180);
-					sigtt_X_fit_err = g_sigtt->GetEY()[i] / sin(th_vec[i] * pi / 180) / sin(th_vec[i] * pi / 180);
+		  sigtt_X_fit     = (g_sigtt->GetY()[i] * 2*pi*pow(10,6) * g_vec[i] / sin(th_vec[i] * pi/180) / sin(th_vec[i] * pi/180));
+		  sigtt_X_fit_err = (g_sigtt->GetEY()[i] * 2*pi*pow(10,6) * g_vec[i] / sin(th_vec[i] *pi/180) / sin(th_vec[i] * pi/180));
+		  
+		  /*
+		  sigtt_X_fit     = (g_sigtt->GetY()[i] * g_vec[i] / sin(th_vec[i] * pi/180) / sin(th_vec[i] * pi/180));
+		  sigtt_X_fit_err = (g_sigtt->GetEY()[i] * g_vec[i] / sin(th_vec[i] *pi/180) / sin(th_vec[i] * pi/180));
 		  */
-			sigtt_X_fit     = g_sigtt->GetY()[i];
-			sigtt_X_fit_err = g_sigtt->GetEY()[i];
+		  // sigtt_X_fit = (tt0/q2_vec[i]*exp(-q2_vec[i]))*(t_vec[i]/pow((t_vec[i]+pow(0.139570, 2)), 2)) * g_vec[i] * sin(th_vec[i] * pi / 180) * sin(th_vec[i] * pi / 180);
+ 
 
+		  /*
+		  sigtt_X_fit     = g_sigtt->GetY()[i];
+		  sigtt_X_fit_err = g_sigtt->GetEY()[i];
+		  */
 		}
 
 
@@ -976,8 +1011,6 @@ void single_setting(TString q2_set){
 	if (g_min > gp_min) {
 		g_sigtt->SetMinimum(gp_min - difff);
 	} 
-
-
 
 	g_sigtt->SetTitle("Sig TT");
 
@@ -1136,16 +1169,28 @@ Double_t fun_Sig_T(Double_t *x, Double_t *par) {
 
 Double_t fun_Sig_T_160(Double_t *x, Double_t *par) {
    Float_t xx = x[0];
+   Float_t q2 = 0.375;
+   // Float_t q2 = x[1];
 
-   Double_t f = par[0] + par[1]*log(0.375) + (par[2] + par[3]*log(0.375))*(xx - (0.0735+0.028*log(0.375))*0.375) / (0.0735+0.028*log(0.375))*0.375 ;
+   //  Double_t f = par[0] + par[1]*log(q2) + ((par[2] + par[3]*log(q2))*(xx - (0.0735 + 0.028*log(q2))*q2)/((0.0735 + 0.028*log(q2))*q2));
+   /*
+   for(Int_t i =1; i <=8;i++)
+     {
+       Double_t tt[8] = {0.01176, 0.01345, 0.01709, 0.02131, 0.02605, 0.03198, 0.04021, 0.05478};
+       Double_t q2[8] = {0.36685, 0.37309, 0.37639, 0.37860, 0.37880, 0.37778, 0.37907, 0.37754};
+
+       Double_t yy = tt[i]*xx;
+   
+       Double_t f = par[0] + par[1]*log(q2[i]) + (par[2] + par[3]*log(q2[i]))*(yy - (0.0735 + 0.028*log(q2[i]))*q2[i]) / (0.0735 + 0.028*log(q2[i]))*q2[i];
+*/   
    // Double_t f = par[0]+par[1]*log(0.375) + (par[2] + par[3]*log(0.375))*(xx - (0.0735+0.028*log(0.375))*0.375);
 
+     
+   // Double_t f = (par[0] + par[1] + par [2])*par[3]*xx ;
 
-   //   Double_t f = par[1] + (par[2] + par [3])*par[0]*xx ;
+   Double_t f = par[0]*exp(par[1]*xx) + par[2] + par[3];
 
-//  Double_t f = par[0]*exp(par[1]*xx) + par[2];
-
-//  Double_t f = par[0]*(xx+ par[1])*(xx+ par[1]) + par[2];
+   // Double_t f = par[0]*(xx+ par[1])*(xx+ par[1]) + par[2];
 
 //   Double_t f = par[0]*exp(par[1]*xx) + par[2]/xx;
 
@@ -1155,7 +1200,8 @@ Double_t fun_Sig_T_160(Double_t *x, Double_t *par) {
 
 //   Double_t f =  par[0] + par[1]*xx;
 
-   return f;
+       return f;
+     
 }
 
 
@@ -1197,8 +1243,19 @@ Double_t fun_Sig_T_245(Double_t *x, Double_t *par) {
 
 Double_t fun_Sig_L(Double_t *x, Double_t *par) {
    Float_t xx = x[0];
+   //Float_t q2 = x[1];
+   Float_t q2 = 0.375;
+   /*
+   for(Int_t i =1; i <=8;i++)
+     {
+       Double_t tt[8] = {0.01176, 0.01345, 0.01709, 0.02131, 0.02605, 0.03198, 0.04021, 0.05478};
+       Double_t q2[8] = {0.36685, 0.37309, 0.37639, 0.37860, 0.37880, 0.37778, 0.37907, 0.37754};
 
-   Double_t f = ((par[0]+par[1]*log(0.375))*exp((par[3]+par[4]*log(0.375))*(xx-0.2)));
+       Double_t yy = tt[i]*xx;
+
+       Double_t f = ((par[0] + par[1]*log(q2[i]))*exp((par[3] + par[4]*log(q2[i]))*(yy-0.2)));
+   */
+   Double_t f = ((par[0] + par[1]*log(q2))*exp((par[3] + par[4]*log(q2))*(xx-0.2)));
 
 
 //   Double_t f = par[0] + par[1]*xx;
@@ -1259,7 +1316,7 @@ Double_t fun_Sig_TT(Double_t *x, Double_t *par) {
 
    Float_t xx = x[0];
 
-  Double_t f = (par[0]/(0.375))*exp(-0.375)*(xx/pow(xx+pow(0.139570, 2), 2));
+   Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
 //  Double_t f = par[0]*exp(par[1]*xx) + par[2]/xx;
 
 //   Double_t f = par[0]*exp(-par[1]*xx) + par[2];

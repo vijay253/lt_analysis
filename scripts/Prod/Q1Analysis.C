@@ -3593,6 +3593,12 @@ void Q1Analysis()
   TH1D *hthtmedCR   = new TH1D("hthtmedCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.06);      
   TH1D *hthepmedCR   = new TH1D("hthepmedCR"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
  
+  //SIMC
+  TH1D *hthQ2SmeC  = new TH1D("hthQ2SmeC"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWSmeC   = new TH1D("hthWSmeC"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtSmeC   = new TH1D("hthtSmeC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.06);      
+  TH1D *hthepSmeC   = new TH1D("hthepSmeC"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
+
  //*************************
  
  
@@ -4627,6 +4633,11 @@ void Q1Analysis()
       
       if(CUTSIMCMEC)
 	{
+	  hthQ2SmeC->Fill(Q2_simcmeC, NFMC*WeightmeC);
+          hthWSmeC->Fill(W_simcmeC, NFMC*WeightmeC);
+          hthtSmeC->Fill(t_simcmeC, NFMC*WeightmeC);
+          hthepSmeC->Fill(epsilon_simcmeC, NFMC*WeightmeC);
+
 	  hphmeSC->Fill(phipqmeC*57.2958, NFMC*WeightmeC);
 	  //hphmeSC->Fill(missmassmeC, NFMC*WeightmeC);
 	  hYSmeC->Fill(t_simcmeC,phipqmeC*57.2958, NFMC*WeightmeC);
@@ -7010,8 +7021,11 @@ void Q1Analysis()
   hthQ2medC->Add(hthQ2medCR, -1);
   hthQ2medC->Scale(ECMEDC);
   hthQ2meC->Add(hthQ2medC, -1);
+  hthQ2SmeC->SetStats(0);
+  hthQ2SmeC->SetLineColor(kRed);
+  hthQ2SmeC->Draw("hist"); 
   hthQ2meC->SetStats(0);
-  hthQ2meC->Draw(); 
+  hthQ2meC->Draw("same"); 
 
   cthesisme->cd(2);
   hthWmeC->Add(hthWmeCR, -1);
@@ -7019,8 +7033,11 @@ void Q1Analysis()
   hthWmedC->Add(hthWmedCR, -1);
   hthWmedC->Scale(ECMEDC);
   hthWmeC->Add(hthWmedC, -1);
+  hthWSmeC->SetStats(0);
+  hthWSmeC->SetLineColor(kRed);
+  hthWSmeC->Draw("hist");
   hthWmeC->SetStats(0);
-  hthWmeC->Draw();
+  hthWmeC->Draw("same");
 
   cthesisme->cd(3);
   hthtmeC->Add(hthtmeCR, -1);
@@ -7028,8 +7045,11 @@ void Q1Analysis()
   hthtmedC->Add(hthtmedCR, -1);
   hthtmedC->Scale(ECMEDC);
   hthtmeC->Add(hthtmedC, -1);
+  hthtSmeC->SetStats(0);
+  hthtSmeC->SetLineColor(kRed);
+  hthtSmeC->Draw("hist");
   hthtmeC->SetStats(0);
-  hthtmeC->Draw();
+  hthtmeC->Draw("same");
 
   cthesisme->cd(4);
   hthepmeC->Add(hthepmeCR, -1);
@@ -7037,8 +7057,11 @@ void Q1Analysis()
   hthepmedC->Add(hthepmedCR, -1);
   hthepmedC->Scale(ECMEDC);
   hthepmeC->Add(hthepmedC, -1);
+  hthepSmeC->SetStats(0);
+  hthepSmeC->SetLineColor(kRed);
+  hthepSmeC->Draw("hist");
   hthepmeC->SetStats(0);
-  hthepmeC->Draw();
+  hthepmeC->Draw("same");
   cthesisme->Print(outputpdf);
 
   //High epsilon analysis Feb 07, 2023

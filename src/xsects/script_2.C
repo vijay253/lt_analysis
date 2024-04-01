@@ -366,9 +366,9 @@ void single_setting(TString q2_set){
 //		TF1* f1 = new TF1("lo_eps_fit", LT_sep_x_lo_fun, 0, 360, 4); 
 //		TF1* f2 = new TF1("hi_eps_fit", LT_sep_x_hi_fun, 0, 360, 4); 
 
-		TF1* f1 = new TF1("lo_eps_fit", LT_sep_x_lo_fun, 0, 360, 4); 
-		TF1* f2 = new TF1("hi_eps_fit", LT_sep_x_hi_fun, 0, 360, 4); 
-		TF1* f3 = new TF1("mi_eps_fit", LT_sep_x_mi_fun, 0, 360, 4); 
+		TF1* f1 = new TF1("lo_eps_fit", LT_sep_x_lo_fun,  11.25, 348.78, 4); 
+		TF1* f2 = new TF1("hi_eps_fit", LT_sep_x_hi_fun,  11.25, 348.78, 4); 
+		TF1* f3 = new TF1("mi_eps_fit", LT_sep_x_mi_fun,  11.25, 348.78, 4); 
 
 	  	TGraphErrors* g1 = (TGraphErrors*) g1_tmp->Clone("g1");
 		
@@ -488,7 +488,7 @@ void single_setting(TString q2_set){
 		TGraph2DErrors* g_plot_err = new TGraph2DErrors();
 
 		Double_t g_xx, g_yy, g_yy_err;
-
+				
 		for(Int_t ii = 0; ii < g1->GetN(); ii++) {
 
 			g1->GetPoint(ii, g_xx, g_yy);
@@ -501,8 +501,8 @@ void single_setting(TString q2_set){
 			g_plot_err->SetPoint(g_plot_err->GetN(), g_xx, eps_lo_setting, g_yy);
 			g_plot_err->SetPointError(g_plot_err->GetN()-1, 0.0, 0.0, g_yy_err);
 
-		}
-
+			}
+			
 		for(Int_t ii = 0; ii < g2->GetN(); ii++) {
 
 			g2->GetPoint(ii, g_xx, g_yy);
@@ -515,7 +515,7 @@ void single_setting(TString q2_set){
 			g_plot_err->SetPointError(g_plot_err->GetN()-1, 0.0,  0.0, g_yy_err);
 
 		}
-
+		
 		for(Int_t ii = 0; ii < g3->GetN(); ii++) {
 
 			g3->GetPoint(ii, g_xx, g_yy);
@@ -527,7 +527,7 @@ void single_setting(TString q2_set){
 			g_plot_err->SetPoint(g_plot_err->GetN(), g_xx, eps_mi_setting, g_yy);
 			g_plot_err->SetPointError(g_plot_err->GetN()-1, 0.0,  0.0, g_yy_err);
 		}
-
+		
 		g_plot_err->SetFillColor(29);
 		g_plot_err->SetMarkerSize(0.8);
 		g_plot_err->SetMarkerStyle(20);
@@ -582,9 +582,10 @@ void single_setting(TString q2_set){
  		// par 2: for sigLT
  		// par 3: for sigTT
  
-		// 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
-		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.286, 0.781);        // VK
- 		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 0, 360, 0.20, 0.90);        // VK
+		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
+		//TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.286, 0.781);        // VK
+		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 11.25, 348.78, 0.26, 0.8);        // VK
+		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 0, 360, 0.2, 0.7);        // VK
  	
  		TGraphErrors * sigL_change = new TGraphErrors(); 
  		TGraphErrors * sigT_change = new TGraphErrors(); 
@@ -850,7 +851,7 @@ void single_setting(TString q2_set){
  // //  		f2->SetParameters(0.2582E-07, -0.1265E-08, 0.0, 0.0);
  // //
  // 
-		//  		g1->SetMarkerColor(4);
+		// 		g1->SetMarkerColor(4);
   		g2->SetMarkerColor(2);
   		g2->SetLineColor(2);
   		g2->SetMarkerStyle(4);
@@ -876,12 +877,12 @@ void single_setting(TString q2_set){
 		// 		g->GetYaxis()->SetTitleOffset(1.6);
  		g->GetYaxis()->CenterTitle();
  
- 
+		
  		f1->FixParameter(0, fff2->GetParameter(0));
  		f1->FixParameter(1, fff2->GetParameter(1));
  		f1->FixParameter(2, fff2->GetParameter(2));
  		f1->FixParameter(3, fff2->GetParameter(3));
- 
+		
 		//		f1->FixParameter(2, 0.0);
 		//		f1->FixParameter(3, 0.0);
  		

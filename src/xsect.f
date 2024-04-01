@@ -414,15 +414,13 @@ c     *   w,q2,eps_mod,th_mod*180./3.14159,tm,eps_set,q2_set
       subroutine xmodel(npol_set,Eb,q2_set,w,q2,tm,phi,
      *     eps_mod,th_mod,x_mod)
 
-
       integer npol_set
       real Eb,q2_set,w,q2,tm,eps_mod,th_mod, thetacm, x_mod
 
       real*8 sig
       real*8 t_gev,tprime_gev,q2_gev,w_gev,eps,tp
       real*8 lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0
-      real*8 a,b,c,d,e,f,fpi,fpi235
-c      real*8 A,B,C,D,E,F,G,H,K,L,mpi    
+      real*8 a,b,c,d,e,f,fpi,fpi235, tav, ftav, ft
       real*8 m_pi0sq
       real*8 phicm, phi pi, mp
 
@@ -481,166 +479,6 @@ c      fpi235 = 1./(1.+2.35/lambdapi_sq)
 * functions at Q^2=2.35, W=2.47 [ub/GeV^2].  Before fitting, I first
 * divided the response functions by (fpi/fpi235)^2 and any sin(thetacm)
 * factors.
-      a = 0.16675 
-      b = 0.89524 
-      c = 3.5991
-      d = 6.4562
-
-c      a =2.07233e-01
-c      b =1.89648e-02
-c      c =-4.98113e-02
-c      d =7.67118e-03
-
-      e = -9.6199
-      f = 5.8319
-      sigL = a*exp(-b*tp)+c*exp(-d*(tp**0.5))+e*exp(-f*(tp**0.25))
- 
-      mpi = 0.13957018
-c...........T.H model.....
-c      A = 350
-c      B = 16
-c      C = 7.5
-c      D = 4.5
-c      E = 2.0
-c      F = 5.0
-c      G = 0.79
-c      H = 3.4
-c      K = 1.1
-c      L = 3.6
-     
-c      sigL = A*(q2/(1+1.77*q2+0.05*q2**2)**2)*exp((B-C*log(q2))*(-tp))
-c      sigT = (D/q2)+(E/q2**2)
-c      sigTT = (-F/q2**2)*(tp/(tp+0.13957018*0.13957018)**2)*sin(thetacm)*sin(thetacm)
-c      sigLT = (exp(G-(H/sqrt(q2))*tp) + K - L/q2**2)*sin(thetacm)
-
-c...this is a new model
-c......................
-c      t0  =    -14.33725
-c      t1  =      -0.1419
-c      t2  =       0.2082
-c      t3  =       0.0000
-c      l0  =      11.5206
-c      l1  =      -0.1996
-c      l2  =       0.0749
-c      l3  =       0.0000
-c      lt0 =      -0.0209
-c      lt1 =       0.3192
-c      lt2 =       0.0000
-c      lt3 =       0.0000
-c      tt0 =       0.0864
-c      tt1 =      -1.7213
-c      tt2 =       0.0000
-c      tt3 =       0.0000
-      
-c      sigl = l0 * (tp + l1)*(tp + l1) + l2
-c      sigt = t0 * (tp + t1)*(tp + t1) + t2 
-c      siglt= (lt0+lt1*tp+lt2*log(q2)+lt3*tp*log(q2))*sin(thetacm)
-c      sigtt=(tt0+tt1*tp+tt2*log(q2)+tt3*tp*log(q2))*sin(thetacm)**2
-c      wfactor=((2.47**2-m_p**2)**2)/((w**2-m_p**2)**2)
-c      sigl = sigl*wfactor
-c      sigt = sigt*wfactor
-c      siglt= siglt*wfactor
-c      sigtt= sigtt*wfactor
-c      sig = sigt + eps_mod*sigl +eps_mod*cos(2.*phicm)*sigtt
-c     *     + sqrt(2.*eps_mod*(1.+eps_mod))*cos(phicm)*siglt
-
-c.........................................................
-c      print*, fpi, fpi235
-
-      sigL = (1./q2**2)*(tp/((tp-0.02)**2))*sigL *(fpi/fpi375)**2
-c      sigL = sigL
-
-      a = -0.12286
-      b = 0.56383
-      c = 1.4673
-      d = 2.1988
-
-c      a =2.07233e-01
-c      b =1.89648e-02
-c      c =-4.98113e-02
-c      d =7.67118e-03
-
-      e = 0.65170
-      f = 18.501
-      sigT = a*exp(-b*tp)+c*exp(-d*(tp**0.5))+e*exp(-f*(tp**2))
-      sigT = sigT *(fpi/fpi375)**2
-c      sigT = sigT
-
-      a = 0.46397
-      b = 4.9179 
-      c = 3.3023
-      d = 3.1741
-
-c      a =2.07233e-01
-c      b =1.89648e-02
-c      c =-4.98113e-02
-c      d =7.67118e-03
-
-      sigLT = a*exp(-b*tp)+c*exp(-d*(tp**0.5))
-      sigLT = sigLT*(fpi/fpi375)**2*sin(thetacm)
-c      sigLT = sigLT*sin(thetacm)
-* Laget uses -sqrt(e(1+e)) instead of +sqrt(2e(1+e))
-      sigLT = -sigLT/sqrt(2.)
-
-      a = -0.26497
-      b = 2.7655 
-      c = 2.8034
-      d = 3.8586
-
-c      a =2.07233e-01
-c      b =1.89648e-02
-c      c =-4.98113e-02
-c      d =7.67118e-03
-
-      sigTT = a*exp(-b*tp)+c*exp(-d*(tp**0.5))
-      sigTT= sigTT*(fpi/fpi375)**2*(sin(thetacm))**2
-c      sigTT= sigTT*(sin(thetacm))**2
-
-c Volmer model
-c===========================
-      a = 34.0
-      b = -23.5 
-      c = 6.0
-      d = 0.0
-
-c      a = 7.57668e-01
-c      b = 6.58532e-01 
-c      c = 1.54334e-01
-c      d = 1.11672e-01
-      sigL = a*exp(b+c*q2*(-tp-0.02))
-      a = 10.0
-      b = 1.0 
-      c = -4.0
-      d = -4.0
-
-c      a = 7.57668e-01
-c      b = 6.58532e-01 
-c      c = 1.54334e-01
-c      d = 1.11672e-01
-      sigT = (a/(q2 + q2**2))*(b+c*tp)+d*sigL*sin(thetacm)**2.0
-      a = 0.94
-      b = -34.4 
-      c = -2.76
-      d = 171.0
-
-c      a = 7.57668e-01
-c      b = 6.58532e-01 
-c      c = 1.54334e-01
-c      d = 1.11672e-01
-
-      sigLT= (a+b*exp(c*q2)*sin(thetacm))
-      sigLT = sigLT + d*exp(113.9*tp*exp(-0.75*q2))*sin(thetacm)
-      a = 2.22
-      b = 0.0 
-      c = 0.0
-      d = 0.0
-
-c      a = 7.57668e-01
-c      b = 6.58532e-01 
-c      c = 1.54334e-01
-c      d = 1.11672e-01
-
-      sigTT = (a/q2**2)*(tp/(tp-0.02)**2)*sin(thetacm)**2
 
 c===========================
 c hh Vijay
@@ -692,9 +530,14 @@ c      b = -48.5525
 c      c = 4.3149
 c      d = -7.8221
 
-      sigT = a+b*log(q2)
-     1     +((c+d*log(q2))*(tp-(0.0735+0.028*log(q2_set))*q2_set)
-     1     /((0.0735+0.028*log(q2_set))*q2_set))
+      tav = (0.0735+0.028*log(q2_set))*q2_set
+      ftav = (abs(tp) - tav)/tav
+
+      sigT = a+b*log(q2)+(c+d*log(q2))*ftav
+
+c      sigT = a+b*log(q2)
+c     1     +((c+d*log(q2))*(tp-(0.0735+0.028*log(q2_set))*q2_set)
+c     1     /((0.0735+0.028*log(q2_set))*q2_set))
 
 
 c it0      
@@ -727,10 +570,11 @@ c      a = -150.9774
 c test
 c      a = -144.7318
 
+      ft = tp/(abs(tp) + 0.139570**2)**2
 
 c      sigTT = ((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
-      sigTT = ((a/q2*exp(-q2))*sin(thetacm)**2)
-      sigTT = sigTT*(tprime_gev/(tp+0.139570**2)**2)
+      sigTT = ((a/q2*exp(-q2))*ft*sin(thetacm)**2)
+c      sigTT = sigTT*(tprime_gev/(tp+0.139570**2)**2)
 
       print*, sigT
 c      print*, sigLT
