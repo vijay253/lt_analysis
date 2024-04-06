@@ -348,6 +348,8 @@ c             dx_real=2.823
 
              if (x_real.eq.0.0) then
                 dx_real = -1000
+c                x_real = 0
+c                dx_real = 0
              endif
             
 
@@ -424,6 +426,19 @@ c     *   w,q2,eps_mod,th_mod*180./3.14159,tm,eps_set,q2_set
       real*8 m_pi0sq
       real*8 phicm, phi pi, mp
 
+c     Fit parameters (V.K.) 
+      integer npar,ipar
+      parameter (npar=12) 
+      real*8 fitpar(npar),par,par_er
+      save fitpar
+      open(88,file='simc_gfortran/par.pl',status='old')      
+      do while(.true.)
+         read(88,*,end=99) par,par_er,ipar
+         fitpar(ipar)=par
+      end do
+ 99   close(88)
+      
+
       pi = 3.1415926
       mp=0.93827231             !mp
 
@@ -484,101 +499,102 @@ c===========================
 c hh Vijay
 c===========================
 c it0
-      a =  0.25961E+02
-      b = -0.10000E+02  
-      c = -0.15838E+02
-      d =  0.00000E+00
+      do ipar=1,npar
+         print*,fitpar(ipar),ipar
+      end do      
+      
+c      a =  0.25961E+02
+c      b = -0.10000E+02  
+c      c = -0.15838E+02
+c      d =  0.00000E+00
 c it1
-c      a = 6.4085
-c      b = -20.2917 
+c      a = 24.5738
+c      b = -11.2538 
 c      c = -15.8380
-c      d = -13.0734
-
+c      d = -11.6768
 c it2
-c      a = -3.8098
-c      b = -9.8736 
+c      a = 8.3738
+c      b = -1.4386 
 c      c = -15.8380
-c      d = -19.9500
+c      d = -17.3067
 c test
-c      a = 6.4085
-c      b = -20.2917 
-c      c = -15.8380
-c      d = -13.0734
+      a = 20.7692
+      b = -4.7067 
+      c = -15.8380
+      d = -13.7974
 
-      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
+c      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
+      sigL = ((fitpar(5)+fitpar(6)*log(q2))
+     1     *exp((fitpar(7)+fitpar(8)*log(q2))*(tp-0.2)))
 
 c it0
-      a =  0.46859E+02
-      b = -0.30000E+02 
-      c = -0.33572E+01
-      d =  0.00000E+00
+c      a =  0.46859E+02
+c      b = -0.30000E+02 
+c      c = -0.33572E+01
+c      d =  0.00000E+00
 c it1
-c      a = 65.05584
-c      b = -48.5525
-c      c = 4.3149
-c      d = -7.8221
-
+c      a = 46.85900
+c      b = -75.5521
+c      c = 1.8041
+c      d = -5.2755
 c it2
-c      a = 87.77741
-c      b = -71.7182
-c      c = 13.5436
-c      d = -17.2312
+c      a = 46.85900
+c      b = -100.0000
+c      c = 28.5507
+c      d = -32.5449
 
 c test
-c      a = 65.05584
-c      b = -48.5525
-c      c = 4.3149
-c      d = -7.8221
+      a = 46.85900
+      b = -96.4655
+      c = -0.5225
+      d = -2.8901
 
       tav = (0.0735+0.028*log(q2_set))*q2_set
       ftav = (abs(tp) - tav)/tav
-
-      sigT = a+b*log(q2)+(c+d*log(q2))*ftav
-
-c      sigT = a+b*log(q2)
-c     1     +((c+d*log(q2))*(tp-(0.0735+0.028*log(q2_set))*q2_set)
-c     1     /((0.0735+0.028*log(q2_set))*q2_set))
-
+c      sigT = a*0+b*log(q2)+(c+d*log(q2))*ftav
+      sigT = fitpar(1)+fitpar(2)*log(q2)+(fitpar(3)+fitpar(4)*log(q2))
+     1     *ftav
 
 c it0      
       a =  0.10000E+00
       b = -0.28000E+02
       c =  0.35000E+01
 c it1
-c      a = -100.0000
-c      b = -83.8045
-c      c = -4.4966
-
+c      a = -347.0861
+c      b = -99.4037
+c      c = -3.2874
 c it2
-c      a = 2883.6951
-c      b = -35.8699
-c      c = -36.2393
+c      a = 3078.3235
+c      b = -36.5664
+c      c = -37.2869
 
 c test
-c      a = -100.0000
-c      b = -83.8045
-c      c = -4.4966
+c      a = -347.0861
+c      b = -99.4037
+c      c = -3.2874
    
-      sigLT = ((a*exp(b*(tp))+c/(tp))*sin(thetacm))
+c      sigLT = ((a*exp(b*(tp))+c/(tp))*sin(thetacm))
+      sigLT = ((fitpar(9)*exp(fitpar(10)*(tp))+fitpar(11)/(tp))
+     1     *sin(thetacm))
 
+c      sigLT = 0
+c      print*,"vija", thetacm
 c it0
       a = -0.67276E+02
 c it1
-c      a = -144.7318
+c      a = -130.8499
 c it2
-c      a = -150.9774
+c      a = -150.9493
 c test
-c      a = -144.7318
+c      a = -130.8499
 
       ft = tp/(abs(tp) + 0.139570**2)**2
+c      sigTT = ((a/q2*exp(-q2))*ft*sin(thetacm)**2)
+      sigTT = ((fitpar(12)/q2*exp(-q2))*ft*sin(thetacm)**2)
 
-c      sigTT = ((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
-      sigTT = ((a/q2*exp(-q2))*ft*sin(thetacm)**2)
-c      sigTT = sigTT*(tprime_gev/(tp+0.139570**2)**2)
-
-      print*, sigT
+c      sigTT =0
+c      print*, sigLT, sigTT
 c      print*, sigLT
-
 
 c===========================
 

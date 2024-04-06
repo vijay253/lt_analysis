@@ -108,8 +108,8 @@ void single_setting(TString q2_set){
 	ifstream para_file_in;
 
 	para_file_in.open("../parameters/itt_0/par.pl_" + q2_set, ifstream::in);
-	//	para_file_in.open("../parameters/it1/par.pl", ifstream::in);
-	//	para_file_in.open("../parameters/it2/par.pl", ifstream::in);
+	//		para_file_in.open("../parameters/it1/par.pl", ifstream::in);
+	//		para_file_in.open("../parameters/it2/par.pl", ifstream::in);
 
 
 
@@ -144,15 +144,17 @@ void single_setting(TString q2_set){
 	tt2 = prv_par_vec[14]; 
 	tt3 = prv_par_vec[15]; 
 	*/
-	l0  = prv_par_vec[0]; 
-	l1  = prv_par_vec[1]; 
-	l2  = prv_par_vec[2]; 
-	l3  = prv_par_vec[3]; 
 
-	t0  = prv_par_vec[4]; 
-	t1  = prv_par_vec[5]; 
-	t2  = prv_par_vec[6]; 
-	t3  = prv_par_vec[7]; 
+	t0  = prv_par_vec[0]; 
+	t1  = prv_par_vec[1]; 
+	t2  = prv_par_vec[2]; 
+	t3  = prv_par_vec[3]; 
+
+	l0  = prv_par_vec[4]; 
+	l1  = prv_par_vec[5]; 
+	l2  = prv_par_vec[6]; 
+	l3  = prv_par_vec[7]; 
+
 
 	lt0 = prv_par_vec[8]; 
 	lt1 = prv_par_vec[9]; 
@@ -246,18 +248,13 @@ void single_setting(TString q2_set){
 
 		f_sigT = new TF1("sig_T", fun_Sig_T_160, 0.01176, 0.05478, 4); 
 		f_sigT->SetParameters(t0, t1, t2, t3);
-		f_sigT->SetParLimits(0, -100, 100);
-		f_sigT->SetParLimits(1, -100, 100);
-		f_sigT->SetParLimits(2, -100, 100);
-		f_sigT->SetParLimits(3, -100, 100);
+		
+		//	f_sigT->SetParLimits(0, -1000, 1000);
+			f_sigT->SetParLimits(1, -100, 100);
+		//	f_sigT->SetParLimits(2, 0, 100);
+		//	f_sigT->SetParLimits(3, 0, 100);
 					
 			
-		/*		f_sigT->SetParameter(0, t0);
-		f_sigT->SetParameter(1, t1);
-		f_sigT->SetParameter(2, t2);
-		f_sigT->SetParameter(3, t3);
-		*/
-
 	} else if (q2_set == "245") {
 
 		f_sigT_pre = new TF1("sig_T_pre", fun_Sig_T_245, 0, 0.5, 3);
@@ -613,11 +610,12 @@ void single_setting(TString q2_set){
 
 	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0.01176, 0.05478, 4);
 	f_sigL->SetParameters(l0, l1, l2, l3);
-	//	f_sigL->SetParLimits(0, -50, 50);
-	//	f_sigL->SetParLimits(1, -50, 50);
-		//	f_sigL->SetParLimits(2, -100, 100);
-		//	f_sigL->SetParLimits(3, -100, 100);
-	f_sigL->SetParLimits(1, -70, 50);
+	//	f_sigL->SetParLimits(0, -20, 100);
+	//			f_sigL->SetParLimits(1, -20, 100);
+	//			f_sigL->SetParLimits(2, -20, 100);
+	//			f_sigL->SetParLimits(3, -20, 0);
+	//			f_sigL->SetParLimits(3, -100, 100);
+	//	f_sigL->SetParLimits(1, -70, 50);
 		//		f_sigL->SetParLimits(2, -100, 100);
 		//		f_sigL->SetParLimits(3, -100, 100);
 
@@ -1170,25 +1168,14 @@ Double_t fun_Sig_T(Double_t *x, Double_t *par) {
 Double_t fun_Sig_T_160(Double_t *x, Double_t *par) {
    Float_t xx = x[0];
    Float_t q2 = 0.375;
-   // Float_t q2 = x[1];
-
-   //  Double_t f = par[0] + par[1]*log(q2) + ((par[2] + par[3]*log(q2))*(xx - (0.0735 + 0.028*log(q2))*q2)/((0.0735 + 0.028*log(q2))*q2));
-   /*
-   for(Int_t i =1; i <=8;i++)
-     {
-       Double_t tt[8] = {0.01176, 0.01345, 0.01709, 0.02131, 0.02605, 0.03198, 0.04021, 0.05478};
-       Double_t q2[8] = {0.36685, 0.37309, 0.37639, 0.37860, 0.37880, 0.37778, 0.37907, 0.37754};
-
-       Double_t yy = tt[i]*xx;
-   
-       Double_t f = par[0] + par[1]*log(q2[i]) + (par[2] + par[3]*log(q2[i]))*(yy - (0.0735 + 0.028*log(q2[i]))*q2[i]) / (0.0735 + 0.028*log(q2[i]))*q2[i];
-*/   
-   // Double_t f = par[0]+par[1]*log(0.375) + (par[2] + par[3]*log(0.375))*(xx - (0.0735+0.028*log(0.375))*0.375);
+   Double_t tav = (0.0735 + 0.028*log(q2))*q2;
+   Double_t ftav = (abs(xx) - tav)/tav;  
+   Double_t f =  par[0]*0 + par[1]*log(q2) + (par[2] + par[3]*log(q2))*ftav;
 
      
    // Double_t f = (par[0] + par[1] + par [2])*par[3]*xx ;
 
-   Double_t f = par[0]*exp(par[1]*xx) + par[2] + par[3];
+   //  Double_t f = par[0]*exp(par[1]*xx) + par[2] + par[3];
 
    // Double_t f = par[0]*(xx+ par[1])*(xx+ par[1]) + par[2];
 

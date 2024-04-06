@@ -618,12 +618,11 @@ void single_setting(TString q2_set){
 		
 
 		//VK
-		/*
+		
  		fff2->FixParameter(2, 0.0);
  		fff2->FixParameter(3, 0.0);
-		*/ 
-
- 		g_plot_err->Fit("fff2", "MR");
+		 
+		g_plot_err->Fit("fff2", "MR");
  
  
  
@@ -654,9 +653,10 @@ void single_setting(TString q2_set){
 		*/
  
  		/// Set parameter 2
- 
-		//		fff2->ReleaseParameter(2);
- 
+		/*
+		fff2->ReleaseParameter(2);
+ 		fff2->ReleaseParameter(3);
+		*/
 		// 		fff2->SetParameter(2, 0.0);
 		/** 	
 			fff2->SetParLimits(2, -0.1, 0.1);
