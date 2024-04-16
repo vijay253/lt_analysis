@@ -39,6 +39,7 @@ c     based on theta_cm.f function, which in turn is based Jochen's script.
       end if
 
       s=w*w
+c      omega=(s+q2-m22)/(2*m2)
       omega=(s+q2-m22)/(2*m2)
       q=sqrt(q2+omega**2)
 

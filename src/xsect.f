@@ -343,6 +343,7 @@ c ratio is data/simc - see GH logbook, p.55
              x_real=x_mod*r
 c             x_real=x_mod
              dx_real=x_mod*dr/r
+c             dx_real=x_mod*dr
 c             dx_real=x_mod*2/100
 c             dx_real=2.823
 
@@ -431,6 +432,8 @@ c     Fit parameters (V.K.)
       parameter (npar=12) 
       real*8 fitpar(npar),par,par_er
       save fitpar
+c      open(88,file='parameters/it8/par.pl')      
+c      open(88,file='simc_gfortran/old_parameters/start_par/par.pl')      
       open(88,file='simc_gfortran/par.pl',status='old')      
       do while(.true.)
          read(88,*,end=99) par,par_er,ipar
@@ -499,9 +502,9 @@ c===========================
 c hh Vijay
 c===========================
 c it0
-      do ipar=1,npar
-         print*,fitpar(ipar),ipar
-      end do      
+c      do ipar=1,npar
+c         print*,fitpar(ipar),ipar
+c      end do      
       
 c      a =  0.25961E+02
 c      b = -0.10000E+02  
@@ -527,6 +530,7 @@ c      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
       sigL = ((fitpar(5)+fitpar(6)*log(q2))
      1     *exp((fitpar(7)+fitpar(8)*log(q2))*(tp-0.2)))
 
+c      sigl = fitpar(5)*exp(fitpar(6)*tp)
 c it0
 c      a =  0.46859E+02
 c      b = -0.30000E+02 
@@ -551,9 +555,10 @@ c test
 
       tav = (0.0735+0.028*log(q2_set))*q2_set
       ftav = (abs(tp) - tav)/tav
-c      sigT = a*0+b*log(q2)+(c+d*log(q2))*ftav
-      sigT = fitpar(1)+fitpar(2)*log(q2)+(fitpar(3)+fitpar(4)*log(q2))
+C      sigT = a+b*ftav
+      sigT=fitpar(1)+fitpar(2)*log(q2)+(fitpar(3)+fitpar(4)*log(q2))
      1     *ftav
+c      sigT=fitpar(1)*(fitpar(2)*tp)*exp(fitpar(3)*tp)
 
 c it0      
       a =  0.10000E+00
@@ -573,7 +578,7 @@ c      a = -347.0861
 c      b = -99.4037
 c      c = -3.2874
    
-c      sigLT = ((a*exp(b*(tp))+c/(tp))*sin(thetacm))
+c      sigLT = ((a*exp(b*(-tp))+c/(tp))*sin(thetacm))
       sigLT = ((fitpar(9)*exp(fitpar(10)*(tp))+fitpar(11)/(tp))
      1     *sin(thetacm))
 
@@ -591,9 +596,10 @@ c      a = -130.8499
       ft = tp/(abs(tp) + 0.139570**2)**2
 c      sigTT = ((a/q2*exp(-q2))*ft*sin(thetacm)**2)
       sigTT = ((fitpar(12)/q2*exp(-q2))*ft*sin(thetacm)**2)
+c      sigLT = ((fitpar(9)/q2*exp(-q2))*ft*sin(thetacm))
 
 c      sigTT =0
-c      print*, sigLT, sigTT
+      print*, sigL, sigT, sigLT, sigTT
 c      print*, sigLT
 
 c===========================
@@ -608,8 +614,10 @@ c      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
      
 c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
-      sig = sig*wfactor
-      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
+c      sig = sig*wfactor
+c      sig = sig
+c      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
+c      sig = sig/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
 
       x_mod = sig     
       th_mod=thetacm

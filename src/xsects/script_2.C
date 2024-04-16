@@ -584,7 +584,7 @@ void single_setting(TString q2_set){
  
 		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
 		//TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.286, 0.781);        // VK
-		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 11.25, 348.78, 0.26, 0.8);        // VK
+		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 11.25, 348.78, 0.26, 0.8 );       // VK
 		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 0, 360, 0.2, 0.7);        // VK
  	
  		TGraphErrors * sigL_change = new TGraphErrors(); 
@@ -618,10 +618,10 @@ void single_setting(TString q2_set){
 		
 
 		//VK
-		
+		/*
  		fff2->FixParameter(2, 0.0);
  		fff2->FixParameter(3, 0.0);
-		 
+		*/
 		g_plot_err->Fit("fff2", "MR");
  
  

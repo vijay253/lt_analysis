@@ -7707,9 +7707,9 @@ void Q1Analysis()
 
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
-  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",50, -10, 370);      
-  TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;",  50, -10, 370);      
-  TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",18, -22.5, 382.5);      
   
   /*
   TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -7742,9 +7742,9 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheR1R  = new TH1D("H_hsyptar_DheR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //CENTER  
-  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",50, -10, 370);      
-  TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",  50, -10, 370);      
-  TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",18, -22.5, 382.5);      
   /*
   TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -7776,9 +7776,9 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheCR  = new TH1D("H_hsyptar_DheCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1  
-  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",50, -10, 370);      
-  TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",  50, -10, 370);      
-  TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",18, -22.5, 382.5);      
   /*
   TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -7810,9 +7810,9 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheL1R  = new TH1D("H_hsyptar_DheL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2  
-  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",50, -10, 370);      
-  TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",  50, -10, 370);      
-  TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",50, -10, 370);      
+  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;", 18, -22.5, 382.5);      
+  TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",18, -22.5, 382.5 );      
   /*
   TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
