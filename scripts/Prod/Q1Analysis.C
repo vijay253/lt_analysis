@@ -332,6 +332,52 @@ void Q1Analysis()
   Float_t phipqL2;TSIMCL2->SetBranchAddress("phipq", &phipqL2);
   Float_t thetapqL2;TSIMCL2->SetBranchAddress("thetapq", &thetapqL2);
 
+ //*************************
+  //plot added on Apr 18, 2024
+  //MMpi 
+  TH1D *MPiC   = new TH1D("MPiC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiL1   = new TH1D("MPiL1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiL2   = new TH1D("MPiL2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  //Random
+  TH1D *MPiCR   = new TH1D("MPiCR"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiL1R   = new TH1D("MPiL1R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiL2R   = new TH1D("MPiL2R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  //Dummy
+  TH1D *MPidC   = new TH1D("MPidC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPidL1   = new TH1D("MPidL1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPidL2   = new TH1D("MPidL2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  //Random
+  TH1D *MPidCR   = new TH1D("MPidCR"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPidL1R   = new TH1D("MPidL1R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPidL2R   = new TH1D("MPidL2R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  //SIMC
+  TH1D *MPiSC   = new TH1D("MPiSC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiSL1   = new TH1D("MPiSL1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiSL2   = new TH1D("MPiSL2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+
+  //t
+  TH1D *hthtC   = new TH1D("hthtC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtL1   = new TH1D("hthtL1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtL2   = new TH1D("hthtL2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  //Random
+  TH1D *hthtCR   = new TH1D("hthtCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtL1R   = new TH1D("hthtL1R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtL2R   = new TH1D("hthtL2R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  //Dummy
+  TH1D *hthtdC   = new TH1D("hthtdC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtdL1   = new TH1D("hthtdL1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtdL2   = new TH1D("hthtdL2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  //Random
+  TH1D *hthtdCR   = new TH1D("hthtdCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtdL1R   = new TH1D("hthtdL1R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtdL2R   = new TH1D("hthtdL2R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  //SIMC
+  TH1D *hthtSC   = new TH1D("hthtSC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtSL1   = new TH1D("hthtSL1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtSL2   = new TH1D("hthtSL2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+
+ //*************************
+
   //DATA HISTOGRAMS
 
   TH2D *hQ2WC  = new TH2D("hQ2WC","; ; ", 300, 0.2, 0.6, 300, 2.1, 2.3);      
@@ -761,6 +807,8 @@ void Q1Analysis()
   Double_t MMpiOffsetL1 = 0.007723;
   Double_t MMpiOffsetC  = 0.006723;
 
+  Double_t tOffsetC  = 0.002;
+
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
     {
@@ -784,7 +832,11 @@ void Q1Analysis()
       Double_t MMpiC = mmC>= 0.932-MMpiOffsetC && mmC <=0.98-MMpiOffsetC;
       Double_t CoinPionC = tcoinC-TimmingOffset>=-1.0 && tcoinC-TimmingOffset <= 1.0;      
       Double_t CoinPionCR = ((tcoinC-TimmingOffset>=-15.0 && tcoinC-TimmingOffset<= -9.0) || (tcoinC-TimmingOffset>=7.0 && tcoinC-TimmingOffset<=13.0));      
-      
+
+      if(CoinPionC && DiamondC)
+	{      
+	  MPiC->Fill(mmC+MMpiOffsetC);
+	}     
       if(CoinPionC && MMpiC && DiamondC)
 	{
 	  H_ssdelta_DC->Fill(P_gtr_dp);
@@ -794,18 +846,23 @@ void Q1Analysis()
 	  H_hsdelta_DC->Fill(H_gtr_dp);
 	  H_hsxptar_DC->Fill(H_gtr_xptar);
 	  H_hsyptar_DC->Fill(H_gtr_yptar);
-
 	  hQ2WC1->Fill(Q2C, WC);	      	  
-  	  htC->Fill(-tC);
+
+	  hthtC->Fill(-tC+tOffsetC); 
+ 	  htC->Fill(-tC);
 	  htInC->Fill(-tC);	
 	  hph_qC->Fill(ph_qC*57.2958 + 180);
 	  hphC->Fill(ph_qC*57.2958 + 180);
 	  //  hphC->Fill(mmC+MMpiOffsetC);
-	  hYC->Fill(-tC, ph_qC*57.2958 + 180);
+	  hYC->Fill(-tC+tOffsetC, ph_qC*57.2958 + 180);
 	  //hYC->Fill(-tC, mmC+MMpiOffsetC);   //0.003492
 	  hthC->Fill(th_qC*57.2958);
 	}	
       //Random    
+      if(CoinPionCR && DiamondC)
+	{
+	  MPiCR->Fill(mmC+MMpiOffsetC);
+	}
       if(CoinPionCR && MMpiC && DiamondC)
 	{
 	  H_ssdelta_DCR->Fill(P_gtr_dp);
@@ -816,13 +873,14 @@ void Q1Analysis()
 	  H_hsxptar_DCR->Fill(H_gtr_xptar);
 	  H_hsyptar_DCR->Fill(H_gtr_yptar);
 
+	  hthtCR->Fill(-tC+tOffsetC); 
 	  htCR->Fill(-tC);
 	  htInCR->Fill(-tC);	
 	  hph_qCR->Fill(ph_qC*57.2958 + 180);
 	  hphCR->Fill(ph_qC*57.2958 + 180);
 	  //  hphCR->Fill(mmC+MMpiOffsetC);
 	  hQ2WCR->Fill(Q2C, WC);
-	  hYCR->Fill(-tC, ph_qC*57.2958 + 180);
+	  hYCR->Fill(-tC+tOffsetC, ph_qC*57.2958 + 180);
 	  //hYCR->Fill(-tC, mmC+MMpiOffsetC);
 	  hthCR->Fill(th_qC*57.2958);
 	}
@@ -841,49 +899,49 @@ void Q1Analysis()
 	{
 	  hW1C->Fill(WC);	
 	  hQ21C->Fill(Q2C);	      	  
-	  ht1C->Fill(-tC); 
+	  ht1C->Fill(-tC+tOffsetC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w2t)
 	{
 	  hW2C->Fill(WC);	
 	  hQ22C->Fill(Q2C);	      	  
-	  ht2C->Fill(-tC); 
+	  ht2C->Fill(-tC+tOffsetC); 
   	}	
       if(CoinPionC && MMpiC && DiamondC && w3t)
 	{
 	  hW3C->Fill(WC);	
 	  hQ23C->Fill(Q2C);	      	  
-	  ht3C->Fill(-tC); 
+	  ht3C->Fill(-tC+tOffsetC); 
   	}	
       if(CoinPionC && MMpiC && DiamondC && w4t)
 	{
 	  hW4C->Fill(WC);	
 	  hQ24C->Fill(Q2C);	      	  
-	  ht4C->Fill(-tC); 
+	  ht4C->Fill(-tC+tOffsetC); 
   	}	
       if(CoinPionC && MMpiC && DiamondC && w5t)
 	{
 	  hW5C->Fill(WC);	
 	  hQ25C->Fill(Q2C);	      	  
-	  ht5C->Fill(-tC); 
+	  ht5C->Fill(-tC+tOffsetC); 
   	}	
       if(CoinPionC && MMpiC && DiamondC && w6t)
 	{
 	  hW6C->Fill(WC);	
 	  hQ26C->Fill(Q2C);	      	  
-	  ht6C->Fill(-tC); 
+	  ht6C->Fill(-tC+tOffsetC); 
   	}	
       if(CoinPionC && MMpiC && DiamondC && w7t)
 	{
 	  hW7C->Fill(WC);	
 	  hQ27C->Fill(Q2C);	      	  
-	  ht7C->Fill(-tC); 
+	  ht7C->Fill(-tC+tOffsetC); 
   	}	
       if(CoinPionC && MMpiC && DiamondC && w8t)
 	{
 	  hW8C->Fill(WC);	
 	  hQ28C->Fill(Q2C);	      	  
- 	  ht8C->Fill(-tC); 
+ 	  ht8C->Fill(-tC+tOffsetC); 
  	}
 	
       //Random
@@ -891,50 +949,50 @@ void Q1Analysis()
       	{	  
 	  hW1CR->Fill(WC);	
 	  hQ21CR->Fill(Q2C);	      	  
-	  ht1CR->Fill(-tC); 
+	  ht1CR->Fill(-tC+tOffsetC); 
 	}      
 
       if(CoinPionCR && MMpiC && DiamondC && w2t)
       	{	  
 	  hW2CR->Fill(WC);	
 	  hQ22CR->Fill(Q2C);	      	  
-	  ht2CR->Fill(-tC); 
+	  ht2CR->Fill(-tC+tOffsetC); 
 	}      
       if(CoinPionCR && MMpiC && DiamondC && w3t)
       	{	  
 	  hW3CR->Fill(WC);	
 	  hQ23CR->Fill(Q2C);	      	  
-	  ht3CR->Fill(-tC); 
+	  ht3CR->Fill(-tC+tOffsetC); 
 	}      
       if(CoinPionCR && MMpiC && DiamondC && w4t)
       	{	  
 	  hW4CR->Fill(WC);	
 	  hQ24CR->Fill(Q2C);	      	  
-	  ht4CR->Fill(-tC); 
+	  ht4CR->Fill(-tC+tOffsetC); 
 	}      
       if(CoinPionCR && MMpiC && DiamondC && w5t)
       	{	  
 	  hW5CR->Fill(WC);	
 	  hQ25CR->Fill(Q2C);	      	  
-	  ht5CR->Fill(-tC); 
+	  ht5CR->Fill(-tC+tOffsetC); 
 	}      
       if(CoinPionCR && MMpiC && DiamondC && w6t)
       	{	  
 	  hW6CR->Fill(WC);	
 	  hQ26CR->Fill(Q2C);	      	  
-	  ht6CR->Fill(-tC); 
+	  ht6CR->Fill(-tC+tOffsetC); 
 	}      
       if(CoinPionCR && MMpiC && DiamondC && w7t)
       	{	  
 	  hW7CR->Fill(WC);	
 	  hQ27CR->Fill(Q2C);	      	  
-	  ht7CR->Fill(-tC); 
+	  ht7CR->Fill(-tC+tOffsetC); 
 	}      
       if(CoinPionCR && MMpiC && DiamondC && w8t)
       	{	  
 	  hW8CR->Fill(WC);	
 	  hQ28CR->Fill(Q2C);	      	  
-	  ht8CR->Fill(-tC); 
+	  ht8CR->Fill(-tC+tOffsetC); 
 	}      
       
       if (((tcoinC-TimmingOffset>=-15.0 && tcoinC-TimmingOffset <= -9.0) || (tcoinC-TimmingOffset>=7.0 && tcoinC-TimmingOffset<=13.0)))
@@ -954,18 +1012,29 @@ void Q1Analysis()
       Double_t CoinPiondC = tcoindC-TimmingOffset>=-1.0 && tcoindC-TimmingOffset <= 1.0;      
       Double_t CoinPiondCR = ((tcoindC-TimmingOffset>=-15.0 && tcoindC-TimmingOffset<= -9.0) || (tcoindC-TimmingOffset>=7.0 && tcoindC-TimmingOffset<=13.0));      
       
+      if(CoinPiondC && DiamonddC)
+	{
+	  MPidC->Fill(mmdC+MMpiOffsetC);
+	}
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
-	  hYdC->Fill(-tdC, ph_qdC*57.2958 + 180);
+	  hYdC->Fill(-tdC+tOffsetC, ph_qdC*57.2958 + 180);
 	  //hYdC->Fill(-tdC, mmdC+MMpiOffsetC);
+	  hthtdC->Fill(-tdC+tOffsetC); 
 	}	
 
+      //Random
       Double_t CUTCCR = ((tcoindC-TimmingOffset>=-15.0 && tcoindC-TimmingOffset <= -9.0) || (tcoindC-TimmingOffset>=7.0 && tcoindC-TimmingOffset <=13.0));      
-      
+
+      if(CoinPiondCR && DiamonddC)
+	{
+	  MPidCR->Fill(mmdC+MMpiOffsetC);
+	}
       if(CoinPiondCR && MMpidC && DiamonddC)
 	{
-	  hYdCR->Fill(-tdC, ph_qdC*57.2958 + 180);
+	  hYdCR->Fill(-tdC+tOffsetC, ph_qdC*57.2958 + 180);
 	  //hYdCR->Fill(-tdC, mmdC+MMpiOffsetC);
+	  hthtdCR->Fill(-tdC+tOffsetC); 
 	}
     }  
 
@@ -991,7 +1060,14 @@ void Q1Analysis()
       //      Double_t CUTSIMCC = hsdelta >=-8.0 && hsdelta <=8.0 && hsxpfp >=-0.08 && hsxpfp <=0.08 && hsypfp >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxpfp >=-0.06 && ssxpfp <=0.06 && ssypfp >=-0.04 && ssypfp <=0.04 && missmass >= 0.932 && missmass <= 0.98 && Diamond_cut;
 
       Double_t CUTSIMCC = hsdelta > -8.0 && hsdelta < 8.0 && hsxptar > -0.08 && hsxptar < 0.08 && hsyptar > -0.045 && hsyptar < 0.045 && ssdelta > -10.0 && ssdelta < 20.0 && ssxptar > -0.06 && ssxptar < 0.06 && ssyptar > -0.04 && ssyptar < 0.04 && missmass >= 0.932 && missmass <= 0.98 && Diamond_cut;
+
+      Double_t CUTSIMCC2 = hsdelta > -8.0 && hsdelta < 8.0 && hsxptar > -0.08 && hsxptar < 0.08 && hsyptar > -0.045 && hsyptar < 0.045 && ssdelta > -10.0 && ssdelta < 20.0 && ssxptar > -0.06 && ssxptar < 0.06 && ssyptar > -0.04 && ssyptar < 0.04 && Diamond_cut;
       
+      if(CUTSIMCC2)
+	{
+	  MPiSC->Fill(missmass, fact*Weight);
+	}
+
       if(CUTSIMCC)
 	{
 	  hthSC->Fill(thetapq*57.2958, fact*Weight);
@@ -1010,6 +1086,8 @@ void Q1Analysis()
 	 
 	  H_t_RE->Fill((t_simc-ti_simc), fact*Weight);
 	  H_t_RE_t->Fill((t_simc-ti_simc), t_simc, fact*Weight);
+	  hthtSC->Fill(t_simc, fact*Weight); 
+
 	}    
 
       if(CUTSIMCC && Sw1t)
@@ -1072,6 +1150,11 @@ void Q1Analysis()
       Double_t CoinPionL1 = tcoinL1-TimmingOffset>=-1.0 && tcoinL1-TimmingOffset <= 1.0;      
       Double_t CoinPionL1R = ((tcoinL1-TimmingOffset>=-15.0 && tcoinL1-TimmingOffset<= -9.0) || (tcoinL1-TimmingOffset>=7.0 && tcoinL1-TimmingOffset<=13.0));      
 
+      if(CoinPionL1 && DiamondL1)
+	{      
+	  MPiL1->Fill(mmL1+MMpiOffsetL1);
+	}     
+
       if(CoinPionL1 && MMpiL1 && DiamondL1)
 	{
 	  H_ssdelta_DL1->Fill(P_gtr_dpL1);
@@ -1082,6 +1165,7 @@ void Q1Analysis()
 	  H_hsxptar_DL1->Fill(H_gtr_xptarL1);
 	  H_hsyptar_DL1->Fill(H_gtr_yptarL1);
 
+	  hthtL1->Fill(-tL1); 
 	  htL1->Fill(-tL1);
  	  htInL1->Fill(-tL1);
 	  hph_qL1->Fill(ph_qL1*57.2958 + 180);	  
@@ -1092,6 +1176,10 @@ void Q1Analysis()
 	}     
  
       //Random            
+      if(CoinPionL1R && DiamondL1)		
+	{
+	  MPiL1R->Fill(mmL1+MMpiOffsetL1);
+	}
       if(CoinPionL1R && MMpiL1 && DiamondL1)		
 	{
 	  H_ssdelta_DL1R->Fill(P_gtr_dpL1);
@@ -1102,6 +1190,7 @@ void Q1Analysis()
 	  H_hsxptar_DL1R->Fill(H_gtr_xptarL1);
 	  H_hsyptar_DL1R->Fill(H_gtr_yptarL1);
 
+	  hthtL1R->Fill(-tL1); 
 	  htL1R->Fill(-tL1);
  	  htInL1R->Fill(-tL1);
 	  hph_qL1R->Fill(ph_qL1*57.2958 + 180);	  
@@ -1237,16 +1326,27 @@ void Q1Analysis()
       Double_t CoinPiondL1 = tcoindL1-TimmingOffset>=-1.0 && tcoindL1-TimmingOffset <= 1.0;      
       Double_t CoinPiondL1R = ((tcoindL1-TimmingOffset>=-15.0 && tcoindL1-TimmingOffset<= -9.0) || (tcoindL1-TimmingOffset>=7.0 && tcoindL1-TimmingOffset<=13.0));      
       
+      if(CoinPiondL1 && DiamonddL1)
+	{
+	  MPidL1->Fill(mmdL1+MMpiOffsetL1);
+	}
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
 	  hYdL1->Fill(-tdL1, ph_qdL1*57.2958 + 180);
 	  //hYdL1->Fill(-tdL1,mmdL1+MMpiOffsetL1);
+	  hthtdL1->Fill(-tdL1); 
 	}	
       
+      //Random
+      if(CoinPiondL1R && DiamonddL1)
+	{
+	  MPidL1R->Fill(mmdL1+MMpiOffsetL1);
+	}
       if(CoinPiondL1R && MMpidL1 && DiamonddL1)
 	{
 	  hYdL1R->Fill(-tdL1, ph_qdL1*57.2958 + 180);
 	  //hYdL1R->Fill(-tdL1,mmdL1+MMpiOffsetL1);
+	  hthtdL1R->Fill(-tdL1); 
 	}
     }    
   
@@ -1264,6 +1364,13 @@ void Q1Analysis()
 
       Double_t CUTSIMCL1 = hsdeltaL1 > -8.0 && hsdeltaL1 < 8.0 && hsxptarL1 > -0.08 && hsxptarL1 < 0.08 && hsyptarL1 > -0.045 && hsyptarL1 < 0.045 && ssdeltaL1 > -10.0 && ssdeltaL1 < 20.0 && ssxptarL1 > -0.06 && ssxptarL1 < 0.06 && ssyptarL1 > -0.04 && ssyptarL1 < 0.04 && missmassL1 >=0.932 && missmassL1 <= 0.98 && Diamond_cut;
 
+      Double_t CUTSIMCL12 = hsdeltaL1 > -8.0 && hsdeltaL1 < 8.0 && hsxptarL1 > -0.08 && hsxptarL1 < 0.08 && hsyptarL1 > -0.045 && hsyptarL1 < 0.045 && ssdeltaL1 > -10.0 && ssdeltaL1 < 20.0 && ssxptarL1 > -0.06 && ssxptarL1 < 0.06 && ssyptarL1 > -0.04 && ssyptarL1 < 0.04 && Diamond_cut;
+
+      if(CUTSIMCL12)
+	{
+	  MPiSL1->Fill(missmassL1, factL1*WeightL1);
+	}
+
       if(CUTSIMCL1)
 	{
 	  hph_qSL1->Fill(phipqL1*57.2958, factL1*WeightL1);
@@ -1278,6 +1385,7 @@ void Q1Analysis()
 	  H_hsdelta_SL1->Fill(hsdeltaL1, factL1*WeightL1);
 	  H_hsxptar_SL1->Fill(hsxptarL1, factL1*WeightL1);
 	  H_hsyptar_SL1->Fill(hsyptarL1, factL1*WeightL1);
+	  hthtSL1->Fill(t_simcL1, factL1*WeightL1); 
 	}
     }
   
@@ -1300,6 +1408,10 @@ void Q1Analysis()
       Double_t CoinPionL2 = tcoinL2-TimmingOffset>=-1.0 && tcoinL2-TimmingOffset <= 1.0;      
       Double_t CoinPionL2R = ((tcoinL2-TimmingOffset>=-15.0 && tcoinL2-TimmingOffset<= -9.0) || (tcoinL2-TimmingOffset>=7.0 && tcoinL2-TimmingOffset<=13.0));      
       
+      if(CoinPionL2 && DiamondL2)
+	{      
+	  MPiL2->Fill(mmL2+MMpiOffsetL2);
+	}     
       if(CoinPionL2 && MMpiL2 && DiamondL2)
 	{
 	  H_ssdelta_DL2->Fill(P_gtr_dpL2);
@@ -1310,6 +1422,7 @@ void Q1Analysis()
 	  H_hsxptar_DL2->Fill(H_gtr_xptarL2);
 	  H_hsyptar_DL2->Fill(H_gtr_yptarL2);
 
+	  hthtL2->Fill(-tL2); 
 	  htL2->Fill(-tL2);
  	  htInL2->Fill(-tL2);
 	  hph_qL2->Fill(ph_qL2*57.2958 + 180);
@@ -1319,6 +1432,11 @@ void Q1Analysis()
 	  //hYL2->Fill(-tL2, mmL2+MMpiOffsetL2);
 	}
 
+      //Random
+      if(CoinPionL2R && DiamondL2)
+	{
+	  MPiL2R->Fill(mmL2+MMpiOffsetL2);
+	}
       if(CoinPionL2R && MMpiL2 && DiamondL2)
 	{
 	  H_ssdelta_DL2R->Fill(P_gtr_dpL2);
@@ -1329,6 +1447,7 @@ void Q1Analysis()
 	  H_hsxptar_DL2R->Fill(H_gtr_xptarL2);
 	  H_hsyptar_DL2R->Fill(H_gtr_yptarL2);
 
+	  hthtL2R->Fill(-tL2); 
 	  htL2R->Fill(-tL2);
  	  htInL2R->Fill(-tL2);
 	  hph_qL2R->Fill(ph_qL2*57.2958 + 180);
@@ -1463,18 +1582,29 @@ void Q1Analysis()
       Double_t CoinPiondL2 = tcoindL2-TimmingOffset>=-1.0 && tcoindL2-TimmingOffset <= 1.0;      
       Double_t CoinPiondL2R = ((tcoindL2-TimmingOffset>=-15.0 && tcoindL2-TimmingOffset<= -9.0) || (tcoindL2-TimmingOffset>=7.0 && tcoindL2-TimmingOffset<=13.0));      
 
+      if(CoinPiondL2 && DiamonddL2)
+	{
+	  MPidL2->Fill(mmdL2+MMpiOffsetL2);
+	}
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
 	  hYdL2->Fill(-tdL2, ph_qdL2*57.2958 + 180);
 	  // hYdL2->Fill(-tdL2, mmdL2+MMpiOffsetL2);
+	  hthtdL2->Fill(-tdL2); 
 	}	
 
+      //Random
       Double_t CUTCL2R = ((tcoindL2>=-15.0 && tcoindL2 <= -9.0) || (tcoindL2>=7.0 && tcoindL2<=13.0));      
-      
+     
+      if(CoinPiondL2R && DiamonddL2)
+	{
+	  MPidL2R->Fill(mmdL2+MMpiOffsetL2);
+	}
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
 	  hYdL2R->Fill(-tdL2, ph_qdL2*57.2958 + 180);
 	  //hYdL2R->Fill(-tdL2, mmdL2+MMpiOffsetL2);
+	  hthtdL2R->Fill(-tdL2); 
 	}
     }    
   //SIMC LEFT2
@@ -1491,6 +1621,12 @@ void Q1Analysis()
 
       Double_t CUTSIMCL2 = hsdeltaL2 > -8.0 && hsdeltaL2 < 8.0 && hsxptarL2 > -0.08 && hsxptarL2 < 0.08 && hsyptarL2 > -0.045 && hsyptarL2 < 0.045 && ssdeltaL2 > -10.0 && ssdeltaL2 < 20.0 && ssxptarL2 > -0.06 && ssxptarL2 < 0.06 && ssyptarL2 > -0.04 && ssyptarL2 < 0.04 && missmassL2 >= 0.932 && missmassL2 <= 0.98 && Diamond_cut;
 
+      Double_t CUTSIMCL22 = hsdeltaL2 > -8.0 && hsdeltaL2 < 8.0 && hsxptarL2 > -0.08 && hsxptarL2 < 0.08 && hsyptarL2 > -0.045 && hsyptarL2 < 0.045 && ssdeltaL2 > -10.0 && ssdeltaL2 < 20.0 && ssxptarL2 > -0.06 && ssxptarL2 < 0.06 && ssyptarL2 > -0.04 && ssyptarL2 < 0.04 && missmassL2 >= 0.932 && missmassL2 <= 0.98 && Diamond_cut;
+
+      if(CUTSIMCL22)
+	{
+	  MPiSL2->Fill(missmassL2, factL2*WeightL2);
+	}
       if(CUTSIMCL2)
 	
 	{
@@ -1506,10 +1642,34 @@ void Q1Analysis()
 	  H_hsdelta_SL2->Fill(hsdeltaL2, factL2*WeightL2);
 	  H_hsxptar_SL2->Fill(hsxptarL2, factL2*WeightL2);
 	  H_hsyptar_SL2->Fill(hsyptarL2, factL2*WeightL2);
+	  hthtSL2->Fill(t_simcL2, factL2*WeightL2); 
 	}
     }
+  //////////////////////////
   Double_t RTSCALE = 1.0/6.0;   
+  //////////////////////////
 
+  MPiCR->Scale(RTSCALE);
+  MPiL1R->Scale(RTSCALE);
+  MPiL2R->Scale(RTSCALE);
+  //dummy
+  MPidCR->Scale(RTSCALE);
+  MPidL1R->Scale(RTSCALE);
+  MPidL2R->Scale(RTSCALE);
+
+  hthtCR->Scale(RTSCALE);
+  hthtL1R->Scale(RTSCALE);
+  hthtL2R->Scale(RTSCALE);
+  //dummy
+  hthtdCR->Scale(RTSCALE);
+  hthtdL1R->Scale(RTSCALE);
+  hthtdL2R->Scale(RTSCALE);
+
+  //Yield
+  hYCR->Scale(RTSCALE);
+  hYL1R->Scale(RTSCALE);
+  hYL2R->Scale(RTSCALE);
+  //dummy
   hYdCR->Scale(RTSCALE);
   hYdL1R->Scale(RTSCALE);
   hYdL2R->Scale(RTSCALE);
@@ -1650,8 +1810,8 @@ void Q1Analysis()
   Double_t ECLEC   = 1.0/307.463;
   Double_t ECLEDC  = 1.0/43.926;
   */
-  Double_t ECLEC   = 1.5/447.01427000000007;
-  Double_t ECLEDC  = 1.5/40.4086;
+  Double_t ECLEC   = 1.0/447.01427000000007;
+  Double_t ECLEDC  = 1.0/40.4086;
 
   //  Double_t ECLEL1  = 1.0/695.990;
   /*  Double_t ECLEL1  = 1.0/464.909;
@@ -1671,6 +1831,87 @@ void Q1Analysis()
   Double_t SCFLEL1 = 1.0;  //0.95
   Double_t SCFLEL2 = 1.0;  //0.95
  
+
+  //////////////////////////////////////////
+  TCanvas *cthesiMPis = new TCanvas("cthesiMPis", "cthesiMPis");
+  cthesiMPis->Divide(2,2);
+  cthesiMPis->cd(1);
+  MPiC->Add(MPiCR, -1);
+  MPiC->Scale(ECLEC);
+  MPidC->Add(MPidCR, -1);
+  MPidC->Scale(ECLEDC);
+  MPiC->Add(MPidC, -1);
+  //  MPiSC->SetStats(0);
+  MPiSC->SetLineColor(kRed);
+  MPiSC->Draw("hist");
+  //  MPiC->SetStats(0);
+  MPiC->Draw("same");
+
+  cthesiMPis->cd(2);
+  MPiL1->Add(MPiL1R, -1);
+  MPiL1->Scale(ECLEL1);
+  MPidL1->Add(MPidL1R, -1);
+  MPidL1->Scale(ECLEDL1);
+  MPiL1->Add(MPidL1, -1);
+  //  MPiSL1->SetStats(0);
+  MPiSL1->SetLineColor(kRed);
+  MPiSL1->Draw("hist");
+  //  MPiL1->SetStats(0);
+  MPiL1->Draw("same");
+
+  cthesiMPis->cd(3);
+  MPiL2->Add(MPiL2R, -1);
+  MPiL2->Scale(ECLEL2);
+  MPidL2->Add(MPidL2R, -1);
+  MPidL2->Scale(ECLEDL2);
+  MPiL2->Add(MPidL2, -1);
+  //  MPiSL2->SetStats(0);
+  MPiSL2->SetLineColor(kRed);
+  MPiSL2->Draw("hist");
+  //  MPiL2->SetStats(0);
+  MPiL2->Draw("same");
+  cthesiMPis->Print(outputpdf + '(');
+
+  TCanvas *cthesis = new TCanvas("cthesis", "cthesis");
+  cthesis->Divide(2,2);
+
+  cthesis->cd(1);
+  hthtC->Add(hthtCR, -1);
+  hthtC->Scale(ECLEC);
+  hthtdC->Add(hthtdCR, -1);
+  hthtdC->Scale(ECLEDC);
+  hthtC->Add(hthtdC, -1);
+  // hthtSC->SetStats(0);
+  hthtSC->SetLineColor(kRed);
+  hthtSC->Draw("hist");
+  // hthtC->SetStats(0);
+  hthtC->Draw("same");
+
+  cthesis->cd(2);
+  hthtL1->Add(hthtL1R, -1);
+  hthtL1->Scale(ECLEL1);
+  hthtdL1->Add(hthtdL1R, -1);
+  hthtdL1->Scale(ECLEDL1);
+  hthtL1->Add(hthtdL1, -1);
+  // hthtSL1->SetStats(0);
+  hthtSL1->SetLineColor(kRed);
+  hthtSL1->Draw("hist");
+  // hthtL1->SetStats(0);
+  hthtL1->Draw("same");
+
+  cthesis->cd(3);
+  hthtL2->Add(hthtL2R, -1);
+  hthtL2->Scale(ECLEL2);
+  hthtdL2->Add(hthtdL2R, -1);
+  hthtdL2->Scale(ECLEDL2);
+  hthtL2->Add(hthtdL2, -1);
+  // hthtSL2->SetStats(0);
+  hthtSL2->SetLineColor(kRed);
+  hthtSL2->Draw("hist");
+  // hthtL2->SetStats(0);
+  hthtL2->Draw("same");
+  cthesis->Print(outputpdf);
+
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
   htcoinL2->SetStats(0);
@@ -1713,7 +1954,7 @@ void Q1Analysis()
   leg->AddEntry(htcoinL2,"Left2","l");
   leg->Draw("same");
 
-  c1->Print(outputpdf + '(');
+  c1->Print(outputpdf);
 
   TCanvas *c3 = new TCanvas("c3", " c3");
  
@@ -4019,7 +4260,7 @@ void Q1Analysis()
 	  hph_qmeR1->Fill(ph_qmeR1*57.2958 + 180);
 	  hphmeR1->Fill(ph_qmeR1*57.2958 + 180);
  	  //hphmeR1->Fill(mmmeR1+MMpiOffsetmeR1);
-	  hYmeR1->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
+	  hYmeR1->Fill(-tmeR1+tOffsetmeR1, ph_qmeR1*57.2958 + 180);
 	  //hYmeR1->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
       //Random
@@ -4043,7 +4284,7 @@ void Q1Analysis()
 	  hph_qmeR1R->Fill(ph_qmeR1*57.2958 + 180);
 	  hphmeR1R->Fill(ph_qmeR1*57.2958 + 180);
  	  //hphmeR1R->Fill(mmmeR1+MMpiOffsetmeR1);
-	  hYmeR1R->Fill(-tmeR1, ph_qmeR1*57.2958 + 180);
+	  hYmeR1R->Fill(-tmeR1+tOffsetmeR1, ph_qmeR1*57.2958 + 180);
 	  // hYmeR1R->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
 
@@ -4060,50 +4301,50 @@ void Q1Analysis()
 	{
 	  hW1meR1->Fill(WMER1);	
 	  hQ21meR1->Fill(Q2MER1);	      	  
-	  ht1meR1->Fill(-tmeR1); 
+	  ht1meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
 
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w2t)
 	{
 	  hW2meR1->Fill(WMER1);	
 	  hQ22meR1->Fill(Q2MER1);	      	  
-	  ht2meR1->Fill(-tmeR1); 
+	  ht2meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w3t)
 	{
 	  hW3meR1->Fill(WMER1);	
 	  hQ23meR1->Fill(Q2MER1);	      	  
-	  ht3meR1->Fill(-tmeR1); 
+	  ht3meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w4t)
 	{
 	  hW4meR1->Fill(WMER1);	
 	  hQ24meR1->Fill(Q2MER1);	      	  
-	  ht4meR1->Fill(-tmeR1); 
+	  ht4meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w5t)
 	{
 	  hW5meR1->Fill(WMER1);	
 	  hQ25meR1->Fill(Q2MER1);	      	  
-	  ht5meR1->Fill(-tmeR1); 
+	  ht5meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w6t)
 	{
 	  hW6meR1->Fill(WMER1);	
 	  hQ26meR1->Fill(Q2MER1);	      	  
-	  ht6meR1->Fill(-tmeR1); 
+	  ht6meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w7t)
 	{
 	  hW7meR1->Fill(WMER1);	
 	  hQ27meR1->Fill(Q2MER1);	      	  
-	  ht7meR1->Fill(-tmeR1); 
+	  ht7meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w8t)
 	{
 	  hW8meR1->Fill(WMER1);	
 	  hQ28meR1->Fill(Q2MER1);	      	  
-	  ht8meR1->Fill(-tmeR1); 
+	  ht8meR1->Fill(-tmeR1+tOffsetmeR1); 
  	}	
 
       //Random
@@ -4112,7 +4353,7 @@ void Q1Analysis()
 	{
 	  hW1meR1R->Fill(WMER1);	
 	  hQ21meR1R->Fill(Q2MER1);	      	  
-	  ht1meR1R->Fill(-tmeR1); 
+	  ht1meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
 
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w2t)
@@ -4120,49 +4361,49 @@ void Q1Analysis()
 	{
 	  hW2meR1R->Fill(WMER1);	
 	  hQ22meR1R->Fill(Q2MER1);	      	  
-	  ht2meR1R->Fill(-tmeR1); 
+	  ht2meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w3t)
 	
 	{
 	  hW3meR1R->Fill(WMER1);	
 	  hQ23meR1R->Fill(Q2MER1);	      	  
-	  ht3meR1R->Fill(-tmeR1); 
+	  ht3meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w4t)
 	
 	{
 	  hW4meR1R->Fill(WMER1);	
 	  hQ24meR1R->Fill(Q2MER1);	      	  
-	  ht4meR1R->Fill(-tmeR1); 
+	  ht4meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w5t)
 	
 	{
 	  hW5meR1R->Fill(WMER1);	
 	  hQ25meR1R->Fill(Q2MER1);	      	  
-	  ht5meR1R->Fill(-tmeR1); 
+	  ht5meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w6t)
 	
 	{
 	  hW6meR1R->Fill(WMER1);	
 	  hQ26meR1R->Fill(Q2MER1);	      	  
-	  ht6meR1R->Fill(-tmeR1); 
+	  ht6meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w7t)
 	
 	{
 	  hW7meR1R->Fill(WMER1);	
 	  hQ27meR1R->Fill(Q2MER1);	      	  
-	  ht7meR1R->Fill(-tmeR1); 
+	  ht7meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w8t)
 	
 	{
 	  hW8meR1R->Fill(WMER1);	
 	  hQ28meR1R->Fill(Q2MER1);	      	  
-	  ht8meR1R->Fill(-tmeR1); 
+	  ht8meR1R->Fill(-tmeR1+tOffsetmeR1); 
 	}
       
       if (((tcoinmeR1-TimmingOffset>=-15.0 && tcoinmeR1-TimmingOffset <= -9.0) || (tcoinmeR1-TimmingOffset>=7.0 && tcoinmeR1-TimmingOffset <=13.0)))
@@ -4186,7 +4427,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR1 && MMpidR1 && DimonddR1)
 	{
-	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  hYmedR1->Fill(-tmedR1+tOffsetmeR1, ph_qmedR1*57.2958 + 180);
 	  //hYmedR1->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
 	  hthtmedR1->Fill(-tmedR1+tOffsetmeR1);
 	}
@@ -4198,7 +4439,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR1R && MMpidR1 && DimonddR1)
 	{
-	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  hYmedR1R->Fill(-tmedR1+tOffsetmeR1, ph_qmedR1*57.2958 + 180);
 	  //hYmedR1R->Fill(-tmedR1, mmmedR1+MMpiOffsetmeR1);
 	  hthtmedR1R->Fill(-tmedR1+tOffsetmeR1);
 	}      
@@ -4283,7 +4524,7 @@ void Q1Analysis()
 	  hph_qmeR2->Fill(ph_qmeR2*57.2958 + 180);
 	  hphmeR2->Fill(ph_qmeR2*57.2958 + 180);
  	  //hphmeR2->Fill(mmmeR2+MMpiOffsetmeR2);
-	  hYmeR2->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
+	  hYmeR2->Fill(-tmeR2+tOffsetmeR2, ph_qmeR2*57.2958 + 180);
 	  //hYmeR2->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       //Random
@@ -4307,7 +4548,7 @@ void Q1Analysis()
 	  hph_qmeR2R->Fill(ph_qmeR2*57.2958 + 180);
 	  hphmeR2R->Fill(ph_qmeR2*57.2958 + 180);
  	  //hphmeR2R->Fill(mmmeR2+MMpiOffsetmeR2);
-	  hYmeR2R->Fill(-tmeR2, ph_qmeR2*57.2958 + 180);
+	  hYmeR2R->Fill(-tmeR2+tOffsetmeR2, ph_qmeR2*57.2958 + 180);
 	  //hYmeR2R->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       
@@ -4324,50 +4565,50 @@ void Q1Analysis()
 	{
 	  hW1meR2->Fill(WMER2);	
 	  hQ21meR2->Fill(Q2MER2);	      	  
-	  ht1meR2->Fill(-tmeR2); 
+	  ht1meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
 
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w2t)
 	{
 	  hW2meR2->Fill(WMER2);	
 	  hQ22meR2->Fill(Q2MER2);	      	  
-	  ht2meR2->Fill(-tmeR2); 
+	  ht2meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w3t)
 	{
 	  hW3meR2->Fill(WMER2);	
 	  hQ23meR2->Fill(Q2MER2);	      	  
-	  ht3meR2->Fill(-tmeR2); 
+	  ht3meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w4t)
 	{
 	  hW4meR2->Fill(WMER2);	
 	  hQ24meR2->Fill(Q2MER2);	      	  
-	  ht4meR2->Fill(-tmeR2); 
+	  ht4meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w5t)
 	{
 	  hW5meR2->Fill(WMER2);	
 	  hQ25meR2->Fill(Q2MER2);	      	  
-	  ht5meR2->Fill(-tmeR2); 
+	  ht5meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w6t)
 	{
 	  hW6meR2->Fill(WMER2);	
 	  hQ26meR2->Fill(Q2MER2);	      	  
-	  ht6meR2->Fill(-tmeR2); 
+	  ht6meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w7t)
 	{
 	  hW7meR2->Fill(WMER2);	
 	  hQ27meR2->Fill(Q2MER2);	      	  
-	  ht7meR2->Fill(-tmeR2); 
+	  ht7meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w8t)
 	{
 	  hW8meR2->Fill(WMER2);	
 	  hQ28meR2->Fill(Q2MER2);	      	  
-	  ht8meR2->Fill(-tmeR2); 
+	  ht8meR2->Fill(-tmeR2+tOffsetmeR2); 
  	}	
       //Random      
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w1t)
@@ -4375,14 +4616,14 @@ void Q1Analysis()
 	{
 	  hW1meR2R->Fill(WMER2);	
 	  hQ21meR2R->Fill(Q2MER2);	      	  
-	  ht1meR2R->Fill(-tmeR2); 
+	  ht1meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w2t)
 	
 	{
 	  hW2meR2R->Fill(WMER2);	
 	  hQ22meR2R->Fill(Q2MER2);	      	  
-	  ht2meR2R->Fill(-tmeR2); 
+	  ht2meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w3t)
@@ -4390,7 +4631,7 @@ void Q1Analysis()
 	{
 	  hW3meR2R->Fill(WMER2);	
 	  hQ23meR2R->Fill(Q2MER2);	      	  
-	  ht3meR2R->Fill(-tmeR2); 
+	  ht3meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w4t)
@@ -4398,7 +4639,7 @@ void Q1Analysis()
 	{
 	  hW4meR2R->Fill(WMER2);	
 	  hQ24meR2R->Fill(Q2MER2);	      	  
-	  ht4meR2R->Fill(-tmeR2); 
+	  ht4meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w5t)
@@ -4406,7 +4647,7 @@ void Q1Analysis()
 	{
 	  hW5meR2R->Fill(WMER2);	
 	  hQ25meR2R->Fill(Q2MER2);	      	  
-	  ht5meR2R->Fill(-tmeR2); 
+	  ht5meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w6t)
@@ -4414,7 +4655,7 @@ void Q1Analysis()
 	{
 	  hW6meR2R->Fill(WMER2);	
 	  hQ26meR2R->Fill(Q2MER2);	      	  
-	  ht6meR2R->Fill(-tmeR2); 
+	  ht6meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w7t)
@@ -4422,7 +4663,7 @@ void Q1Analysis()
 	{
 	  hW7meR2R->Fill(WMER2);	
 	  hQ27meR2R->Fill(Q2MER2);	      	  
-	  ht7meR2R->Fill(-tmeR2); 
+	  ht7meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if(CoinPionR2R && MMpiR2 && DiamondR2 && w8t)
@@ -4430,7 +4671,7 @@ void Q1Analysis()
 	{
 	  hW8meR2R->Fill(WMER2);	
 	  hQ28meR2R->Fill(Q2MER2);	      	  
-	  ht8meR2R->Fill(-tmeR2); 
+	  ht8meR2R->Fill(-tmeR2+tOffsetmeR2); 
 	}
 
       if (((tcoinmeR2-TimmingOffset>=-15.0 && tcoinmeR2-TimmingOffset <= -9.0) || (tcoinmeR2-TimmingOffset>=7.0 && tcoinmeR2-TimmingOffset <=13.0)))
@@ -4454,7 +4695,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR2 && MMpidR2 && DimonddR2)
 	{
-	  hYmedR2->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
+	  hYmedR2->Fill(-tmedR2+tOffsetmeR2, ph_qmedR2*57.2958 + 180);
 	  //hYmedR2->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
 	  hthtmedR2->Fill(-tmedR2+tOffsetmeR2);
 	}
@@ -4466,7 +4707,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR2R && MMpidR2 && DimonddR2)
 	{
-	  hYmedR2R->Fill(-tmedR2, ph_qmedR2*57.2958 + 180);
+	  hYmedR2R->Fill(-tmedR2+tOffsetmeR2, ph_qmedR2*57.2958 + 180);
 	  //hYmedR2R->Fill(-tmedR2, mmmedR2+MMpiOffsetmeR2);
 	  hthtmedR2R->Fill(-tmedR2+tOffsetmeR2);
 	}      
@@ -4561,7 +4802,7 @@ void Q1Analysis()
 	  hph_qmeC->Fill(ph_qmeC*57.2958 + 180);
 	  hphmeC->Fill(ph_qmeC*57.2958 + 180);
  	  //hphmeC->Fill(mmmeC+MMpiOffsetmeC);
-	  hYmeC->Fill(-tmeC, ph_qmeC*57.2958 + 180);
+	  hYmeC->Fill(-tmeC+tOffsetmeC, ph_qmeC*57.2958 + 180);
 	  //hYmeC->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
 
 	}	      
@@ -4591,7 +4832,7 @@ void Q1Analysis()
 	  htmeInCR->Fill(-tmeC);
 	  hph_qmeCR->Fill(ph_qmeC*57.2958 + 180);
 	  //hYmeCR->Fill(-tmeC, mmmeC+MMpiOffsetmeC);
-	  hYmeCR->Fill(-tmeC, ph_qmeC*57.2958 + 180);
+	  hYmeCR->Fill(-tmeC+tOffsetmeC, ph_qmeC*57.2958 + 180);
 	  hphmeCR->Fill(ph_qmeC*57.2958 + 180);
  	  //hphmeCR->Fill(mmmeC+MMpiOffsetmeC);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
@@ -4609,106 +4850,106 @@ void Q1Analysis()
 	{
 	  hW1meC->Fill(WMEC);	
 	  hQ21meC->Fill(Q2MEC);	      	  
-	  ht1meC->Fill(-tmeC); 
+	  ht1meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w2t)
 	{
 	  hW2meC->Fill(WMEC);	
 	  hQ22meC->Fill(Q2MEC);	      	  
-	  ht2meC->Fill(-tmeC); 
+	  ht2meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w3t)
 	{
 	  hW3meC->Fill(WMEC);	
 	  hQ23meC->Fill(Q2MEC);	      	  
-	  ht3meC->Fill(-tmeC); 
+	  ht3meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w4t)
 	{
 	  hW4meC->Fill(WMEC);	
 	  hQ24meC->Fill(Q2MEC);	      	  
-	  ht4meC->Fill(-tmeC); 
+	  ht4meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w5t)
 	{
 	  hW5meC->Fill(WMEC);	
 	  hQ25meC->Fill(Q2MEC);	      	  
-	  ht5meC->Fill(-tmeC); 
+	  ht5meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w6t)
 	{
 	  hW6meC->Fill(WMEC);	
-	  hQ26meC->Fill(Q2MEC);	      	  
-	  ht6meC->Fill(-tmeC); 
+	  hQ26meC->Fill(Q2MEC+tOffsetmeC);	      	  
+	  ht6meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w7t)
 	{
 	  hW7meC->Fill(WMEC);	
 	  hQ27meC->Fill(Q2MEC);	      	  
-	  ht7meC->Fill(-tmeC); 
+	  ht7meC->Fill(-tmeC+tOffsetmeC); 
  	}	
       if(CoinPionC && MMpiC && DiamondC && w8t)
 	{
 	  hW8meC->Fill(WMEC);	
 	  hQ28meC->Fill(Q2MEC);	      	  
-	  ht8meC->Fill(-tmeC); 
+	  ht8meC->Fill(-tmeC+tOffsetmeC); 
  	}	
-
+      //Random
       if(CoinPionCR && MMpiC && DiamondC && w1t)
 	
 	{
 	  hW1meCR->Fill(WMEC);	
 	  hQ21meCR->Fill(Q2MEC);	      	  
-	  ht1meCR->Fill(-tmeC); 
+	  ht1meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w2t)
 	
 	{
 	  hW2meCR->Fill(WMEC);	
 	  hQ22meCR->Fill(Q2MEC);	      	  
-	  ht2meCR->Fill(-tmeC); 
+	  ht2meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w3t)
 	
 	{
 	  hW3meCR->Fill(WMEC);	
 	  hQ23meCR->Fill(Q2MEC);	      	  
-	  ht3meCR->Fill(-tmeC); 
+	  ht3meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w4t)
 	
 	{
 	  hW4meCR->Fill(WMEC);	
 	  hQ24meCR->Fill(Q2MEC);	      	  
-	  ht4meCR->Fill(-tmeC); 
+	  ht4meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w5t)
 	
 	{
 	  hW5meCR->Fill(WMEC);	
 	  hQ25meCR->Fill(Q2MEC);	      	  
-	  ht5meCR->Fill(-tmeC); 
+	  ht5meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w6t)
 	
 	{
 	  hW6meCR->Fill(WMEC);	
 	  hQ26meCR->Fill(Q2MEC);	      	  
-	  ht6meCR->Fill(-tmeC); 
+	  ht6meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w7t)
 	
 	{
 	  hW7meCR->Fill(WMEC);	
 	  hQ27meCR->Fill(Q2MEC);	      	  
-	  ht7meCR->Fill(-tmeC); 
+	  ht7meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       if(CoinPionCR && MMpiC && DiamondC && w8t)
 	
 	{
 	  hW8meCR->Fill(WMEC);	
 	  hQ28meCR->Fill(Q2MEC);	      	  
-	  ht8meCR->Fill(-tmeC); 
+	  ht8meCR->Fill(-tmeC+tOffsetmeC); 
 	}
       
       if(((tcoinmeC-TimmingOffset>=-15.0 && tcoinmeC-TimmingOffset <= -9.0) || (tcoinmeC-TimmingOffset>=7.0 && tcoinmeC-TimmingOffset <=13.0)))
@@ -4737,7 +4978,7 @@ void Q1Analysis()
           hthWmedC->Fill(WMEDC);
           hthtmedC->Fill(-tmedC+tOffsetmeC);
           hthepmedC->Fill(epsilonMEDC);
-	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	  hYmedC->Fill(-tmedC+tOffsetmeC, ph_qmedC*57.2958 + 180);
 	  //hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}
 
@@ -4753,7 +4994,7 @@ void Q1Analysis()
           hthWmedCR->Fill(WMEDC);
           hthtmedCR->Fill(-tmedC+tOffsetmeC);
           hthepmedCR->Fill(epsilonMEDC);
-	  hYmedCR->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	  hYmedCR->Fill(-tmedC+tOffsetmeC, ph_qmedC*57.2958 + 180);
 	  //hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
 	}      
     }    
@@ -5322,7 +5563,11 @@ void Q1Analysis()
 	  
         }
     }
- 	
+  MPimeR1R->Scale(RTSCALE);
+  MPimeR2R->Scale(RTSCALE);
+  MPimeCR->Scale(RTSCALE);
+  MPimeL1R->Scale(RTSCALE);
+  MPimeL2R->Scale(RTSCALE);
   //Dummy
   MPimedR1R->Scale(RTSCALE);
   MPimedR2R->Scale(RTSCALE);
@@ -5330,6 +5575,12 @@ void Q1Analysis()
   MPimedL1R->Scale(RTSCALE);
   MPimedL2R->Scale(RTSCALE);
 
+  hthtmeR1R->Scale(RTSCALE);
+  hthtmeR2R->Scale(RTSCALE);
+  hthtmeCR->Scale(RTSCALE);
+  hthtmeL1R->Scale(RTSCALE);
+  hthtmeL2R->Scale(RTSCALE);
+  //Dummy
   hthtmedR1R->Scale(RTSCALE);
   hthtmedR2R->Scale(RTSCALE);
   hthtmedCR->Scale(RTSCALE);
@@ -5339,7 +5590,13 @@ void Q1Analysis()
   hthQ2medCR->Scale(RTSCALE);
   hthWmedCR->Scale(RTSCALE);
   hthepmedCR->Scale(RTSCALE);
-
+  //Yield
+  hYmeR1R->Scale(RTSCALE);
+  hYmeR2R->Scale(RTSCALE);
+  hYmeCR->Scale(RTSCALE);
+  hYmeL1R->Scale(RTSCALE);
+  hYmeL2R->Scale(RTSCALE);
+  //Yield Dummy
   hYmedR1R->Scale(RTSCALE);
   hYmedR2R->Scale(RTSCALE);
   hYmedCR->Scale(RTSCALE);
@@ -5580,8 +5837,8 @@ void Q1Analysis()
   /*  Double_t ECMEC    = 1.0/147.723;
       Double_t ECMEDC   = 1.0/35.726;
   */
-  Double_t ECMEC    = 1.6/249.1794;
-  Double_t ECMEDC   = 1.6/34.8308;
+  Double_t ECMEC    = 1.0/249.1794;
+  Double_t ECMEDC   = 1.0/34.8308;
 
   //  Double_t ECMEL1   = 1.0/341.394;
   /*  Double_t ECMEL1   = 1.0/235.014;
@@ -8288,7 +8545,7 @@ void Q1Analysis()
 	  hph_qheR1->Fill(ph_qheR1*57.2958 + 180);
 	  hphheR1->Fill(ph_qheR1*57.2958 + 180);
 	  //hphheR1->Fill(mmheR1+MMpiOffsetheR1);
-	  hYheR1->Fill(-theR1, ph_qheR1*57.2958 + 180);
+	  hYheR1->Fill(-theR1+tOffsetheR1, ph_qheR1*57.2958 + 180);
 	  //hYheR1->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
       //Random
@@ -8312,7 +8569,7 @@ void Q1Analysis()
 	  hph_qheR1R->Fill(ph_qheR1*57.2958 + 180);
 	  hphheR1R->Fill(ph_qheR1*57.2958 + 180);
 	  //hphheR1R->Fill(mmheR1+MMpiOffsetheR1);
-	  hYheR1R->Fill(-theR1, ph_qheR1*57.2958 + 180);
+	  hYheR1R->Fill(-theR1+tOffsetheR1, ph_qheR1*57.2958 + 180);
 	  //hYheR1R->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
       Double_t w1t = -theR1 >= bins[1] && -theR1 <= bins[2];
@@ -8328,49 +8585,49 @@ void Q1Analysis()
 	{
 	  hW1heR1->Fill(WHER1);	
 	  hQ21heR1->Fill(Q2HER1);	      	  
-	  ht1heR1->Fill(-theR1); 
+	  ht1heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w2t)
 	{
 	  hW2heR1->Fill(WHER1);	
 	  hQ22heR1->Fill(Q2HER1);	      	  
-	  ht2heR1->Fill(-theR1); 
+	  ht2heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w3t)
 	{
 	  hW3heR1->Fill(WHER1);	
 	  hQ23heR1->Fill(Q2HER1);	      	  
-	  ht3heR1->Fill(-theR1); 
+	  ht3heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w4t)
 	{
 	  hW4heR1->Fill(WHER1);	
 	  hQ24heR1->Fill(Q2HER1);	      	  
-	  ht4heR1->Fill(-theR1); 
+	  ht4heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w5t)
 	{
 	  hW5heR1->Fill(WHER1);	
 	  hQ25heR1->Fill(Q2HER1);	      	  
-	  ht5heR1->Fill(-theR1); 
+	  ht5heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w6t)
 	{
 	  hW6heR1->Fill(WHER1);	
 	  hQ26heR1->Fill(Q2HER1);	      	  
-	  ht6heR1->Fill(-theR1); 
+	  ht6heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w7t)
 	{
 	  hW7heR1->Fill(WHER1);	
 	  hQ27heR1->Fill(Q2HER1);	      	  
-	  ht7heR1->Fill(-theR1); 
+	  ht7heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w8t)
 	{
 	  hW8heR1->Fill(WHER1);	
 	  hQ28heR1->Fill(Q2HER1);	      	  
-	  ht8heR1->Fill(-theR1); 
+	  ht8heR1->Fill(-theR1+tOffsetheR1); 
  	}	
       //Random
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w1t)
@@ -8378,7 +8635,7 @@ void Q1Analysis()
 	{
 	  hW1heR1R->Fill(WHER1);	
 	  hQ21heR1R->Fill(Q2HER1);	      	  
-	  ht1heR1R->Fill(-theR1); 
+	  ht1heR1R->Fill(-theR1+tOffsetheR1); 
 	}
 
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w2t)
@@ -8386,49 +8643,49 @@ void Q1Analysis()
 	{
 	  hW2heR1R->Fill(WHER1);	
 	  hQ22heR1R->Fill(Q2HER1);	      	  
-	  ht2heR1R->Fill(-theR1); 
+	  ht2heR1R->Fill(-theR1+tOffsetheR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w3t)
 	
 	{
 	  hW3heR1R->Fill(WHER1);	
 	  hQ23heR1R->Fill(Q2HER1);	      	  
-	  ht3heR1R->Fill(-theR1); 
+	  ht3heR1R->Fill(-theR1+tOffsetheR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w4t)
 	
 	{
 	  hW4heR1R->Fill(WHER1);	
 	  hQ24heR1R->Fill(Q2HER1);	      	  
-	  ht4heR1R->Fill(-theR1); 
+	  ht4heR1R->Fill(-theR1+tOffsetheR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w5t)
 	
 	{
 	  hW5heR1R->Fill(WHER1);	
 	  hQ25heR1R->Fill(Q2HER1);	      	  
-	  ht5heR1R->Fill(-theR1); 
+	  ht5heR1R->Fill(-theR1+tOffsetheR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w6t)
 	
 	{
 	  hW6heR1R->Fill(WHER1);	
 	  hQ26heR1R->Fill(Q2HER1);	      	  
-	  ht6heR1R->Fill(-theR1); 
+	  ht6heR1R->Fill(-theR1+tOffsetheR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w7t)
 	
 	{
 	  hW7heR1R->Fill(WHER1);	
 	  hQ27heR1R->Fill(Q2HER1);	      	  
-	  ht7heR1R->Fill(-theR1); 
+	  ht7heR1R->Fill(-theR1+tOffsetheR1); 
 	}
       if(CoinPionR1R && MMpiR1 && DiamondR1 && w8t)
 	
 	{
 	  hW8heR1R->Fill(WHER1);	
 	  hQ28heR1R->Fill(Q2HER1);	      	  
-	  ht8heR1R->Fill(-theR1); 
+	  ht8heR1R->Fill(-theR1+tOffsetheR1); 
 	}
 
       if (((tcoinheR1-TimmingOffset>=-15.0 && tcoinheR1-TimmingOffset <= -9.0) || (tcoinheR1-TimmingOffset>=7.0 && tcoinheR1-TimmingOffset <=13.0)))
@@ -8453,7 +8710,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR1 && MMpidR1 && DiamonddR1)
 	{
-	  hYmedR1->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  hYmedR1->Fill(-tmedR1+tOffsetheR1, ph_qmedR1*57.2958 + 180);
 	  //hYhedR1->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	  hththedR1->Fill(-thedR1+tOffsetheR1);
 	}
@@ -8464,7 +8721,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR1R && MMpidR1 && DiamonddR1)
 	{
-	  hYmedR1R->Fill(-tmedR1, ph_qmedR1*57.2958 + 180);
+	  hYmedR1R->Fill(-tmedR1+tOffsetheR1, ph_qmedR1*57.2958 + 180);
 	  //hYhedR1R->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	  hththedR1R->Fill(-thedR1+tOffsetheR1);
 	}      
@@ -9318,23 +9575,33 @@ void Q1Analysis()
 	  
         }
     }
-
   MPiheR1R->Scale(RTSCALE);
   MPiheCR->Scale(RTSCALE);
   MPiheL1R->Scale(RTSCALE);
   MPiheL2R->Scale(RTSCALE);
+  //dummy
+  MPihedR1R->Scale(RTSCALE);
+  MPihedCR->Scale(RTSCALE);
+  MPihedL1R->Scale(RTSCALE);
+  MPihedL2R->Scale(RTSCALE);
 
   hththeR1R->Scale(RTSCALE);
   hththeCR->Scale(RTSCALE);
   hththeL1R->Scale(RTSCALE);
   hththeL2R->Scale(RTSCALE);
+  //dummy
+  hththedR1R->Scale(RTSCALE);
+  hththedCR->Scale(RTSCALE);
+  hththedL1R->Scale(RTSCALE);
+  hththedL2R->Scale(RTSCALE);
+
 
   //Yield
   hYheR1R->Scale(RTSCALE);
   hYheCR->Scale(RTSCALE);
   hYheL1R->Scale(RTSCALE);
   hYheL2R->Scale(RTSCALE);
-
+  //Yield Dummy
   hYhedR1R->Scale(RTSCALE);
   hYhedCR->Scale(RTSCALE);
   hYhedL1R->Scale(RTSCALE);
@@ -9516,8 +9783,8 @@ void Q1Analysis()
   Double_t ECHEDR1  = 1.0/44.1619;
 
   //  Double_t ECHEC    = 1.0/380.289;
-  Double_t ECHEC    = 2.0/286.61148000000003;
-  Double_t ECHEDC   = 2.0/62.482;
+  Double_t ECHEC    = 1.0/286.61148000000003;
+  Double_t ECHEDC   = 1.0/62.482;
 
   //  Double_t ECHEL1   = 1.0/183.317;
   Double_t ECHEL1   = 1.0/162.69519;
