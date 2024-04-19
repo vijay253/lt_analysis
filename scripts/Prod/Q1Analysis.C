@@ -6780,18 +6780,18 @@ void Q1Analysis()
   H_ssdelta_DmeR2->SetLineColor(kGreen);
   H_ssdelta_DmeR2->Draw("same"); 
   cdeltaSmeR2->Print(outputpdf);
-
+  /*
   TCanvas *cdeltaSmeC = new TCanvas("cdeltaSmeC", " cdeltaSmeC");
   // H_ssdelta_SmeC->SetStats(0);
   H_ssdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssdelta_SmeC->Scale(SCFMEC);
-  H_ssdelta_SmeC->Draw("");
+  // H_ssdelta_SmeC->Draw("");
   H_ssdelta_DmeC->Add(H_ssdelta_DmeCR, -1);
   H_ssdelta_DmeC->Scale(ECMEC);
   H_ssdelta_DmeC->SetLineColor(kGreen);
   H_ssdelta_DmeC->Draw("same"); 
   cdeltaSmeC->Print(outputpdf);
-
+  */
   TCanvas *cdeltaSmeL1 = new TCanvas("cdeltaSmeL1", " cdeltaSmeL1");
   // H_ssdelta_SmeL1->SetStats(0);
   H_ssdelta_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -6835,7 +6835,7 @@ void Q1Analysis()
   H_hsdelta_DmeR2->SetLineColor(kGreen);
   H_hsdelta_DmeR2->Draw("same"); 
   cdeltaHmeR2->Print(outputpdf);
-
+  /*
   TCanvas *cdeltaHmeC = new TCanvas("cdeltaHmeC", " cdeltaHmeC");
   // H_hsdelta_SmeC->SetStats(0);
   H_hsdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -6846,7 +6846,7 @@ void Q1Analysis()
   H_hsdelta_DmeC->SetLineColor(kGreen);
   H_hsdelta_DmeC->Draw("same"); 
   cdeltaHmeC->Print(outputpdf);
-
+  */
   TCanvas *cdeltaHmeL1 = new TCanvas("cdeltaHmeL1", " cdeltaHmeL1");
   // H_hsdelta_SmeL1->SetStats(0);
   H_hsdelta_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -6890,7 +6890,7 @@ void Q1Analysis()
   H_ssxptar_DmeR2->SetLineColor(kGreen);
   H_ssxptar_DmeR2->Draw("same");
   cxptarSmeR2->Print(outputpdf);
-
+  /*
   TCanvas *cxptarSmeC = new TCanvas("cxptarSmeC", " cxptarSmeC");
   //  H_ssxptar_SmeC->SetStats(0);
   H_ssxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -6901,7 +6901,7 @@ void Q1Analysis()
   H_ssxptar_DmeC->SetLineColor(kGreen);
   H_ssxptar_DmeC->Draw("same");
   cxptarSmeC->Print(outputpdf);
-
+  */
   TCanvas *cxptarSmeL1 = new TCanvas("cxptarSmeL1", " cxptarSmeL1");
   // H_ssxptar_SmeL1->SetStats(0);
   H_ssxptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -6945,7 +6945,7 @@ void Q1Analysis()
   H_ssyptar_DmeR2->SetLineColor(kGreen);
   H_ssyptar_DmeR2->Draw("same");
   cyptarSmeR2->Print(outputpdf);
-
+  /*
   TCanvas *cyptarSmeC = new TCanvas("cyptarSmeC", " cyptarSmeC");
   // H_ssyptar_SmeC->SetStats(0);
   H_ssyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -6956,7 +6956,7 @@ void Q1Analysis()
   H_ssyptar_DmeC->SetLineColor(kGreen);
   H_ssyptar_DmeC->Draw("same");
   cyptarSmeC->Print(outputpdf);
-
+  */
   TCanvas *cyptarSmeL1 = new TCanvas("cyptarSmeL1", " cyptarSmeL1");
   // H_ssyptar_SmeL1->SetStats(0);
   H_ssyptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -7001,6 +7001,7 @@ void Q1Analysis()
   H_hsxptar_DmeR2->Draw("same");
   cxptarHmeR2->Print(outputpdf);
 
+  /*
   TCanvas *cxptarHmeC = new TCanvas("cxptarHmeC", " cxptarHmeC");
   // H_hsxptar_SmeC->SetStats(0);
   H_hsxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -7011,7 +7012,7 @@ void Q1Analysis()
   H_hsxptar_DmeC->SetLineColor(kGreen);
   H_hsxptar_DmeC->Draw("same");
   cxptarHmeC->Print(outputpdf);
-
+  */
   TCanvas *cxptarHmeL1 = new TCanvas("cxptarHmeL1", " cxptarHmeL1");
   // H_hsxptar_SmeL1->SetStats(0);
   H_hsxptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -7055,7 +7056,7 @@ void Q1Analysis()
   H_hsyptar_DmeR2->SetLineColor(kGreen);
   H_hsyptar_DmeR2->Draw("same");
   cyptarHmeR2->Print(outputpdf);
-
+  /*
   TCanvas *cyptarHmeC = new TCanvas("cyptarHmeC", " cyptarHmeC");
   //  H_hsyptar_SmeC->SetStats(0);
   H_hsyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -7066,7 +7067,7 @@ void Q1Analysis()
   H_hsyptar_DmeC->SetLineColor(kGreen);
   H_hsyptar_DmeC->Draw("same");
   cyptarHmeC->Print(outputpdf);
-
+  */
   TCanvas *cyptarHmeL1 = new TCanvas("cyptarHmeL1", " cyptarHmeL1");
   // H_hsyptar_SmeL1->SetStats(0);
   H_hsyptar_SmeL1->GetYaxis()->SetTitle("Yield (Events/mC)"); 
@@ -7496,6 +7497,11 @@ void Q1Analysis()
   hthQ2medC->Add(hthQ2medCR, -1);
   hthQ2medC->Scale(ECMEDC);
   hthQ2meC->Add(hthQ2medC, -1);
+  TAxis *XQ2meC = hthQ2meC->GetXaxis();
+  Double_t InQ2meC = hthQ2meC->Integral(XQ2meC->FindBin(0.3), XQ2meC->FindBin(0.45), "");
+  TAxis *XQ2SmeC = hthQ2SmeC->GetXaxis();
+  Double_t InQ2SmeC = hthQ2SmeC->Integral(XQ2SmeC->FindBin(0.3), XQ2SmeC->FindBin(0.45), "");
+  hthQ2meC->Scale(InQ2SmeC/InQ2meC);
   hthQ2SmeC->SetStats(0);
   hthQ2SmeC->SetLineColor(kRed);
   hthQ2SmeC->Draw("hist"); 
@@ -7508,6 +7514,11 @@ void Q1Analysis()
   hthWmedC->Add(hthWmedCR, -1);
   hthWmedC->Scale(ECMEDC);
   hthWmeC->Add(hthWmedC, -1);
+  TAxis *XWmeC = hthWmeC->GetXaxis();
+  Double_t InWmeC = hthWmeC->Integral(XWmeC->FindBin(2.16), XWmeC->FindBin(2.23), "");
+  TAxis *XWSmeC = hthWSmeC->GetXaxis();
+  Double_t InWSmeC = hthWSmeC->Integral(XWSmeC->FindBin(2.16), XWSmeC->FindBin(2.23), "");
+  hthWmeC->Scale(InWSmeC/InWmeC);
   hthWSmeC->SetStats(0);
   hthWSmeC->SetLineColor(kRed);
   hthWSmeC->Draw("hist");
@@ -7520,6 +7531,11 @@ void Q1Analysis()
   hthtmedC->Add(hthtmedCR, -1);
   hthtmedC->Scale(ECMEDC);
   hthtmeC->Add(hthtmedC, -1);
+  TAxis *XtmeC =  hthtmeC->GetXaxis();
+  Double_t IntmeC = hthtmeC->Integral(XtmeC->FindBin(0.0), XtmeC->FindBin(0.06), "");
+  TAxis *XtSmeC = hthtSmeC->GetXaxis();
+  Double_t IntSmeC = hthtSmeC->Integral(XtSmeC->FindBin(0.0), XtSmeC->FindBin(0.06), "");
+  hthtmeC->Scale(IntSmeC/IntmeC);
   hthtSmeC->SetStats(0);
   hthtSmeC->SetLineColor(kRed);
   hthtSmeC->Draw("hist");
@@ -7532,6 +7548,11 @@ void Q1Analysis()
   hthepmedC->Add(hthepmedCR, -1);
   hthepmedC->Scale(ECMEDC);
   hthepmeC->Add(hthepmedC, -1);
+  TAxis *XepmeC =  hthepmeC->GetXaxis();
+  Double_t InepmeC = hthepmeC->Integral(XepmeC->FindBin(0.616), XepmeC->FindBin(0.65), "");
+  TAxis *XepSmeC = hthepSmeC->GetXaxis();
+  Double_t InepSmeC = hthepSmeC->Integral(XepSmeC->FindBin(0.616), XepSmeC->FindBin(0.65), "");
+  hthepmeC->Scale(InepSmeC/InepmeC);
   hthepSmeC->SetStats(0);
   hthepSmeC->SetLineColor(kRed);
   hthepSmeC->Draw("hist");
@@ -7539,7 +7560,73 @@ void Q1Analysis()
   hthepmeC->Draw("same");
   cthesisme->Print(outputpdf);
 
+  TCanvas *cthesisAcc = new TCanvas("cthesisAcc", "cthesisAcc");
+  cthesisAcc->Divide(2,3);
+  cthesisAcc->cd(1);
+  H_ssdelta_SmeC->SetStats(0);
+  H_ssdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssdelta_SmeC->SetLineColor(kRed);
+  H_ssdelta_SmeC->Draw("hist");
+  H_ssdelta_DmeC->Add(H_ssdelta_DmeCR, -1);
+  H_ssdelta_DmeC->Scale(ECMEC);
+  //  H_ssdelta_DmeC->SetStats(0);
+  H_ssdelta_DmeC->Draw("same"); 
+
+  cthesisAcc->cd(2);
+  H_ssxptar_SmeC->SetStats(0);
+  H_ssxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssxptar_SmeC->SetLineColor(kRed);
+  H_ssxptar_SmeC->Draw("hist");
+  H_ssxptar_DmeC->Add(H_ssxptar_DmeCR, -1);
+  H_ssxptar_DmeC->Scale(ECMEC);
+  //  H_ssxptar_DmeC->SetStats(0);
+  H_ssxptar_DmeC->Draw("same");
+
+  cthesisAcc->cd(3);
+  H_ssyptar_SmeC->SetStats(0);
+  H_ssyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_ssyptar_SmeC->SetLineColor(kRed);
+  H_ssyptar_SmeC->Draw("hist");
+  H_ssyptar_DmeC->Add(H_ssyptar_DmeCR, -1);
+  H_ssyptar_DmeC->Scale(ECMEC);
+  //  H_ssyptar_DmeC->SetStats(0);
+  H_ssyptar_DmeC->Draw("same");
+ 
+  cthesisAcc->cd(4);
+  H_hsdelta_SmeC->SetStats(0);
+  H_hsdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsdelta_SmeC->SetLineColor(kRed);
+  H_hsdelta_SmeC->Draw("hist");
+  H_hsdelta_DmeC->Add(H_hsdelta_DmeCR, -1);
+  H_hsdelta_DmeC->Scale(ECMEC);
+  //  H_hsdelta_DmeC->SetStats(0);
+  H_hsdelta_DmeC->Draw("same"); 
+
+  cthesisAcc->cd(5);
+  H_hsxptar_SmeC->SetStats(0);
+  H_hsxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsxptar_SmeC->SetLineColor(kRed);
+  H_hsxptar_SmeC->Draw("hist");
+  H_hsxptar_DmeC->Add(H_hsxptar_DmeCR, -1);
+  H_hsxptar_DmeC->Scale(ECMEC);
+  //  H_hsxptar_DmeC->SetStats(0);
+  H_hsxptar_DmeC->Draw("same");
+
+  cthesisAcc->cd(6);
+  H_hsyptar_SmeC->SetStats(0);
+  H_hsyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  H_hsyptar_SmeC->SetLineColor(kRed);
+  H_hsyptar_SmeC->Draw("hist");
+  H_hsyptar_DmeC->Add(H_hsyptar_DmeCR, -1);
+  H_hsyptar_DmeC->Scale(ECMEC);
+  // H_hsyptar_DmeC->SetStats(0);
+  H_hsyptar_DmeC->Draw("same");
+  cthesisAcc->Print(outputpdf);
+
   TCanvas *cthesiMPisme1 = new TCanvas("cthesiMPisme1", "cthesiMPisme1");
+  cthesiMPisme1->Divide(2,2);
+
+  cthesiMPisme1->cd(1);
   MPimeR2->Add(MPimeR2R, -1);
   MPimeR2->Scale(ECMER2);
   MPimedR2->Add(MPimedR2R, -1);
@@ -7550,8 +7637,45 @@ void Q1Analysis()
   MPiSmeR2->Draw("hist");
   //  MPimeR2->SetStats(0);
   MPimeR2->Draw("same");
+
+  cthesiMPisme1->cd(2);
+  MPimeR1->Add(MPimeR1R, -1);
+  MPimeR1->Scale(ECMER1);
+  MPimedR1->Add(MPimedR1R, -1);
+  MPimedR1->Scale(ECMEDR1);
+  MPimeR1->Add(MPimedR1, -1);
+  // MPiSmeR1->SetStats(0);
+  MPiSmeR1->SetLineColor(kRed);
+  MPiSmeR1->Draw("hist");
+  // MPimeR1->SetStats(0);
+  MPimeR1->Draw("same");
+
+  cthesiMPisme1->cd(3);
+  MPimeL1->Add(MPimeL1R, -1);
+  MPimeL1->Scale(ECMEL1);
+  MPimedL1->Add(MPimedL1R, -1);
+  MPimedL1->Scale(ECMEDL1);
+  MPimeL1->Add(MPimedL1, -1);
+  //  MPiSmeL1->SetStats(0);
+  MPiSmeL1->SetLineColor(kRed);
+  MPiSmeL1->Draw("hist");
+  //  MPimeL1->SetStats(0);
+  MPimeL1->Draw("same");
+
+  cthesiMPisme1->cd(4);
+  MPimeL2->Add(MPimeL2R, -1);
+  MPimeL2->Scale(ECMEL2);
+  MPimedL2->Add(MPimedL2R, -1);
+  MPimedL2->Scale(ECMEDL2);
+  MPimeL2->Add(MPimedL2, -1);
+  //  MPiSmeL2->SetStats(0);
+  MPiSmeL2->SetLineColor(kRed);
+  MPiSmeL2->Draw("hist");
+  //  MPimeL2->SetStats(0);
+  MPimeL2->Draw("same");
   cthesiMPisme1->Print(outputpdf);
 
+  /*
   TCanvas *cthesiMPisme2 = new TCanvas("cthesiMPisme2", "cthesiMPisme2");
   MPimeR1->Add(MPimeR1R, -1);
   MPimeR1->Scale(ECMER1);
@@ -7564,20 +7688,25 @@ void Q1Analysis()
   // MPimeR1->SetStats(0);
   MPimeR1->Draw("same");
   cthesiMPisme2->Print(outputpdf);
-
+  */
   TCanvas *cthesiMPisme3 = new TCanvas("cthesiMPisme3", "cthesiMPisme3");
   MPimeC->Add(MPimeCR, -1);
   MPimeC->Scale(ECMEC);
   MPimedC->Add(MPimedCR, -1);
   MPimedC->Scale(ECMEDC);
   MPimeC->Add(MPimedC, -1);
+  TAxis *XmpimeC = MPimeC->GetXaxis();
+  Double_t InmpimeC = MPimeC->Integral(XmpimeC->FindBin(0.9), XmpimeC->FindBin(1.0), "");
+  TAxis *XmpiSmeC = MPiSmeC->GetXaxis();
+  Double_t InmpiSmeC = MPiSmeC->Integral(XmpiSmeC->FindBin(0.9), XmpiSmeC->FindBin(1.0), "");
+  MPimeC->Scale(InmpiSmeC/InmpimeC);
   MPiSmeC->SetStats(0);
   MPiSmeC->SetLineColor(kRed);
   MPiSmeC->Draw("hist");
   MPimeC->SetStats(0);
   MPimeC->Draw("same");
   cthesiMPisme3->Print(outputpdf);
-
+  /*
   TCanvas *cthesiMPisme4 = new TCanvas("cthesiMPisme4", "cthesiMPisme4");
   MPimeL1->Add(MPimeL1R, -1);
   MPimeL1->Scale(ECMEL1);
@@ -7590,8 +7719,7 @@ void Q1Analysis()
   //  MPimeL1->SetStats(0);
   MPimeL1->Draw("same");
   cthesiMPisme4->Print(outputpdf);
-
-  TCanvas *cthesiMPisme5 = new TCanvas("cthesiMPisme5", "cthesiMPisme5");
+    TCanvas *cthesiMPisme5 = new TCanvas("cthesiMPisme5", "cthesiMPisme5");
   MPimeL2->Add(MPimeL2R, -1);
   MPimeL2->Scale(ECMEL2);
   MPimedL2->Add(MPimedL2R, -1);
@@ -7603,6 +7731,7 @@ void Q1Analysis()
   //  MPimeL2->SetStats(0);
   MPimeL2->Draw("same");
   cthesiMPisme5->Print(outputpdf);
+  */
 
   TCanvas *cthesisme1 = new TCanvas("cthesisme1", "cthesisme1");
   cthesisme1->Divide(2,2);
