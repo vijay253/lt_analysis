@@ -335,15 +335,15 @@ c /*--------------------------------------------------*/
 c cross-section
 c ratio is data/simc - see GH logbook, p.55
 
-            if (r.gt.15.0) then
+            if (r.gt.2.0) then
                r=0.0
                dr=0.0
             endif
 
              x_real=x_mod*r
 c             x_real=x_mod
-             dx_real=x_mod*dr/r
-c             dx_real=x_mod*dr
+c             dx_real=x_mod*dr/r
+             dx_real=x_mod*dr
 c             dx_real=x_mod*2/100
 c             dx_real=2.823
 
@@ -527,10 +527,14 @@ c test
       d = -13.7974
 
 c      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
-      sigL = ((fitpar(5)+fitpar(6)*log(q2))
-     1     *exp((fitpar(7)+fitpar(8)*log(q2))*(tp-0.2)))
+c      sigL = ((fitpar(5)+fitpar(6)*log(q2))
+c     1     *exp((fitpar(7)+fitpar(8)*log(q2))*(tp-0.2)))
+c      sigL = ((fitpar(5)+fitpar(6)*log(q2))
+c     1     *exp((fitpar(7)+fitpar(8)*log(q2))*(tp)))
+c      sigL = ((fitpar(5)+fitpar(6)*log(q2))
+c     1     *exp((fitpar(7)+fitpar(8)*log(q2))*tp))
 
-c      sigl = fitpar(5)*exp(fitpar(6)*tp)
+      sigl = fitpar(5)*exp(fitpar(6)*tp)
 c it0
 c      a =  0.46859E+02
 c      b = -0.30000E+02 
@@ -555,9 +559,9 @@ c test
 
       tav = (0.0735+0.028*log(q2_set))*q2_set
       ftav = (abs(tp) - tav)/tav
-C      sigT = a+b*ftav
-      sigT=fitpar(1)+fitpar(2)*log(q2)+(fitpar(3)+fitpar(4)*log(q2))
-     1     *ftav
+      sigT = fitpar(1)+fitpar(2)*ftav
+c      sigT=fitpar(1)+fitpar(2)*log(q2)+(fitpar(3)+fitpar(4)*log(q2))
+c     1     *ftav
 c      sigT=fitpar(1)*(fitpar(2)*tp)*exp(fitpar(3)*tp)
 
 c it0      

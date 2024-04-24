@@ -558,7 +558,8 @@ void Q1Analysis()
   TH1D *ht7L2R  = new TH1D("ht7L2R","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *ht8L2R  = new TH1D("ht8L2R","MandelT; MandelT;",   300, -0.01, 0.1);      
 
-  Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0701167, 0.1};
+  //  Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0701167, 0.1};
+  Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0741167, 0.1};
   Double_t PhiBinLow = 0.932-0.003;
   //  Double_t PhiBinLow = 0.920-0.003;
   Double_t PhiBinHigh = 0.980+0.003;
@@ -602,9 +603,9 @@ void Q1Analysis()
   TH1D *hmmL1R  = new TH1D("hmmL1R","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmL2R  = new TH1D("hmmL2R","MM; MM;", 300, 0.8, 1.2);      
 
-  TH1D *htcoinC   = new TH1D("htcoinC","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinL1  = new TH1D("htcoinL1","CTime_ROC1; CTime_ROC1;", 300, -20.0, 20.0);      
-  TH1D *htcoinL2  = new TH1D("htcoinL2","CTime_ROC1; CTime_ROC1;", 300, -20.0, 20.0);      
+  TH1D *htcoinC   = new TH1D("htcoinC","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinL1  = new TH1D("htcoinL1"," ; ;", 300, -20.0, 20.0);      
+  TH1D *htcoinL2  = new TH1D("htcoinL2","; ;", 300, -20.0, 20.0);      
 
   TH2D *hYC   = new TH2D("hYC"," Yield C;t-Bin; Phi-Bin ", 10, bins, 18, -22.5, 382.5);      
   TH2D *hYCR  = new TH2D("hYCR"," Yield in Bins; t-Bin; Phi-Bin", 10, bins, 18, -22.5, 382.5);      
@@ -807,7 +808,8 @@ void Q1Analysis()
   Double_t MMpiOffsetL1 = 0.007723;
   Double_t MMpiOffsetC  = 0.006723;
 
-  Double_t tOffsetC  = 0.002;
+  Double_t tOffsetC  = 0.001;
+  Double_t tOffsetL2  = -0.004;
 
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
@@ -1422,13 +1424,13 @@ void Q1Analysis()
 	  H_hsxptar_DL2->Fill(H_gtr_xptarL2);
 	  H_hsyptar_DL2->Fill(H_gtr_yptarL2);
 
-	  hthtL2->Fill(-tL2); 
+	  hthtL2->Fill(-tL2+tOffsetL2); 
 	  htL2->Fill(-tL2);
  	  htInL2->Fill(-tL2);
 	  hph_qL2->Fill(ph_qL2*57.2958 + 180);
 	  hphL2->Fill(ph_qL2*57.2958 + 180);
 	  // hphL2->Fill(mmL2+MMpiOffsetL2);
-	  hYL2->Fill(-tL2, ph_qL2*57.2958 + 180);
+	  hYL2->Fill(-tL2+tOffsetL2, ph_qL2*57.2958 + 180);
 	  //hYL2->Fill(-tL2, mmL2+MMpiOffsetL2);
 	}
 
@@ -1447,13 +1449,13 @@ void Q1Analysis()
 	  H_hsxptar_DL2R->Fill(H_gtr_xptarL2);
 	  H_hsyptar_DL2R->Fill(H_gtr_yptarL2);
 
-	  hthtL2R->Fill(-tL2); 
+	  hthtL2R->Fill(-tL2+tOffsetL2); 
 	  htL2R->Fill(-tL2);
  	  htInL2R->Fill(-tL2);
 	  hph_qL2R->Fill(ph_qL2*57.2958 + 180);
 	  hphL2R->Fill(ph_qL2*57.2958 + 180);
 	  // hphL2R->Fill(mmL2+MMpiOffsetL2);
-	  hYL2R->Fill(-tL2, ph_qL2*57.2958 + 180);
+	  hYL2R->Fill(-tL2+tOffsetL2, ph_qL2*57.2958 + 180);
 	  //  hYL2R->Fill(-tL2, mmL2+MMpiOffsetL2);
 	}
 
@@ -1588,9 +1590,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
-	  hYdL2->Fill(-tdL2, ph_qdL2*57.2958 + 180);
+	  hYdL2->Fill(-tdL2+tOffsetL2, ph_qdL2*57.2958 + 180);
 	  // hYdL2->Fill(-tdL2, mmdL2+MMpiOffsetL2);
-	  hthtdL2->Fill(-tdL2); 
+	  hthtdL2->Fill(-tdL2+tOffsetL2); 
 	}	
 
       //Random
@@ -1602,9 +1604,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
-	  hYdL2R->Fill(-tdL2, ph_qdL2*57.2958 + 180);
+	  hYdL2R->Fill(-tdL2+tOffsetL2, ph_qdL2*57.2958 + 180);
 	  //hYdL2R->Fill(-tdL2, mmdL2+MMpiOffsetL2);
-	  hthtdL2R->Fill(-tdL2); 
+	  hthtdL2R->Fill(-tdL2+tOffsetL2); 
 	}
     }    
   //SIMC LEFT2
@@ -1914,24 +1916,29 @@ void Q1Analysis()
 
   TCanvas *c1 = new TCanvas("c1", " c1"); 
 
-  htcoinL2->SetStats(0);
-  htcoinL2->SetLineColor(kBlack);
-  htcoinL2->Draw("Weight");
+  htcoinC->SetStats(0);
+  htcoinC->SetLineColor(kGreen);
+  //  htcoinC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  //  htcoinC->GetXaxis()->SetTitle("Coincidence time (ns)"); 
+  htcoinC->Scale(ECLEC);
+  htcoinC->Draw("Weight");
 
   htcoinL1->SetStats(0);
   htcoinL1->SetLineColor(kRed);
+  htcoinL1->Scale(ECLEL1);
   htcoinL1->Draw("same Weight ");
 
-  htcoinC->SetStats(0);
-  htcoinC->SetLineColor(kGreen);
-  htcoinC->Draw("same Weight");
+  htcoinL2->SetStats(0);
+  htcoinL2->SetLineColor(kBlack);
+  htcoinL2->Scale(ECLEL2);
+  htcoinL2->Draw("same Weight");
 
-  TLine *l1 = new TLine(-1.0, 0.0, -1.0, 7000.0);
-  TLine *l2 = new TLine(1.0, 0.0, 1.0, 7000.0);
-  TLine *l3 = new TLine(-15.0, 0.0, -15.0, 7000.0);
-  TLine *l4 = new TLine(-9.0, 0.0, -9.0, 7000.0);
-  TLine *l5 = new TLine(7.0, 0.0, 7.0, 7000.0);
-  TLine *l6 = new TLine(13.0, 0.0, 13.0, 7000.0);
+  TLine *l1 = new TLine(-1.0, 0.0, -1.0, 14.0);
+  TLine *l2 = new TLine(1.0, 0.0, 1.0, 14.0);
+  TLine *l3 = new TLine(-15.0, 0.0, -15.0, 14.0);
+  TLine *l4 = new TLine(-9.0, 0.0, -9.0, 14.0);
+  TLine *l5 = new TLine(7.0, 0.0, 7.0, 14.0);
+  TLine *l6 = new TLine(13.0, 0.0, 13.0, 14.0);
 
   l1->SetLineColor(kBlue);
   l2->SetLineColor(kBlue);
@@ -1948,7 +1955,7 @@ void Q1Analysis()
   l6->Draw("same");
 
   auto leg = new TLegend(0.1,0.7,0.30,0.9);
-  leg->SetHeader("Low epsilon","C");
+  leg->SetHeader("Epsilon = 0.286","C");
   leg->AddEntry(htcoinC,"Center","l");
   leg->AddEntry(htcoinL1,"Left1","l");
   leg->AddEntry(htcoinL2,"Left2","l");
@@ -3812,91 +3819,91 @@ void Q1Analysis()
 
   //*************************
   //Thesis Plots
-  TH1D *MPimeC   = new TH1D("MPimeC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *hthQ2meC  = new TH1D("hthQ2meC"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
-  TH1D *hthWmeC   = new TH1D("hthWmeC"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
-  TH1D *hthtmeC   = new TH1D("hthtmeC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *MPimeC   = new TH1D("MPimeC"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *hthQ2meC  = new TH1D("hthQ2meC"," ; Q^{2} (GeV^{2}); Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmeC   = new TH1D("hthWmeC"," ;W (GeV); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmeC   = new TH1D("hthtmeC"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   TH1D *hthepmeC   = new TH1D("hthepmeC"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
   //Random
-  TH1D *MPimeCR   = new TH1D("MPimeCR"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *hthQ2meCR  = new TH1D("hthQ2meCR"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
-  TH1D *hthWmeCR   = new TH1D("hthWmeCR"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
-  TH1D *hthtmeCR   = new TH1D("hthtmeCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *MPimeCR   = new TH1D("MPimeCR"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *hthQ2meCR  = new TH1D("hthQ2meCR"," ; Q^{2} (GeV^{2}); Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmeCR   = new TH1D("hthWmeCR"," ;W (GeV); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmeCR   = new TH1D("hthtmeCR"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   TH1D *hthepmeCR   = new TH1D("hthepmeCR"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
 
   //Dummy
-  TH1D *MPimedC   = new TH1D("MPimedC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *hthQ2medC  = new TH1D("hthQ2medC"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
-  TH1D *hthWmedC   = new TH1D("hthWmedC"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
-  TH1D *hthtmedC   = new TH1D("hthtmedC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *MPimedC   = new TH1D("MPimedC"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *hthQ2medC  = new TH1D("hthQ2medC"," ; Q^{2}(GeV^{2}); Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmedC   = new TH1D("hthWmedC"," ;W (GeV); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmedC   = new TH1D("hthtmedC"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   TH1D *hthepmedC   = new TH1D("hthepmedC"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
   //Random
-  TH1D *MPimedCR   = new TH1D("MPimedCR"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *hthQ2medCR  = new TH1D("hthQ2medCR"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
-  TH1D *hthWmedCR   = new TH1D("hthWmedCR"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
-  TH1D *hthtmedCR   = new TH1D("hthtmedCR"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *MPimedCR   = new TH1D("MPimedCR"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *hthQ2medCR  = new TH1D("hthQ2medCR"," ; Q^{2}(GeV^{2}); Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWmedCR   = new TH1D("hthWmedCR"," ;W (GeV); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtmedCR   = new TH1D("hthtmedCR"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   TH1D *hthepmedCR   = new TH1D("hthepmedCR"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
  
   //SIMC
-  TH1D *MPiSmeC   = new TH1D("MPiSmeC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *hthQ2SmeC  = new TH1D("hthQ2SmeC"," ; Q^{2}(GeV/c)^{2}; Yield (events/mC)", 150, 0.2, 0.6);      
-  TH1D *hthWSmeC   = new TH1D("hthWSmeC"," ;W (GeV/c); Yield (events/mC)", 150, 2.14, 2.26);
-  TH1D *hthtSmeC   = new TH1D("hthtSmeC"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *MPiSmeC   = new TH1D("MPiSmeC"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *hthQ2SmeC  = new TH1D("hthQ2SmeC"," ; Q^{2}(GeV^{2}); Yield (events/mC)", 150, 0.2, 0.6);      
+  TH1D *hthWSmeC   = new TH1D("hthWSmeC"," ;W (GeV); Yield (events/mC)", 150, 2.14, 2.26);
+  TH1D *hthtSmeC   = new TH1D("hthtSmeC"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   TH1D *hthepSmeC   = new TH1D("hthepSmeC"," ;epsilon; Yield (events/mC)", 150, 0.60, 0.66);      
 
  //*************************
   //plot added on Apr 17, 2024
   //MMpi 
-  TH1D *MPimeR1   = new TH1D("MPimeR1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimeR2   = new TH1D("MPimeR2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimeL1   = new TH1D("MPimeL1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimeL2   = new TH1D("MPimeL2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeR1   = new TH1D("MPimeR1"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeR2   = new TH1D("MPimeR2"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeL1   = new TH1D("MPimeL1"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeL2   = new TH1D("MPimeL2"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
   //Random
-  TH1D *MPimeR1R   = new TH1D("MPimeR1R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimeR2R   = new TH1D("MPimeR2R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimeL1R   = new TH1D("MPimeL1R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimeL2R   = new TH1D("MPimeL2R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeR1R   = new TH1D("MPimeR1R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeR2R   = new TH1D("MPimeR2R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeL1R   = new TH1D("MPimeL1R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimeL2R   = new TH1D("MPimeL2R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
   //Dummy
-  TH1D *MPimedR1   = new TH1D("MPimedR1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimedR2   = new TH1D("MPimedR2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimedL1   = new TH1D("MPimedL1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimedL2   = new TH1D("MPimedL2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedR1   = new TH1D("MPimedR1"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedR2   = new TH1D("MPimedR2"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedL1   = new TH1D("MPimedL1"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedL2   = new TH1D("MPimedL2"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
   //Random
-  TH1D *MPimedR1R   = new TH1D("MPimedR1R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimedR2R   = new TH1D("MPimedR2R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimedL1R   = new TH1D("MPimedL1R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPimedL2R   = new TH1D("MPimedL2R"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedR1R   = new TH1D("MPimedR1R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedR2R   = new TH1D("MPimedR2R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedL1R   = new TH1D("MPimedL1R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPimedL2R   = new TH1D("MPimedL2R"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
   //SIMC
-  TH1D *MPiSmeR1   = new TH1D("MPiSmeR1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPiSmeR2   = new TH1D("MPiSmeR2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPiSmeL1   = new TH1D("MPiSmeL1"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
-  TH1D *MPiSmeL2   = new TH1D("MPiSmeL2"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiSmeR1   = new TH1D("MPiSmeR1"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiSmeR2   = new TH1D("MPiSmeR2"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiSmeL1   = new TH1D("MPiSmeL1"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
+  TH1D *MPiSmeL2   = new TH1D("MPiSmeL2"," ; Missing Mass (GeV); Yield (events/mC)", 150, 0.9, 1.0);      
 
   //t
-  TH1D *hthtmeR1   = new TH1D("hthtmeR1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmeR2   = new TH1D("hthtmeR2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmeL1   = new TH1D("hthtmeL1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmeL2   = new TH1D("hthtmeL2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeR1   = new TH1D("hthtmeR1"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeR2   = new TH1D("hthtmeR2"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeL1   = new TH1D("hthtmeL1"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeL2   = new TH1D("hthtmeL2"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   //Random
-  TH1D *hthtmeR1R   = new TH1D("hthtmeR1R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmeR2R   = new TH1D("hthtmeR2R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmeL1R   = new TH1D("hthtmeL1R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmeL2R   = new TH1D("hthtmeL2R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeR1R   = new TH1D("hthtmeR1R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeR2R   = new TH1D("hthtmeR2R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeL1R   = new TH1D("hthtmeL1R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmeL2R   = new TH1D("hthtmeL2R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   //Dummy
-  TH1D *hthtmedR1   = new TH1D("hthtmedR1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmedR2   = new TH1D("hthtmedR2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmedL1   = new TH1D("hthtmedL1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmedL2   = new TH1D("hthtmedL2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedR1   = new TH1D("hthtmedR1"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedR2   = new TH1D("hthtmedR2"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedL1   = new TH1D("hthtmedL1"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedL2   = new TH1D("hthtmedL2"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   //Random
-  TH1D *hthtmedR1R   = new TH1D("hthtmedR1R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmedR2R   = new TH1D("hthtmedR2R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmedL1R   = new TH1D("hthtmedL1R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtmedL2R   = new TH1D("hthtmedL2R"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedR1R   = new TH1D("hthtmedR1R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedR2R   = new TH1D("hthtmedR2R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedL1R   = new TH1D("hthtmedL1R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtmedL2R   = new TH1D("hthtmedL2R"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
   //SIMC
-  TH1D *hthtSmeR1   = new TH1D("hthtSmeR1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtSmeR2   = new TH1D("hthtSmeR2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtSmeL1   = new TH1D("hthtSmeL1"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
-  TH1D *hthtSmeL2   = new TH1D("hthtSmeL2"," ;t (GeV/c)^{2}; Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtSmeR1   = new TH1D("hthtSmeR1"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtSmeR2   = new TH1D("hthtSmeR2"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtSmeL1   = new TH1D("hthtSmeL1"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
+  TH1D *hthtSmeL2   = new TH1D("hthtSmeL2"," ;t (GeV^{2}); Yield (events/mC)",   150, 0.00, 0.071);      
 
 
  //*************************
@@ -4016,11 +4023,11 @@ void Q1Analysis()
   TH1D *hmmmeL1R  = new TH1D("hmmmeL1R","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmmeL2R  = new TH1D("hmmmeL2R","MM; MM;", 300, 0.8, 1.2);      
 
-  TH1D *htcoinmeR1   = new TH1D("htcoinmeR1","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinmeR2   = new TH1D("htcoinmeR2","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinmeC    = new TH1D("htcoinmeC","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinmeL1   = new TH1D("htcoinmeL1","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinmeL2   = new TH1D("htcoinmeL2","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
+  TH1D *htcoinmeR1   = new TH1D("htcoinmeR1","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinmeR2   = new TH1D("htcoinmeR2","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinmeC    = new TH1D("htcoinmeC","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinmeL1   = new TH1D("htcoinmeL1","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinmeL2   = new TH1D("htcoinmeL2","; ;",  300, -20.0, 20.0);      
   
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
@@ -4219,6 +4226,8 @@ void Q1Analysis()
   Double_t tOffsetmeR1 = 0.0025;
   Double_t tOffsetmeR2 = 0.004;
   Double_t tOffsetmeC  = 0.001;
+  Double_t tOffsetmeL1  = -0.002;
+  Double_t tOffsetmeL2  = -0.002;
 
   //Data R1
   for(Long64_t i = 0; i < nEntries_TBRANCHMIDER1; i++)
@@ -5074,13 +5083,13 @@ void Q1Analysis()
           H_hsxptar_DmeL1->Fill(H_gtr_xptarmeL1);
           H_hsyptar_DmeL1->Fill(H_gtr_yptarmeL1);
 
-          hthtmeL1->Fill(-tmeL1);
+          hthtmeL1->Fill(-tmeL1+tOffsetmeL1);
 	  htmeL1->Fill(-tmeL1);
 	  htmeInL1->Fill(-tmeL1);
 	  hph_qmeL1->Fill(ph_qmeL1*57.2958 + 180);	  
 	  hphmeL1->Fill(ph_qmeL1*57.2958 + 180);
  	  //hphmeL1->Fill(mmmeL1+MMpiOffsetmeL1);
-	  hYmeL1->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
+	  hYmeL1->Fill(-tmeL1+tOffsetmeL1, ph_qmeL1*57.2958 + 180);
 	  //hYmeL1->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 
 	}
@@ -5099,13 +5108,13 @@ void Q1Analysis()
           H_hsxptar_DmeL1R->Fill(H_gtr_xptarmeL1);
           H_hsyptar_DmeL1R->Fill(H_gtr_yptarmeL1);
 
-          hthtmeL1R->Fill(-tmeL1);
+          hthtmeL1R->Fill(-tmeL1+tOffsetmeL1);
 	  htmeL1R->Fill(-tmeL1);
 	  htmeInL1R->Fill(-tmeL1);
 	  hph_qmeL1R->Fill(ph_qmeL1*57.2958 + 180);	  
 	  hphmeL1R->Fill(ph_qmeL1*57.2958 + 180);
  	  //hphmeL1R->Fill(mmmeL1+MMpiOffsetmeL1);
-	  hYmeL1R->Fill(-tmeL1, ph_qmeL1*57.2958 + 180);
+	  hYmeL1R->Fill(-tmeL1+tOffsetmeL1, ph_qmeL1*57.2958 + 180);
 	  //hYmeL1R->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 	}
       Double_t w1t = -tmeL1 >= bins[1] && -tmeL1 <= bins[2];
@@ -5244,9 +5253,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL1 && MMpidL1 && DimonddL1)
 	{
-	  hYmedL1->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	  hYmedL1->Fill(-tmedL1+tOffsetmeL1, ph_qmedL1*57.2958 + 180);
 	  //hYmedL1->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
-          hthtmedL1->Fill(-tmedL1);
+          hthtmedL1->Fill(-tmedL1+tOffsetmeL1);
 
 	}
       //Random
@@ -5256,9 +5265,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL1R && MMpidL1 && DimonddL1)
 	{
-	  hYmedL1R->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	  hYmedL1R->Fill(-tmedL1+tOffsetmeL1, ph_qmedL1*57.2958 + 180);
 	  //hYmedL1R->Fill(-tmedL1, mmmedL1+MMpiOffsetmeL1);
-         hthtmedL1R->Fill(-tmedL1);
+         hthtmedL1R->Fill(-tmedL1+tOffsetmeL1);
 
 	}      
     }    
@@ -5336,13 +5345,13 @@ void Q1Analysis()
           H_hsxptar_DmeL2->Fill(H_gtr_xptarmeL2);
           H_hsyptar_DmeL2->Fill(H_gtr_yptarmeL2);
 
-          hthtmeL2->Fill(-tmeL2);
+          hthtmeL2->Fill(-tmeL2+tOffsetmeL2);
 	  htmeL2->Fill(-tmeL2);
 	  htmeInL2->Fill(-tmeL2);
 	  hph_qmeL2->Fill(ph_qmeL2*57.2958 + 180);
 	  hphmeL2->Fill(ph_qmeL2*57.2958 + 180);
  	  //hphmeL2->Fill(mmmeL2+MMpiOffsetmeL2);  //+MMpiOffsetme
-	  hYmeL2->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
+	  hYmeL2->Fill(-tmeL2+tOffsetmeL2, ph_qmeL2*57.2958 + 180);
 	  //hYmeL2->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
       //Random
@@ -5360,13 +5369,13 @@ void Q1Analysis()
           H_hsxptar_DmeL2R->Fill(H_gtr_xptarmeL2);
           H_hsyptar_DmeL2R->Fill(H_gtr_yptarmeL2);
 
-          hthtmeL2R->Fill(-tmeL2);
+          hthtmeL2R->Fill(-tmeL2+tOffsetmeL2);
 	  htmeL2R->Fill(-tmeL2);
 	  htmeInL2R->Fill(-tmeL2);
 	  hph_qmeL2R->Fill(ph_qmeL2*57.2958 + 180);
 	  hphmeL2R->Fill(ph_qmeL2*57.2958 + 180);
  	  //hphmeL2R->Fill(mmmeL2+MMpiOffsetmeL2);
-	  hYmeL2R->Fill(-tmeL2, ph_qmeL2*57.2958 + 180);
+	  hYmeL2R->Fill(-tmeL2+tOffsetmeL2, ph_qmeL2*57.2958 + 180);
 	  //hYmeL2R->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
       Double_t w1t = -tmeL2 >= bins[1] && -tmeL2 <= bins[2];
@@ -5506,9 +5515,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL2 && MMpidL2 && DimonddL2)
 	{
-	  hYmedL2->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	  hYmedL2->Fill(-tmedL2+tOffsetmeL2, ph_qmedL2*57.2958 + 180);
 	  //hYmedL2->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
-          hthtmedL2->Fill(-tmedL2);
+          hthtmedL2->Fill(-tmedL2+tOffsetmeL2);
 
 	}
       //Random
@@ -5518,9 +5527,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL2R && MMpidL2 && DimonddL2)
 	{
-	  hYmedL2R->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	  hYmedL2R->Fill(-tmedL2+tOffsetmeL2, ph_qmedL2*57.2958 + 180);
 	  //hYmedL2R->Fill(-tmedL2, mmmedL2+MMpiOffsetmeL2);
-          hthtmedL2R->Fill(-tmedL2);
+          hthtmedL2R->Fill(-tmedL2+tOffsetmeL2);
 
 	}      
     }    
@@ -5861,32 +5870,40 @@ void Q1Analysis()
   Double_t SCFMEL2 = 1.0; //0.75;
 
   TCanvas *c8me = new TCanvas("c8me", " tcoin"); 
-  htcoinmeL1->SetStats(0);
-  htcoinmeL1->SetLineColor(kRed);
-  htcoinmeL1->Draw("Weight ");
-  
-  htcoinmeR2->SetStats(0);
-  htcoinmeR2->SetLineColor(kYellow);
-  htcoinmeR2->Draw("same Weight");
- 
+
   htcoinmeC->SetStats(0);
   htcoinmeC->SetLineColor(kGreen);
-  htcoinmeC->Draw("same Weight");
+  //  htcoinmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  //  htcoinmeC->GetXaxis()->SetTitle("Coincidence time (ns)"); 
+  htcoinmeC->Scale(ECMEC);
+  htcoinmeC->Draw("Weight");
 
-  htcoinmeR1->SetStats(0);
-  htcoinmeR1->SetLineColor(kBlue);
-  htcoinmeR1->Draw(" same Weight");
-
+  htcoinmeL1->SetStats(0);
+  htcoinmeL1->SetLineColor(kRed);
+  htcoinmeL1->Scale(ECMEL1);
+  htcoinmeL1->Draw("same Weight ");
+ 
   htcoinmeL2->SetStats(0);
   htcoinmeL2->SetLineColor(kBlack);
+  htcoinmeL2->Scale(ECMEL2);
   htcoinmeL2->Draw("same Weight");
+ 
+  htcoinmeR2->SetStats(0);
+  htcoinmeR2->SetLineColor(kMagenta);
+  htcoinmeR2->Scale(ECMER2);
+  htcoinmeR2->Draw("same Weight");
+ 
+  htcoinmeR1->SetStats(0);
+  htcoinmeR1->SetLineColor(kBlue);
+  htcoinmeR1->Scale(ECMER1);
+  htcoinmeR1->Draw(" same Weight");
   
-  TLine *l1me = new TLine(-1.0, 0.0, -1.0, 74000.0);
-  TLine *l2me = new TLine(1.0, 0.0, 1.0, 74000.0);
-  TLine *l3me = new TLine(-15.0, 0.0, -15.0, 74000.0);
-  TLine *l4me = new TLine(-9.0, 0.0, -9.0, 74000.0);
-  TLine *l5me = new TLine(7.0, 0.0, 7.0, 74000.0);
-  TLine *l6me = new TLine(13.0, 0.0, 13.0, 74000.0);
+  TLine *l1me = new TLine(-1.0, 0.0, -1.0, 250.0);
+  TLine *l2me = new TLine(1.0, 0.0, 1.0, 250.0);
+  TLine *l3me = new TLine(-15.0, 0.0, -15.0, 250.0);
+  TLine *l4me = new TLine(-9.0, 0.0, -9.0, 250.0);
+  TLine *l5me = new TLine(7.0, 0.0, 7.0, 250.0);
+  TLine *l6me = new TLine(13.0, 0.0, 13.0, 250.0);
   l1me->SetLineColor(kBlue);
   l2me->SetLineColor(kBlue);
   l3me->SetLineColor(kBlue);
@@ -5901,7 +5918,7 @@ void Q1Analysis()
   l6me->Draw("same");
      
   auto legme = new TLegend(0.1,0.7,0.30,0.9);
-  legme->SetHeader("Mid epsilon","C");
+  legme->SetHeader("Epsilon = 0.629","C");
   legme->AddEntry(htcoinmeR1,"Right1","l");
   legme->AddEntry(htcoinmeR2,"Right2","l");
   legme->AddEntry(htcoinmeC,"Center","l");
@@ -7501,10 +7518,11 @@ void Q1Analysis()
   Double_t InQ2meC = hthQ2meC->Integral(XQ2meC->FindBin(0.3), XQ2meC->FindBin(0.45), "");
   TAxis *XQ2SmeC = hthQ2SmeC->GetXaxis();
   Double_t InQ2SmeC = hthQ2SmeC->Integral(XQ2SmeC->FindBin(0.3), XQ2SmeC->FindBin(0.45), "");
-  hthQ2meC->Scale(InQ2SmeC/InQ2meC);
+  // hthQ2meC->Scale(InQ2SmeC/InQ2meC);
   hthQ2SmeC->SetStats(0);
   hthQ2SmeC->SetLineColor(kRed);
   hthQ2SmeC->Draw("hist"); 
+  //hthQ2SmeC->Draw(""); 
   hthQ2meC->SetStats(0);
   hthQ2meC->Draw("same"); 
 
@@ -7518,10 +7536,11 @@ void Q1Analysis()
   Double_t InWmeC = hthWmeC->Integral(XWmeC->FindBin(2.16), XWmeC->FindBin(2.23), "");
   TAxis *XWSmeC = hthWSmeC->GetXaxis();
   Double_t InWSmeC = hthWSmeC->Integral(XWSmeC->FindBin(2.16), XWSmeC->FindBin(2.23), "");
-  hthWmeC->Scale(InWSmeC/InWmeC);
+  // hthWmeC->Scale(InWSmeC/InWmeC);
   hthWSmeC->SetStats(0);
   hthWSmeC->SetLineColor(kRed);
   hthWSmeC->Draw("hist");
+  //hthWSmeC->Draw("");
   hthWmeC->SetStats(0);
   hthWmeC->Draw("same");
 
@@ -7535,10 +7554,11 @@ void Q1Analysis()
   Double_t IntmeC = hthtmeC->Integral(XtmeC->FindBin(0.0), XtmeC->FindBin(0.06), "");
   TAxis *XtSmeC = hthtSmeC->GetXaxis();
   Double_t IntSmeC = hthtSmeC->Integral(XtSmeC->FindBin(0.0), XtSmeC->FindBin(0.06), "");
-  hthtmeC->Scale(IntSmeC/IntmeC);
+  // hthtmeC->Scale(IntSmeC/IntmeC);
   hthtSmeC->SetStats(0);
   hthtSmeC->SetLineColor(kRed);
   hthtSmeC->Draw("hist");
+  //hthtSmeC->Draw("");
   hthtmeC->SetStats(0);
   hthtmeC->Draw("same");
 
@@ -7552,10 +7572,11 @@ void Q1Analysis()
   Double_t InepmeC = hthepmeC->Integral(XepmeC->FindBin(0.616), XepmeC->FindBin(0.65), "");
   TAxis *XepSmeC = hthepSmeC->GetXaxis();
   Double_t InepSmeC = hthepSmeC->Integral(XepSmeC->FindBin(0.616), XepSmeC->FindBin(0.65), "");
-  hthepmeC->Scale(InepSmeC/InepmeC);
+  // hthepmeC->Scale(InepSmeC/InepmeC);
   hthepSmeC->SetStats(0);
   hthepSmeC->SetLineColor(kRed);
   hthepSmeC->Draw("hist");
+  //hthepSmeC->Draw("");
   hthepmeC->SetStats(0);
   hthepmeC->Draw("same");
   cthesisme->Print(outputpdf);
@@ -7567,6 +7588,7 @@ void Q1Analysis()
   H_ssdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssdelta_SmeC->SetLineColor(kRed);
   H_ssdelta_SmeC->Draw("hist");
+  //H_ssdelta_SmeC->Draw("");
   H_ssdelta_DmeC->Add(H_ssdelta_DmeCR, -1);
   H_ssdelta_DmeC->Scale(ECMEC);
   //  H_ssdelta_DmeC->SetStats(0);
@@ -7577,6 +7599,7 @@ void Q1Analysis()
   H_ssxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssxptar_SmeC->SetLineColor(kRed);
   H_ssxptar_SmeC->Draw("hist");
+  //H_ssxptar_SmeC->Draw("");
   H_ssxptar_DmeC->Add(H_ssxptar_DmeCR, -1);
   H_ssxptar_DmeC->Scale(ECMEC);
   //  H_ssxptar_DmeC->SetStats(0);
@@ -7587,6 +7610,7 @@ void Q1Analysis()
   H_ssyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_ssyptar_SmeC->SetLineColor(kRed);
   H_ssyptar_SmeC->Draw("hist");
+  //H_ssyptar_SmeC->Draw("");
   H_ssyptar_DmeC->Add(H_ssyptar_DmeCR, -1);
   H_ssyptar_DmeC->Scale(ECMEC);
   //  H_ssyptar_DmeC->SetStats(0);
@@ -7597,6 +7621,7 @@ void Q1Analysis()
   H_hsdelta_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsdelta_SmeC->SetLineColor(kRed);
   H_hsdelta_SmeC->Draw("hist");
+  //H_hsdelta_SmeC->Draw("");
   H_hsdelta_DmeC->Add(H_hsdelta_DmeCR, -1);
   H_hsdelta_DmeC->Scale(ECMEC);
   //  H_hsdelta_DmeC->SetStats(0);
@@ -7607,6 +7632,7 @@ void Q1Analysis()
   H_hsxptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsxptar_SmeC->SetLineColor(kRed);
   H_hsxptar_SmeC->Draw("hist");
+  //H_hsxptar_SmeC->Draw("");
   H_hsxptar_DmeC->Add(H_hsxptar_DmeCR, -1);
   H_hsxptar_DmeC->Scale(ECMEC);
   //  H_hsxptar_DmeC->SetStats(0);
@@ -7617,6 +7643,7 @@ void Q1Analysis()
   H_hsyptar_SmeC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
   H_hsyptar_SmeC->SetLineColor(kRed);
   H_hsyptar_SmeC->Draw("hist");
+  //H_hsyptar_SmeC->Draw("");
   H_hsyptar_DmeC->Add(H_hsyptar_DmeCR, -1);
   H_hsyptar_DmeC->Scale(ECMEC);
   // H_hsyptar_DmeC->SetStats(0);
@@ -7699,12 +7726,19 @@ void Q1Analysis()
   Double_t InmpimeC = MPimeC->Integral(XmpimeC->FindBin(0.9), XmpimeC->FindBin(1.0), "");
   TAxis *XmpiSmeC = MPiSmeC->GetXaxis();
   Double_t InmpiSmeC = MPiSmeC->Integral(XmpiSmeC->FindBin(0.9), XmpiSmeC->FindBin(1.0), "");
-  MPimeC->Scale(InmpiSmeC/InmpimeC);
+  // MPimeC->Scale(InmpiSmeC/InmpimeC);
+  cout<< "InmpimeC/InmpiSmeC = "<<InmpimeC/InmpiSmeC<<endl;
   MPiSmeC->SetStats(0);
   MPiSmeC->SetLineColor(kRed);
   MPiSmeC->Draw("hist");
   MPimeC->SetStats(0);
   MPimeC->Draw("same");
+  TLine *MMpil1me = new TLine(0.932, 0.0, 0.932, 6.0);
+  TLine *MMpil2me = new TLine(0.980, 0.0, 0.980, 6.0);
+  MMpil1me->SetLineColor(kBlue);
+  MMpil2me->SetLineColor(kBlue);
+  MMpil1me->Draw("same");
+  MMpil2me->Draw("same");
   cthesiMPisme3->Print(outputpdf);
   /*
   TCanvas *cthesiMPisme4 = new TCanvas("cthesiMPisme4", "cthesiMPisme4");
@@ -8420,10 +8454,10 @@ void Q1Analysis()
   TH1D *hmmheL1R  = new TH1D("hmmheL1R","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmheL2R  = new TH1D("hmmheL2R","MM; MM;", 300, 0.8, 1.2);      
 
-  TH1D *htcoinheR1   = new TH1D("htcoinheR1","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinheC    = new TH1D("htcoinheC","CTime_ROC1; CTime_ROC1;",   300, -20.0, 20.0);      
-  TH1D *htcoinheL1   = new TH1D("htcoinheL1","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
-  TH1D *htcoinheL2   = new TH1D("htcoinheL2","CTime_ROC1; CTime_ROC1;",  300, -20.0, 20.0);      
+  TH1D *htcoinheR1   = new TH1D("htcoinheR1","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinheC    = new TH1D("htcoinheC","; ;",   300, -20.0, 20.0);      
+  TH1D *htcoinheL1   = new TH1D("htcoinheL1","; ;",  300, -20.0, 20.0);      
+  TH1D *htcoinheL2   = new TH1D("htcoinheL2","; ;",  300, -20.0, 20.0);      
 
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
@@ -8632,6 +8666,8 @@ void Q1Analysis()
   Double_t MMpiOffsetheL2 = 0.004;
 
   Double_t tOffsetheR1 = 0.004;
+  Double_t tOffsetheL1 = -0.002;
+  Double_t tOffsetheL2 = -0.004;
 
   //Data R1
 
@@ -9207,13 +9243,13 @@ void Q1Analysis()
           H_hsxptar_DheL1->Fill(H_gtr_xptarheL1);
           H_hsyptar_DheL1->Fill(H_gtr_yptarheL1);
 
-	  hththeL1->Fill(-theL1);
+	  hththeL1->Fill(-theL1+tOffsetheL1);
 	  htheL1->Fill(-theL1);
 	  htheInL1->Fill(-theL1);
 	  hph_qheL1->Fill(ph_qheL1*57.2958 + 180);	  
 	  hphheL1->Fill(ph_qheL1*57.2958 + 180);
 	  //hphheL1->Fill(mmheL1+MMpiOffsetheL1);
-	  hYheL1->Fill(-theL1, ph_qheL1*57.2958 + 180);
+	  hYheL1->Fill(-theL1+tOffsetheL1, ph_qheL1*57.2958 + 180);
 	  //hYheL1->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}      
       //Random
@@ -9232,13 +9268,13 @@ void Q1Analysis()
           H_hsxptar_DheL1R->Fill(H_gtr_xptarheL1);
           H_hsyptar_DheL1R->Fill(H_gtr_yptarheL1);
 
-	  hththeL1R->Fill(-theL1);
+	  hththeL1R->Fill(-theL1+tOffsetheL1);
 	  htheL1R->Fill(-theL1);
 	  htheInL1R->Fill(-theL1);
 	  hph_qheL1R->Fill(ph_qheL1*57.2958 + 180);	  
 	  hphheL1R->Fill(ph_qheL1*57.2958 + 180);
 	  //hphheL1R->Fill(mmheL1+MMpiOffsetheL1);
-	  hYheL1R->Fill(-theL1, ph_qheL1*57.2958 + 180);
+	  hYheL1R->Fill(-theL1+tOffsetheL1, ph_qheL1*57.2958 + 180);
 	  //hYheL1R->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}
       Double_t w1t = -theL1 >= bins[1] && -theL1 <= bins[2];
@@ -9383,9 +9419,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
-	  hYmedL1->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	  hYmedL1->Fill(-tmedL1+tOffsetheL1, ph_qmedL1*57.2958 + 180);
 	  //hYhedL1->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
-	  hththedL1->Fill(-thedL1);
+	  hththedL1->Fill(-thedL1+tOffsetheL1);
 
 	}
 
@@ -9396,9 +9432,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL1R && MMpidL1 && DiamonddL1)
 	{
-	  hYmedL1R->Fill(-tmedL1, ph_qmedL1*57.2958 + 180);
+	  hYmedL1R->Fill(-tmedL1+tOffsetheL1, ph_qmedL1*57.2958 + 180);
 	  //hYhedL1R->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
-	  hththedL1R->Fill(-thedL1);
+	  hththedL1R->Fill(-thedL1+tOffsetheL1);
 
 	}      
     }    
@@ -9477,13 +9513,13 @@ void Q1Analysis()
           H_hsxptar_DheL2->Fill(H_gtr_xptarheL2);
           H_hsyptar_DheL2->Fill(H_gtr_yptarheL2);
 
-	  hththeL2->Fill(-theL2);
+	  hththeL2->Fill(-theL2+tOffsetheL2);
 	  htheL2->Fill(-theL2);
 	  htheInL2->Fill(-theL2);
 	  hph_qheL2->Fill(ph_qheL2*57.2958 + 180);
 	  hphheL2->Fill(ph_qheL2*57.2958 + 180);
 	  //hphheL2->Fill(mmheL2+MMpiOffsetheL2);
-	  hYheL2->Fill(-theL2, ph_qheL2*57.2958 + 180);
+	  hYheL2->Fill(-theL2+tOffsetheL2, ph_qheL2*57.2958 + 180);
 	  //hYheL2->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
 
@@ -9502,13 +9538,13 @@ void Q1Analysis()
           H_hsxptar_DheL2R->Fill(H_gtr_xptarheL2);
           H_hsyptar_DheL2R->Fill(H_gtr_yptarheL2);
 
-	  hththeL2R->Fill(-theL2);
+	  hththeL2R->Fill(-theL2+tOffsetheL2);
 	  htheL2R->Fill(-theL2);
 	  htheInL2R->Fill(-theL2);
 	  hph_qheL2R->Fill(ph_qheL2*57.2958 + 180);
 	  hphheL2R->Fill(ph_qheL2*57.2958 + 180);
 	  //hphheL2R->Fill(mmheL2+MMpiOffsetheL2);
-	  hYheL2R->Fill(-theL2, ph_qheL2*57.2958 + 180);
+	  hYheL2R->Fill(-theL2+tOffsetheL2, ph_qheL2*57.2958 + 180);
 	  //hYheL2R->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
       Double_t w1t = -theL2 >= bins[1] && -theL2 <= bins[2];
@@ -9647,9 +9683,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
-	  hYmedL2->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	  hYmedL2->Fill(-tmedL2+tOffsetheL2, ph_qmedL2*57.2958 + 180);
 	  //hYhedL2->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
-	  hththedL2->Fill(-thedL2);
+	  hththedL2->Fill(-thedL2+tOffsetheL2);
 
 	}
       
@@ -9660,9 +9696,9 @@ void Q1Analysis()
 	}
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
-	  hYmedL2R->Fill(-tmedL2, ph_qmedL2*57.2958 + 180);
+	  hYmedL2R->Fill(-tmedL2+tOffsetheL2, ph_qmedL2*57.2958 + 180);
 	  //hYhedL2R->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
-	  hththedL2R->Fill(-thedL2);
+	  hththedL2R->Fill(-thedL2+tOffsetheL2);
 	}      
     }    
 
@@ -10036,27 +10072,32 @@ void Q1Analysis()
  
   htcoinheC->SetStats(0);
   htcoinheC->SetLineColor(kGreen);
+  // htcoinheC->GetYaxis()->SetTitle("Yield (Events/mC)"); 
+  // htcoinheC->GetXaxis()->SetTitle("Coincidence time (ns)"); 
+  htcoinheC->Scale(ECHEDC);
   htcoinheC->Draw("Weight");
 
   htcoinheR1->SetStats(0);
   htcoinheR1->SetLineColor(kBlue);
+  htcoinheR1->Scale(ECHEDR1);
   htcoinheR1->Draw(" same Weight");
 
   htcoinheL2->SetStats(0);
   htcoinheL2->SetLineColor(kBlack);
+  htcoinheL2->Scale(ECHEDL2);
   htcoinheL2->Draw("same Weight");
 
   htcoinheL1->SetStats(0);
   htcoinheL1->SetLineColor(kRed);
+  htcoinheL1->Scale(ECHEDL1);
   htcoinheL1->Draw("same Weight ");
   
-  
-  TLine *l1he = new TLine(-1.0, 0.0, -1.0, 300000.0);
-  TLine *l2he = new TLine(1.0, 0.0, 1.0, 300000.0);
-  TLine *l3he = new TLine(-15.0, 0.0, -15.0, 300000.0);
-  TLine *l4he = new TLine(-9.0, 0.0, -9.0, 300000.0);
-  TLine *l5he = new TLine(7.0, 0.0, 7.0, 300000.0);
-  TLine *l6he = new TLine(13.0, 0.0, 13.0, 300000.0);
+  TLine *l1he = new TLine(-1.0, 0.0, -1.0, 4500.0);
+  TLine *l2he = new TLine(1.0, 0.0, 1.0, 4500.0);
+  TLine *l3he = new TLine(-15.0, 0.0, -15.0, 4500.0);
+  TLine *l4he = new TLine(-9.0, 0.0, -9.0, 4500.0);
+  TLine *l5he = new TLine(7.0, 0.0, 7.0, 4500.0);
+  TLine *l6he = new TLine(13.0, 0.0, 13.0, 4500.0);
   l1he->SetLineColor(kBlue);
   l2he->SetLineColor(kBlue);
   l3he->SetLineColor(kBlue);
@@ -10071,7 +10112,7 @@ void Q1Analysis()
   l6he->Draw("same");
      
   auto leghe = new TLegend(0.1,0.7,0.30,0.9);
-  leghe->SetHeader("High epsilon","C");
+  leghe->SetHeader("Epsilon = 0.781","C");
   leghe->AddEntry(htcoinheR1,"Right1","l");
   leghe->AddEntry(htcoinheC,"Center","l");
   leghe->AddEntry(htcoinheL1,"Left1","l");
@@ -11903,6 +11944,77 @@ void Q1Analysis()
   label.DrawLatex(0.5, 0.02, "Q^{2} (GeV^{2})");
   label.SetTextAngle(90);
   label.DrawLatex(0.04, 0.5, "W (GeV)");
-  canvas->Print(outputpdf + ')');
+  canvas->Print(outputpdf);
+
+  TCanvas *Coincanvas = new TCanvas("Coincanvas", " ", 700, 700);
+  Coincanvas->Divide(1, 3);  
+  Coincanvas->cd(1);
+  TPad* coinpad1 = (TPad*)Coincanvas->GetPad(1);
+  coinpad1->SetLeftMargin(0.07);
+  coinpad1->SetBottomMargin(0.04);
+  coinpad1->SetTopMargin(0.02);
+  coinpad1->SetRightMargin(0.0);
+  htcoinC->SetStats(0);
+  htcoinC->Draw("Weight");
+  htcoinL1->Draw("same Weight");
+  htcoinL2->Draw("same Weight");
+  l1->Draw("same");
+  l2->Draw("same");
+  l3->Draw("same");
+  l4->Draw("same");
+  l5->Draw("same");
+  l6->Draw("same");
+  leg->Draw("same");
+  Coincanvas->cd(2);
+
+  TPad* coinpad2 = (TPad*)Coincanvas->GetPad(2);
+  coinpad2->SetLeftMargin(0.07);
+  coinpad2->SetBottomMargin(0.04);
+  coinpad2->SetTopMargin(0.02);
+  coinpad2->SetRightMargin(0.0);
+  htcoinmeC->SetStats(0);
+  htcoinmeC->Draw("Weight");
+  htcoinmeL1->Draw("same Weight");
+  htcoinmeL2->Draw("same Weight");
+  htcoinmeR1->Draw("same Weight");
+  htcoinmeR2->Draw("same Weight");
+  l1me->Draw("same");
+  l2me->Draw("same");
+  l3me->Draw("same");
+  l4me->Draw("same");
+  l5me->Draw("same");
+  l6me->Draw("same");
+  legme->Draw("same");
+
+  Coincanvas->cd(3);
+  TPad* coinpad3 = (TPad*)Coincanvas->GetPad(3);
+  coinpad3->SetLeftMargin(0.07);
+  coinpad3->SetBottomMargin(0.07);
+  coinpad3->SetTopMargin(0.02);
+  coinpad3->SetRightMargin(0.0);
+  htcoinheC->SetStats(0);
+  htcoinheC->Draw("Weight");
+  htcoinheL1->Draw("same Weight");
+  htcoinheL2->Draw("same Weight");
+  htcoinheR1->Draw("same Weight");
+  l1he->Draw("same");
+  l2he->Draw("same");
+  l3he->Draw("same");
+  l4he->Draw("same");
+  l5he->Draw("same");
+  l6he->Draw("same");
+  leghe->Draw("same");
+  Coincanvas->cd();
+
+  Coincanvas->Update();
+ // Add common axis title and labels
+  TLatex label1;
+  label1.SetTextFont(42);
+  label1.SetTextSize(0.03);
+  label1.DrawLatex(0.5, 0.008, "Coincidence time (ns)");
+  label1.SetTextAngle(90);
+  label1.DrawLatex(0.04, 0.5, "Yield (Events/mC) ");
+ Coincanvas->Print(outputpdf + ')');
+
  
 }

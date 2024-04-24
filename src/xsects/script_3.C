@@ -251,21 +251,22 @@ void single_setting(TString q2_set){
 		f_sigT_pre = new TF1("sig_T_pre", fun_Sig_T_160, 0, 0.07, 4);
 		f_sigT_pre->SetParameters(t0, t1, t2, t3);
 		
-		f_sigT = new TF1("sig_T", fun_Sig_T_160, 0.01176, 0.05478, 4); 
-		f_sigT->SetParameters(t0, t1, t2, t3);
+		f_sigT = new TF1("sig_T", fun_Sig_T_160, 0.01176, 0.05478, 2); 
+		f_sigT->SetParameters(t0, t1);
+				
 			
 			/*	
 				f_sigT = new TF1("sig_T", fun_Sig_T_160, 0.01176, 0.05478, 3); 
 				f_sigT->SetParameters(t1, t2, t3);
 			*/
 	       					
-			//	f_sigT->SetParLimits(0, -100, 100);
+		//		f_sigT->SetParLimits(0, -100, 100);
 			
-				//		f_sigT->SetParLimits(1, -100, 100);
+		//				f_sigT->SetParLimits(1, -100, 100);
 			
 				//   
-			//		f_sigT->SetParLimits(2, -100, 100);
-			//	f_sigT->SetParLimits(3, -100, 100);
+		//			f_sigT->SetParLimits(2, -100, 100);
+		f_sigT->FixParameter(1, 0);
 								
 			
 	} else if (q2_set == "245") {
@@ -626,8 +627,9 @@ void single_setting(TString q2_set){
 //	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0, 0.5, 1); 
 //	f_sigL->SetParameters(prv_par_vec[3], prv_par_vec[4], prv_par_vec[5]);
 
-	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0.01176, 0.05478, 4);
-	f_sigL->SetParameters(l0, l1, l2, l3);
+	TF1* f_sigL = new TF1("sig_L", fun_Sig_L, 0.01176, 0.05478, 2);
+	f_sigL->SetParameters(l0, l1);
+
 	//	f_sigL->SetParLimits(0, 0, 50);
 	// 	f_sigL->SetParLimits(1, 0, 40);
 	//	f_sigL->SetParLimits(0, 0, 50);
@@ -891,6 +893,7 @@ void single_setting(TString q2_set){
 */
 	TF1* f_sigLT = new TF1("sig_LT", fun_Sig_LT, 0.01176, 0.05478, 3); 
 	f_sigLT->SetParameters(lt0, lt1, lt2);
+
 	//	f_sigLT->SetParLimits(0, -100,  100);
 
 	g_siglt_fit->Fit(f_sigLT, "S");
@@ -1204,8 +1207,9 @@ Double_t fun_Sig_T_160(Double_t *x, Double_t *par) {
    Float_t q2 = 0.375;
    Double_t tav = (0.0735 + 0.028*log(q2))*q2;
    Double_t ftav = (abs(xx) - tav)/tav;  
-   Double_t f =  par[0]+par[1]*log(q2)+(par[3]+par[4]*log(q2))*ftav;
-   // Double_t f =  par[0]*(par[1]*xx)*exp(par[2]*xx);
+   //   Double_t f =  par[0]+par[1]*log(q2)+(par[3]+par[4]*log(q2))*ftav;
+   //   Double_t f =  par[0]*(par[1]*xx)*exp(par[2]*xx);
+  Double_t f =  par[0]+par[1]*ftav;
 
      
    //  Double_t f = (par[0] + par[1]*xx);
@@ -1276,8 +1280,9 @@ Double_t fun_Sig_L(Double_t *x, Double_t *par) {
 
        Double_t f = ((par[0] + par[1]*log(q2[i]))*exp((par[3] + par[4]*log(q2[i]))*(yy-0.2)));
    */
-   Double_t f = ((par[0] + par[1]*log(q2))*exp((par[3]+par[4]*log(q2))*(xx-0.2)));
-   // Double_t f =  par[0]*exp(par[1]*abs(xx));
+   //   Double_t f = ((par[0] + par[1]*log(q2))*exp((par[2]+par[3]*log(q2))*(xx-0.2)));
+   //   Double_t f = ((par[0] + par[1]*log(q2))*exp((par[2]+par[3]*log(q2))*(xx)));
+   Double_t f =  par[0]*exp(par[1]*abs(xx));
 
 //   Double_t f = par[0] + par[1]*xx;
 
