@@ -458,7 +458,7 @@ c      print*,"*****", npol_set, Eb, w, q2, tm, thetacm, eps_mod
 
       tprime_gev = tm
 
-      tp = abs(tprime_gev)      ! just to make sure it's positive
+      tp = abs(tm)      ! just to make sure it's positive
 
 c      if (abs(t_gev)<tp) then
 c         write(6,*)' invalid -t>-tprime error',abs(t_gev),tp

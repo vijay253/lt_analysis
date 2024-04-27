@@ -344,7 +344,7 @@ void single_setting(TString q2_set){
 		} else {
 
 		  upp.Form("(t> %lf && t < %lf) && x!=0.0", u_list[i-1]+0.001, u_list[i]+0.001); 
-					//	upp.Form("(t> %lf && t < %lf) && x!=0.0", u_list[i-1], u_list[i]); 
+		  //	upp.Form("(t> %lf && t < %lf) && x!=0.0", u_list[i-1], u_list[i]); 
 
 		}
 		
@@ -583,8 +583,8 @@ void single_setting(TString q2_set){
  		// par 3: for sigTT
  
 		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.25, 0.6);
-		//TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.286, 0.781);        // VK
-		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 11.25, 348.78, 0.26, 0.8 );       // VK
+		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(0.017453*x)  + y*[3]*cos(0.034906*x)", 0, 360, 0.20, 0.90);        // VK
+		TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 11.25, 348.78, 0.26, 0.80 );       // VK
 		//	TF2 *fff2 = new TF2("fff2","[0] + y*[1] + sqrt(2*y*(1+y))*[2]*cos(x*pi/180)  + y*[3]*cos(2*x*pi/180)", 0, 360, 0.2, 0.7);        // VK
  	
  		TGraphErrors * sigL_change = new TGraphErrors(); 
@@ -618,7 +618,7 @@ void single_setting(TString q2_set){
 		
 
 		//VK
-		/*
+		/*	
  		fff2->FixParameter(2, 0.0);
  		fff2->FixParameter(3, 0.0);
 		*/
@@ -682,11 +682,11 @@ void single_setting(TString q2_set){
 		//	fff2->SetParameter(1, fff2->GetParameter(1));
  
  		/// Fix parameter 2 and 3
- 
-  		//fff2->FixParameter(2, fff2->GetParameter(2));
-  		//fff2->FixParameter(3, fff2->GetParameter(3));
- 
-   		//g_plot_err->Fit("fff2", "MR");
+		/*
+  		fff2->FixParameter(2, fff2->GetParameter(2));
+  		fff2->FixParameter(3, fff2->GetParameter(3));
+		*/
+		//	g_plot_err->Fit("fff2", "MR");
 		/*
  		sigL_change->SetPoint(sigL_change->GetN(), sigL_change->GetN()+1, fff2->GetParameter(1));
  		sigL_change->SetPointError(sigL_change->GetN()-1, 0, fff2->GetParError(1));
@@ -723,7 +723,7 @@ void single_setting(TString q2_set){
 		/** 
 		fff2->SetParLimits(3, -0.1, 0.1);
 		**/
-		//		g_plot_err->Fit("fff2", "MR");
+		//	g_plot_err->Fit("fff2", "MR");
  
 		
  		/*--------------------------------------------------*/
@@ -738,38 +738,38 @@ void single_setting(TString q2_set){
 		/*
 		fff2->ReleaseParameter(0);
  		fff2->ReleaseParameter(1);
- 
+		
  		fff2->SetParameter(0, fff2->GetParameter(0));
  		fff2->SetParameter(1, fff2->GetParameter(1));
- 
+		*/
  		/// Fix parameter 2 and 3
  
-  		fff2->FixParameter(2, fff2->GetParameter(2));
-  		fff2->FixParameter(3, fff2->GetParameter(3));
+  		//fff2->FixParameter(2, fff2->GetParameter(2));
+		//	fff2->FixParameter(3, fff2->GetParameter(3));
  
-   		g_plot_err->Fit("fff2", "MR");
-		*/
+		//   		g_plot_err->Fit("fff2", "MR");
+		
  
  
  // 		/*--------------------------------------------------*/
  // 		/// Fit 6
  // 		///
- // 		cout  << endl << "/*--------------------------------------------------*/" << endl;
+ // 		cout  << endl << "--------------------------------------------------" << endl;
  // 		cout << " Fitting Step 4" << endl;
  // 		cout << " Fit LT and TT, while Fix L and T" << endl;
  // 
  // 		/// Fix parameter 0 and 1
  // 
- // // 		fff2->FixParameter(0, fff2->GetParameter(0));
- // // 		fff2->FixParameter(1, fff2->GetParameter(1));
+		//  		fff2->FixParameter(0, fff2->GetParameter(0));
+		//		fff2->FixParameter(1, fff2->GetParameter(1));
  // 
  // 
  //  		fff2->SetParLimits(0, fff2->GetParameter(0) - fff2->GetParError(0), fff2->GetParameter(0) + fff2->GetParError(0));
  //  		fff2->SetParLimits(1, fff2->GetParameter(1) - fff2->GetParError(1), fff2->GetParameter(0) + fff2->GetParError(0));
  // 
  // 
- // 		fff2->ReleaseParameter(2);
- // 		fff2->ReleaseParameter(3);
+ //		fff2->ReleaseParameter(2);
+		//  		fff2->ReleaseParameter(3);
  // 
  //  		fff2->SetParameter(2, fff2->GetParameter(2));
  //  		fff2->SetParameter(3, fff2->GetParameter(3));
@@ -785,7 +785,7 @@ void single_setting(TString q2_set){
  
  		/// Fix parameter 0 and 1
  
-		/*
+		/*		
  		fff2->ReleaseParameter(0);
  		fff2->ReleaseParameter(1);
  		fff2->ReleaseParameter(2);
@@ -804,7 +804,6 @@ void single_setting(TString q2_set){
    		fff2->FixParameter(3, fff2->GetParameter(3));
 		*/
  
- 
  //  		fff2->SetParLimits(0, 0, 0.3);
  
  // 		fff2->FixParameter(1, 0.0);
@@ -814,12 +813,12 @@ void single_setting(TString q2_set){
   
 		//   		fff2->SetParLimits(2, fff2->GetParameter(2) - fff2->GetParError(2), fff2->GetParameter(2) + fff2->GetParError(2));
 		//    		fff2->SetParLimits(3, fff2->GetParameter(3) - fff2->GetParError(3), fff2->GetParameter(3) + fff2->GetParError(3));
- 
+		
    		fff2->SetParameter(0, fff2->GetParameter(0));
    		fff2->SetParameter(1, fff2->GetParameter(1));
    		fff2->SetParameter(2, fff2->GetParameter(2));
    		fff2->SetParameter(3, fff2->GetParameter(3));
- 
+		
  		
    		g_plot_err->Fit("fff2", "MR");
   
