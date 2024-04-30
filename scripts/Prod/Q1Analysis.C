@@ -897,14 +897,14 @@ void Q1Analysis()
 	}
       
       //For kin_aver, Q2, W & p_theta 
-      Double_t w1t = -tC >= bins[1] && -tC <= bins[2];
-      Double_t w2t = -tC >= bins[2] && -tC <= bins[3];
-      Double_t w3t = -tC >= bins[3] && -tC <= bins[4];
-      Double_t w4t = -tC >= bins[4] && -tC <= bins[5];
-      Double_t w5t = -tC >= bins[5] && -tC <= bins[6];
-      Double_t w6t = -tC >= bins[6] && -tC <= bins[7];
-      Double_t w7t = -tC >= bins[7] && -tC <= bins[8];
-      Double_t w8t = -tC >= bins[8] && -tC <= bins[9];
+      Double_t w1t = -tC+tOffsetC >= bins[1] && -tC+tOffsetC <= bins[2];
+      Double_t w2t = -tC+tOffsetC >= bins[2] && -tC+tOffsetC <= bins[3];
+      Double_t w3t = -tC+tOffsetC >= bins[3] && -tC+tOffsetC <= bins[4];
+      Double_t w4t = -tC+tOffsetC >= bins[4] && -tC+tOffsetC <= bins[5];
+      Double_t w5t = -tC+tOffsetC >= bins[5] && -tC+tOffsetC <= bins[6];
+      Double_t w6t = -tC+tOffsetC >= bins[6] && -tC+tOffsetC <= bins[7];
+      Double_t w7t = -tC+tOffsetC >= bins[7] && -tC+tOffsetC <= bins[8];
+      Double_t w8t = -tC+tOffsetC >= bins[8] && -tC+tOffsetC <= bins[9];
 
       if(CoinPionC && MMpiC && DiamondC && w1t)
 	{
@@ -1469,14 +1469,14 @@ void Q1Analysis()
 	}
 
       //For kin_aver, Q2, W & p_theta 
-      Double_t w1t = -tL2 >= bins[1] && -tL2 <= bins[2];
-      Double_t w2t = -tL2 >= bins[2] && -tL2 <= bins[3];
-      Double_t w3t = -tL2 >= bins[3] && -tL2 <= bins[4];
-      Double_t w4t = -tL2 >= bins[4] && -tL2 <= bins[5];
-      Double_t w5t = -tL2 >= bins[5] && -tL2 <= bins[6];
-      Double_t w6t = -tL2 >= bins[6] && -tL2 <= bins[7];
-      Double_t w7t = -tL2 >= bins[7] && -tL2 <= bins[8];
-      Double_t w8t = -tL2 >= bins[8] && -tL2 <= bins[9];
+      Double_t w1t = -tL2+tOffsetL2 >= bins[1] && -tL2+tOffsetL2 <= bins[2];
+      Double_t w2t = -tL2+tOffsetL2 >= bins[2] && -tL2+tOffsetL2 <= bins[3];
+      Double_t w3t = -tL2+tOffsetL2 >= bins[3] && -tL2+tOffsetL2 <= bins[4];
+      Double_t w4t = -tL2+tOffsetL2 >= bins[4] && -tL2+tOffsetL2 <= bins[5];
+      Double_t w5t = -tL2+tOffsetL2 >= bins[5] && -tL2+tOffsetL2 <= bins[6];
+      Double_t w6t = -tL2+tOffsetL2 >= bins[6] && -tL2+tOffsetL2 <= bins[7];
+      Double_t w7t = -tL2+tOffsetL2 >= bins[7] && -tL2+tOffsetL2 <= bins[8];
+      Double_t w8t = -tL2+tOffsetL2 >= bins[8] && -tL2+tOffsetL2 <= bins[9];
 
       if(CoinPionL2 && MMpiL2 && DiamondL2 && w1t)
 	{
@@ -4231,12 +4231,12 @@ void Q1Analysis()
   Double_t MMpiOffsetmeC  = 0.003;
   Double_t MMpiOffsetmeL1 = 0.0035;
   Double_t MMpiOffsetmeL2 = 0.003;
-  
+ 
   Double_t tOffsetmeR1 = 0.0025;
   Double_t tOffsetmeR2 = 0.004;
   Double_t tOffsetmeC  = 0.001;
   Double_t tOffsetmeL1  = -0.002;
-  Double_t tOffsetmeL2  = -0.002;
+  Double_t tOffsetmeL2  = -0.002;  
   /*
   Double_t tOffsetmeR1 = 0.00;
   Double_t tOffsetmeR2 = 0.00;
@@ -4313,14 +4313,14 @@ void Q1Analysis()
 	  // hYmeR1R->Fill(-tmeR1, mmmeR1+MMpiOffsetmeR1);
 	}
 
-      Double_t w1t = -tmeR1 >= bins[1] && -tmeR1 <= bins[2];
-      Double_t w2t = -tmeR1 >= bins[2] && -tmeR1 <= bins[3];
-      Double_t w3t = -tmeR1 >= bins[3] && -tmeR1 <= bins[4];
-      Double_t w4t = -tmeR1 >= bins[4] && -tmeR1 <= bins[5];
-      Double_t w5t = -tmeR1 >= bins[5] && -tmeR1 <= bins[6];
-      Double_t w6t = -tmeR1 >= bins[6] && -tmeR1 <= bins[7];
-      Double_t w7t = -tmeR1 >= bins[7] && -tmeR1 <= bins[8];
-      Double_t w8t = -tmeR1 >= bins[8] && -tmeR1 <= bins[9];
+      Double_t w1t = -tmeR1+tOffsetmeR1 >= bins[1] && -tmeR1+tOffsetmeR1 <= bins[2];
+      Double_t w2t = -tmeR1+tOffsetmeR1 >= bins[2] && -tmeR1+tOffsetmeR1 <= bins[3];
+      Double_t w3t = -tmeR1+tOffsetmeR1 >= bins[3] && -tmeR1+tOffsetmeR1 <= bins[4];
+      Double_t w4t = -tmeR1+tOffsetmeR1 >= bins[4] && -tmeR1+tOffsetmeR1 <= bins[5];
+      Double_t w5t = -tmeR1+tOffsetmeR1 >= bins[5] && -tmeR1+tOffsetmeR1 <= bins[6];
+      Double_t w6t = -tmeR1+tOffsetmeR1 >= bins[6] && -tmeR1+tOffsetmeR1 <= bins[7];
+      Double_t w7t = -tmeR1+tOffsetmeR1 >= bins[7] && -tmeR1+tOffsetmeR1 <= bins[8];
+      Double_t w8t = -tmeR1+tOffsetmeR1 >= bins[8] && -tmeR1+tOffsetmeR1 <= bins[9];
 
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w1t)
 	{
@@ -4577,14 +4577,14 @@ void Q1Analysis()
 	  //hYmeR2R->Fill(-tmeR2, mmmeR2+MMpiOffsetmeR2);
 	}
       
-      Double_t w1t = -tmeR2 >= bins[1] && -tmeR2 <= bins[2];
-      Double_t w2t = -tmeR2 >= bins[2] && -tmeR2 <= bins[3];
-      Double_t w3t = -tmeR2 >= bins[3] && -tmeR2 <= bins[4];
-      Double_t w4t = -tmeR2 >= bins[4] && -tmeR2 <= bins[5];
-      Double_t w5t = -tmeR2 >= bins[5] && -tmeR2 <= bins[6];
-      Double_t w6t = -tmeR2 >= bins[6] && -tmeR2 <= bins[7];
-      Double_t w7t = -tmeR2 >= bins[7] && -tmeR2 <= bins[8];
-      Double_t w8t = -tmeR2 >= bins[8] && -tmeR2 <= bins[9];
+      Double_t w1t = -tmeR2+tOffsetmeR2 >= bins[1] && -tmeR2+tOffsetmeR2 <= bins[2];
+      Double_t w2t = -tmeR2+tOffsetmeR2 >= bins[2] && -tmeR2+tOffsetmeR2 <= bins[3];
+      Double_t w3t = -tmeR2+tOffsetmeR2 >= bins[3] && -tmeR2+tOffsetmeR2 <= bins[4];
+      Double_t w4t = -tmeR2+tOffsetmeR2 >= bins[4] && -tmeR2+tOffsetmeR2 <= bins[5];
+      Double_t w5t = -tmeR2+tOffsetmeR2 >= bins[5] && -tmeR2+tOffsetmeR2 <= bins[6];
+      Double_t w6t = -tmeR2+tOffsetmeR2 >= bins[6] && -tmeR2+tOffsetmeR2 <= bins[7];
+      Double_t w7t = -tmeR2+tOffsetmeR2 >= bins[7] && -tmeR2+tOffsetmeR2 <= bins[8];
+      Double_t w8t = -tmeR2+tOffsetmeR2 >= bins[8] && -tmeR2+tOffsetmeR2 <= bins[9];
 
       if(CoinPionR2 && MMpiR2 && DiamondR2 && w1t)
 	{
@@ -4862,14 +4862,14 @@ void Q1Analysis()
  	  //hphmeCR->Fill(mmmeC+MMpiOffsetmeC);
 	  hQ2WMECR->Fill(Q2MEC, WMEC);
 	}
-      Double_t w1t = -tmeC >= bins[1] && -tmeC <= bins[2];
-      Double_t w2t = -tmeC >= bins[2] && -tmeC <= bins[3];
-      Double_t w3t = -tmeC >= bins[3] && -tmeC <= bins[4];
-      Double_t w4t = -tmeC >= bins[4] && -tmeC <= bins[5];
-      Double_t w5t = -tmeC >= bins[5] && -tmeC <= bins[6];
-      Double_t w6t = -tmeC >= bins[6] && -tmeC <= bins[7];
-      Double_t w7t = -tmeC >= bins[7] && -tmeC <= bins[8];
-      Double_t w8t = -tmeC >= bins[8] && -tmeC <= bins[9];
+      Double_t w1t = -tmeC+tOffsetmeC >= bins[1] && -tmeC+tOffsetmeC <= bins[2];
+      Double_t w2t = -tmeC+tOffsetmeC >= bins[2] && -tmeC+tOffsetmeC <= bins[3];
+      Double_t w3t = -tmeC+tOffsetmeC >= bins[3] && -tmeC+tOffsetmeC <= bins[4];
+      Double_t w4t = -tmeC+tOffsetmeC >= bins[4] && -tmeC+tOffsetmeC <= bins[5];
+      Double_t w5t = -tmeC+tOffsetmeC >= bins[5] && -tmeC+tOffsetmeC <= bins[6];
+      Double_t w6t = -tmeC+tOffsetmeC >= bins[6] && -tmeC+tOffsetmeC <= bins[7];
+      Double_t w7t = -tmeC+tOffsetmeC >= bins[7] && -tmeC+tOffsetmeC <= bins[8];
+      Double_t w8t = -tmeC+tOffsetmeC >= bins[8] && -tmeC+tOffsetmeC <= bins[9];
 
       if(CoinPionC && MMpiC && DiamondC && w1t)
 	{
@@ -5133,14 +5133,14 @@ void Q1Analysis()
 	  hYmeL1R->Fill(-tmeL1+tOffsetmeL1, ph_qmeL1*57.2958 + 180);
 	  //hYmeL1R->Fill(-tmeL1, mmmeL1+MMpiOffsetmeL1);
 	}
-      Double_t w1t = -tmeL1 >= bins[1] && -tmeL1 <= bins[2];
-      Double_t w2t = -tmeL1 >= bins[2] && -tmeL1 <= bins[3];
-      Double_t w3t = -tmeL1 >= bins[3] && -tmeL1 <= bins[4];
-      Double_t w4t = -tmeL1 >= bins[4] && -tmeL1 <= bins[5];
-      Double_t w5t = -tmeL1 >= bins[5] && -tmeL1 <= bins[6];
-      Double_t w6t = -tmeL1 >= bins[6] && -tmeL1 <= bins[7];
-      Double_t w7t = -tmeL1 >= bins[7] && -tmeL1 <= bins[8];
-      Double_t w8t = -tmeL1 >= bins[8] && -tmeL1 <= bins[9];
+      Double_t w1t = -tmeL1+tOffsetmeL1 >= bins[1] && -tmeL1+tOffsetmeL1 <= bins[2];
+      Double_t w2t = -tmeL1+tOffsetmeL1 >= bins[2] && -tmeL1+tOffsetmeL1 <= bins[3];
+      Double_t w3t = -tmeL1+tOffsetmeL1 >= bins[3] && -tmeL1+tOffsetmeL1 <= bins[4];
+      Double_t w4t = -tmeL1+tOffsetmeL1 >= bins[4] && -tmeL1+tOffsetmeL1 <= bins[5];
+      Double_t w5t = -tmeL1+tOffsetmeL1 >= bins[5] && -tmeL1+tOffsetmeL1 <= bins[6];
+      Double_t w6t = -tmeL1+tOffsetmeL1 >= bins[6] && -tmeL1+tOffsetmeL1 <= bins[7];
+      Double_t w7t = -tmeL1+tOffsetmeL1 >= bins[7] && -tmeL1+tOffsetmeL1 <= bins[8];
+      Double_t w8t = -tmeL1+tOffsetmeL1 >= bins[8] && -tmeL1+tOffsetmeL1 <= bins[9];
 
       if(CoinPionL1 && MMpiL1 && DiamondL1 && w1t)
 	{
@@ -5394,14 +5394,14 @@ void Q1Analysis()
 	  hYmeL2R->Fill(-tmeL2+tOffsetmeL2, ph_qmeL2*57.2958 + 180);
 	  //hYmeL2R->Fill(-tmeL2, mmmeL2+MMpiOffsetmeL2);
 	}
-      Double_t w1t = -tmeL2 >= bins[1] && -tmeL2 <= bins[2];
-      Double_t w2t = -tmeL2 >= bins[2] && -tmeL2 <= bins[3];
-      Double_t w3t = -tmeL2 >= bins[3] && -tmeL2 <= bins[4];
-      Double_t w4t = -tmeL2 >= bins[4] && -tmeL2 <= bins[5];
-      Double_t w5t = -tmeL2 >= bins[5] && -tmeL2 <= bins[6];
-      Double_t w6t = -tmeL2 >= bins[6] && -tmeL2 <= bins[7];
-      Double_t w7t = -tmeL2 >= bins[7] && -tmeL2 <= bins[8];
-      Double_t w8t = -tmeL2 >= bins[8] && -tmeL2 <= bins[9];
+      Double_t w1t = -tmeL2+tOffsetmeL2 >= bins[1] && -tmeL2+tOffsetmeL2 <= bins[2];
+      Double_t w2t = -tmeL2+tOffsetmeL2 >= bins[2] && -tmeL2+tOffsetmeL2 <= bins[3];
+      Double_t w3t = -tmeL2+tOffsetmeL2 >= bins[3] && -tmeL2+tOffsetmeL2 <= bins[4];
+      Double_t w4t = -tmeL2+tOffsetmeL2 >= bins[4] && -tmeL2+tOffsetmeL2 <= bins[5];
+      Double_t w5t = -tmeL2+tOffsetmeL2 >= bins[5] && -tmeL2+tOffsetmeL2 <= bins[6];
+      Double_t w6t = -tmeL2+tOffsetmeL2 >= bins[6] && -tmeL2+tOffsetmeL2 <= bins[7];
+      Double_t w7t = -tmeL2+tOffsetmeL2 >= bins[7] && -tmeL2+tOffsetmeL2 <= bins[8];
+      Double_t w8t = -tmeL2+tOffsetmeL2 >= bins[8] && -tmeL2+tOffsetmeL2 <= bins[9];
 
       if(CoinPionL2 && MMpiL2 && DiamondL2 && w1t)
 	{
@@ -7993,6 +7993,11 @@ void Q1Analysis()
   Double_t ph_qheC;TBRANCHHIGHEC->SetBranchAddress("ph_q", &ph_qheC);
   Double_t ph_qheL1;TBRANCHHIGHEL1->SetBranchAddress("ph_q", &ph_qheL1);
   Double_t ph_qheL2;TBRANCHHIGHEL2->SetBranchAddress("ph_q", &ph_qheL2);
+  //Dummy
+  Double_t ph_qhedR1;TBRANCHHIGHEDR1->SetBranchAddress("ph_q", &ph_qhedR1);
+  Double_t ph_qhedC;TBRANCHHIGHEDC->SetBranchAddress("ph_q", &ph_qhedC);
+  Double_t ph_qhedL1;TBRANCHHIGHEDL1->SetBranchAddress("ph_q", &ph_qhedL1);
+  Double_t ph_qhedL2;TBRANCHHIGHEDL2->SetBranchAddress("ph_q", &ph_qhedL2);
 
   Double_t mmheR1;TBRANCHHIGHER1->SetBranchAddress("MM", &mmheR1);
   Double_t mmheC;TBRANCHHIGHEC->SetBranchAddress("MM", &mmheC);
@@ -8477,9 +8482,9 @@ void Q1Analysis()
 
   //SIMC and Data HISTOGRAMS  
   //RIGHT1
-  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;", 18, -22.5, 382.5);      
-  TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;", 18, -22.5, 382.5);      
-  TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",  50, -10, 370);      
+  TH1D *hphheR1R  = new TH1D("hphheR1R","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheSR1  = new TH1D("hphheSR1","ph_q; ph_q;", 50, -10, 370);      
   
   /*
   TH1D *hphheR1  = new TH1D("hphheR1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -8512,9 +8517,9 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheR1R  = new TH1D("H_hsyptar_DheR1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //CENTER  
-  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",18, -22.5, 382.5);      
-  TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;", 18, -22.5, 382.5);      
-  TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheSC  = new TH1D("hphheSC","ph_q; ph_q;", 50, -10, 370);      
   /*
   TH1D *hphheC  = new TH1D("hphheC","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheCR  = new TH1D("hphheCR","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -8546,9 +8551,9 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheCR  = new TH1D("H_hsyptar_DheCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT1  
-  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",18, -22.5, 382.5);      
-  TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;", 18, -22.5, 382.5);      
-  TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;",18, -22.5, 382.5);      
+  TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheSL1  = new TH1D("hphheSL1","ph_q; ph_q;", 50, -10, 370);      
   /*
   TH1D *hphheL1  = new TH1D("hphheL1","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheL1R  = new TH1D("hphheL1R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -8580,9 +8585,9 @@ void Q1Analysis()
   TH1D *H_hsyptar_DheL1R  = new TH1D("H_hsyptar_DheL1R","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
   //LEFT2  
-  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",18, -22.5, 382.5);      
-  TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;", 18, -22.5, 382.5);      
-  TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;",18, -22.5, 382.5 );      
+  TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;", 50, -10, 370);      
+  TH1D *hphheSL2  = new TH1D("hphheSL2","ph_q; ph_q;", 50, -10, 370);      
   /*
   TH1D *hphheL2  = new TH1D("hphheL2","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
   TH1D *hphheL2R  = new TH1D("hphheL2R","ph_q; ph_q;",150, PhiBinLow, PhiBinHigh);      
@@ -8756,14 +8761,14 @@ void Q1Analysis()
 	  hYheR1R->Fill(-theR1+tOffsetheR1, ph_qheR1*57.2958 + 180);
 	  //hYheR1R->Fill(-theR1, mmheR1+MMpiOffsetheR1);
 	}
-      Double_t w1t = -theR1 >= bins[1] && -theR1 <= bins[2];
-      Double_t w2t = -theR1 >= bins[2] && -theR1 <= bins[3];
-      Double_t w3t = -theR1 >= bins[3] && -theR1 <= bins[4];
-      Double_t w4t = -theR1 >= bins[4] && -theR1 <= bins[5];
-      Double_t w5t = -theR1 >= bins[5] && -theR1 <= bins[6];
-      Double_t w6t = -theR1 >= bins[6] && -theR1 <= bins[7];
-      Double_t w7t = -theR1 >= bins[7] && -theR1 <= bins[8];
-      Double_t w8t = -theR1 >= bins[8] && -theR1 <= bins[9];
+      Double_t w1t = -theR1+tOffsetheR1 >= bins[1] && -theR1+tOffsetheR1 <= bins[2];
+      Double_t w2t = -theR1+tOffsetheR1 >= bins[2] && -theR1+tOffsetheR1 <= bins[3];
+      Double_t w3t = -theR1+tOffsetheR1 >= bins[3] && -theR1+tOffsetheR1 <= bins[4];
+      Double_t w4t = -theR1+tOffsetheR1 >= bins[4] && -theR1+tOffsetheR1 <= bins[5];
+      Double_t w5t = -theR1+tOffsetheR1 >= bins[5] && -theR1+tOffsetheR1 <= bins[6];
+      Double_t w6t = -theR1+tOffsetheR1 >= bins[6] && -theR1+tOffsetheR1 <= bins[7];
+      Double_t w7t = -theR1+tOffsetheR1 >= bins[7] && -theR1+tOffsetheR1 <= bins[8];
+      Double_t w8t = -theR1+tOffsetheR1 >= bins[8] && -theR1+tOffsetheR1 <= bins[9];
 
       if(CoinPionR1 && MMpiR1 && DiamondR1 && w1t)
 	{
@@ -8894,7 +8899,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR1 && MMpidR1 && DiamonddR1)
 	{
-	  hYmedR1->Fill(-tmedR1+tOffsetheR1, ph_qmedR1*57.2958 + 180);
+	  hYhedR1->Fill(-thedR1+tOffsetheR1, ph_qhedR1*57.2958 + 180);
 	  //hYhedR1->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	  hththedR1->Fill(-thedR1+tOffsetheR1);
 	}
@@ -8905,7 +8910,7 @@ void Q1Analysis()
 	}
       if(CoinPiondR1R && MMpidR1 && DiamonddR1)
 	{
-	  hYmedR1R->Fill(-tmedR1+tOffsetheR1, ph_qmedR1*57.2958 + 180);
+	  hYhedR1R->Fill(-thedR1+tOffsetheR1, ph_qhedR1*57.2958 + 180);
 	  //hYhedR1R->Fill(-thedR1, mmhedR1+MMpiOffsetheR1);
 	  hththedR1R->Fill(-thedR1+tOffsetheR1);
 	}      
@@ -9166,7 +9171,7 @@ void Q1Analysis()
 	}
       if(CoinPiondC && MMpidC && DiamonddC)
 	{
-	  hYmedC->Fill(-tmedC, ph_qmedC*57.2958 + 180);
+	  hYhedC->Fill(-thedC, ph_qhedC*57.2958 + 180);
 	  //hYhedC->Fill(-thedC, mmhedC+MMpiOffsetheC);
 	  hththedC->Fill(-thedC);
 
@@ -9179,7 +9184,7 @@ void Q1Analysis()
 	}      
       if(CoinPiondCR && MMpidC && DiamonddC)
 	{
-	  hYmedCR->Fill(-tmedC, ph_qmedR1*57.2958 + 180);
+	  hYhedCR->Fill(-thedC, ph_qhedR1*57.2958 + 180);
 	  //hYhedCR->Fill(-thedC, mmhedC+MMpiOffsetheC);
 	  hththedCR->Fill(-thedC);
 
@@ -9296,14 +9301,14 @@ void Q1Analysis()
 	  hYheL1R->Fill(-theL1+tOffsetheL1, ph_qheL1*57.2958 + 180);
 	  //hYheL1R->Fill(-theL1, mmheL1+MMpiOffsetheL1);
 	}
-      Double_t w1t = -theL1 >= bins[1] && -theL1 <= bins[2];
-      Double_t w2t = -theL1 >= bins[2] && -theL1 <= bins[3];
-      Double_t w3t = -theL1 >= bins[3] && -theL1 <= bins[4];
-      Double_t w4t = -theL1 >= bins[4] && -theL1 <= bins[5];
-      Double_t w5t = -theL1 >= bins[5] && -theL1 <= bins[6];
-      Double_t w6t = -theL1 >= bins[6] && -theL1 <= bins[7];
-      Double_t w7t = -theL1 >= bins[7] && -theL1 <= bins[8];
-      Double_t w8t = -theL1 >= bins[8] && -theL1 <= bins[9];
+      Double_t w1t = -theL1+tOffsetheL1 >= bins[1] && -theL1+tOffsetheL1 <= bins[2];
+      Double_t w2t = -theL1+tOffsetheL1 >= bins[2] && -theL1+tOffsetheL1 <= bins[3];
+      Double_t w3t = -theL1+tOffsetheL1 >= bins[3] && -theL1+tOffsetheL1 <= bins[4];
+      Double_t w4t = -theL1+tOffsetheL1 >= bins[4] && -theL1+tOffsetheL1 <= bins[5];
+      Double_t w5t = -theL1+tOffsetheL1 >= bins[5] && -theL1+tOffsetheL1 <= bins[6];
+      Double_t w6t = -theL1+tOffsetheL1 >= bins[6] && -theL1+tOffsetheL1 <= bins[7];
+      Double_t w7t = -theL1+tOffsetheL1 >= bins[7] && -theL1+tOffsetheL1 <= bins[8];
+      Double_t w8t = -theL1+tOffsetheL1 >= bins[8] && -theL1+tOffsetheL1 <= bins[9];
 
       if(CoinPionL1 && MMpiL1 && DiamondL1 && w1t)
 	{
@@ -9438,7 +9443,7 @@ void Q1Analysis()
 	}
       if(CoinPiondL1 && MMpidL1 && DiamonddL1)
 	{
-	  hYmedL1->Fill(-tmedL1+tOffsetheL1, ph_qmedL1*57.2958 + 180);
+	  hYhedL1->Fill(-thedL1+tOffsetheL1, ph_qhedL1*57.2958 + 180);
 	  //hYhedL1->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
 	  hththedL1->Fill(-thedL1+tOffsetheL1);
 
@@ -9451,7 +9456,7 @@ void Q1Analysis()
 	}
       if(CoinPiondL1R && MMpidL1 && DiamonddL1)
 	{
-	  hYmedL1R->Fill(-tmedL1+tOffsetheL1, ph_qmedL1*57.2958 + 180);
+	  hYhedL1R->Fill(-thedL1+tOffsetheL1, ph_qhedL1*57.2958 + 180);
 	  //hYhedL1R->Fill(-thedL1, mmhedL1+MMpiOffsetheL1);
 	  hththedL1R->Fill(-thedL1+tOffsetheL1);
 
@@ -9566,14 +9571,14 @@ void Q1Analysis()
 	  hYheL2R->Fill(-theL2+tOffsetheL2, ph_qheL2*57.2958 + 180);
 	  //hYheL2R->Fill(-theL2,mmheL2+MMpiOffsetheL2);
 	}
-      Double_t w1t = -theL2 >= bins[1] && -theL2 <= bins[2];
-      Double_t w2t = -theL2 >= bins[2] && -theL2 <= bins[3];
-      Double_t w3t = -theL2 >= bins[3] && -theL2 <= bins[4];
-      Double_t w4t = -theL2 >= bins[4] && -theL2 <= bins[5];
-      Double_t w5t = -theL2 >= bins[5] && -theL2 <= bins[6];
-      Double_t w6t = -theL2 >= bins[6] && -theL2 <= bins[7];
-      Double_t w7t = -theL2 >= bins[7] && -theL2 <= bins[8];
-      Double_t w8t = -theL2 >= bins[8] && -theL2 <= bins[9];
+      Double_t w1t = -theL2+tOffsetheL2 >= bins[1] && -theL2+tOffsetheL2 <= bins[2];
+      Double_t w2t = -theL2+tOffsetheL2 >= bins[2] && -theL2+tOffsetheL2 <= bins[3];
+      Double_t w3t = -theL2+tOffsetheL2 >= bins[3] && -theL2+tOffsetheL2 <= bins[4];
+      Double_t w4t = -theL2+tOffsetheL2 >= bins[4] && -theL2+tOffsetheL2 <= bins[5];
+      Double_t w5t = -theL2+tOffsetheL2 >= bins[5] && -theL2+tOffsetheL2 <= bins[6];
+      Double_t w6t = -theL2+tOffsetheL2 >= bins[6] && -theL2+tOffsetheL2 <= bins[7];
+      Double_t w7t = -theL2+tOffsetheL2 >= bins[7] && -theL2+tOffsetheL2 <= bins[8];
+      Double_t w8t = -theL2+tOffsetheL2 >= bins[8] && -theL2+tOffsetheL2 <= bins[9];
 
       if(CoinPionL2 && MMpiL2 && DiamondL2 && w1t)
 	{
@@ -9702,7 +9707,7 @@ void Q1Analysis()
 	}
       if(CoinPiondL2 && MMpidL2 && DiamonddL2)
 	{
-	  hYmedL2->Fill(-tmedL2+tOffsetheL2, ph_qmedL2*57.2958 + 180);
+	  hYhedL2->Fill(-thedL2+tOffsetheL2, ph_qhedL2*57.2958 + 180);
 	  //hYhedL2->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
 	  hththedL2->Fill(-thedL2+tOffsetheL2);
 
@@ -9715,7 +9720,7 @@ void Q1Analysis()
 	}
       if(CoinPiondL2R && MMpidL2 && DiamonddL2)
 	{
-	  hYmedL2R->Fill(-tmedL2+tOffsetheL2, ph_qmedL2*57.2958 + 180);
+	  hYhedL2R->Fill(-thedL2+tOffsetheL2, ph_qhedL2*57.2958 + 180);
 	  //hYhedL2R->Fill(-thedL2, mmhedL2+MMpiOffsetheL2);
 	  hththedL2R->Fill(-thedL2+tOffsetheL2);
 	}      
