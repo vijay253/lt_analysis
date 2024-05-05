@@ -340,10 +340,10 @@ c ratio is data/simc - see GH logbook, p.55
                dr=0.0
             endif
 
-             x_real=x_mod*r
-c             x_real=x_mod
-             dx_real=x_mod*dr/r
-c             dx_real=x_mod*2/100
+c             x_real=x_mod*r
+             x_real=x_mod
+c             dx_real=x_mod*dr/r
+             dx_real=x_mod*2/100
 c             dx_real=2.823
 
              if (x_real.eq.0.0) then

@@ -814,12 +814,11 @@ void Q1Analysis()
   Double_t MMpiOffsetL1 = 0.007723;
   Double_t MMpiOffsetC  = 0.006723;
   
-  Double_t tOffsetC  = 0.001;
-  Double_t tOffsetL2  = -0.004;
-  /*
-  Double_t tOffsetC  = 0.00;
+  Double_t tOffsetC  = 0.0015;
+  // Double_t tOffsetL2  = -0.004;
+  // Double_t tOffsetC  = 0.00;
   Double_t tOffsetL2  = 0.00;
-  */
+  
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
     {
@@ -4231,12 +4230,13 @@ void Q1Analysis()
   Double_t MMpiOffsetmeC  = 0.003;
   Double_t MMpiOffsetmeL1 = 0.0035;
   Double_t MMpiOffsetmeL2 = 0.003;
- 
+  
   Double_t tOffsetmeR1 = 0.0025;
   Double_t tOffsetmeR2 = 0.004;
   Double_t tOffsetmeC  = 0.001;
-  Double_t tOffsetmeL1  = -0.002;
+  Double_t tOffsetmeL1  = -0.0015;
   Double_t tOffsetmeL2  = -0.002;  
+ 
   /*
   Double_t tOffsetmeR1 = 0.00;
   Double_t tOffsetmeR2 = 0.00;

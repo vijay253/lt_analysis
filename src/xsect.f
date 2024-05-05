@@ -534,7 +534,7 @@ c     1     *exp((fitpar(7)+fitpar(8)*log(q2))*(tp)))
 c      sigL = ((fitpar(5)+fitpar(6)*log(q2))
 c     1     *exp((fitpar(7)+fitpar(8)*log(q2))*tp))
 
-      sigl = fitpar(5)*exp(fitpar(6)*tp)
+      sigl = fitpar(5)*exp(fitpar(6)*(tp))
 c it0
 c      a =  0.46859E+02
 c      b = -0.30000E+02 
