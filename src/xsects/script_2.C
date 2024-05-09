@@ -316,7 +316,7 @@ void single_setting(TString q2_set){
 	u_bin_num = u_list.size();
 
 	TCanvas* c1 =  new TCanvas("c1", "c1", 1800, 600); 
-	TCanvas* c2 =  new TCanvas("c2", "c2", 1500, 1200); 
+	TCanvas* c2 =  new TCanvas("c2", "c2", 1500, 2000); 
 	//thesis plot
 	TCanvas* cthesis =  new TCanvas("cthesis", "cthesis", 1500, 600); 
 
@@ -324,7 +324,7 @@ void single_setting(TString q2_set){
 	//	c1->Divide(u_bin_num, 1, 0.003, 0.003);
 	//	c2->Divide(u_bin_num, 1, 0.003, 0.003);
 	c1->Divide(4, 2);
-	c2->Divide(3, 3);
+	c2->Divide(2, 4);
 	//	c1->Divide(u_bin_num, 1);
 	//	c2->Divide(u_bin_num, 1);
  
@@ -835,13 +835,13 @@ void single_setting(TString q2_set){
  		c2->Update();
  
 		c2->cd(i+1);
-		/*	
+			
 		TPad* pad = (TPad*)c2->GetPad(i+1);
-		pad->SetLeftMargin(0.08);
-		pad->SetBottomMargin(0.07);
-		pad->SetTopMargin(0.05);
-		pad->SetRightMargin(0.02);
-		*/
+		pad->SetLeftMargin(0.13);
+		pad->SetBottomMargin(0.06);
+		pad->SetTopMargin(0.08);
+		pad->SetRightMargin(0.0);
+		
  // 		g1->Draw("A*");
  
   		g1->SetMarkerStyle(5);
@@ -873,13 +873,14 @@ void single_setting(TString q2_set){
 //  
 // 		g->SetTitle("Unseprated #sigma");
 // 
+/*
 		g->GetXaxis()->SetTitle("#phi (deg)");
  		g->GetXaxis()->CenterTitle();
 		// 		g->GetYaxis()->SetTitle("Unseparated X-Section");
  		g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 		// 		g->GetYaxis()->SetTitleOffset(1.6);
  		g->GetYaxis()->CenterTitle();
-		
+*/		
 		
  		f1->FixParameter(0, fff2->GetParameter(0));
  		f1->FixParameter(1, fff2->GetParameter(1));
@@ -1061,44 +1062,87 @@ void single_setting(TString q2_set){
 	c1->Print("lt_sep_plots/check_"+ q2_set + ".png");
 	c1->Print("lt_sep_plots/check_"+ q2_set + ".root");
 	
-	
-
+	c2->cd();
+	c2->Update();
+	// Add common axis title and labels                                                                                                                                                         
+	TLatex label;
+	label.SetTextFont(42);
+	label.SetTextSize(0.04);
+	label.DrawLatex(0.5, 0.02, "#phi (deg)");
+	label.SetTextAngle(90);
+	label.DrawLatex(0.04, 0.5, "d#sigma/dtd#phi (#mub/GeV^{2})");
 	c2->Print("lt_sep_plots/money_"+q2_set + ".pdf");
 	c2->Print("lt_sep_plots/money_"+q2_set + ".root");
 
-	TCanvas* c3 = new TCanvas();
-
+	TCanvas* c3 = new TCanvas("c3", "c3", 700, 700);
+	c3->Divide(2,2);
+	c3->cd(1);
+	/*
 	sig_L_g->GetXaxis()->SetTitle("t (GeV^{2})");
 	sig_L_g->GetXaxis()->CenterTitle();
 	sig_L_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_L_g->GetYaxis()->CenterTitle();
+	*/
+	TPad* pad1 = (TPad*)c3->GetPad(1);
+	pad1->SetLeftMargin(0.13);
+	pad1->SetBottomMargin(0.08);
+	pad1->SetTopMargin(0.07);
+	pad1->SetRightMargin(0.0);
 	sig_L_g->Draw("a*");
-	c3->Print("lt_sep_plots/sigL_"+ q2_set + ".png");
-
+	//	c3->Print("lt_sep_plots/sigL_"+ q2_set + ".png");
+	c3->cd(2);
+	TPad* pad2 = (TPad*)c3->GetPad(2);
+	pad2->SetLeftMargin(0.13);
+	pad2->SetBottomMargin(0.08);
+	pad2->SetTopMargin(0.07);
+	pad2->SetRightMargin(0.0);
+	/*
 	sig_T_g->GetXaxis()->SetTitle("t (GeV^{2})");
 	sig_T_g->GetXaxis()->CenterTitle();
 	sig_T_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_T_g->GetYaxis()->CenterTitle();
+	*/
 	sig_T_g->Draw("a*");
-	c3->Print("lt_sep_plots/sigT_"+ q2_set + ".png");
-
+	//	c3->Print("lt_sep_plots/sigT_"+ q2_set + ".png");
+	c3->cd(3);
+	TPad* pad3 = (TPad*)c3->GetPad(3);
+	pad3->SetLeftMargin(0.13);
+	pad3->SetBottomMargin(0.08);
+	pad3->SetTopMargin(0.07);
+	pad3->SetRightMargin(0.0);
+	/*
 	sig_LT_g->GetXaxis()->SetTitle("t (GeV^{2})");
 	sig_LT_g->GetXaxis()->CenterTitle();
 	sig_LT_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_LT_g->GetYaxis()->CenterTitle();
+	*/
 	sig_LT_g->Draw("a*");
-	c3->Print("lt_sep_plots/sigLT_"+ q2_set + ".png");
-
+	//	c3->Print("lt_sep_plots/sigLT_"+ q2_set + ".png");
+	c3->cd(4);
+	TPad* pad4 = (TPad*)c3->GetPad(4);
+	pad4->SetLeftMargin(0.13);
+	pad4->SetBottomMargin(0.08);
+	pad4->SetTopMargin(0.07);
+	pad4->SetRightMargin(0.0);
+	/*
 	sig_TT_g->GetXaxis()->SetTitle("t (GeV^{2})");
 	sig_TT_g->GetXaxis()->CenterTitle();
 	sig_TT_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_TT_g->GetYaxis()->CenterTitle();
+	*/
 	sig_TT_g->Draw("a*");
-	c3->Print("lt_sep_plots/sigTT_"+ q2_set + ".png");
-
-
-
-
+	//	c3->Print("lt_sep_plots/sigTT_"+ q2_set + ".png");
+	//	c3->Print("lt_sep_plots/Sep_X_"+ q2_set + ".png");
+	c3->cd();
+	c3->Update();
+	// Add common axis title and labels                                                                                                                                                         
+	TLatex label1;
+	label1.SetTextFont(42);
+	label1.SetTextSize(0.04);
+	label1.DrawLatex(0.5, 0.02, "t (GeV^{2})");
+	label1.SetTextAngle(90);
+	label1.DrawLatex(0.04, 0.5, "d#sigma/dtd#phi (#mub/GeV^{2})");
+	c3->Print("lt_sep_plots/Sep_X_"+ q2_set + ".pdf");
 
 	delete c1;
 	delete c2;

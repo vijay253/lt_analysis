@@ -234,7 +234,7 @@ c         stop
          th_cm=th_pos
 
 
-         tm = tt
+c         tm = tt
 
 c         print *,  w,dw,q2,dq2,tt,dtt,th_pos
 
@@ -618,9 +618,9 @@ c      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
      
 c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
-c      sig = sig*wfactor
+      sig = sig*wfactor
 c      sig = sig
-c      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
+      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
 c      sig = sig/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
 
       x_mod = sig     

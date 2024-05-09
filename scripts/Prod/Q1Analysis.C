@@ -767,7 +767,7 @@ void Q1Analysis()
 
   TH1D *H_t_S  = new TH1D("H_t_S","t; t;", 300, -0.01, 0.1); 
   TH1D *H_ti_S  = new TH1D("H_ti_S","ti; ti;", 300, -0.01, 0.1); 
-  TH1D *H_t_RE  = new TH1D("H_t_RE"," t Resolution (t-ti); t Resolution;", 300, -0.03, 0.03); 
+  TH1D *H_t_RE  = new TH1D("H_t_RE"," ; t Resolution (t-ti);", 300, -0.02, 0.02); 
   TH1D *H_t_RE1  = new TH1D("H_t_RE1"," t Resolution (t-ti) 1 bin; t Resolution;", 300, -0.03, 0.03); 
   TH1D *H_t_RE2  = new TH1D("H_t_RE2"," t Resolution (t-ti) 2 bin; t Resolution;", 300, -0.03, 0.03); 
   TH1D *H_t_RE3  = new TH1D("H_t_RE3"," t Resolution (t-ti) 3 bin; t Resolution;", 300, -0.03, 0.03); 
@@ -2985,23 +2985,25 @@ void Q1Analysis()
 	}
     }
 
-  TCanvas *cRE = new TCanvas("cRE", " cRE");
+  
+ TCanvas *cRE = new TCanvas("cRE", " cRE");
 
   TF1 *Gauss = new TF1("Gauss","gaus(0)",-0.004,0.006);
   Gauss->SetLineColor(kRed);
-  H_t_RE->Fit("Gauss", "RQ"); 
-  // H_t_RE->SetStats(0);
+  //  H_t_RE->Fit("Gauss", "RQ"); 
+  H_t_RE->SetStats(0);
   H_t_RE->GetYaxis()->SetTitle("Weighted Yield");  
   H_t_RE->Draw("Weight");
 
   //  auto legRE = new TLegend(0.8,0.7,0.30,0.9); 
   auto legRE = new TLegend(0.1,0.7,0.40,0.9); 
-  legRE->SetHeader("Center setting at low #epsilon ","C");
+  legRE->SetHeader("SHMS Center Setting (#epsilon = 0.286)","C");
   legRE->SetTextSize(0.03);
-  legRE->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss->GetParameter(2)), "lep"); 
+  //  legRE->AddEntry(Gauss, TString::Format("Gauss(2); #sigma = %0.6f",Gauss->GetParameter(2)), "lep"); 
+  legRE->AddEntry(H_t_RE, TString::Format("#sigma = %0.6f",H_t_RE->GetStdDev()), "lep"); 
   legRE->Draw("same");
   cRE->Print(outputpdf);
-
+  
   TCanvas *cREt = new TCanvas("cREt", " cREt");
 
   H_t_RE_t->SetStats(0);
@@ -11461,6 +11463,8 @@ void Q1Analysis()
   htheC->SetStats(0);
   htheC->SetLineColor(kGreen);
   htheC->Add(htheCR,-1);
+  htheC->GetXaxis()->SetTitle("t (GeV^{2})");
+  htheC->GetYaxis()->SetTitle("Events");
   TAxis *In1 = htheC->GetXaxis();
   Double_t heC =  htheC->Integral(In1->FindBin(tmn), In1->FindBin(tmx), "");
   cout<< " High epsilon C events: "<<heC<<endl;

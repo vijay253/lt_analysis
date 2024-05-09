@@ -267,7 +267,7 @@ void single_setting(TString q2_set){
 			
 				//   
 		//			f_sigT->SetParLimits(2, -100, 100);
-		f_sigT->FixParameter(1, 0);
+		//		f_sigT->FixParameter(1, 0);
 								
 			
 	} else if (q2_set == "245") {
