@@ -1962,8 +1962,9 @@ void Q1Analysis()
   l5->Draw("same");
   l6->Draw("same");
 
-  auto leg = new TLegend(0.1,0.7,0.30,0.9);
-  leg->SetHeader("Epsilon = 0.286","C");
+  auto leg = new TLegend(0.1,0.5,0.30,0.9);
+  leg->SetHeader("#epsilon = 0.286","C");
+  leg->SetTextSize(0.1);
   leg->AddEntry(htcoinC,"Center","l");
   leg->AddEntry(htcoinL1,"Left1","l");
   leg->AddEntry(htcoinL2,"Left2","l");
@@ -4136,15 +4137,15 @@ void Q1Analysis()
   TH1D *H_ssxptar_DmeCR  = new TH1D("H_ssxptar_DmeCR","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_DmeCR  = new TH1D("H_ssyptar_DmeCR","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
 
-  TH1D *H_hsdelta_SmeC  = new TH1D("H_hsdelta_SmeC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsdelta_SmeC  = new TH1D("H_hsdelta_SmeC","HMS Delta; hsdelta;", 50, -7.0, 7.0);
   TH1D *H_hsxptar_SmeC  = new TH1D("H_hsxptar_SmeC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_SmeC  = new TH1D("H_hsyptar_SmeC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
-  TH1D *H_hsdelta_DmeC  = new TH1D("H_hsdelta_DmeC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsdelta_DmeC  = new TH1D("H_hsdelta_DmeC","HMS Delta; hsdelta;", 50, -7.0, 7.0);
   TH1D *H_hsxptar_DmeC  = new TH1D("H_hsxptar_DmeC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeC  = new TH1D("H_hsyptar_DmeC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
-  TH1D *H_hsdelta_DmeCR  = new TH1D("H_hsdelta_DmeCR","HMS Delta; hsdelta;", 50, -20.0, 20.0);
+  TH1D *H_hsdelta_DmeCR  = new TH1D("H_hsdelta_DmeCR","HMS Delta; hsdelta;", 50, -7.0, 7.0);
   TH1D *H_hsxptar_DmeCR  = new TH1D("H_hsxptar_DmeCR","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeCR  = new TH1D("H_hsyptar_DmeCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
 
@@ -5614,6 +5615,10 @@ void Q1Analysis()
   hthtmedL1R->Scale(RTSCALE);
   hthtmedL2R->Scale(RTSCALE);
 
+  hthQ2meCR->Scale(RTSCALE);
+  hthWmeCR->Scale(RTSCALE);
+  hthepmeCR->Scale(RTSCALE);
+  //Dummy 
   hthQ2medCR->Scale(RTSCALE);
   hthWmedCR->Scale(RTSCALE);
   hthepmedCR->Scale(RTSCALE);
@@ -5935,8 +5940,9 @@ void Q1Analysis()
   l5me->Draw("same");
   l6me->Draw("same");
      
-  auto legme = new TLegend(0.1,0.7,0.30,0.9);
-  legme->SetHeader("Epsilon = 0.629","C");
+  auto legme = new TLegend(0.1,0.3,0.30,0.9);
+  legme->SetHeader("#epsilon = 0.629","C");
+  legme->SetTextSize(0.1);
   legme->AddEntry(htcoinmeR1,"Right1","l");
   legme->AddEntry(htcoinmeR2,"Right2","l");
   legme->AddEntry(htcoinmeC,"Center","l");
@@ -10137,8 +10143,9 @@ void Q1Analysis()
   l5he->Draw("same");
   l6he->Draw("same");
      
-  auto leghe = new TLegend(0.1,0.7,0.30,0.9);
-  leghe->SetHeader("Epsilon = 0.781","C");
+  auto leghe = new TLegend(0.1,0.4,0.30,0.9);
+  leghe->SetHeader("#epsilon = 0.781","C");
+  leghe->SetTextSize(0.1);
   leghe->AddEntry(htcoinheR1,"Right1","l");
   leghe->AddEntry(htcoinheC,"Center","l");
   leghe->AddEntry(htcoinheL1,"Left1","l");
