@@ -3299,6 +3299,15 @@ void Q1Analysis()
   Double_t  H_gtr_dpmeC;TBRANCHMIDEC->SetBranchAddress("hsdelta", &H_gtr_dpmeC);
   Double_t  H_gtr_xptarmeC;TBRANCHMIDEC->SetBranchAddress("hsxptar", &H_gtr_xptarmeC);
   Double_t  H_gtr_yptarmeC;TBRANCHMIDEC->SetBranchAddress("hsyptar", &H_gtr_yptarmeC);
+  //Dummy
+  Double_t  P_gtr_dpmedC;TBRANCHMIDEDC->SetBranchAddress("ssdelta", &P_gtr_dpmedC);
+  Double_t  P_gtr_xptarmedC;TBRANCHMIDEDC->SetBranchAddress("ssxptar", &P_gtr_xptarmedC);
+  Double_t  P_gtr_yptarmedC;TBRANCHMIDEDC->SetBranchAddress("ssyptar", &P_gtr_yptarmedC);
+
+  Double_t  H_gtr_dpmedC;TBRANCHMIDEDC->SetBranchAddress("hsdelta", &H_gtr_dpmedC);
+  Double_t  H_gtr_xptarmedC;TBRANCHMIDEDC->SetBranchAddress("hsxptar", &H_gtr_xptarmedC);
+  Double_t  H_gtr_yptarmedC;TBRANCHMIDEDC->SetBranchAddress("hsyptar", &H_gtr_yptarmedC);
+
 
   Double_t WMEC;TBRANCHMIDEC->SetBranchAddress("W", &WMEC);
   Double_t Q2MEC;TBRANCHMIDEC->SetBranchAddress("Q2", &Q2MEC);
@@ -4132,22 +4141,39 @@ void Q1Analysis()
   TH1D *H_ssdelta_DmeC  = new TH1D("H_ssdelta_DmeC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_DmeC  = new TH1D("H_ssxptar_DmeC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_DmeC  = new TH1D("H_ssyptar_DmeC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
-
+  //Random
   TH1D *H_ssdelta_DmeCR  = new TH1D("H_ssdelta_DmeCR","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_DmeCR  = new TH1D("H_ssxptar_DmeCR","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_DmeCR  = new TH1D("H_ssyptar_DmeCR","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+  //Dummy
+  TH1D *H_ssdelta_DmedC  = new TH1D("H_ssdelta_DmedC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmedC  = new TH1D("H_ssxptar_DmedC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmedC  = new TH1D("H_ssyptar_DmedC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
+  //Random
+  TH1D *H_ssdelta_DmedCR  = new TH1D("H_ssdelta_DmedCR","SHMS delta; ssdelta;", 50, -5.0, 3.0);
+  TH1D *H_ssxptar_DmedCR  = new TH1D("H_ssxptar_DmedCR","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
+  TH1D *H_ssyptar_DmedCR  = new TH1D("H_ssyptar_DmedCR","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
 
   TH1D *H_hsdelta_SmeC  = new TH1D("H_hsdelta_SmeC","HMS Delta; hsdelta;", 50, -7.0, 7.0);
   TH1D *H_hsxptar_SmeC  = new TH1D("H_hsxptar_SmeC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_SmeC  = new TH1D("H_hsyptar_SmeC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
-
+  
   TH1D *H_hsdelta_DmeC  = new TH1D("H_hsdelta_DmeC","HMS Delta; hsdelta;", 50, -7.0, 7.0);
   TH1D *H_hsxptar_DmeC  = new TH1D("H_hsxptar_DmeC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeC  = new TH1D("H_hsyptar_DmeC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
-
+  //Random
   TH1D *H_hsdelta_DmeCR  = new TH1D("H_hsdelta_DmeCR","HMS Delta; hsdelta;", 50, -7.0, 7.0);
   TH1D *H_hsxptar_DmeCR  = new TH1D("H_hsxptar_DmeCR","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DmeCR  = new TH1D("H_hsyptar_DmeCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+  //Dummy
+  TH1D *H_hsdelta_DmedC  = new TH1D("H_hsdelta_DmedC","HMS Delta; hsdelta;", 50, -7.0, 7.0);
+  TH1D *H_hsxptar_DmedC  = new TH1D("H_hsxptar_DmedC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmedC  = new TH1D("H_hsyptar_DmedC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+  //Random
+  TH1D *H_hsdelta_DmedCR  = new TH1D("H_hsdelta_DmedCR","HMS Delta; hsdelta;", 50, -7.0, 7.0);
+  TH1D *H_hsxptar_DmedCR  = new TH1D("H_hsxptar_DmedCR","HMS xptar; hsxptar;", 50, -0.1, 0.1);
+  TH1D *H_hsyptar_DmedCR  = new TH1D("H_hsyptar_DmedCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
+
 
   //LEFT1
     
@@ -5008,6 +5034,14 @@ void Q1Analysis()
           hthepmedC->Fill(epsilonMEDC);
 	  hYmedC->Fill(-tmedC+tOffsetmeC, ph_qmedC*57.2958 + 180);
 	  //hYmedC->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
+
+          H_ssdelta_DmedC->Fill(P_gtr_dpmedC);
+          H_ssxptar_DmedC->Fill(P_gtr_xptarmedC);
+          H_ssyptar_DmedC->Fill(P_gtr_yptarmedC);
+
+          H_hsdelta_DmedC->Fill(H_gtr_dpmedC);
+          H_hsxptar_DmedC->Fill(H_gtr_xptarmedC);
+          H_hsyptar_DmedC->Fill(H_gtr_yptarmedC);
 	}
 
       //Random      
@@ -5024,6 +5058,15 @@ void Q1Analysis()
           hthepmedCR->Fill(epsilonMEDC);
 	  hYmedCR->Fill(-tmedC+tOffsetmeC, ph_qmedC*57.2958 + 180);
 	  //hYmedCR->Fill(-tmedC, mmmedC+MMpiOffsetmeC);
+
+          H_ssdelta_DmedCR->Fill(P_gtr_dpmedC);
+          H_ssxptar_DmedCR->Fill(P_gtr_xptarmedC);
+          H_ssyptar_DmedCR->Fill(P_gtr_yptarmedC);
+
+          H_hsdelta_DmedCR->Fill(H_gtr_dpmedC);
+          H_hsxptar_DmedCR->Fill(H_gtr_xptarmedC);
+          H_hsyptar_DmedCR->Fill(H_gtr_yptarmedC);
+
 	}      
     }    
   //SIMC CENTER                                                                                                                                                                                      
@@ -5591,6 +5634,14 @@ void Q1Analysis()
 	  
         }
     }
+  H_ssdelta_DmedCR->Scale(RTSCALE);
+  H_ssxptar_DmedCR->Scale(RTSCALE);
+  H_ssyptar_DmedCR->Scale(RTSCALE);
+
+  H_hsdelta_DmedCR->Scale(RTSCALE);
+  H_hsxptar_DmedCR->Scale(RTSCALE);
+  H_hsyptar_DmedCR->Scale(RTSCALE);
+
   MPimeR1R->Scale(RTSCALE);
   MPimeR2R->Scale(RTSCALE);
   MPimeCR->Scale(RTSCALE);
@@ -7615,6 +7666,9 @@ void Q1Analysis()
   //H_ssdelta_SmeC->Draw("");
   H_ssdelta_DmeC->Add(H_ssdelta_DmeCR, -1);
   H_ssdelta_DmeC->Scale(ECMEC);
+  H_ssdelta_DmedC->Add(H_ssdelta_DmedCR, -1);
+  H_ssdelta_DmedC->Scale(ECMEDC);
+  H_ssdelta_DmeC->Add(H_ssdelta_DmedC, -1);
   //  H_ssdelta_DmeC->SetStats(0);
   H_ssdelta_DmeC->Draw("same"); 
 
@@ -7626,6 +7680,9 @@ void Q1Analysis()
   //H_ssxptar_SmeC->Draw("");
   H_ssxptar_DmeC->Add(H_ssxptar_DmeCR, -1);
   H_ssxptar_DmeC->Scale(ECMEC);
+  H_ssxptar_DmedC->Add(H_ssxptar_DmedCR, -1);
+  H_ssxptar_DmedC->Scale(ECMEDC);
+  H_ssxptar_DmedC->Add(H_ssxptar_DmedC, -1);
   //  H_ssxptar_DmeC->SetStats(0);
   H_ssxptar_DmeC->Draw("same");
 
@@ -7637,7 +7694,10 @@ void Q1Analysis()
   //H_ssyptar_SmeC->Draw("");
   H_ssyptar_DmeC->Add(H_ssyptar_DmeCR, -1);
   H_ssyptar_DmeC->Scale(ECMEC);
-  //  H_ssyptar_DmeC->SetStats(0);
+  H_ssyptar_DmedC->Add(H_ssyptar_DmedCR, -1);
+  H_ssyptar_DmedC->Scale(ECMEDC);
+  H_ssyptar_DmeC->Add(H_ssyptar_DmedC, -1);
+ //  H_ssyptar_DmeC->SetStats(0);
   H_ssyptar_DmeC->Draw("same");
  
   cthesisAcc->cd(4);
@@ -7648,6 +7708,9 @@ void Q1Analysis()
   //H_hsdelta_SmeC->Draw("");
   H_hsdelta_DmeC->Add(H_hsdelta_DmeCR, -1);
   H_hsdelta_DmeC->Scale(ECMEC);
+  H_hsdelta_DmedC->Add(H_hsdelta_DmedCR, -1);
+  H_hsdelta_DmedC->Scale(ECMEDC);
+  H_hsdelta_DmeC->Add(H_hsdelta_DmedC, -1);
   //  H_hsdelta_DmeC->SetStats(0);
   H_hsdelta_DmeC->Draw("same"); 
 
@@ -7659,6 +7722,9 @@ void Q1Analysis()
   //H_hsxptar_SmeC->Draw("");
   H_hsxptar_DmeC->Add(H_hsxptar_DmeCR, -1);
   H_hsxptar_DmeC->Scale(ECMEC);
+  H_hsxptar_DmedC->Add(H_hsxptar_DmedCR, -1);
+  H_hsxptar_DmedC->Scale(ECMEDC);
+  H_hsxptar_DmeC->Add(H_hsxptar_DmedC, -1);
   //  H_hsxptar_DmeC->SetStats(0);
   H_hsxptar_DmeC->Draw("same");
 
@@ -7670,6 +7736,9 @@ void Q1Analysis()
   //H_hsyptar_SmeC->Draw("");
   H_hsyptar_DmeC->Add(H_hsyptar_DmeCR, -1);
   H_hsyptar_DmeC->Scale(ECMEC);
+  H_hsyptar_DmedC->Add(H_hsyptar_DmedCR, -1);
+  H_hsyptar_DmedC->Scale(ECMEDC);
+  H_hsyptar_DmeC->Add(H_hsyptar_DmedC, -1);
   // H_hsyptar_DmeC->SetStats(0);
   H_hsyptar_DmeC->Draw("same");
   cthesisAcc->Print(outputpdf);
