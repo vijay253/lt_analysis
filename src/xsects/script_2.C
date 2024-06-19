@@ -839,7 +839,7 @@ void single_setting(TString q2_set){
 		TPad* pad = (TPad*)c2->GetPad(i+1);
 		pad->SetLeftMargin(0.13);
 		pad->SetBottomMargin(0.06);
-		pad->SetTopMargin(0.08);
+		pad->SetTopMargin(0.02);
 		pad->SetRightMargin(0.0);
 		
  // 		g1->Draw("A*");
@@ -1069,8 +1069,16 @@ void single_setting(TString q2_set){
 	label.SetTextFont(42);
 	label.SetTextSize(0.04);
 	label.DrawLatex(0.5, 0.02, "#phi (deg)");
+	label.DrawLatex(0.14, 0.96, "-t = 0.009");
+	label.DrawLatex(0.64, 0.96, "-t = 0.013");
+	label.DrawLatex(0.14, 0.71, "-t = 0.017");
+	label.DrawLatex(0.64, 0.71, "-t = 0.021");
+	label.DrawLatex(0.14, 0.46, "-t = 0.026");
+	label.DrawLatex(0.64, 0.46, "-t = 0.032");
+	label.DrawLatex(0.14, 0.21, "-t = 0.041");
+
 	label.SetTextAngle(90);
-	label.DrawLatex(0.04, 0.5, "d#sigma/dtd#phi (#mub/GeV^{2})");
+	label.DrawLatex(0.04, 0.5, "d^{2}#sigma/dtd#phi (#mub/GeV^{2})");
 	c2->Print("lt_sep_plots/money_"+q2_set + ".pdf");
 	c2->Print("lt_sep_plots/money_"+q2_set + ".root");
 
@@ -1086,15 +1094,16 @@ void single_setting(TString q2_set){
 	TPad* pad1 = (TPad*)c3->GetPad(1);
 	pad1->SetLeftMargin(0.13);
 	pad1->SetBottomMargin(0.08);
-	pad1->SetTopMargin(0.07);
+	pad1->SetTopMargin(0.02);
 	pad1->SetRightMargin(0.0);
+	sig_L_g->GetYaxis()->SetRangeUser(0.70,2.65);
 	sig_L_g->Draw("a*");
 	//	c3->Print("lt_sep_plots/sigL_"+ q2_set + ".png");
 	c3->cd(2);
 	TPad* pad2 = (TPad*)c3->GetPad(2);
 	pad2->SetLeftMargin(0.13);
 	pad2->SetBottomMargin(0.08);
-	pad2->SetTopMargin(0.07);
+	pad2->SetTopMargin(0.02);
 	pad2->SetRightMargin(0.0);
 	/*
 	sig_T_g->GetXaxis()->SetTitle("t (GeV^{2})");
@@ -1102,13 +1111,14 @@ void single_setting(TString q2_set){
 	sig_T_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_T_g->GetYaxis()->CenterTitle();
 	*/
+	sig_T_g->GetYaxis()->SetRangeUser(0.70,2.65);
 	sig_T_g->Draw("a*");
 	//	c3->Print("lt_sep_plots/sigT_"+ q2_set + ".png");
 	c3->cd(3);
 	TPad* pad3 = (TPad*)c3->GetPad(3);
 	pad3->SetLeftMargin(0.13);
 	pad3->SetBottomMargin(0.08);
-	pad3->SetTopMargin(0.07);
+	pad3->SetTopMargin(0.02);
 	pad3->SetRightMargin(0.0);
 	/*
 	sig_LT_g->GetXaxis()->SetTitle("t (GeV^{2})");
@@ -1116,13 +1126,14 @@ void single_setting(TString q2_set){
 	sig_LT_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_LT_g->GetYaxis()->CenterTitle();
 	*/
+	sig_LT_g->GetYaxis()->SetRangeUser(-0.75,0.50);
 	sig_LT_g->Draw("a*");
 	//	c3->Print("lt_sep_plots/sigLT_"+ q2_set + ".png");
 	c3->cd(4);
 	TPad* pad4 = (TPad*)c3->GetPad(4);
 	pad4->SetLeftMargin(0.13);
 	pad4->SetBottomMargin(0.08);
-	pad4->SetTopMargin(0.07);
+	pad4->SetTopMargin(0.02);
 	pad4->SetRightMargin(0.0);
 	/*
 	sig_TT_g->GetXaxis()->SetTitle("t (GeV^{2})");
@@ -1130,6 +1141,7 @@ void single_setting(TString q2_set){
 	sig_TT_g->GetYaxis()->SetTitle("d#sigma/dtd#phi (#mub/GeV^{2})");
 	sig_TT_g->GetYaxis()->CenterTitle();
 	*/
+	sig_TT_g->GetYaxis()->SetRangeUser(-0.75,0.50);
 	sig_TT_g->Draw("a*");
 	//	c3->Print("lt_sep_plots/sigTT_"+ q2_set + ".png");
 	//	c3->Print("lt_sep_plots/Sep_X_"+ q2_set + ".png");
@@ -1139,9 +1151,14 @@ void single_setting(TString q2_set){
 	TLatex label1;
 	label1.SetTextFont(42);
 	label1.SetTextSize(0.04);
-	label1.DrawLatex(0.5, 0.02, "t (GeV^{2})");
+	label1.DrawLatex(0.45, 0.01, "-t (GeV^{2})");
+	label1.DrawLatex(0.20, 0.90, "#sigma_{L}");
+	label1.DrawLatex(0.70, 0.90, "#sigma_{T}");
+	label1.DrawLatex(0.20, 0.40, "#sigma_{LT}");
+	label1.DrawLatex(0.70, 0.40, "#sigma_{TT}");
+
 	label1.SetTextAngle(90);
-	label1.DrawLatex(0.04, 0.5, "d#sigma/dtd#phi (#mub/GeV^{2})");
+	label1.DrawLatex(0.04, 0.5, "d^{2}#sigma/dtd#phi (#mub/GeV^{2})");
 	c3->Print("lt_sep_plots/Sep_X_"+ q2_set + ".pdf");
 
 	delete c1;

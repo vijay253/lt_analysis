@@ -517,6 +517,7 @@ void single_setting(TString q2_set){
 
 	c1->cd(2);
 	n1->Draw("l:u:l_e", "", "goff");
+	//	n1->Draw("l:q2:l_e", "", "goff");
 
 //	TF1* f_sigL_pre = new TF1("sig_L", fun_Sig_L, 0, 0.5, 3);
 //	f_sigL_pre->SetParameters(prv_par_vec[3], prv_par_vec[4], prv_par_vec[5]);

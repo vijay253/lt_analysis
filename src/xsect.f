@@ -619,9 +619,7 @@ c      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
 c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
       sig = sig*wfactor
-c      sig = sig
-      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
-c      sig = sig/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
+      sig = sig/2./pi           !dsig/dtdphicm in microbarns/GeV^2/rad
 
       x_mod = sig     
       th_mod=thetacm

@@ -789,7 +789,16 @@ void Q1Analysis()
   Double_t MMPICUTL = 0.91; 
   Double_t MMPICUTH = 0.98; 
   /////////////////////////////
-
+  //Missing mass cut dependent study
+  // Double_t MMPICUTH = 0.978; 
+  //  Double_t MMPICUTH = 0.976; 
+  // Double_t MMPICUTH = 0.974; 
+  // Double_t MMPICUTH = 0.972; 
+  
+  //  Double_t MMPICUTH = 0.982; 
+  // Double_t MMPICUTH = 0.984; 
+  // Double_t MMPICUTH = 0.986; 
+  //  Double_t MMPICUTH = 0.988; 
 
   // ULong64_t Q2C1[60000000];
   //ULong64_t WC1[600000000];
@@ -1056,8 +1065,11 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
       
-      Double_t fact = 9428650.0/400000.0;
-      // Double_t fact = 7772090.0/10000.0;
+      // Double_t fact = 9428650.0/400000.0;
+      //RadiativeStudy
+      Double_t fact = 7932660.0/400000.0;
+
+
       Double_t Sw1t = t_simc >= bins[1] && t_simc <= bins[2];
       Double_t Sw2t = t_simc >= bins[2] && t_simc <= bins[3];
       Double_t Sw3t = t_simc >= bins[3] && t_simc <= bins[4];
@@ -1368,8 +1380,10 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));  
       
-      Double_t factL1 =  9950550.0/400000.0;
-      //      Double_t factL1 = 10030400.0/10000.0;
+      // Double_t factL1 =  9950550.0/400000.0;
+      //RadiativeStudy
+      Double_t factL1 = 7528680.0/400000.0;
+
       //      Double_t CUTSIMCL1 = hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxpfpL1 >=-0.08 && hsxpfpL1 <=0.08 && hsypfpL1 >=-0.045 && hsypfpL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxpfpL1 >=-0.06 && ssxpfpL1 <=0.06 && ssypfpL1 >=-0.04 && ssypfpL1 <=0.04 && missmassL1 >=0.932 && missmassL1 <= 0.98 && Diamond_cut;
 
       Double_t CUTSIMCL1 = hsdeltaL1 > -8.0 && hsdeltaL1 < 8.0 && hsxptarL1 > -0.08 && hsxptarL1 < 0.08 && hsyptarL1 > -0.045 && hsyptarL1 < 0.045 && ssdeltaL1 > -10.0 && ssdeltaL1 < 20.0 && ssxptarL1 > -0.06 && ssxptarL1 < 0.06 && ssyptarL1 > -0.04 && ssyptarL1 < 0.04 && missmassL1 >=MMPICUTL && missmassL1 <=MMPICUTH && Diamond_cut;
@@ -1625,8 +1639,10 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));  
       
-      Double_t factL2 = 9637460.0/400000.0;
-      // Double_t factL2 = 9585160.0/10000.0;
+      //Double_t factL2 = 9637460.0/400000.0;
+      //RadiativeStudy
+      Double_t factL2 = 7552280.0/400000.0;
+
       //      Double_t CUTSIMCL2 = hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxpfpL2 >=-0.08 && hsxpfpL2 <=0.08 && hsypfpL2 >=-0.045 && hsypfpL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxpfpL2 >=-0.06 && ssxpfpL2 <=0.06 && ssypfpL2 >=-0.04 && ssypfpL2 <=0.04 && missmassL2 >= 0.932 && missmassL2 <= 0.98 && Diamond_cut;
 
       Double_t CUTSIMCL2 = hsdeltaL2 > -8.0 && hsdeltaL2 < 8.0 && hsxptarL2 > -0.08 && hsxptarL2 < 0.08 && hsyptarL2 > -0.045 && hsyptarL2 < 0.045 && ssdeltaL2 > -10.0 && ssdeltaL2 < 20.0 && ssxptarL2 > -0.06 && ssxptarL2 < 0.06 && ssyptarL2 > -0.04 && ssyptarL2 < 0.04 && missmassL2 >=MMPICUTL && missmassL2 <=MMPICUTH && Diamond_cut;
@@ -4507,8 +4523,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeR1, W_simcmeR1));
 
-      Double_t NFMR1 = 22563800.0/400000.0;
-      //      Double_t NFMR1 = 22562000.0/10000.0;
+      //Double_t NFMR1 = 22563800.0/400000.0;
+      //RadiativeStudy
+      Double_t NFMR1 = 23244300.0/400000.0;
 
       //      if(hsdeltameR1 >=-8.0 && hsdeltameR1 <=8.0 && hsxpfpmeR1 >=-0.08 && hsxpfpmeR1 <=0.08 && hsypfpmeR1 >=-0.045 && hsypfpmeR1 <=0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxpfpmeR1 >=-0.06 && ssxpfpmeR1 <=0.06 && ssypfpmeR1 >=-0.04 && ssypfpmeR1 <=0.04 && missmassmeR1 >= 0.932 && missmassmeR1 <= 0.98 && Diamond_cut)
 
@@ -4775,8 +4792,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeR2, W_simcmeR2));
 
-      Double_t NFMR2 = 22581600.0/400000.0;
-      //  Double_t NFMR2 = 22596300.0/10000.0;
+      //Double_t NFMR2 = 22581600.0/400000.0;
+      //RadiativeStudy
+      Double_t NFMR2 = 23224200.0/400000.0;
 
       //      if(hsdeltameR2 >=-8.0 && hsdeltameR2 <=8.0 && hsxpfpmeR2 >=-0.08 && hsxpfpmeR2 <=0.08 && hsypfpmeR2 >=-0.045 && hsypfpmeR2 <=0.045 && ssdeltameR2 >=-10.0 && ssdeltameR2 <=20.0 && ssxpfpmeR2 >=-0.06 && ssxpfpmeR2 <=0.06 && ssypfpmeR2 >=-0.04 && ssypfpmeR2 <=0.04 && missmassmeR2 >= 0.932 && missmassmeR2 <= 0.98 && Diamond_cut)
 
@@ -5077,8 +5095,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeC, W_simcmeC));
 
-      Double_t NFMC = 22498100.0/400000.0;
-      //      Double_t NFMC = 22729600.0/10000.0;
+      //Double_t NFMC = 22498100.0/400000.0;
+      //RadiativeStudy
+      Double_t NFMC = 23290000.0/400000.0;
 
       //      if(hsdeltameC >=-8.0 && hsdeltameC <=8.0 && hsxpfpmeC >=-0.08 && hsxpfpmeC <=0.08 && hsypfpmeC >=-0.045 && hsypfpmeC <=0.045 && ssdeltameC >=-10.0 && ssdeltameC <=20.0 && ssxpfpmeC >=-0.06 && ssxpfpmeC <=0.06 && ssypfpmeC >=-0.04 && ssypfpmeC <=0.04 && missmassmeC >=0.932  && missmassmeC <= 0.98 && Diamond_cut)
 
@@ -5341,8 +5360,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL1, W_simcmeL1));
 
-      Double_t NFML1 = 22410500.0/400000.0;
-      //      Double_t NFML1 = 22542800.0/10000.0;
+      //Double_t NFML1 = 22410500.0/400000.0;
+      //RadiativeStudy
+      Double_t NFML1 = 23349600.0/400000.0;
 
       //      if(hsdeltameL1 >=-8.0 && hsdeltameL1 <=8.0 && hsxpfpmeL1 >=-0.08 && hsxpfpmeL1 <=0.08 && hsypfpmeL1 >=-0.045 && hsypfpmeL1 <=0.045 && ssdeltameL1 >=-10.0 && ssdeltameL1 <=20.0 && ssxpfpmeL1 >=-0.06 && ssxpfpmeL1 <=0.06 && ssypfpmeL1 >=-0.04 && ssypfpmeL1 <=0.04 && missmassmeL1 >= 0.932 && missmassmeL1 <= 0.98 && Diamond_cut)
 
@@ -5603,8 +5623,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL2, W_simcmeL2));
 
-      Double_t NFML2 = 22204500.0/400000.0;
-      // Double_t NFML2 = 22504000.0/10000.0;
+      //Double_t NFML2 = 22204500.0/400000.0;
+      //RadiativeStudy    
+      Double_t NFML2 = 23437000.0/400000.0;
 
       //      if(hsdeltameL2 >=-8.0 && hsdeltameL2 <=8.0 && hsxpfpmeL2 >=-0.08 && hsxpfpmeL2 <=0.08 && hsypfpmeL2 >=-0.045 && hsypfpmeL2 <=0.045 && ssdeltameL2 >=-10.0 && ssdeltameL2 <=20.0 && ssxpfpmeL2 >=-0.06 && ssxpfpmeL2 <=0.06 && ssypfpmeL2 >=-0.04 && ssypfpmeL2 <=0.04 && missmassmeL2 >= 0.932 && missmassmeL2 <= 0.98 && Diamond_cut)
       
@@ -7828,10 +7849,35 @@ void Q1Analysis()
   MPimeC->Draw("same");
   TLine *MMpil1me = new TLine(MMPICUTL, 0.0, MMPICUTL, 6.0);
   TLine *MMpil2me = new TLine(MMPICUTH, 0.0, MMPICUTH, 6.0);
+  //MM scan
+  TLine *MMpil3me = new TLine(MMPICUTH-0.002, 0.0, MMPICUTH-0.002, 3.0);
+  TLine *MMpil4me = new TLine(MMPICUTH-0.004, 0.0, MMPICUTH-0.004, 3.0);
+  TLine *MMpil5me = new TLine(MMPICUTH-0.006, 0.0, MMPICUTH-0.006, 3.0);
+  TLine *MMpil6me = new TLine(MMPICUTH-0.008, 0.0, MMPICUTH-0.008, 3.0);
+  TLine *MMpil7me = new TLine(MMPICUTH+0.002, 0.0, MMPICUTH+0.002, 3.0);
+  TLine *MMpil8me = new TLine(MMPICUTH+0.004, 0.0, MMPICUTH+0.004, 3.0);
+  TLine *MMpil9me = new TLine(MMPICUTH+0.006, 0.0, MMPICUTH+0.006, 3.0);
+  TLine *MMpil10me = new TLine(MMPICUTH+0.008, 0.0, MMPICUTH+0.008, 3.0);
   MMpil1me->SetLineColor(kBlue);
   MMpil2me->SetLineColor(kBlue);
   MMpil1me->Draw("same");
   MMpil2me->Draw("same");
+  MMpil3me->SetLineColor(kRed);
+  MMpil4me->SetLineColor(kRed);
+  MMpil5me->SetLineColor(kRed);
+  MMpil6me->SetLineColor(kRed);
+  MMpil7me->SetLineColor(kRed);
+  MMpil8me->SetLineColor(kRed);
+  MMpil9me->SetLineColor(kRed);
+  MMpil10me->SetLineColor(kRed);
+  MMpil3me->Draw("same");
+  MMpil4me->Draw("same");
+  MMpil5me->Draw("same");
+  MMpil6me->Draw("same");
+  MMpil7me->Draw("same");
+  MMpil8me->Draw("same");
+  MMpil9me->Draw("same");
+  MMpil10me->Draw("same");
   cthesiMPisme3->Print(outputpdf);
   /*
   TCanvas *cthesiMPisme4 = new TCanvas("cthesiMPisme4", "cthesiMPisme4");
@@ -9001,8 +9047,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheR1, W_simcheR1));
 
-      Double_t NFR1 = 35406000.0/400000.0;
-      //  Double_t NFR1 = 35924000.0/10000.0;
+      // Double_t NFR1 = 35406000.0/400000.0;
+      //RadiativeStudy
+      Double_t NFR1 = 38411900.0/400000.0;
 
       //      if(hsdeltaheR1 >=-8.0 && hsdeltaheR1 <=8.0 && hsxpfpheR1 >=-0.08 && hsxpfpheR1 <=0.08 && hsypfpheR1 >=-0.045 && hsypfpheR1 <=0.045 && ssdeltaheR1 >=-10.0 && ssdeltaheR1 <=20.0 && ssxpfpheR1 >=-0.06 && ssxpfpheR1 <=0.06 && ssypfpheR1 >=-0.04 && ssypfpheR1 <=0.04 && missmassheR1 >= 0.932 && missmassheR1 <= 0.98 && Diamond_cut)
 
@@ -9276,8 +9323,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheC, W_simcheC));
 
-      Double_t NFC =  35356600.0/400000.0;
-      //     Double_t NFC = 35706100.0/10000.0;
+      // Double_t NFC =  35356600.0/400000.0;
+      //RadiativeStudy
+      Double_t NFC =  38432000.0/400000.0;
 
       //      if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxpfpheC >=-0.08 && hsxpfpheC <=0.08 && hsypfpheC >=-0.045 && hsypfpheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxpfpheC >=-0.06 && ssxpfpheC <=0.06 && ssypfpheC >=-0.04 && ssypfpheC <=0.04 && missmassheC >= 0.932 && missmassheC <= 0.98 && Diamond_cut
       
@@ -9548,8 +9596,9 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheL1, W_simcheL1));
 
-      Double_t NFL1 = 35026200.0/400000.0;
-      //      Double_t NFL1 = 35792000.0/10000.0;
+      // Double_t NFL1 = 35026200.0/400000.0;
+      //RadiativeStudy
+      Double_t NFL1 = 38310200.0/400000.0;
 
       //      if(hsdeltaheL1 >=-8.0 && hsdeltaheL1 <=8.0 && hsxpfpheL1 >=-0.08 && hsxpfpheL1 <=0.08 && hsypfpheL1 >=-0.045 && hsypfpheL1 <=0.045 && ssdeltaheL1 >=-10.0 && ssdeltaheL1 <=20.0 && ssxpfpheL1 >=-0.06 && ssxpfpheL1 <=0.06 && ssypfpheL1 >=-0.04 && ssypfpheL1 <=0.04 && missmassheL1 >= 0.932 && missmassheL1 <= 0.98 && Diamond_cut)
       
@@ -9811,8 +9860,9 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheL2, W_simcheL2));
       
-      Double_t NFL2 = 34657200.0/400000.0;
-      //      Double_t NFL2 = 35217000.0/10000.0;
+      // Double_t NFL2 = 34657200.0/400000.0;
+      //RadiativeStudy
+      Double_t NFL2 = 38073700.0/400000.0;
       
       //      if(hsdeltaheL2 >=-8.0 && hsdeltaheL2 <=8.0 && hsxpfpheL2 >=-0.08 && hsxpfpheL2 <=0.08 && hsypfpheL2 >=-0.045 && hsypfpheL2 <=0.045 && ssdeltaheL2 >=-10.0 && ssdeltaheL2 <=20.0 && ssxpfpheL2 >=-0.06 && ssxpfpheL2 <=0.06 && ssypfpheL2 >=-0.04 && ssypfpheL2 <=0.04 && missmassheL2 >= 0.932 && missmassheL2 <= 0.98 && Diamond_cut)
       
