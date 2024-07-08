@@ -65,7 +65,23 @@ void Q1Analysis()
   //Dummy extra thickness correction factor.
   Double_t THCF = 1.0/4.8579;
   Double_t TimmingOffset = 44.1;
-
+  //SIMC Acceptance Cuts
+  //SHMS
+  Double_t SIMC_Delta_Low_P   = -10;
+  Double_t SIMC_Delta_High_P  =  20;
+  Double_t SIMC_Xptar_Low_P   = -0.06;
+  Double_t SIMC_Xptar_High_P  =  0.06;
+  Double_t SIMC_Yptar_Low_P   = -0.04;
+  Double_t SIMC_Yptar_High_P  =  0.04;
+  //HMS
+  
+  Double_t SIMC_Delta_Low_H   = -8;
+  Double_t SIMC_Delta_High_H  =  8;
+  Double_t SIMC_Xptar_Low_H   = -0.08;
+  Double_t SIMC_Xptar_High_H  =  0.08;
+  Double_t SIMC_Yptar_Low_H   = -0.045;
+  Double_t SIMC_Yptar_High_H  =  0.045;
+  
   // Low epsilon analysis
   cout<<" "<<endl;
   cout<<" Analysing low epsilon data..." <<endl;
@@ -1081,9 +1097,9 @@ void Q1Analysis()
 
       //      Double_t CUTSIMCC = hsdelta >=-8.0 && hsdelta <=8.0 && hsxpfp >=-0.08 && hsxpfp <=0.08 && hsypfp >=-0.045 && hsypfp <=0.045 && ssdelta >=-10.0 && ssdelta <=20.0 && ssxpfp >=-0.06 && ssxpfp <=0.06 && ssypfp >=-0.04 && ssypfp <=0.04 && missmass >= 0.932 && missmass <= 0.98 && Diamond_cut;
 
-      Double_t CUTSIMCC = hsdelta > -8.0 && hsdelta < 8.0 && hsxptar > -0.08 && hsxptar < 0.08 && hsyptar > -0.045 && hsyptar < 0.045 && ssdelta > -10.0 && ssdelta < 20.0 && ssxptar > -0.06 && ssxptar < 0.06 && ssyptar > -0.04 && ssyptar < 0.04 && missmass >=MMPICUTL && missmass <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCC = hsdelta > SIMC_Delta_Low_H && hsdelta < SIMC_Delta_High_H && hsxptar > SIMC_Xptar_Low_H && hsxptar < SIMC_Xptar_High_H && hsyptar > SIMC_Yptar_Low_H && hsyptar < SIMC_Yptar_High_H && ssdelta > SIMC_Delta_Low_P && ssdelta < SIMC_Delta_High_P && ssxptar > SIMC_Xptar_Low_P && ssxptar < SIMC_Xptar_High_P && ssyptar > SIMC_Yptar_Low_P && ssyptar < SIMC_Yptar_High_P && missmass >=MMPICUTL && missmass <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCC2 = hsdelta > -8.0 && hsdelta < 8.0 && hsxptar > -0.08 && hsxptar < 0.08 && hsyptar > -0.045 && hsyptar < 0.045 && ssdelta > -10.0 && ssdelta < 20.0 && ssxptar > -0.06 && ssxptar < 0.06 && ssyptar > -0.04 && ssyptar < 0.04 && Diamond_cut;
+      Double_t CUTSIMCC2 = hsdelta > SIMC_Delta_Low_H && hsdelta < SIMC_Delta_High_H && hsxptar > SIMC_Xptar_Low_H && hsxptar < SIMC_Xptar_High_H && hsyptar > SIMC_Yptar_Low_H && hsyptar < SIMC_Yptar_High_H && ssdelta > SIMC_Delta_Low_P && ssdelta < SIMC_Delta_High_P && ssxptar > SIMC_Xptar_Low_P && ssxptar < SIMC_Xptar_High_P && ssyptar > SIMC_Yptar_Low_P && ssyptar < SIMC_Yptar_High_P && Diamond_cut;
       
       if(CUTSIMCC2)
 	{
@@ -1386,9 +1402,11 @@ void Q1Analysis()
 
       //      Double_t CUTSIMCL1 = hsdeltaL1 >=-8.0 && hsdeltaL1 <=8.0 && hsxpfpL1 >=-0.08 && hsxpfpL1 <=0.08 && hsypfpL1 >=-0.045 && hsypfpL1 <=0.045 && ssdeltaL1 >=-10.0 && ssdeltaL1 <=20.0 && ssxpfpL1 >=-0.06 && ssxpfpL1 <=0.06 && ssypfpL1 >=-0.04 && ssypfpL1 <=0.04 && missmassL1 >=0.932 && missmassL1 <= 0.98 && Diamond_cut;
 
-      Double_t CUTSIMCL1 = hsdeltaL1 > -8.0 && hsdeltaL1 < 8.0 && hsxptarL1 > -0.08 && hsxptarL1 < 0.08 && hsyptarL1 > -0.045 && hsyptarL1 < 0.045 && ssdeltaL1 > -10.0 && ssdeltaL1 < 20.0 && ssxptarL1 > -0.06 && ssxptarL1 < 0.06 && ssyptarL1 > -0.04 && ssyptarL1 < 0.04 && missmassL1 >=MMPICUTL && missmassL1 <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCL1 = hsdeltaL1 > SIMC_Delta_Low_H && hsdeltaL1 < SIMC_Delta_High_H && hsxptarL1 > SIMC_Xptar_Low_H && hsxptarL1 < SIMC_Xptar_High_H && hsyptarL1 > SIMC_Yptar_Low_H && hsyptarL1 < SIMC_Yptar_High_H && ssdeltaL1 > SIMC_Delta_Low_P && ssdeltaL1 < SIMC_Delta_High_P && ssxptarL1 > SIMC_Xptar_Low_P && ssxptarL1 < SIMC_Xptar_High_P && ssyptarL1 > SIMC_Yptar_Low_P && ssyptarL1 < SIMC_Yptar_High_P && missmassL1 >=MMPICUTL && missmassL1 <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCL12 = hsdeltaL1 > -8.0 && hsdeltaL1 < 8.0 && hsxptarL1 > -0.08 && hsxptarL1 < 0.08 && hsyptarL1 > -0.045 && hsyptarL1 < 0.045 && ssdeltaL1 > -10.0 && ssdeltaL1 < 20.0 && ssxptarL1 > -0.06 && ssxptarL1 < 0.06 && ssyptarL1 > -0.04 && ssyptarL1 < 0.04 && Diamond_cut;
+      Double_t CUTSIMCL12 = hsdeltaL1 > SIMC_Delta_Low_H && hsdeltaL1 < SIMC_Delta_High_H && hsxptarL1 > SIMC_Xptar_Low_H && hsxptarL1 < SIMC_Xptar_High_H && hsyptarL1 > SIMC_Yptar_Low_H && hsyptarL1 < SIMC_Yptar_High_H && ssdeltaL1 > SIMC_Delta_Low_P && ssdeltaL1 < SIMC_Delta_High_P && ssxptarL1 > SIMC_Xptar_Low_P && ssxptarL1 < SIMC_Xptar_High_P && ssyptarL1 > SIMC_Yptar_Low_P && ssyptarL1 < SIMC_Yptar_High_P && Diamond_cut;
+
+	//hsdeltaL1 > -8.0 && hsdeltaL1 < 8.0 && hsxptarL1 > -0.08 && hsxptarL1 < 0.08 && hsyptarL1 > -0.045 && hsyptarL1 < 0.045 && ssdeltaL1 > -10.0 && ssdeltaL1 < 20.0 && ssxptarL1 > -0.06 && ssxptarL1 < 0.06 && ssyptarL1 > -0.04 && ssyptarL1 < 0.04 && Diamond_cut;
 
       if(CUTSIMCL12)
 	{
@@ -1645,9 +1663,10 @@ void Q1Analysis()
 
       //      Double_t CUTSIMCL2 = hsdeltaL2 >=-8.0 && hsdeltaL2 <=8.0 && hsxpfpL2 >=-0.08 && hsxpfpL2 <=0.08 && hsypfpL2 >=-0.045 && hsypfpL2 <=0.045 && ssdeltaL2 >=-10.0 && ssdeltaL2 <=20.0 && ssxpfpL2 >=-0.06 && ssxpfpL2 <=0.06 && ssypfpL2 >=-0.04 && ssypfpL2 <=0.04 && missmassL2 >= 0.932 && missmassL2 <= 0.98 && Diamond_cut;
 
-      Double_t CUTSIMCL2 = hsdeltaL2 > -8.0 && hsdeltaL2 < 8.0 && hsxptarL2 > -0.08 && hsxptarL2 < 0.08 && hsyptarL2 > -0.045 && hsyptarL2 < 0.045 && ssdeltaL2 > -10.0 && ssdeltaL2 < 20.0 && ssxptarL2 > -0.06 && ssxptarL2 < 0.06 && ssyptarL2 > -0.04 && ssyptarL2 < 0.04 && missmassL2 >=MMPICUTL && missmassL2 <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCL2 = hsdeltaL2 > SIMC_Delta_Low_H && hsdeltaL2 < SIMC_Delta_High_H && hsxptarL2 > SIMC_Xptar_Low_H && hsxptarL2 < SIMC_Xptar_High_H && hsyptarL2 > SIMC_Yptar_Low_H && hsyptarL2 < SIMC_Yptar_High_H && ssdeltaL2 > SIMC_Delta_Low_P && ssdeltaL2 < SIMC_Delta_High_P && ssxptarL2 > SIMC_Xptar_Low_P && ssxptarL2 < SIMC_Xptar_High_P && ssyptarL2 > SIMC_Yptar_Low_P && ssyptarL2 < SIMC_Yptar_High_P && missmassL2 >=MMPICUTL && missmassL2 <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCL22 = hsdeltaL2 > -8.0 && hsdeltaL2 < 8.0 && hsxptarL2 > -0.08 && hsxptarL2 < 0.08 && hsyptarL2 > -0.045 && hsyptarL2 < 0.045 && ssdeltaL2 > -10.0 && ssdeltaL2 < 20.0 && ssxptarL2 > -0.06 && ssxptarL2 < 0.06 && ssyptarL2 > -0.04 && ssyptarL2 < 0.04 && Diamond_cut;
+      Double_t CUTSIMCL22 = hsdeltaL2 > SIMC_Delta_Low_H && hsdeltaL2 < SIMC_Delta_High_H && hsxptarL2 > SIMC_Xptar_Low_H && hsxptarL2 < SIMC_Xptar_High_H && hsyptarL2 > SIMC_Yptar_Low_H && hsyptarL2 < SIMC_Yptar_High_H && ssdeltaL2 > SIMC_Delta_Low_P && ssdeltaL2 < SIMC_Delta_High_P && ssxptarL2 > SIMC_Xptar_Low_P && ssxptarL2 < SIMC_Xptar_High_P && ssyptarL2 > SIMC_Yptar_Low_P && ssyptarL2 < SIMC_Yptar_High_P && Diamond_cut;
+      //hsdeltaL2 > -8.0 && hsdeltaL2 < 8.0 && hsxptarL2 > -0.08 && hsxptarL2 < 0.08 && hsyptarL2 > -0.045 && hsyptarL2 < 0.045 && ssdeltaL2 > -10.0 && ssdeltaL2 < 20.0 && ssxptarL2 > -0.06 && ssxptarL2 < 0.06 && ssyptarL2 > -0.04 && ssyptarL2 < 0.04 && Diamond_cut;
 
       if(CUTSIMCL22)
 	{
@@ -4529,9 +4548,10 @@ void Q1Analysis()
 
       //      if(hsdeltameR1 >=-8.0 && hsdeltameR1 <=8.0 && hsxpfpmeR1 >=-0.08 && hsxpfpmeR1 <=0.08 && hsypfpmeR1 >=-0.045 && hsypfpmeR1 <=0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxpfpmeR1 >=-0.06 && ssxpfpmeR1 <=0.06 && ssypfpmeR1 >=-0.04 && ssypfpmeR1 <=0.04 && missmassmeR1 >= 0.932 && missmassmeR1 <= 0.98 && Diamond_cut)
 
-      Double_t CUTSIMCMER1 = hsdeltameR1 > -8.0 && hsdeltameR1 < 8.0 && hsxptarmeR1 > -0.08 && hsxptarmeR1 < 0.08 && hsyptarmeR1 > -0.045 && hsyptarmeR1 < 0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxptarmeR1 > -0.06 && ssxptarmeR1 < 0.06 && ssyptarmeR1 > -0.04 && ssyptarmeR1 < 0.04 && missmassmeR1 >=MMPICUTL && missmassmeR1 <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCMER1 = hsdeltameR1 > SIMC_Delta_Low_H && hsdeltameR1 < SIMC_Delta_High_H && hsxptarmeR1 > SIMC_Xptar_Low_H && hsxptarmeR1 < SIMC_Xptar_High_H && hsyptarmeR1 > SIMC_Yptar_Low_H && hsyptarmeR1 < SIMC_Yptar_High_H && ssdeltameR1 > SIMC_Delta_Low_P && ssdeltameR1 < SIMC_Delta_High_P && ssxptarmeR1 > SIMC_Xptar_Low_P && ssxptarmeR1 < SIMC_Xptar_High_P && ssyptarmeR1 > SIMC_Yptar_Low_P && ssyptarmeR1 < SIMC_Yptar_High_P && missmassmeR1 >=MMPICUTL && missmassmeR1 <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCMER12 = hsdeltameR1 > -8.0 && hsdeltameR1 < 8.0 && hsxptarmeR1 > -0.08 && hsxptarmeR1 < 0.08 && hsyptarmeR1 > -0.045 && hsyptarmeR1 < 0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxptarmeR1 > -0.06 && ssxptarmeR1 < 0.06 && ssyptarmeR1 > -0.04 && ssyptarmeR1 < 0.04 && Diamond_cut;
+      Double_t CUTSIMCMER12 = hsdeltameR1 > SIMC_Delta_Low_H && hsdeltameR1 < SIMC_Delta_High_H && hsxptarmeR1 > SIMC_Xptar_Low_H && hsxptarmeR1 < SIMC_Xptar_High_H && hsyptarmeR1 > SIMC_Yptar_Low_H && hsyptarmeR1 < SIMC_Yptar_High_H && ssdeltameR1 > SIMC_Delta_Low_P && ssdeltameR1 < SIMC_Delta_High_P && ssxptarmeR1 > SIMC_Xptar_Low_P && ssxptarmeR1 < SIMC_Xptar_High_P && ssyptarmeR1 > SIMC_Yptar_Low_P && ssyptarmeR1 < SIMC_Yptar_High_P && Diamond_cut;
+	//hsdeltameR1 > -8.0 && hsdeltameR1 < 8.0 && hsxptarmeR1 > -0.08 && hsxptarmeR1 < 0.08 && hsyptarmeR1 > -0.045 && hsyptarmeR1 < 0.045 && ssdeltameR1 >=-10.0 && ssdeltameR1 <=20.0 && ssxptarmeR1 > -0.06 && ssxptarmeR1 < 0.06 && ssyptarmeR1 > -0.04 && ssyptarmeR1 < 0.04 && Diamond_cut;
 
       if(CUTSIMCMER12)
 	{
@@ -4798,9 +4818,10 @@ void Q1Analysis()
 
       //      if(hsdeltameR2 >=-8.0 && hsdeltameR2 <=8.0 && hsxpfpmeR2 >=-0.08 && hsxpfpmeR2 <=0.08 && hsypfpmeR2 >=-0.045 && hsypfpmeR2 <=0.045 && ssdeltameR2 >=-10.0 && ssdeltameR2 <=20.0 && ssxpfpmeR2 >=-0.06 && ssxpfpmeR2 <=0.06 && ssypfpmeR2 >=-0.04 && ssypfpmeR2 <=0.04 && missmassmeR2 >= 0.932 && missmassmeR2 <= 0.98 && Diamond_cut)
 
-      Double_t CUTSIMCMER2 = hsdeltameR2 > -8.0 && hsdeltameR2 < 8.0 && hsxptarmeR2 > -0.08 && hsxptarmeR2 < 0.08 && hsyptarmeR2 > -0.045 && hsyptarmeR2 < 0.045 && ssdeltameR2 > -10.0 && ssdeltameR2 < 20.0 && ssxptarmeR2 > -0.06 && ssxptarmeR2 < 0.06 && ssyptarmeR2 > -0.04 && ssyptarmeR2 < 0.04 && missmassmeR2 >=MMPICUTL && missmassmeR2 <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCMER2 = hsdeltameR2 > SIMC_Delta_Low_H && hsdeltameR2 < SIMC_Delta_High_H && hsxptarmeR2 > SIMC_Xptar_Low_H && hsxptarmeR2 < SIMC_Xptar_High_H && hsyptarmeR2 > SIMC_Yptar_Low_H && hsyptarmeR2 < SIMC_Yptar_High_H && ssdeltameR2 > SIMC_Delta_Low_P && ssdeltameR2 < SIMC_Delta_High_P && ssxptarmeR2 > SIMC_Xptar_Low_P && ssxptarmeR2 < SIMC_Xptar_High_P && ssyptarmeR2 > SIMC_Yptar_Low_P && ssyptarmeR2 < SIMC_Yptar_High_P && missmassmeR2 >=MMPICUTL && missmassmeR2 <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCMER22 = hsdeltameR2 > -8.0 && hsdeltameR2 < 8.0 && hsxptarmeR2 > -0.08 && hsxptarmeR2 < 0.08 && hsyptarmeR2 > -0.045 && hsyptarmeR2 < 0.045 && ssdeltameR2 > -10.0 && ssdeltameR2 < 20.0 && ssxptarmeR2 > -0.06 && ssxptarmeR2 < 0.06 && ssyptarmeR2 > -0.04 && ssyptarmeR2 < 0.04 && Diamond_cut;
+      Double_t CUTSIMCMER22 = hsdeltameR2 > SIMC_Delta_Low_H && hsdeltameR2 < SIMC_Delta_High_H && hsxptarmeR2 > SIMC_Xptar_Low_H && hsxptarmeR2 < SIMC_Xptar_High_H && hsyptarmeR2 > SIMC_Yptar_Low_H && hsyptarmeR2 < SIMC_Yptar_High_H && ssdeltameR2 > SIMC_Delta_Low_P && ssdeltameR2 < SIMC_Delta_High_P && ssxptarmeR2 > SIMC_Xptar_Low_P && ssxptarmeR2 < SIMC_Xptar_High_P && ssyptarmeR2 > SIMC_Yptar_Low_P && ssyptarmeR2 < SIMC_Yptar_High_P && Diamond_cut;
+	//hsdeltameR2 > -8.0 && hsdeltameR2 < 8.0 && hsxptarmeR2 > -0.08 && hsxptarmeR2 < 0.08 && hsyptarmeR2 > -0.045 && hsyptarmeR2 < 0.045 && ssdeltameR2 > -10.0 && ssdeltameR2 < 20.0 && ssxptarmeR2 > -0.06 && ssxptarmeR2 < 0.06 && ssyptarmeR2 > -0.04 && ssyptarmeR2 < 0.04 && Diamond_cut;
 
       if(CUTSIMCMER22)	
 	{
@@ -5101,9 +5122,10 @@ void Q1Analysis()
 
       //      if(hsdeltameC >=-8.0 && hsdeltameC <=8.0 && hsxpfpmeC >=-0.08 && hsxpfpmeC <=0.08 && hsypfpmeC >=-0.045 && hsypfpmeC <=0.045 && ssdeltameC >=-10.0 && ssdeltameC <=20.0 && ssxpfpmeC >=-0.06 && ssxpfpmeC <=0.06 && ssypfpmeC >=-0.04 && ssypfpmeC <=0.04 && missmassmeC >=0.932  && missmassmeC <= 0.98 && Diamond_cut)
 
-      Double_t CUTSIMCMEC = hsdeltameC > -8.0 && hsdeltameC < 8.0 && hsxptarmeC > -0.08 && hsxptarmeC < 0.08 && hsyptarmeC > -0.045 && hsyptarmeC < 0.045 && ssdeltameC > -10.0 && ssdeltameC < 20.0 && ssxptarmeC > -0.06 && ssxptarmeC < 0.06 && ssyptarmeC > -0.04 && ssyptarmeC < 0.04 && missmassmeC >=MMPICUTL  && missmassmeC <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCMEC = hsdeltameC > SIMC_Delta_Low_H && hsdeltameC < SIMC_Delta_High_H && hsxptarmeC > SIMC_Xptar_Low_H && hsxptarmeC < SIMC_Xptar_High_H && hsyptarmeC > SIMC_Yptar_Low_H && hsyptarmeC < SIMC_Yptar_High_H && ssdeltameC > SIMC_Delta_Low_P && ssdeltameC < SIMC_Delta_High_P && ssxptarmeC > SIMC_Xptar_Low_P && ssxptarmeC < SIMC_Xptar_High_P && ssyptarmeC > SIMC_Yptar_Low_P && ssyptarmeC < SIMC_Yptar_High_P && missmassmeC >=MMPICUTL  && missmassmeC <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCMEC2 = hsdeltameC > -8.0 && hsdeltameC < 8.0 && hsxptarmeC > -0.08 && hsxptarmeC < 0.08 && hsyptarmeC > -0.045 && hsyptarmeC < 0.045 && ssdeltameC > -10.0 && ssdeltameC < 20.0 && ssxptarmeC > -0.06 && ssxptarmeC < 0.06 && ssyptarmeC > -0.04 && ssyptarmeC < 0.04 && Diamond_cut;
+      Double_t CUTSIMCMEC2 = hsdeltameC > SIMC_Delta_Low_H && hsdeltameC < SIMC_Delta_High_H && hsxptarmeC > SIMC_Xptar_Low_H && hsxptarmeC < SIMC_Xptar_High_H && hsyptarmeC > SIMC_Yptar_Low_H && hsyptarmeC < SIMC_Yptar_High_H && ssdeltameC > SIMC_Delta_Low_P && ssdeltameC < SIMC_Delta_High_P && ssxptarmeC > SIMC_Xptar_Low_P && ssxptarmeC < SIMC_Xptar_High_P && ssyptarmeC > SIMC_Yptar_Low_P && ssyptarmeC < SIMC_Yptar_High_P && Diamond_cut;
+	//hsdeltameC > -8.0 && hsdeltameC < 8.0 && hsxptarmeC > -0.08 && hsxptarmeC < 0.08 && hsyptarmeC > -0.045 && hsyptarmeC < 0.045 && ssdeltameC > -10.0 && ssdeltameC < 20.0 && ssxptarmeC > -0.06 && ssxptarmeC < 0.06 && ssyptarmeC > -0.04 && ssyptarmeC < 0.04 && Diamond_cut;
       
       if(CUTSIMCMEC2)
 	{
@@ -5366,9 +5388,10 @@ void Q1Analysis()
 
       //      if(hsdeltameL1 >=-8.0 && hsdeltameL1 <=8.0 && hsxpfpmeL1 >=-0.08 && hsxpfpmeL1 <=0.08 && hsypfpmeL1 >=-0.045 && hsypfpmeL1 <=0.045 && ssdeltameL1 >=-10.0 && ssdeltameL1 <=20.0 && ssxpfpmeL1 >=-0.06 && ssxpfpmeL1 <=0.06 && ssypfpmeL1 >=-0.04 && ssypfpmeL1 <=0.04 && missmassmeL1 >= 0.932 && missmassmeL1 <= 0.98 && Diamond_cut)
 
-      Double_t CUTSIMCMEL1 = hsdeltameL1 > -8.0 && hsdeltameL1 < 8.0 && hsxptarmeL1 > -0.08 && hsxptarmeL1 < 0.08 && hsyptarmeL1 > -0.045 && hsyptarmeL1 < 0.045 && ssdeltameL1 > -10.0 && ssdeltameL1 < 20.0 && ssxptarmeL1 > -0.06 && ssxptarmeL1 < 0.06 && ssyptarmeL1 > -0.04 && ssyptarmeL1 < 0.04 && missmassmeL1 >=MMPICUTL && missmassmeL1 <=MMPICUTH && Diamond_cut; 
+      Double_t CUTSIMCMEL1 = hsdeltameL1 > SIMC_Delta_Low_H && hsdeltameL1 < SIMC_Delta_High_H && hsxptarmeL1 > SIMC_Xptar_Low_H && hsxptarmeL1 < SIMC_Xptar_High_H && hsyptarmeL1 > SIMC_Yptar_Low_H && hsyptarmeL1 < SIMC_Yptar_High_H && ssdeltameL1 > SIMC_Delta_Low_P && ssdeltameL1 < SIMC_Delta_High_P && ssxptarmeL1 > SIMC_Xptar_Low_P && ssxptarmeL1 < SIMC_Xptar_High_P && ssyptarmeL1 > SIMC_Yptar_Low_P && ssyptarmeL1 < SIMC_Yptar_High_P && missmassmeL1 >=MMPICUTL && missmassmeL1 <=MMPICUTH && Diamond_cut; 
 
-      Double_t CUTSIMCMEL12 = hsdeltameL1 > -8.0 && hsdeltameL1 < 8.0 && hsxptarmeL1 > -0.08 && hsxptarmeL1 < 0.08 && hsyptarmeL1 > -0.045 && hsyptarmeL1 < 0.045 && ssdeltameL1 > -10.0 && ssdeltameL1 < 20.0 && ssxptarmeL1 > -0.06 && ssxptarmeL1 < 0.06 && ssyptarmeL1 > -0.04 && ssyptarmeL1 < 0.04 && Diamond_cut; 
+      Double_t CUTSIMCMEL12 = hsdeltameL1 > SIMC_Delta_Low_H && hsdeltameL1 < SIMC_Delta_High_H && hsxptarmeL1 > SIMC_Xptar_Low_H && hsxptarmeL1 < SIMC_Xptar_High_H && hsyptarmeL1 > SIMC_Yptar_Low_H && hsyptarmeL1 < SIMC_Yptar_High_H && ssdeltameL1 > SIMC_Delta_Low_P && ssdeltameL1 < SIMC_Delta_High_P && ssxptarmeL1 > SIMC_Xptar_Low_P && ssxptarmeL1 < SIMC_Xptar_High_P && ssyptarmeL1 > SIMC_Yptar_Low_P && ssyptarmeL1 < SIMC_Yptar_High_P && Diamond_cut; 
+	//hsdeltameL1 > -8.0 && hsdeltameL1 < 8.0 && hsxptarmeL1 > -0.08 && hsxptarmeL1 < 0.08 && hsyptarmeL1 > -0.045 && hsyptarmeL1 < 0.045 && ssdeltameL1 > -10.0 && ssdeltameL1 < 20.0 && ssxptarmeL1 > -0.06 && ssxptarmeL1 < 0.06 && ssyptarmeL1 > -0.04 && ssyptarmeL1 < 0.04 && Diamond_cut; 
       
       if(CUTSIMCMEL12)
 	{
@@ -5629,9 +5652,10 @@ void Q1Analysis()
 
       //      if(hsdeltameL2 >=-8.0 && hsdeltameL2 <=8.0 && hsxpfpmeL2 >=-0.08 && hsxpfpmeL2 <=0.08 && hsypfpmeL2 >=-0.045 && hsypfpmeL2 <=0.045 && ssdeltameL2 >=-10.0 && ssdeltameL2 <=20.0 && ssxpfpmeL2 >=-0.06 && ssxpfpmeL2 <=0.06 && ssypfpmeL2 >=-0.04 && ssypfpmeL2 <=0.04 && missmassmeL2 >= 0.932 && missmassmeL2 <= 0.98 && Diamond_cut)
       
-      Double_t CUTSIMCMEL2 = hsdeltameL2 > -8.0 && hsdeltameL2 < 8.0 && hsxptarmeL2 > -0.08 && hsxptarmeL2 < 0.08 && hsyptarmeL2 > -0.045 && hsyptarmeL2 < 0.045 && ssdeltameL2 > -10.0 && ssdeltameL2 < 20.0 && ssxptarmeL2 > -0.06 && ssxptarmeL2 < 0.06 && ssyptarmeL2 > -0.04 && ssyptarmeL2 < 0.04 && missmassmeL2 >=MMPICUTL && missmassmeL2 <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCMEL2 = hsdeltameL2 > SIMC_Delta_Low_H && hsdeltameL2 < SIMC_Delta_High_H && hsxptarmeL2 > SIMC_Xptar_Low_H && hsxptarmeL2 < SIMC_Xptar_High_H && hsyptarmeL2 > SIMC_Yptar_Low_H && hsyptarmeL2 < SIMC_Yptar_High_H && ssdeltameL2 > SIMC_Delta_Low_P && ssdeltameL2 < SIMC_Delta_High_P && ssxptarmeL2 > SIMC_Xptar_Low_P && ssxptarmeL2 < SIMC_Xptar_High_P && ssyptarmeL2 > SIMC_Yptar_Low_P && ssyptarmeL2 < SIMC_Yptar_High_P && missmassmeL2 >=MMPICUTL && missmassmeL2 <=MMPICUTH && Diamond_cut;
       
-      Double_t CUTSIMCMEL22 = hsdeltameL2 > -8.0 && hsdeltameL2 < 8.0 && hsxptarmeL2 > -0.08 && hsxptarmeL2 < 0.08 && hsyptarmeL2 > -0.045 && hsyptarmeL2 < 0.045 && ssdeltameL2 > -10.0 && ssdeltameL2 < 20.0 && ssxptarmeL2 > -0.06 && ssxptarmeL2 < 0.06 && ssyptarmeL2 > -0.04 && ssyptarmeL2 < 0.04 && Diamond_cut;
+      Double_t CUTSIMCMEL22 =  hsdeltameL2 > SIMC_Delta_Low_H && hsdeltameL2 < SIMC_Delta_High_H && hsxptarmeL2 > SIMC_Xptar_Low_H && hsxptarmeL2 < SIMC_Xptar_High_H && hsyptarmeL2 > SIMC_Yptar_Low_H && hsyptarmeL2 < SIMC_Yptar_High_H && ssdeltameL2 > SIMC_Delta_Low_P && ssdeltameL2 < SIMC_Delta_High_P && ssxptarmeL2 > SIMC_Xptar_Low_P && ssxptarmeL2 < SIMC_Xptar_High_P && ssyptarmeL2 > SIMC_Yptar_Low_P && ssyptarmeL2 < SIMC_Yptar_High_P && Diamond_cut;
+	// hsdeltameL2 > -8.0 && hsdeltameL2 < 8.0 && hsxptarmeL2 > -0.08 && hsxptarmeL2 < 0.08 && hsyptarmeL2 > -0.045 && hsyptarmeL2 < 0.045 && ssdeltameL2 > -10.0 && ssdeltameL2 < 20.0 && ssxptarmeL2 > -0.06 && ssxptarmeL2 < 0.06 && ssyptarmeL2 > -0.04 && ssyptarmeL2 < 0.04 && Diamond_cut;
 
       if(CUTSIMCMEL22)	
 	{
@@ -9053,9 +9077,10 @@ void Q1Analysis()
 
       //      if(hsdeltaheR1 >=-8.0 && hsdeltaheR1 <=8.0 && hsxpfpheR1 >=-0.08 && hsxpfpheR1 <=0.08 && hsypfpheR1 >=-0.045 && hsypfpheR1 <=0.045 && ssdeltaheR1 >=-10.0 && ssdeltaheR1 <=20.0 && ssxpfpheR1 >=-0.06 && ssxpfpheR1 <=0.06 && ssypfpheR1 >=-0.04 && ssypfpheR1 <=0.04 && missmassheR1 >= 0.932 && missmassheR1 <= 0.98 && Diamond_cut)
 
-      Double_t CUTSIMCHER1 = hsdeltaheR1 > -8.0 && hsdeltaheR1 < 8.0 && hsxptarheR1 > -0.08 && hsxptarheR1 < 0.08 && hsyptarheR1 > -0.045 && hsyptarheR1 < 0.045 && ssdeltaheR1 > -10.0 && ssdeltaheR1 < 20.0 && ssxptarheR1 > -0.06 && ssxptarheR1 < 0.06 && ssyptarheR1 > -0.04 && ssyptarheR1 < 0.04 && missmassheR1 >=MMPICUTL && missmassheR1 <=MMPICUTH && Diamond_cut; 
+      Double_t CUTSIMCHER1 = hsdeltaheR1 > SIMC_Delta_Low_H && hsdeltaheR1 < SIMC_Delta_High_H && hsxptarheR1 > SIMC_Xptar_Low_H && hsxptarheR1 < SIMC_Xptar_High_H && hsyptarheR1 > SIMC_Yptar_Low_H && hsyptarheR1 < SIMC_Yptar_High_H && ssdeltaheR1 > SIMC_Delta_Low_P && ssdeltaheR1 < SIMC_Delta_High_P && ssxptarheR1 > SIMC_Xptar_Low_P && ssxptarheR1 < SIMC_Xptar_High_P && ssyptarheR1 > SIMC_Yptar_Low_P && ssyptarheR1 < SIMC_Yptar_High_P && missmassheR1 >=MMPICUTL && missmassheR1 <=MMPICUTH && Diamond_cut; 
 
-      Double_t CUTSIMCHER12 = hsdeltaheR1 > -8.0 && hsdeltaheR1 < 8.0 && hsxptarheR1 > -0.08 && hsxptarheR1 < 0.08 && hsyptarheR1 > -0.045 && hsyptarheR1 < 0.045 && ssdeltaheR1 > -10.0 && ssdeltaheR1 < 20.0 && ssxptarheR1 > -0.06 && ssxptarheR1 < 0.06 && ssyptarheR1 > -0.04 && ssyptarheR1 < 0.04 && Diamond_cut; 
+      Double_t CUTSIMCHER12 = hsdeltaheR1 > SIMC_Delta_Low_H && hsdeltaheR1 < SIMC_Delta_High_H && hsxptarheR1 > SIMC_Xptar_Low_H && hsxptarheR1 < SIMC_Xptar_High_H && hsyptarheR1 > SIMC_Yptar_Low_H && hsyptarheR1 < SIMC_Yptar_High_H && ssdeltaheR1 > SIMC_Delta_Low_P && ssdeltaheR1 < SIMC_Delta_High_P && ssxptarheR1 > SIMC_Xptar_Low_P && ssxptarheR1 < SIMC_Xptar_High_P && ssyptarheR1 > SIMC_Yptar_Low_P && ssyptarheR1 < SIMC_Yptar_High_P && Diamond_cut;
+	// hsdeltaheR1 > -8.0 && hsdeltaheR1 < 8.0 && hsxptarheR1 > -0.08 && hsxptarheR1 < 0.08 && hsyptarheR1 > -0.045 && hsyptarheR1 < 0.045 && ssdeltaheR1 > -10.0 && ssdeltaheR1 < 20.0 && ssxptarheR1 > -0.06 && ssxptarheR1 < 0.06 && ssyptarheR1 > -0.04 && ssyptarheR1 < 0.04 && Diamond_cut; 
       
       if(CUTSIMCHER12)	
 	{
@@ -9329,9 +9354,10 @@ void Q1Analysis()
 
       //      if(hsdeltaheC >=-8.0 && hsdeltaheC <=8.0 && hsxpfpheC >=-0.08 && hsxpfpheC <=0.08 && hsypfpheC >=-0.045 && hsypfpheC <=0.045 && ssdeltaheC >=-10.0 && ssdeltaheC <=20.0 && ssxpfpheC >=-0.06 && ssxpfpheC <=0.06 && ssypfpheC >=-0.04 && ssypfpheC <=0.04 && missmassheC >= 0.932 && missmassheC <= 0.98 && Diamond_cut
       
-      Double_t CUTSIMCHEC = hsdeltaheC > -8.0 && hsdeltaheC < 8.0 && hsxptarheC > -0.08 && hsxptarheC < 0.08 && hsyptarheC > -0.045 && hsyptarheC < 0.045 && ssdeltaheC > -10.0 && ssdeltaheC < 20.0 && ssxptarheC > -0.06 && ssxptarheC < 0.06 && ssyptarheC > -0.04 && ssyptarheC < 0.04 && missmassheC >=MMPICUTL && missmassheC <=MMPICUTH && Diamond_cut;
+      Double_t CUTSIMCHEC = hsdeltaheC > SIMC_Delta_Low_H && hsdeltaheC < SIMC_Delta_High_H && hsxptarheC > SIMC_Xptar_Low_H && hsxptarheC < SIMC_Xptar_High_H && hsyptarheC > SIMC_Yptar_Low_H && hsyptarheC < SIMC_Yptar_High_H && ssdeltaheC > SIMC_Delta_Low_P && ssdeltaheC < SIMC_Delta_High_P && ssxptarheC > SIMC_Xptar_Low_P && ssxptarheC < SIMC_Xptar_High_P && ssyptarheC > SIMC_Yptar_Low_P && ssyptarheC < SIMC_Yptar_High_P && missmassheC >=MMPICUTL && missmassheC <=MMPICUTH && Diamond_cut;
 
-      Double_t CUTSIMCHEC2 = hsdeltaheC > -8.0 && hsdeltaheC < 8.0 && hsxptarheC > -0.08 && hsxptarheC < 0.08 && hsyptarheC > -0.045 && hsyptarheC < 0.045 && ssdeltaheC > -10.0 && ssdeltaheC < 20.0 && ssxptarheC > -0.06 && ssxptarheC < 0.06 && ssyptarheC > -0.04 && ssyptarheC < 0.04 && Diamond_cut;
+      Double_t CUTSIMCHEC2 = hsdeltaheC > SIMC_Delta_Low_H && hsdeltaheC < SIMC_Delta_High_H && hsxptarheC > SIMC_Xptar_Low_H && hsxptarheC < SIMC_Xptar_High_H && hsyptarheC > SIMC_Yptar_Low_H && hsyptarheC < SIMC_Yptar_High_H && ssdeltaheC > SIMC_Delta_Low_P && ssdeltaheC < SIMC_Delta_High_P && ssxptarheC > SIMC_Xptar_Low_P && ssxptarheC < SIMC_Xptar_High_P && ssyptarheC > SIMC_Yptar_Low_P && ssyptarheC < SIMC_Yptar_High_P && Diamond_cut;
+	//hsdeltaheC > -8.0 && hsdeltaheC < 8.0 && hsxptarheC > -0.08 && hsxptarheC < 0.08 && hsyptarheC > -0.045 && hsyptarheC < 0.045 && ssdeltaheC > -10.0 && ssdeltaheC < 20.0 && ssxptarheC > -0.06 && ssxptarheC < 0.06 && ssyptarheC > -0.04 && ssyptarheC < 0.04 && Diamond_cut;
       
       if (CUTSIMCHEC2)
 	{
@@ -9602,9 +9628,10 @@ void Q1Analysis()
 
       //      if(hsdeltaheL1 >=-8.0 && hsdeltaheL1 <=8.0 && hsxpfpheL1 >=-0.08 && hsxpfpheL1 <=0.08 && hsypfpheL1 >=-0.045 && hsypfpheL1 <=0.045 && ssdeltaheL1 >=-10.0 && ssdeltaheL1 <=20.0 && ssxpfpheL1 >=-0.06 && ssxpfpheL1 <=0.06 && ssypfpheL1 >=-0.04 && ssypfpheL1 <=0.04 && missmassheL1 >= 0.932 && missmassheL1 <= 0.98 && Diamond_cut)
       
-      Double_t CUTSIMCHEL1 = hsdeltaheL1 > -8.0 && hsdeltaheL1 < 8.0 && hsxptarheL1 > -0.08 && hsxptarheL1 < 0.08 && hsyptarheL1 > -0.045 && hsyptarheL1 < 0.045 && ssdeltaheL1 > -10.0 && ssdeltaheL1 < 20.0 && ssxptarheL1 > -0.06 && ssxptarheL1 < 0.06 && ssyptarheL1 > -0.04 && ssyptarheL1 < 0.04 && missmassheL1 >=MMPICUTL && missmassheL1 <=MMPICUTH && Diamond_cut;	
+      Double_t CUTSIMCHEL1 = hsdeltaheL1 > SIMC_Delta_Low_H && hsdeltaheL1 < SIMC_Delta_High_H && hsxptarheL1 > SIMC_Xptar_Low_H && hsxptarheL1 < SIMC_Xptar_High_H && hsyptarheL1 > SIMC_Yptar_Low_H && hsyptarheL1 < SIMC_Yptar_High_H && ssdeltaheL1 > SIMC_Delta_Low_P && ssdeltaheL1 < SIMC_Delta_High_P && ssxptarheL1 > SIMC_Xptar_Low_P && ssxptarheL1 < SIMC_Xptar_High_P && ssyptarheL1 > SIMC_Yptar_Low_P && ssyptarheL1 < SIMC_Yptar_High_P && missmassheL1 >=MMPICUTL && missmassheL1 <=MMPICUTH && Diamond_cut;	
 
-      Double_t CUTSIMCHEL12 = hsdeltaheL1 > -8.0 && hsdeltaheL1 < 8.0 && hsxptarheL1 > -0.08 && hsxptarheL1 < 0.08 && hsyptarheL1 > -0.045 && hsyptarheL1 < 0.045 && ssdeltaheL1 > -10.0 && ssdeltaheL1 < 20.0 && ssxptarheL1 > -0.06 && ssxptarheL1 < 0.06 && ssyptarheL1 > -0.04 && ssyptarheL1 < 0.04 && Diamond_cut;	
+      Double_t CUTSIMCHEL12 = hsdeltaheL1 > SIMC_Delta_Low_H && hsdeltaheL1 < SIMC_Delta_High_H && hsxptarheL1 > SIMC_Xptar_Low_H && hsxptarheL1 < SIMC_Xptar_High_H && hsyptarheL1 > SIMC_Yptar_Low_H && hsyptarheL1 < SIMC_Yptar_High_H && ssdeltaheL1 > SIMC_Delta_Low_P && ssdeltaheL1 < SIMC_Delta_High_P && ssxptarheL1 > SIMC_Xptar_Low_P && ssxptarheL1 < SIMC_Xptar_High_P && ssyptarheL1 > SIMC_Yptar_Low_P && ssyptarheL1 < SIMC_Yptar_High_P && Diamond_cut;
+	//hsdeltaheL1 > -8.0 && hsdeltaheL1 < 8.0 && hsxptarheL1 > -0.08 && hsxptarheL1 < 0.08 && hsyptarheL1 > -0.045 && hsyptarheL1 < 0.045 && ssdeltaheL1 > -10.0 && ssdeltaheL1 < 20.0 && ssxptarheL1 > -0.06 && ssxptarheL1 < 0.06 && ssyptarheL1 > -0.04 && ssyptarheL1 < 0.04 && Diamond_cut;	
 
       if(CUTSIMCHEL12)
 	{
@@ -9866,9 +9893,10 @@ void Q1Analysis()
       
       //      if(hsdeltaheL2 >=-8.0 && hsdeltaheL2 <=8.0 && hsxpfpheL2 >=-0.08 && hsxpfpheL2 <=0.08 && hsypfpheL2 >=-0.045 && hsypfpheL2 <=0.045 && ssdeltaheL2 >=-10.0 && ssdeltaheL2 <=20.0 && ssxpfpheL2 >=-0.06 && ssxpfpheL2 <=0.06 && ssypfpheL2 >=-0.04 && ssypfpheL2 <=0.04 && missmassheL2 >= 0.932 && missmassheL2 <= 0.98 && Diamond_cut)
       
-      Double_t CUTSIMCHEL2 = hsdeltaheL2 > -8.0 && hsdeltaheL2 < 8.0 && hsxptarheL2 > -0.08 && hsxptarheL2 < 0.08 && hsyptarheL2 > -0.045 && hsyptarheL2 < 0.045 && ssdeltaheL2 > -10.0 && ssdeltaheL2 < 20.0 && ssxptarheL2 > -0.06 && ssxptarheL2 < 0.06 && ssyptarheL2 >=-0.04 && ssyptarheL2 <=0.04 && missmassheL2 >=MMPICUTL && missmassheL2 <=MMPICUTH && Diamond_cut;	
+      Double_t CUTSIMCHEL2 = hsdeltaheL2 > SIMC_Delta_Low_H && hsdeltaheL2 < SIMC_Delta_High_H && hsxptarheL2 > SIMC_Xptar_Low_H && hsxptarheL2 < SIMC_Xptar_High_H && hsyptarheL2 > SIMC_Yptar_Low_H && hsyptarheL2 < SIMC_Yptar_High_H && ssdeltaheL2 > SIMC_Delta_Low_P && ssdeltaheL2 < SIMC_Delta_High_P && ssxptarheL2 > SIMC_Xptar_Low_P && ssxptarheL2 < SIMC_Xptar_High_P && ssyptarheL2 > SIMC_Yptar_Low_P && ssyptarheL2 < SIMC_Yptar_High_P && missmassheL2 >=MMPICUTL && missmassheL2 <=MMPICUTH && Diamond_cut;	
 
-      Double_t CUTSIMCHEL22 = hsdeltaheL2 > -8.0 && hsdeltaheL2 < 8.0 && hsxptarheL2 > -0.08 && hsxptarheL2 < 0.08 && hsyptarheL2 > -0.045 && hsyptarheL2 < 0.045 && ssdeltaheL2 > -10.0 && ssdeltaheL2 < 20.0 && ssxptarheL2 > -0.06 && ssxptarheL2 < 0.06 && ssyptarheL2 >=-0.04 && ssyptarheL2 <=0.04 && Diamond_cut;	
+      Double_t CUTSIMCHEL22 = hsdeltaheL2 > SIMC_Delta_Low_H && hsdeltaheL2 < SIMC_Delta_High_H && hsxptarheL2 > SIMC_Xptar_Low_H && hsxptarheL2 < SIMC_Xptar_High_H && hsyptarheL2 > SIMC_Yptar_Low_H && hsyptarheL2 < SIMC_Yptar_High_H && ssdeltaheL2 > SIMC_Delta_Low_P && ssdeltaheL2 < SIMC_Delta_High_P && ssxptarheL2 > SIMC_Xptar_Low_P && ssxptarheL2 < SIMC_Xptar_High_P && ssyptarheL2 > SIMC_Yptar_Low_P && ssyptarheL2 < SIMC_Yptar_High_P && Diamond_cut;
+	// hsdeltaheL2 > -8.0 && hsdeltaheL2 < 8.0 && hsxptarheL2 > -0.08 && hsxptarheL2 < 0.08 && hsyptarheL2 > -0.045 && hsyptarheL2 < 0.045 && ssdeltaheL2 > -10.0 && ssdeltaheL2 < 20.0 && ssxptarheL2 > -0.06 && ssxptarheL2 < 0.06 && ssyptarheL2 >=-0.04 && ssyptarheL2 <=0.04 && Diamond_cut;	
       
       if(CUTSIMCHEL22)       
 	{
