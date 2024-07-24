@@ -167,9 +167,9 @@ void single_setting(TString q2_set){
 	lt2 = prv_par_vec[10];
  
 	tt0 = prv_par_vec[11]; 
-	/*
 	tt1 = prv_par_vec[13]; 
 	tt2 = prv_par_vec[14]; 
+	/*
 	tt3 = prv_par_vec[15]; 
 	*/
 
@@ -1082,12 +1082,13 @@ void single_setting(TString q2_set){
 //	f_sigTT->SetParameters(prv_par_vec[9], prv_par_vec[10], prv_par_vec[11]);
 
 //	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0.01176, 0.05478, 1); 
-	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0.00, 0.07, 1); 
+	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0.00, 0.07, 3); 
 	//f_sigTT->SetParameters(tt0);
-	f_sigTT->SetParameter(0, tt0);
-
-
-
+	//	f_sigTT->SetParameter(0, tt0);
+	f_sigTT->SetParameters(tt0, tt1, tt2);
+	f_sigTT->SetParLimits(0, -10, -10);
+	f_sigTT->SetParLimits(1, -100, 100);
+	f_sigTT->SetParLimits(2, -100, 100);
 
 	g_sigtt_fit->Fit(f_sigTT, "S");
 
@@ -1118,11 +1119,12 @@ void single_setting(TString q2_set){
 
 
 	tt0 = f_sigTT->GetParameter(0);
-	//	tt1 = f_sigTT->GetParameter(1);
+	tt1 = f_sigTT->GetParameter(1);
+	tt2 = f_sigTT->GetParameter(2);
 
 	par_vec.push_back(tt0);
-	//	par_vec.push_back(tt1);
-	//	par_vec.push_back(tt2);
+	par_vec.push_back(tt1);
+	par_vec.push_back(tt2);
 	//	par_vec.push_back(tt3);
 
 	par_err_vec.push_back(f_sigTT->GetParError(0));
@@ -1150,8 +1152,8 @@ void single_setting(TString q2_set){
 	for(Int_t i=0; i <par_vec.size(); i++) {
 
 		cout << setw(10) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i]  << setw(14) << par_chi2_vec[i] << setw(10) << i << endl;
-		file_out << setw(12) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i]  << setw(12) << par_chi2_vec[i] << setw(5) << i << endl;
-		file_out1 << setw(12) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i] << setw(5) << i+1<< endl;
+		file_out << setw(10) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i]  << setw(12) << par_chi2_vec[i] << setw(5) << i << endl;
+		file_out1 << setw(10) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i] << setw(5) << i+1<< endl;
 
 	}
 
@@ -1319,7 +1321,8 @@ Double_t fun_Sig_LT(Double_t *x, Double_t *par) {
 
    Float_t xx = x[0];
 
-   Double_t f = (par[0]*exp(par[1]*(xx))+par[2]/(xx));
+   //   Double_t f = (par[0]*exp(par[1]*(xx))+par[2]/(xx));
+   Double_t f = (par[0]*exp(par[1]*(xx))+par[2]);
 
    //   Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
 
@@ -1347,13 +1350,8 @@ Double_t fun_Sig_TT(Double_t *x, Double_t *par) {
 
    Float_t xx = x[0];
 
-   Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
-//  Double_t f = par[0]*exp(par[1]*xx) + par[2]/xx;
-
-//   Double_t f = par[0]*exp(-par[1]*xx) + par[2];
-
-//   Double_t f = par[0]*exp(par[1]*xx) + par[2]/xx;
-
+   //   Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
+   Double_t f = ((par[0]*exp(par[1]*(xx))+par[2])/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
 
 ///*--------------------------------------------------*/
 /// Straight Line

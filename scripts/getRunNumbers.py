@@ -10,13 +10,16 @@
 #
 # Copyright (c) trottar
 #
-import sys
+import sys, os
 
 inp_f = sys.argv[1]
 
+if not os.path.exists(inp_f):
+        print("")
+else:
 # Read in run numbers from run list and save as a string where each run is separated by a space (format for bash input)
-f_data = ''
-with open(inp_f, 'r') as f:
-    for line in f:
-        f_data += str(line)+' '
-print(f_data)
+    f_data = ''
+    with open(inp_f, 'r') as f:
+        for line in f:
+            f_data += str(line)+' '
+    print(f_data)

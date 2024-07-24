@@ -71,12 +71,8 @@ void Q1Analysis()
   Double_t SIMC_Delta_High_P  =  20;
   Double_t SIMC_Xptar_Low_P   = -0.06;
   Double_t SIMC_Xptar_High_P  =  0.06;
-  //  Double_t SIMC_Yptar_Low_P   = -0.04;
-  // Double_t SIMC_Yptar_High_P  =  0.04;
-
-  Double_t SIMC_Yptar_Low_P   = -0.036;
-  Double_t SIMC_Yptar_High_P  =  0.036;
-
+  Double_t SIMC_Yptar_Low_P   = -0.04;
+  Double_t SIMC_Yptar_High_P  =  0.04;
   //HMS
   
   Double_t SIMC_Delta_Low_H   = -8;
@@ -1400,8 +1396,8 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));  
       
-      Double_t factL1 =  9950550.0/400000.0;
-      //Double_t factL1 =  9898300.0/400000.0;
+      //      Double_t factL1 =  9950550.0/400000.0;
+      Double_t factL1 =  9898300.0/400000.0;
       //RadiativeStudy
       // Double_t factL1 = 7528680.0/400000.0;
 
@@ -1662,8 +1658,8 @@ void Q1Analysis()
       
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));  
       
-      Double_t factL2 = 9637460.0/400000.0;
-      //Double_t factL2 = 9581580.0/400000.0;
+      //      Double_t factL2 = 9637460.0/400000.0;
+      Double_t factL2 = 9581580.0/400000.0;
       //RadiativeStudy
       // Double_t factL2 = 7552280.0/400000.0;
 
@@ -5122,8 +5118,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeC, W_simcmeC));
 
-      Double_t NFMC = 22498100.0/400000.0;
-      // Double_t NFMC = 22501800.0/400000.0;
+      //      Double_t NFMC = 22498100.0/400000.0;
+      Double_t NFMC = 22501800.0/400000.0;
       //RadiativeStudy
       //Double_t NFMC = 23290000.0/400000.0;
 
@@ -5389,8 +5385,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcmeL1, W_simcmeL1));
 
-      Double_t NFML1 = 22410500.0/400000.0;
-      // Double_t NFML1 = 22341200.0/400000.0;
+      //      Double_t NFML1 = 22410500.0/400000.0;
+      Double_t NFML1 = 22341200.0/400000.0;
       //RadiativeStudy
       //Double_t NFML1 = 23349600.0/400000.0;
 
@@ -9356,8 +9352,8 @@ void Q1Analysis()
 
       Double_t Diamond_cut = (Dcut->IsInside(Q2_simcheC, W_simcheC));
 
-      Double_t NFC =  35356600.0/400000.0;
-      // Double_t NFC =  35354400.0/400000.0;
+      //      Double_t NFC =  35356600.0/400000.0;
+      Double_t NFC =  35354400.0/400000.0;
       //RadiativeStudy
       // Double_t NFC =  38432000.0/400000.0;
 
