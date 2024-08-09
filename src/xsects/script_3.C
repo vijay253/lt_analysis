@@ -804,14 +804,14 @@ void single_setting(TString q2_set){
 
 //			exit(0);
 
-
+/*
 		  siglt_X_fit     = (g_siglt->GetY()[i]);//  * 2*pi*pow(10,6) * g_vec[i]);//  / sin(th_vec[i] * pi /180));
 		  siglt_X_fit_err = (g_siglt->GetEY()[i]);// * 2*pi*pow(10,6) * g_vec[i]);// / sin(th_vec[i] * pi/180));
-
-/*		  
+*/
+		  
 		  siglt_X_fit     = (g_siglt->GetY()[i] / sin(th_vec[i] * pi /180));
 		  siglt_X_fit_err = (g_siglt->GetEY()[i] / sin(th_vec[i] * pi/180));
-*/
+
 /*
 		  siglt_X_fit     = (g_siglt->GetY()[i] * g_vec[i] / sin(th_vec[i] * pi /180));
 		  siglt_X_fit_err = (g_siglt->GetEY()[i] * g_vec[i] / sin(th_vec[i] * pi/180));
@@ -994,14 +994,14 @@ void single_setting(TString q2_set){
 			sigtt_X_fit_err = g_siglt->GetEY()[i];
 
 		} else {
-
+		  /*
 		  sigtt_X_fit     = (g_sigtt->GetY()[i]);// * 2*pi*pow(10,6) * g_vec[i]);//  / sin(th_vec[i] * pi/180) / sin(th_vec[i] * pi/180));
 		  sigtt_X_fit_err = (g_sigtt->GetEY()[i]);//* 2*pi*pow(10,6) * g_vec[i]);//  / sin(th_vec[i] *pi/180) / sin(th_vec[i] * pi/180));
+		  */
 		  
-		  /*
 		  sigtt_X_fit     = (g_sigtt->GetY()[i]  / sin(th_vec[i] * pi/180) / sin(th_vec[i] * pi/180));
 		  sigtt_X_fit_err = (g_sigtt->GetEY()[i] / sin(th_vec[i] *pi/180) / sin(th_vec[i] * pi/180));
-		  */
+		  
 		  /*
 		  sigtt_X_fit     = (g_sigtt->GetY()[i] * g_vec[i] / sin(th_vec[i] * pi/180) / sin(th_vec[i] * pi/180));
 		  sigtt_X_fit_err = (g_sigtt->GetEY()[i] * g_vec[i] / sin(th_vec[i] *pi/180) / sin(th_vec[i] * pi/180));
@@ -1084,12 +1084,13 @@ void single_setting(TString q2_set){
 //	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0.01176, 0.05478, 1); 
 	TF1* f_sigTT = new TF1("sig_TT", fun_Sig_TT, 0.00, 0.07, 3); 
 	//f_sigTT->SetParameters(tt0);
-	//	f_sigTT->SetParameter(0, tt0);
+	//f_sigTT->SetParameter(0, tt0);
 	f_sigTT->SetParameters(tt0, tt1, tt2);
+	/*
 	f_sigTT->SetParLimits(0, -10, -10);
 	f_sigTT->SetParLimits(1, -100, 100);
 	f_sigTT->SetParLimits(2, -100, 100);
-
+	*/
 	g_sigtt_fit->Fit(f_sigTT, "S");
 
 
@@ -1321,8 +1322,9 @@ Double_t fun_Sig_LT(Double_t *x, Double_t *par) {
 
    Float_t xx = x[0];
 
-   //   Double_t f = (par[0]*exp(par[1]*(xx))+par[2]/(xx));
-   Double_t f = (par[0]*exp(par[1]*(xx))+par[2]);
+   //Double_t f = (par[0]*exp(par[1]*(xx))+par[2]/(xx));
+   //   Double_t f = (par[0]*exp(par[1]*(xx))+par[2]);
+   Double_t f = (par[0]/pow((xx),1)*exp(par[1]/(xx))+par[2]/pow((xx),1));
 
    //   Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
 
@@ -1350,8 +1352,9 @@ Double_t fun_Sig_TT(Double_t *x, Double_t *par) {
 
    Float_t xx = x[0];
 
-   //   Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
-   Double_t f = ((par[0]*exp(par[1]*(xx))+par[2])/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
+   //      Double_t f = (par[0]/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
+   //   Double_t f = ((par[0]*exp(par[1]*(xx))+par[2])/0.375*exp(-0.375))*(xx/pow((xx+pow(0.139570, 2)), 2));
+   Double_t f = ((par[0]/pow((xx),3)*exp(par[1]*(xx))+par[2]/pow((xx),10)))*(xx/pow((xx+pow(0.139570, 2)), 2));
 
 ///*--------------------------------------------------*/
 /// Straight Line

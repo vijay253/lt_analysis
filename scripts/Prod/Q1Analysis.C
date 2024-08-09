@@ -71,20 +71,16 @@ void Q1Analysis()
   Double_t SIMC_Delta_High_P  =  20;
   Double_t SIMC_Xptar_Low_P   = -0.06;
   Double_t SIMC_Xptar_High_P  =  0.06;
-  //  Double_t SIMC_Yptar_Low_P   = -0.04;
-  // Double_t SIMC_Yptar_High_P  =  0.04;
-
-  Double_t SIMC_Yptar_Low_P   = -0.036;
-  Double_t SIMC_Yptar_High_P  =  0.036;
-
+  Double_t SIMC_Yptar_Low_P   = -0.04;
+  Double_t SIMC_Yptar_High_P  =  0.04;
   //HMS
-  
   Double_t SIMC_Delta_Low_H   = -8;
   Double_t SIMC_Delta_High_H  =  8;
   Double_t SIMC_Xptar_Low_H   = -0.08;
   Double_t SIMC_Xptar_High_H  =  0.08;
   Double_t SIMC_Yptar_Low_H   = -0.045;
   Double_t SIMC_Yptar_High_H  =  0.045;
+
   
   // Low epsilon analysis
   cout<<" "<<endl;
@@ -844,10 +840,11 @@ void Q1Analysis()
   Double_t MMpiOffsetC  = 0.006723;
   
   Double_t tOffsetC  = 0.0015;
-  // Double_t tOffsetL2  = -0.004;
-  // Double_t tOffsetC  = 0.00;
   Double_t tOffsetL2  = 0.00;
-  
+  /*
+    Double_t tOffsetC  = 0.00;
+    Double_t tOffsetL2  = 0.00;
+  */
   //DATA CENTER
   for(Long64_t i = 0; i < nEntries_TBRANCHC; i++)
     {
@@ -4300,13 +4297,13 @@ void Q1Analysis()
   Double_t MMpiOffsetmeC  = 0.003;
   Double_t MMpiOffsetmeL1 = 0.0035;
   Double_t MMpiOffsetmeL2 = 0.003;
-  
+     
   Double_t tOffsetmeR1 = 0.0025;
   Double_t tOffsetmeR2 = 0.004;
   Double_t tOffsetmeC  = 0.001;
   Double_t tOffsetmeL1  = -0.0015;
   Double_t tOffsetmeL2  = -0.002;  
- 
+  
   /*
   Double_t tOffsetmeR1 = 0.00;
   Double_t tOffsetmeR2 = 0.00;
@@ -8842,6 +8839,7 @@ void Q1Analysis()
   Double_t tOffsetheR1 = 0.004;
   Double_t tOffsetheL1 = -0.002;
   Double_t tOffsetheL2 = -0.004;
+   
   /*
   Double_t tOffsetheR1 = 0.00;
   Double_t tOffsetheL1 = 0.00;

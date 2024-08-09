@@ -429,8 +429,8 @@ c     *   w,q2,eps_mod,th_mod*180./3.14159,tm,eps_set,q2_set
 
 c     Fit parameters (V.K.) 
       integer npar,ipar
-      parameter (npar=12) 
-c      parameter (npar=14) 
+c      parameter (npar=12) 
+      parameter (npar=14) 
       real*8 fitpar(npar),par,par_er
       save fitpar
 c      open(88,file='parameters/it8/par.pl')      
@@ -583,10 +583,12 @@ c      a = -347.0861
 c      b = -99.4037
 c      c = -3.2874
    
-      sigLT = ((fitpar(9)*exp(fitpar(10)*(tp))+fitpar(11)/(tp))
-     1     *sin(thetacm))
+c      sigLT = ((fitpar(9)*exp(fitpar(10)*(tp))+fitpar(11)/(tp))
+c     1     *sin(thetacm))
 c      sigLT = ((fitpar(9)*exp(fitpar(10)*(tp))+fitpar(11))
 c     1     *sin(thetacm))
+      sigLT = ((fitpar(9)/tp*exp(fitpar(10)/(tp))+fitpar(11)/tp)
+     1     *sin(thetacm))
 
 c      sigLT = 0
 c      print*,"vija", thetacm
@@ -600,9 +602,12 @@ c test
 c      a = -130.8499
 
       ft = tp/(abs(tp) + 0.139570**2)**2
-      sigTT = ((fitpar(12)/q2*exp(-q2))*ft*sin(thetacm)**2)
+c      sigTT = ((fitpar(12)/q2*exp(-q2))*ft*sin(thetacm)**2)
 c      sigTT = (((fitpar(12)*exp(fitpar(13)*(tp))+fitpar(14))/q2
 c     1     *exp(-q2))*ft*sin(thetacm)**2)
+      sigTT = (((fitpar(12)/tp**3*exp(fitpar(13)*(tp))
+     1     +fitpar(14)/tp**10))*ft*sin(thetacm)**2)
+          
 
 c      sigTT =0
       print*, sigL, sigT, sigLT, sigTT
@@ -620,8 +625,8 @@ c      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
      
 c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
 
-      sig = sig*wfactor
-      sig = sig/2./pi           !dsig/dtdphicm in microbarns/GeV^2/rad
+c      sig = sig*wfactor
+c      sig = sig/2./pi           !dsig/dtdphicm in microbarns/GeV^2/rad
 
       x_mod = sig     
       th_mod=thetacm
