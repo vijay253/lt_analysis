@@ -27,7 +27,7 @@
 #include <TGraph.h>
 #include <TPad.h>
 
-void Q1Analysis()
+void yield()
 {
   TString Hostname = gSystem->HostName();
   TString User = (gSystem->GetUserInfo())->fUser;
