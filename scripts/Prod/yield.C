@@ -666,7 +666,7 @@ void yield()
   ht7C->Add(ht7CR, -1);
   ht8C->Add(ht8CR, -1);
 
-  ofstream outleC("kindata/kindata.pl_375_286_+0000.dat");
+  ofstream outleC("kindata/kindata.pl_375_286_setting.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
@@ -694,7 +694,7 @@ void yield()
   hYC->Add(hYCR, -1);  
   hYC->Scale(ECLEC);  
   hYSC->Scale(SCFLEC);
-  ofstream YleC("yield/yields.pl_375_286_+0000.target");
+  ofstream YleC("yield/yields.pl_375_286_setting.target");
   for(int j=1 ; j <=10 ; ++j) 
     {
       if (j==1)
@@ -719,7 +719,7 @@ void yield()
   hYdC->Add(hYdCR, -1);  
   hYdC->Scale(ECLEDC);   
   hYdC->Scale(THCF);
-  ofstream YdleC("yield/yields.pl_375_286_+0000.dummy");
+  ofstream YdleC("yield/yields.pl_375_286_setting.dummy");
   for(int j=1 ; j <=10 ; ++j)
     {
       if (j==1)
@@ -741,7 +741,7 @@ void yield()
 	}
     }
   YdleC.close();
-  ofstream YSleC("yield/yields.pl_375_286_+0000.simc");
+  ofstream YSleC("yield/yields.pl_375_286_setting.simc");
   for(int j=1 ; j <=10 ; ++j)
     {
       if (j==1)
