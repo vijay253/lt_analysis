@@ -100,10 +100,6 @@ void Q1Analysis()
   TFile *InFile_DATADC = new TFile(rootFile_DATADC, "READ");
   //SIMC
   TFile *InFile_SIMCC = new TFile(rootFile_SIMCC, "READ");
-  //Output file names 
-  TString foutname   = OutPath+"/" + "Analysed_Qp375W2p2" + ".root";
-  TString fouttxt    = OutPath+"/" + "Analysed_Qp375W2p2" + ".txt";
-  TString outputpdf  = OutPath+"/" + "Analysed_Qp375W2p2" + ".pdf";
   //Data
   TTree* TBRANCHC  = (TTree*)InFile_DATAC->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHC  = (Long64_t)TBRANCHC->GetEntries();  
   //Dummy
@@ -666,7 +662,7 @@ void Q1Analysis()
   ht7C->Add(ht7CR, -1);
   ht8C->Add(ht8CR, -1);
 
-  ofstream outleC("kindata/kindata.pl_375_286_setting.dat");
+  ofstream outleC("kindata/kindata.pl_q2_eps_setting.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
@@ -694,7 +690,7 @@ void Q1Analysis()
   hYC->Add(hYCR, -1);  
   hYC->Scale(ECLEC);  
   hYSC->Scale(SCFLEC);
-  ofstream YleC("yield/yields.pl_375_286_setting.target");
+  ofstream YleC("yield/yields.pl_q2_eps_setting.target");
   for(int j=1 ; j <=10 ; ++j) 
     {
       if (j==1)
@@ -719,7 +715,7 @@ void Q1Analysis()
   hYdC->Add(hYdCR, -1);  
   hYdC->Scale(ECLEDC);   
   hYdC->Scale(THCF);
-  ofstream YdleC("yield/yields.pl_375_286_setting.dummy");
+  ofstream YdleC("yield/yields.pl_q2_eps_setting.dummy");
   for(int j=1 ; j <=10 ; ++j)
     {
       if (j==1)
@@ -741,7 +737,7 @@ void Q1Analysis()
 	}
     }
   YdleC.close();
-  ofstream YSleC("yield/yields.pl_375_286_setting.simc");
+  ofstream YSleC("yield/yields.pl_q2_eps_setting.simc");
   for(int j=1 ; j <=10 ; ++j)
     {
       if (j==1)

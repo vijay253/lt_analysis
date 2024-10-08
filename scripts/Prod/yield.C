@@ -100,10 +100,6 @@ void yield()
   TFile *InFile_DATADC = new TFile(rootFile_DATADC, "READ");
   //SIMC
   TFile *InFile_SIMCC = new TFile(rootFile_SIMCC, "READ");
-  //Output file names 
-  TString foutname   = OutPath+"/" + "Analysed_Qp375W2p2" + ".root";
-  TString fouttxt    = OutPath+"/" + "Analysed_Qp375W2p2" + ".txt";
-  TString outputpdf  = OutPath+"/" + "Analysed_Qp375W2p2" + ".pdf";
   //Data
   TTree* TBRANCHC  = (TTree*)InFile_DATAC->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHC  = (Long64_t)TBRANCHC->GetEntries();  
   //Dummy
@@ -254,7 +250,6 @@ void yield()
   TH1D *ht6CR  = new TH1D("ht6CR","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *ht7CR  = new TH1D("ht7CR","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *ht8CR  = new TH1D("ht8CR","MandelT; MandelT;",   300, -0.01, 0.1);      
-
   Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0741167, 0.1};
   Double_t PhiBinLow = 0.932-0.003;
   //  Double_t PhiBinLow = 0.920-0.003;
@@ -647,7 +642,6 @@ void yield()
   hW6C->Add(hW6CR, -1);
   hW7C->Add(hW7CR, -1);
   hW8C->Add(hW8CR, -1);
-
   hQ21C->Add(hQ21CR, -1); 
   hQ22C->Add(hQ22CR, -1); 
   hQ23C->Add(hQ23CR, -1); 
@@ -656,7 +650,6 @@ void yield()
   hQ26C->Add(hQ26CR, -1); 
   hQ27C->Add(hQ27CR, -1); 
   hQ28C->Add(hQ28CR, -1); 
-
   ht1C->Add(ht1CR, -1);
   ht2C->Add(ht2CR, -1);
   ht3C->Add(ht3CR, -1);
@@ -665,8 +658,7 @@ void yield()
   ht6C->Add(ht6CR, -1);
   ht7C->Add(ht7CR, -1);
   ht8C->Add(ht8CR, -1);
-
-  ofstream outleC("kindata/kindata.pl_375_286_setting.dat");
+  ofstream outleC("kindata/kindata.pl_q2_eps_setting.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
       if(i==0)
@@ -694,7 +686,7 @@ void yield()
   hYC->Add(hYCR, -1);  
   hYC->Scale(ECLEC);  
   hYSC->Scale(SCFLEC);
-  ofstream YleC("yield/yields.pl_375_286_setting.target");
+  ofstream YleC("yield/yields.pl_q2_eps_setting.target");
   for(int j=1 ; j <=10 ; ++j) 
     {
       if (j==1)
@@ -719,7 +711,7 @@ void yield()
   hYdC->Add(hYdCR, -1);  
   hYdC->Scale(ECLEDC);   
   hYdC->Scale(THCF);
-  ofstream YdleC("yield/yields.pl_375_286_setting.dummy");
+  ofstream YdleC("yield/yields.pl_q2_eps_setting.dummy");
   for(int j=1 ; j <=10 ; ++j)
     {
       if (j==1)
@@ -741,7 +733,7 @@ void yield()
 	}
     }
   YdleC.close();
-  ofstream YSleC("yield/yields.pl_375_286_setting.simc");
+  ofstream YSleC("yield/yields.pl_q2_eps_setting.simc");
   for(int j=1 ; j <=10 ; ++j)
     {
       if (j==1)
