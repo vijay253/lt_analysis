@@ -57,24 +57,8 @@ void Q1Analysis()
   //Dummy extra thickness correction factor.
   Double_t THCF = 1.0/4.8579;
   Double_t TimmingOffset = 44.1;
-  //SIMC Acceptance Cuts
-  //SHMS
-  Double_t SIMC_Delta_Low_P   = -10;
-  Double_t SIMC_Delta_High_P  =  20;
-  Double_t SIMC_Xptar_Low_P   = -0.06;
-  Double_t SIMC_Xptar_High_P  =  0.06;
-  Double_t SIMC_Yptar_Low_P   = -0.04;
-  Double_t SIMC_Yptar_High_P  =  0.04;
-  //HMS
-  Double_t SIMC_Delta_Low_H   = -8;
-  Double_t SIMC_Delta_High_H  =  8;
-  Double_t SIMC_Xptar_Low_H   = -0.08;
-  Double_t SIMC_Xptar_High_H  =  0.08;
-  Double_t SIMC_Yptar_Low_H   = -0.045;
-  Double_t SIMC_Yptar_High_H  =  0.045;
-
   cout<<" "<<endl;
-  cout<<" Physics Analysis..." <<endl;
+  cout<<" PHYSICS DATA ANALYSIS..." <<endl;
   cout<<" "<<endl;
   //Data  
   TString TInDATAFilenameC = "Analysed_Data_Q0p375W2p2_lowe_Center.root";
@@ -82,16 +66,9 @@ void Q1Analysis()
   //Dummy
   TString TInDATAFilenamedC = "Analysed_Data_Q0p375W2p2_lowe_dummy_Center.root";
   TString rootFile_DATADC  = ROOTfilePath+"/"+TInDATAFilenamedC;
-  //SIMC
-  TString TInSIMCFilenameC  = "Pion_2p7_Q1_center.root";
-  TString rootFile_SIMCC   = ROOTfilePath+"/"+TInSIMCFilenameC;
   
   if (gSystem->AccessPathName(rootFile_DATAC) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_DATAC <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
-    exit;
-  }
-  if (gSystem->AccessPathName(rootFile_SIMCC) == kTRUE){
-    cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_SIMCC <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     exit;
   }
   //Data
@@ -99,13 +76,10 @@ void Q1Analysis()
   //Dummy
   TFile *InFile_DATADC = new TFile(rootFile_DATADC, "READ");
   //SIMC
-  TFile *InFile_SIMCC = new TFile(rootFile_SIMCC, "READ");
   //Data
   TTree* TBRANCHC  = (TTree*)InFile_DATAC->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHC  = (Long64_t)TBRANCHC->GetEntries();  
   //Dummy
   TTree* TBRANCHDC  = (TTree*)InFile_DATADC->Get("Cut_Kaon_Events_prompt_noRF");Long64_t nEntries_TBRANCHDC  = (Long64_t)TBRANCHDC->GetEntries();  
-  //SIMC  
-  TTree* TSIMCC  = (TTree*)InFile_SIMCC->Get("h10");Long64_t nEntries_TSIMCC  = (Long64_t)TSIMCC->GetEntries();  
   //DATA VARIABLES
   Double_t  P_gtr_dp;TBRANCHC->SetBranchAddress("ssdelta", &P_gtr_dp);
   Double_t  P_gtr_xptar;TBRANCHC->SetBranchAddress("ssxptar", &P_gtr_xptar);
@@ -139,37 +113,6 @@ void Q1Analysis()
   //dummy
   Double_t tcoindC;TBRANCHDC->SetBranchAddress("CTime_ROC1", &tcoindC);
 
-  //SIMC VARIABLES
-  //SHMS SIMC variables                                                                                                                                                                                
-  Float_t ssdelta;TSIMCC->SetBranchAddress("ssdelta", &ssdelta);
-  Float_t ssxptar;TSIMCC->SetBranchAddress("ssxptar", &ssxptar);
-  Float_t ssyptar;TSIMCC->SetBranchAddress("ssyptar", &ssyptar);
-  Float_t ssxfp;TSIMCC->SetBranchAddress("ssxfp", &ssxfp);
-  Float_t ssyfp;TSIMCC->SetBranchAddress("ssyfp", &ssyfp);
-  Float_t ssxpfp;TSIMCC->SetBranchAddress("ssxpfp", &ssxpfp);
-  Float_t ssypfp;TSIMCC->SetBranchAddress("ssypfp", &ssypfp);
-
-  //HMS SIMC variables                                                                                                                                                                                
-  Float_t hsdelta;TSIMCC->SetBranchAddress("hsdelta", &hsdelta);
-  Float_t hsxptar;TSIMCC->SetBranchAddress("hsxptar", &hsxptar);
-  Float_t hsyptar;TSIMCC->SetBranchAddress("hsyptar", &hsyptar);
-  Float_t hsxfp;TSIMCC->SetBranchAddress("hsxfp", &hsxfp);
-  Float_t hsyfp;TSIMCC->SetBranchAddress("hsyfp", &hsyfp);
-  Float_t hsxpfp;TSIMCC->SetBranchAddress("hsxpfp", &hsxpfp);
-  Float_t hsypfp;TSIMCC->SetBranchAddress("hsypfp", &hsypfp);
-
-  Float_t q;TSIMCC->SetBranchAddress("q", &q);
-  Float_t Q2_simc;TSIMCC->SetBranchAddress("Q2", &Q2_simc);
-  Float_t W_simc;TSIMCC->SetBranchAddress("W", &W_simc);
-  Float_t t_simc;TSIMCC->SetBranchAddress("t", &t_simc);
-  Float_t ti_simc;TSIMCC->SetBranchAddress("ti", &ti_simc);
-  Float_t epsilon_simc;TSIMCC->SetBranchAddress("epsilon", &epsilon_simc);
-  Float_t missmass;TSIMCC->SetBranchAddress("missmass", &missmass);
-  Float_t Em;TSIMCC->SetBranchAddress("Em", &Em);
-  Float_t Pm;TSIMCC->SetBranchAddress("Pm", &Pm);
-  Float_t Weight;TSIMCC->SetBranchAddress("Weight", &Weight);
-  Float_t phipq;TSIMCC->SetBranchAddress("phipq", &phipq);
-  Float_t thetapq;TSIMCC->SetBranchAddress("thetapq", &thetapq);
   //*************************
   TH1D *MPiC   = new TH1D("MPiC"," ; Missing Mass (GeV/c^{2}); Yield (events/mC)", 150, 0.9, 1.0);      
   //Random
@@ -250,7 +193,6 @@ void Q1Analysis()
   TH1D *ht6CR  = new TH1D("ht6CR","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *ht7CR  = new TH1D("ht7CR","MandelT; MandelT;",   300, -0.01, 0.1);      
   TH1D *ht8CR  = new TH1D("ht8CR","MandelT; MandelT;",   300, -0.01, 0.1);      
-
   Double_t bins[] = {-0.01, 0.00595, 0.0118167, 0.0151167, 0.01915, 0.02355, 0.0286833, 0.03565, 0.04555, 0.0741167, 0.1};
   Double_t PhiBinLow = 0.932-0.003;
   //  Double_t PhiBinLow = 0.920-0.003;
@@ -264,7 +206,6 @@ void Q1Analysis()
   TH1D *hph_qC  = new TH1D("hph_qC","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hph_qCR  = new TH1D("hph_qCR","ph_q; ph_q;",  18, -22.5, 382.5);      
   //SIMC
-  TH1D *hph_qSC  = new TH1D("hph_qSC","ph_q; ph_q;",   18, -22.5, 382.5);      
   TH1D *hmmC  = new TH1D("hmmC","MM; MM;", 300, 0.8, 1.2);      
   TH1D *hmmCR  = new TH1D("hmmCR","MM; MM;", 300, 0.8, 1.2);      
   TH1D *htcoinC   = new TH1D("htcoinC","; ;",  300, -20.0, 20.0);      
@@ -277,22 +218,14 @@ void Q1Analysis()
   //SIMC and Data HISTOGRAMS
   TH1D *hphC  = new TH1D("hphC","ph_q; ph_q;",50, -10, 370);      
   TH1D *hphCR  = new TH1D("hphCR","ph_q; ph_q;",  50, -10, 370);      
-  TH1D *hphSC  = new TH1D("hphSC","ph_q; ph_q;",50, -10, 370);      
   TH1D *hthC  = new TH1D("hthC","th_q; th_q;",   50, -0.01, 5.0);      
   TH1D *hthCR  = new TH1D("hthCR","th_q; th_q;",  50, -0.01, 5.0);      
-  TH1D *hthSC  = new TH1D("hth_qC","th_q; th_q;",   50, -0.01, 5.0);      
-  TH1D *H_ssdelta_SC  = new TH1D("H_ssdelta_SC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
-  TH1D *H_ssxptar_SC  = new TH1D("H_ssxptar_SC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
-  TH1D *H_ssyptar_SC  = new TH1D("H_ssyptar_SC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
   TH1D *H_ssdelta_DC  = new TH1D("H_ssdelta_DC","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_DC  = new TH1D("H_ssxptar_DC","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_DC  = new TH1D("H_ssyptar_DC","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
   TH1D *H_ssdelta_DCR  = new TH1D("H_ssdelta_DCR","SHMS delta; ssdelta;", 50, -5.0, 3.0);
   TH1D *H_ssxptar_DCR  = new TH1D("H_ssxptar_DCR","SHMS xptar; ssxptar;", 50, -0.06, 0.06);
   TH1D *H_ssyptar_DCR  = new TH1D("H_ssyptar_DCR","SHMS yptar; ssyptar;", 50, -0.04, 0.04);
-  TH1D *H_hsdelta_SC  = new TH1D("H_hsdelta_SC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
-  TH1D *H_hsxptar_SC  = new TH1D("H_hsxptar_SC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
-  TH1D *H_hsyptar_SC  = new TH1D("H_hsyptar_SC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
   TH1D *H_hsdelta_DC  = new TH1D("H_hsdelta_DC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
   TH1D *H_hsxptar_DC  = new TH1D("H_hsxptar_DC","HMS xptar; hsxptar;", 50, -0.1, 0.1);
   TH1D *H_hsyptar_DC  = new TH1D("H_hsyptar_DC","HMS yptar; hsyptar;", 50, -0.05, 0.05);
@@ -301,18 +234,6 @@ void Q1Analysis()
   TH1D *H_hsyptar_DCR  = new TH1D("H_hsyptar_DCR","HMS yptar; hsyptar;", 50, -0.05, 0.05);
   TH1D *H_hsdelta_DummyC  = new TH1D("H_hsdelta_DummyC","HMS Delta; hsdelta;", 50, -20.0, 20.0);
   TH1D *H_hsdelta_DummyCR  = new TH1D("H_hsdelta_DummyCR","HMS Delta; hsdelta;", 50, -20.0, 20.0);
-  TH1D *H_t_S  = new TH1D("H_t_S","t; t;", 300, -0.01, 0.1); 
-  TH1D *H_ti_S  = new TH1D("H_ti_S","ti; ti;", 300, -0.01, 0.1); 
-  TH1D *H_t_RE  = new TH1D("H_t_RE"," ; t Resolution (t-ti);", 300, -0.02, 0.02); 
-  TH1D *H_t_RE1  = new TH1D("H_t_RE1"," t Resolution (t-ti) 1 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE2  = new TH1D("H_t_RE2"," t Resolution (t-ti) 2 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE3  = new TH1D("H_t_RE3"," t Resolution (t-ti) 3 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE4  = new TH1D("H_t_RE4"," t Resolution (t-ti) 4 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE5  = new TH1D("H_t_RE5"," t Resolution (t-ti) 5 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE6  = new TH1D("H_t_RE6"," t Resolution (t-ti) 6 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE7  = new TH1D("H_t_RE7"," t Resolution (t-ti) 7 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH1D *H_t_RE8  = new TH1D("H_t_RE8"," t Resolution (t-ti) 8 bin; t Resolution;", 300, -0.03, 0.03); 
-  TH2D *H_t_RE_t = new TH2D("H_t_RE_t","t Resolution vs t; t Resolution; t ", 300, -0.02, 0.03, 300, 0.0, 0.04);      
   TCutG *Dcut = new TCutG("Dcut",5);
   Dcut->SetVarX("Q2");
   Dcut->SetVarY("W");
@@ -540,43 +461,6 @@ void Q1Analysis()
 
 	}
     }  
-  //SIMC
-  for(Long64_t i = 0; i < nEntries_TSIMCC; i++)
-
-    {
-      TSIMCC->GetEntry(i);
-
-      Double_t Diamond_cut = (Dcut->IsInside(Q2_simc, W_simc));  
-      Double_t fact = 9428650.0/400000.0;
-      Double_t Sw1t = t_simc >= bins[1] && t_simc <= bins[2];
-      Double_t Sw2t = t_simc >= bins[2] && t_simc <= bins[3];
-      Double_t Sw3t = t_simc >= bins[3] && t_simc <= bins[4];
-      Double_t Sw4t = t_simc >= bins[4] && t_simc <= bins[5];
-      Double_t Sw5t = t_simc >= bins[5] && t_simc <= bins[6];
-      Double_t Sw6t = t_simc >= bins[6] && t_simc <= bins[7];
-      Double_t Sw7t = t_simc >= bins[7] && t_simc <= bins[8];
-      Double_t Sw8t = t_simc >= bins[8] && t_simc <= bins[9];
-      
-      Double_t CUTSIMCC = (hsdelta > SIMC_Delta_Low_H && hsdelta < SIMC_Delta_High_H) && (hsxptar > SIMC_Xptar_Low_H && hsxptar < SIMC_Xptar_High_H) && (hsyptar > SIMC_Yptar_Low_H && hsyptar < SIMC_Yptar_High_H) && (ssdelta > SIMC_Delta_Low_P && ssdelta < SIMC_Delta_High_P) && (ssxptar > SIMC_Xptar_Low_P && ssxptar < SIMC_Xptar_High_P) && (ssyptar > SIMC_Yptar_Low_P && ssyptar < SIMC_Yptar_High_P) && (missmass >=MMPICUTL && missmass <=MMPICUTH) && Diamond_cut;      
-
-      if(CUTSIMCC)
-	{
-	  hthSC->Fill(thetapq*57.2958, fact*Weight);
-	  hph_qSC->Fill(phipq*57.2958, fact*Weight);
-	  hphSC->Fill(phipq*57.2958, fact*Weight);
-	  hYSC->Fill(t_simc, phipq*57.2958, fact*Weight);
-	  H_ssdelta_SC->Fill(ssdelta, fact*Weight);
-	  H_ssxptar_SC->Fill(ssxptar, fact*Weight);
-	  H_ssyptar_SC->Fill(ssyptar, fact*Weight);
-	  H_hsdelta_SC->Fill(hsdelta, fact*Weight);
-	  H_hsxptar_SC->Fill(hsxptar, fact*Weight);
-	  H_hsyptar_SC->Fill(hsyptar, fact*Weight);
-	  H_t_RE->Fill((t_simc-ti_simc), fact*Weight);
-	  H_t_RE_t->Fill((t_simc-ti_simc), t_simc, fact*Weight);
-	  hthtSC->Fill(t_simc, fact*Weight); 
-
-	}    
-    }  
   //////////////////////////
   Double_t RTSCALE = 1.0/6.0;   
   //////////////////////////
@@ -630,10 +514,6 @@ void Q1Analysis()
   //Effective charge 
   Double_t ECLEC   = 1.0/447.01427000000007;
   Double_t ECLEDC  = 1.0/40.4086;
-  //SIMC SCAL
-  Double_t SCFLEC  = 1.0;  
-  Double_t SCFLEL1 = 1.0; 
-  Double_t SCFLEL2 = 1.0; 
   //////////////////////////////////////////
   hW1C->Add(hW1CR, -1);
   hW2C->Add(hW2CR, -1);
@@ -643,7 +523,6 @@ void Q1Analysis()
   hW6C->Add(hW6CR, -1);
   hW7C->Add(hW7CR, -1);
   hW8C->Add(hW8CR, -1);
-
   hQ21C->Add(hQ21CR, -1); 
   hQ22C->Add(hQ22CR, -1); 
   hQ23C->Add(hQ23CR, -1); 
@@ -652,7 +531,6 @@ void Q1Analysis()
   hQ26C->Add(hQ26CR, -1); 
   hQ27C->Add(hQ27CR, -1); 
   hQ28C->Add(hQ28CR, -1); 
-
   ht1C->Add(ht1CR, -1);
   ht2C->Add(ht2CR, -1);
   ht3C->Add(ht3CR, -1);
@@ -661,7 +539,6 @@ void Q1Analysis()
   ht6C->Add(ht6CR, -1);
   ht7C->Add(ht7CR, -1);
   ht8C->Add(ht8CR, -1);
-
   ofstream outleC("kindata/kindata.pl_q2_eps_setting.dat");
   for(int i=0 ; i <=9 ; ++i) 
     {
@@ -689,7 +566,6 @@ void Q1Analysis()
   outleC.close();
   hYC->Add(hYCR, -1);  
   hYC->Scale(ECLEC);  
-  hYSC->Scale(SCFLEC);
   ofstream YleC("yield/yields.pl_q2_eps_setting.target");
   for(int j=1 ; j <=10 ; ++j) 
     {
@@ -737,27 +613,4 @@ void Q1Analysis()
 	}
     }
   YdleC.close();
-  ofstream YSleC("yield/yields.pl_q2_eps_setting.simc");
-  for(int j=1 ; j <=10 ; ++j)
-    {
-      if (j==1)
-	{
-	  YSleC<< 1.0000<<endl;
-	  continue;
-	  
-	}
-      if (j==10)
-	{
-	  YSleC<< 1.0000<<endl;
-	  break;
-	  
-	}
-      for(Long64_t i = 2; i <= 17; i++)
-	{
-	  Double_t err;
-	  YSleC<<hYSC->IntegralAndError(j, j, i, i, err, "")<<"\t"<<err<<"\t"<<j-1<<"\t"<<i-1 <<endl;
-	}
-      
-    }
-  YSleC.close();  
 }
