@@ -23,8 +23,6 @@ c      call average_k(2.45,.27,.55)
 c     Average W and Q2 over theta_pq settings, then over low and high epsilon
 c     settings, then over neg. and pos. settings,
 c     and save result in averages/aver.* .
-
-c      parameter (nu=3)
       parameter (nu=8)
 
       real aveW(nu),errW(nu),aveQ2(nu),errQ2(nu)
@@ -83,7 +81,6 @@ c      real thetacm_neg(nu),thetacm_pos(nu)
             avtt(it,ip)=0.
             ertt(it,ip)=0.
 
-c            do lmh=1,2
             do lmh=1,3
                aW(it,lmh,ip)=0.
                eW(it,lmh,ip)=0.
@@ -107,7 +104,6 @@ c
 
 c      print*, "BBBBBBBBB", q2_bin       
 
-c      open (unit = 22, file = "../u_bin_interval", action='read')
       open (unit = 22, file = "t_bin_interval", action='read')
       read (22,*) q2_bin, u_bin, phi_bin
 
@@ -180,15 +176,12 @@ c     Get low, high eps. and neg., pos. polarity data.
 
       do ip=1,2
 
-c         do lh=1,2
          do lmh=1,3
 
             nset=0
-c            open(55,file='list.settings.omega')
             open(55,file='list.settings.pion19')
             do while(.true.)
 
-c               read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx,nbt
                read(55,*,end=9) ipol,q2,eps,th_pq,tmn,tmx
 
                if(ipol.eq.pol_set(ip).and.q2.eq.q2_set.and.
@@ -272,7 +265,6 @@ cc c   /*--------------------------------------------------*/
 cc c   Read the u and phi bins 
 cc 
 c
-c       open (unit = 22, file = "../u_bin_interval", action='read')
        open (unit = 22, file = "t_bin_interval", action='read')
 c      read (22,*) q2_bin, u_bin, phi_bin
 c

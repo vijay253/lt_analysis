@@ -335,32 +335,14 @@ c /*--------------------------------------------------*/
 c cross-section
 c ratio is data/simc - see GH logbook, p.55
 
-            if (r.gt.15.0) then
-               r=0.0
-               dr=0.0
-            endif
-
-c             x_real=x_mod*r
-             x_real=x_mod
-c             dx_real=x_mod*dr/r
-             dx_real=x_mod*2/100
-c             dx_real=2.823
+             x_real=x_mod*r
+             dx_real=x_mod*dr
 
              if (x_real.eq.0.0) then
                 dx_real = -1000
              endif
             
-
-
-c             dx_real=x_mod*dr
-
-c            x_real=x_mod
-c            dx_real=0.01
-
-
-
-
-            print*, "JJJJJJJJ  ratio check ", r, x_mod, x_real 
+             print*, "JJJJJJJJ  ratio check ", r, x_mod, x_real 
 
 
 
@@ -647,7 +629,7 @@ c hh Vijay
 c===========================
 c it0
       a =  0.25961E+02
-      b = -0.10000E+02  
+      b = -0.00000E+02  
       c = -0.15838E+02
       d =  0.00000E+00
 c it1
@@ -667,11 +649,11 @@ c      b = -20.2917
 c      c = -15.8380
 c      d = -13.0734
 
-      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp-0.2)))
+      sigL = ((a+b*log(q2))*exp((c+d*log(q2))*(tp)))
 
 c it0
       a =  0.46859E+02
-      b = -0.30000E+02 
+      b =  0.00000E+02 
       c = -0.33572E+01
       d =  0.00000E+00
 c it1
@@ -716,10 +698,13 @@ c      a = -100.0000
 c      b = -83.8045
 c      c = -4.4966
    
-      sigLT = ((a*exp(b*(tp))+c/(tp))*sin(thetacm))
+      sigLT = ((a/tp*exp(b/(tp))+c/(tp))*sin(thetacm))
 
-c it0
-      a = -0.67276E+02
+
+c     it0
+      a = -0.0008
+      b = 40.7516
+      c = 00.0000
 c it1
 c      a = -144.7318
 c it2
@@ -727,14 +712,8 @@ c      a = -150.9774
 c test
 c      a = -144.7318
 
-
-c      sigTT = ((fpi/fpi375)**2*(a/(q2))*exp(-q2)*sin(thetacm)**2)
-      sigTT = ((a/q2*exp(-q2))*sin(thetacm)**2)
+      sigTT = ((a/tp**3*exp(b*tp)+c/tp)*sin(thetacm)**2)
       sigTT = sigTT*(tprime_gev/(tp+0.139570**2)**2)
-
-      print*, sigT
-c      print*, sigLT
-
 
 c===========================
 
@@ -745,15 +724,11 @@ c      wfactor=(2.2002**2-mp**2)**2/(w**2-mp**2)**2
 
       sig = sigT + eps_mod*sigL+(eps_mod*cos(2.*phicm)*sigTT)
      *     +sqrt(2.*eps_mod*(1.+eps_mod))*(cos(phicm))*sigLT
-     
-c      sig = sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV^2/rad
-
+      sig = sig/2./pi/1.d+06    !dsig/dtdphicm in microbarns/MeV^2/rad
       sig = sig*wfactor
-      sig = sig/2./pi/1.d+06           !dsig/dtdphicm in microbarns/GeV^2/rad
-
       x_mod = sig     
       th_mod=thetacm
-
+      
 c      if (phi.lt.0.3) then
 c         write(6,102) eps_mod,tm,sigL,sigT,sigTT,sigLT, x_mod
 c 102     format( ('xmodel: eps=',f5.3,' t=',f5.3,' sigL=',f7.2,' sigT=',f6.2,

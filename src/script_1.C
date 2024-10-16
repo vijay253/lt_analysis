@@ -1,211 +1,151 @@
-#include "get_t_phi_bin.C" 
-TGraphErrors* q2_g;
-TGraphErrors* q2_ratio_lo;
-TGraphErrors* q2_ratio_mi;
-TGraphErrors* q2_ratio_hi;
+
+const Float_t m_p     = 0.93827;
+const Float_t m_omega = 0.78259;
+
+const Float_t Mpi0    = 134.9766;
+const Float_t Mpi02   = pow(Mpi0,2);
+const Float_t pi      = 3.141592653589793; 
+
+Int_t neg_count;
 
 
-TGraphErrors* q2_t_set;
+TString q2_set_str;
 
-TMultiGraph *mg;
+Float_t sig_summer19_mod(Float_t thetacm, Float_t phicm, Float_t t_gev, Float_t tprime_gev, Float_t q2_gev, Float_t w_gev, Float_t eps);
 
-// const Int_t t_bin_num = 2;
-// Float_t t_lower_limit[t_bin_num];
-// Float_t t_upper_limit[t_bin_num];
+Float_t sig_gmh_mod_u_two_model(Float_t thetacm, Float_t phicm, Float_t u_gev, Float_t q2_gev, Float_t w_gev, Float_t eps);
 
-Int_t t_bin_num;
-Double_t* t_lower_limit;
-Double_t* t_upper_limit;
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
 
-TString outplot_dir = "ratio_check/";
-TString outphiyield_dir = "ratio_check/phiyield/";
+void wt_test() 
+{
+  
+  TString q2;
+	TString eps;
+	TString theta;
 
-TString ave_dir = "averages/";
-
-Int_t iii = 0;
-void Single_Setting(Int_t q2_set, Int_t eps_set);
-Int_t Get_t_bin();
-Int_t Get_phi_bin();
-Double_t Get_t_bin_q2(Int_t q2_set, Int_t t_bin_num);
-
-void script_1() {
-
-  //	gROOT->ProcessLine(".L get_t_phi_bin.C");
-
-	t_bin_num = Get_t_bin();
-
-	const Int_t t_bin_num_const = t_bin_num;
-
-	t_lower_limit = new Double_t[t_bin_num_const];
-	t_upper_limit = new Double_t[t_bin_num_const];
-
-
-//	Double file_name_arr[4] = {"160_32", "160_59", "245_27", "245_55"};
-//	Double file_name_arr[4] = {"160_32", "160_59", "245_27", "245_55"};
-
-//	file_name = "aver_160_32.dat";
-
-// 	file_name = "aver_160_32.dat";
-// 	file_name = "aver_160_32.dat";
-// 	file_name = "aver_160_32.dat";
-// 	file_name = "aver_160_32.dat";
-// 
-
-//	file_name = {"160_32", "160_59", "245_27", "245_55"};
-
-
-//	TString file_name_str;
-
- 	q2_g   = new TGraphErrors();
- 	q2_ratio_lo   = new TGraphErrors();
- 	q2_ratio_mi   = new TGraphErrors();
- 	q2_ratio_hi   = new TGraphErrors();
-
- 	TF1* q2_fit = new TF1("q2_fit", "pol1", 150, 260);
-
-	mg = new TMultiGraph();
+	//	TString q2_setting[2]     = {"160", "245"};
+	TString q2_setting[2]     = {"375", "245"};
 	
- 	q2_t_set  = new TGraphErrors();
+	TString eps_375[3]        = {"286", "629", "781"};
 
-// 
-// 	for (Int_t i; i < 4; i++) {
+	/*
+	  TString eps_160[2]        = {"32", "59"};
+	TString eps_245[2]        = {"27", "55"};
+	*/
+// 	TString hms_angle_160_l[2]  = {"+0970", "+3000"};
+// 	TString hms_angle_160_h[3]  = {"-2730",  "+0000", "+3000"};
 // 	
-// 
-// //		Single_Setting("pl_" + file_name_arr[i]);
-// //		file_name_str =  "aver_" + file_name[i] + ".dat";
-// 
-// 
-// 
-// 	}
+// 	TString hms_angle_245_l[2]  = {"+1350", "+3000"};
+// 	TString hms_angle_245_h[3]  = {"-3000", "+0000", "+3000"};
 
-	Single_Setting(375,286);
-	Single_Setting(375,629);
-	Single_Setting(375,781);
-		/*Single_Setting(44,48);
-	Single_Setting(44,71);
-	Single_Setting(33,39);
-	Single_Setting(33,66);
-	Single_Setting(33,57);
-	Single_Setting(33,87);
-	Single_Setting(21,24);
-	Single_Setting(21,78);
-	Single_Setting(05,45);
-	Single_Setting(05,69);
+
+	TString hms_angle_375_l[3]  = {"-4.005", "-1.995", "+0.000"};
+	TString hms_angle_375_m[5]  = {"-4.000", "-2.000", "+0.000", "+2.000", "+3.120"};
+	TString hms_angle_375_h[4]  = {"-4.000",  "-2.015", "+0.000", "+2.680"};
+
+	/*
+	TString hms_angle_160_l[2]  = {"+1", "+3"};
+	TString hms_angle_160_h[3]  = {"-3",  "00", "+3"};	
+	TString hms_angle_245_l[2]  = {"+1", "+3"};
+	TString hms_angle_245_h[3]  = {"-3", "00", "+3"};
 	*/
 
-	TCanvas* c2 = new TCanvas();
+	TString dir_str;
+	TString file_name;
+	/*
+	//	dir_str = "../";
+	dir_str = "/volatile/hallc/c-kaonlt/vijay/ROOTfiles/KaonLT_Analysis/PhysicsAnalysis/PionLT/Analysis/KaonLT";
 
 
-	c2->cd();
+	for (int i = 0; i < 2; i++) {
 
- 	q2_g->SetTitle("u Fit vs Q{^2} ");
- 	
-    q2_g->GetXaxis()->SetTitle("Q^{2}");		
-    q2_g->GetXaxis()->CenterTitle();		
+		q2 = q2_setting[i];
 
-    q2_g->GetYaxis()->SetTitle("Fitted parameter");		
-    q2_g->GetYaxis()->SetTitleOffset(1.2);		
-    q2_g->GetYaxis()->CenterTitle();		
+		if( q2 =="375") {
 
-	q2_g->Draw("A*");
-	
-	
-	q2_g->Fit("q2_fit");
+			for (int dd = 0; dd < 3; dd++) {
 
-	c2->Print(outplot_dir+"q2_setting.png");
+				eps = eps_375[dd];
 
+				if ( eps.Atoi()  < 629) {
+					
+					for (int iii = 0; iii < 3; iii++) {
 
-	c2->Clear();
-	c2->cd();
+						theta = hms_angle_375_l[iii]; 
 
+						file_name = "omega_" + q2 + "_" + eps + "_" + theta + ".root";
 
- 	q2_t_set->SetTitle("Q^{2} vs -u");
- 	
-    q2_t_set->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
-    q2_t_set->GetXaxis()->CenterTitle();		
+						cout << file_name  << endl;
 
-    q2_t_set->GetYaxis()->SetTitle("Q^{2}");		
-    q2_t_set->GetYaxis()->SetTitleOffset(1.2);		
-    q2_t_set->GetYaxis()->CenterTitle();		
+						wt_test_single(dir_str + file_name);
 
-	q2_t_set->Draw("A*");
+					}
 
-	c2->Print(outplot_dir+"q2_vs_u.png");
+				} else {
+ 
+					for (int iii = 0; iii < 3; iii++) {
+				
+						theta = hms_angle_160_h[iii]; 
 
-	c2->Clear();
-	c2->cd();
+						file_name = "omega_"+ q2 + "_" + eps + "_" + theta + ".root";
 
-	q2_ratio_hi->SetMarkerColor(2);
-	q2_ratio_hi->Draw("A*");
+						cout << file_name  << endl;
 
-	q2_ratio_hi->SetTitle("Average Yield Ratio (Yexp/Ysim) vs Q^{2}");
-	
-    q2_ratio_hi->GetXaxis()->SetTitle("Q^{2}");		
-    q2_ratio_hi->GetXaxis()->CenterTitle();		
-	
-    q2_ratio_hi->GetYaxis()->SetTitle("Average Yield Ratio");		
-    q2_ratio_hi->GetYaxis()->SetTitleOffset(1.2);		
-    q2_ratio_hi->GetYaxis()->CenterTitle();		
+						wt_test_single(dir_str + file_name);
 
+					}
 
-    /*
-	if(TMath::MaxElement(q2_ratio_lo->GetN(),q2_ratio_lo->GetY()) > TMath::MaxElement(q2_ratio_hi->GetN(),q2_ratio_hi->GetY())) {
+				}
 
-		q2_ratio_hi->SetMaximum(TMath::MaxElement(q2_ratio_lo->GetN(),q2_ratio_lo->GetY())*1.1);
+			}
 
-	}
-    */
-	q2_ratio_lo->Draw("*");
+		}	else {
 
-	c2->Print(outplot_dir + "q2_ratio.png");
-	
+			for (int ii = 0; ii < 2; ii++) {
 
+				eps = eps_245[ii];
 
-	c2->Clear();
-	c2->cd();
+				if (eps.Atoi() < 40) {
 
+					for (int iii = 0; iii < 2; iii++) {
 
+						theta = hms_angle_245_l[iii]; 
 
-	TF1* t_fit_total = new TF1("t_total", "pol1", 0.0, 0.6); 
+						file_name = "omega_"+ q2 + "_" + eps + "_" + theta + ".root";
 
+						cout << file_name  << endl;
 
+						wt_test_single(dir_str + file_name);
 
-	mg->SetTitle("Average Yield Ratio (Yexp/Ysim) vs -t");
-	
-	mg->Draw("a");
+					}
+ 
+				} else {
 
-    mg->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
-    mg->GetXaxis()->CenterTitle();		
-	
-    mg->GetYaxis()->SetTitle("Average Yield Ratio");		
-    mg->GetYaxis()->SetTitleOffset(1.2);		
-    mg->GetYaxis()->CenterTitle();		
+					for (int iii = 0; iii < 3; iii++) {
 
-	mg->Fit("t_total", "R");
+						theta = hms_angle_245_h[iii]; 
 
+						file_name = "omega_"+ q2 + "_" + eps + "_" + theta + ".root";
 
-	TLatex* tt = new TLatex();
+						cout << file_name  << endl;
 
-	tt->SetNDC(true);
-	tt->SetTextSize(0.035);
+						wt_test_single(dir_str + file_name);
 
-	tt->SetText(0.15, 0.33, "low Q^{2}, low #epsilon");
-	tt->SetTextColor(1);
-	tt->DrawClone("same");
+					}
 
-	tt->SetText(0.15, 0.28, "low Q^{2}, high #epsilon");
-	tt->SetTextColor(2);
-	tt->DrawClone("same");
+				}			
 
-	tt->SetText(0.15, 0.23, "high Q^{2}, low #epsilon");
-	tt->SetTextColor(3);
-	tt->DrawClone("same");
+			}
+			
+  		}
 
-	tt->SetText(0.15, 0.18, "high Q^{2}, high #epsilon");
-	tt->SetTextColor(4);
-	tt->DrawClone("same");
+	}	
 
-	c2->Print( outplot_dir + "total_yield_ratio.png");
+	*/
+//	wt_test_single("omega_160_32_+1.root");
+//	wt_test_single("omega_test");
 
 
 }
@@ -213,418 +153,1349 @@ void script_1() {
 
 
 
-void Single_Setting(Int_t q2_set, Int_t eps_set) {
 
-	const Int_t t_bin_num_const = t_bin_num;
 
-	ifstream t_bin_file("t_bin_interval", std::fstream::in); 
 
-	if (!t_bin_file.is_open()) {
 
-		cout << "u file doesn't exits! " << endl; 
-		exit(0);
-	}
 
-	string dummy_str;
 
-	getline(t_bin_file, dummy_str);
 
- 	if( q2_set == 375) {
+
+
+
+
+//void wt_test_single(TString root_file_str) {
+void wt_test_single() {
+
+	
+  TString root_file_str = "/volatile/hallc/c-kaonlt/vijay/ROOTfiles/KaonLT_Analysis/PhysicsAnalysis/PionLT/Analysis/KaonLT/Pion_2p7_Q1_center.root";
+
+//	TString root_file_str = "omega_test";
+
+ 	TFile* f1     = new TFile(root_file_str, "READ");
+// 	TFile* f1_mod = new TFile(root_file_str + "_mod.root", "RECREATE");
+
+//	TFile* f1     = new TFile(root_file_str + ".root", "UPDATE");
+
+//	TFile* f1     = new TFile(root_file_str, "UPDATE");
+	
+	TTree* t1 = (TTree*)f1->Get("h10");
+
+	cout << root_file_str << "    " << root_file_str.ReplaceAll(".root", "") << endl; 
+	
+	TFile* f1_mod = new TFile(root_file_str.ReplaceAll(".root", "") + "_mod.root", "RECREATE");
+
+	neg_count = 0;	
+
+//	exit(0);
+
+
+//	TBranch* b1 =
+
+//	t1->Draw("Weight");
+	
+
+	Float_t weight_mod;
+	Float_t sig_mod;
+	Float_t weight;
+	Float_t sigcm;
+
+	Float_t thetacm, thetapq, phicm, t, w, Q2, eps;
+	Float_t wi, ti, Q2i, thetacmi, phipqi, epsiloni, nu, q;
+	Float_t phicmi, wcmi, tprimei, ui;
+
+
+
+//	TBranch* w_mod = t1->Branch("mod", &weight_mod, "mod/F");
+
+	TBranch *b = t1->GetBranch("Weight_mod");
+	t1->GetListOfBranches()->Remove(b);
+//	b->Delete();
+
+
+
+	TBranch* w_mod = t1->Branch("Weight_mod", &weight_mod, "Weight_mod");
+
+	t1->SetBranchAddress("Weight",  &weight  );
+	t1->SetBranchAddress("sigcm",   &sigcm   );
+
+	t1->SetBranchAddress("thetapq", &thetacm );
+
+	t1->SetBranchAddress("phipq",   &phicm   );
+	t1->SetBranchAddress("t",       &t       );
+	t1->SetBranchAddress("W",       &w       );
+
+	t1->SetBranchAddress("Q2",      &Q2      );
+	t1->SetBranchAddress("epsilon", &eps     );
+
+	t1->SetBranchAddress("Wi",       &wi       );
+	t1->SetBranchAddress("Q2i",      &Q2i      );
+	t1->SetBranchAddress("thetapq", &thetacmi );
+	t1->SetBranchAddress("phipqi",   &phipqi   );
+
+	t1->SetBranchAddress("nu",       &nu       );
+	t1->SetBranchAddress("q",        &q        );
+
+
+	t1->SetBranchAddress("epsilon", &epsiloni );
+	t1->SetBranchAddress("phipqi",   &phicmi   );
+	t1->SetBranchAddress("Wi",       &wcmi     );
+	t1->SetBranchAddress("ti",  &tprimei  );
+
+	t1->SetBranchAddress("ti",       &ti  );
+	t1->SetBranchAddress("ti",       &ui  );
+
+
+//	t1->SetBranchAddress("sigcm", &sigcm);
+//	t1->SetBranchAddress("sigcm", &sigcm);
+//	t1->SetBranchAddress("sigcm", &sigcm);
+//	t1->SetBranchAddress("sigcm", &sigcm);
+
+    Long64_t nentries = t1->GetEntries(); // read the number of entries in the t3
+
+
+
+
+
+//	t1->SetBranchStatus("mod", 1);
+
+    for (Long64_t i = 0; i < nentries; i++) {
+//    for (Long64_t i = 0; i < 1; i++) {
+
+		
+//		t1->SetBranchStatus("Weight", 1);
+
+		t1->GetEntry(i);
+
+		Float_t Wsq, qsq, m_psq, invm, tt, uu, theta, phi;
+		Float_t mass;
+
+		
+		/*--------------------------------------------------*/
+
+// 		invm  = w;
+// 		tt    = t;
+// //		qsq   = Q2;
+// 		theta = thetacm;
+// 	 	phi   = phicm;
+
+// 		/*--------------------------------------------------*/
  
- 	/// t from 0.01 to 0.45
+
+		invm  = wcmi;
+		tt    = ti;
+		qsq   = Q2i;
+		theta = thetacmi;
+		phi   = phicmi;
+		eps   = epsiloni;
+		uu    = ui;
+
+// 
+
+//		invm = sqrt((nu+m_p)**2-q**2);
+	
+		/*--------------------------------------------------*/
+		/// Constant		
+		Wsq   = invm*invm;
+		m_psq = m_p*m_p;
+		mass  = m_omega;
+
+
+
+
+
+
+
+		Float_t e_photCM = (Wsq - qsq - m_psq)/invm/2.;
+		Float_t e_omCM   = (Wsq + pow(mass,2) - m_psq)/invm/2.;
+      
+		Float_t t_min    = -qsq + pow(mass, 2) -2*(e_omCM*e_photCM-sqrt((pow(e_omCM, 2)-pow(mass,2)*(pow(e_photCM,2)+qsq))));
+
+//		Float_t tprime   = abs(tt)-abs(t_min);
+
+		Float_t tprime   = tprimei;
+
+
+//		cout<< "Check tprime:  " << -tt << "     " << tprime << endl;
+
+
+		/*--------------------------------------------------*/	
+		// Cal_New_Mod(thetacm, phicm, t_gev, tprime_gev, q2_gev, w_gev, eps);		/// Calculate the new Cross section
+//		 sig_mod = Cal_New_Mod(theta, phi, -tt, tprime, qsq, invm, eps);
+//		 sig_mod = sig_gmh_mod(theta, phi, -tt, tprime, qsq, invm, eps);
+
+
+
+ 		if (root_file_str.Contains("Q1")) {
  
- 	///	t_lower_limit[0] = 0.01;
+			q2_set_str = "Q1";
 
-	//	t_bin_file >> >> >> ; 
+ 		} else if (root_file_str.Contains("Q2")) {
 
-		Float_t temp_num[t_bin_num_const];
+			q2_set_str = "Q2";
+ 
+ 		} else {
+ 
+// 			sig_mod = 0.0;
+ 			exit(0);
+// 	
+ 		}
 
-		for(Int_t i = 0; i <= t_bin_num; i++) {
-			t_bin_file >> temp_num[i];
-			cout << temp_num[i] << endl;
+//     /*--------------------------------------------------*/
+//     //  Itt_20 Fitted parameterization
+// 
+// 	if( q2_set_str == "160") {
+// 		cout << "Q2 = 1.6 Parameterization is used ! " << endl; 
+// 	} else if (q2_set_str == "245") {
+// 		cout << "Q2 = 2.45 Parameterization is used !" << endl; 
+// 	} else {
+// 		cout << "No parameterization found !" << endl;
+// 		exit(0);
+// 	}
+//		sig_mod = sig_gmh_mod_u_two_model(theta, phi, -uu, qsq, invm, eps);
+
+		sig_mod = sig_summer19_mod(theta, phi, -tt, tprime, qsq, invm, eps);
+
+		if (sig_mod < 0.0) {
+
+// 			cout << "The sig_mod calculated is below 0 !!!!!   " << sig_mod << endl;
+// 			cout << "If you see this message, go back to your fit_in_t and then refit!" << endl;
+// 			cout << "Parameterization should not yield sig < 0" << endl;
+//			exit(0);
+
+			neg_count++;
+
+//			sig_mod = 0.0;
+
 		}
 
+//		sig_mod = sig_gmh_mod_u(theta, phi, -uu, qsq, invm, eps);
 
-		for(Int_t i = 0; i < t_bin_num; i++) {
+		/*--------------------------------------------------*/	
+		/// Calculate the new weight
+	
 
-			t_lower_limit[i] = temp_num[i];
-			t_upper_limit[i] = temp_num[i+1];
+		if( weight*sig_mod/sigcm != weight*sig_mod/sigcm) {
 
-			cout << 	t_lower_limit[i] << "   " << t_upper_limit[i] << endl;
+			weight_mod = weight;			
+//			cout << "!!! " << weight_mod << endl;	
+
+		} else {
+
+			weight_mod = weight * sig_mod/sigcm;
 
 		}
 
+//		weight_mod = sig_mod / sigcm;
+
+// 		cout << weight << "     " << weight_mod << "    " << sigcm << "    " << sig_mod<< endl;
 
 //		exit(0);
 
-//  		t_lower_limit[0] = 0.0;
-//  		t_upper_limit[0] = 0.12;
-//  
-//  		t_lower_limit[1] = 0.12;
-//  		t_upper_limit[1] = 0.2;
-//  
-//  		t_lower_limit[2] = 0.2;
-//  		t_upper_limit[2] = 0.4;
+// 		if (Float_t(sigcm/sig_mod) != Float_t(1.0)) {
+// 
+//  			cout << "  Sig: " << sigcm << "    Sig_mod:" << sig_mod << "  "  << sigcm / sig_mod << endl;
+// 			
+// 
+// 		} 
+// 	
+
+//		exit();
+
+//		weight_mod = 1.1;
+
+//		t1->SetBranchStatus("*", 0);
+//		t1->SetBranchStatus("mod", 1);
+
+		w_mod->Fill();
+
+//		t1->SetBranchStatus("*", 1);
+
+
+    }
+
+
+
+
+
+
+// 	t1->SetBranchAddress("Weight_mod/F", &weight);
+// 
+//     for (Long64_t i = 0; i < nentries; i++) {
+// 
+// 		t1->GetEntry(i);
+// 
+// 		cout << weight<< "     " << weight_mod << endl;
+// 
+//     }
+//	t1->SetBranchStatus("*",1);
+//	t1->Print();
+
+ 	cout << "The total number of negtive counts:  " << neg_count << endl;
+
+	/*--------------------------------------------------*/	
+	/// Print into a new file 
+	
+	TTree* t11 = t1->CloneTree();
+
+//	f1->Close();
+//	t1->Delete();
+//	f1->Clear();
+
+
+	f1_mod->cd();
+//	f1->cd();
+//	f1->DeleteAll();
+//	gDirectory->Delete("h666;*");
+//	f1->ReOpen("RECREATE");
+
+// 	t11->Print();
+ 	t11->Write();
+
+	f1_mod->Close();
+	f1->Close();
+
+}
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+
+Float_t sig_gmh_mod_u_two_model(Float_t thetacm, Float_t phicm, Float_t u_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_gmh_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor, Mp, m_p;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,g,h,fpi,fpi235;
+	Float_t m_pi0sq, tp, up;
+	Float_t mp = m_p*1000;
+	
+    Float_t t0, t1, t2, t3 ;
+    Float_t l0, l1, l2, l3 ;
+    Float_t lt0,lt1,lt2,lt3;
+    Float_t tt0,tt1,tt2,tt3;  
+
+	Mp = 938.27231;
+	m_p = Mp/1000;
+
+
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
+
+
+
+    m_pi0sq= Mpi02/1.e6;
+
+    up = fabs(u_gev);      // just to make sure it's positive
+
+
+	///*--------------------------------------------------*/
+	/// Checking 
+//  	w_gev   =    2.2616900000000002       ;  
+//  	q2_gev  =    1.4605500000000000       ; 
+//  	up      =   5.00000000000000028E-002  ;
+//  	phicm   =   0.39269874999999999       ;	
+//  	thetacm =    3.0453998878191055       ; 
+//  	eps     =   0.31417277374253511       ; 
+	/*--------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------*/
+/// Stright Line
+    /*--------------------------------------------------*/
+    //  Itt_151 Starting parameterization
+
+  	if( q2_set_str == "Q1") {
+ //		cout << "Q2 = 1.6 Parameterization is used ! " << endl; 
+ //		exit(0);
  
- 	} else if ( q2_set == 245) {
+ 		t0  =        7.73587     ;
+ 		t1  =        -7.9672     ;
+ 		t2  =         0.0000     ;
+ 		t3  =         0.0000     ;
+ 		l0  =        13.2553     ;
+ 		l1  =       -47.2633     ;
+ 		l2  =         0.0000     ;
+ 		l3  =         0.0000     ;
+ 		lt0 =        -0.3439        ;
+ 		lt1 =         5.9217        ;
+ 		lt2 =         0.0000        ;
+ 		lt3 =         0.0000        ;
+ 		tt0 =         8.1221        ;
+ 		tt1 =      -139.8422        ;
+ 		tt2 =         0.0000        ;
+ 		tt3 =         0.0000        ;
  
-		getline(t_bin_file, dummy_str);
-		getline(t_bin_file, dummy_str);
+ 	} else if (q2_set_str == "245") {
+ //		cout << "Q2 = 2.45 Parameterization is used !" << endl; 
+ //		exit(0);
 
-		Float_t temp_num[t_bin_num_const];
-
-		for(Int_t i = 0; i <= t_bin_num; i++) {
-			t_bin_file >> temp_num[i];
-			cout << temp_num[i] << endl;
-		}
-
-
-		for(Int_t i = 0; i < t_bin_num; i++) {
-
-			t_lower_limit[i] = temp_num[i];
-			t_upper_limit[i] = temp_num[i+1];
-
-			cout << 	t_lower_limit[i] << "   " << t_upper_limit[i] << endl;
-
-		}
-
-//  		t_lower_limit[0] = 0.0; 
-//  		t_upper_limit[0] = 0.212;
-//  
-//  		t_lower_limit[1] = 0.212;
-//  		t_upper_limit[1] = 0.33;
-//  
-//  		t_lower_limit[2] = 0.33;
-//  		t_upper_limit[2] = 0.60;
-
-//			exit(0);
+ 		t0  =      6.16527     ;
+ 		t1  =      -4.2124     ;
+ 		t2  =       0.0000     ;
+ 		t3  =       0.0000     ;
+ 		l0  =      12.2546     ;
+ 		l1  =     -29.8629     ;
+ 		l2  =       0.0000     ;
+ 		l3  =       0.0000     ;
+ 		lt0 =      -0.3620        ;
+ 		lt1 =       3.1028        ;
+ 		lt2 =       0.0000        ;
+ 		lt3 =       0.0000        ;
+ 		tt0 =      -7.4032        ;
+ 		tt1 =      63.4705        ;
+ 		tt2 =       0.0000        ;
+ 		tt3 =       0.0000        ;
+ 
+ 	} else {
+ 
+ 		cout << "No parameterization found !" << endl;
+ 		
+ 		exit(0);
  
  	}
+// 
+
+ 	/// Iteration 40 starting parameter
+ 
+//  	t0  =  0.05  ;
+//  	t1  =  0.2   ;
+//  	t2  =  0.25  ;
+//  	t3  =  -0.9  ;
+//  	l0  =  0.7   ;
+//  	l1  =  -2.7  ;
+//  	l2  =  -0.5  ;
+//  	l3  =  2.5   ;
+//  	lt0 =  0.05  ;
+//  	lt1 =  -0.3  ;
+//  	lt2 =  -0.15 ;
+//  	lt3 =  0.7   ;
+//  	tt0 =  0.1   ;
+//  	tt1 =  -1.8  ;
+//  	tt2 =  -0.3  ;
+//  	tt3 =   3    ;
+
+// 
+//     /*--------------------------------------------------*/
+//     // Sigma T
+//       sigt = t0 + t1 * up + t2 * log(q2_gev) + t3 * up * log(q2_gev);
+
+       sigt = t0 / sqrt(q2_gev) + t1 * up / sqrt(q2_gev) + t2 / sqrt(q2_gev) + t3 * up / sqrt(q2_gev);
+
+// 
+
+
+
+////     /*--------------------------------------------------*/
+////     // Sigma T
+//
+//  	if( q2_set_str == "160") {
+//
+// 	  //Double_t f = par[0]*(xx+ par[1])*(xx+ par[1]) + par[2];
+//
+//      sigt = t0 * (up + t1)*(up + t1) + t2 ;
+//
+// 	} else if (q2_set_str == "245") {
+//
+//      // f = par[0]*exp(par[1]*xx) + par[2]
+//  
+//      sigt = t0 * exp( t1 * up ) + t2;
+//
+// 	} else {
+// 		exit(0);
+// 	}
 
 
 
 
-	Double_t t_set;
 
-//	cout << t_lower_limit[2] << endl;
+//    sigt = t0;
+
+    /*--------------------------------------------------*/
+    // Sigma L
+//     sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
+//     sigl = l1 + l2 * up;
+//     sigl = l1 * exp( l2 * up ) + l3 / up;
+//     sigl = l1 * (up-l2)**2 + l3;
+
+//    sigl = l0 + l1 * up + l2 * log(q2_gev) + l3 * up * log(q2_gev);
+
+      sigl = l0/(q2_gev*q2_gev) + l1 * up / (q2_gev*q2_gev) + l2 / q2_gev + l3 * up / q2_gev;
+
+
+//    sigl = l0 * exp( l1 * up ) + l2;
+//      sigl = l0 * (up + l1)*(up + l1) + l2 ;
+
+    /*--------------------------------------------------*/
+    // Sigma LT  
+//    siglt = (lt0 + lt1 * up + lt2 * log(q2_gev) + lt3 * up * log(q2_gev)) * sin(thetacm);
+
+    siglt = (lt0/q2_gev + lt1 * up / q2_gev + lt2 / q2_gev + lt3 * up / q2_gev) * sin(thetacm);
+
+    //siglt = lt1 * exp( -lt2 * (up-lt3)**2) * sin(thetacm);
+     
+    /*--------------------------------------------------*/
+    // Sigma TT 
+//    sigtt = (tt0 + tt1 * up + tt2 * log(q2_gev) + tt3 * up * log(q2_gev)) * sin(thetacm) * sin(thetacm);
+//    sigtt = (tt1 * exp( tt2 * up ) + tt3 / up) * sin(thetacm) * sin(thetacm);
+
+    sigtt = (tt0/q2_gev + tt1 * up / q2_gev + tt2 / q2_gev + tt3 * up / q2_gev) * sin(thetacm) * sin(thetacm);
+
+
+/*--------------------------------------------------*/
+
+//	wfactor=((2.47**2-m_p**2)**2)/((w_gev**2-m_p**2)**2);
+    wfactor=1/pow((pow(w_gev,2)-pow(m_p,2)),2);
+
+	sigt = sigt*wfactor;
+	sigl = sigl*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
 	
+	sig = sigt + eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
+	
+	sig = sig/2./pi/1.e06;
+
+	sig_gmh_mod = sig;
+	
+//	cout << "eps=" << eps << " u=" << up << " sigT=" << sigt << " sigL=" << sigl << " sigLT=" << siglt << " sigTT=" << sigtt << " x_mod=" << sig_gmh_mod << endl;
+	
+//	cout << " wfactor=" << wfactor << " m_p=" << m_p << " w_gev=" << w_gev << endl;
+
+
 //	exit(0);
 
+	return sig_gmh_mod;
 
-	TString file_name_str;	
-	file_name_str.Form("pl_%i_%i", q2_set, eps_set);
-	TString file_name;
-	file_name =  ave_dir + "aver." + file_name_str + ".dat";
 
-	//	TNtuple* n1 = new TNtuple("n1", "n1", "ratio:r_err:phi_bin:t_bin:y_exp:y_sim");
-	TNtuple* n1 = new TNtuple("n1", "n1", "ratio:r_err:phi_bin:t_bin");
- 	n1->ReadFile(file_name);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// u dependent model original 
+///
+
+Float_t sig_gmh_mod_u(Float_t thetacm, Float_t phicm, Float_t u_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_gmh_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,fpi,fpi235;
+	Float_t m_pi0sq, tp, up;
+	Float_t mp = m_p*1000;
+
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
+
+
+
+    m_pi0sq= Mpi02/1.e6;
+
+    up = fabs(u_gev);      // just to make sure it's positive
+
+
+
+
+
+	/*--------------------------------------------------*/
+    /// Itt 6
+	a = 0.0495;
+	b = 7;
+	c = 0.0;
+
+    sigl = a * exp( -b * up) + c;
+
+	/*--------------------------------------------------*/
+    /// Itt 6
+	a = 0.088;
+	b = 5; 	
+	c = 0.00022;
+
+    sigt = a * exp( -b * up) + c;
+
+	/*--------------------------------------------------*/
+    /// Itt 6
+    a = 0.0015;
+    b = 1.04;
+    c = 0.000158;
+
+    siglt = a * exp( -b * up) + c;
+
+	/*--------------------------------------------------*/
+    /// Itt 6
+    a = 0.001;
+    b = 1.1789;
+    c = 0.00024;
+
+    sigtt = a * exp( -b * up) + c;
+
+
+    wfactor=pow((pow(2.47,2)-pow(mp,2)),2)/pow((pow(w_gev,2)-pow(mp,2)),2);
+
+	sigl = sigl*wfactor;
+	sigt = sigt*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
+	
+	sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
+	
+	sig = sig/2./pi/1.e06;
+
+	sig_gmh_mod = sig;
+
+
+
+
+
+
+	
+	return sig_gmh_mod;
+
+}
+
+
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// u dependent model for Q2=1.60
+///
+
+Float_t sig_gmh_mod_u_160(Float_t thetacm, Float_t phicm, Float_t u_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_gmh_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,g,h,fpi,fpi235;
+	Float_t m_pi0sq, tp, up;
+	Float_t mp = m_p*1000;
+
+    Float_t l1,l2,l3;
+    Float_t t1,t2,t3;
+    Float_t lt1,lt2,lt3;
+    Float_t tt1,tt2,tt3;
+
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
+
+    m_pi0sq= Mpi02/1.e6;
+
+    up = fabs(u_gev);      // just to make sure it's positive
+
+//       /*--------------------------------------------------*/
+//       /// Itt_18
+//       t1  =   0.1       ;
+//       t2  =  -5.0       ;
+//       t3  =   0.0002    ; 
+//       l1  =   0.05      ;
+//       l2  =   0.6       ;
+//       l3  =   0.02      ;
+//       lt1 =   0.000000  ;
+//       lt2 =   0.000000  ; 
+//       lt3 =   0.000000  ; 
+//       tt1 =   0.000000  ;
+//       tt2 =   0.000000  ;
+//       tt3 =   0.000000  ;
+
+//       /*--------------------------------------------------*/
+      /// Itt_19
+      t1  =   0.23417  ;
+      t2  =  -12.0748  ;
+      t3  =   -0.0108  ; 
+      l1  =    0.0000  ;
+      l2  =    0.0000  ;
+      l3  =    0.0616  ;
+      lt1 =   -0.0237  ;
+      lt2 =    1.2987  ; 
+      lt3 =    0.0014  ; 
+      tt1 =    0.0166  ;
+      tt2 =    0.0000  ;
+      tt3 =    0.0000  ;
+
+
+
+
+//     /*--------------------------------------------------*/
+//     // Sigma T
+//     sigt = t1 * exp( -t2 * up) + t3;
+//       
+//     /*--------------------------------------------------*/
+//     // Sigma L
+//     sigl = l1 * exp(l2 * up) + l3;
+//       
+//     /*--------------------------------------------------*/
+//     // Sigma TT  
+//     sigtt = tt1 * exp( -tt2 * up) * sin(thetacm) * sin(thetacm);
+//       
+//     /*--------------------------------------------------*/
+//     // Sigma LT  
+//     siglt = lt1 * exp( -lt2 * up) * sin(thetacm);
+//     //siglt = lt1 * exp( -lt2 * (up-lt3)**2) * sin(thetacm);
+// 
+
+     /*--------------------------------------------------*/
+     // Sigma T
+     sigt = t1 * exp(t2 * up) + t3;
+       
+
+     /*--------------------------------------------------*/
+     // Sigma L
+//     sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
+//     sigl = l1 + l2 * up;
+//     sigl = l1 * exp( l2 * up ) + l3 / up;
+     sigl = l1 * pow((up-l2),2) + l3;
  
-	TGraphErrors* t_g = new TGraphErrors();
-
-	TF1* t_fit = new TF1("t1", "pol1", 0, 4); 
-
-	TCanvas *c1 = new TCanvas("n1", "n1", 1500, 600);
-	//	TCanvas *c1 = new TCanvas("n1", "n1");
-	c1->SetRightMargin(0.);
-	c1->SetLeftMargin(0.);
-	c1->SetTopMargin(0.);
-	c1->SetBottomMargin(0.);
-	//	c1->Divide(8,1);
-	c1->Divide(4,2);
-
-	Float_t q2_sum;
 
 
-	for (Int_t i = 0; i < t_bin_num; i++) {
-	  
-	  //	  TCanvas *ci = new TCanvas("ci", "ci", 1200, 400);
-	  
-	  Int_t in = i + 1;	
+     /*--------------------------------------------------*/
+     // Sigma LT  
+     siglt = (lt1 * exp( lt2 * up ) +lt3 / up) * sin(thetacm);
+     //siglt = lt1 * exp( -lt2 * (up-lt3)**2) * sin(thetacm);
 
-	  //		cout << in << endl;
 
-	  c1->cd(in);
-	  TPad* pad = (TPad*)c1->GetPad(in);
-	  pad->SetLeftMargin(0.08);
-	  pad->SetBottomMargin(0.07);
-	  pad->SetTopMargin(0.02);
-	  pad->SetRightMargin(0.02);
+// 	if (siglt < 0.0) {
+// 		
+// 		cout << "Negative Sigma: sig check: " << sigl << " " << sigt << " " << siglt << " " << sigtt << " " << sigtt << " " << thetacm << " "<< up << endl;
+// //		cout << "Negative Sigma: sig check: " << siglt << " " << lt1 << " " << lt2 << " " << lt3 << endl;
+// //		cout << "Negative Sigma: thetacm check: " << up << lt1 * exp( lt2 * up ) +lt3 / up << " " << thetacm << " " << sin(thetacm) << endl;
+// 
+// 		exit(0);
+// 
+// 	}
+ 
 
-	  TString t_bin_limit;
-	  t_bin_limit.Form( "t_bin == %i && ratio != 0", in);	
+     /*--------------------------------------------------*/
+     // Sigma TT  
+     sigtt = tt1 * sin(thetacm) * sin(thetacm);
 
-	  //	  n1->Draw("ratio:phi_bin", t_bin_limit, "*");
-	  n1->Draw("ratio:phi_bin:r_err", t_bin_limit, "off");
+     wfactor=pow((pow(2.47,2)-pow(mp,2)),2)/pow((pow(w_gev,2)-pow(mp,2)),2);
 
-	  TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0, n1->GetV3());
-	  //	TGraphErrors* g = new TGraphErrors(n1->GetSelectedRows(), n1->GetV2(), n1->GetV1(), 0,0);
+	sigl = sigl*wfactor;
+	sigt = sigt*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
+	
+	sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
+	
+	sig = sig/2./pi/1.e06;
+
+	sig_gmh_mod = sig;
+	
+
+	if (sig_gmh_mod < 0.0) {
 		
-	  //	  g->SetTitle("Yield Ratio: Yexp/Ysim");
-	  g->SetTitle("");
-	
-	  g->GetXaxis()->SetTitle("#phi Angle");		
-	  g->GetXaxis()->CenterTitle();		
-	
-	  g->GetYaxis()->SetTitle("Yexp/Ysim");		
-	  //  g->GetYaxis()->SetTitleOffset(1.8);		
-	  g->GetYaxis()->CenterTitle();		
+//		cout << "Negative Sigma: sig check: " << sigl << " " << sigt << " " << siglt << " " << sigtt << " " << sigtt << " " << thetacm << " "<< up << endl;
+		cout << "Negative Sigma: sig check: " << siglt << " " << lt1 << " " << lt2 << " " << lt3 << endl;
+//		cout << "Negative Sigma: thetacm check: " << up << lt1 * exp( lt2 * up ) +lt3 / up << " " << thetacm << " " << sin(thetacm) << endl;
 
-
-	  Double_t xx;
-	  Double_t yy;
-
-	  Double_t sum_r = 0;
-	  Double_t sum_w = 0;
-
-	  Double_t weighted_ave_top = 0;
-	  Double_t weighted_ave_bot = 0;
-
-	  
-	  /*	
-	  for( Int_t ii = 0; ii < g->GetN(); ii++) {
-
-	    g->GetPoint(ii, xx, yy);		
-
-	    if(yy==0.0 && yy >= 3.0 ) {
-	      g->RemovePoint(ii);
-	    }
-	  }
-	  	
-	  */
-
-	  for( Int_t ii = 0; ii < g->GetN(); ii++) {
-			
-	    g->GetPoint(ii, xx, yy);		
-	
-	    cout << ii  << "    " << xx << "    " << yy << "     " << g->GetErrorY(ii) << endl;
-
-	    sum_r =  sum_r + yy;
-	    //			sum_w =  sum_w + 1/(g->GetErrorY(ii)**2);
-	    sum_w =  sum_w + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
-
-	    //			weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)**2) * yy;
-	    weighted_ave_top = weighted_ave_top + 1/(g->GetErrorY(ii)*g->GetErrorY(ii))*yy;
-	    //			weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)**2);
-	    weighted_ave_bot = weighted_ave_bot + 1/(g->GetErrorY(ii)*g->GetErrorY(ii));
-
-	  }
-	  g->SetMarkerStyle(29);
-	  g->GetYaxis()->SetRangeUser(0.0, 3.0);
-	  // g->GetYaxis()->SetRangeUser(0.0, 10.0);
-	  // 	  g->GetYaxis()->SetRangeUser(0.0, 4.0);
-	  g->Draw("AP");
-	  TLine *L = new TLine(0.0, 1.0, 17.0, 1.0);
-	  L->SetLineColor(kRed);
-	  L->Draw("same");
-
-	  Int_t graph_it = t_g->GetN(); 
-
-	  t_set = (t_lower_limit[i] + t_upper_limit[i])/2;
-
-	  //		t_g->SetPoint(graph_it, i+1, sum_r/4);
-
-	  //		t_g->SetPoint(graph_it, t_set, sum_r/graph_it);
-	  //		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/graph_it);
-
-
-	  cout << "ppppppppppppppppp   "<< g->GetN() << endl;
-
-	  //		exit(0);
-			
-
-	  //		t_g->SetPoint(graph_it, t_set, sum_r/g->GetN());
-	  //		t_g->SetPointError(graph_it, 0, sqrt(sum_r_err)/g->GetN());
-
-	  t_g->SetPoint(graph_it, t_set, weighted_ave_top/weighted_ave_bot);
-	  t_g->SetPointError(graph_it, 0, 1/sqrt(sum_w));
-
-
-	  Float_t q2_set_tmp;
-
-	  //		q2_set_tmp = Get_t_bin_q2(q2_set, i);
-
-	  q2_set_tmp = Get_t_bin_q2(q2_set, i);
-
-
-	  q2_t_set->SetPoint(q2_t_set->GetN(), t_set, q2_set_tmp);
-
-		
-	  cout << t_set << "   " << q2_set_tmp << endl;
-	  //		exit(0);
-
-
-	  // 		if (q2_set == 160) {		
-	  // 
-	  // 			if (i == 0) { 
-	  // 	
-	  // 				q2_set_tmp = 150.458;
-	  // 			
-	  // 			} else if (i == 1) { 
-	  // 	
-	  // 				q2_set_tmp = 162.791;
-	  // 	
-	  // 			} else {
-	  // 	
-	  // 				q2_set_tmp = 170.599;
-	  // 	
-	  // 			}
-	  // 
-	  // 		} else{
-	  // 
-	  // 			if (i == 0) { 
-	  // 	
-	  // 				q2_set_tmp = 225.943;
-	  // 			
-	  // 			} else if (i == 1) {
-	  // 	
-	  // 				q2_set_tmp = 243.919;
-	  // 	
-	  // 			} else {
-	  // 	
-	  // 				q2_set_tmp = 261.004;
-	  // 	
-	  // 			}
-	  // 
-	  // 		}
-
-
-
-
-
-	  if (eps_set < 40) { 
-
-	    Int_t graph_it = q2_ratio_lo->GetN(); 
-	    //			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, sum_r/graph_it);
-	    //			q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, sum_r/g->GetN());
-
-	    q2_ratio_lo->SetPoint(graph_it, q2_set_tmp, weighted_ave_top/weighted_ave_bot);
-
-	  } else { 
-
-	    Int_t graph_it = q2_ratio_hi->GetN(); 
-	    //			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, sum_r/graph_it);
-	    //			q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, sum_r/g->GetN());
-
-	    q2_ratio_hi->SetPoint(graph_it, q2_set_tmp, weighted_ave_top/weighted_ave_bot);
-
-	  }
-
-	  q2_sum =  q2_sum + q2_set_tmp;
-
-	  //	ci->Print(outphiyield_dir + i + file_name_str + ".png");
+//		exit(0);
 
 	}
 
+	return sig_gmh_mod;
 
-	//	exit(0);
+}
 
-	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".png");
-	//	c1->Print(outplot_dir + "ratio_check_t_phi_bin" + file_name_str + ".root");
 
-	c1->Clear();
-	c1->cd();
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// u dependent model for Q2=2.45
+///
+
+Float_t sig_gmh_mod_u_245(Float_t thetacm, Float_t phicm, Float_t u_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_gmh_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,g,h,fpi,fpi235;
+	Float_t m_pi0sq, tp, up;
+	Float_t mp = m_p*1000;
 	
+    Float_t l1,l2,l3;
+    Float_t t1,t2,t3;
+    Float_t lt1,lt2,lt3;
+    Float_t tt1,tt2,tt3;  
 
-    t_g->SetTitle("t Dependence Plot");
-     
-    t_g->GetXaxis()->SetTitle("-#it{u} [GeV^{2}]");		
-    t_g->GetXaxis()->CenterTitle();		
-     
-    t_g->GetYaxis()->SetTitle("Yield Ratio");		
-    t_g->GetYaxis()->SetTitleOffset(1.8);		
-    t_g->GetYaxis()->CenterTitle();		
 
-	t_g->Draw("a*");
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
 
-	TGraphErrors* t_g_1 = (TGraphErrors*) t_g->Clone();
+
+
+    m_pi0sq= Mpi02/1.e6;
+
+    up = fabs(u_gev);      // just to make sure it's positive
+
+//     /*--------------------------------------------------*/
+//     /// Itt_18
+//     t1  =     0.1           ; 
+//     t2  =    -5.0           ;
+//     t3  =     0.0002        ; 
+//     l1  =     0.05          ;
+//     l2  =     0.6           ;
+//     l3  =     0.02          ;
+//     lt1 =     0.000000      ;
+//     lt2 =     0.000000      ;
+//     lt3 =     0.000000      ;
+//     tt1 =     0.000000      ;
+//     tt2 =     0.000000      ;
+//     tt3 =     0.000000      ;
+ 
+
+    /*--------------------------------------------------*/
+    /// Itt_19
+    t1  =       0.23417        ; 
+    t2  =      -12.0748        ;
+    t3  =       -0.0108        ; 
+    l1  =        0.0000        ;
+    l2  =        0.0000        ;
+    l3  =        0.0616        ;
+    lt1 =       -0.0237        ;
+    lt2 =        1.2987        ;
+    lt3 =        0.0014        ;
+    tt1 =        0.0166        ;
+    tt2 =        0.0000        ;
+    tt3 =        0.0000        ;
+
+             
+//     /*--------------------------------------------------*/
+//     // Sigma T
+//     sigt = t1 * exp( -t2 * up) + t3;
+//       
+//     /*--------------------------------------------------*/
+//     // Sigma L
+//     sigl = l1 * exp(l2 * up) + l3;
+//       
+//     /*--------------------------------------------------*/
+//     // Sigma TT  
+//     sigtt = tt1 * exp( -tt2 * up) * sin(thetacm) * sin(thetacm);
+//       
+//     /*--------------------------------------------------*/
+//     // Sigma LT  
+//     siglt = lt1 * exp( -lt2 * up) * sin(thetacm);
+//     //siglt = lt1 * exp( -lt2 * (up-lt3)**2) * sin(thetacm);
+
+     /*--------------------------------------------------*/
+     // Sigma T
+     sigt = t1 * exp(t2 * up) + t3;
+
+     /*--------------------------------------------------*/
+     // Sigma L
+//     sigl = l1* (exp(-l2*(up-l3)) + l2*(up-l3));
+//     sigl = l1 + l2 * up;
+//     sigl = l1 * exp( l2 * up ) + l3 / up;
+     sigl = l1 * pow((up-l2),2) + l3;
+
+
+
+
+     /*--------------------------------------------------*/
+     // Sigma LT  
+     siglt = (lt1 * exp( lt2 * up ) + lt3 / up) * sin(thetacm);
+     //siglt = lt1 * exp( -lt2 * (up-lt3)**2) * sin(thetacm);
+      
+     /*--------------------------------------------------*/
+     // Sigma TT  
+     sigtt = tt1 * sin(thetacm) * sin(thetacm);
+
+
+
+
+
+     wfactor=pow((pow(2.47,2)-pow(mp,2)),2)/pow((pow(w_gev,2)-pow(mp,2)),2);
+
+	sigl = sigl*wfactor;
+	sigt = sigt*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
 	
-	iii = iii+1;
-
-	t_g_1->SetMarkerColor(iii);
-	t_g_1->SetLineColor(iii);
-
-	mg->Add(t_g_1, "*");
-
-
-
+	sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
 	
-	gStyle->SetOptFit(); 
+	sig = sig/2./pi/1.e06;
 
-	t_g->Fit("t1");
+	sig_gmh_mod = sig;
+	
+	return sig_gmh_mod;
+
+}
 
 
 
-	//	c1->Print(outplot_dir + "average_ratio" + file_name_str + ".png");
 
 
-	Int_t graph_it = q2_g->GetN();
 
-//	q2_g->SetPoint(graph_it, q2_set, t_fit->GetParameter(1));
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------*/
+/*--------------------------------------------------*/
+/// WL Newly modified model
 //
+
+Float_t Cal_New_Mod(Float_t thetacm, Float_t phicm, Float_t t_gev, Float_t tprime_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_gmh_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,g,h,fpi,fpi235;
+	Float_t m_pi0sq, tp;
+	Float_t mp = m_p*1000;
+
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
+
+
+
+    m_pi0sq= Mpi02/1.e6;
+
+
+
+	///*--------------------------------------------------*/
+	/// Important !! 
+	/// Must be fabs instead of abs!!!!
+
+	tp = fabs(tprime_gev);
+
+	lambda0_sq= 0.462;
+
+
+
+//	cout << m_pi0sq << endl;
+
+	if (t_gev>m_pi0sq) { 
+	   alphapi_t=0.7*(t_gev-m_pi0sq);
+	} else {
+	   alphapi_t=tanh(0.7*(t_gev-m_pi0sq));
+	}
+	
+	alphapi_0=0.7*(0.-m_pi0sq);
+	lambdapi_sq=lambda0_sq*pow((1.+alphapi_t)/(1.+alphapi_0),2);
+	fpi    = 1./(1.+q2_gev/lambdapi_sq);
+	fpi235 = 1./(1.+2.35/lambdapi_sq);
+	
+//	cout << fpi <<  "  " << fpi235 << endl;
+
+	a = 0.16675;
+//	b = 0.89524;
+
+	b = 0.89524;
+	c = 3.5991;
+	d = 6.4562;
+	e = -9.6199;
+	f = 5.8319;
+
+	
+	
+	/*--------------------------------------------------*/
+	/// Iteration: 1  
+	// sigl = a*exp(-b*tp)+c*exp(-d*(tp**0.5))+e*exp(-f*(tp**0.25));
+	// sigl = sigl *(fpi/fpi235)**2;
+
 	
 
-	cout << "!!!!!!   " <<  q2_g->GetN() << "   " << q2_sum/3 << "   " << t_fit->GetParameter(1) << endl ;
 
-	q2_g->SetPoint(graph_it, q2_sum/3, t_fit->GetParameter(1));
+	/*--------------------------------------------------*/
+	/// Iteration: 2  
+	// sigl = a*exp(-b*tp) + c*exp(-d*(tp**0.5));
+	// sigl = sigl * (1 + 3 * q2_gev)/5;
 
-//	q2_g->SetPointError(graph_it, 0, t_fit->GetParError(1));
 
+
+//	tp =4;
+//	tp =5;
+
+	/*--------------------------------------------------*/
+	/// Iteration: 3  
+	sigl = a*exp(0.08*tp) + c*exp(-d*(pow(tp,0.5)));
+	sigl = sigl * (1 + 6 * q2_gev);
+
+
+	
+
+
+
+	a = -0.12286;
+//	b = 0.56383;
+	b = 1;
+	c = 1.4673;
+	d = 2.1988;
+	e = 0.65170;
+	f = 18.501;
+
+	/*--------------------------------------------------*/
+	/// Iteration: 1
+	// sigt = a*exp(-b*tp)+c*exp(-d*(tp**0.5))+e*exp(-f*(tp**2));
+	// sigt = sigt *(fpi/fpi235)**2;
+
+
+	/*--------------------------------------------------*/
+	/// Iteration: 2
+	// sigt = a*exp(-b*tp) + c*exp(-d*(tp**0.5));
+	// sigt = sigt * (1 + 4 * q2_gev)/5;
+
+//	sigt = a*exp(-b*tp) + c*exp(-d*(tp**0.5));
+	sigt = 0.005*exp(0.1*tp);
+
+	sigt = sigt * (1 + 8 * q2_gev);
+
+
+// 
+// 	cout << tp << "Sigma L: " << sigl << endl;;
+// 	cout << "Sigma T: "<< sigt << endl;;
+// 
 //	exit(0);
 
-//	delete c1;
+
+
+// 	/*--------------------------------------------------*/
+// 	/// 
+// 	a = 0.46397;
+// 	b = 4.9179;
+// 	c = 3.3023;
+// 	d = 3.1741;
+// 	siglt = a*exp(-b*tp)+c*exp(-d*(tp**0.5));
+// 	siglt = siglt*(fpi/fpi235)**2*sin(thetacm);
+// 	siglt = -siglt/sqrt(2.);
+// 	
+// //	cout << "Sigma LT: "<< siglt << endl;;
+// 
+// 
+// 	/*--------------------------------------------------*/
+// 	/// 
+// 
+// 	a = -0.26497;
+// 	b = 2.7655;
+// 	c = 2.8034;
+// 	d = 3.8586;
+// 	sigtt = a*exp(-b*tp)+c*exp(-d*(tp**0.5));
+// 	sigtt= sigtt*(fpi/fpi235)**2*(sin(thetacm))**2;
+// 	
+// //	cout << "Sigma TT: " << sigtt << endl;;
+
+
+	siglt = 0;
+	sigtt = 0;
+	
+
+
+
+
+
+
+	/*--------------------------------------------------*/
+	/*--------------------------------------------------*/
+
+
+	wfactor=pow((pow(2.47,2)-pow(mp,2)),2)/pow((pow(w_gev,2)-pow(mp,2)),2);
+	
+	sigl = sigl*wfactor;
+	sigt = sigt*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
+	
+	sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
+	
+	sig = sig/2./pi/1.e06;
+
+	sig_gmh_mod = sig;
+	
+	
+	
+	return sig_gmh_mod;
 
 }
+//=========================================================================
+/// Model for Summer 2019 data Jun 7, 2024
+/// Analyzed V.K.
+//==========================================================================
+
+Float_t sig_summer19_mod(Float_t thetacm, Float_t phicm, Float_t t_gev, Float_t tprime_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_summer19_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,fpi,fpi235;
+	Float_t m_pi0sq, tp;
+	Float_t mp = m_p*1000;
+
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
+
+    m_pi0sq= Mpi02/1.e6;
+
+	tp = fabs(tprime_gev);
+
+	lambda0_sq= 0.462;
 
 
 
-// Double_t t_dependent_fitting_function(Double_t x, Double par) {
-// 
-// 
-// }
-// 
-// 
+//	cout << m_pi0sq << endl;
 
-
-
-
-
-
-
-
-/*--------------------------------------------------*/
-/*--------------------------------------------------*/
-
-Double_t Get_t_bin_q2(Int_t q2_set, Int_t t_bin_num) {
+	if (t_gev>m_pi0sq) { 
+	   alphapi_t=0.7*(t_gev-m_pi0sq);
+	} else {
+	   alphapi_t=tanh(0.7*(t_gev-m_pi0sq));
+	}
 	
-	TString file_str;
-	TString dir_str;
-
-	dir_str = "averages/";
-
-	file_str.Form("avek.%i.dat",q2_set);
-
-	cout << file_str << endl;
-
-	TNtuple* avek_ntp = new TNtuple("avek", "avek", "w:dw:q2:dq2:theta_lo:theta_hi:t_bin_in");
-
-	avek_ntp->ReadFile(dir_str + file_str);
+	alphapi_0=0.7*(0.-m_pi0sq);
+	lambdapi_sq=lambda0_sq*pow((1.+alphapi_t)/(1.+alphapi_0),2);
+	fpi    = 1./(1.+q2_gev/lambdapi_sq);
+	fpi235 = 1./(1.+0.375/lambdapi_sq);
 	
-	Float_t q2_ave;
 	
-	avek_ntp->SetBranchAddress("q2", &q2_ave);	
+	a = 0.16675;
+	b = 0.89524;
+	c = 3.5991;
+	d = 6.4562;
+	e = -9.6199;
+	f = 5.8319;
+	sigl = a*exp(-b*tp)+c*exp(-d*(pow(tp,0.5)))+e*exp(-f*pow(tp,0.25));
+	sigl = sigl *pow(fpi/fpi235,2);
 	
-	avek_ntp->GetEntry(t_bin_num);
 
-	cout << q2_ave << endl;
-	delete avek_ntp;
+//	cout << "Sigma L: "<< fpi <<  "  " << fpi235 << "   "<< tp << "  " << sigl << endl;;
 
-	return q2_ave; 
+
+	a = -0.12286;
+	b = 0.56383;
+	c = 1.4673;
+	d = 2.1988;
+	e = 0.65170;
+	f = 18.501;
+	sigt = a*exp(-b*tp)+c*exp(-d*(pow(tp,0.5)))+e*exp(-f*pow(tp,2));
+	sigt = sigt *pow(fpi/fpi235,2);
+
+//	cout << "Sigma T: "<< sigt << endl;;
+
+	
+	a = 0.46397;
+	b = 4.9179;
+	c = 3.3023;
+	d = 3.1741;
+	siglt = a*exp(-b*tp)+c*exp(-d*pow(tp,0.5));
+	siglt = siglt*pow(fpi/fpi235,2)*sin(thetacm);
+	siglt = -siglt/sqrt(2.);
+	
+//	cout << "Sigma LT: "<< siglt << endl;;
+
+
+
+	a = -0.26497;
+	b = 2.7655;
+	c = 2.8034;
+	d = 3.8586;
+	sigtt = a*exp(-b*tp)+c*exp(-d*pow(tp,0.5));
+	sigtt= sigtt*pow(fpi/fpi235,2)*pow(sin(thetacm),2);
+	
+//	cout << "Sigma TT: " << sigtt << endl;;
+
+	wfactor=pow((pow(2.47,2)-pow(mp,2)),2)/pow((pow(w_gev,2)-pow(mp,2)),2);
+	
+//	cout << "wfactor: " << mp << "   " << wfactor << endl;;
+
+
+	sigl = sigl*wfactor;
+	sigt = sigt*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
+	
+	sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
+	
+	sig = sig/2./pi/1.e06;
+
+	sig_summer19_mod = sig;
+	
+	
+	
+	return sig_summer19_mod;
 }
 
-
-
-
 /*--------------------------------------------------*/
 /*--------------------------------------------------*/
+/// GMH model original 
+//
+/// Do Not Change!
+
+Float_t sig_gmh_mod(Float_t thetacm, Float_t phicm, Float_t t_gev, Float_t tprime_gev, Float_t q2_gev, Float_t w_gev, Float_t eps) {
+
+	Float_t sig_gmh_mod;
+
+//	sig_gmh_mod = 100.0;
+
+	Float_t sig, wfactor;
+	Float_t sigt,sigl,siglt,sigtt;
+//	Float_t thetacm,phicm,t_gev,tprime_gev,q2_gev,w_gev,eps,tp;
+	Float_t lambda0_sq,lambdapi_sq,alphapi_t,alphapi_0;
+	Float_t a,b,c,d,e,f,fpi,fpi235;
+	Float_t m_pi0sq, tp;
+	Float_t mp = m_p*1000;
+
+//	cout << endl << "Theta: "<< thetacm << "   phi: " << phicm << "   t_gev: " << t_gev << "   t_prime: " << tprime_gev << "   q2_gev: " << q2_gev  <<  "   w_gev: "<< w_gev  << "  eps: " << eps << endl << endl;   
+
+
+
+    m_pi0sq= Mpi02/1.e6;
+
+	tp = fabs(tprime_gev);
+
+	lambda0_sq= 0.462;
+
+
+
+//	cout << m_pi0sq << endl;
+
+	if (t_gev>m_pi0sq) { 
+	   alphapi_t=0.7*(t_gev-m_pi0sq);
+	} else {
+	   alphapi_t=tanh(0.7*(t_gev-m_pi0sq));
+	}
+	
+	alphapi_0=0.7*(0.-m_pi0sq);
+	lambdapi_sq=lambda0_sq*pow((1.+alphapi_t)/(1.+alphapi_0),2);
+	fpi    = 1./(1.+q2_gev/lambdapi_sq);
+	fpi235 = 1./(1.+2.35/lambdapi_sq);
+	
+	
+	a = 0.16675;
+	b = 0.89524;
+	c = 3.5991;
+	d = 6.4562;
+	e = -9.6199;
+	f = 5.8319;
+	sigl = a*exp(-b*tp)+c*exp(-d*(pow(tp,0.5)))+e*exp(-f*pow(tp,0.25));
+	sigl = sigl *pow(fpi/fpi235,2);
+	
+
+//	cout << "Sigma L: "<< fpi <<  "  " << fpi235 << "   "<< tp << "  " << sigl << endl;;
+
+
+	a = -0.12286;
+	b = 0.56383;
+	c = 1.4673;
+	d = 2.1988;
+	e = 0.65170;
+	f = 18.501;
+	sigt = a*exp(-b*tp)+c*exp(-d*(pow(tp,0.5)))+e*exp(-f*pow(tp,2));
+	sigt = sigt *pow(fpi/fpi235,2);
+
+//	cout << "Sigma T: "<< sigt << endl;;
+
+	
+	a = 0.46397;
+	b = 4.9179;
+	c = 3.3023;
+	d = 3.1741;
+	siglt = a*exp(-b*tp)+c*exp(-d*pow(tp,0.5));
+	siglt = siglt*pow(fpi/fpi235,2)*sin(thetacm);
+	siglt = -siglt/sqrt(2.);
+	
+//	cout << "Sigma LT: "<< siglt << endl;;
+
+
+
+	a = -0.26497;
+	b = 2.7655;
+	c = 2.8034;
+	d = 3.8586;
+	sigtt = a*exp(-b*tp)+c*exp(-d*pow(tp,0.5));
+	sigtt= sigtt*pow(fpi/fpi235,2)*pow(sin(thetacm),2);
+	
+//	cout << "Sigma TT: " << sigtt << endl;;
+
+	wfactor=pow((pow(2.47,2)-pow(mp,2)),2)/pow((pow(w_gev,2)-pow(mp,2)),2);
+	
+//	cout << "wfactor: " << mp << "   " << wfactor << endl;;
+
+
+	sigl = sigl*wfactor;
+	sigt = sigt*wfactor;
+	siglt= siglt*wfactor;
+	sigtt= sigtt*wfactor;
+	
+	sig = sigt +eps*sigl +eps*cos(2.*phicm)*sigtt +sqrt(2.*eps*(1.+eps))*cos(phicm)*siglt;
+	
+	sig = sig/2./pi/1.e06;
+
+	sig_gmh_mod = sig;
+	
+	
+	
+	return sig_gmh_mod;
+
+}
 

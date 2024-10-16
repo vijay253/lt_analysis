@@ -43,8 +43,8 @@ void Yield_Data()
   if(Hostname.Contains("farm")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
     // Output path for root file
-    ROOTfilePath = "/cache/hallc/kaonlt/vijay/Analysis/Q1";
-    OutPath =  "/cache/hallc/kaonlt/vijay/";
+    ROOTfilePath = "ROOT FILE PATH";      // change ROOT FILE PATH
+    OutPath =  "OUTPUT FILE PATH";          // change OUTPUT FILE PATH
   }
   else if(Hostname.Contains("qcd")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
@@ -61,10 +61,10 @@ void Yield_Data()
   cout<<" PHYSICS DATA ANALYSIS..." <<endl;
   cout<<" "<<endl;
   //Data  
-  TString TInDATAFilenameC = "Analysed_Data_Q0p375W2p2_lowe_Center.root";
+  TString TInDATAFilenameC = "ROOTFILE.root";    // change ROOFFILE
   TString rootFile_DATAC  = ROOTfilePath+"/"+TInDATAFilenameC;
   //Dummy
-  TString TInDATAFilenamedC = "Analysed_Data_Q0p375W2p2_lowe_dummy_Center.root";
+  TString TInDATAFilenamedC = "ROOTFILE.root";      // change ROOFFILE
   TString rootFile_DATADC  = ROOTfilePath+"/"+TInDATAFilenamedC;
   
   if (gSystem->AccessPathName(rootFile_DATAC) == kTRUE){

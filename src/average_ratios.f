@@ -34,7 +34,6 @@ c     in averages/aver.* .
       real yd
 
       parameter (nt=8,nphi=16)
-
       real yrd(nphi,nt),drd(nphi,nt)
       real ydm(nphi,nt),ddm(nphi,nt)
       real ymc(nphi,nt),dmc(nphi,nt)

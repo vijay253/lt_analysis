@@ -43,8 +43,8 @@ void Yield_SIMC()
   if(Hostname.Contains("farm")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
     // Output path for root file
-    ROOTfilePath = "/cache/hallc/kaonlt/vijay/Analysis/Q1";
-    OutPath =  "/cache/hallc/kaonlt/vijay/";
+    ROOTfilePath = "ROOT FILE PATH";               //change ROOT FILE PATH 
+    OutPath =  "OUTPUT FILE PATH/";               // change OUTPUT FILE PATH  
   }
   else if(Hostname.Contains("qcd")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
@@ -76,7 +76,7 @@ void Yield_SIMC()
   cout<<" "<<endl;
   cout<<" PHYSICS SIMC ANALYSIS..." <<endl;
   cout<<" "<<endl;
-  TString TInSIMCFilenameC  = "Pion_2p7_Q1_center.root";
+  TString TInSIMCFilenameC  = "ROOTFILE.root";          //change ROOTFILE 
   TString rootFile_SIMCC   = ROOTfilePath+"/"+TInSIMCFilenameC;
   
   if (gSystem->AccessPathName(rootFile_SIMCC) == kTRUE){
