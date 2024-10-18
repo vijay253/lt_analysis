@@ -17,7 +17,7 @@ TF1* fun_t3 = new TF1();
 
 // 
 
-
+// const Int_t t_bin_num = 2;
 // const Int_t t_bin_num = 2;
 // const Int_t phi_bin_num = 10;
 // const Int_t bin_num = t_bin_num * phi_bin_num;
