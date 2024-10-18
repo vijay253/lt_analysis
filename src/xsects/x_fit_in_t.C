@@ -1022,8 +1022,6 @@ void single_setting(TString q2_set){
 	file_out1 << setprecision(5);
 
 	for(Int_t i=0; i <par_vec.size(); i++) {
-
-		cout << setw(10) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i]  << setw(14) << par_chi2_vec[i] << setw(10) << i << endl;
 		file_out << setw(12) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i]  << setw(12) << par_chi2_vec[i] << setw(5) << i << endl;
 		file_out1 << setw(12) << par_vec[i]  << "   " << setw(15) << setprecision(4) << par_err_vec[i] << setw(5) << i+1<< endl;
 
