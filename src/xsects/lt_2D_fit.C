@@ -1038,19 +1038,6 @@ void single_setting(TString q2_set){
  
 	}
 
-	//	TCanvas* c3 = new TCanvas();
-	//	sig_L_g->Draw("a*");
-	//	c3->Print("lt_sep_plots/sigL_"+ q2_set + ".png");
-	//	sig_T_g->Draw("a*");
-	//	c3->Print("lt_sep_plots/sigT_"+ q2_set + ".png");
-	//	sig_LT_g->Draw("a*");
-	//	c3->Print("lt_sep_plots/sigLT_"+ q2_set + ".png");
-	//	sig_TT_g->Draw("a*");
-	//	c3->Print("lt_sep_plots/sigTT_"+ q2_set + ".png");
-
-	//	c1->Print("lt_sep_plots/check_"+ q2_set + ".png");
-	//	c1->Print("lt_sep_plots/check_"+ q2_set + ".root");
-
 	c2->Print("lt_sep_plots/Unsep_"+q2_set + ".png");
 	c2->Print("lt_sep_plots/Unsep_"+q2_set + ".root");
 	
