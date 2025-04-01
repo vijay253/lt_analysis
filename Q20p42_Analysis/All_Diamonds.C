@@ -356,22 +356,30 @@ void All_Diamonds()
   
   TH2D *hQ2WC  = new TH2D("hQ2WC","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
   TH2D *hQ2WC1  = new TH2D("hQ2WC1","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
-
   TH2D *hQ2WCR  = new TH2D("hQ2WCR","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
   TH2D *hQ2WC1R  = new TH2D("hQ2WC1R","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
-
   //SIMC
   TH2D *hQ2WSC  = new TH2D("hQ2WSC","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
   TH2D *hQ2WSC1  = new TH2D("hQ2WSC1","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
 
+  TH2D *hQ2WL1  = new TH2D("hQ2WL1","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
+  //SIMC
+  TH2D *hQ2WSL1  = new TH2D("hQ2WSL1","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
 
- 
+  TH2D *hQ2WL2  = new TH2D("hQ2WL2","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
+  //SIMC
+  TH2D *hQ2WSL2  = new TH2D("hQ2WSL2","; ; ", hisbin, hisxaxisl, hisxaxish, hisbin, hisyaxisl, hisyaxish);
+  
   TCutG *Dcut = new TCutG("Dcut",5);
   Dcut->SetVarX("Q2");
   Dcut->SetVarY("W");
-
+  /*
   Dcut->SetPoint(0,0.407515,2.18602);Dcut->SetPoint(1,0.348397,2.22735);
   Dcut->SetPoint(2,0.436072,2.20831); Dcut->SetPoint(3,0.501202,2.16576);
+  Dcut->SetPoint(4,0.407515,2.18602);
+  */
+  Dcut->SetPoint(0,0.407515,2.18602);Dcut->SetPoint(1,0.348397,2.22725);
+  Dcut->SetPoint(2,0.436072,2.20741); Dcut->SetPoint(3,0.501202,2.16576);
   Dcut->SetPoint(4,0.407515,2.18602);
 
   //////////////////////////////
@@ -413,30 +421,155 @@ void All_Diamonds()
 
       Double_t CUTSIMCC = hsdelta > SIMC_Delta_Low_H && hsdelta < SIMC_Delta_High_H && hsxptar > SIMC_Xptar_Low_H && hsxptar < SIMC_Xptar_High_H && hsyptar > SIMC_Yptar_Low_H && hsyptar < SIMC_Yptar_High_H && ssdelta > SIMC_Delta_Low_P && ssdelta < SIMC_Delta_High_P && ssxptar > SIMC_Xptar_Low_P && ssxptar < SIMC_Xptar_High_P && ssyptar > SIMC_Yptar_Low_P && ssyptar < SIMC_Yptar_High_P;
       
-      Double_t fact = 9942030.0/400000.0;
+      Double_t fact = 9974390.0/400000.0;
 
       if (CUTSIMCC)
 	{
 	  hQ2WSC->Fill(Q2_simc, W_simc, fact*Weight);	  
 	}	  
     }
-  
-TCanvas *c = new TCanvas("c", " c");
 
-Dcut->SetLineColor(kRed);
-hQ2WC->Draw("COL");
-Dcut->Draw("same");
-// hQ2WC1->SetStats(0);
-//Dcut->SetLineColor(kRed);
+  //DATA LEFT1
+  for(Long64_t i = 0; i < nEntries_TBRANCHL1; i++)
+    {
+      TBRANCHL1->GetEntry(i);
+
+      if(tcoinL1 -TimmingOffset >=-1.0 && tcoinL1 -TimmingOffset <= 1.0 && mmL1>= MMPICUTL && mmL1 <=MMPICUTH)
+	{
+	  hQ2WL1->Fill(Q2L1, WL1);
+	  
+	}
+      Double_t DiamondL1 = (Dcut->IsInside(Q2L1, WL1));
+      Double_t MMpiL1 = mmL1>= MMPICUTL && mmL1 <=MMPICUTH;
+      Double_t CoinPionL1 = tcoinL1-TimmingOffset>=-1.0 && tcoinL1-TimmingOffset <= 1.0;
+      Double_t CoinPionL1R = ((tcoinL1-TimmingOffset>=-15.0 && tcoinL1-TimmingOffset<= -9.0) || (tcoinL1-TimmingOffset>=7.0 && tcoinL1-TimmingOffset<=13.0));
+
+      if(CoinPionL1 && MMpiL1 && DiamondL1)
+	{
+	  //	  hQ2WC1->Fill(Q2C, WC);
+	  
+	}
+    }
+  
+  //SIMC LEFT1
+  for(Long64_t i = 0; i < nEntries_TSIMCL1; i++)
+    
+    {
+      TSIMCL1->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL1, W_simcL1));
+
+      Double_t CUTSIMCL1 = hsdeltaL1 > SIMC_Delta_Low_H && hsdeltaL1 < SIMC_Delta_High_H && hsxptarL1 > SIMC_Xptar_Low_H && hsxptarL1 < SIMC_Xptar_High_H && hsyptarL1 > SIMC_Yptar_Low_H && hsyptarL1 < SIMC_Yptar_High_H && ssdeltaL1 > SIMC_Delta_Low_P && ssdeltaL1 < SIMC_Delta_High_P && ssxptarL1 > SIMC_Xptar_Low_P && ssxptarL1 < SIMC_Xptar_High_P && ssyptarL1 > SIMC_Yptar_Low_P && ssyptarL1 < SIMC_Yptar_High_P;
+      
+      Double_t fact = 9681860.0/400000.0;
+
+      if (CUTSIMCL1)
+	{
+	  hQ2WSL1->Fill(Q2_simcL1, W_simcL1, fact*Weight);	  
+	}	  
+    }
+
+
+  //DATA LEFT2
+  for(Long64_t i = 0; i < nEntries_TBRANCHL2; i++)
+    {
+      TBRANCHL2->GetEntry(i);
+
+      if(tcoinL2 -TimmingOffset >=-1.0 && tcoinL2 -TimmingOffset <= 1.0 && mmL2>= MMPICUTL && mmL2 <=MMPICUTH)
+	{
+	  hQ2WL2->Fill(Q2L2, WL2);
+	  
+	}
+      Double_t DiamondL2 = (Dcut->IsInside(Q2L2, WL2));
+      Double_t MMpiL2 = mmL2>= MMPICUTL && mmL2 <=MMPICUTH;
+      Double_t CoinPionL2 = tcoinL2-TimmingOffset>=-1.0 && tcoinL2-TimmingOffset <= 1.0;
+      Double_t CoinPionL2R = ((tcoinL2-TimmingOffset>=-15.0 && tcoinL2-TimmingOffset<= -9.0) || (tcoinL2-TimmingOffset>=7.0 && tcoinL2-TimmingOffset<=13.0));
+
+      if(CoinPionL2 && MMpiL2 && DiamondL2)
+	{
+	  //	  hQ2WL2->Fill(Q2L2, WL2);
+	  
+	}
+    }
+  
+  //SIMC LEFT2
+  for(Long64_t i = 0; i < nEntries_TSIMCL2; i++)
+    
+    {
+      TSIMCL2->GetEntry(i);
+
+      Double_t Diamond_cut = (Dcut->IsInside(Q2_simcL2, W_simcL2));
+
+      Double_t CUTSIMCL2 = hsdeltaL2 > SIMC_Delta_Low_H && hsdeltaL2 < SIMC_Delta_High_H && hsxptarL2 > SIMC_Xptar_Low_H && hsxptarL2 < SIMC_Xptar_High_H && hsyptarL2 > SIMC_Yptar_Low_H && hsyptarL2 < SIMC_Yptar_High_H && ssdeltaL2 > SIMC_Delta_Low_P && ssdeltaL2 < SIMC_Delta_High_P && ssxptarL2 > SIMC_Xptar_Low_P && ssxptarL2 < SIMC_Xptar_High_P && ssyptarL2 > SIMC_Yptar_Low_P && ssyptarL2 < SIMC_Yptar_High_P;
+      
+      Double_t fact = 9378980.0/400000.0;
+
+      if (CUTSIMCL2)
+	{
+	  hQ2WSL2->Fill(Q2_simcL2, W_simcL2, fact*Weight);	  
+	}	  
+    }
+
+  
+  TCanvas *c = new TCanvas("c", " c");
+
+  Dcut->SetLineColor(kRed);
+  hQ2WC->Draw("COL");
+  Dcut->Draw("same");
+  // hQ2WC1->SetStats(0);
+  //Dcut->SetLineColor(kRed);
 //hQ2WC1->Draw("COL");
 //Dcut->Draw("same");
-c->Print(outputpdf + '(');
+  c->Print(outputpdf + '(');
+  
+  TCanvas *cs = new TCanvas("cs", " cs");
+  
+  Dcut->SetLineColor(kRed);
+  hQ2WSC->Draw("COL");
+  Dcut->Draw("same");
+  cs->Print(outputpdf);
 
-TCanvas *cs = new TCanvas("cs", " cs");
-
-Dcut->SetLineColor(kRed);
-hQ2WSC->Draw("COL");
-Dcut->Draw("same");
-cs->Print(outputpdf + ')');
-
+  TCanvas *cL1 = new TCanvas("cL1", " cL1");
+  
+  Dcut->SetLineColor(kRed);
+  hQ2WL1->Draw("COL");
+  Dcut->Draw("same");
+  // hQ2WC1->SetStats(0);
+  //Dcut->SetLineColor(kRed);
+  //hQ2WC1->Draw("COL");
+  //Dcut->Draw("same");
+  cL1->Print(outputpdf);
+  
+ TCanvas *cL1s = new TCanvas("cL1s", " cL1s");
+ 
+ Dcut->SetLineColor(kRed);
+ hQ2WSL1->Draw("COL");
+ Dcut->Draw("same");
+ cL1s->Print(outputpdf);
+ 
+ TCanvas *cL2 = new TCanvas("cL2", " cL2");
+  
+  Dcut->SetLineColor(kRed);
+  hQ2WL2->Draw("COL");
+  Dcut->Draw("same");
+  // hQ2WL2->SetStats(0);
+  //Dcut->SetLineColor(kRed);
+  //hQ2WC1->Draw("COL");
+  //Dcut->Draw("same");
+  cL2->Print(outputpdf);
+  
+ TCanvas *cL2s = new TCanvas("cL2s", " cL2s");
+ 
+ Dcut->SetLineColor(kRed);
+ hQ2WSL2->Draw("COL");
+ Dcut->Draw("same");
+ cL2s->Print(outputpdf + ')');
+ 
+ TFile *OutHisto_file = new TFile(foutname,"RECREATE");
+ TDirectory *Hist = OutHisto_file->mkdir("Hist");
+ Hist->cd();
+ hQ2WSC->Write();
+ 
+ OutHisto_file->Close();
+ 
 }
