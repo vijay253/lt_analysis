@@ -1,6 +1,5 @@
 ###### Polar plot script
 ###### Dr. Kumar, June 17, 2026
-###### PRL-quality PDF output
 
 import ROOT
 import numpy as np
@@ -8,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.colors import to_rgba
 
+### PRL format
 mpl.rcParams.update({
     "font.family": "serif",
     "font.size": 10,
@@ -19,7 +19,7 @@ mpl.rcParams.update({
     "axes.linewidth": 1.0,
     "xtick.direction": "in",
     "ytick.direction": "in",
-    "pdf.fonttype": 42,   
+    "pdf.fonttype": 42,
     "ps.fonttype": 42
 })
 
@@ -43,19 +43,15 @@ def extract_data(file_path,
     angle = []
 
     for entry in tree:
+        if (getattr(entry, cut_var) > cut_value1 and
+            getattr(entry, cut_var) < cut_value2):
 
-        # Example timing cut (currently commented out)
-        # if (getattr(entry, cut_var) > cut_value1 and
-        #     getattr(entry, cut_var) < cut_value2):
-
-        if getattr(entry, radius_branch) <= 0.0:
             radius.append(getattr(entry, radius_branch))
             angle.append(getattr(entry, angle_branch))
 
     file.Close()
 
     return np.array(radius), np.array(angle)
-
 
 root_files = [
     "/lustre24/expphy/volatile/hallc/c-kaonlt/vijay/Analysis/Q1/Analysed_Data_Q0p375W2p2_mide_Right2.root",
@@ -77,13 +73,28 @@ cut_value2 = 45
 colors = ["red", "black", "blue", "magenta", "green"]
 settings = ["Right2", "Right1", "Left2", "Left1", "Center"]
 
-# PRL single-column width (3.4 inches)
+#### t offsets
+
+t_offsets = [
+    0.00034,  # Right2
+    0.00045,  # Right1
+    0.00054,  # Left2
+    0.00063,  # Left1
+    0.00056   # Center
+]
+
+print("\nApplying Hall C t-offsets:")
+for name, offset in zip(settings, t_offsets):
+    print(f"{name:7s} : {offset:.6f}")
+
+## t range for plotting    
+t_min = 0.006
+t_max = 0.1
+
 fig, ax = plt.subplots(
     figsize=(3.4, 3.4),
     subplot_kw={'projection': 'polar'}
 )
-
-max_radius = 0
 
 for i, root_file in enumerate(root_files):
 
@@ -100,41 +111,41 @@ for i, root_file in enumerate(root_files):
     if len(radius) == 0:
         continue
 
-    rplot = -1.0 * radius
+    # -------------------------------------------------
+    # MandelT is negative in tree (t < 0)
+    # Apply correction:
+    # t_corr = t + t_offset
+    # plot |t| = -t_corr = -t - t_offset
+    # -------------------------------------------------
+    rplot = -radius - t_offsets[i]
 
-    max_radius = max(max_radius, np.max(rplot))
+    mask = (rplot >= t_min) & (rplot <= t_max)
+
+    angle_plot = angle[mask]
+    rplot_plot = rplot[mask]
 
     ax.scatter(
-        angle,
-        rplot,
-        s=0.2,                     # publication-quality point size
+        angle_plot,
+        rplot_plot,
+        s=0.2,
         color=to_rgba(colors[i], alpha=0.7),
-        rasterized=True,           # keeps PDF size manageable
+        rasterized=True,
         label=settings[i]
     )
 
 ax.grid(True, linewidth=0.8)
 
-# Remove title for PRL submission
-# Put kinematics in caption instead
-# ax.set_title(
-#     r"$Q^2 = 0.375~\mathrm{GeV}^2,\ \epsilon = 0.629$",
-#     pad=15
-# )
-
-# Radial grid labels
-radii = np.linspace(0.0, max_radius, 6)
+radii = np.linspace(t_min, t_max, 6)
 
 labels = [''] * len(radii)
-labels[0] = f"{radii[0]:.2f}"
+labels[0] = f"{radii[0]:.3f}"
 labels[-1] = f"{radii[-1]:.2f}"
 
 ax.set_rgrids(radii, labels=labels, angle=0)
 
-# Theta labels
 ax.tick_params(axis='both', which='major', labelsize=8)
 
-legend = ax.legend(
+ax.legend(
     loc='upper right',
     bbox_to_anchor=(1.25, 1.15),
     frameon=False,
@@ -153,8 +164,8 @@ plt.savefig(
     bbox_inches="tight"
 )
 
-print("Saved:")
+print("\nSaved:")
 print("  Polar_PRL.pdf")
 print("  Polar_PRL.png")
 
-#plt.show()
+# plt.show()
